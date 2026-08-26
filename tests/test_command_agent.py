@@ -1,5 +1,4 @@
 import json
-import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -17,12 +16,40 @@ class CommandAgentTests(unittest.TestCase):
             workspace.mkdir(parents=True)
             sidecar = workspace / ".alf" / "usage.json"
             sidecar.parent.mkdir()
-            sidecar.write_text(json.dumps({"event_count": 2, "command_count": 1, "failed_event_count": 1, "model": "m"}), encoding="utf-8")
+            sidecar.write_text(
+                json.dumps(
+                    {
+                        "event_count": 2,
+                        "command_count": 1,
+                        "failed_event_count": 1,
+                        "model": "m",
+                    }
+                ),
+                encoding="utf-8",
+            )
             result = ProcessResult(["ok"], 0, "", "", 0)
-            with patch("alf.agents.command.os.name", "nt"), patch("alf.agents.command.run_process", return_value=result) as run:
-                agent = CommandAgent('tool "{root}\\nested path\\agent.exe" --workspace "{workspace}"')
-                got = agent.run(root=root, workspace=workspace, language="csharp", language_config={}, task={"id": "t"}, prompt="p", timeout=4)
-            self.assertEqual(run.call_args.args[0][1], str(root / "nested path" / "agent.exe"))
+            with (
+                patch("alf.agents.command.os.name", "nt"),
+                patch("alf.agents.command.run_process", return_value=result) as run,
+            ):
+                agent = CommandAgent(
+                    'tool "{root}\\nested path\\agent.exe" --workspace "{workspace}"'
+                )
+                got = agent.run(
+                    root=root,
+                    workspace=workspace,
+                    language="csharp",
+                    language_config={},
+                    task={"id": "t"},
+                    prompt="p",
+                    timeout=4,
+                )
+
+            # CommandAgent tokenizes but does not normalize path separators. On an
+            # actual Windows host, str(root) already contains backslashes; when
+            # simulating Windows on POSIX, preserve the rendered Windows suffix.
+            expected_executable = f"{root}\\nested path\\agent.exe"
+            self.assertEqual(run.call_args.args[0][1], expected_executable)
             self.assertEqual(run.call_args.kwargs["env"]["ALF_ROOT"], str(root))
             self.assertEqual(run.call_args.kwargs["env"]["ALF_TIMEOUT"], "4")
             self.assertEqual(run.call_args.kwargs["timeout"], 34.0)

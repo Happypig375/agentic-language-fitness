@@ -1,25 +1,50 @@
-# Agent context
+# Agent entry point
 
-## Research scope
+This file is the repository-level instruction entry point for maintainer coding agents.
 
-The study asks whether programming-language choice changes the cumulative computation, correctness, and repair burden of coding agents maintaining semantically matched software through inherited changes. The controlled pilot compares F# and C# on .NET 10. This is not a claim that F# is better, that sequential-maintenance benchmarking is novel, or that the preliminary run estimates a causal effect.
+## Start here
 
-## Benchmark invariants
+Before substantial work:
 
-- Keep the F# and C# task sequence, behavioral oracle, baseline semantics, and agent protocol matched.
-- Start a fresh agent process per task while retaining the changed candidate workspace.
-- Do not expose gold snapshots, evaluator cases, parent repositories, credentials, or unrelated host files to an agent.
-- Record model, agent, toolchain, container image, run order, seed, tokens, timings, commands, diffs, and evaluation outcomes.
-- Treat artifacts as research data: preserve raw JSON/JSONL, redact credentials, and never commit secrets or reusable tokens.
+1. Read `PLAN.md`. It is the canonical current checkpoint, ordered continuation plan, decision gates, and definition of the next milestone.
+2. Read `docs/preliminary-results-2026-08-26.md` before interpreting or extending the first paired run.
+3. Read `docs/protocol.md` and `docs/environment.md` before changing the harness, isolation, telemetry, or run procedure.
+4. Read `docs/research-gap.md` and the literature-review addendum before changing novelty or contribution claims.
+5. Inspect the latest commit and CI status. Do not launch paid/model experiments while `main` is red.
 
-## Reproduction environment
+When work changes project status, ordering, assumptions, or acceptance criteria, update `PLAN.md` in the same change. Keep this file concise; route durable detail to the appropriate document.
 
-The validated host toolchain is .NET SDK `10.0.302`, Python `3.11.15`, and Git `2.46.2.windows.1`; the agent is Codex CLI `0.149.1`, model `gpt-5.6-luna`, using image `alf-codex:0.149.1` (image ID recorded in the report). Run `python scripts/alf.py doctor --strict` and `python scripts/alf.py validate` before experiments. Build isolation with `make docker-build`, smoke-test with `make docker-smoke`, then use `scripts/codex-docker.py` through the `command` adapter as documented in README and `docs/environment.md`.
+## Current priority
 
-Docker mounts only the candidate workspace read-write and uses a temporary read-only auth projection; bridge egress remains enabled. Access tokens can still be visible inside the trusted container, and Docker/daemon and task-prompt trust remain residual risks. Do not broaden mounts or bypass the evaluator boundary.
+Stay in Phase 1. Restore a green cross-platform baseline, audit usage/event accounting, freeze accepted-run provenance, and perform counterbalanced repeated pairs to estimate variance. Do not infer an F# advantage from the single 2-task paired run, and do not jump to broad repository expansion before the gates in `PLAN.md` are met.
 
-## Results and validation
+## Development agents versus benchmarked agents
 
-The successful paired run is `results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3/`; its tracked summary is `docs/preliminary-results-2026-08-26.md`. Earlier directories `codex-docker-dotnet10-gpt-5.6-luna-seed20260826`, `codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun1`, `codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun2`, `codex-dotnet10-gpt-5.6-luna-seed20260826`, `codex-dotnet10-gpt-5.6-luna-seed20260826-rerun1`, and scripted runs are infrastructure/harness diagnostics, not valid paired treatment data.
+This file guides agents **developing this repository**. Candidate agents being measured by the benchmark must not receive repository-level research instructions. The experimental Codex launch deliberately uses `--ignore-user-config` and `--ignore-rules`; preserve that separation unless the protocol explicitly introduces an instruction treatment.
 
-Use `$env:PYTHONPATH='src'; python -m unittest discover -s tests -v` in PowerShell (or `PYTHONPATH=src python -m unittest discover -s tests -v` in a POSIX shell) for the full harness suite, and `python scripts/alf.py validate` for benchmark validation. Keep generated build outputs and ephemeral workspaces out of source control when possible; retain only intentionally curated result artifacts and reports.
+## Research invariants
+
+- Keep F# and C# task text, ordered changes, external behavior, evaluator, resource limits, and agent protocol matched.
+- Start a fresh candidate-agent process/container per task while retaining only the changed candidate workspace.
+- Never expose gold snapshots, evaluator cases, parent repositories, credentials, or unrelated host files to a candidate agent.
+- Record every attempt, including provider, host, authentication, evaluator, timeout, and agent failures; never silently replace failed attempts.
+- Preserve raw JSON/JSONL and exact environment metadata outside Git as appropriate; commit only curated, redacted summaries, manifests, and hashes.
+- Keep model, CLI, image digest, toolchain, network policy, run order, timestamps, tokens, timings, commands, diffs, and outcomes explicit.
+- Treat language, model, scaffold, order, task, and chain position as possible interacting factors rather than seeking a universal ranking.
+
+## Validation commands
+
+Install first with `python -m pip install -e .`, then run:
+
+```text
+python -m unittest discover -s tests -v
+python scripts/alf.py doctor --strict
+python scripts/alf.py validate
+python scripts/alf.py matrix --agent scripted --output results/pilot
+```
+
+For the isolated Codex path, build with `make docker-build`, smoke-test with `make docker-smoke`, and follow `README.md` plus `docs/environment.md`. Do not broaden Docker mounts or weaken the evaluator boundary.
+
+## Current accepted result
+
+The accepted preliminary run is summarized in `docs/preliminary-results-2026-08-26.md`. Its raw local directory is `results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3/`. Earlier runs listed in the summary and prior `AGENTS.md` history are infrastructure diagnostics, not substitutable treatment observations.
