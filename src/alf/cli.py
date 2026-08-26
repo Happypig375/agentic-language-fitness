@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from .config import DEFAULT_MANIFEST, find_repo_root, load_manifest
+from .config import DEFAULT_MANIFEST, REQUIRED_DOTNET_SDK, find_repo_root, load_manifest
 from .runner import environment_snapshot, run_chain, validate_benchmark
 
 
@@ -23,6 +23,7 @@ def cmd_doctor(args: argparse.Namespace) -> int:
         "python_3_11_plus": sys.version_info >= (3, 11),
         "git_available": shutil.which("git") is not None,
         "dotnet_available": shutil.which("dotnet") is not None,
+        "dotnet_sdk_required": data.get("dotnet") == REQUIRED_DOTNET_SDK,
     }
     if args.require_agent == "codex":
         checks["codex_available"] = shutil.which("codex") is not None

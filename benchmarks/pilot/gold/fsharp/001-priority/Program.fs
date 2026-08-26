@@ -38,14 +38,18 @@ let handle (request: Request) =
         |> fun ids -> { ids = ids }
     | operation -> invalidArg "operation" $"Unknown operation: {operation}"
 
-let mutable line = Console.ReadLine()
+let mutable running = true
 
-while not (isNull line) do
-    try
-        let request = JsonSerializer.Deserialize<Request>(line, options)
-        let response = handle request
-        Console.WriteLine(JsonSerializer.Serialize(response, options))
-    with ex ->
+while running do
+    match Console.ReadLine() with
+    | null -> running <- false
+    | input ->
+      try
+        let request = JsonSerializer.Deserialize<Request>(input, options)
+        match request with
+        | null -> raise (InvalidOperationException("Request was null"))
+        | request ->
+          let response = handle request
+          Console.WriteLine(JsonSerializer.Serialize(response, options))
+      with ex ->
         Console.WriteLine(JsonSerializer.Serialize({| error = ex.Message |}, options))
-
-    line <- Console.ReadLine()

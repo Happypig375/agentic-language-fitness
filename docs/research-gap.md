@@ -19,7 +19,7 @@ The project is therefore best described as a **controlled experimental extension
 
 ## Proposed contribution
 
-1. **Paired-language maintenance design.** F# and C# implementations target .NET 8 and expose the same protocol, allowing identical evolving requirements and black-box cases.
+1. **Paired-language maintenance design.** F# and C# implementations target .NET 10 and expose the same protocol, allowing identical evolving requirements and black-box cases.
 2. **Cumulative language-cost measurement.** Language is compared over creation and repeated fresh-context maintenance rather than only one-shot generation.
 3. **Mechanism decomposition.** Training familiarity, semantic density, tokenizer behavior, type inference, compiler feedback, idiomaticity, documentation access, and source footprint are measured or ablated instead of being collapsed into a language label.
 4. **Complete trajectory accounting.** Correctness, tokens, tool calls, compilation/test iterations, wall time, diffs, and regressions remain separate observable outcomes.

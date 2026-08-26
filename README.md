@@ -6,7 +6,7 @@ The project does not assume that F# is better than C#, Python, Rust, or any othe
 
 > When semantically equivalent software is represented in different programming languages, how much agent computation is required to correctly understand, change, verify, and maintain it over a sequence of inherited changes?
 
-The first controlled comparison is **F# versus C# on .NET 8**. Sharing the runtime, standard library, package ecosystem, build system, and external behavior removes many confounds that affect ordinary multilingual benchmarks.
+The first controlled comparison is **F# versus C# on .NET 10**. Sharing the runtime, standard library, package ecosystem, build system, and external behavior removes many confounds that affect ordinary multilingual benchmarks.
 
 ## Research gap
 
@@ -43,7 +43,7 @@ Three adapters are included:
 
 ## Quick start
 
-Requirements: Python 3.11+, Git, and .NET SDK 8.x.
+Requirements: Python 3.11+, Git, and .NET SDK 10.0.302.
 
 ```bash
 python scripts/alf.py doctor --strict
@@ -74,6 +74,35 @@ alf run \
 
 The command receives `ALF_WORKSPACE`, `ALF_TASK_ID`, `ALF_LANGUAGE`, and `ALF_PROMPT_FILE`. It may write `.alf/usage.json`; see [the protocol](docs/protocol.md).
 
+For container-isolated Codex runs, build the pinned image and use the host wrapper through
+the command adapter:
+
+```bash
+make docker-build
+make docker-smoke
+alf run --language fsharp --agent command \
+  --agent-command 'python {root}/scripts/codex-docker.py --workspace {workspace} --prompt-file {prompt_file} --model YOUR_MODEL'
+```
+
+PowerShell (quote every path so Windows spaces and backslashes survive):
+
+```powershell
+alf run --language fsharp --agent command --agent-command 'python "{root}\scripts\codex-docker.py" --workspace "{workspace}" --prompt-file "{prompt_file}" --model YOUR_MODEL'
+```
+
+The wrapper mounts only the task workspace read-write (Docker's default) at `/workspace` and (when found)
+one host Codex `auth.json` read-only at `/home/codex/.codex/auth.json`; it never mounts the
+repository, gold/evaluator data, or a broad `CODEX_HOME`. Set `CODEX_AUTH_FILE` or
+`CODEX_HOME` to choose authentication. Docker is the isolation boundary for the
+intentionally bypassed in-container approval/sandbox flags.
+Mount paths containing commas are rejected because Docker mount specifications use
+comma-delimited options. The container uses Docker's default bridge network, so it has
+egress; task prompts and image contents are therefore trusted inputs.
+The wrapper creates a temporary auth projection with refresh-token values blanked (the
+schema key is retained so Codex can deserialize it) and deletes it after the run. A
+short-lived access token may still be exposed to the container;
+only use trusted task prompts and a trusted Docker daemon.
+
 ## Reproducibility and safety
 
 The default pilot is suitable for harness development, not yet for a publication-quality causal estimate. A credible experiment must pin the model and agent versions, randomize run order, repeat stochastic runs, isolate the workspace so the agent cannot read gold data or evaluator cases, and record exact toolchain/container versions. See [environmental assumptions](docs/environment.md).
@@ -84,7 +113,7 @@ The default pilot is suitable for harness development, not yet for a publication
 - `benchmarks/pilot/` — matched .NET projects, task specifications, tests, and gold snapshots
 - `docs/` — literature review, hypotheses, protocol, metrics, and experimental design
 - `tests/` — harness unit tests
-- `.github/workflows/ci.yml` — end-to-end scripted validation on Python 3.12 and .NET 8
+- `.github/workflows/ci.yml` — end-to-end scripted validation on Python 3.12 and .NET 10.0.302
 
 ## Status
 
@@ -94,7 +123,7 @@ The default pilot is suitable for harness development, not yet for a publication
 - [x] fresh-process chain runner
 - [x] Codex JSONL usage parser
 - [x] CI validation
-- [ ] container-isolated real-agent runs
+- [x] container-isolated preliminary real-agent run (see [tracked results note](docs/preliminary-results-2026-08-26.md))
 - [ ] larger matched repository family
 - [ ] preregistration and power analysis
 - [ ] multi-model repeated study

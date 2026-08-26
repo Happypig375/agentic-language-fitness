@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0.302@sha256:72dd743782f2ae7e5476fd64f6a460045e3998dc862218b80e6944cba79a01b0
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates git nodejs npm \
+    && npm install --global @openai/codex@0.149.1 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd --create-home --shell /bin/bash codex
+RUN mkdir -p /workspace /home/codex/.codex && chown -R codex:codex /workspace /home/codex
+WORKDIR /workspace
+USER codex
+ENTRYPOINT ["codex"]

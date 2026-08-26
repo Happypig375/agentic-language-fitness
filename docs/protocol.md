@@ -37,6 +37,7 @@ The task prompt is supplied on stdin. `--model` is added when specified. JSONL e
 The command template supports:
 
 - `{workspace}`
+- `{root}` (harness repository, for locating a host-side wrapper)
 - `{prompt_file}`
 - `{task_id}`
 - `{language}`
@@ -44,6 +45,7 @@ The command template supports:
 Equivalent environment variables are exported:
 
 - `ALF_WORKSPACE`
+- `ALF_ROOT`
 - `ALF_PROMPT_FILE`
 - `ALF_TASK_ID`
 - `ALF_LANGUAGE`
@@ -63,6 +65,14 @@ The agent may write `.alf/usage.json`:
 ```
 
 Missing fields remain null/zero according to the result schema; they are never inferred silently.
+The container wrapper additionally records `event_count`, tool-specific counts, and the
+configured image identifier. Its temporary auth projection retains the `refresh_token`
+schema key but blanks its value; a short-lived access token can still be read by the
+unprivileged container process.
+
+To validate an auth projection without a model run, bind it read-only at
+`/home/codex/.codex/auth.json` and invoke `codex login status` in the image; this is the
+same path used by the wrapper.
 
 ## Fair-comparison rules
 

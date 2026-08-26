@@ -59,7 +59,7 @@ Sources:
 - https://www.swebench.com/multilingual.html
 - https://arxiv.org/abs/2602.05892
 
-The first experiment here uses F# and C# on .NET 8 so the runtime, standard library, package system, external protocol, task text, and black-box oracle can be held substantially constant. This does not remove every confound—compiler quality, idioms, tooling, and training exposure remain real mechanisms—but it makes the language contrast more interpretable.
+The first experiment here uses F# and C# on .NET 10 so the runtime, standard library, package system, external protocol, task text, and black-box oracle can be held substantially constant. This does not remove every confound—compiler quality, idioms, tooling, and training exposure remain real mechanisms—but it makes the language contrast more interpretable.
 
 ### 4. Cross-language behavioral equivalence is feasible, but prior work applies it to translation
 

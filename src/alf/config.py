@@ -6,6 +6,10 @@ from typing import Any
 
 
 DEFAULT_MANIFEST = Path("benchmarks/pilot/manifest.json")
+# Keep the toolchain contract in one place so environment checks and tests do
+# not silently drift from global.json and the benchmark project files.
+REQUIRED_DOTNET_SDK = "10.0.302"
+REQUIRED_DOTNET_TARGET_FRAMEWORK = "net10.0"
 
 
 def find_repo_root(start: Path | None = None) -> Path:

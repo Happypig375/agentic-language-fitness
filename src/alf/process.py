@@ -9,6 +9,15 @@ from typing import Mapping, Sequence
 from .models import ProcessResult
 
 
+def _decode_output(value: str | bytes | None) -> str:
+    """Return captured output as text without depending on the system locale."""
+    if value is None:
+        return ""
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return value
+
+
 def run_process(
     argv: Sequence[str],
     *,
@@ -27,6 +36,8 @@ def run_process(
             cwd=cwd,
             input=input_text,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             timeout=timeout,
@@ -36,13 +47,13 @@ def run_process(
         return ProcessResult(
             argv=list(argv),
             returncode=completed.returncode,
-            stdout=completed.stdout,
-            stderr=completed.stderr,
+            stdout=_decode_output(completed.stdout),
+            stderr=_decode_output(completed.stderr),
             duration_seconds=time.monotonic() - started,
         )
     except subprocess.TimeoutExpired as exc:
-        stdout = exc.stdout.decode() if isinstance(exc.stdout, bytes) else (exc.stdout or "")
-        stderr = exc.stderr.decode() if isinstance(exc.stderr, bytes) else (exc.stderr or "")
+        stdout = _decode_output(exc.stdout)
+        stderr = _decode_output(exc.stderr)
         return ProcessResult(
             argv=list(argv),
             returncode=124,

@@ -3,7 +3,7 @@
 ## Minimum local environment
 
 - Python 3.11 or newer
-- .NET SDK 8.x
+- .NET SDK 10.0.302
 - Git 2.x
 - a POSIX-like shell for the Makefile (the Python CLI itself is cross-platform)
 - optional: Codex CLI for the `codex` adapter
@@ -19,7 +19,7 @@ The harness never stores API keys. A real-agent command inherits the caller's en
 
 ## Reproducibility assumptions
 
-The executable pilot records exact detected versions, but `8.0.x` and model aliases can move. A publishable experiment should additionally pin:
+The executable pilot records exact detected versions, and the checked-in project requires SDK `10.0.302`. A publishable experiment should additionally pin:
 
 - OS/container image digest;
 - CPU architecture and resource limits;

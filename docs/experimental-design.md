@@ -13,7 +13,7 @@ Initial factors:
 - tool feedback condition;
 - documentation condition.
 
-Task and external behavior are matched. The first pair shares .NET 8, `System.Text.Json`, process protocol, and evaluator.
+Task and external behavior are matched. The first pair shares .NET 10, `System.Text.Json`, process protocol, and evaluator.
 
 ## Pilot
 
