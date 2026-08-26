@@ -1,21 +1,5 @@
 # Experiments
 
-Store immutable experiment manifests here.
+This directory is reserved for preregistrations, immutable run manifests, analysis notebooks/scripts, and dated experiment reports.
 
-Each run should record at least:
-
-- git commit;
-- language;
-- compiler/runtime version;
-- model and exact version/date where available;
-- reasoning/temperature settings;
-- prompt/system instructions;
-- available tools;
-- task id;
-- random seed where supported;
-- token accounting;
-- complete tool/model trajectory;
-- test results;
-- final patch.
-
-Raw model outputs should not be silently rewritten before analysis.
+The executable harness lives under `src/alf`; benchmark fixtures live under `benchmarks/`. Do not modify benchmark tasks after collecting main-study data without creating a new version.

@@ -1,106 +1,84 @@
 # Research plan
 
-## Phase 0 — Reproduce existing results
+## Phase 0 — Harness validation
 
-Goal: validate the harness before testing novel claims.
+1. Keep F# and C# projects behaviorally matched through black-box JSON tests.
+2. Run the `scripted` adapter in CI to validate workspace creation, chained state, builds, evaluation, and artifact production.
+3. Unit-test trajectory parsing and repository metrics.
+4. Record exact Python, Git, .NET, OS, model, and agent versions.
 
-1. Reproduce a small subset of multilingual one-shot coding tasks.
-2. Record complete trajectories, including failed compilations and retries.
-3. Verify that language-dependent token-cost differences are observable.
-4. Validate token accounting across providers/models.
+**Exit criterion:** clean CI runs produce equivalent passing results for both languages and deterministic result schemas.
 
-**Exit criterion:** repeated runs produce stable enough language/model cost distributions to justify repository-scale experiments.
+## Phase 1 — Feasibility pilot
 
-## Phase 1 — F# vs C# controlled .NET benchmark
+Run at least three agent/model configurations across both languages and both pilot tasks.
 
-Build matched implementations on the same runtime and libraries.
+- fresh process/context at every maintenance step;
+- inherited workspace state;
+- randomized language/run ordering;
+- at least 10 stochastic repetitions per cell;
+- identical task text and behavioral oracle;
+- exact token and trajectory capture where available.
 
-Suggested initial domain: a small service/library with:
+Primary feasibility outcomes:
 
-- immutable-ish domain model;
-- JSON serialization;
-- validation;
-- collections and transformations;
-- persistence abstraction;
-- async operations;
-- tests;
-- a small CLI or HTTP boundary.
-
-Construct 20–30 matched maintenance tasks.
-
-Record:
-
-- successful completion;
-- source/context tokens read;
-- output/reasoning tokens;
-- compile/test iterations;
+- completion rate;
+- total input, cached input, output, and reasoning tokens;
+- build/test iterations;
 - elapsed time;
-- regressions;
-- patch size.
+- escaped regressions;
+- source/context footprint.
 
-**Primary question:** does F# reduce semantic recovery/context cost enough to offset lower model familiarity and possible repair overhead?
+**Exit criterion:** the tasks are neither saturated nor impossible, token accounting is reliable, and language effects can be estimated with uncertainty.
 
-## Phase 2 — Repository-size scaling
+## Phase 2 — Matched repository expansion
 
-Create or derive small/medium/large variants with the same conceptual architecture.
+Create 3–5 paired .NET applications at increasing sizes and architectural shapes:
 
-Test whether relative language cost changes as relevant context grows.
+- pure data transformation;
+- command-line application with persistence;
+- HTTP service;
+- event/state-machine domain;
+- library with public API compatibility constraints.
 
-**Key interaction:** `language × repository_size`.
+Each repository receives a preregistered chain of 10–30 changes covering additive features, cross-cutting schema changes, refactors, bug fixes, performance constraints, and compatibility requirements.
 
-## Phase 3 — Fresh-agent maintenance chains
+**Exit criterion:** matched external behavior and comparable task difficulty are established by independent review and black-box tests.
 
-Create deterministic sequences of 50–100 changes.
+## Phase 3 — Representation ablations
 
-For every task:
+Separate language syntax from other mechanisms:
 
-1. reset model context;
-2. present only the issue and repository/tool access;
-3. require tests to pass;
-4. store complete trajectory;
-5. advance the repository state only on successful completion.
+- normal formatting versus losslessly compacted formatting;
+- descriptive versus anonymized identifiers;
+- explicit type annotations versus inferred types where legal;
+- idiomatic versus mechanically translated implementations;
+- compiler/test feedback enabled versus disabled;
+- documentation retrieval enabled versus disabled.
 
-Compare cumulative lifetime cost and defect escape rate.
+This phase tests whether any effect comes from semantic density, tokenizer behavior, static verification, training familiarity, or coding style.
 
-## Phase 4 — Semantic compression ablations
+## Phase 4 — Longitudinal study
 
-Use transformations within one language to distinguish:
+Run the full chain with fresh agents, preserving only the repository state between tasks. Analyze:
 
-- whitespace/presentation redundancy;
-- redundant type syntax;
-- descriptive identifiers;
-- standard high-level combinators;
-- artificial shorthand/code golf.
+- creation cost versus cumulative maintenance cost;
+- language × repository size interaction;
+- language × model capability interaction;
+- failure compounding across inherited changes;
+- semantic recovery cost for a fresh agent;
+- defect escape and repair burden.
 
-This phase tests the central representation hypothesis independently of language popularity.
+Use mixed-effects or hierarchical models with task, repository, model, and run as appropriate effects. Report distributions and uncertainty rather than a single “best language” score.
 
-## Phase 5 — Familiarity/tooling disentanglement
+## Phase 5 — Generalization
 
-Conditions:
+Add languages chosen to separate mechanisms:
 
-- no documentation;
-- documentation retrieval enabled;
-- compiler only;
-- compiler + tests;
-- language primer in context;
-- optional language-specific adaptation for open models.
+- Python: high familiarity, low static verification;
+- TypeScript: high familiarity, gradual typing;
+- Rust: strong verification, higher type-system interaction cost;
+- OCaml: ML-family representation with a smaller ecosystem;
+- a deliberately compact or transformed representation.
 
-Estimate how much of each language's performance comes from learned familiarity versus intrinsic representation/tooling properties.
-
-## Phase 6 — Expand language set
-
-Add Python, TypeScript, Rust, OCaml and potentially others only after the harness is stable.
-
-Avoid turning the project into a language popularity contest. Each added language should test a distinct point in the design space.
-
-## Phase 7 — Model lifetime economics
-
-Fit an expected-cost model:
-
-\[
-E[C] = C_{creation} + \lambda C_{maintenance} + \mu C_{defects}
-\]
-
-where \(\lambda\) represents expected future modifications and \(\mu\) represents the expected cost of escaped defects.
-
-Report Pareto frontiers for different project types rather than one global ranking.
+The aim is a mechanism map and Pareto frontier, not a universal ranking.

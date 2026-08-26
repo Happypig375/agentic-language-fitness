@@ -1,90 +1,66 @@
 # Experimental design
 
-## Principles
+## Core design
 
-1. Use identical functional requirements across languages.
-2. Keep tests and hidden acceptance criteria language-neutral where possible.
-3. Record complete trajectories.
-4. Randomize task/language/model run order.
-5. Use repeated trials because agent trajectories are stochastic.
-6. Pin model versions, compiler versions, dependencies, and prompts.
-7. Keep temperature/reasoning settings explicit.
-8. Treat provider cost as metadata, not a timeless scientific metric.
+A repeated, blocked, paired experiment over semantically equivalent repositories.
 
-## Primary controlled comparison: F# vs C#
+Initial factors:
 
-Both use:
+- language: F# / C#;
+- model: multiple capability tiers and families;
+- agent harness: at least two where feasible;
+- repository size/chain stage;
+- tool feedback condition;
+- documentation condition.
 
-- the same .NET version;
-- equivalent NuGet dependencies;
-- the same external test oracle/behavior;
-- equivalent I/O and domain requirements.
+Task and external behavior are matched. The first pair shares .NET 8, `System.Text.Json`, process protocol, and evaluator.
 
-This comparison is intended to isolate representational and language-tooling differences while minimizing runtime/ecosystem confounds.
+## Pilot
 
-## Repository sizes
+The executable pilot contains one small application and two cumulative changes. It validates infrastructure and reveals gross difficulty imbalances. It is not powered for substantive conclusions.
 
-Suggested initial targets:
+## Main-study sampling
 
-- small: ~5k–10k conventional LOC;
-- medium: ~25k–50k;
-- large: ~100k+ or a dependency-expanded equivalent.
-
-LOC is descriptive only. Store bytes, tokenizer counts, AST counts, and dependency structure as primary representation measures.
-
-## Task families
-
-- local bug fix;
-- cross-cutting domain-model change;
-- API evolution;
-- serialization/schema change;
-- error-model change;
-- refactor;
-- performance/caching change;
-- concurrency/state fix;
-- new feature spanning multiple modules;
-- test-driven diagnosis with misleading surface symptoms.
-
-## Agent conditions
-
-At minimum:
-
-1. source search/read + edit + compiler/tests;
-2. same plus documentation retrieval;
-3. optional language primer;
-4. multiple model capability levels.
-
-The agent must not be given hidden-test details.
-
-## Fresh-context protocol
-
-For longitudinal tasks, every maintenance task begins in a clean model context. The repository is the durable state.
-
-This approximates:
-
-- a new agent session;
-- a future developer/agent with no conversational memory;
-- context compaction that discarded earlier reasoning.
-
-It directly measures how well the programming representation preserves intent for later recovery.
+- Create several paired repositories, not one translated toy.
+- Use 10–30 maintenance steps per chain.
+- Repeat stochastic runs at least 10 times per language × model × harness cell in the feasibility stage; determine the final count through simulation/power analysis using pilot variance.
+- Randomize run order and block by model/harness/task chain.
+- Use fresh agent processes and conversations at every step.
 
 ## Analysis
 
-Suggested mixed-effects model:
+Correctness can be modeled with logistic mixed-effects or hierarchical models. Positive skewed cost outcomes can use log-normal/gamma models or robust paired comparisons, conditional on success and with failure handled explicitly.
 
-`metric ~ language * model + language * repo_size + language * maintenance_depth + tooling + (1|task) + (1|repository)`
+A conceptual model is:
 
-For binary correctness, use a logistic mixed model; for skewed cost metrics, consider log transforms or suitable generalized models.
+\[
+Cost \sim Language + Model + Stage + Language\times Model + Language\times Stage + (1|Repository) + (1|Task) + (1|Run)
+\]
 
-Report effect sizes and confidence intervals, not only p-values.
+Do not treat repeated tasks from the same evolving chain as independent observations.
 
-## Failure criteria for the F# thesis
+## Confounds and controls
 
-The hypothesis should be weakened if, under strong tool-using agents:
+### Training exposure
 
-- F# remains more expensive than C# across repository sizes;
-- F# does not improve relatively with maintenance depth;
-- lower source size does not reduce semantic recovery/context cost;
-- compiler/type information fails to reduce defects or repair cost enough to compensate for unfamiliarity.
+Closed-model corpora are unknown. Use multiple models, code-corpus proxies, controlled documentation conditions, and—if feasible—matched continued-pretraining experiments with an open model.
 
-A negative result is useful: it would imply training familiarity/ecosystem conventions dominate representational advantages more strongly than expected.
+### Implementation comparability
+
+Equal lines of code is not the goal. Require identical external behavior and comparable architecture, then independently review whether either implementation is intentionally unidiomatic or artificially verbose.
+
+### Tokenizer dependence
+
+Record results under each model's native tokenizer. For representation ablations, also report characters/bytes/lexical units and avoid presenting one tokenizer as a language-intrinsic measure.
+
+### Toolchain quality
+
+Record diagnostic counts and messages. Shared .NET infrastructure reduces but does not eliminate compiler/language-service differences.
+
+### Agent leakage
+
+Use container/VM isolation and external evaluation in the main study. The local pilot is not a security boundary.
+
+## Stopping and exclusion
+
+Predefine timeouts, infrastructure-failure criteria, provider-error retries, and whether failed tasks stop or continue a chain. Never silently discard costly failed trajectories.

@@ -1,15 +1,5 @@
 # Data
 
-Generated benchmark results should use a documented, append-only raw format plus derived analysis tables.
+Generated run artifacts belong in `results/` and are ignored by Git.
 
-Suggested structure:
-
-```text
-data/
-├── raw/
-│   └── <experiment>/<run-id>/...
-└── derived/
-    └── ...
-```
-
-Do not commit credentials, private provider logs, or copyrighted benchmark material without appropriate rights.
+For a published study, release de-identified raw event logs, exact environment manifests, task definitions, result JSON, analysis code, and exclusion decisions. Never commit credentials, provider session files, or private model transcripts without reviewing their contents and license/privacy implications.

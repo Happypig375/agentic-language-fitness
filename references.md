@@ -1,75 +1,43 @@
-# References and starting points
+# Working bibliography
 
-This is a working bibliography, not a claim that every source directly tests the full hypothesis.
+Search last updated: **2026-08-26**. This bibliography distinguishes direct predecessors from mechanism evidence. Inclusion does not imply that a source tests the full hypothesis.
 
-## Agent cost and language
+## Directly adjacent benchmarks
 
-- **The Best Programming Language for Tokenmaxxing** (2026)  
-  https://arxiv.org/abs/2607.22807  
-  Directly studies programming-language effects on coding-agent token cost and full trajectories.
+- Wu, Z., Anderson, C. J., & Guha, A. (2026). **The Best Programming Language for Tokenmaxxing: An Investigation of Coding Agent Behavior Across Programming Languages.** arXiv:2607.22807. https://arxiv.org/abs/2607.22807
+- Lam, M. H., et al. (2026). **SWE-Chain: Benchmarking Coding Agents on Chained Release-Level Package Upgrades.** arXiv:2605.14415. https://arxiv.org/abs/2605.14415
+- Zan, D., et al. (2025). **Multi-SWE-bench: A Multilingual Benchmark for Issue Resolving.** arXiv:2504.02605. https://arxiv.org/abs/2504.02605
+- Li, H., et al. (2026). **ContextBench: A Benchmark for Context Retrieval in Coding Agents.** arXiv:2602.05892. https://arxiv.org/abs/2602.05892
+- Zhu, J., Hu, M., & Wu, J. (2026). **SWE Context Bench: A Benchmark for Context Learning in Coding.** arXiv:2602.08316. https://arxiv.org/abs/2602.08316
+- Khandpur, K., Lieret, K., Jimenez, C. E., Press, O., & Yang, J. (2025). **SWE-bench Multilingual.** https://www.swebench.com/multilingual.html
+- **SWE-EVO: Benchmarking Coding Agents in Long-Horizon Software Evolution Scenarios.** arXiv:2512.18470. https://arxiv.org/abs/2512.18470
+- **RepoMod-Bench: A Benchmark for Repository-Level Modernization.** arXiv:2602.22518. https://arxiv.org/abs/2602.22518
+- **GitTaskBench: A Benchmark for Code Agents Solving Real-World Tasks Through Code Repository Leveraging.** arXiv:2508.18993. https://arxiv.org/abs/2508.18993
+- **LongCodeBench: Evaluating Coding LLMs at 1M Context Windows.** arXiv:2505.07897. https://arxiv.org/abs/2505.07897
 
-## Repository-scale context
+## Multilingual and low-resource code generation
 
-- **LongCodeBench** (2025)  
-  https://arxiv.org/abs/2505.07897  
-  Repository/long-context coding benchmark; useful for the claim that effective performance degrades with larger required contexts.
+- Cassano, F., et al. (2022). **MultiPL-E: A Scalable and Polyglot Approach to Benchmarking Neural Code Generation.** arXiv:2208.08227. https://arxiv.org/abs/2208.08227
+- Cassano, F., et al. (2023). **Knowledge Transfer from High-Resource to Low-Resource Programming Languages for Code LLMs (MultiPL-T).** arXiv:2308.09895. https://arxiv.org/abs/2308.09895
+- Lang, N.-A. H., et al. (2026). **Perish or Flourish? A Holistic Evaluation of Large Language Models for Code Generation in Functional Programming.** arXiv:2601.02060. https://arxiv.org/abs/2601.02060
+- Cheng, J., et al. (2026). **CangjieBench: Benchmarking LLMs on a Low-Resource General-Purpose Programming Language.** arXiv:2603.14501. https://arxiv.org/abs/2603.14501
+- Joel, S., Wu, J. J. W., & Fard, F. H. (2024). **A Survey on LLM-based Code Generation for Low-Resource and Domain-Specific Programming Languages.** arXiv:2410.03981. https://arxiv.org/abs/2410.03981
 
-- **LongCodeZip** (2025)  
-  https://arxiv.org/abs/2510.00446  
-  Structure/relevance-aware code-context compression.
+## Representation and token efficiency
 
-## Tokenization and source representation
+- Sun, Z., et al. (2025). **Token Sugar: Making Source Code Sweeter for LLMs through Token-Efficient Shorthand.** arXiv:2512.08266. https://arxiv.org/abs/2512.08266
+- Pan, D., et al. (2025). **The Hidden Cost of Readability: How Code Formatting Silently Consumes Your LLM Budget.** arXiv:2508.13666. https://arxiv.org/abs/2508.13666
+- Liu, S., et al. (2026). **ShortCoder: Knowledge-Augmented Syntax Optimization for Token-Efficient Code Generation.** arXiv:2601.09703. https://arxiv.org/abs/2601.09703
+- **TokDrift: Semantic-Preserving Tokenization Changes Affect Code Models.** ACL 2026. Search by title in the ACL Anthology.
 
-- **TokDrift** (ACL 2026)  
-  https://aclanthology.org/2026.acl-long.2199/  
-  Studies behavior changes from tokenization differences in semantically equivalent programs.
+## Feedback, execution, and cost
 
-- **Token Sugar: Making Source Code Sweeter for LLMs through Token-Efficient Shorthand** (ASE 2025)  
-  https://arxiv.org/abs/2512.08266  
-  Learns reversible shorthand for frequent code patterns while preserving code-generation performance.
+- Ding, Y., et al. (2024). **CoCoGen: Leveraging Static Analysis and Compiler Feedback for Context-Aware Code Generation.** arXiv:2403.16792. https://arxiv.org/abs/2403.16792
+- **How Do AI Agents Spend Your Money? Token-Cost Analysis of Software Engineering Agents.** arXiv:2604.22750. https://arxiv.org/abs/2604.22750
+- **To Run or Not to Run: Understanding the Role of Execution in Agentic Coding.** arXiv:2606.26978. https://arxiv.org/abs/2606.26978
+- **Code Health in LLM-Based Test Generation.** arXiv:2608.18645. https://arxiv.org/abs/2608.18645
 
-## Multilingual code generation / transfer
+## Tool and protocol sources
 
-- **MultiPL-E**  
-  https://github.com/nuprl/MultiPL-E  
-  Parallel multilingual execution-tested code-generation benchmark infrastructure.
-
-- **Knowledge Transfer from High-Resource to Low-Resource Programming Languages for Code LLMs (MultiPL-T)**  
-  Search via Microsoft Research / paper index; relevant to language familiarity and transfer controls.
-
-## Static feedback / repair
-
-- **CoCoGen: Code Context Generation for Large Language Models with Static Analysis** (2024)  
-  https://arxiv.org/abs/2403.16792  
-  Relevant to compiler/static-analysis feedback improving project-context code generation.
-
-## F# / agentic programming context
-
-- Don Syme / GitHub Next profile  
-  https://githubnext.com/people/dsyme/
-
-- Don Syme, **On Specifications, Software and Tools / Intent-Actualisation Toolchains** (2025)  
-  https://dsyme.net/2025/09/24/on-specifications-software-and-tools/
-
-- Don Syme, **What Kind of Programming is Natural Language Programming?** (2025)  
-  https://dsyme.net/2025/09/02/what-kind-of-programming-is-natural-language-programming/
-
-## Corpus proxies
-
-- **The Stack v3** statistics  
-  https://huggingface.co/datasets/HuggingFaceCode/stack-v3-train  
-  Useful as an open-source corpus proxy; do not treat it as disclosure of any proprietary model's training mixture.
-
-## Notes for literature review
-
-Future review should distinguish:
-
-1. one-shot code generation;
-2. agent trajectory cost;
-3. repository comprehension;
-4. compiler/tool feedback;
-5. tokenizer efficiency;
-6. source-code maintainability;
-7. longitudinal/fresh-context maintenance.
-
-The central project question sits at the intersection of these literatures rather than being answered by any one of them.
+- OpenAI Codex CLI non-interactive execution documentation: https://developers.openai.com/codex/noninteractive
+- OpenAI Codex CLI event types: https://github.com/openai/codex/blob/main/sdk/typescript/src/events.ts

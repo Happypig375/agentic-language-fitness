@@ -1,85 +1,68 @@
 # Metrics
 
-## Unit of analysis
+No single score is sufficient. Correctness is primary; cost metrics are interpreted conditional on correctness.
 
-One **agent trajectory** = all model/tool interactions from receiving a task until success, failure, or budget exhaustion.
+## Primary outcomes
 
-Store every event so aggregate metrics remain reproducible.
+### Correct completion
 
-## Correctness metrics
+- project builds;
+- all cumulative hidden behavioral cases pass;
+- no timeout or agent failure;
+- no forbidden test/gold access in isolated runs.
 
-- `success`: all required hidden tests pass.
-- `compile_success`: final repository compiles/type-checks.
-- `regressions`: pre-existing hidden tests newly failing.
-- `static_findings`: normalized severity/count where available.
-- `defect_escape`: failure found only by later tasks/additional tests.
+### Complete trajectory usage
 
-## Compute metrics
+- input tokens;
+- cached input tokens;
+- cache-write input tokens;
+- output tokens;
+- reasoning output tokens;
+- elapsed agent time;
+- tool/command calls;
+- build/test invocations where observable;
+- process failures and retries.
 
-- `input_tokens_total`
-- `output_tokens_total`
-- `reasoning_tokens_total` (when exposed)
-- `cached_input_tokens` (when exposed)
-- `source_tokens_read_total`
-- `source_tokens_read_unique`
-- `max_context_tokens`
-- `tool_calls_total`
-- `wall_clock_seconds`
-- `provider_cost` (secondary; provider pricing changes over time)
+Report **tokens per correct task** and model success jointly rather than rewarding cheap failures.
 
-## Repair metrics
+## Repository/context metrics
 
-- `compile_attempts`
-- `compile_failures`
-- `test_runs`
-- `test_failures`
-- `patch_iterations`
-- `reverted_edits`
-- `failed_tool_calls`
+- source files, bytes, lines, and approximate lexical tokens;
+- changed files, added/deleted lines, and diff bytes;
+- unique files read and repeated reads when the agent event stream exposes them;
+- maximum and cumulative context tokens where available;
+- dependency and declaration counts in later benchmark versions.
 
-## Representation metrics
+## Repair burden
 
-Measure final repository and task-relevant working set:
+- non-zero agent subprocesses;
+- failed builds;
+- failed behavioral evaluations;
+- patch iterations;
+- time between first compilable and final correct state where observable.
 
-- bytes / characters;
-- tokenizer tokens for each tested model;
-- lines (secondary only);
-- AST nodes;
-- declarations;
-- type annotations;
-- dependency edges;
-- number of files/modules loaded for successful repair.
+## Longitudinal metrics
 
-## Maintenance metrics
-
-### Semantic Recovery Cost (SRC)
-
-For maintenance task \(M\):
+For a chain of tasks:
 
 \[
-SRC(M)=\text{source/context tokens consumed before the first correct patch}
+C_{lifetime}=C_{baseline}+\sum_i C_{task_i}+C_{escaped\ defects}
 \]
 
-Also record unique source tokens separately from repeated reads.
+The pilot records the observable terms and leaves defect weighting explicit.
 
-### Lifetime Agent Cost (LAC)
+### Semantic recovery cost
 
-For a project history with tasks \(1...N\):
+Operational definition: resources consumed by a fresh agent before it produces a correct maintenance patch in an inherited repository. It is measured by complete trajectory cost, not an unobservable quantity called “meaning.”
+
+### Lifetime amortized cost
 
 \[
-LAC_N=C_{initial}+\sum_{i=1}^N C_i
+LAC = \frac{C_{creation}+\sum_i C_{maintenance,i}}{1+n_{maintenance}}
 \]
 
-Report this in raw token/compute components rather than hiding it behind one conversion factor.
+Use only for descriptive reporting; preserve the underlying distribution and success outcomes.
 
-## Efficiency ratios
+## Representation metrics are explanatory, not objectives
 
-Useful derived metrics:
-
-- total tokens per successful task;
-- source tokens read per successful task;
-- retries per success;
-- successful modifications per million model tokens;
-- regression-free modifications per million model tokens.
-
-Avoid defining “semantic density” directly. Treat it as a latent property inferred from observable recovery and maintenance costs.
+Characters, bytes, tokenizer tokens, and AST nodes can help explain differences but cannot replace trajectory measurements. A code-golf representation may be short while being expensive to recover or repair.

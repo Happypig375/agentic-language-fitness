@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Unit tests
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+      - name: Environment check
+        run: python scripts/alf.py doctor --strict
+      - name: Validate matched benchmark snapshots
+        run: python scripts/alf.py validate
+      - name: Run scripted chain matrix
+        run: python scripts/alf.py matrix --agent scripted --output results/ci
+      - name: Summarize
+        run: python scripts/alf.py summarize results/ci --json > results/ci-summary.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pilot-results
+          path: results/
+          if-no-files-found: warn

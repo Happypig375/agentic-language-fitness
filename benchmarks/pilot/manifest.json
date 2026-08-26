@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "id": "pilot-order-flow",
+  "description": "Matched F#/C# chained maintenance pilot on .NET 8",
+  "languages": {
+    "fsharp": {
+      "base": "benchmarks/pilot/repos/fsharp/v0",
+      "project_file": "OrderFlow.fsproj",
+      "source_file": "Program.fs"
+    },
+    "csharp": {
+      "base": "benchmarks/pilot/repos/csharp/v0",
+      "project_file": "OrderFlow.csproj",
+      "source_file": "Program.cs"
+    }
+  },
+  "baseline_cases": [
+    {
+      "name": "ready filters pending and sorts by creation time then id",
+      "input": {
+        "operation": "ready",
+        "orders": [
+          {
+            "id": "b",
+            "createdAt": "2026-01-02T00:00:00Z",
+            "status": "pending"
+          },
+          {
+            "id": "done",
+            "createdAt": "2025-12-01T00:00:00Z",
+            "status": "completed"
+          },
+          {
+            "id": "c",
+            "createdAt": "2026-01-03T00:00:00Z",
+            "status": "pending"
+          },
+          {
+            "id": "a",
+            "createdAt": "2026-01-02T00:00:00Z",
+            "status": "pending"
+          }
+        ]
+      },
+      "expected": {
+        "ids": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "name": "ready accepts an empty order list",
+      "input": {
+        "operation": "ready",
+        "orders": []
+      },
+      "expected": {
+        "ids": []
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "id": "001-priority",
+      "prompt": "benchmarks/pilot/tasks/001-priority/task.md",
+      "gold": {
+        "fsharp": "benchmarks/pilot/gold/fsharp/001-priority/Program.fs",
+        "csharp": "benchmarks/pilot/gold/csharp/001-priority/Program.cs"
+      },
+      "cases": [
+        {
+          "name": "ready sorts priority descending before creation time and id",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              {
+                "id": "low",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": 1
+              },
+              {
+                "id": "z",
+                "createdAt": "2026-01-03T00:00:00Z",
+                "status": "pending",
+                "priority": 5
+              },
+              {
+                "id": "a",
+                "createdAt": "2026-01-03T00:00:00Z",
+                "status": "pending",
+                "priority": 5
+              },
+              {
+                "id": "early",
+                "createdAt": "2026-01-02T00:00:00Z",
+                "status": "pending",
+                "priority": 5
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "early",
+              "a",
+              "z",
+              "low"
+            ]
+          }
+        },
+        {
+          "name": "missing priority defaults to zero",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              {
+                "id": "implicit",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending"
+              },
+              {
+                "id": "negative",
+                "createdAt": "2025-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": -1
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "implicit",
+              "negative"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "002-overdue",
+      "prompt": "benchmarks/pilot/tasks/002-overdue/task.md",
+      "gold": {
+        "fsharp": "benchmarks/pilot/gold/fsharp/002-overdue/Program.fs",
+        "csharp": "benchmarks/pilot/gold/csharp/002-overdue/Program.cs"
+      },
+      "cases": [
+        {
+          "name": "overdue filters status and due date and applies the specified ordering",
+          "input": {
+            "operation": "overdue",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "late-low",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": 1,
+                "dueAt": "2026-02-01T00:00:00Z"
+              },
+              {
+                "id": "late-high",
+                "createdAt": "2026-01-05T00:00:00Z",
+                "status": "processing",
+                "priority": 8,
+                "dueAt": "2026-02-01T00:00:00Z"
+              },
+              {
+                "id": "older",
+                "createdAt": "2026-01-08T00:00:00Z",
+                "status": "pending",
+                "priority": 0,
+                "dueAt": "2026-01-20T00:00:00Z"
+              },
+              {
+                "id": "complete",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "completed",
+                "priority": 99,
+                "dueAt": "2026-01-01T00:00:00Z"
+              },
+              {
+                "id": "future",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": 99,
+                "dueAt": "2026-03-01T00:00:00Z"
+              },
+              {
+                "id": "undated",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": 99
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "older",
+              "late-high",
+              "late-low"
+            ]
+          }
+        },
+        {
+          "name": "due exactly at asOf is not overdue",
+          "input": {
+            "operation": "overdue",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "equal",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "dueAt": "2026-02-10T00:00:00Z"
+              },
+              {
+                "id": "before",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "dueAt": "2026-02-09T23:59:59Z"
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "before"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

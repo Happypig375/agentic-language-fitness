@@ -1,254 +1,102 @@
 # Agentic Language Fitness
 
-Research plan for measuring how programming-language choice changes the lifetime computational cost, reliability, and maintainability of agentic software engineering.
+A reproducible pilot for measuring how programming-language choice changes the **lifetime computational cost and reliability of coding agents**.
 
-## Core question
+The project does not assume that F# is better than C#, Python, Rust, or any other language. It tests a narrower causal question:
 
-> Which programming-language properties minimize the total computation required for AI agents to correctly create, understand, modify, verify, and maintain software over its lifetime?
+> When semantically equivalent software is represented in different programming languages, how much agent computation is required to correctly understand, change, verify, and maintain it over a sequence of inherited changes?
 
-This is deliberately different from asking which language produces the shortest source or the highest one-shot benchmark score.
+The first controlled comparison is **F# versus C# on .NET 8**. Sharing the runtime, standard library, package ecosystem, build system, and external behavior removes many confounds that affect ordinary multilingual benchmarks.
 
-A useful first approximation is:
+## Research gap
 
-\[
-C_{lifetime} = C_{creation} + \sum_i C_{maintenance,i} + C_{defects}
-\]
+Existing work separately studies language-dependent token cost on small programming tasks, multilingual repository issue resolution, context retrieval, chained maintenance, low-resource languages, and token-efficient source transformations. As of the literature search dated **2026-08-26**, we found no benchmark that combines all of the following:
 
-where an agent trajectory may include source/context tokens read, reasoning and output tokens, tool calls, compilation failures, test failures, retries, wall time, and undetected regressions.
+1. semantically matched repositories in different languages;
+2. a shared runtime and external test oracle;
+3. an inherited sequence of maintenance changes;
+4. a fresh agent context for each change;
+5. complete trajectory, context, repair, and correctness measurements.
 
-## Motivation
+See [the literature review](docs/literature-review.md) and [gap statement](docs/research-gap.md). The novelty claim is deliberately scoped and falsifiable rather than “which language is best.”
 
-Programming languages are representations consumed repeatedly by both humans and coding agents. Language choice can therefore affect:
+## What is executable now
 
-- source/context size;
-- semantic information available per model token;
-- model familiarity from pretraining;
-- locality of reasoning;
-- strength of compiler/type-checker feedback;
-- cost of repair loops;
-- probability of undetected defects;
-- ease of fresh-context maintenance;
-- interoperability and ecosystem knowledge.
-
-The working hypothesis is **not** “shorter languages are better.” Code-golf languages expose why that objective is wrong: extreme lexical compression can remove semantic anchors, increase model uncertainty, and create more retries than it saves in source tokens.
-
-The more interesting target is approximately:
-
-\[
-\text{Agentic Language Fitness}
-\propto
-\frac{\text{recoverable semantics + verifiable constraints}}
-     {\text{context + reasoning + repair cost}}
-\]
-
-## Why F# is an interesting test case
-
-F# is not assumed to be optimal. It is a useful experimental point because it combines:
-
-- concise ML-family syntax;
-- strong static typing with type inference;
-- discriminated unions and exhaustive pattern matching;
-- expression-oriented programming;
-- immutability-by-default conventions;
-- relatively low boilerplate;
-- strong compiler feedback;
-- access to the much larger .NET ecosystem and C# knowledge base.
-
-Its obvious countervailing weakness is lower native training-corpus exposure than Python, JavaScript/TypeScript, C#, Java, or C++.
-
-The cleanest primary comparison is therefore **F# vs C#**, because both share .NET, NuGet, CLR semantics, and much of the same library surface. This controls away more ecosystem variation than comparisons such as F# vs Python.
-
-## Main hypotheses
-
-See [`docs/hypotheses.md`](docs/hypotheses.md) for falsifiable versions. In brief:
-
-1. Programming language changes total agent trajectory cost even after controlling for task and model.
-2. Raw source brevity is a poor predictor of total agent cost.
-3. Semantic compression is beneficial; opaque lexical compression is not.
-4. Static verification trades some first-pass difficulty for cheaper and safer repair.
-5. Training familiarity dominates more strongly for weaker agents and small tasks.
-6. Representation quality matters more as repository size and maintenance depth increase.
-7. F# may lose one-shot generation while becoming relatively stronger on fresh-agent repository maintenance.
-8. The advantage, if any, should appear most clearly against C# under shared-.NET workloads.
-
-## Experimental program
-
-### Tier 1 — Matched microtasks
-
-Implement identical algorithmic and library-light tasks in several languages.
-
-Candidate languages:
-
-- F#
-- C#
-- Python
-- TypeScript
-- Rust
-- OCaml
-
-Measure the **full trajectory**, not only the final answer:
-
-- input/context tokens;
-- reasoning tokens where observable;
-- output tokens;
-- compilation attempts and failures;
-- test runs and failures;
-- tool calls;
-- wall-clock time;
-- final correctness;
-- final source tokens.
-
-This establishes basic language/model interactions and reproduces the style of recent multilingual token-cost work.
-
-### Tier 2 — Parallel repositories
-
-Construct semantically equivalent medium-sized repositories in at least F# and C#, then optionally Python/Rust/TypeScript.
-
-Give agents matched realistic issues:
-
-- add a domain-model variant;
-- change serialization;
-- propagate an optional field;
-- add caching;
-- modify validation rules;
-- diagnose a regression;
-- refactor duplicated behavior;
-- alter an API contract;
-- change error handling;
-- fix concurrency/state bugs.
-
-Measure correctness and the amount of repository state the agent had to consume before making a successful patch.
-
-### Tier 3 — Fresh-agent longitudinal maintenance
-
-This is the central experiment.
-
-Simulate a project history of many changes. For each maintenance task, start with a **fresh agent context** that has no memory of earlier development beyond the repository itself.
-
-Define semantic recovery cost for task \(M\):
-
-\[
-SRC(M) = \text{source/context tokens consumed before a correct modification}
-\]
-
-Then estimate:
-
-\[
-C_{lifetime} = C_{initial} + \sum_{i=1}^{N} C_{maintenance,i}
-\]
-
-The key prediction is an interaction between language and repository/history size—not necessarily a universal one-shot winner.
-
-### Tier 4 — Representation ablations
-
-Within the same language, vary representation while preserving behavior:
-
-1. normal descriptive code;
-2. formatting-minified but semantically identical code;
-3. shortened/opaque identifiers;
-4. boilerplate-expanded code;
-5. inferred vs explicit types where possible;
-6. normal abstractions vs artificially golfed shorthand.
-
-This distinguishes **useful compression** from destructive compression.
-
-### Tier 5 — Familiarity controls
-
-Training exposure is a major confound. Use several approaches:
-
-- compare multiple model families and capability levels;
-- run closed-book vs documentation/tool-enabled conditions;
-- provide matched language primers;
-- use open-weight code models where training data are better characterized;
-- if feasible, adapt the same base model on equal token budgets of different languages.
-
-## Primary metrics
-
-Do not collapse everything into a single score initially.
-
-### Correctness
-
-- hidden-test pass rate;
-- compile/type-check success;
-- regressions introduced;
-- static-analysis findings;
-- property-test failures.
-
-### Agent computation
-
-- total input/context tokens;
-- total generated tokens;
-- reasoning tokens where available;
-- repeated source-token reads;
-- tool calls;
-- wall-clock time;
-- provider/model cost when meaningful.
-
-### Repair burden
-
-- compiler failures;
-- test failures;
-- patch iterations;
-- reversions;
-- failed tool invocations.
-
-### Representation
-
-- source characters;
-- tokenizer tokens by model;
-- AST node count;
-- declaration count;
-- dependency edges;
-- static type/constraint information;
-- repository working-set size needed for a task.
-
-### Maintenance
-
-- semantic recovery cost (SRC);
-- tokens read by a fresh agent before first correct patch;
-- cumulative lifetime cost across a task sequence;
-- defect escape rate after repeated evolution.
-
-See [`docs/metrics.md`](docs/metrics.md).
-
-## Statistical design
-
-A useful initial factorial design is:
-
-- 5–6 languages;
-- 4–5 models/capability levels;
-- 50–100 matched tasks;
-- 3 repository sizes;
-- repeated trials per condition.
-
-A mixed-effects analysis can model task and repository as random effects while estimating language, model, repository size, and interaction terms such as:
-
-- language × model capability;
-- language × repository size;
-- language × maintenance depth;
-- language × tooling availability.
-
-The most important preregistered prediction for the F# hypothesis is:
-
-> **F#'s relative performance should improve as the task shifts from small one-shot generation toward large-repository, fresh-context maintenance with compiler/tool access.**
-
-If it does not, the hypothesis loses substantial support.
-
-## Non-goals / guardrails
-
-- Do not assume F# is best before measurement.
-- Do not equate character count with tokenizer count.
-- Do not use final source length as a proxy for full agent cost.
-- Do not treat one proprietary provider's current pricing as a scientific constant.
-- Do not hide negative results.
-
-## Repository layout
+The repository contains a two-step pilot benchmark with behaviorally equivalent F# and C# implementations of a line-oriented JSON order-processing service.
 
 ```text
-benchmarks/   matched benchmark projects and tasks
-data/         raw/derived result conventions
-experiments/  immutable experiment manifests
-docs/         hypotheses, metrics, experimental design
+baseline -> 001-priority -> 002-overdue
 ```
 
-See [`PLAN.md`](PLAN.md) for the staged implementation roadmap and [`references.md`](references.md) for the initial literature map.
+The harness:
+
+- creates an isolated workspace from the language baseline;
+- starts a fresh agent process for every task while retaining the changed codebase;
+- builds with the .NET SDK;
+- evaluates cumulative hidden behavioral cases;
+- records source metrics, git diffs, process durations, tool/command counts, and token usage when exposed by the agent;
+- writes machine-readable JSON and JSONL artifacts.
+
+Three adapters are included:
+
+- `scripted`: applies checked-in gold snapshots to validate the harness without an LLM;
+- `codex`: runs a fresh non-interactive `codex exec --json --ephemeral` process per task;
+- `command`: invokes any external agent command and optionally reads a standard usage sidecar.
+
+## Quick start
+
+Requirements: Python 3.11+, Git, and .NET SDK 8.x.
+
+```bash
+python scripts/alf.py doctor --strict
+python scripts/alf.py validate
+python scripts/alf.py matrix --agent scripted --output results/pilot
+python scripts/alf.py summarize results/pilot
+
+# Optional editable installation exposes the shorter `alf` command:
+python -m pip install -e .
+```
+
+Run a real Codex pilot after authenticating the Codex CLI:
+
+```bash
+alf run --language fsharp --agent codex --model YOUR_MODEL --output results/codex
+alf run --language csharp --agent codex --model YOUR_MODEL --output results/codex
+alf summarize results/codex
+```
+
+A provider-neutral command adapter is also available:
+
+```bash
+alf run \
+  --language fsharp \
+  --agent command \
+  --agent-command 'your-agent --workspace {workspace} --prompt-file {prompt_file}'
+```
+
+The command receives `ALF_WORKSPACE`, `ALF_TASK_ID`, `ALF_LANGUAGE`, and `ALF_PROMPT_FILE`. It may write `.alf/usage.json`; see [the protocol](docs/protocol.md).
+
+## Reproducibility and safety
+
+The default pilot is suitable for harness development, not yet for a publication-quality causal estimate. A credible experiment must pin the model and agent versions, randomize run order, repeat stochastic runs, isolate the workspace so the agent cannot read gold data or evaluator cases, and record exact toolchain/container versions. See [environmental assumptions](docs/environment.md).
+
+## Repository map
+
+- `src/alf/` — Python harness and agent adapters
+- `benchmarks/pilot/` — matched .NET projects, task specifications, tests, and gold snapshots
+- `docs/` — literature review, hypotheses, protocol, metrics, and experimental design
+- `tests/` — harness unit tests
+- `.github/workflows/ci.yml` — end-to-end scripted validation on Python 3.12 and .NET 8
+
+## Status
+
+- [x] scoped literature review
+- [x] defensible gap statement
+- [x] executable paired-language pilot
+- [x] fresh-process chain runner
+- [x] Codex JSONL usage parser
+- [x] CI validation
+- [ ] container-isolated real-agent runs
+- [ ] larger matched repository family
+- [ ] preregistration and power analysis
+- [ ] multi-model repeated study
