@@ -10,15 +10,13 @@ The first controlled comparison is **F# versus C# on .NET 8**. Sharing the runti
 
 ## Research gap
 
-Existing work separately studies language-dependent token cost on small programming tasks, multilingual repository issue resolution, context retrieval, chained maintenance, low-resource languages, and token-efficient source transformations. As of the literature search dated **2026-08-26**, we found no benchmark that combines all of the following:
+Sequential maintenance is **not** the novelty: ChainSWE, SlopCodeBench, SWE-Chain, and SWE-CI already evaluate accumulated or iterative software state. Multilingual repository benchmarks also exist, while Tokenmaxxing directly shows that programming language changes agent token expenditure on small tasks.
 
-1. semantically matched repositories in different languages;
-2. a shared runtime and external test oracle;
-3. an inherited sequence of maintenance changes;
-4. a fresh agent context for each change;
-5. complete trajectory, context, repair, and correctness measurements.
+The narrower gap found in the search dated **2026-08-26** is the controlled intersection of those lines of work:
 
-See [the literature review](docs/literature-review.md) and [gap statement](docs/research-gap.md). The novelty claim is deliberately scoped and falsifiable rather than “which language is best.”
+> No published study found treats programming language as the independent variable inside an inherited maintenance experiment over semantically matched repositories while holding the runtime, task sequence, external behavioral oracle, agent configuration, and measurement protocol substantially constant.
+
+This project is therefore a controlled experimental extension and synthesis, not a claim to have invented sequential maintenance benchmarking. See [the literature review](docs/literature-review.md), [search log](docs/search-log.md), and [gap statement](docs/research-gap.md).
 
 ## What is executable now
 
