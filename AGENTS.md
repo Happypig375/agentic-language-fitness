@@ -16,7 +16,7 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-Stay in Phase 1. Restore a green cross-platform baseline, audit usage/event accounting, freeze accepted-run provenance, and perform counterbalanced repeated pairs to estimate variance. Do not infer an F# advantage from the single 2-task paired run, and do not jump to broad repository expansion before the gates in `PLAN.md` are met.
+Cross-platform CI is green at commit `41252deb4ac84df36f5887a23bc198d91bd24fbd`. Stay in Phase 1 and begin with the usage/event-accounting audit in `PLAN.md`, then freeze result provenance before running the 10 counterbalanced paired blocks. Do not infer an F# advantage from the single 2-task pair, and do not jump to broad repository expansion before the measurement and variance gates are met.
 
 ## Development agents versus benchmarked agents
 

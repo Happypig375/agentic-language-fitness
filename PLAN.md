@@ -12,7 +12,8 @@ Completed:
 - fresh process and container per maintenance task with inherited candidate code;
 - isolated Codex command adapter with pinned CLI/image metadata;
 - one accepted paired run with `gpt-5.6-luna`, two tasks per language, and all cumulative cases passing;
-- tracked preliminary summary in `docs/preliminary-results-2026-08-26.md`.
+- tracked preliminary summary in `docs/preliminary-results-2026-08-26.md`;
+- green Linux and Windows CI at commit `41252deb4ac84df36f5887a23bc198d91bd24fbd`.
 
 The first accepted pair is **infrastructure and variance evidence, not language-effect evidence**:
 
@@ -22,13 +23,13 @@ The first accepted pair is **infrastructure and variance evidence, not language-
 - F# ran first and C# second, so order was not counterbalanced;
 - there was only one stochastic observation per language.
 
-The latest failed CI run did not reach benchmark validation. A unit test simulated Windows tokenization on Linux but compared the preserved Windows backslashes against a host-native POSIX path. Treat this as a portability-test defect, not an experimental failure. The continuation begins by restoring a green cross-platform baseline.
+CI run 16 initially failed before benchmark validation because a unit test simulated Windows tokenization on Linux but compared preserved Windows backslashes with a host-native POSIX path. The first follow-up then exposed that `global.json` allowed a feature-band roll-forward from the requested .NET SDK `10.0.302` to the runner's preinstalled `10.0.400`. Both issues are fixed: the test is host-independent, `rollForward` is disabled, and CI now validates the harness on Linux and Windows.
 
 ## Current decision
 
-Remain in **Phase 1: measurement and feasibility**. Do not claim an F# advantage, begin a confirmatory study, or expand to many repositories until the following gates are met:
+Remain in **Phase 1: measurement and feasibility**. Do not claim an F# advantage, begin a confirmatory study, or expand to many repositories until the remaining gates are met:
 
-1. CI is green on Linux and Windows;
+1. cross-platform CI is green — **met**;
 2. token and event accounting is independently reconciled against raw JSONL;
 3. repeated counterbalanced pairs quantify stochastic and order variance;
 4. the pilot is recalibrated if correctness remains saturated;
@@ -36,14 +37,14 @@ Remain in **Phase 1: measurement and feasibility**. Do not claim an F# advantage
 
 ## Workstream A — Stabilize and freeze the apparatus
 
-### A1. Restore and broaden CI
+### A1. Restore and broaden CI — complete
 
-- Fix the host-dependent Windows path assertion.
-- Keep the full Linux job: unit tests, doctor, benchmark validation, scripted chain, container build, and container validation.
-- Add a Windows job for unit tests, environment checks, and matched benchmark validation.
-- Do not start paid/model experiments while `main` is red.
+- [x] Fix the host-dependent Windows path assertion.
+- [x] Keep the full Linux job: unit tests, doctor, benchmark validation, scripted chain, container build, and container validation.
+- [x] Add a Windows job for unit tests, environment checks, and matched benchmark validation.
+- [x] Enforce the exact .NET SDK pin rather than permitting feature-band roll-forward.
 
-**Exit:** the same commit is green on both operating systems and the scripted pair passes.
+**Exit achieved:** Linux and Windows jobs pass on the same commit, and the scripted pair plus container validation pass on Linux.
 
 ### A2. Freeze a protocol version
 
@@ -59,7 +60,7 @@ Before the next accepted real-agent run, define a dated protocol version and rec
 
 A nominal `seed` may identify run ordering and harness randomness, but must not be described as a model seed unless the model endpoint actually exposes deterministic seeding.
 
-### A3. Audit usage accounting
+### A3. Audit usage accounting — next action
 
 Before interpreting the preliminary token totals:
 
@@ -212,7 +213,6 @@ Those outcomes remain scientifically useful: they would show that language choic
 
 The next milestone is complete when:
 
-- Linux and Windows CI are green;
 - usage accounting is reconciled and guarded by tests;
 - a frozen run manifest and failure taxonomy exist;
 - 10 counterbalanced paired blocks of the current cell are preserved;
