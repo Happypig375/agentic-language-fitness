@@ -24,7 +24,15 @@ def evaluate_project(
 ) -> dict[str, Any]:
     project = workspace / language_config["project_file"]
     build = run_process(
-        ["dotnet", "build", str(project), "--configuration", "Release", "--nologo"],
+        [
+            "dotnet",
+            "build",
+            str(project),
+            "--configuration",
+            "Release",
+            "--no-incremental",
+            "--nologo",
+        ],
         cwd=workspace,
         timeout=timeout,
         env={"DOTNET_CLI_TELEMETRY_OPTOUT": "1", "DOTNET_NOLOGO": "1"},
