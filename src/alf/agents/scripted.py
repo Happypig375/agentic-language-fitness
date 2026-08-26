@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import shutil
 import time
 from pathlib import Path
 from typing import Any
@@ -27,7 +26,7 @@ class ScriptedAgent(Agent):
         source = root / task["gold"][language]
         target = workspace / language_config["source_file"]
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
+        target.write_bytes(source.read_bytes())
         process = ProcessResult(
             argv=["scripted-copy", str(source), str(target)],
             returncode=0,
