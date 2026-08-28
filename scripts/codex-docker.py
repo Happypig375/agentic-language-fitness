@@ -104,6 +104,13 @@ def write_usage(workspace: Path, stdout: str, model: str | None, image: str | No
         "failed_event_count": counts["failed_events"],
         "event_count": len(events),
         "image": image,
+        "derived_from_codex_jsonl": True,
+        "usage_available": bool(counts.get("usage_records") and counts.get("usage_valid")),
+        "accounting_valid": bool(counts.get("accounting_valid")),
+        "usage_errors": counts.get("usage_errors", []),
+        "file_reads": counts.get("file_reads", 0),
+        "unique_file_reads": counts.get("unique_file_reads", 0),
+        "file_revisits": counts.get("file_revisits", 0),
     })
     target = workspace / ".alf" / "usage.json"
     target.parent.mkdir(parents=True, exist_ok=True)

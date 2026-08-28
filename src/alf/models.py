@@ -58,8 +58,14 @@ class AgentResult:
     command_count: int = 0
     file_change_count: int = 0
     failed_event_count: int = 0
+    file_reads: int = 0
+    unique_file_reads: int = 0
+    file_revisits: int = 0
     events: list[dict[str, Any]] = field(default_factory=list)
+    accounting_valid: bool = True
+    usage_available: bool = False
+    accounting_errors: list[str] = field(default_factory=list)
 
     @property
     def ok(self) -> bool:
-        return self.process.ok and self.failed_event_count == 0
+        return self.process.ok and self.failed_event_count == 0 and self.accounting_valid and not self.accounting_errors

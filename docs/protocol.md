@@ -9,7 +9,10 @@ A **run** is one language implementation traversing an ordered task chain. The w
 1. Snapshot repository metrics and current commit.
 2. Write the task request to `.alf/TASK.md` inside the workspace.
 3. Start a fresh agent process.
-4. Capture stdout, stderr, JSONL events, usage, duration, and exit status.
+4. Capture stdout, stderr, JSONL events, usage, duration, and exit status. Codex
+   usage sums every `turn.completed.usage` record; missing, malformed, or negative
+   fields invalidate accounting. Docker sidecars are marked as derived from raw
+   JSONL and copied per task; generic commands report usage unavailable, never zero.
 5. Build the project with the pinned toolchain.
 6. Run all cumulative black-box cases through the line-oriented JSON protocol.
 7. Record git diff and post-task repository metrics.
@@ -64,7 +67,23 @@ The agent may write `.alf/usage.json`:
 }
 ```
 
-Missing fields remain null/zero according to the result schema; they are never inferred silently.
+Use `alf run --agent command --require-usage --agent-command ...` when the command
+wrapper must produce usage. The adapter clears stale sidecars before each task;
+missing or malformed fresh artifacts make the task unsuccessful while preserving
+result artifacts. Without the flag, generic usage is optional and unavailable is
+distinct from measured zero.
+
+Missing fields remain unavailable according to the result schema; they are never
+inferred silently. Official OpenAI usage defines `input_tokens` as including cached
+and cache-write input tokens (not additive); see https://developers.openai.com/api/reference/resources/admin/subresources/organization/subresources/usage .
+Exact Codex CLI 0.149.1 artifacts still require reconciliation against raw JSONL.
+Agent-process time covers the child process only; evaluator time includes baseline
+and cumulative evaluator calls; task time runs from task start through commit
+attempt and immediately before task-result serialization; run time starts before
+initialization and ends immediately before result serialization. These are monotonic
+elapsed intervals and are not additive substitutes for one another. Read telemetry
+supports only simple `cat/head/tail/less/more`, `sed -n`, and `rg PATTERN PATH`
+forms with shell operators/options rejected; it does not infer semantic recovery.
 The container wrapper additionally records `event_count`, tool-specific counts, and the
 configured image identifier. Its temporary auth projection retains the `refresh_token`
 schema key but blanks its value; a short-lived access token can still be read by the

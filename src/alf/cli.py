@@ -9,6 +9,7 @@ from typing import Any
 
 from .config import DEFAULT_MANIFEST, REQUIRED_DOTNET_SDK, find_repo_root, load_manifest
 from .runner import environment_snapshot, run_chain, validate_benchmark
+from .audit import audit_run
 
 
 def _root_and_manifest(args: argparse.Namespace) -> tuple[Path, dict[str, Any]]:
@@ -41,6 +42,8 @@ def cmd_validate(args: argparse.Namespace) -> int:
 
 
 def cmd_run(args: argparse.Namespace) -> int:
+    if args.require_usage and args.agent != "command":
+        raise ValueError("--require-usage is valid only with --agent command")
     root, manifest = _root_and_manifest(args)
     output = Path(args.output)
     if not output.is_absolute():
@@ -53,6 +56,7 @@ def cmd_run(args: argparse.Namespace) -> int:
         output_root=output,
         model=args.model,
         agent_command=args.agent_command,
+        require_usage=args.require_usage,
         timeout=args.timeout,
         max_tasks=args.max_tasks,
     )
@@ -62,6 +66,8 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 
 def cmd_matrix(args: argparse.Namespace) -> int:
+    if args.require_usage and args.agent != "command":
+        raise ValueError("--require-usage is valid only with --agent command")
     root, manifest = _root_and_manifest(args)
     output = Path(args.output)
     if not output.is_absolute():
@@ -78,6 +84,7 @@ def cmd_matrix(args: argparse.Namespace) -> int:
             output_root=output,
             model=args.model,
             agent_command=args.agent_command,
+            require_usage=args.require_usage,
             timeout=args.timeout,
             max_tasks=args.max_tasks,
         )
@@ -102,7 +109,7 @@ def cmd_summarize(args: argparse.Namespace) -> int:
     rows = []
     for result_path in _result_files(path):
         data = json.loads(result_path.read_text(encoding="utf-8"))
-        usage = data.get("aggregate_usage") or {}
+        usage = data.get("aggregate_usage") if isinstance(data.get("aggregate_usage"), dict) else {}
         rows.append(
             {
                 "run_id": data.get("run_id"),
@@ -111,10 +118,10 @@ def cmd_summarize(args: argparse.Namespace) -> int:
                 "model": data.get("requested_model"),
                 "tasks_completed": len(data.get("tasks") or []),
                 "success": bool(data.get("success")),
-                "input_tokens": usage.get("input_tokens", 0),
-                "cached_input_tokens": usage.get("cached_input_tokens", 0),
-                "output_tokens": usage.get("output_tokens", 0),
-                "reasoning_output_tokens": usage.get("reasoning_output_tokens", 0),
+                "input_tokens": usage.get("input_tokens"),
+                "cached_input_tokens": usage.get("cached_input_tokens"),
+                "output_tokens": usage.get("output_tokens"),
+                "reasoning_output_tokens": usage.get("reasoning_output_tokens"),
             }
         )
     if args.json:
@@ -130,6 +137,15 @@ def cmd_summarize(args: argparse.Namespace) -> int:
         for row in rows:
             print("  ".join(str(row.get(col, "")).ljust(widths[col]) for col in columns))
     return 0
+
+def cmd_audit(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    path = Path(args.path)
+    if not path.is_absolute():
+        path = root / path
+    report = audit_run(path)
+    print(json.dumps(report, indent=2, sort_keys=True))
+    return 0 if report["ok"] else 1
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -153,6 +169,7 @@ def build_parser() -> argparse.ArgumentParser:
         p.add_argument("--agent", choices=["scripted", "codex", "command"], default="scripted")
         p.add_argument("--model")
         p.add_argument("--agent-command")
+        p.add_argument("--require-usage", action="store_true", help="Require a fresh valid command-adapter usage sidecar")
         p.add_argument("--output", default="results")
         p.add_argument("--timeout", type=float, default=600)
         p.add_argument("--max-tasks", type=int)
@@ -170,6 +187,9 @@ def build_parser() -> argparse.ArgumentParser:
     summarize.add_argument("path")
     summarize.add_argument("--json", action="store_true")
     summarize.set_defaults(func=cmd_summarize)
+    audit = sub.add_parser("audit", help="Reconcile a run's task and aggregate artifacts")
+    audit.add_argument("path")
+    audit.set_defaults(func=cmd_audit)
     return parser
 
 

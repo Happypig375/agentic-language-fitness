@@ -80,14 +80,14 @@ the command adapter:
 ```bash
 make docker-build
 make docker-smoke
-alf run --language fsharp --agent command \
+alf run --language fsharp --agent command --require-usage \
   --agent-command 'python {root}/scripts/codex-docker.py --workspace {workspace} --prompt-file {prompt_file} --model YOUR_MODEL'
 ```
 
 PowerShell (quote every path so Windows spaces and backslashes survive):
 
 ```powershell
-alf run --language fsharp --agent command --agent-command 'python "{root}\scripts\codex-docker.py" --workspace "{workspace}" --prompt-file "{prompt_file}" --model YOUR_MODEL'
+alf run --language fsharp --agent command --require-usage --agent-command 'python "{root}\scripts\codex-docker.py" --workspace "{workspace}" --prompt-file "{prompt_file}" --model YOUR_MODEL'
 ```
 
 The wrapper mounts only the task workspace read-write (Docker's default) at `/workspace` and (when found)

@@ -3,19 +3,26 @@ from __future__ import annotations
 import json
 import os
 import shlex
+import shutil
 from pathlib import Path
 from typing import Any
 
 from .base import Agent
+from .codex import parse_codex_jsonl
 from ..models import AgentResult, Usage
 from ..process import run_process
 
 
+def _nonnegative_int(value: Any) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and value >= 0
+
+
 class CommandAgent(Agent):
-    def __init__(self, command_template: str):
+    def __init__(self, command_template: str, *, require_usage: bool = False):
         if not command_template.strip():
             raise ValueError("--agent-command is required for the command adapter")
         self.command_template = command_template
+        self.require_usage = require_usage
 
     def run(
         self,
@@ -30,6 +37,8 @@ class CommandAgent(Agent):
     ) -> AgentResult:
         alf_dir = workspace / ".alf"
         alf_dir.mkdir(exist_ok=True)
+        sidecar = alf_dir / "usage.json"
+        sidecar.unlink(missing_ok=True)
         prompt_file = alf_dir / "TASK.md"
         prompt_file.write_text(prompt, encoding="utf-8")
         rendered = self.command_template.format(
@@ -63,19 +72,80 @@ class CommandAgent(Agent):
         usage = Usage()
         model: str | None = None
         data: dict[str, Any] = {}
-        sidecar = alf_dir / "usage.json"
+        accounting_valid = not self.require_usage
+        usage_available = False
+        accounting_errors: list[str] = []
+        events: list[dict[str, Any]] = []
         if sidecar.is_file():
-            data = json.loads(sidecar.read_text(encoding="utf-8"))
+            try:
+                value = json.loads(sidecar.read_text(encoding="utf-8"))
+                if not isinstance(value, dict):
+                    raise ValueError("sidecar must contain a JSON object")
+                data = value
+            except (OSError, json.JSONDecodeError, ValueError) as exc:
+                accounting_errors.append(f"invalid usage sidecar: {exc}")
+                accounting_valid = False
+                data = {}
+            derived = data.get("derived_from_codex_jsonl") is True
+            if derived:
+                parsed_events, parsed_usage, parsed_counts = parse_codex_jsonl(process.stdout)
+                usage_available = parsed_counts["usage_records"] > 0 and parsed_counts["usage_valid"]
+                accounting_valid = parsed_counts["accounting_valid"]
+                accounting_errors.extend(parsed_counts["usage_errors"])
+                for name in usage.__dataclass_fields__:
+                    value = data.get(name)
+                    if not _nonnegative_int(value) or value != getattr(parsed_usage, name):
+                        accounting_valid = False
+                        accounting_errors.append(f"derived sidecar mismatch: usage.{name}")
+                count_map = {"event_count": len(parsed_events), "command_count": parsed_counts["commands"],
+                             "file_change_count": parsed_counts["file_changes"], "failed_event_count": parsed_counts["failed_events"],
+                             "file_reads": parsed_counts["file_reads"], "unique_file_reads": parsed_counts["unique_file_reads"],
+                             "file_revisits": parsed_counts["file_revisits"]}
+                for name, expected in count_map.items():
+                    value = data.get(name)
+                    if not _nonnegative_int(value) or value != expected:
+                        accounting_valid = False
+                        accounting_errors.append(f"derived sidecar mismatch: {name}")
+                for name, expected in (("accounting_valid", parsed_counts["accounting_valid"]),
+                                       ("usage_available", usage_available)):
+                    if not isinstance(data.get(name), bool) or data[name] is not expected:
+                        accounting_valid = False
+                        accounting_errors.append(f"derived sidecar mismatch: {name}")
+                if data.get("usage_errors") != parsed_counts["usage_errors"]:
+                    accounting_valid = False
+                    accounting_errors.append("derived sidecar mismatch: usage_errors")
+                events = parsed_events
+                if not accounting_valid:
+                    accounting_errors.append("derived sidecar disagrees with Codex JSONL")
+            elif not all(_nonnegative_int(data.get(field)) for field in usage.__dataclass_fields__):
+                accounting_valid = False
+                accounting_errors.append("usage sidecar has missing or invalid counters")
+            else:
+                accounting_valid = True
             for field in usage.__dataclass_fields__:
                 value = data.get(field)
-                if isinstance(value, int) and value >= 0:
+                if _nonnegative_int(value):
                     setattr(usage, field, value)
             model = data.get("model") if isinstance(data.get("model"), str) else None
+            if not derived and not accounting_errors:
+                usage_available = True
         def count(name: str) -> int:
             value = data.get(name, 0) if sidecar.is_file() else 0
-            return value if isinstance(value, int) and value >= 0 else 0
+            return value if _nonnegative_int(value) else 0
+        # Preserve provenance before a later task can overwrite the shared sidecar.
+        if sidecar.is_file():
+            shutil.copy2(sidecar, alf_dir / f"usage-{task['id']}.json")
+        elif self.require_usage:
+            accounting_errors.append("required fresh usage sidecar is missing")
+        if self.require_usage and not usage_available:
+            accounting_valid = False
         return AgentResult(
             process=process, usage=usage, model=model,
             event_count=count("event_count"), command_count=count("command_count"),
             file_change_count=count("file_change_count"), failed_event_count=count("failed_event_count"),
+            file_reads=count("file_reads"), unique_file_reads=count("unique_file_reads"), file_revisits=count("file_revisits"),
+            accounting_valid=accounting_valid,
+            usage_available=usage_available,
+            accounting_errors=accounting_errors,
+            events=events,
         )

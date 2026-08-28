@@ -60,7 +60,7 @@ Before the next accepted real-agent run, define a dated protocol version and rec
 
 A nominal `seed` may identify run ordering and harness randomness, but must not be described as a model seed unless the model endpoint actually exposes deterministic seeding.
 
-### A3. Audit usage accounting — next action
+### A3. Audit usage accounting — materially advanced, not complete
 
 Before interpreting the preliminary token totals:
 
@@ -71,6 +71,13 @@ Before interpreting the preliminary token totals:
 - distinguish agent-process wall time, evaluator time, and total run time;
 - add validation that rejects inconsistent or missing usage artifacts rather than silently treating them as zero;
 - derive file-read and file-revisit telemetry where command events permit it, because semantic recovery cannot be inferred from tokens alone.
+
+The harness now validates and sums Codex records, reconciles derived sidecars,
+preserves per-task copies, records timing categories, and exposes `alf audit`.
+A3 is **not complete** because the accepted raw run
+`results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3` is missing.
+Next action: recover that exact raw run, add a redacted fixture, and reconcile it
+before interpreting token totals.
 
 **Exit:** a fixture from an accepted raw run reproduces the checked-in aggregate exactly, and parser behavior is unit-tested.
 
