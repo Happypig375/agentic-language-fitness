@@ -11,12 +11,12 @@ Completed:
 - cumulative language-neutral black-box evaluation;
 - fresh process and container per maintenance task with inherited candidate code;
 - isolated Codex command adapter with pinned CLI/image metadata;
-- green Linux and Windows CI on commit `a882180234ee01dd3a6a101c916cc01159d1e0bf`;
+- green Linux and Windows CI on commit `7dda2bd232376b84968bd616a79d8043699c48c7`;
 - A3 accounting machinery: strict Codex usage validation and summation, stale-sidecar removal, required-usage mode, per-task sidecar preservation, separated timing categories, conservative file-read/revisit telemetry, and the read-only `alf audit` reconciler;
 - exact recovery and hash-preservation of the historical exploratory F#/C# pair, with its legacy audit failure and exclusion recorded;
 - a derived, redacted two-task real-output fixture whose raw stdout, event copies, usage sidecars, task envelopes, run aggregates, timings, and source hashes reconcile exactly under `alf audit`;
-- a tracked `variance-v1` protocol draft plus fail-closed validation, clean-freeze, image-archive verification, pinned resource/authentication enforcement, attempt reservation, retry, classification, and inclusion machinery;
-- independent protocol review with no remaining P1/P2 findings and a model-free validation checkpoint: 67 affected tests, strict doctor, benchmark validation, both scripted chains, Docker smoke, protocol validation, real archive re-hash, A3 fixture audit, and both expected 21-error legacy audits. The dirty-tree freeze refusal was also verified. No resolved manifest or candidate run has been created yet.
+- a tracked `variance-v1`/`variance-v2` protocol apparatus plus fail-closed validation, clean-freeze, image-archive verification, pinned resource/authentication enforcement, attempt reservation, retry, classification, and inclusion machinery;
+- independent protocol review with no remaining P1/P2 findings and a model-free validation checkpoint: 67 affected tests, strict doctor, benchmark validation, both scripted chains, Docker smoke, protocol validation, real archive re-hash, A3 fixture audit, and both expected 21-error legacy audits. The dirty-tree freeze refusal was also verified. The v1 resolved manifest was clean-frozen with SHA-256 `0afe05f37d5fbfbe51cf336af1f515680b84856c99921041e7ea4a4cf82e08ca`; no v2 manifest or formal candidate run has been created.
 
 The historical pair is **not formal study data**. The exact raw directory was recovered and hash-preserved on 2026-08-29, but its legacy artifacts fail the current `alf audit` schema checks; see `docs/historical-run-recovery-2026-08-29.md`. It remains excluded from the planned 10-block variance dataset.
 
@@ -28,10 +28,10 @@ Remain in **Phase 1: measurement and feasibility**. The immediate objective is n
 
 Do not claim an F# advantage, begin confirmatory analysis, or expand to multiple repositories until these gates are met:
 
-1. cross-platform CI is green — **met at `a882180234ee01dd3a6a101c916cc01159d1e0bf`**;
+1. cross-platform CI is green — **met at `7dda2bd232376b84968bd616a79d8043699c48c7`**;
 2. the historical raw run is either recovered and audited or explicitly retired from analysis — **met: recovered, hash-preserved, legacy-audit failure recorded, excluded**;
 3. usage/event accounting is reconciled against at least one real raw run fixture — **met for the recovered one-record-per-task evidence**;
-4. protocol, provenance, failure, and inclusion rules are frozen before data collection — **implementation complete; clean committed freeze pending**;
+4. protocol, provenance, failure, and inclusion rules are frozen before data collection — **v1 freeze complete; v2 clean committed freeze pending**;
 5. repeated counterbalanced pairs quantify stochastic, task, temporal, and order variance — **pending**;
 6. the benchmark is recalibrated if correctness remains saturated — **pending the variance report**.
 
@@ -64,7 +64,7 @@ Each recovered task has exactly one terminal usage record. The pinned Codex 0.14
 
 ### 2. Freeze protocol and provenance before accepted runs — implementation complete; clean freeze pending
 
-The tracked draft is `protocols/variance-v1/definition.json`. It defines a new cell pinned to `gpt-5.4-mini-2026-03-17`, medium reasoning, Codex CLI/image `0.149.1`, immutable image ID and verified archive, .NET `10.0.302`, explicit Docker limits, one non-counting calibration, and ten pre-generated balanced formal blocks. It is not continuity with the historical Luna pair. The harness now fails closed on dirty or changed Git state, mismatched benchmark/task hashes, probes, image/archive, model/settings/limits, schedule position, attempt identity, retry eligibility, or inclusion disposition.
+The next tracked cell is `protocols/variance-v2/definition.json`. It pins `gpt-5.4`, medium reasoning, Codex CLI/image `0.149.1`, the immutable image ID and verified archive, .NET `10.0.302`, explicit Docker limits, one non-counting calibration, and ten pre-generated balanced formal blocks. It is not continuity with either the retired v1 attempt or the historical Luna pair. The harness now fails closed on dirty or changed Git state, mismatched benchmark/task hashes, probes, image/archive, model/settings/limits, schedule position, attempt identity, retry eligibility, or inclusion disposition.
 
 Create a versioned protocol/manifest for the first variance cell. At minimum record:
 
@@ -84,11 +84,11 @@ A nominal `seed` may identify schedule generation and harness randomness. It mus
 
 If the original model/CLI/container combination cannot still be pinned, define a **new experimental cell**. Do not mix a changed backend or scaffold into the old pair as though it were a replication.
 
-**Current status:** the tracked definition and implementation passed independent review and model-free validation. A resolved manifest deliberately does not exist because the working tree is uncommitted; the freeze command was verified to reject this state without creating `results/variance-v1`. The exact next action is a maintainer-authorized commit of the reviewed apparatus, followed by a freeze from that clean HEAD and then calibration. The exit is not met until the clean resolved manifest is retained.
+**Current status:** `variance-v1` was clean-frozen with resolved-manifest SHA-256 `0afe05f37d5fbfbe51cf336af1f515680b84856c99921041e7ea4a4cf82e08ca`; its first C# calibration attempt (`calibration-01-csharp-01`) was provider-infrastructure-invalid because authenticated Codex rejected unsupported model `gpt-5.4-mini-2026-03-17`, before any candidate task edit or terminal usage. Position 2 and formal runs did not execute. The next cell is `variance-v2`: commit the reviewed apparatus, confirm CI is green from that clean commit, freeze `results/variance-v2/resolved-manifest.json`, then run its full non-counting calibration. The exit is not met until the v2 clean resolved manifest and calibration evidence are retained.
 
 ### 3. Run one non-counting end-to-end calibration block — next experimental action after clean freeze
 
-After steps 0–2, run one paired F#/C# block under the frozen protocol. Its purpose is apparatus verification, not estimation.
+After the v2 clean freeze, run one paired F#/C# block under the frozen protocol. Its purpose is apparatus verification, not estimation.
 
 The calibration must:
 
@@ -102,7 +102,7 @@ The calibration must:
 
 If the protocol or harness changes in response, increment the protocol version and repeat the calibration. The final calibration does not count toward the variance sample.
 
-No model-backed calibration has been launched for `variance-v1`.
+The v1 calibration was attempted but was provider-invalid before any candidate outcome; v2 calibration remains pending.
 
 ### 4. Collect the counterbalanced variance pilot
 
@@ -170,7 +170,7 @@ The versioned definition, hashes, retention policy, failure taxonomy, metric-spe
 
 ## Workstream B — Estimate stochastic and order variance
 
-Execute immediate continuation steps 4–5. The first formal cell is the new `variance-v1` configuration pinned in its tracked definition. Do not pool it with or describe it as a replication of the previously reported `gpt-5.6-luna` pair.
+Execute immediate continuation steps 4–5 after the v2 calibration. The first formal cell is the new `variance-v2` configuration pinned in its tracked definition. Do not pool it with the retired v1 attempt or describe it as a replication of the previously reported `gpt-5.6-luna` pair.
 
 ## Workstream C — Recalibrate the benchmark
 

@@ -21,6 +21,7 @@ from alf.protocol import (
 
 ROOT = Path(__file__).parents[1]
 DEFINITION = ROOT / "protocols" / "variance-v1" / "definition.json"
+V2_DEFINITION = ROOT / "protocols" / "variance-v2" / "definition.json"
 SCHEDULE = ROOT / "protocols" / "variance-v1" / "schedule.json"
 
 
@@ -146,6 +147,39 @@ class ProtocolTests(unittest.TestCase):
             first,
             ["csharp", "csharp", "fsharp", "csharp", "fsharp", "csharp", "fsharp", "fsharp", "csharp", "fsharp"],
         )
+
+    def test_successor_definition_and_arbitrary_snapshot_pin_are_valid(self):
+        successor = validate_cell(ROOT, V2_DEFINITION)
+        self.assertTrue(successor["ok"], successor["errors"])
+
+        repo = CellRepository()
+        try:
+            repo.definition["model"]["snapshot"] = "an-arbitrary-provider-snapshot"
+            repo.flush()
+            report = validate_cell(repo.root, repo.definition_path)
+        finally:
+            repo.close()
+        self.assertTrue(report["ok"], report["errors"])
+
+    def test_model_pins_require_exact_structural_schema(self):
+        cases = (
+            ({"reasoning_effort": "medium"}, "snapshot"),
+            ({"snapshot": "  ", "reasoning_effort": "medium"}, "snapshot"),
+            ({"snapshot": 123, "reasoning_effort": "medium"}, "snapshot"),
+            ({"snapshot": "gpt-test", "reasoning_effort": "extreme"}, "reasoning_effort"),
+            ({"snapshot": "gpt-test", "reasoning_effort": "medium", "extra": True}, "exactly"),
+        )
+        for model, expected in cases:
+            with self.subTest(model=model):
+                repo = CellRepository()
+                try:
+                    repo.definition["model"] = model
+                    repo.flush()
+                    report = validate_cell(repo.root, repo.definition_path)
+                finally:
+                    repo.close()
+                self.assertFalse(report["ok"])
+                self.assertTrue(any(expected in error for error in report["errors"]))
 
     def test_definition_path_outside_repository_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:

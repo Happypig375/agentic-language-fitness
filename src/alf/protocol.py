@@ -17,8 +17,7 @@ from typing import Any, Callable
 
 
 SCHEMA_VERSION = 1
-MODEL_SNAPSHOT = "gpt-5.4-mini-2026-03-17"
-REASONING_EFFORT = "medium"
+SUPPORTED_REASONING_EFFORTS = {"low", "medium", "high"}
 CODEX_CLI_VERSION = "0.149.1"
 DOTNET_SDK_VERSION = "10.0.302"
 TARGET_FRAMEWORK = "net10.0"
@@ -243,11 +242,13 @@ def validate_cell(root: Path, definition_path: str | Path) -> dict[str, Any]:
     model = definition.get("model")
     if not isinstance(model, dict):
         errors.append("model must be an object")
-    elif model != {
-        "snapshot": MODEL_SNAPSHOT,
-        "reasoning_effort": REASONING_EFFORT,
-    }:
-        errors.append("model pins are invalid")
+    else:
+        if set(model) != {"snapshot", "reasoning_effort"}:
+            errors.append("model must contain exactly snapshot and reasoning_effort")
+        if not isinstance(model.get("snapshot"), str) or not model["snapshot"].strip():
+            errors.append("model.snapshot must be a non-empty string")
+        if model.get("reasoning_effort") not in SUPPORTED_REASONING_EFFORTS:
+            errors.append("model.reasoning_effort must be low, medium, or high")
 
     codex = definition.get("codex")
     if not isinstance(codex, dict):

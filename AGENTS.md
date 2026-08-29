@@ -16,16 +16,16 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-CI is green after commit `a882180234ee01dd3a6a101c916cc01159d1e0bf`. Historical recovery and real-output A3 reconciliation are complete. The `variance-v1` protocol apparatus passed independent review and model-free validation but is not yet committed or frozen. Follow the immediate continuation order in `PLAN.md`:
+CI is green after commit `7dda2bd232376b84968bd616a79d8043699c48c7`. Historical recovery and real-output A3 reconciliation are complete. `variance-v1` was clean-frozen, but its first C# calibration attempt was provider-infrastructure-invalid because authenticated Codex rejected unsupported model `gpt-5.4-mini-2026-03-17`; no candidate task edit or terminal usage occurred, and position 2/formal runs did not execute. Follow the immediate continuation order in `PLAN.md`:
 
-1. commit the reviewed apparatus, then generate the resolved manifest from that clean HEAD;
-2. run one non-counting audited calibration block under the frozen manifest;
-3. collect 10 new counterbalanced paired blocks under one unchanged cell;
+1. commit the reviewed v2 apparatus, confirm CI, then generate `results/variance-v2/resolved-manifest.json` from that clean HEAD;
+2. run one non-counting audited v2 calibration block under the frozen manifest;
+3. collect 10 new counterbalanced paired blocks under one unchanged v2 cell;
 4. produce the variance/power decision report before extending the benchmark.
 
 The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use the historical Markdown token totals as validated data, do not reconstruct or repair raw artifacts, and do not count the old pair as part of the planned 10-block sample.
 
-Do not launch a candidate/model call until the reviewed apparatus is committed and `results/variance-v1/resolved-manifest.json` has been generated successfully from that clean HEAD.
+Do not launch a candidate/model call until the reviewed v2 apparatus is committed and `results/variance-v2/resolved-manifest.json` has been generated successfully from that clean HEAD.
 
 ## Development agents versus benchmarked agents
 

@@ -1,10 +1,13 @@
-# Variance-v1 protocol freeze
+# Variance-v2 protocol freeze
 
-`protocols/variance-v1/definition.json` is the tracked draft for the new formal
-cell. It pins `gpt-5.4-mini-2026-03-17` with medium reasoning, Codex CLI/image
+`protocols/variance-v2/definition.json` is the tracked draft for the new formal
+cell. It pins `gpt-5.4` with medium reasoning, Codex CLI/image
 0.149.1, the .NET 10.0.302 toolchain, matched tasks, limits, isolation, and
-failure rules. It is a new cell, not a continuation of the unaudited
-2026-08-26 `gpt-5.6-luna` pair.
+failure rules. `variance-v1`, which pinned `gpt-5.4-mini-2026-03-17`, was retired
+after its first C# calibration attempt was classified provider-invalid because
+the authenticated provider rejected that model before any candidate outcome.
+This v2 cell is distinct both from v1 and from the unaudited 2026-08-26
+`gpt-5.6-luna` pair.
 
 The explicit schedule contains one non-counting calibration (`C#` then `F#`)
 and ten formal blocks, balanced by first language with a maximum run of two.
@@ -19,13 +22,13 @@ their raw-byte SHA-256.
 Validate the draft with:
 
 ```text
-python scripts/alf.py protocol validate --definition protocols/variance-v1/definition.json
+python scripts/alf.py protocol validate --definition protocols/variance-v2/definition.json
 ```
 
 After all protocol edits are committed, run from that clean checkout:
 
 ```text
-python scripts/alf.py protocol freeze --definition protocols/variance-v1/definition.json --output results/variance-v1/resolved-manifest.json
+python scripts/alf.py protocol freeze --definition protocols/variance-v2/definition.json --output results/variance-v2/resolved-manifest.json
 ```
 
 The freeze command derives Git, host, Docker, and container probes itself and
@@ -51,13 +54,18 @@ their affected metric aggregates. The adjudication precedence is protocol,
 authentication, provider, host, timeout, accounting, agent, evaluator.
 Calibration is always non-counting.
 
-The 2026-08-29 pre-freeze checkpoint passed independent review and all assigned
+The 2026-08-29 variance-v1 pre-freeze checkpoint passed independent review and all assigned
 model-free checks: 67 affected unit tests, strict environment doctor, benchmark
 snapshot validation, both scripted chains, Docker smoke, protocol validation,
 the real retained-archive hash, the A3 fixture audit, and both expected legacy
-audit failures. A freeze attempt correctly refused the dirty working tree and
-left `results/variance-v1` absent. This evidence does not make the draft frozen
-and did not invoke a candidate model.
+audit failures. An initial freeze attempt correctly refused the dirty working
+tree. After commit `7dda2bd232376b84968bd616a79d8043699c48c7` passed Linux and Windows
+CI, the clean freeze succeeded with resolved-manifest SHA-256
+`0afe05f37d5fbfbe51cf336af1f515680b84856c99921041e7ea4a4cf82e08ca`.
+The subsequent retained v1 calibration attempt was provider-invalid because
+`gpt-5.4-mini-2026-03-17` was unsupported; it produced no candidate outcome or
+terminal usage. This evidence does not make the v2 draft frozen and did not
+validate v2.
 
 Accepted token accounting also requires a sidecar derived from the preserved
 Codex JSONL and exactly one `turn.completed` usage record per ephemeral task
@@ -90,8 +98,8 @@ concurrent invocations cannot reserve the same attempt.
 After freezing, the predeclared calibration commands are:
 
 ```text
-python scripts/alf.py run --language csharp --agent command --model gpt-5.4-mini-2026-03-17 --require-usage --output results/variance-v1 --timeout 600 --protocol-manifest results/variance-v1/resolved-manifest.json --block-id calibration-01 --order csharp-first --attempt-id calibration-01-csharp-01 --position 1
-python scripts/alf.py run --language fsharp --agent command --model gpt-5.4-mini-2026-03-17 --require-usage --output results/variance-v1 --timeout 600 --protocol-manifest results/variance-v1/resolved-manifest.json --block-id calibration-01 --order csharp-first --attempt-id calibration-01-fsharp-01 --position 2
+python scripts/alf.py run --language csharp --agent command --model gpt-5.4 --require-usage --output results/variance-v2 --timeout 600 --protocol-manifest results/variance-v2/resolved-manifest.json --block-id calibration-01 --order csharp-first --attempt-id calibration-01-csharp-01 --position 1
+python scripts/alf.py run --language fsharp --agent command --model gpt-5.4 --require-usage --output results/variance-v2 --timeout 600 --protocol-manifest results/variance-v2/resolved-manifest.json --block-id calibration-01 --order csharp-first --attempt-id calibration-01-fsharp-01 --position 2
 ```
 
 Position 2 fails closed until a matching, retained position-1 primary outcome

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "cell_id": "variance-v2",
+  "seed": 20260829,
+  "generator": "Python 3.12: r=random.Random(20260829); first=['fsharp']*5+['csharp']*5; r.shuffle(first); r.shuffle(first); explicit sequence is authoritative",
+  "calibration": {"block_id": "calibration-01", "order": ["csharp", "fsharp"], "counting": false},
+  "formal": [
+    {"block_id": "block-01", "order": ["csharp", "fsharp"]},
+    {"block_id": "block-02", "order": ["csharp", "fsharp"]},
+    {"block_id": "block-03", "order": ["fsharp", "csharp"]},
+    {"block_id": "block-04", "order": ["csharp", "fsharp"]},
+    {"block_id": "block-05", "order": ["fsharp", "csharp"]},
+    {"block_id": "block-06", "order": ["csharp", "fsharp"]},
+    {"block_id": "block-07", "order": ["fsharp", "csharp"]},
+    {"block_id": "block-08", "order": ["fsharp", "csharp"]},
+    {"block_id": "block-09", "order": ["csharp", "fsharp"]},
+    {"block_id": "block-10", "order": ["fsharp", "csharp"]}
+  ],
+  "constraints": {"formal_blocks": 10, "balanced_first_language": {"csharp": 5, "fsharp": 5}, "max_same_order_run": 2}
+}
