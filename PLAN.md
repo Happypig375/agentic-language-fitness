@@ -2,7 +2,7 @@
 
 > **Canonical continuation plan.** Maintainer agents must read this file before substantial work. `AGENTS.md` is the automatically discovered entry point and routes agents here. Update this plan whenever the current checkpoint, ordering, or decision gates change.
 
-## Current checkpoint — 2026-08-26
+## Current checkpoint — 2026-08-29
 
 Completed:
 
@@ -11,143 +11,187 @@ Completed:
 - cumulative language-neutral black-box evaluation;
 - fresh process and container per maintenance task with inherited candidate code;
 - isolated Codex command adapter with pinned CLI/image metadata;
-- one accepted paired run with `gpt-5.6-luna`, two tasks per language, and all cumulative cases passing;
-- tracked preliminary summary in `docs/preliminary-results-2026-08-26.md`;
-- green Linux and Windows CI at commit `41252deb4ac84df36f5887a23bc198d91bd24fbd`.
+- green Linux and Windows CI on commit `8711ea9ebceb39c18abd56659a5bf41e555f62d2`;
+- A3 accounting machinery: strict Codex usage validation and summation, stale-sidecar removal, required-usage mode, per-task sidecar preservation, separated timing categories, conservative file-read/revisit telemetry, and the read-only `alf audit` reconciler;
+- one historical exploratory F#/C# pair in which both languages completed both tasks.
 
-The first accepted pair is **infrastructure and variance evidence, not language-effect evidence**:
+The historical pair is **not formal study data** at present. Its expected raw directory,
+`results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3/`, is unavailable, so the checked-in summary cannot be independently reconciled against raw JSONL with the new accounting audit. It must not be included in the planned 10-block variance dataset unless the exact artifacts are recovered and pass `alf audit` without reconstruction.
 
-- F# and C# both completed 2/2 tasks, so correctness is saturated in this tiny chain;
-- aggregate input tokens were nearly tied;
-- the task-level direction reversed sharply between `001-priority` and `002-overdue`;
-- F# ran first and C# second, so order was not counterbalanced;
-- there was only one stochastic observation per language.
-
-CI run 16 initially failed before benchmark validation because a unit test simulated Windows tokenization on Linux but compared preserved Windows backslashes with a host-native POSIX path. The first follow-up then exposed that `global.json` allowed a feature-band roll-forward from the requested .NET SDK `10.0.302` to the runner's preinstalled `10.0.400`. Both issues are fixed: the test is host-independent, `rollForward` is disabled, and CI now validates the harness on Linux and Windows.
+Even if recovered, the pair remains exploratory because it predates the current accounting/provenance protocol, used one F#-then-C# order, had only one stochastic observation per language, and saturated correctness on a two-task chain.
 
 ## Current decision
 
-Remain in **Phase 1: measurement and feasibility**. Do not claim an F# advantage, begin a confirmatory study, or expand to many repositories until the remaining gates are met:
+Remain in **Phase 1: measurement and feasibility**. The immediate objective is no longer to add features or languages; it is to produce a frozen, auditable first experimental cell.
+
+Do not claim an F# advantage, begin confirmatory analysis, or expand to multiple repositories until these gates are met:
 
 1. cross-platform CI is green — **met**;
-2. token and event accounting is independently reconciled against raw JSONL;
-3. repeated counterbalanced pairs quantify stochastic and order variance;
-4. the pilot is recalibrated if correctness remains saturated;
-5. accepted-run and infrastructure-failure rules are frozen before further collection.
+2. the historical raw run is either recovered and audited or explicitly retired from analysis;
+3. usage/event accounting is reconciled against at least one real raw run fixture;
+4. protocol, provenance, failure, and inclusion rules are frozen before data collection;
+5. repeated counterbalanced pairs quantify stochastic, task, temporal, and order variance;
+6. the benchmark is recalibrated if correctness remains saturated.
 
-## Workstream A — Stabilize and freeze the apparatus
+## Immediate continuation order
 
-### A1. Restore and broaden CI — complete
+### 0. Resolve the historical-run status
 
-- [x] Fix the host-dependent Windows path assertion.
-- [x] Keep the full Linux job: unit tests, doctor, benchmark validation, scripted chain, container build, and container validation.
-- [x] Add a Windows job for unit tests, environment checks, and matched benchmark validation.
-- [x] Enforce the exact .NET SDK pin rather than permitting feature-band roll-forward.
+Perform one explicit recovery pass for the exact original directory and its task-level raw files. Check the originating host/WSL environment, backups, archived terminal workspace, and any deliberately retained external run storage. Do not recreate raw artifacts from the Markdown totals.
 
-**Exit achieved:** Linux and Windows jobs pass on the same commit, and the scripted pair plus container validation pass on Linux.
+Two valid outcomes:
 
-### A2. Freeze a protocol version
+- **Recovered:** preserve an immutable copy, calculate hashes, run `alf audit`, redact a small representative fixture, and document every discrepancy.
+- **Not recovered:** mark the pair permanently as an unaudited legacy smoke test, exclude it from every formal aggregate and power calculation, and use a new calibration run as the first auditable observation.
 
-Before the next accepted real-agent run, define a dated protocol version and record:
+This decision must be recorded before interpreting the old token numbers further. Recovery failure is a provenance result, not a reason to block the project indefinitely.
 
-- benchmark manifest hash and commit SHA;
-- model identifier, agent product/CLI version, and relevant settings;
+### 1. Complete A3 with a real reconciliation fixture
+
+The accounting implementation is materially advanced but not scientifically complete until exercised against actual raw agent output.
+
+Required work:
+
+- verify whether Codex CLI emits incremental or cumulative usage when more than one `turn.completed.usage` record appears;
+- reconcile raw `agent.stdout`, parsed `events.jsonl`, copied `usage.json`, embedded task results, and run aggregates;
+- confirm from the endpoint/version whether cached input is a subset of `input_tokens`, not an additive quantity;
+- preserve input, cached input, cache-write input, output, reasoning output, and tool calls separately;
+- test missing, malformed, negative, duplicated, and multi-record usage cases;
+- calibrate the conservative file-read/revisit extractor against real command events and document its recall limitations;
+- create a redacted raw-run fixture whose `alf audit` result and expected aggregate are unit-tested.
+
+If the historical run is unavailable, perform this step on the non-counting calibration run in step 3.
+
+**Exit:** a real raw fixture reproduces the recorded task and run aggregates exactly, accounting semantics are documented, and any unavailable telemetry remains unavailable rather than zero.
+
+### 2. Freeze protocol and provenance before accepted runs
+
+Create a versioned protocol/manifest for the first variance cell. At minimum record:
+
+- protocol version and repository commit;
+- benchmark manifest and task-file hashes;
+- model identifier, agent product, CLI version, and exposed settings;
 - container tag and immutable image ID;
-- Python, Git, .NET SDK, OS, architecture, CPU/memory limits, and timeout;
-- network/documentation policy;
-- language order and pre-generated block identifier;
-- every attempt, including infrastructure failures and timeouts.
+- Python, Git, .NET SDK, OS, architecture, CPU/memory/process limits, and timeout;
+- network and documentation policy;
+- fresh-context and inherited-workspace semantics;
+- pre-generated paired-block order and block identifier;
+- raw-artifact location, file hashes, redaction policy, and retention policy;
+- inclusion/exclusion rules and a failure taxonomy covering agent, provider, authentication, host, evaluator, timeout, protocol, and accounting failures;
+- retry rules that retain every attempt and never silently substitute a successful rerun.
 
-A nominal `seed` may identify run ordering and harness randomness, but must not be described as a model seed unless the model endpoint actually exposes deterministic seeding.
+A nominal `seed` may identify schedule generation and harness randomness. It must not be described as a model seed unless deterministic endpoint seeding is actually exposed.
 
-### A3. Audit usage accounting — materially advanced, not complete
+If the original model/CLI/container combination cannot still be pinned, define a **new experimental cell**. Do not mix a changed backend or scaffold into the old pair as though it were a replication.
 
-Before interpreting the preliminary token totals:
+**Exit:** a reviewer can determine in advance which attempts enter analysis and can reproduce every accepted aggregate from preserved artifacts.
 
-- verify whether Codex emits one aggregate `turn.completed` usage record or multiple records that must be summed;
-- reconcile every task's raw JSONL, `.alf/usage.json`, task result, and run aggregate;
-- document whether cached input is a subset of input or an additive category for this endpoint/version;
-- preserve input, cached input, cache-write input, output, and reasoning output separately;
-- distinguish agent-process wall time, evaluator time, and total run time;
-- add validation that rejects inconsistent or missing usage artifacts rather than silently treating them as zero;
-- derive file-read and file-revisit telemetry where command events permit it, because semantic recovery cannot be inferred from tokens alone.
+### 3. Run one non-counting end-to-end calibration block
 
-The harness now validates and sums Codex records, reconciles derived sidecars,
-preserves per-task copies, records timing categories, and exposes `alf audit`.
-A3 is **not complete** because the accepted raw run
-`results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3` is missing.
-Next action: recover that exact raw run, add a redacted fixture, and reconcile it
-before interpreting token totals.
+After steps 0–2, run one paired F#/C# block under the frozen protocol. Its purpose is apparatus verification, not estimation.
 
-**Exit:** a fixture from an accepted raw run reproduces the checked-in aggregate exactly, and parser behavior is unit-tested.
+The calibration must:
 
-### A4. Formalize result provenance
+- use the predeclared order for that block;
+- require valid usage accounting;
+- pass `alf audit` for both language runs;
+- preserve raw artifacts and hashes under the new provenance rules;
+- verify that fresh processes/containers and inherited task workspaces behave as specified;
+- produce a redacted fixture and machine-readable audit report;
+- expose any provider, timing, or read-telemetry incompatibility before the 10-block run.
 
-- Keep credentials and unrestricted raw transcripts out of Git.
-- For each accepted run, track a redacted manifest, aggregate summary, result-file hashes, and the external/raw-storage location.
-- Retain failed attempts; never replace a failed run with a successful rerun without recording both.
-- Classify failures as agent, evaluator, provider, host, authentication, timeout, or protocol failures using rules fixed before viewing language differences.
+If the protocol or harness changes in response, increment the protocol version and repeat the calibration. The final calibration does not count toward the variance sample.
 
-**Exit:** a reviewer can determine exactly which attempts entered each analysis and reproduce every reported aggregate from preserved artifacts.
+### 4. Collect the counterbalanced variance pilot
 
-## Workstream B — Estimate stochastic and order variance
-
-Use the current tiny chain only as a **variance pilot** before adding more tasks.
-
-### Fixed first cell
-
-Hold constant the accepted-run configuration:
-
-- model: `gpt-5.6-luna`;
-- Codex CLI: `0.149.1`;
-- image: `alf-codex:0.149.1` with the recorded immutable ID;
-- .NET SDK: `10.0.302`;
-- fresh ephemeral process and container per task;
-- identical task text, evaluator, resource limits, network policy, and timeout.
-
-Run at least **10 paired blocks**:
+Use the current small chain only to estimate stochastic and order variance. Under one unchanged protocol cell, collect at least **10 complete paired blocks**:
 
 - five blocks in F# → C# order;
 - five blocks in C# → F# order;
-- pre-generate and commit/hash the order schedule;
-- interleave blocks rather than completing all runs of one language first;
-- retain every attempt and timestamp to expose provider/load or quota drift.
+- order pre-generated, committed or hashed, and interleaved;
+- both language runs in a block performed as close together as practical;
+- every attempt and timestamp retained to expose provider/load, quota, or temporal drift;
+- no inspection-driven changes to prompts, tasks, evaluator, harness, model, scaffold, or toolchain inside the cell.
 
-Primary pilot outcomes, evaluated jointly with success:
+Primary pilot outcomes, interpreted jointly with correctness:
 
-- complete-chain success and per-task success;
-- total and cached input tokens;
+- full-chain and per-task success;
+- input and cached-input tokens;
 - output and reasoning tokens;
-- agent and total wall time;
-- tool calls, commands, builds/tests, file changes, reads, and revisitations where observable;
-- escaped behavioral regressions.
+- agent-process, evaluator, task-total, and run-total wall time;
+- tool calls, commands, compiler/test interactions, file changes, reads, and revisitations where observable;
+- behavioral regressions and classified failures.
 
-Use paired differences and log ratios with uncertainty intervals. Ten blocks are for estimating variance and planning sample size, not for a definitive significance claim.
+The unaudited historical pair is not block 0 and is excluded from these ten blocks.
 
-**Exit:** token reconciliation remains stable, no unmodeled order effect is evident, and a simulation/power analysis can estimate the repetitions needed for larger cells.
+### 5. Produce the variance and decision report
+
+Before extending the benchmark, report:
+
+- paired language differences and log ratios by task and aggregate;
+- within-language and within-task variance;
+- order, block-time, and temporal-trend diagnostics;
+- success/failure distributions and reasons;
+- agreement between tokens, wall time, navigation, and repair behavior;
+- sensitivity to excluding infrastructure/provider failures under the frozen rules;
+- simulation-based sample-size estimates for plausible effects, including the approximately 7–8% token effect reported by the closest code-cleanliness predecessor.
+
+Ten blocks are a variance pilot, not a definitive hypothesis test.
+
+Decision gate:
+
+- **Accounting/provenance unstable:** fix the apparatus and start a new protocol cell.
+- **Variance overwhelms plausible effects:** increase repetitions, improve blocking, or reframe the study around scaffold/trajectory variance.
+- **Measurement stable but correctness saturated:** extend the chain before testing more models.
+- **Stable measurable variation:** proceed to benchmark recalibration and multi-configuration feasibility.
+
+## Workstream A — Stabilize and freeze the apparatus
+
+### A1. Cross-platform CI — complete
+
+- [x] Host-independent Windows path tests.
+- [x] Full Linux unit, doctor, snapshot, scripted-chain, container-build, and container-validation job.
+- [x] Windows unit, doctor, and matched-snapshot validation job.
+- [x] Exact .NET SDK pin with feature-band roll-forward disabled.
+
+### A2. Protocol freeze — next after A3 disposition
+
+Complete immediate continuation steps 0–3.
+
+### A3. Usage accounting — implementation complete, empirical reconciliation pending
+
+The code path is now guarded and auditable. The remaining requirement is a real raw fixture and an explicit disposition of the missing historical run.
+
+### A4. Result provenance — not complete
+
+Complete the versioned manifest, hashes, retention policy, failure taxonomy, and inclusion rules before accepted variance runs.
+
+## Workstream B — Estimate stochastic and order variance
+
+Execute immediate continuation steps 4–5. The first formal cell should use one pin-able model/agent/scaffold configuration. The previously reported `gpt-5.6-luna`/Codex CLI `0.149.1` combination may be reused only if it can still be held constant and recorded; otherwise define a new cell rather than asserting continuity.
 
 ## Workstream C — Recalibrate the benchmark
 
-The current 2/2 versus 2/2 result indicates that the chain is too small to measure correctness or defect escape. After the variance pilot:
+The 2/2 versus 2/2 exploratory result indicates that the chain is too small to measure correctness or defect escape. After the variance report:
 
 1. extend the existing application to a **5–10 task chain** before creating many repositories;
-2. include additive changes, a cross-cutting schema change, a bug diagnosis, a refactor with unchanged behavior, and an API/backward-compatibility constraint;
+2. include additive changes, a cross-cutting schema change, a bug diagnosis, a behavior-preserving refactor, and an API/backward-compatibility constraint;
 3. maintain cumulative black-box cases and keep gold/evaluator data outside candidate workspaces;
-4. have both implementations independently reviewed for idiomaticity and comparable architecture;
-5. add at least one within-language matched representation treatment, such as clean/noisy structure or descriptive/anonymized identifiers, to calibrate any cross-language effect against ordinary source-form sensitivity;
-6. pilot with a lower-capability configuration if the frontier model remains at 100% success.
+4. independently review both implementations for idiomaticity and comparable architecture;
+5. add at least one within-language matched representation treatment—such as clean/noisy structure or descriptive/anonymized identifiers—to calibrate cross-language effects against ordinary source-form sensitivity;
+6. pilot a lower-capability configuration if the strongest configuration remains at 100% correctness.
 
 **Exit:** the chain creates measurable variation without becoming dominated by impossible tasks, and language-neutral equivalence survives independent review.
 
-## Workstream D — Multi-configuration feasibility study
+## Workstream D — Multi-configuration feasibility
 
 Only after A–C:
 
 - test at least three model/agent configurations spanning capability or scaffolds;
 - block and randomize language order within each configuration;
-- use the same protocol version throughout a cell;
-- determine repetitions from pilot variance rather than an arbitrary final sample size;
-- preregister primary outcomes, exclusions, stopping rules, and the hierarchical/paired analysis before collecting confirmatory data.
+- keep one protocol version throughout each cell;
+- determine repetitions from pilot variance rather than an arbitrary final count;
+- preregister primary outcomes, exclusions, stopping rules, and hierarchical/paired analysis before confirmatory collection.
 
 Analyze language × task, language × model, language × scaffold, language × chain position, and language × order interactions. A universal language ranking is not the target.
 
@@ -162,8 +206,6 @@ Create 3–5 independently reviewed paired .NET applications at increasing sizes
 - library with public API compatibility constraints.
 
 Each receives a preregistered chain of 10–30 changes. Reuse or adapt established language-agnostic benchmark tasks where possible, while retaining native idiomatic implementations and a common black-box oracle.
-
-**Exit:** task difficulty, architecture, and external behavior are defensibly matched across languages.
 
 ## Phase 3 — Mechanism ablations
 
@@ -182,13 +224,7 @@ The aim is to explain an effect, not merely rank languages.
 
 ## Phase 4 — Confirmatory longitudinal study
 
-Run the preregistered full chains with fresh agents while preserving only repository state. Estimate:
-
-- creation cost versus cumulative maintenance cost;
-- semantic recovery cost for a new agent;
-- error compounding and escaped defects;
-- language × repository-size and language × capability interactions;
-- whether one-shot and lifetime rankings differ.
+Run preregistered full chains with fresh agents while preserving only repository state. Estimate creation versus maintenance cost, semantic recovery, error compounding, escaped defects, language × repository-size and language × capability interactions, and whether one-shot and lifetime rankings differ.
 
 Use mixed-effects or hierarchical models that respect paired runs and dependence within evolving chains. Report distributions and uncertainty, not a single “best language” score.
 
@@ -208,7 +244,7 @@ The final deliverable should be a mechanism map and Pareto frontier for agentic 
 
 Reframe or stop if:
 
-- prior work is found that already performs the same controlled matched-language inherited-maintenance experiment;
+- prior work already performs the same controlled matched-language inherited-maintenance experiment;
 - paired implementations cannot be made comparably idiomatic and behaviorally equivalent;
 - measurement variance or provider drift overwhelms plausible language effects;
 - effects disappear after controlling for model familiarity, toolchain feedback, source cleanliness, or order;
@@ -220,8 +256,10 @@ Those outcomes remain scientifically useful: they would show that language choic
 
 The next milestone is complete when:
 
-- usage accounting is reconciled and guarded by tests;
-- a frozen run manifest and failure taxonomy exist;
-- 10 counterbalanced paired blocks of the current cell are preserved;
-- a variance and power report determines whether and how to expand the chain;
-- no language claim is made beyond what those observations support.
+- the historical run is recovered and audited or explicitly retired;
+- a real raw fixture passes `alf audit` and guards accounting semantics in tests;
+- a frozen protocol manifest and failure/inclusion taxonomy exist;
+- a non-counting calibration block passes end to end;
+- 10 new counterbalanced paired blocks are preserved under one unchanged cell;
+- a variance and power report determines whether and how to extend the chain;
+- no language claim exceeds those observations.
