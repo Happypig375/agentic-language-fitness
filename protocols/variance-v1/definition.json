@@ -3,10 +3,10 @@
   "cell_id": "variance-v1",
   "description": "New counterbalanced F#/C# maintenance cell; not comparable with the unaudited 2026-08-26 pair.",
   "benchmark_manifest": "benchmarks/pilot/manifest.json",
-  "benchmark_manifest_sha256": "3bc392b6014b3ef8cbb5211d2fd5e9f48ddf8a40f5aa165a0c78b1fc9d975a9e",
+  "benchmark_manifest_sha256": "3ee650c22f227338b0fd06dcfc79aaf481dc410e05bdde327228d9e27f91b9cb",
   "task_hashes": {
-    "001-priority": "f4f5c955601e75c4f54c7f340712a413bf76544119212e192121f243575d2667",
-    "002-overdue": "13accefea35effaf32d0e18d8fe0684589b0301a24ba4ae71e962bb85cba686a"
+    "001-priority": "4b003212969d3c3537f65d82320ba88ee42bb5a20a13e3ce6951f16dcfb1f1c0",
+    "002-overdue": "c166e62c2ed2f915a2865555ad824a8cc63b74ef1980b43f0a6b5ce62a94545c"
   },
   "model": {
     "snapshot": "gpt-5.4-mini-2026-03-17",

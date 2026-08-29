@@ -101,13 +101,31 @@ _IMAGE_ID = re.compile(r"^sha256:[0-9a-f]{64}$")
 
 
 def sha256(path: Path) -> str:
-    """Return the lowercase SHA-256 digest for *path*."""
+    """Return raw-byte SHA-256 (used for binary archives)."""
 
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def tracked_text_sha256(path: Path) -> str:
+    """Hash UTF-8 tracked text after normalizing CRLF and lone CR to LF."""
+
+    try:
+        text = path.read_bytes().decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValueError(f"invalid UTF-8 tracked text at {path}: {exc}") from exc
+    data = text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+    return hashlib.sha256(data).hexdigest()
+
+
+def _safe_tracked_hash(path: Path) -> str | None:
+    try:
+        return tracked_text_sha256(path)
+    except (OSError, ValueError):
+        return None
 
 
 def canonical_json_hash(value: dict[str, Any]) -> str:
@@ -333,8 +351,11 @@ def validate_cell(root: Path, definition_path: str | Path) -> dict[str, Any]:
         if not benchmark_path.is_file():
             errors.append("benchmark manifest is unavailable")
         else:
-            if sha256(benchmark_path) != definition.get("benchmark_manifest_sha256"):
-                errors.append("benchmark manifest hash mismatch")
+            try:
+                if tracked_text_sha256(benchmark_path) != definition.get("benchmark_manifest_sha256"):
+                    errors.append("benchmark manifest hash mismatch")
+            except ValueError as exc:
+                errors.append(str(exc))
             loaded_benchmark = _load_json(benchmark_path, "benchmark manifest")
             if not isinstance(loaded_benchmark, dict):
                 errors.append("benchmark manifest must contain an object")
@@ -371,8 +392,12 @@ def validate_cell(root: Path, definition_path: str | Path) -> dict[str, Any]:
             prompt = _repo_path(root, task.get("prompt", ""), f"task {task_id} prompt")
             if not prompt.is_file():
                 errors.append(f"task prompt is unavailable: {task_id}")
-            elif sha256(prompt) != task_hashes.get(task_id):
-                errors.append(f"task hash mismatch: {task_id}")
+            else:
+                try:
+                    if tracked_text_sha256(prompt) != task_hashes.get(task_id):
+                        errors.append(f"task hash mismatch: {task_id}")
+                except ValueError as exc:
+                    errors.append(str(exc))
         except ValueError as exc:
             errors.append(str(exc))
     if len(task_ids) != len(set(task_ids)):
@@ -453,10 +478,8 @@ def validate_cell(root: Path, definition_path: str | Path) -> dict[str, Any]:
         "errors": errors,
         "definition": definition,
         "schedule": schedule,
-        "definition_sha256": sha256(definition_file) if definition_file.is_file() else None,
-        "schedule_sha256": (
-            sha256(schedule_path) if schedule_path is not None and schedule_path.is_file() else None
-        ),
+        "definition_sha256": tracked_text_sha256(definition_file) if definition_file.is_file() else None,
+        "schedule_sha256": _safe_tracked_hash(schedule_path) if schedule_path is not None and schedule_path.is_file() else None,
         "definition_file": str(definition_file),
         "schedule_file": str(schedule_path) if schedule_path is not None else None,
         "raw_root": str(raw_root) if raw_root is not None else None,

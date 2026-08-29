@@ -11,6 +11,11 @@ and ten formal blocks, balanced by first language with a maximum run of two.
 The listed schedule is authoritative; the generator metadata records the two
 sequential seeded shuffles used to produce it.
 
+All tracked text hashes in the definition (definition, schedule, benchmark
+manifest, and task prompts) use canonical UTF-8 bytes with CRLF and lone CR
+line endings normalized to LF before SHA-256. Binary image archives retain
+their raw-byte SHA-256.
+
 Validate the draft with:
 
 ```text

@@ -12,6 +12,7 @@ from alf.protocol import (
     freeze_cell,
     load_frozen_manifest,
     sha256,
+    tracked_text_sha256,
     validate_cell,
     verify_image_archive,
     write_frozen_manifest,
@@ -73,7 +74,7 @@ class CellRepository:
             target.parent.mkdir(parents=True)
             shutil.copy2(ROOT / relative, target)
             task_entries.append({"id": task_id, "prompt": relative.as_posix()})
-            task_hashes[task_id] = sha256(target)
+            task_hashes[task_id] = tracked_text_sha256(target)
 
         self.benchmark = {"schema_version": 1, "id": "test", "tasks": task_entries}
         self.schedule = json.loads(SCHEDULE.read_text(encoding="utf-8"))
@@ -86,7 +87,7 @@ class CellRepository:
         self.benchmark_path.write_text(
             json.dumps(self.benchmark, indent=2) + "\n", encoding="utf-8"
         )
-        self.definition["benchmark_manifest_sha256"] = sha256(self.benchmark_path)
+        self.definition["benchmark_manifest_sha256"] = tracked_text_sha256(self.benchmark_path)
         self.schedule_path.write_text(
             json.dumps(self.schedule, indent=2) + "\n", encoding="utf-8"
         )
@@ -99,6 +100,44 @@ class CellRepository:
 
 
 class ProtocolTests(unittest.TestCase):
+    def test_tracked_text_hash_normalizes_line_endings(self):
+        with tempfile.TemporaryDirectory() as directory:
+            lf = Path(directory) / "lf.txt"
+            crlf = Path(directory) / "crlf.txt"
+            changed = Path(directory) / "changed.txt"
+            lf.write_bytes(b"one\ntwo\n")
+            crlf.write_bytes(b"one\r\ntwo\r\n")
+            changed.write_bytes(b"one\ntres\n")
+            self.assertEqual(tracked_text_sha256(lf), tracked_text_sha256(crlf))
+            self.assertNotEqual(tracked_text_sha256(lf), tracked_text_sha256(changed))
+
+    def test_tracked_text_hash_normalizes_lone_cr(self):
+        with tempfile.TemporaryDirectory() as directory:
+            lf = Path(directory) / "lf.txt"
+            cr = Path(directory) / "cr.txt"
+            lf.write_bytes(b"one\ntwo\n")
+            cr.write_bytes(b"one\rtwo\r")
+            self.assertEqual(tracked_text_sha256(lf), tracked_text_sha256(cr))
+
+    def test_invalid_utf8_is_reported_for_definition_and_prompt(self):
+        repo = CellRepository()
+        try:
+            repo.definition_path.write_bytes(b"{\xff")
+            report = validate_cell(repo.root, repo.definition_path)
+        finally:
+            repo.close()
+            self.assertFalse(report["ok"])
+        self.assertIn("invalid definition JSON", report["errors"][0])
+
+        repo = CellRepository()
+        try:
+            prompt = repo.root / "benchmarks" / "pilot" / "tasks" / "001-priority" / "task.md"
+            prompt.write_bytes(b"bad\xff")
+            report = validate_cell(repo.root, repo.definition_path)
+        finally:
+            repo.close()
+        self.assertFalse(report["ok"])
+        self.assertTrue(any("invalid UTF-8 tracked text" in error for error in report["errors"]))
     def test_tracked_definition_and_generated_schedule_are_valid(self):
         report = validate_cell(ROOT, DEFINITION)
         self.assertTrue(report["ok"], report["errors"])
