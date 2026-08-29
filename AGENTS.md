@@ -6,71 +6,52 @@ This file is the repository-level instruction entry point for maintainer coding 
 
 Before substantial work:
 
-1. Read `PLAN.md`. It is the canonical current checkpoint, ordered continuation plan, decision gates, and definition of the next milestone.
-2. Read `docs/preliminary-results-2026-08-26.md` before referring to the historical paired run.
-3. Read `docs/protocol.md`, `docs/event-schema.md`, and `docs/environment.md` before changing the harness, isolation, telemetry, or run procedure.
-4. Read `docs/research-gap.md` and the literature-review addendum before changing novelty or contribution claims.
-5. Inspect the latest commit and CI status. Do not launch paid/model experiments while `main` is red.
+1. Read `PLAN.md`; it is the canonical checkpoint, ordering, and decision-gate document.
+2. Read `docs/workstream-d-feasibility-design-2026-08-30.md`; it is the normative draft for the next milestone.
+3. Read `docs/difficulty-v1-results-2026-08-30.md` and `docs/variance-v2-results-2026-08-29.md` before interpreting the pilot evidence.
+4. Read `docs/protocol.md`, `docs/event-schema.md`, and `docs/environment.md` before changing isolation, telemetry, protocol, or run procedures.
+5. Read `docs/research-gap.md` and the literature-review addendum before changing novelty or contribution claims.
+6. Inspect the latest commit and CI status. Never launch paid/model experiments while `main` is red or before the relevant cell is independently reviewed and cleanly frozen.
 
-When work changes project status, ordering, assumptions, or acceptance criteria, update `PLAN.md` in the same change. Keep this file concise; route durable detail to the appropriate document.
+When work changes status, ordering, assumptions, acceptance criteria, or the selected configuration family, update `PLAN.md` in the same change. Keep this file concise; put durable design detail in `docs/`.
 
 ## Current priority
 
-`variance-v2` is complete and documented in
-`docs/variance-v2-results-2026-08-29.md`; its observations are a variance pilot,
-not evidence of a language advantage. Workstream C's matched eight-task chain,
-C3 representation treatment, and frozen non-counting `difficulty-v1` pilot are
-also complete. The cell was frozen at
-`edc6f3cacfba2aac428a4c60ae426b1cf8f2922d` after green GitHub Actions run
-`33269820641`; see `docs/difficulty-v1-results-2026-08-30.md` for the attempt,
-audit, archive, and interpretation record.
+Workstreams A–C are complete for the current pilot methodology. `variance-v2` established high stochastic/order variance on the short chain; `difficulty-v1` established that the reviewed eight-task chain is no longer fully saturated and exposed candidate-caused deterministic-representation drift.
 
-The Workstream C design in
-`docs/workstream-c-benchmark-design-2026-08-29.md` is independently reviewed;
-its material legacy-behavior clarification was independently reviewed and
-approved with no P1/P2 findings. Retained C#/F# Task 002 parameter casing
-differs, but the candidate-visible suffix-free exact strings are symmetric;
-Task 001/002 remain unchanged. The language-equivalence/error review gate is
-closed. C2 implementation and model-free validation are complete and approved.
-C3 representation design, implementation, model-free validation, and
-independent implementation review are complete with no remaining P1/P2/P3
-findings. The difficulty pilot retained four valid primaries: three completed
-all eight tasks, while C# descriptive failed the frozen Task 007 structural
-acceptance checks. The F# deterministic primary remains valid for performance
-metrics but is excluded from representation analysis because candidate edits
-reintroduced descriptive aliases. One Williams row supports no language,
-representation, causal, or significance claim.
+The next task is **Workstream D design review**, not another model run:
 
-The excluded F# attempt exposed a Windows CP1252/UTF-8 subprocess-decoding
-defect. The repair and direct-Unicode regression are committed at
-`73001e1fce14b367c5e257113e328fcfddfc349e` and green in GitHub Actions run
-`33275928430` (Linux 4m05s, Windows 5m27s; Node 20 deprecation annotations
-only). The apparatus gate is closed. The next milestone is Workstream D
-multi-configuration feasibility design, not immediate data collection. Any
-later paid/model run requires a newly reviewed, versioned cell and clean
-freeze; any representation follow-up must use complete counterbalanced blocks
-and explicitly handle treatment drift.
+1. independently review `docs/workstream-d-feasibility-design-2026-08-30.md`;
+2. close all P1/P2 findings;
+3. implement or validate a parent feasibility-family schedule plus three child capability cells;
+4. model-free validate exact configuration, descriptive-only scope, hashes, limits, accounting, and macroblock balance;
+5. obtain green Linux/Windows CI and freeze each child from a clean checkpoint;
+6. only then run non-counting configuration calibrations.
 
-The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use their legacy Markdown token totals as validated data.
+The first D-Language family deliberately uses only the canonical descriptive representation. Do not multiply the unstable representation treatment across model configurations. A later D-Representation family must use complete Williams superblocks and intention-to-treat as its primary estimand; candidate-caused drift is an outcome, not an automatic primary-analysis exclusion.
+
+No paid/model run is authorized by the current design draft.
 
 ## Development agents versus benchmarked agents
 
-This file guides agents **developing this repository**. Candidate agents being measured by the benchmark must not receive repository-level research instructions. The experimental Codex launch deliberately uses `--ignore-user-config` and `--ignore-rules`; preserve that separation unless the protocol explicitly introduces an instruction treatment.
+This file guides agents **developing this repository**. Candidate agents being measured must not receive repository-level research instructions. The experimental launcher uses `--ignore-user-config` and `--ignore-rules`; preserve that separation unless a reviewed protocol explicitly introduces an instruction treatment.
 
 ## Research invariants
 
 - Keep F# and C# task text, ordered changes, external behavior, evaluator, resource limits, and agent protocol matched.
 - Start a fresh candidate-agent process/container per task while retaining only the changed candidate workspace.
 - Never expose gold snapshots, evaluator cases, parent repositories, credentials, or unrelated host files to a candidate agent.
-- Record every attempt, including provider, host, authentication, evaluator, timeout, protocol, accounting, and agent failures; never silently replace failed attempts.
-- Preserve raw JSON/JSONL and exact environment metadata outside Git as appropriate; commit curated redacted fixtures, manifests, hashes, and summaries.
-- Keep model, CLI, image digest, toolchain, network policy, run order, timestamps, tokens, timings, commands, diffs, and outcomes explicit.
-- Treat language, model, scaffold, order, task, time, and chain position as possible interacting factors rather than seeking a universal ranking.
-- Increment the protocol/cell identifier after any change that could affect measured trajectories; do not pool across changed cells without modeling the change.
+- Record every attempt, including candidate, provider, authentication, host, evaluator, timeout, protocol, accounting, and archive failures; never silently replace an attempt.
+- Preserve raw JSON/JSONL and exact environment metadata outside Git as appropriate; commit curated redacted fixtures, definitions, hashes, and reports.
+- Keep model, reasoning effort, CLI, image digest, toolchain, network policy, order, timestamps, tokens, timings, commands, diffs, and outcomes explicit.
+- Treat language, configuration, order, task, time, and chain position as interacting factors rather than seeking a universal ranking.
+- Increment the protocol/cell identifier after any change that could affect measured trajectories; never pool across changed cells without explicitly modeling the change.
+- Candidate correctness failures are valid outcomes. Only preregistered pre-candidate infrastructure failures may be retried/excluded.
+- Do not condition cost interpretation only on completed chains; retain terminal-stop and paired common-prefix outcomes.
 
 ## Validation commands
 
-Install first with `python -m pip install -e .`, then run:
+Install with `python -m pip install -e .`, then run:
 
 ```text
 python -m unittest discover -s tests -v
@@ -80,8 +61,12 @@ python scripts/alf.py matrix --agent scripted --output results/pilot
 python scripts/alf.py audit <run-directory>
 ```
 
-For the isolated Codex path, build with `make docker-build`, smoke-test with `make docker-smoke`, and follow `README.md` plus `docs/environment.md`. Require usage for accepted command-adapter runs and do not broaden Docker mounts or weaken the evaluator boundary.
+For isolated Codex execution, build with `make docker-build`, smoke-test with `make docker-smoke`, and follow `README.md` plus `docs/environment.md`. Require usage for accepted command-adapter runs and never broaden Docker mounts or weaken the evaluator boundary.
 
-## Historical exploratory result
+## Evidence boundaries
 
-The 2026-08-26 pair is summarized in `docs/preliminary-results-2026-08-26.md`. Its exact raw directory is recovered at `results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3/`, but the legacy artifacts fail `alf audit`; the pair remains an unaudited smoke-test observation excluded from formal aggregates, variance estimation, and power analysis.
+- The historical 2026-08-26 pair is recovered and hash-preserved but fails the current audit schema; it remains excluded.
+- `variance-v2` is a variance pilot on the two-task chain, not successor-chain evidence.
+- `difficulty-v1` is one non-counting Williams row, not a language or representation estimate.
+- The F# deterministic difficulty primary remains valid for correctness/time/usage but not for the pilot's per-protocol representation comparison because the candidate reintroduced descriptive aliases.
+- No existing result supports an F# advantage, a deterministic-representation advantage, significance, or cross-cell pooling.
