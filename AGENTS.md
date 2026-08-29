@@ -16,13 +16,19 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Workstream C's matched eight-task design review is complete. Follow the next gates in `PLAN.md`: implement and validate the longer benchmark chain, implement and review its separate representation treatment, then define and freeze a new protocol cell. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run until the remaining gates are complete and main CI is green.
+`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Workstream C's matched eight-task design review and C2 implementation/validation are complete. Follow the next gate in `PLAN.md`: design, implement, and independently review the C3 representation treatment, then define and freeze a new protocol cell. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run until the remaining gates are complete and main CI is green.
 
 The Workstream C design in
-`docs/workstream-c-benchmark-design-2026-08-29.md` is independently reviewed
-and approved; C2 implementation/validation may proceed. The separately
-reviewed representation treatment, new protocol freeze, difficulty pilot, and
-all paid/model runs remain blocked until their gates are complete.
+`docs/workstream-c-benchmark-design-2026-08-29.md` is independently reviewed;
+its material legacy-behavior clarification was independently reviewed and
+approved with no P1/P2 findings. Retained C#/F# Task 002 parameter casing
+differs, but the candidate-visible suffix-free exact strings are symmetric;
+Task 001/002 remain unchanged. The language-equivalence/error review gate is
+closed. C2 implementation and model-free validation are complete and approved.
+C3 representation treatment is the immediate next step and remains pending
+design/implementation/review. The new protocol freeze, difficulty pilot,
+paid/model runs, and main CI for the new commit remain blocked/pending until
+their gates are complete.
 
 The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use their legacy Markdown token totals as validated data.
 

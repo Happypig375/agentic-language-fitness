@@ -300,13 +300,20 @@ freeze and precedes any confirmatory run.
 ## Workstream C gate status (current)
 
 The implementation-ready eight-task contract is in
-`docs/workstream-c-benchmark-design-2026-08-29.md` and is independently
-reviewed/approved; implementation/harness and experimental-design reviews
-found no remaining P1/P2 findings after repairs. **C1 is complete. C2 is next
-and in progress:** implement and validate the chain, cumulative black-box cases,
-backward-compatible multi-file gold manifests, language-specific workspace
-checks, both golds, and the arbitrary-chain runner; and C3 separately designs,
-reviews, implements, and validates the full-chain descriptive-versus-
-deterministic private-identifier treatment. **C3 remains pending.** Only then
-may a new protocol/cell be frozen with hashes and a difficulty pilot run.
-Historical fixtures and variance cells remain unchanged and excluded.
+`docs/workstream-c-benchmark-design-2026-08-29.md`. Its material
+legacy-behavior clarification standardizes exact language-neutral serialized
+errors for unknown operations and missing/null `asOf`. Limited independent
+review is approved with no P1/P2 findings: retained C#/F# Task 002
+`ArgumentException` parameter casing differs, while the suffix-free exact
+strings are symmetric; Task 001/002 remain unchanged. The
+language-equivalence/error review gate is closed. **C1 and C2 are complete.**
+C2 delivered the eight-task cumulative chain and 90 final cases per language,
+legacy/multi-file golds, workspace checks, fail-closed paths, and exact pilot
+baseline/Tasks 001/002 retention. Evidence includes 126 unit tests, strict
+doctor, legacy/successor validation and scripted matrices, serialized Task
+007/008 checks, focused path suites, 18 isolated gold builds, and independent
+harness-security and gold/equivalence reviews with no P1/P2 findings. **C3 is
+next:** implement and validate the representation treatment. The protocol
+freeze, difficulty pilot, and paid/model runs remain blocked, and main CI for
+this commit is pending. Historical fixtures and variance cells remain unchanged
+and excluded.

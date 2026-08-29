@@ -17,6 +17,7 @@ from .evaluator import evaluate_project
 from .metrics import git_diff_metrics, git_head, snapshot_repository
 from .models import AgentResult, Usage
 from .process import run_process
+from .benchmark_artifacts import artifact_plan, checks_for_language, copy_artifacts, merge_workspace_checks
 from .protocol import classify_failure, load_frozen_manifest
 
 
@@ -564,6 +565,15 @@ def run_chain(
 
     init_workspace(root, manifest, language, workspace)
     cfg = manifest["languages"][language]
+    tasks = manifest["tasks"][:max_tasks] if max_tasks is not None else manifest["tasks"]
+    # Resolve every source, target, and check path before baseline/agent work.
+    planned_artifacts = []
+    planned_checks = []
+    for task in tasks:
+        planned_artifacts.append(artifact_plan(root, manifest, language, task, workspace))
+        planned_checks.append(merge_workspace_checks(workspace, checks_for_language(task, language, set(manifest["languages"]))))
+        for sibling_language in manifest["languages"]:
+            merge_workspace_checks(workspace, checks_for_language(task, sibling_language, set(manifest["languages"])))
     agent = make_agent(
         agent_name,
         model=model,
@@ -627,8 +637,8 @@ def run_chain(
         return run_dir
 
     cumulative_cases = list(manifest["baseline_cases"])
-    tasks = manifest["tasks"][:max_tasks] if max_tasks is not None else manifest["tasks"]
-    for task in tasks:
+    cumulative_checks: dict[str, Any] = {"file_exists": [], "text_contains": [], "text_not_contains": []}
+    for task_index, task in enumerate(tasks):
         task_started_monotonic = time.monotonic()
         task_dir = run_dir / "tasks" / task["id"]
         prompt_path = root / task["prompt"]
@@ -636,12 +646,18 @@ def run_chain(
         pre = snapshot_repository(workspace)
         pre_head = git_head(workspace)
         task_started = utc_now()
+        agent_task = dict(task)
+        if agent_name == "scripted":
+            agent_task["_artifact_context"] = {
+                "manifest_parent": getattr(manifest, "manifest_parent", None)
+            }
+            agent_task["_artifact_plan"] = planned_artifacts[task_index]
         agent_result = agent.run(
             root=root,
             workspace=workspace,
             language=language,
             language_config=cfg,
-            task=task,
+            task=agent_task,
             prompt=prompt,
             timeout=timeout,
         )
@@ -660,12 +676,16 @@ def run_chain(
             shutil.copy2(provenance_sidecar, task_dir / "usage.json")
 
         cumulative_cases.extend(task["cases"])
+        task_checks = planned_checks[task_index]
+        for check_key in cumulative_checks:
+            cumulative_checks[check_key].extend(task_checks[check_key])
         evaluation_started = time.monotonic()
         evaluation = evaluate_project(
             workspace,
             cfg,
             cumulative_cases,
             timeout=min(timeout, 300),
+            workspace_checks=cumulative_checks,
         )
         evaluation["evaluator_wall_seconds"] = time.monotonic() - evaluation_started
         run_result["agent_process_wall_seconds"] += agent_result.process.duration_seconds
@@ -744,15 +764,26 @@ def validate_benchmark(root: Path, manifest: dict[str, Any], timeout: float = 30
         with tempfile.TemporaryDirectory(prefix=f"alf-validate-{language}-") as temp:
             workspace = Path(temp) / "workspace"
             init_workspace(root, manifest, language, workspace)
+            planned = [artifact_plan(root, manifest, language, task, workspace) for task in manifest["tasks"]]
+            planned_checks = []
+            for task in manifest["tasks"]:
+                for sibling_language in manifest["languages"]:
+                    sibling_checks = checks_for_language(task, sibling_language, set(manifest["languages"]))
+                    merge_workspace_checks(workspace, sibling_checks)
+                planned_checks.append(merge_workspace_checks(workspace, checks_for_language(task, language, set(manifest["languages"]))))
             baseline = evaluate_project(workspace, cfg, manifest["baseline_cases"], timeout=timeout)
             language_report["baseline"] = baseline
             ok = baseline["ok"]
             cases = list(manifest["baseline_cases"])
-            for task in manifest["tasks"]:
-                source = root / task["gold"][language]
-                shutil.copy2(source, workspace / cfg["source_file"])
+            cumulative_checks: dict[str, Any] = {"file_exists": [], "text_contains": [], "text_not_contains": []}
+            for task_index, task in enumerate(manifest["tasks"]):
+                plan = planned[task_index]
+                copy_artifacts(plan)
                 cases.extend(task["cases"])
-                evaluation = evaluate_project(workspace, cfg, cases, timeout=timeout)
+                checks = planned_checks[task_index]
+                for check_key in cumulative_checks:
+                    cumulative_checks[check_key].extend(checks[check_key])
+                evaluation = evaluate_project(workspace, cfg, cases, timeout=timeout, workspace_checks=cumulative_checks)
                 language_report["tasks"].append({"task_id": task["id"], "evaluation": evaluation})
                 ok = ok and evaluation["ok"]
             language_report["ok"] = ok

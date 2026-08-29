@@ -6,6 +6,8 @@ from typing import Any
 
 from .base import Agent
 from ..models import AgentResult, ProcessResult
+from ..benchmark_artifacts import artifact_plan, copy_artifacts
+from ..config import Manifest
 
 
 class ScriptedAgent(Agent):
@@ -23,14 +25,21 @@ class ScriptedAgent(Agent):
         timeout: float,
     ) -> AgentResult:
         started = time.monotonic()
-        source = root / task["gold"][language]
-        target = workspace / language_config["source_file"]
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(source.read_bytes())
+        plan = task.get("_artifact_plan")
+        if plan is None:
+            context = task.get("_artifact_context", {})
+            manifest = Manifest({"languages": {language: language_config}})
+            manifest.manifest_parent = Path(
+                context.get("manifest_parent")
+                if isinstance(context, dict) and context.get("manifest_parent")
+                else root / "benchmarks/pilot"
+            )
+            plan = artifact_plan(root, manifest, language, task, workspace)
+        copy_artifacts(plan)
         process = ProcessResult(
-            argv=["scripted-copy", str(source), str(target)],
+            argv=["scripted-copy", *[str(item.source) for item in plan]],
             returncode=0,
-            stdout=f"Applied {source}\n",
+            stdout=f"Applied {len(plan)} gold artifact(s)\n",
             stderr="",
             duration_seconds=time.monotonic() - started,
         )

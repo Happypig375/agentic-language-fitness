@@ -1,8 +1,20 @@
 # Workstream C benchmark design
 
-Status: independently reviewed and approved for C2 implementation. No paid or
-model-backed run is authorized by this document. The implementation/harness and
-experimental-design reviews found no remaining P1/P2 findings after repairs.
+Status: C2 implementation and model-free validation complete and independently
+approved, including the material legacy-behavior clarification below. No paid
+or model-backed run is authorized by this document; C3 is the next gate.
+
+## C2 implementation acceptance and evidence
+
+The successor is a cumulative eight-task chain with 90 final black-box cases
+per language. It preserves the pilot baseline and Tasks 001/002 exactly,
+supports legacy and multi-file gold manifests, cumulative workspace checks, and
+fail-closed cross-platform path validation. Evidence includes 126 unit tests,
+strict doctor, legacy/successor validation and scripted matrices, serialized
+Task 007/008 checks, focused path suites (Windows 25; Linux 24 plus one
+expected junction skip), and 18 isolated gold builds. Independent harness
+security and gold/equivalence reviews approve with no P1/P2 findings; the
+amendment review is also approved.
 
 ## Scope and invariants
 
@@ -20,6 +32,31 @@ hard-coded two-task schedule.
 Each task is specified by purpose/category, exact contract, adversarial cases,
 gold expectation, dependency, and fairness risks. Case matrices are cumulative:
 all earlier cases continue to run after every later task.
+
+## Material legacy-behavior clarification (C2 review amendment)
+
+The retained pilot C# and F# golds expose language-specific `ArgumentException`
+diagnostics (including parameter-name casing and suffixes), making exact
+language-neutral error cases impossible to match. Stable explicit strings are
+scientifically preferable and symmetric. Accordingly, the successor contract
+is amended as follows:
+
+- By Task 003, an unknown operation returns exactly `Unknown operation:
+  <operation>`, with no language/runtime parameter-name suffix. The
+  candidate-visible Task 003 text states this requirement, and the oracle tests
+  the exact serialized error.
+- By Task 005, missing or null `asOf` for `overdue` returns exactly `asOf is
+  required for overdue`; `atRisk` retains its already exact `asOf is required
+  for atRisk` string. Candidate-visible acceptance text states both
+  requirements, and precedence tests cover them.
+
+This is a material legacy-behavior clarification, not a retrospective change
+to the retained pilot. The limited independent review is approved with no
+P1/P2 findings: retained C#/F# Task 002 `ArgumentException` parameter casing
+differs, while the candidate-visible suffix-free exact strings are symmetric.
+Task 001/002 remain unchanged. The language-equivalence/error review gate is
+closed; C2 implementation and model-free validation may continue, while the
+representation treatment, protocol freeze, and paid/model runs remain blocked.
 
 ## Task 003 — at-risk window
 

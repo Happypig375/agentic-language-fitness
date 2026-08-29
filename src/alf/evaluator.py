@@ -6,6 +6,7 @@ from typing import Any
 
 from .models import ProcessResult
 from .process import run_process
+from .benchmark_artifacts import check_workspace
 
 
 def _serialize_process(result: ProcessResult) -> dict[str, Any]:
@@ -21,6 +22,7 @@ def evaluate_project(
     cases: list[dict[str, Any]],
     *,
     timeout: float = 180,
+    workspace_checks: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     project = workspace / language_config["project_file"]
     build = run_process(
@@ -42,8 +44,17 @@ def evaluate_project(
         "build": _serialize_process(build),
         "run": None,
         "case_results": [],
+        "workspace_checks": None,
     }
+    def apply_workspace_result() -> None:
+        if workspace_checks is None:
+            return
+        try:
+            result["workspace_checks"] = check_workspace(workspace, workspace_checks)
+        except (OSError, ValueError) as exc:
+            result["workspace_checks"] = {"ok": False, "error": str(exc)}
     if not build.ok:
+        apply_workspace_result()
         return result
 
     input_text = "".join(json.dumps(case["input"], separators=(",", ":")) + "\n" for case in cases)
@@ -64,6 +75,7 @@ def evaluate_project(
     )
     result["run"] = _serialize_process(run)
     if not run.ok:
+        apply_workspace_result()
         return result
 
     lines = [line for line in run.stdout.splitlines() if line.strip()]
@@ -91,5 +103,7 @@ def evaluate_project(
         )
     if len(lines) > len(cases):
         result["extra_output_lines"] = lines[len(cases) :]
-    result["ok"] = all_ok
+    if workspace_checks is not None:
+        apply_workspace_result()
+    result["ok"] = all_ok and (result["workspace_checks"] is None or result["workspace_checks"]["ok"])
     return result

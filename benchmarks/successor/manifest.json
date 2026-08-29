@@ -1,0 +1,1882 @@
+{
+  "schema_version": 1,
+  "id": "successor-order-flow",
+  "description": "Matched cumulative eight-task OrderFlow recalibration benchmark",
+  "languages": {
+    "fsharp": {
+      "base": "benchmarks/successor/repos/fsharp/v0",
+      "project_file": "OrderFlow.fsproj",
+      "source_file": "Program.fs"
+    },
+    "csharp": {
+      "base": "benchmarks/successor/repos/csharp/v0",
+      "project_file": "OrderFlow.csproj",
+      "source_file": "Program.cs"
+    }
+  },
+  "baseline_cases": [
+    {
+      "name": "ready filters pending and sorts by creation time then id",
+      "input": {
+        "operation": "ready",
+        "orders": [
+          {
+            "id": "b",
+            "createdAt": "2026-01-02T00:00:00Z",
+            "status": "pending"
+          },
+          {
+            "id": "done",
+            "createdAt": "2025-12-01T00:00:00Z",
+            "status": "completed"
+          },
+          {
+            "id": "c",
+            "createdAt": "2026-01-03T00:00:00Z",
+            "status": "pending"
+          },
+          {
+            "id": "a",
+            "createdAt": "2026-01-02T00:00:00Z",
+            "status": "pending"
+          }
+        ]
+      },
+      "expected": {
+        "ids": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "name": "ready accepts an empty order list",
+      "input": {
+        "operation": "ready",
+        "orders": []
+      },
+      "expected": {
+        "ids": []
+      }
+    },
+    {
+      "name": "null request returns the standard null-request error",
+      "input": null,
+      "expected": {
+        "error": "Request was null"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "id": "001-priority",
+      "prompt": "benchmarks/successor/tasks/001-priority/task.md",
+      "gold": {
+        "fsharp": "benchmarks/successor/gold/fsharp/001-priority/Program.fs",
+        "csharp": "benchmarks/successor/gold/csharp/001-priority/Program.cs"
+      },
+      "cases": [
+        {
+          "name": "ready sorts priority descending before creation time and id",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              {
+                "id": "low",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": 1
+              },
+              {
+                "id": "z",
+                "createdAt": "2026-01-03T00:00:00Z",
+                "status": "pending",
+                "priority": 5
+              },
+              {
+                "id": "a",
+                "createdAt": "2026-01-03T00:00:00Z",
+                "status": "pending",
+                "priority": 5
+              },
+              {
+                "id": "early",
+                "createdAt": "2026-01-02T00:00:00Z",
+                "status": "pending",
+                "priority": 5
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "early",
+              "a",
+              "z",
+              "low"
+            ]
+          }
+        },
+        {
+          "name": "missing priority defaults to zero",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              {
+                "id": "implicit",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending"
+              },
+              {
+                "id": "negative",
+                "createdAt": "2025-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": -1
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "implicit",
+              "negative"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "002-overdue",
+      "prompt": "benchmarks/successor/tasks/002-overdue/task.md",
+      "gold": {
+        "fsharp": "benchmarks/successor/gold/fsharp/002-overdue/Program.fs",
+        "csharp": "benchmarks/successor/gold/csharp/002-overdue/Program.cs"
+      },
+      "cases": [
+        {
+          "name": "overdue filters status and due date and applies the specified ordering",
+          "input": {
+            "operation": "overdue",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "late-low",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": 1,
+                "dueAt": "2026-02-01T00:00:00Z"
+              },
+              {
+                "id": "late-high",
+                "createdAt": "2026-01-05T00:00:00Z",
+                "status": "processing",
+                "priority": 8,
+                "dueAt": "2026-02-01T00:00:00Z"
+              },
+              {
+                "id": "older",
+                "createdAt": "2026-01-08T00:00:00Z",
+                "status": "pending",
+                "priority": 0,
+                "dueAt": "2026-01-20T00:00:00Z"
+              },
+              {
+                "id": "complete",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "completed",
+                "priority": 99,
+                "dueAt": "2026-01-01T00:00:00Z"
+              },
+              {
+                "id": "future",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": 99,
+                "dueAt": "2026-03-01T00:00:00Z"
+              },
+              {
+                "id": "undated",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "priority": 99
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "older",
+              "late-high",
+              "late-low"
+            ]
+          }
+        },
+        {
+          "name": "due exactly at asOf is not overdue",
+          "input": {
+            "operation": "overdue",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "equal",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "dueAt": "2026-02-10T00:00:00Z"
+              },
+              {
+                "id": "before",
+                "createdAt": "2026-01-01T00:00:00Z",
+                "status": "pending",
+                "dueAt": "2026-02-09T23:59:59Z"
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "before"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "003-at-risk-window",
+      "prompt": "benchmarks/successor/tasks/003-at-risk-window/task.md",
+      "gold": {
+        "fsharp": "benchmarks/successor/gold/fsharp/003-at-risk-window/Program.fs",
+        "csharp": "benchmarks/successor/gold/csharp/003-at-risk-window/Program.cs"
+      },
+      "cases": [
+        {
+          "name": "atRisk lower inclusive",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "start",
+                "status": "pending",
+                "dueAt": "2026-02-10T00:00:00Z"
+              },
+              {
+                "id": "inside",
+                "status": "processing",
+                "dueAt": "2026-02-10T23:59:59Z"
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "start",
+              "inside"
+            ]
+          }
+        },
+        {
+          "name": "atRisk upper exclusive",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "end",
+                "status": "pending",
+                "dueAt": "2026-02-11T00:00:00Z"
+              },
+              {
+                "id": "after",
+                "status": "pending",
+                "dueAt": "2026-02-11T00:00:01Z"
+              },
+              {
+                "id": "before",
+                "status": "pending",
+                "dueAt": "2026-02-09T23:59:59Z"
+              }
+            ]
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "atRisk one second inside lower boundary",
+          "input": {"operation":"atRisk","asOf":"2026-02-10T00:00:00Z","orders":[{"id":"inside","status":"pending","dueAt":"2026-02-10T00:00:01Z"},{"id":"before","status":"pending","dueAt":"2026-02-09T23:59:59Z"}]},
+          "expected": {"ids":["inside"]}
+        },
+        {
+          "name": "atRisk compares equivalent offsets",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00+02:00",
+            "orders": [
+              {
+                "id": "same",
+                "status": "PENDING",
+                "dueAt": "2026-02-10T00:00:00+00:00"
+              },
+              {
+                "id": "inside",
+                "status": "processing",
+                "dueAt": "2026-02-10T23:00:00+02:00"
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "same",
+              "inside"
+            ]
+          }
+        },
+        {
+          "name": "atRisk due priority and ordinal id ordering",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "z",
+                "status": "pending",
+                "dueAt": "2026-02-10T01:00:00Z",
+                "priority": -1
+              },
+              {
+                "id": "A",
+                "status": "pending",
+                "dueAt": "2026-02-10T01:00:00Z",
+                "priority": 2
+              },
+              {
+                "id": "a",
+                "status": "pending",
+                "dueAt": "2026-02-10T01:00:00Z",
+                "priority": 2
+              },
+              {
+                "id": "high",
+                "status": "pending",
+                "dueAt": "2026-02-10T01:00:00Z",
+                "priority": 3
+              },
+              {
+                "id": "missing",
+                "status": "pending",
+                "dueAt": "2026-02-10T02:00:00Z"
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "high",
+              "A",
+              "a",
+              "z",
+              "missing"
+            ]
+          }
+        },
+        {
+          "name": "atRisk excludes statuses and undated",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "completed",
+                "status": "completed",
+                "dueAt": "2026-02-10T01:00:00Z"
+              },
+              {
+                "id": "cancelled",
+                "status": "CANCELLED",
+                "dueAt": "2026-02-10T01:00:00Z"
+              },
+              {
+                "id": "unknown",
+                "status": "mystery",
+                "dueAt": "2026-02-10T01:00:00Z"
+              },
+              {
+                "id": "undated",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "atRisk excludes null dueAt",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "null-due",
+                "status": "pending",
+                "dueAt": null
+              },
+              {
+                "id": "valid",
+                "status": "pending",
+                "dueAt": "2026-02-10T01:00:00Z"
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "valid"
+            ]
+          }
+        },
+        {
+          "name": "atRisk missing asOf",
+          "input": {
+            "operation": "atRisk",
+            "orders": []
+          },
+          "expected": {
+            "error": "asOf is required for atRisk"
+          }
+        },
+        {
+          "name": "atRisk null asOf",
+          "input": {
+            "operation": "atRisk",
+            "asOf": null,
+            "orders": []
+          },
+          "expected": {
+            "error": "asOf is required for atRisk"
+          }
+        },
+        {
+          "name": "unknown operation exact error",
+          "input": {
+            "operation": "mystery",
+            "orders": []
+          },
+          "expected": {
+            "error": "Unknown operation: mystery"
+          }
+        }
+      ]
+    },
+    {
+      "id": "004-vip-ready",
+      "prompt": "benchmarks/successor/tasks/004-vip-ready/task.md",
+      "gold": {
+        "fsharp": "benchmarks/successor/gold/fsharp/004-vip-ready/Program.fs",
+        "csharp": "benchmarks/successor/gold/csharp/004-vip-ready/Program.cs"
+      },
+      "cases": [
+        {
+          "name": "vip gold platinum mixed case",
+          "input": {
+            "operation": "vipReady",
+            "orders": [
+              {
+                "id": "gold",
+                "status": "pending",
+                "customer": {
+                  "tier": "GoLd"
+                }
+              },
+              {
+                "id": "plat",
+                "status": "PENDING",
+                "priority": 2,
+                "customer": {
+                  "tier": "PLATINUM"
+                }
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "plat",
+              "gold"
+            ]
+          }
+        },
+        {
+          "name": "vip excludes nonprecious tiers",
+          "input": {
+            "operation": "vipReady",
+            "orders": [
+              {
+                "id": "silver",
+                "status": "pending",
+                "customer": {
+                  "tier": "silver"
+                }
+              },
+              {
+                "id": "unknown",
+                "status": "pending",
+                "customer": {
+                  "tier": "bronze"
+                }
+              },
+              {
+                "id": "empty",
+                "status": "pending",
+                "customer": {
+                  "tier": ""
+                }
+              }
+            ]
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "vip excludes missing null customer tier",
+          "input": {
+            "operation": "vipReady",
+            "orders": [
+              {
+                "id": "missing",
+                "status": "pending"
+              },
+              {
+                "id": "null-customer",
+                "status": "pending",
+                "customer": null
+              },
+              {
+                "id": "null-tier",
+                "status": "pending",
+                "customer": {
+                  "tier": null
+                }
+              }
+            ]
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "vip applies ready status and ordering",
+          "input": {
+            "operation": "vipReady",
+            "orders": [
+              {
+                "id": "done",
+                "status": "completed",
+                "priority": 99,
+                "createdAt": "2026-01-01T00:00:00Z",
+                "customer": {
+                  "tier": "gold"
+                }
+              },
+              {
+                "id": "late",
+                "status": "pending",
+                "priority": 1,
+                "createdAt": "2026-01-02T00:00:00Z",
+                "customer": {
+                  "tier": "gold"
+                }
+              },
+              {
+                "id": "early",
+                "status": "pending",
+                "priority": 1,
+                "createdAt": "2026-01-01T00:00:00Z",
+                "customer": {
+                  "tier": "platinum"
+                }
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "early",
+              "late"
+            ]
+          }
+        },
+        {
+          "name": "vip final tie uses ordinal id",
+          "input": {"operation":"vipReady","orders":[{"id":"a","status":"pending","priority":4,"createdAt":"2026-01-01T00:00:00Z","customer":{"tier":"gold"}},{"id":"A","status":"pending","priority":4,"createdAt":"2026-01-01T00:00:00Z","customer":{"tier":"platinum"}},{"id":"b","status":"pending","priority":4,"createdAt":"2026-01-01T00:00:00Z","customer":{"tier":"gold"}}]},
+          "expected": {"ids":["A","a","b"]}
+        },
+        {
+          "name": "ready remains compatible without customer",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              {
+                "id": "old",
+                "status": "pending",
+                "createdAt": "2026-01-01T00:00:00Z"
+              },
+              {
+                "id": "vip",
+                "status": "pending",
+                "createdAt": "2026-01-02T00:00:00Z",
+                "customer": {
+                  "tier": "gold"
+                }
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "old",
+              "vip"
+            ]
+          }
+        },
+        {
+          "name": "vip ignores customer extras",
+          "input": {
+            "operation": "vipReady",
+            "orders": [
+              {
+                "id": "extra",
+                "status": "pending",
+                "customer": {
+                  "id": "x",
+                  "tier": "gold",
+                  "region": "APAC"
+                }
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "extra"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "005-null-order-robustness",
+      "prompt": "benchmarks/successor/tasks/005-null-order-robustness/task.md",
+      "gold": {
+        "fsharp": "benchmarks/successor/gold/fsharp/005-null-order-robustness/Program.fs",
+        "csharp": "benchmarks/successor/gold/csharp/005-null-order-robustness/Program.cs"
+      },
+      "cases": [
+        {
+          "name": "ready omitted orders empty",
+          "input": {
+            "operation": "ready"
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "overdue null orders empty",
+          "input": {
+            "operation": "overdue",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": null
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "atRisk ignores null elements",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              null,
+              {
+                "id": "a",
+                "status": "pending",
+                "dueAt": "2026-02-10T01:00:00Z"
+              },
+              null,
+              {
+                "id": "b",
+                "status": "processing",
+                "dueAt": "2026-02-10T02:00:00Z"
+              },
+              null
+            ]
+          },
+          "expected": {
+            "ids": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "name": "vip all null array empty",
+          "input": {
+            "operation": "vipReady",
+            "orders": [
+              null,
+              null
+            ]
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "overdue required asOf precedence",
+          "input": {
+            "operation": "overdue"
+          },
+          "expected": {
+            "error": "asOf is required for overdue"
+          }
+        },
+        {
+          "name": "overdue null asOf required",
+          "input": {
+            "operation": "overdue",
+            "asOf": null,
+            "orders": null
+          },
+          "expected": {
+            "error": "asOf is required for overdue"
+          }
+        },
+        {
+          "name": "atRisk required asOf with null",
+          "input": {
+            "operation": "atRisk",
+            "orders": [
+              null
+            ]
+          },
+          "expected": {
+            "error": "asOf is required for atRisk"
+          }
+        },
+        {
+          "name": "atRisk null asOf required",
+          "input": {
+            "operation": "atRisk",
+            "asOf": null
+          },
+          "expected": {
+            "error": "asOf is required for atRisk"
+          }
+        },
+        {
+          "name": "ready null orders empty",
+          "input": {
+            "operation": "ready",
+            "orders": null
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "ready all null orders empty",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              null,
+              null
+            ]
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "ready nulls surround valid order",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              null,
+              {
+                "id": "r",
+                "status": "pending",
+                "createdAt": "2026-01-01T00:00:00Z"
+              },
+              null
+            ]
+          },
+          "expected": {
+            "ids": [
+              "r"
+            ]
+          }
+        },
+        {
+          "name": "overdue omitted orders empty",
+          "input": {
+            "operation": "overdue",
+            "asOf": "2026-02-10T00:00:00Z"
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "overdue all null orders empty",
+          "input": {
+            "operation": "overdue",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              null,
+              null
+            ]
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "overdue nulls surround valid order",
+          "input": {
+            "operation": "overdue",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              null,
+              {
+                "id": "r",
+                "status": "pending",
+                "dueAt": "2026-02-09T00:00:00Z"
+              },
+              null
+            ]
+          },
+          "expected": {
+            "ids": [
+              "r"
+            ]
+          }
+        },
+        {
+          "name": "atRisk omitted orders empty",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z"
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "atRisk null orders empty",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": null
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "atRisk all null orders empty",
+          "input": {
+            "operation": "atRisk",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              null,
+              null
+            ]
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "vip omitted orders empty",
+          "input": {
+            "operation": "vipReady"
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "vip null orders empty",
+          "input": {
+            "operation": "vipReady",
+            "orders": null
+          },
+          "expected": {
+            "ids": []
+          }
+        },
+        {
+          "name": "vip nulls surround valid order",
+          "input": {
+            "operation": "vipReady",
+            "orders": [
+              null,
+              {
+                "id": "r",
+                "status": "pending",
+                "customer": {
+                  "tier": "gold"
+                }
+              },
+              null
+            ]
+          },
+          "expected": {
+            "ids": [
+              "r"
+            ]
+          }
+        },
+        {
+          "name": "valid orders survive null",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              null,
+              {
+                "id": "b",
+                "status": "pending",
+                "createdAt": "2026-01-02T00:00:00Z"
+              },
+              null,
+              {
+                "id": "a",
+                "status": "pending",
+                "createdAt": "2026-01-01T00:00:00Z"
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "a",
+              "b"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "006-transition-validation",
+      "prompt": "benchmarks/successor/tasks/006-transition-validation/task.md",
+      "gold": {
+        "fsharp": "benchmarks/successor/gold/fsharp/006-transition-validation/Program.fs",
+        "csharp": "benchmarks/successor/gold/csharp/006-transition-validation/Program.cs"
+      },
+      "cases": [
+        {
+          "name": "pending to processing",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "PROCESSING",
+            "orders": [
+              {
+                "id": "p",
+                "status": "Pending"
+              }
+            ]
+          },
+          "expected": {
+            "id": "p",
+            "status": "processing"
+          }
+        },
+        {
+          "name": "pending to cancelled",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "cancelled",
+            "orders": [
+              {
+                "id": "p",
+                "status": "PENDING"
+              }
+            ]
+          },
+          "expected": {
+            "id": "p",
+            "status": "cancelled"
+          }
+        },
+        {
+          "name": "processing to completed",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "Completed",
+            "orders": [
+              {
+                "id": "p",
+                "status": "processing"
+              }
+            ]
+          },
+          "expected": {
+            "id": "p",
+            "status": "completed"
+          }
+        },
+        {
+          "name": "processing to cancelled",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "CANCELLED",
+            "orders": [
+              {
+                "id": "p",
+                "status": "PROCESSING"
+              }
+            ]
+          },
+          "expected": {
+            "id": "p",
+            "status": "cancelled"
+          }
+        },
+        {
+          "name": "invalid transition exact error",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "completed",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "transition missing id precedence",
+          "input": {
+            "operation": "transition",
+            "toStatus": "processing",
+            "orders": []
+          },
+          "expected": {
+            "error": "id is required for transition"
+          }
+        },
+        {
+          "name": "transition null id precedence",
+          "input": {
+            "operation": "transition",
+            "id": null,
+            "toStatus": "processing"
+          },
+          "expected": {
+            "error": "id is required for transition"
+          }
+        },
+        {
+          "name": "transition empty toStatus",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "",
+            "orders": []
+          },
+          "expected": {
+            "error": "toStatus is required for transition"
+          }
+        },
+        {
+          "name": "transition missing toStatus",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "orders": []
+          },
+          "expected": {
+            "error": "toStatus is required for transition"
+          }
+        },
+        {
+          "name": "transition no match",
+          "input": {
+            "operation": "transition",
+            "id": "missing",
+            "toStatus": "processing",
+            "orders": [
+              null,
+              {
+                "id": "other",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "error": "order not found for transition"
+          }
+        },
+        {
+          "name": "transition duplicate ids",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "processing",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending"
+              },
+              {
+                "id": "p",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "error": "duplicate order id for transition"
+          }
+        },
+        {
+          "name": "transition id case sensitive",
+          "input": {
+            "operation": "transition",
+            "id": "P",
+            "toStatus": "processing",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "error": "order not found for transition"
+          }
+        },
+        {
+          "name": "transition null orders normalizes",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "processing",
+            "orders": null
+          },
+          "expected": {
+            "error": "order not found for transition"
+          }
+        },
+        {
+          "name": "pending to pending invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "pending",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "pending to completed invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "completed",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "pending to unknown invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "unknown",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "processing to pending invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "pending",
+            "orders": [
+              {
+                "id": "p",
+                "status": "processing"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "processing to processing invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "processing",
+            "orders": [
+              {
+                "id": "p",
+                "status": "processing"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "completed to pending invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "pending",
+            "orders": [
+              {
+                "id": "p",
+                "status": "completed"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "completed to processing invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "processing",
+            "orders": [
+              {
+                "id": "p",
+                "status": "completed"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "completed to completed invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "completed",
+            "orders": [
+              {
+                "id": "p",
+                "status": "completed"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "completed to cancelled invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "cancelled",
+            "orders": [
+              {
+                "id": "p",
+                "status": "completed"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "cancelled to pending invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "pending",
+            "orders": [
+              {
+                "id": "p",
+                "status": "cancelled"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "cancelled to processing invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "processing",
+            "orders": [
+              {
+                "id": "p",
+                "status": "cancelled"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "cancelled to completed invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "completed",
+            "orders": [
+              {
+                "id": "p",
+                "status": "cancelled"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "cancelled to cancelled invalid",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "cancelled",
+            "orders": [
+              {
+                "id": "p",
+                "status": "cancelled"
+              }
+            ]
+          },
+          "expected": {
+            "error": "invalid transition"
+          }
+        },
+        {
+          "name": "empty transition id is missing",
+          "input": {
+            "operation": "transition",
+            "id": "",
+            "toStatus": "processing",
+            "orders": []
+          },
+          "expected": {
+            "error": "id is required for transition"
+          }
+        },
+        {
+          "name": "null transition target is missing",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": null,
+            "orders": []
+          },
+          "expected": {
+            "error": "toStatus is required for transition"
+          }
+        },
+        {
+          "name": "case differing duplicate ids are distinct",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "processing",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending"
+              },
+              {
+                "id": "P",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "id": "p",
+            "status": "processing"
+          }
+        },
+        {
+          "name": "first stateful transition request",
+          "input": {"operation":"transition","id":"stateful","toStatus":"processing","orders":[{"id":"stateful","status":"pending"}]},
+          "expected": {"id":"stateful","status":"processing"}
+        },
+        {
+          "name": "second identical stateful transition request",
+          "input": {"operation":"transition","id":"stateful","toStatus":"processing","orders":[{"id":"stateful","status":"pending"}]},
+          "expected": {"id":"stateful","status":"processing"}
+        },
+        {
+          "name": "subsequent query sees original pending status",
+          "input": {"operation":"ready","orders":[{"id":"stateful","status":"pending","createdAt":"2026-01-01T00:00:00Z"}]},
+          "expected": {"ids":["stateful"]}
+        }
+      ]
+    },
+    {
+      "id": "007-query-engine-refactor",
+      "prompt": "benchmarks/successor/tasks/007-query-engine-refactor/task.md",
+      "gold": {
+        "fsharp": {
+          "files": [
+            {
+              "source": "benchmarks/successor/gold/fsharp/007-query-engine-refactor/OrderFlow.fsproj",
+              "target": "OrderFlow.fsproj"
+            },
+            {
+              "source": "benchmarks/successor/gold/fsharp/007-query-engine-refactor/OrderFlowEngine.fs",
+              "target": "OrderFlowEngine.fs"
+            },
+            {
+              "source": "benchmarks/successor/gold/fsharp/007-query-engine-refactor/Program.fs",
+              "target": "Program.fs"
+            }
+          ]
+        },
+        "csharp": {
+          "files": [
+            {
+              "source": "benchmarks/successor/gold/csharp/007-query-engine-refactor/OrderFlowEngine.cs",
+              "target": "OrderFlowEngine.cs"
+            },
+            {
+              "source": "benchmarks/successor/gold/csharp/007-query-engine-refactor/Program.cs",
+              "target": "Program.cs"
+            }
+          ]
+        }
+      },
+      "cases": [
+        {
+          "name": "refactor preserves transition",
+          "input": {
+            "operation": "transition",
+            "id": "p",
+            "toStatus": "processing",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "id": "p",
+            "status": "processing"
+          }
+        },
+        {
+          "name": "refactor cumulative ready",
+          "input": {
+            "operation": "ready",
+            "orders": []
+          },
+          "expected": {
+            "ids": []
+          }
+        }
+      ],
+      "workspace_checks": {
+        "fsharp": {
+          "file_exists": [
+            "OrderFlowEngine.fs"
+          ],
+          "text_contains": [
+            {
+              "path": "OrderFlowEngine.fs",
+              "text": "module OrderFlowEngine"
+            },
+            {
+              "path": "Program.fs",
+              "text": "OrderFlowEngine.handle"
+            }
+          ],
+          "text_not_contains": [
+            {
+              "path": "Program.fs",
+              "text": "type Order"
+            },
+            {
+              "path": "Program.fs",
+              "text": "type Customer"
+            },
+            {
+              "path": "Program.fs",
+              "text": "type Request"
+            },
+            {
+              "path": "Program.fs",
+              "text": "type Response"
+            },
+            {
+              "path": "Program.fs",
+              "text": "let handle"
+            },
+            {
+              "path": "Program.fs",
+              "text": "\"ready\""
+            },
+            {
+              "path": "Program.fs",
+              "text": "\"overdue\""
+            },
+            {
+              "path": "Program.fs",
+              "text": "\"atRisk\""
+            },
+            {
+              "path": "Program.fs",
+              "text": "\"vipReady\""
+            },
+            {
+              "path": "Program.fs",
+              "text": "\"transition\""
+            }
+          ]
+        },
+        "csharp": {
+          "file_exists": [
+            "OrderFlowEngine.cs"
+          ],
+          "text_contains": [
+            {
+              "path": "OrderFlowEngine.cs",
+              "text": "public static class OrderFlowEngine"
+            },
+            {
+              "path": "Program.cs",
+              "text": "OrderFlowEngine.Handle"
+            }
+          ],
+          "text_not_contains": [
+            {
+              "path": "Program.cs",
+              "text": "class Order"
+            },
+            {
+              "path": "Program.cs",
+              "text": "class Customer"
+            },
+            {
+              "path": "Program.cs",
+              "text": "class Request"
+            },
+            {
+              "path": "Program.cs",
+              "text": "record Response"
+            },
+            {
+              "path": "Program.cs",
+              "text": " Handle("
+            },
+            {
+              "path": "Program.cs",
+              "text": "\"ready\""
+            },
+            {
+              "path": "Program.cs",
+              "text": "\"overdue\""
+            },
+            {
+              "path": "Program.cs",
+              "text": "\"atRisk\""
+            },
+            {
+              "path": "Program.cs",
+              "text": "\"vipReady\""
+            },
+            {
+              "path": "Program.cs",
+              "text": "\"transition\""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "008-summary-api",
+      "prompt": "benchmarks/successor/tasks/008-summary-api/task.md",
+      "gold": {
+        "fsharp": {
+          "files": [
+            {
+              "source": "benchmarks/successor/gold/fsharp/008-summary-api/OrderFlow.fsproj",
+              "target": "OrderFlow.fsproj"
+            },
+            {
+              "source": "benchmarks/successor/gold/fsharp/008-summary-api/OrderFlowEngine.fs",
+              "target": "OrderFlowEngine.fs"
+            },
+            {
+              "source": "benchmarks/successor/gold/fsharp/008-summary-api/Program.fs",
+              "target": "Program.fs"
+            }
+          ]
+        },
+        "csharp": {
+          "files": [
+            {
+              "source": "benchmarks/successor/gold/csharp/008-summary-api/OrderFlowEngine.cs",
+              "target": "OrderFlowEngine.cs"
+            },
+            {
+              "source": "benchmarks/successor/gold/csharp/008-summary-api/Program.cs",
+              "target": "Program.cs"
+            }
+          ]
+        }
+      },
+      "cases": [
+        {
+          "name": "summary status and overdue counts",
+          "input": {
+            "operation": "summary",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "p",
+                "status": "PENDING",
+                "dueAt": "2026-02-09T00:00:00Z"
+              },
+              {
+                "id": "q",
+                "status": "processing",
+                "dueAt": "2026-02-10T00:00:00Z"
+              },
+              {
+                "id": "c",
+                "status": "Completed"
+              },
+              {
+                "id": "x",
+                "status": "CANCELLED"
+              },
+              {
+                "id": "u",
+                "status": "mystery"
+              }
+            ]
+          },
+          "expected": {
+            "pending": 1,
+            "processing": 1,
+            "completed": 1,
+            "cancelled": 1,
+            "overdue": 1
+          }
+        },
+        {
+          "name": "summary missing orders zero",
+          "input": {
+            "operation": "summary"
+          },
+          "expected": {
+            "pending": 0,
+            "processing": 0,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue": 0
+          }
+        },
+        {
+          "name": "summary null orders zero",
+          "input": {"operation": "summary", "orders": null},
+          "expected": {"pending": 0, "processing": 0, "completed": 0, "cancelled": 0, "overdue": 0}
+        },
+        {
+          "name": "summary null orders and elements zero",
+          "input": {
+            "operation": "summary",
+            "orders": [
+              null,
+              null
+            ]
+          },
+          "expected": {
+            "pending": 0,
+            "processing": 0,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue": 0
+          }
+        },
+        {
+          "name": "summary null asOf absent",
+          "input": {
+            "operation": "summary",
+            "asOf": null,
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending",
+                "dueAt": "2026-01-01T00:00:00Z"
+              }
+            ]
+          },
+          "expected": {
+            "pending": 1,
+            "processing": 0,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue": 0
+          }
+        },
+        {
+          "name": "summary strict boundary offsets",
+          "input": {
+            "operation": "summary",
+            "asOf": "2026-02-10T02:00:00+02:00",
+            "orders": [
+              {
+                "id": "equal",
+                "status": "pending",
+                "dueAt": "2026-02-10T00:00:00Z"
+              },
+              {
+                "id": "before",
+                "status": "processing",
+                "dueAt": "2026-02-10T01:59:59+02:00"
+              }
+            ]
+          },
+          "expected": {
+            "pending": 1,
+            "processing": 1,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue": 1
+          }
+        },
+        {
+          "name": "summary ignores unknown and missing dueAt",
+          "input": {
+            "operation": "summary",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [
+              {
+                "id": "u",
+                "status": "unknown",
+                "dueAt": "2026-02-01T00:00:00Z"
+              },
+              {
+                "id": "p",
+                "status": "pending"
+              }
+            ]
+          },
+          "expected": {
+            "pending": 1,
+            "processing": 0,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue": 0
+          }
+        },
+        {
+          "name": "summary null dueAt is not overdue",
+          "input": {"operation": "summary", "asOf": "2026-02-10T00:00:00Z", "orders": [{"id":"p", "status":"pending", "dueAt":null}]},
+          "expected": {"pending": 1, "processing": 0, "completed": 0, "cancelled": 0, "overdue": 0}
+        },
+        {
+          "name": "summary preserves other operations",
+          "input": {
+            "operation": "ready",
+            "orders": [
+              {
+                "id": "p",
+                "status": "pending",
+                "createdAt": "2026-01-01T00:00:00Z"
+              }
+            ]
+          },
+          "expected": {
+            "ids": [
+              "p"
+            ]
+          }
+        },
+        {
+          "name": "summary exact object keys",
+          "input": {
+            "operation": "summary",
+            "asOf": "2026-02-10T00:00:00Z",
+            "orders": [{"id":"p","status":"pending","createdAt":"2026-01-01T00:00:00Z"}]
+          },
+          "expected": {
+            "pending": 1,
+            "processing": 0,
+            "completed": 0,
+            "cancelled": 0,
+            "overdue": 0
+          }
+        },
+        {
+          "name": "post-summary ready remains unchanged",
+          "input": {"operation": "ready", "orders": [{"id":"p", "status":"pending", "createdAt":"2026-01-01T00:00:00Z"}]},
+          "expected": {"ids": ["p"]}
+        }
+      ],
+      "workspace_checks": {
+        "fsharp": {
+          "file_exists": [],
+          "text_contains": [],
+          "text_not_contains": [
+            {
+              "path": "Program.fs",
+              "text": "\"summary\""
+            }
+          ]
+        },
+        "csharp": {
+          "file_exists": [],
+          "text_contains": [],
+          "text_not_contains": [
+            {
+              "path": "Program.cs",
+              "text": "\"summary\""
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
