@@ -23,12 +23,14 @@ The next task is **Workstream D design review**, not another model run:
 
 1. independently review `docs/workstream-d-feasibility-design-2026-08-30.md`;
 2. close all P1/P2 findings;
-3. implement or validate a parent feasibility-family schedule plus three child capability cells;
-4. model-free validate exact configuration, descriptive-only scope, hashes, limits, accounting, and macroblock balance;
+3. implement or validate one parent feasibility-family definition, its six-macroblock H/M/L schedule, and three child capability cells;
+4. model-free validate exact configuration, descriptive-only scope, hashes, limits, accounting, macroblock balance, and the preregistered 4+2 gate;
 5. obtain green Linux/Windows CI and freeze each child from a clean checkpoint;
-6. only then run non-counting configuration calibrations.
+6. only then run non-counting configuration calibrations, including reverse-order confirmation before replacing a boundary M/L configuration.
 
 The first D-Language family deliberately uses only the canonical descriptive representation. Do not multiply the unstable representation treatment across model configurations. A later D-Representation family must use complete Williams superblocks and intention-to-treat as its primary estimand; candidate-caused drift is an outcome, not an automatic primary-analysis exclusion.
+
+The formal D-Language schedule is staged but fully predeclared: execute macroblocks 1–4, then use only apparatus stability and saturation/impossibility criteria to decide whether to complete macroblocks 5–6. Never use the sign or magnitude of the F#–C# difference as the continuation rule.
 
 No paid/model run is authorized by the current design draft.
 
@@ -47,7 +49,7 @@ This file guides agents **developing this repository**. Candidate agents being m
 - Treat language, configuration, order, task, time, and chain position as interacting factors rather than seeking a universal ranking.
 - Increment the protocol/cell identifier after any change that could affect measured trajectories; never pool across changed cells without explicitly modeling the change.
 - Candidate correctness failures are valid outcomes. Only preregistered pre-candidate infrastructure failures may be retried/excluded.
-- Do not condition cost interpretation only on completed chains; retain terminal-stop and paired common-prefix outcomes.
+- Do not condition cost interpretation only on completed chains; retain terminal-stop and paired common-exposure-prefix outcomes.
 
 ## Validation commands
 
