@@ -32,6 +32,8 @@ jobs:
         run: python scripts/alf.py validate
       - name: Check C3 representation artifacts
         run: python scripts/alf.py representation check
+      - name: Validate difficulty-v1 protocol definition
+        run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate C3 descriptive treatment
         run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
       - name: Validate C3 deterministic treatment
@@ -74,6 +76,8 @@ jobs:
         run: python scripts/alf.py validate
       - name: Check C3 representation artifacts
         run: python scripts/alf.py representation check
+      - name: Validate difficulty-v1 protocol definition
+        run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate C3 descriptive treatment
         run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
       - name: Validate C3 deterministic treatment

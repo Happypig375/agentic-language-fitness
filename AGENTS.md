@@ -27,9 +27,10 @@ Task 001/002 remain unchanged. The language-equivalence/error review gate is
 closed. C2 implementation and model-free validation are complete and approved.
 C3 representation design, implementation, model-free validation, and
 independent implementation review are complete with no remaining P1/P2/P3
-findings. The immediate next gate is to define and freeze a new protocol cell,
-then run its non-counting difficulty pilot. Paid/model runs remain blocked until
-the freeze is complete. C3 implementation commit
+findings. difficulty-v1 is implemented, model-free validated, and independently
+reviewed with no remaining P1/P2/P3 findings; it is pending commit, green
+cross-platform CI, and clean freeze, then its non-counting difficulty pilot.
+Paid/model runs remain blocked until the freeze is complete. C3 implementation commit
 `31430489102437a48d79fa611b8700e0e11e53fd` and the shallow-checkout CI repair
 at `9e1a5a92674313ca6e5f33917b12cb93aa7e1026` are both pushed; the green run is
 recorded above.

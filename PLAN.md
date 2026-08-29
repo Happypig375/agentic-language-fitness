@@ -315,9 +315,11 @@ doctor, legacy/successor validation and scripted matrices, serialized Task
 harness-security and gold/equivalence reviews with no P1/P2 findings. **C3 is
 implemented, model-free validated, and independently approved with no remaining
 P1/P2/P3 findings:** see
-`docs/representation-treatment-v1-2026-08-29.md`. **Next: define and freeze a
-new protocol cell, then run its non-counting difficulty pilot.** Paid/model runs
-remain blocked until those gates pass. CI for C2 commit
+`docs/representation-treatment-v1-2026-08-29.md`. **difficulty-v1 is now
+implemented, model-free validated, and independently reviewed with no remaining
+P1/P2/P3 findings; it is pending commit, green cross-platform CI, and clean
+freeze.** Then run its non-counting difficulty pilot. Paid/model runs remain
+blocked until those gates pass. CI for C2 commit
 `4e58677e0bfff18c2104298ad35fc4e801bbd052` is green: GitHub Actions run
 `33258119571` (Linux 2m20s, Windows 2m23s; Node 20 deprecation warnings only).
 C3 implementation commit `31430489102437a48d79fa611b8700e0e11e53fd`

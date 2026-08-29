@@ -1,0 +1,16 @@
+{
+  "schema_version": 2,
+  "cell_id": "difficulty-v1",
+  "williams_rows": [
+    ["fsharp-descriptive","csharp-descriptive","csharp-deterministic","fsharp-deterministic"],
+    ["csharp-descriptive","fsharp-deterministic","fsharp-descriptive","csharp-deterministic"],
+    ["fsharp-deterministic","csharp-deterministic","csharp-descriptive","fsharp-descriptive"],
+    ["csharp-deterministic","fsharp-descriptive","fsharp-deterministic","csharp-descriptive"]
+  ],
+  "pilot": [{"block_id":"pilot-01","order_id":"williams-01","order":["fsharp-descriptive","csharp-descriptive","csharp-deterministic","fsharp-deterministic"],"counting":false,"role":"difficulty-pilot"}],
+  "formal": [],
+  "randomization": false,
+  "seed": null,
+  "generator": "none; explicit Williams rows are authoritative",
+  "constraints": {"pilot_blocks":1,"formal_blocks":0,"order_id":"williams-01","randomization":false,"seed":null,"complete_williams_superblocks":true}
+}

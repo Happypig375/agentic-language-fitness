@@ -19,6 +19,7 @@ from .models import AgentResult, Usage
 from .process import run_process
 from .benchmark_artifacts import artifact_plan, checks_for_language, copy_artifacts, merge_workspace_checks
 from .protocol import classify_failure, load_frozen_manifest
+from .audit import audit_representation_checkpoint
 
 
 def utc_now() -> str:
@@ -158,8 +159,10 @@ def _retained_position_one(
     block_id: str,
     order: str,
     first_language: str,
+    required_position: int = 1,
+    condition: str | None = None,
 ) -> bool:
-    """Return whether a result is a completed, usable first-position outcome."""
+    """Return whether a result is an eligible retained predecessor outcome."""
 
     provenance = result.get("provenance")
     baseline = result.get("baseline")
@@ -168,23 +171,47 @@ def _retained_position_one(
         return False
     if baseline.get("ok") is not True or not result.get("finished_at"):
         return False
-    if not isinstance(tasks, list) or not tasks:
-        return False
-    if not any(isinstance(task, dict) and task.get("finished_at") for task in tasks):
+    if not isinstance(tasks, list) or not tasks or not all(
+        isinstance(task, dict) and task.get("finished_at") for task in tasks
+    ):
         return False
     same_attempt_context = (
         provenance.get("cell_id") == protocol.get("cell_id")
         and provenance.get("manifest_sha256") == protocol.get("manifest_sha256")
         and provenance.get("block_id") == block_id
         and provenance.get("order") == order
-        and provenance.get("position") == 1
+        and provenance.get("position") == required_position
         and provenance.get("language") == first_language
     )
     if not same_attempt_context:
         return False
     disposition = result.get("disposition")
+    if condition is not None and provenance.get("condition") != condition:
+        return False
     if not isinstance(disposition, dict) or disposition.get("analysis_role") != "primary":
         return False
+    if protocol.get("schema_version") == 2:
+        # Candidate correctness, timeout, and accounting failures remain immutable
+        # primary outcomes. Apparatus failures never authorize the next position.
+        if (
+            disposition.get("protocol_valid") is not True
+            or disposition.get("candidate_outcome") is not True
+            or disposition.get("retryable") is not False
+        ):
+            return False
+        baseline_audit = result.get("representation_audit")
+        if (
+            not isinstance(baseline_audit, dict)
+            or baseline_audit.get("ok") is not True
+            or baseline_audit.get("representation_interpretable") is not True
+        ):
+            return False
+        if any(
+            not isinstance(task.get("representation_audit"), dict)
+            or task["representation_audit"].get("ok") is not True
+            for task in tasks
+        ):
+            return False
     return True
 
 
@@ -273,9 +300,36 @@ def _derive_protocol_disposition(run_result: dict[str, Any]) -> dict[str, Any]:
         if baseline_ok and evaluations_recorded
         else True
     )
+    monitored = (
+        isinstance(run_result.get("provenance"), dict)
+        and run_result["provenance"].get("cell_id") == "difficulty-v1"
+    )
+    baseline_audit = run_result.get("representation_audit")
+    task_audits = [
+        task.get("representation_audit")
+        for task in tasks
+        if isinstance(task, dict)
+    ]
+    representation_protocol_ok = True
+    if monitored:
+        representation_protocol_ok = (
+            isinstance(baseline_audit, dict)
+            and baseline_audit.get("ok") is True
+            and baseline_audit.get("representation_interpretable") is True
+            and len(task_audits) == len(tasks)
+            and all(
+                isinstance(audit, dict) and audit.get("ok") is True
+                for audit in task_audits
+            )
+        )
+    protocol_ok = (
+        isinstance(run_result.get("provenance"), dict)
+        and sidecar_protocol_ok
+        and representation_protocol_ok
+    )
     category = classify_failure(
         protocol_ok=(
-            isinstance(run_result.get("provenance"), dict) and sidecar_protocol_ok
+            protocol_ok
         ),
         accounting_ok=accounting_ok,
         auth_ok=auth_ok,
@@ -292,10 +346,19 @@ def _derive_protocol_disposition(run_result: dict[str, Any]) -> dict[str, Any]:
         and run_result.get("aggregate_accounting_valid") is True
         and run_result.get("aggregate_usage_available") is True
     )
-    return {
-        "protocol_valid": (
-            isinstance(run_result.get("provenance"), dict) and sidecar_protocol_ok
-        ),
+    audits = [baseline_audit, *task_audits]
+    audit_interpretable = (
+        all(
+            isinstance(audit, dict)
+            and audit.get("ok") is True
+            and audit.get("representation_interpretable") is True
+            for audit in audits
+        )
+        if monitored
+        else True
+    )
+    disposition = {
+        "protocol_valid": protocol_ok,
         "failure_category": category,
         "classification_basis": "frozen deterministic runner rules",
         "candidate_outcome": candidate_outcome,
@@ -305,6 +368,14 @@ def _derive_protocol_disposition(run_result: dict[str, Any]) -> dict[str, Any]:
         "include_usage_metrics": usage_included,
         "include_paired_performance": candidate_outcome,
     }
+    if monitored:
+        disposition.update(
+            {
+                "representation_interpretable": audit_interpretable,
+                "include_representation_analysis": audit_interpretable,
+            }
+        )
+    return disposition
 
 
 def _reserve_protocol_run_directory(output_root: Path, attempt_id: str) -> Path:
@@ -346,19 +417,36 @@ def _prepare_protocol_run(
         not block_id
         or not attempt_id
         or _ATTEMPT_ID.fullmatch(attempt_id) is None
-        or position not in {1, 2}
-        or order not in {"csharp-first", "fsharp-first"}
+        or not isinstance(position, int) or isinstance(position, bool) or position < 1
+        or (order not in {"csharp-first", "fsharp-first"} and not re.fullmatch(r"williams-\d{2}", order or ""))
     ):
         raise ValueError(
             "protocol runs require a safe attempt_id, block_id, position, and "
-            "csharp-first/fsharp-first order"
+            "legacy order or safe Williams order_id"
         )
 
     protocol = load_frozen_manifest(root, protocol_manifest)
+    # Keep v2's frozen manifest immutable; v1 callers historically receive identity.
+    if protocol.get("schema_version") == 2:
+        protocol = dict(protocol)
     definition = protocol["definition"]
     schedule = protocol["schedule"]
 
-    benchmark_path = (root / definition["benchmark_manifest"]).resolve()
+    v2 = protocol.get("schema_version") == 2
+    selected_condition = None
+    if v2:
+        blocks = schedule.get("pilot") or []
+        block = next((item for item in blocks if item.get("block_id") == block_id), None)
+        if block is None or order != block.get("order_id") or position > len(block.get("order", [])):
+            raise ValueError("protocol block/order/position mismatch")
+        selected_condition = block["order"][position - 1]
+        expected_language = selected_condition.split("-", 1)[0]
+        if language != expected_language:
+            raise ValueError("protocol condition/language mismatch")
+        spec = definition.get("conditions", {}).get(selected_condition, {})
+        benchmark_path = (root / (spec.get("manifest") or spec.get("manifest_path"))).resolve()
+    else:
+        benchmark_path = (root / definition["benchmark_manifest"]).resolve()
     try:
         tracked_benchmark = json.loads(benchmark_path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
@@ -366,14 +454,16 @@ def _prepare_protocol_run(
     if benchmark_manifest != tracked_benchmark:
         raise ValueError("loaded benchmark does not match the frozen protocol")
 
-    blocks = [schedule["calibration"], *schedule["formal"]]
+    blocks = ([*schedule.get("pilot", [])] if v2 else [schedule["calibration"], *schedule["formal"]])
     block = next((item for item in blocks if item.get("block_id") == block_id), None)
     if block is None:
         raise ValueError("protocol block is not in the frozen schedule")
-    expected_order = f"{block['order'][0]}-first"
-    expected_language = block["order"][position - 1]
-    if order != expected_order or language != expected_language:
-        raise ValueError("protocol block/language/order mismatch")
+    if not v2:
+        if position > len(block["order"]): raise ValueError("protocol position is invalid")
+        expected_order = f"{block['order'][0]}-first"
+        expected_language = block["order"][position - 1]
+        if order != expected_order or language != expected_language:
+            raise ValueError("protocol block/language/order mismatch")
 
     raw_root = (root / definition["raw_root"]).resolve()
     if output_root.resolve() != raw_root:
@@ -427,7 +517,8 @@ def _prepare_protocol_run(
             raise ValueError("the prior attempt is not retryable under the frozen policy")
 
     attempt_number = len(matching_results) + 1
-    expected_attempt_id = f"{block_id}-{language}-{attempt_number:02d}"
+    attempt_label = selected_condition if v2 else language
+    expected_attempt_id = f"{block_id}-{attempt_label}-{attempt_number:02d}"
     if attempt_id != expected_attempt_id:
         raise ValueError(f"attempt_id must be {expected_attempt_id}")
 
@@ -439,17 +530,22 @@ def _prepare_protocol_run(
     if not image_probe.ok or image_probe.stdout.strip() != protocol["image_id"]:
         raise ValueError("Docker image tag does not match frozen image ID")
 
-    if position == 2 and not any(
+    if position > 1 and not any(
         _retained_position_one(
             prior,
             protocol=protocol,
             block_id=block_id,
             order=order,
-            first_language=block["order"][0],
+            first_language=(block["order"][position - 2].split("-", 1)[0] if v2 else block["order"][position - 2]),
+            required_position=position - 1,
+            condition=(block["order"][position - 2] if v2 else None),
         )
         for prior in retained
     ):
-        raise ValueError("a completed position-1 outcome must be retained before position-2")
+        raise ValueError(
+            "an eligible immediate predecessor (position-1 for position-2) "
+            "must be retained before this position"
+        )
 
     wrapper = root / "scripts" / "codex-docker.py"
     command = (
@@ -462,6 +558,10 @@ def _prepare_protocol_run(
         f'--pids-limit {definition["limits"]["pids"]} '
         "--require-auth-preflight"
     )
+    if v2:
+        protocol["_selected_condition"] = selected_condition
+        protocol["_condition_manifest"] = str(benchmark_path.relative_to(root)).replace("\\", "/")
+        protocol["_condition_manifest_sha256"] = definition["conditions"][selected_condition].get("manifest_sha256")
     return protocol, command, attempt_number
 
 
@@ -549,6 +649,24 @@ def run_chain(
             "attempt_number": attempt_number,
             "language": language,
         }
+        if provenance.get("_selected_condition"):
+            condition = provenance["_selected_condition"]
+            scheduled_block = next(
+                (
+                    candidate
+                    for candidate in provenance["schedule"].get("pilot", [])
+                    if candidate.get("block_id") == block_id
+                ),
+                {},
+            )
+            run_provenance.update({
+                "condition": condition,
+                "representation": condition.split("-", 1)[1],
+                "condition_manifest": provenance["_condition_manifest"],
+                "condition_manifest_sha256": provenance["_condition_manifest_sha256"],
+                "schedule_counting": scheduled_block.get("counting"),
+                "schedule_role": scheduled_block.get("role"),
+            })
         copied = run_dir / "protocol-manifest.json"
         copied.write_bytes(Path(protocol_manifest).read_bytes())
         attempt_record_path = run_dir / "attempt.json"
@@ -590,6 +708,12 @@ def run_chain(
         timeout=min(timeout, 300),
     )
     baseline["evaluator_wall_seconds"] = time.monotonic() - baseline_started
+    representation_audit = None
+    if provenance is not None and provenance.get("schema_version") == 2:
+        artifact_root = root / "benchmarks" / "successor" / "representation-v1"
+        _condition = provenance.get("_selected_condition", "")
+        representation_audit = audit_representation_checkpoint(workspace, artifact_root, language, _condition.split("-", 1)[1] if "-" in _condition else None, "baseline")
+        (run_dir / "representation-audit.json").write_text(json.dumps(representation_audit, indent=2, sort_keys=True), encoding="utf-8")
     aggregate_usage = Usage()
     aggregate_accounting_valid = True
     aggregate_usage_available = True
@@ -615,6 +739,17 @@ def run_chain(
         "require_usage": require_usage,
         "provenance": run_provenance,
     }
+    if representation_audit is not None:
+        run_result["representation_audit"] = representation_audit
+        if not representation_audit.get("representation_interpretable"):
+            run_result["finished_at"] = utc_now(); run_result["run_total_wall_seconds"] = time.monotonic() - run_started_monotonic
+            run_result["success"] = False
+            run_result["disposition"] = _derive_protocol_disposition(run_result)
+            (run_dir / "result.json").write_text(json.dumps(run_result, indent=2, sort_keys=True), encoding="utf-8")
+            if attempt_record is not None and attempt_record_path is not None:
+                attempt_record.update({"state":"completed", "finished_at":run_result["finished_at"], "disposition":run_result["disposition"]})
+                attempt_record_path.write_text(json.dumps(attempt_record, indent=2, sort_keys=True), encoding="utf-8")
+            return run_dir
     if not baseline["ok"]:
         run_result["run_total_wall_seconds"] = time.monotonic() - run_started_monotonic
         run_result["finished_at"] = utc_now()
@@ -637,6 +772,7 @@ def run_chain(
         return run_dir
 
     cumulative_cases = list(manifest["baseline_cases"])
+    condition = run_provenance.get("condition") if isinstance(run_provenance, dict) else None
     cumulative_checks: dict[str, Any] = {"file_exists": [], "text_contains": [], "text_not_contains": []}
     for task_index, task in enumerate(tasks):
         task_started_monotonic = time.monotonic()
@@ -706,6 +842,18 @@ def run_chain(
             "success": task_ok,
             "task_total_wall_seconds": None,
         }
+        if representation_audit is not None:
+            task_audit = audit_representation_checkpoint(workspace, root / "benchmarks" / "successor" / "representation-v1", language, condition.split("-", 1)[1] if "-" in condition else None, task["id"])
+            task_result["representation_audit"] = task_audit
+            (task_dir / "representation-audit.json").write_text(json.dumps(task_audit, indent=2, sort_keys=True), encoding="utf-8")
+            if task_audit.get("ok") is not True:
+                task_ok = False
+                task_result["success"] = False
+                task_result["representation_checkpoint_failed"] = True
+            elif task_audit.get("representation_interpretable") is not True:
+                # Candidate-caused drift is observational: preserve correctness
+                # and chain exposure while excluding representation analysis.
+                task_result["representation_analysis_invalid"] = True
         if task_ok:
             for argv in (
                 ["git", "add", "."],

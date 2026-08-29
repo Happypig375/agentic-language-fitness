@@ -17,6 +17,7 @@ from typing import Any, Callable
 
 
 SCHEMA_VERSION = 1
+SCHEMA_V2 = 2
 SUPPORTED_REASONING_EFFORTS = {"low", "medium", "high"}
 CODEX_CLI_VERSION = "0.149.1"
 DOTNET_SDK_VERSION = "10.0.302"
@@ -31,6 +32,85 @@ SCHEDULE_GENERATOR = (
     "first=['fsharp']*5+['csharp']*5; r.shuffle(first); r.shuffle(first); "
     "explicit sequence is authoritative"
 )
+
+DIFFICULTY_C3_SOURCE_COMMIT = "4e58677e0bfff18c2104298ad35fc4e801bbd052"
+DIFFICULTY_IMAGE_ARCHIVE = {
+    "path": (
+        r"X:\backup20260827\Archives\SourceRepos\agentic-language-fitness-images"
+        r"\alf-codex-0.149.1-sha256-0320a60c5b2628ce.tar"
+    ),
+    "bytes": 630053888,
+    "sha256": "55ee85f0656cef429d1cd40edced79782d54abb7b2180c9770c14bea06828ddf",
+    "local_image_id": EXPECTED_IMAGE_ID,
+}
+DIFFICULTY_C3_ARTIFACTS = {
+    "definition": {
+        "path": "benchmarks/successor/representation-v1/definition.json",
+        "sha256": "e2c21b484da5cfd2e20b59548360b3102acbe0492925e1198c3f18eb4e95ef00",
+    },
+    "mapping": {
+        "path": "benchmarks/successor/representation-v1/mapping.json",
+        "sha256": "7a1b36918a83b6cbad5093c797cc3e79503d97f1c245cfc6e781eb0c28e72546",
+    },
+    "role_inventory": {
+        "path": "benchmarks/successor/representation-v1/role-inventory.json",
+        "sha256": "2a30fbe1474c8207da3ee315e45b6628f438fab2142a0b25a32eda795427dc41",
+    },
+    "exclusions": {
+        "path": "benchmarks/successor/representation-v1/exclusions.json",
+        "sha256": "b742b889c367a967a00a755ccaae5eb970e423cd2c11b329e15978d559240079",
+    },
+    "source_manifest": {
+        "path": "benchmarks/successor/representation-v1/source-manifest.json",
+        "sha256": "65339303386e2aa6c55ae4a6ede2843c99ec61eeb25b009bdd08d49ced4ec19d",
+    },
+    "reports": {
+        "path": "benchmarks/successor/representation-v1/reports.json",
+        "sha256": "6f4f662f85eb9c3c0ab55cfbead40e741d8e16bf5edf6950cd542a0ce6008f14",
+    },
+}
+DIFFICULTY_CONDITIONS = {
+    "fsharp-descriptive": {
+        "language": "fsharp",
+        "representation": "descriptive",
+        "manifest": "benchmarks/successor/representation-v1/descriptive.manifest.json",
+        "manifest_sha256": "5d174f5703184381984ae068c22571b280be9881d6d8ed9941be713b89925749",
+    },
+    "csharp-descriptive": {
+        "language": "csharp",
+        "representation": "descriptive",
+        "manifest": "benchmarks/successor/representation-v1/descriptive.manifest.json",
+        "manifest_sha256": "5d174f5703184381984ae068c22571b280be9881d6d8ed9941be713b89925749",
+    },
+    "fsharp-deterministic": {
+        "language": "fsharp",
+        "representation": "deterministic",
+        "manifest": "benchmarks/successor/representation-v1/deterministic.manifest.json",
+        "manifest_sha256": "7de96dbd84daab058eed9476a91ad052a78bb6c1aa4eacdff9aa6cdb848f6ac5",
+    },
+    "csharp-deterministic": {
+        "language": "csharp",
+        "representation": "deterministic",
+        "manifest": "benchmarks/successor/representation-v1/deterministic.manifest.json",
+        "manifest_sha256": "7de96dbd84daab058eed9476a91ad052a78bb6c1aa4eacdff9aa6cdb848f6ac5",
+    },
+}
+DIFFICULTY_TASK_HASHES = {
+    "001-priority": "4b003212969d3c3537f65d82320ba88ee42bb5a20a13e3ce6951f16dcfb1f1c0",
+    "002-overdue": "c166e62c2ed2f915a2865555ad824a8cc63b74ef1980b43f0a6b5ce62a94545c",
+    "003-at-risk-window": "b37955c3b54b1a04a5359715969d7e97692cfe013fa22e6c4fd85a965a429199",
+    "004-vip-ready": "90d06aa42a610bc8e55d5e8f03cb6d47e305ca3f044baf7cc4a4032a1151556e",
+    "005-null-order-robustness": "4ce101299b1d61acf53d1e61344fbcee7f40a9ae7c88e1283b9e8ff5834c9c50",
+    "006-transition-validation": "0ac889d9ea84732feffee90400461f985676cc1800dfb680d5542100db054a01",
+    "007-query-engine-refactor": "26ce7bb89282d4ba89e966e1abb2e15873314449ab19a4711809d0b7c303cbc5",
+    "008-summary-api": "4db339c6e5e95535ca8f4cfe3235b864372179cb15cc138b3592686fc5de1139",
+}
+DIFFICULTY_WILLIAMS_ROWS = [
+    ["fsharp-descriptive", "csharp-descriptive", "csharp-deterministic", "fsharp-deterministic"],
+    ["csharp-descriptive", "fsharp-deterministic", "fsharp-descriptive", "csharp-deterministic"],
+    ["fsharp-deterministic", "csharp-deterministic", "csharp-descriptive", "fsharp-descriptive"],
+    ["csharp-deterministic", "fsharp-descriptive", "fsharp-deterministic", "csharp-descriptive"],
+]
 
 REQUIRED_FAILURES = {
     "agent",
@@ -212,7 +292,7 @@ def _generated_first_languages(seed: int) -> list[str]:
     return first
 
 
-def validate_cell(root: Path, definition_path: str | Path) -> dict[str, Any]:
+def _validate_cell_v1(root: Path, definition_path: str | Path) -> dict[str, Any]:
     """Validate a tracked protocol definition and all referenced inputs."""
 
     root = root.resolve()
@@ -487,6 +567,257 @@ def validate_cell(root: Path, definition_path: str | Path) -> dict[str, Any]:
     }
 
 
+def _validate_cell_v2(root: Path, definition_path: str | Path) -> dict[str, Any]:
+    """Validate the condition-level schema used by the difficulty cell.
+
+    This is deliberately separate from v1: changing the v1 validator would
+    silently change the already frozen variance cells.
+    """
+    root = root.resolve()
+    try:
+        definition_file = _repo_path(root, definition_path, "definition_path")
+        definition = _load_json(definition_file, "definition")
+    except ValueError as exc:
+        return _empty_report([str(exc)])
+    if not isinstance(definition, dict):
+        return _empty_report(["definition must contain an object"])
+    errors: list[str] = []
+    if definition.get("schema_version") != SCHEMA_V2:
+        errors.append("schema_version must be 2")
+    cell_id = definition.get("cell_id")
+    if cell_id != "difficulty-v1":
+        errors.append("cell_id must be difficulty-v1")
+    _require_nonempty_string(definition.get("description"), "description", errors)
+
+    exact_pins = {
+        "model": {"snapshot": "gpt-5.4", "reasoning_effort": "medium"},
+        "codex": {
+            "cli_version": CODEX_CLI_VERSION,
+            "image": EXPECTED_IMAGE,
+            "dockerfile": "Dockerfile.codex-agent",
+        },
+        "image_archive": DIFFICULTY_IMAGE_ARCHIVE,
+        "toolchain": {
+            "dotnet_sdk": DOTNET_SDK_VERSION,
+            "target_framework": TARGET_FRAMEWORK,
+        },
+        "limits": {
+            "task_timeout_seconds": 600,
+            "evaluator_timeout_seconds": 300,
+            "memory": "2g",
+            "cpus": 2,
+            "pids": 256,
+        },
+        "network_policy": (
+            "bridge network; candidate egress and external documentation are allowed equally "
+            "for both languages; mounts are limited to /workspace plus minimized authentication file"
+        ),
+        "documentation_policy": (
+            "No benchmark/evaluator/gold files or parent repository are exposed to candidate"
+        ),
+        "artifact_policy": {
+            "raw": "retain every attempt outside Git",
+            "redaction": "remove credentials and prompt/transcript secrets",
+            "retention": "retain raw and hashes for the study record",
+        },
+        "failure_precedence": FAILURE_PRECEDENCE,
+        "inclusion": {
+            "formal_outcomes": "Pilot is non-counting; retain all outcomes",
+            "metric_missingness": "Use only valid available metrics",
+            "infrastructure_invalid": "Retain and report infrastructure failures",
+            "calibration": "Non-counting",
+            "sensitivity": "Report all failures",
+        },
+        "retry_policy": (
+            "Retry only protocol/auth/provider/host/evaluator infrastructure-invalid attempts; "
+            "retain every attempt and never replace a candidate outcome"
+        ),
+        "fresh_process": True,
+        "schedule_file": "protocols/difficulty-v1/schedule.json",
+        "raw_root": "results/difficulty-v1",
+        "retention": {
+            "location": "results/difficulty-v1 plus read-only study archive",
+            "period": "retain raw artifacts and hashes for at least five years",
+            "redaction": "remove credentials and transcript secrets before curation",
+        },
+        "c3_source_commit": DIFFICULTY_C3_SOURCE_COMMIT,
+        "c3_artifacts": DIFFICULTY_C3_ARTIFACTS,
+        "conditions": DIFFICULTY_CONDITIONS,
+        "task_hashes": DIFFICULTY_TASK_HASHES,
+    }
+    for field, expected in exact_pins.items():
+        if definition.get(field) != expected:
+            errors.append(f"{field} pins are invalid")
+
+    taxonomy = definition.get("failure_taxonomy")
+    if (
+        not isinstance(taxonomy, list)
+        or len(taxonomy) != len(REQUIRED_FAILURES)
+        or set(taxonomy) != REQUIRED_FAILURES
+    ):
+        errors.append("failure taxonomy is invalid")
+
+    try:
+        dockerfile = _repo_path(root, "Dockerfile.codex-agent", "codex.dockerfile")
+        if not dockerfile.is_file():
+            errors.append("codex.dockerfile is unavailable")
+    except ValueError as exc:
+        errors.append(str(exc))
+
+    c3 = definition.get("c3_artifacts")
+    if not isinstance(c3, dict) or set(c3) != set(DIFFICULTY_C3_ARTIFACTS):
+        errors.append("c3_artifacts must contain exactly the six approved pins")
+        c3 = c3 if isinstance(c3, dict) else {}
+    for name, expected_pin in DIFFICULTY_C3_ARTIFACTS.items():
+        pin = c3.get(name)
+        if pin != expected_pin:
+            errors.append(f"c3 artifact hash mismatch or pin mismatch: {name}")
+            continue
+        try:
+            artifact = _repo_path(root, pin["path"], f"c3_artifacts.{name}")
+            if not artifact.is_file() or tracked_text_sha256(artifact) != pin["sha256"]:
+                errors.append(f"c3 artifact hash mismatch: {name}")
+        except (OSError, ValueError) as exc:
+            errors.append(str(exc))
+
+    conditions = definition.get("conditions")
+    if not isinstance(conditions, dict) or set(conditions) != set(DIFFICULTY_CONDITIONS):
+        errors.append("conditions must contain exactly the four approved treatments")
+        conditions = conditions if isinstance(conditions, dict) else {}
+    loaded_manifests: dict[str, dict[str, Any]] = {}
+    for condition, expected_spec in DIFFICULTY_CONDITIONS.items():
+        spec = conditions.get(condition)
+        if spec != expected_spec:
+            errors.append(f"condition {condition} language/representation or manifest pin is invalid")
+            continue
+        try:
+            manifest_path = _repo_path(root, spec["manifest"], f"condition {condition} manifest")
+            if not manifest_path.is_file():
+                errors.append(f"condition {condition} manifest is unavailable")
+                continue
+            if tracked_text_sha256(manifest_path) != spec["manifest_sha256"]:
+                errors.append(f"condition {condition} manifest hash mismatch")
+            loaded = _load_json(manifest_path, f"condition {condition} manifest")
+        except (OSError, ValueError) as exc:
+            errors.append(str(exc))
+            continue
+        if not isinstance(loaded, dict):
+            errors.append(f"condition {condition} manifest must be an object")
+            continue
+        provenance = loaded.get("representation_provenance")
+        if (
+            not isinstance(provenance, dict)
+            or provenance.get("treatment") != expected_spec["representation"]
+            or provenance.get("source_commit") != DIFFICULTY_C3_SOURCE_COMMIT
+        ):
+            errors.append(f"condition {condition} representation provenance mismatch")
+        loaded_manifests[condition] = loaded
+
+    task_hashes = definition.get("task_hashes")
+    if task_hashes != DIFFICULTY_TASK_HASHES:
+        errors.append("task hash mismatch: task_hashes must contain the eight canonical prompt pins")
+        task_hashes = task_hashes if isinstance(task_hashes, dict) else {}
+    for condition, manifest in loaded_manifests.items():
+        tasks = manifest.get("tasks")
+        if not isinstance(tasks, list) or len(tasks) != len(DIFFICULTY_TASK_HASHES):
+            errors.append(f"condition {condition} must contain eight tasks")
+            continue
+        task_ids: list[Any] = []
+        for task in tasks:
+            if not isinstance(task, dict):
+                errors.append(f"condition {condition} contains a malformed task")
+                continue
+            task_id = task.get("id")
+            task_ids.append(task_id)
+            try:
+                prompt_path = _repo_path(root, task.get("prompt", ""), f"task {task_id} prompt")
+                if (
+                    not prompt_path.is_file()
+                    or tracked_text_sha256(prompt_path) != DIFFICULTY_TASK_HASHES.get(task_id)
+                ):
+                    errors.append(f"task hash mismatch: {task_id}")
+            except (OSError, ValueError) as exc:
+                errors.append(str(exc))
+        if len(task_ids) != len(set(task_ids)) or set(task_ids) != set(DIFFICULTY_TASK_HASHES):
+            errors.append(f"condition {condition} task set does not match top-level hashes")
+
+    schedule_path: Path | None = None
+    schedule: dict[str, Any] = {}
+    try:
+        schedule_path = _repo_path(root, definition.get("schedule_file", ""), "schedule_file")
+        loaded_schedule = _load_json(schedule_path, "schedule")
+        if not isinstance(loaded_schedule, dict):
+            raise ValueError("schedule must contain an object")
+        schedule = loaded_schedule
+    except ValueError as exc:
+        errors.append(str(exc))
+
+    expected_schedule = {
+        "schema_version": 2,
+        "cell_id": "difficulty-v1",
+        "williams_rows": DIFFICULTY_WILLIAMS_ROWS,
+        "pilot": [
+            {
+                "block_id": "pilot-01",
+                "order_id": "williams-01",
+                "order": DIFFICULTY_WILLIAMS_ROWS[0],
+                "counting": False,
+                "role": "difficulty-pilot",
+            }
+        ],
+        "formal": [],
+        "randomization": False,
+        "seed": None,
+        "generator": "none; explicit Williams rows are authoritative",
+        "constraints": {
+            "pilot_blocks": 1,
+            "formal_blocks": 0,
+            "order_id": "williams-01",
+            "randomization": False,
+            "seed": None,
+            "complete_williams_superblocks": True,
+        },
+    }
+    if schedule != expected_schedule:
+        if schedule.get("williams_rows") != DIFFICULTY_WILLIAMS_ROWS:
+            errors.append("Williams rows are invalid")
+        else:
+            errors.append("difficulty schedule metadata is invalid")
+
+    raw_root: Path | None = None
+    try:
+        raw_root = _repo_path(root, definition.get("raw_root", ""), "raw_root")
+    except ValueError as exc:
+        errors.append(str(exc))
+    return {
+        "ok": not errors,
+        "errors": errors,
+        "definition": definition,
+        "schedule": schedule,
+        "definition_sha256": _safe_tracked_hash(definition_file),
+        "schedule_sha256": _safe_tracked_hash(schedule_path) if schedule_path else None,
+        "definition_file": str(definition_file),
+        "schedule_file": str(schedule_path) if schedule_path else None,
+        "raw_root": str(raw_root) if raw_root else None,
+    }
+
+
+def validate_cell(root: Path, definition_path: str | Path) -> dict[str, Any]:
+    """Dispatch validation without changing schema-v1 behavior."""
+    try:
+        path = _repo_path(root.resolve(), definition_path, "definition_path")
+        value = _load_json(path, "definition")
+    except ValueError as exc:
+        return _empty_report([str(exc)])
+    if (
+        isinstance(value, dict)
+        and value.get("schema_version") == SCHEMA_V2
+        and value.get("cell_id") == "difficulty-v1"
+    ):
+        return _validate_cell_v2(root, definition_path)
+    return _validate_cell_v1(root, definition_path)
+
+
 def _git(root: Path, *args: str) -> str:
     completed = subprocess.run(
         ["git", *args],
@@ -678,7 +1009,7 @@ def freeze_cell(
 
     definition_file = Path(report["definition_file"])
     manifest: dict[str, Any] = {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": definition.get("schema_version", SCHEMA_VERSION),
         "frozen": True,
         "frozen_at": datetime.now(timezone.utc).isoformat(),
         "cell_id": definition["cell_id"],
@@ -760,7 +1091,7 @@ def load_frozen_manifest(root: Path, manifest_path: str | Path) -> dict[str, Any
     value = _load_json(path, "protocol manifest")
     if not isinstance(value, dict):
         raise ValueError("protocol manifest must contain an object")
-    if value.get("schema_version") != SCHEMA_VERSION:
+    if value.get("schema_version") not in {SCHEMA_VERSION, SCHEMA_V2}:
         raise ValueError("protocol manifest schema version is invalid")
     if value.get("frozen") is not True or value.get("dirty") is not False:
         raise ValueError("protocol manifest is not a clean frozen manifest")
@@ -780,6 +1111,8 @@ def load_frozen_manifest(root: Path, manifest_path: str | Path) -> dict[str, Any
         raise ValueError("protocol definition is no longer valid: " + "; ".join(report["errors"]))
     definition = report["definition"]
     schedule = report["schedule"]
+    if value.get("schema_version") != definition.get("schema_version"):
+        raise ValueError("protocol manifest schema version does not match embedded definition")
     if value.get("cell_id") != definition.get("cell_id"):
         raise ValueError("protocol manifest cell mismatch")
     if value.get("definition") != definition or value.get("schedule") != schedule:

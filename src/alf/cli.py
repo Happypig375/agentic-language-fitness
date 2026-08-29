@@ -75,7 +75,7 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 def cmd_matrix(args: argparse.Namespace) -> int:
     if args.protocol_manifest or args.block_id or args.attempt_id or args.order or args.position:
-        raise ValueError("protocol runs must use two ordered `alf run` calls; matrix is not supported")
+        raise ValueError("protocol runs must be invoked with `alf run`; matrix does not accept protocol position arguments")
     if args.require_usage and args.agent != "command":
         raise ValueError("--require-usage is valid only with --agent command")
     root, manifest = _root_and_manifest(args)
@@ -232,9 +232,9 @@ def build_parser() -> argparse.ArgumentParser:
         p.add_argument("--max-tasks", type=int)
         p.add_argument("--protocol-manifest", help="Resolved frozen protocol manifest for an auditable run")
         p.add_argument("--block-id")
-        p.add_argument("--order", choices=["csharp-first", "fsharp-first"])
+        p.add_argument("--order")
         p.add_argument("--attempt-id")
-        p.add_argument("--position", type=int, choices=[1, 2])
+        p.add_argument("--position", type=int)
 
     run = sub.add_parser("run", help="Run one language through the maintenance chain")
     add_run_arguments(run, True)

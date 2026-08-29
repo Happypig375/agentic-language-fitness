@@ -27,6 +27,7 @@ from alf.representation import (
     check_representation,
     scan_identifiers,
 )
+from alf.audit import audit_representation_checkpoint
 
 
 def sha256(data: bytes) -> str:
@@ -397,6 +398,105 @@ class RepresentationArtifactTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaisesRegex(RepresentationError, "versioned direct child"):
                 build_representation(self.root, Path(directory) / "representation-v1")
+
+    def test_checkpoint_detects_opposite_names_and_records_unclassified_observations(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            (workspace / "sample.cs").write_text("class Sample { int loc_ey5euhrnbl; int novelIdentifier; }", encoding="utf-8")
+            report = audit_representation_checkpoint(workspace, self.artifact_root, "csharp", "descriptive", "baseline")
+            self.assertFalse(report["representation_interpretable"])
+            self.assertGreater(report["counts"]["opposite_treatment_names"], 0)
+            self.assertTrue(any(item["name"] == "novelIdentifier" for item in report["observations"]))
+
+    def test_all_frozen_checkpoints_are_representation_interpretable(self):
+        stages = ["baseline", *(task["id"] for task in self.original["tasks"])]
+        for treatment in ("descriptive", "deterministic"):
+            for language in ("csharp", "fsharp"):
+                for stage in stages:
+                    with self.subTest(treatment=treatment, language=language, stage=stage):
+                        workspace = self.artifact_root / "transformed" / treatment / language
+                        workspace = (
+                            workspace / "baseline"
+                            if stage == "baseline"
+                            else workspace / "gold" / stage
+                        )
+                        report = audit_representation_checkpoint(
+                            workspace,
+                            self.artifact_root,
+                            language,
+                            treatment,
+                            stage,
+                        )
+                        self.assertTrue(report["ok"], report["errors"])
+                        self.assertTrue(report["representation_interpretable"], report)
+
+    def test_checkpoint_detects_eligible_descriptive_alias_in_deterministic_arm(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            (workspace / "OrderFlowEngine.cs").write_text(
+                "class OrderFlowEngine { private static bool IsStatus(string value) => true; }",
+                encoding="utf-8",
+            )
+            report = audit_representation_checkpoint(
+                workspace,
+                self.artifact_root,
+                "csharp",
+                "deterministic",
+                "007-query-engine-refactor",
+            )
+            self.assertTrue(report["ok"], report["errors"])
+            self.assertFalse(report["representation_interpretable"])
+            self.assertEqual(report["counts"]["reintroduced_aliases"], 1)
+
+    def test_checkpoint_honors_per_snapshot_exclusion(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            (workspace / "Program.fs").write_text(
+                "module Program\nlet isStatus value = true\n",
+                encoding="utf-8",
+            )
+            report = audit_representation_checkpoint(
+                workspace,
+                self.artifact_root,
+                "fsharp",
+                "deterministic",
+                "baseline",
+            )
+            self.assertTrue(report["ok"], report["errors"])
+            self.assertTrue(report["representation_interpretable"], report)
+            self.assertEqual(report["counts"]["reintroduced_aliases"], 0)
+
+    def test_unclassified_identifier_is_observational_only(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            (workspace / "sample.cs").write_text(
+                "class Sample { int genuinelyNewPrivateName; }",
+                encoding="utf-8",
+            )
+            report = audit_representation_checkpoint(
+                workspace,
+                self.artifact_root,
+                "csharp",
+                "descriptive",
+                "baseline",
+            )
+            self.assertTrue(report["ok"], report["errors"])
+            self.assertTrue(report["representation_interpretable"], report)
+            self.assertTrue(
+                any(
+                    item["name"] == "genuinelyNewPrivateName"
+                    and item["kind"] == "unclassified"
+                    for item in report["observations"]
+                )
+            )
+
+    def test_checkpoint_malformed_source_is_not_ok(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            (workspace / "bad.cs").write_bytes(b'var value = "unterminated')
+            report = audit_representation_checkpoint(workspace, self.artifact_root, "csharp", "descriptive", "baseline")
+            self.assertFalse(report["ok"])
+            self.assertFalse(report["representation_interpretable"])
 
 
 if __name__ == "__main__":

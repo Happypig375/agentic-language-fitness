@@ -22,6 +22,7 @@ from alf.protocol import (
 ROOT = Path(__file__).parents[1]
 DEFINITION = ROOT / "protocols" / "variance-v1" / "definition.json"
 V2_DEFINITION = ROOT / "protocols" / "variance-v2" / "definition.json"
+DIFFICULTY_DEFINITION = ROOT / "protocols" / "difficulty-v1" / "definition.json"
 SCHEDULE = ROOT / "protocols" / "variance-v1" / "schedule.json"
 
 
@@ -101,6 +102,95 @@ class CellRepository:
 
 
 class ProtocolTests(unittest.TestCase):
+    def test_difficulty_v2_definition_is_tracked_and_valid(self):
+        report = validate_cell(ROOT, DIFFICULTY_DEFINITION)
+        self.assertTrue(report["ok"], report["errors"])
+        self.assertEqual(report["definition"]["schema_version"], 2)
+        self.assertEqual(report["schedule"]["pilot"][0]["order_id"], "williams-01")
+
+    def test_difficulty_v2_condition_and_pin_tampering_fails_closed(self):
+        original = json.loads(DIFFICULTY_DEFINITION.read_text(encoding="utf-8"))
+        cases = (
+            (lambda d: d["conditions"].pop("fsharp-descriptive"), "four approved treatments"),
+            (lambda d: d["conditions"].update({"extra": dict(next(iter(d["conditions"].values())))}), "four approved treatments"),
+            (lambda d: d["conditions"]["csharp-descriptive"].update(language="fsharp"), "language/representation"),
+            (lambda d: d["conditions"]["csharp-descriptive"].update(manifest_sha256="0" * 64), "manifest pin"),
+            (lambda d: d["conditions"]["csharp-descriptive"].update(extra=True), "manifest pin"),
+            (lambda d: d["c3_artifacts"].pop("exclusions"), "six approved pins"),
+            (lambda d: d["c3_artifacts"].update({"extra": dict(d["c3_artifacts"]["mapping"])}), "six approved pins"),
+            (lambda d: d["c3_artifacts"]["mapping"].update(sha256="0" * 64), "c3 artifact hash mismatch"),
+            (lambda d: d["task_hashes"].update({"001-priority": "0" * 64}), "task hash mismatch"),
+            (lambda d: d["task_hashes"].pop("008-summary-api"), "task hash mismatch"),
+            (lambda d: d["image_archive"].update(path="X:\\wrong.tar"), "image_archive pins"),
+            (lambda d: d.update(network_policy="changed"), "network_policy pins"),
+            (lambda d: d.update(raw_root="results/other"), "raw_root pins"),
+            (lambda d: d.update(fresh_process=False), "fresh_process pins"),
+            (lambda d: d.update(c3_source_commit="0" * 40), "c3_source_commit pins"),
+        )
+        for mutate, expected in cases:
+            with self.subTest(expected=expected):
+                handle, name = tempfile.mkstemp(suffix=".json", dir=DIFFICULTY_DEFINITION.parent)
+                import os
+                os.close(handle)
+                Path(name).unlink()
+                path = Path(name)
+                try:
+                    value = json.loads(json.dumps(original))
+                    mutate(value)
+                    path.write_text(json.dumps(value), encoding="utf-8")
+                    report = validate_cell(ROOT, path)
+                    self.assertFalse(report["ok"])
+                    self.assertTrue(any(expected in error for error in report["errors"]), report["errors"])
+                finally:
+                    path.unlink(missing_ok=True)
+
+    def test_schema_v1_definition_remains_valid(self):
+        report = validate_cell(ROOT, DEFINITION)
+        self.assertTrue(report["ok"], report["errors"])
+
+    def test_frozen_manifest_schema_must_match_difficulty_definition(self):
+        raw_root = ROOT / "results" / "difficulty-v1"
+        raw_root.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(
+            "w",
+            suffix=".json",
+            dir=raw_root,
+            delete=False,
+            encoding="utf-8",
+        ) as handle:
+            manifest_path = Path(handle.name)
+            manifest = {
+                "schema_version": 1,
+                "frozen": True,
+                "dirty": False,
+                "definition_file": "protocols/difficulty-v1/definition.json",
+            }
+            manifest["manifest_sha256"] = canonical_json_hash(manifest)
+            json.dump(manifest, handle)
+        try:
+            with self.assertRaisesRegex(ValueError, "schema version does not match"):
+                load_frozen_manifest(ROOT, manifest_path)
+        finally:
+            manifest_path.unlink(missing_ok=True)
+
+    def test_difficulty_v2_williams_schedule_tampering_fails_closed(self):
+        original = json.loads(DIFFICULTY_DEFINITION.read_text(encoding="utf-8"))
+        schedule_path = ROOT / original["schedule_file"]
+        schedule = json.loads(schedule_path.read_text(encoding="utf-8"))
+        schedule["williams_rows"] = list(reversed(schedule["williams_rows"]))
+        with tempfile.NamedTemporaryFile("w", suffix=".json", dir=schedule_path.parent, delete=False, encoding="utf-8") as handle:
+            json.dump(schedule, handle)
+            altered_schedule = Path(handle.name)
+        try:
+            value = json.loads(json.dumps(original)); value["schedule_file"] = altered_schedule.relative_to(ROOT).as_posix()
+            with tempfile.NamedTemporaryFile("w", suffix=".json", dir=DIFFICULTY_DEFINITION.parent, delete=False, encoding="utf-8") as handle:
+                json.dump(value, handle); altered_definition = Path(handle.name)
+            try:
+                report = validate_cell(ROOT, altered_definition)
+                self.assertFalse(report["ok"])
+                self.assertTrue(any("Williams rows" in e for e in report["errors"]), report["errors"])
+            finally: altered_definition.unlink(missing_ok=True)
+        finally: altered_schedule.unlink(missing_ok=True)
     def test_tracked_text_hash_normalizes_line_endings(self):
         with tempfile.TemporaryDirectory() as directory:
             lf = Path(directory) / "lf.txt"

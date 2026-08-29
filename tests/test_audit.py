@@ -2,9 +2,18 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from alf.audit import audit_run
+from alf.audit import audit_run, audit_representation_checkpoint
+from alf.runner import _derive_protocol_disposition
 
 class AuditTests(unittest.TestCase):
+    def test_c3_checkpoint_four_baselines_are_interpretable(self):
+        root = Path(__file__).parents[1] / "benchmarks" / "successor" / "representation-v1"
+        for treatment in ("descriptive", "deterministic"):
+            for language in ("csharp", "fsharp"):
+                report = audit_representation_checkpoint(root / "transformed" / treatment / language / "baseline", root, language, treatment, "baseline")
+                self.assertTrue(report["ok"], report["errors"])
+                self.assertTrue(report["representation_interpretable"], report)
+
     def test_reconciles_derived_redacted_recovered_fixture(self):
         fixture = Path(__file__).parent / "fixtures" / "a3-redacted-run"
         report = audit_run(fixture)
@@ -104,3 +113,34 @@ class AuditTests(unittest.TestCase):
             report = audit_run(root)
             self.assertFalse(report["ok"])
             self.assertIn("usage sidecar", report["errors"][0])
+
+    def test_difficulty_audit_requires_representation_sidecars(self):
+        root = self._derived_fixture(); run_path = root / "result.json"; run = json.loads(run_path.read_text())
+        audit = {"ok": True, "representation_interpretable": True, "include_representation_analysis": True, "errors": []}
+        run["provenance"] = {"cell_id": "difficulty-v1"}; run["representation_audit"] = audit; run["tasks"][0]["representation_audit"] = audit
+        run["disposition"] = _derive_protocol_disposition(run)
+        run_path.write_text(json.dumps(run)); (root / "tasks" / "t1" / "task-result.json").write_text(json.dumps(run["tasks"][0])); (root / "representation-audit.json").write_text(json.dumps(audit)); (root / "tasks" / "t1" / "representation-audit.json").write_text(json.dumps(audit))
+        self.assertTrue(audit_run(root)["ok"])
+        (root / "representation-audit.json").unlink(); report = audit_run(root); self.assertFalse(report["ok"])
+        self.assertTrue(any("baseline representation audit" in error for error in report["errors"]))
+
+    def test_difficulty_audit_rejects_tampered_task_representation_sidecar(self):
+        root = self._derived_fixture(); run_path = root / "result.json"; run = json.loads(run_path.read_text())
+        audit = {"ok": True, "representation_interpretable": True, "include_representation_analysis": True, "errors": []}
+        run["provenance"] = {"cell_id": "difficulty-v1"}; run["representation_audit"] = audit; run["tasks"][0]["representation_audit"] = audit
+        run["disposition"] = _derive_protocol_disposition(run)
+        run_path.write_text(json.dumps(run)); (root / "tasks" / "t1" / "task-result.json").write_text(json.dumps(run["tasks"][0])); (root / "representation-audit.json").write_text(json.dumps(audit))
+        (root / "tasks" / "t1" / "representation-audit.json").write_text(json.dumps({**audit, "ok": False}))
+        report = audit_run(root); self.assertFalse(report["ok"])
+        self.assertTrue(any("representation audit disagrees" in error for error in report["errors"]))
+
+    def test_difficulty_audit_rejects_disposition_only_tampering(self):
+        root = self._derived_fixture(); run_path = root / "result.json"; run = json.loads(run_path.read_text())
+        audit = {"ok": True, "representation_interpretable": True, "include_representation_analysis": True, "errors": []}
+        run["provenance"] = {"cell_id": "difficulty-v1"}; run["representation_audit"] = audit; run["tasks"][0]["representation_audit"] = audit
+        run["disposition"] = _derive_protocol_disposition(run)
+        run["disposition"]["include_representation_analysis"] = False
+        run_path.write_text(json.dumps(run)); (root / "tasks" / "t1" / "task-result.json").write_text(json.dumps(run["tasks"][0])); (root / "representation-audit.json").write_text(json.dumps(audit)); (root / "tasks" / "t1" / "representation-audit.json").write_text(json.dumps(audit))
+        report = audit_run(root)
+        self.assertFalse(report["ok"])
+        self.assertTrue(any("frozen disposition" in error for error in report["errors"]))
