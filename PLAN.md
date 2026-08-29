@@ -292,5 +292,21 @@ at least one within-language representation treatment is implemented and
 independently reviewed; cumulative black-box cases remain language-neutral with gold data
 outside candidate workspaces; both implementations pass idiomaticity and
 behavioral-equivalence review; and the longer chain produces measurable,
-non-dominated correctness and trajectory variation. Only then should a new
-protocol cell be designed and frozen before any paid/model run.
+non-dominated correctness and trajectory variation in a frozen difficulty
+pilot. The chain, treatment apparatus, golds, and reviews must be complete
+before that new protocol cell is designed and frozen; the pilot follows the
+freeze and precedes any confirmatory run.
+
+## Workstream C gate status (current)
+
+The implementation-ready eight-task contract is in
+`docs/workstream-c-benchmark-design-2026-08-29.md` and is independently
+reviewed/approved; implementation/harness and experimental-design reviews
+found no remaining P1/P2 findings after repairs. **C1 is complete. C2 is next
+and in progress:** implement and validate the chain, cumulative black-box cases,
+backward-compatible multi-file gold manifests, language-specific workspace
+checks, both golds, and the arbitrary-chain runner; and C3 separately designs,
+reviews, implements, and validates the full-chain descriptive-versus-
+deterministic private-identifier treatment. **C3 remains pending.** Only then
+may a new protocol/cell be frozen with hashes and a difficulty pilot run.
+Historical fixtures and variance cells remain unchanged and excluded.

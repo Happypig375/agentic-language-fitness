@@ -16,7 +16,13 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Follow the next milestone in `PLAN.md`: design and independently review Workstream C's matched cumulative 5–10-task chain, implement and validate that longer benchmark chain, then define and freeze a new protocol cell. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run until the design and implementation are reviewed, validated, and main CI is green.
+`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Workstream C's matched eight-task design review is complete. Follow the next gates in `PLAN.md`: implement and validate the longer benchmark chain, implement and review its separate representation treatment, then define and freeze a new protocol cell. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run until the remaining gates are complete and main CI is green.
+
+The Workstream C design in
+`docs/workstream-c-benchmark-design-2026-08-29.md` is independently reviewed
+and approved; C2 implementation/validation may proceed. The separately
+reviewed representation treatment, new protocol freeze, difficulty pilot, and
+all paid/model runs remain blocked until their gates are complete.
 
 The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use their legacy Markdown token totals as validated data.
 
