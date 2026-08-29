@@ -189,5 +189,16 @@ remaining P1/P2/P3 findings. The generated report deliberately retains
 `pending-external-model-free-validation`: environment-dependent validation
 results are review evidence recorded here rather than inputs to deterministic
 artifact generation. The post-review coverage-accounting repair did not change
-any transformed baseline or gold hash. Cross-platform CI remains the commit
-gate before protocol work proceeds.
+any transformed baseline or gold hash.
+
+Implementation commit `31430489102437a48d79fa611b8700e0e11e53fd` is pushed.
+Its first CI attempt exposed that the default shallow checkout could not read
+the pinned C2 source commit; no representation invariant or artifact check
+failed. Main commit `9e1a5a92674313ca6e5f33917b12cb93aa7e1026`
+made both CI checkouts full-history. GitHub Actions run `33266189763` then
+passed the Linux job in 3m53s and the Windows job in 5m23s, including unit,
+strict environment, baseline, artifact, both treatment-arm, scripted-matrix,
+container-build, and container-entrypoint gates where applicable. The only
+annotations were Node 20 action-runtime deprecation warnings. The C3
+cross-platform commit gate is closed; protocol-cell definition and freeze are
+next.

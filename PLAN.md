@@ -320,5 +320,9 @@ new protocol cell, then run its non-counting difficulty pilot.** Paid/model runs
 remain blocked until those gates pass. CI for C2 commit
 `4e58677e0bfff18c2104298ad35fc4e801bbd052` is green: GitHub Actions run
 `33258119571` (Linux 2m20s, Windows 2m23s; Node 20 deprecation warnings only).
-The C3 implementation awaits its commit and cross-platform CI result.
+C3 implementation commit `31430489102437a48d79fa611b8700e0e11e53fd`
+is pushed. Main commit `9e1a5a92674313ca6e5f33917b12cb93aa7e1026`
+adds the full-history checkout required to verify the pinned C2 source commit;
+GitHub Actions run `33266189763` is green (Linux 3m53s, Windows 5m23s; Node 20
+deprecation warnings only). The C3 commit and cross-platform CI gate are closed.
 Historical fixtures and variance cells remain unchanged and excluded.

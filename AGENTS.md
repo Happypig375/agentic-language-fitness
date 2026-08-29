@@ -16,7 +16,7 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Workstream C's matched eight-task design review and C2 implementation/validation are complete. C2 commit `4e58677e0bfff18c2104298ad35fc4e801bbd052` has green GitHub Actions run `33258119571` (Linux 2m20s, Windows 2m23s; Node 20 deprecation warnings only). Follow the next gate in `PLAN.md`: design, implement, and independently review the C3 representation treatment, then define and freeze a new protocol cell. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run while the remaining gates are blocked.
+`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Workstream C's matched eight-task chain and C3 representation treatment are implemented, model-free validated, independently approved, and green cross-platform at main commit `9e1a5a92674313ca6e5f33917b12cb93aa7e1026`, GitHub Actions run `33266189763` (Linux 3m53s, Windows 5m23s; Node 20 deprecation warnings only). Follow the next gate in `PLAN.md`: define and freeze a new protocol cell, then run its non-counting difficulty pilot. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run before the freeze is complete.
 
 The Workstream C design in
 `docs/workstream-c-benchmark-design-2026-08-29.md` is independently reviewed;
@@ -29,8 +29,10 @@ C3 representation design, implementation, model-free validation, and
 independent implementation review are complete with no remaining P1/P2/P3
 findings. The immediate next gate is to define and freeze a new protocol cell,
 then run its non-counting difficulty pilot. Paid/model runs remain blocked until
-those gates are complete. Main CI for C2 is green as recorded above; C3 awaits
-its implementation commit and cross-platform CI result.
+the freeze is complete. C3 implementation commit
+`31430489102437a48d79fa611b8700e0e11e53fd` and the shallow-checkout CI repair
+at `9e1a5a92674313ca6e5f33917b12cb93aa7e1026` are both pushed; the green run is
+recorded above.
 
 The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use their legacy Markdown token totals as validated data.
 
