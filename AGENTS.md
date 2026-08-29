@@ -16,7 +16,7 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Workstream C's matched eight-task design review and C2 implementation/validation are complete. Follow the next gate in `PLAN.md`: design, implement, and independently review the C3 representation treatment, then define and freeze a new protocol cell. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run until the remaining gates are complete and main CI is green.
+`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Workstream C's matched eight-task design review and C2 implementation/validation are complete. C2 commit `4e58677e0bfff18c2104298ad35fc4e801bbd052` has green GitHub Actions run `33258119571` (Linux 2m20s, Windows 2m23s; Node 20 deprecation warnings only). Follow the next gate in `PLAN.md`: design, implement, and independently review the C3 representation treatment, then define and freeze a new protocol cell. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run while the remaining gates are blocked.
 
 The Workstream C design in
 `docs/workstream-c-benchmark-design-2026-08-29.md` is independently reviewed;
@@ -27,8 +27,8 @@ Task 001/002 remain unchanged. The language-equivalence/error review gate is
 closed. C2 implementation and model-free validation are complete and approved.
 C3 representation treatment is the immediate next step and remains pending
 design/implementation/review. The new protocol freeze, difficulty pilot,
-paid/model runs, and main CI for the new commit remain blocked/pending until
-their gates are complete.
+paid/model runs, protocol freeze, and difficulty pilot remain blocked until
+their gates are complete. Main CI for C2 is green as recorded above.
 
 The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use their legacy Markdown token totals as validated data.
 

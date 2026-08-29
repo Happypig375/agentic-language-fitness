@@ -314,6 +314,8 @@ doctor, legacy/successor validation and scripted matrices, serialized Task
 007/008 checks, focused path suites, 18 isolated gold builds, and independent
 harness-security and gold/equivalence reviews with no P1/P2 findings. **C3 is
 next:** implement and validate the representation treatment. The protocol
-freeze, difficulty pilot, and paid/model runs remain blocked, and main CI for
-this commit is pending. Historical fixtures and variance cells remain unchanged
+freeze, difficulty pilot, and paid/model runs remain blocked. CI for C2 commit
+`4e58677e0bfff18c2104298ad35fc4e801bbd052` is green: GitHub Actions run
+`33258119571` (Linux 2m20s, Windows 2m23s; Node 20 deprecation warnings only).
+Historical fixtures and variance cells remain unchanged
 and excluded.
