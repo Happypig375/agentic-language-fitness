@@ -66,23 +66,46 @@ Each configuration is a separate versioned child cell with its own clean freeze,
 After design review and implementation, run one audited non-counting F#/C# descriptive pair for each candidate configuration. Configuration selection must use only preregistered difficulty and apparatus criteria—not the sign or size of the F#–C# token difference.
 
 - H remains the upper reference if apparatus/accounting are valid.
-- A candidate M/L configuration is too easy if both chains complete 8/8 without a substantive acceptance or behavioral failure; step down for that slot.
-- It is too hard if neither language reaches Task 006 or fewer than 8 of the 16 possible task envelopes pass; step up for that slot.
+- A candidate M/L configuration is provisionally too easy if both chains complete 8/8 without a substantive acceptance or behavioral failure.
+- It is provisionally too hard if neither language reaches Task 006 or fewer than 8 of the 16 possible task envelopes pass.
 - It is provisionally informative when at least one chain reaches Task 007 and combined completion lies between those extremes.
 - Any protocol, accounting, authentication, provider, host, evaluator, or archive failure follows the frozen retry/disposition policy and cannot be used for configuration selection.
 
-These calibrations are apparatus/difficulty evidence only and never count toward the formal feasibility blocks.
+A single stochastic pair is too weak to replace a boundary configuration. If M/L is provisionally classified as too easy or too hard, run one additional non-counting pair in the reverse language order under the same child cell. Replace the configuration only if the same boundary classification repeats. This confirmatory calibration is still non-counting, and selection remains independent of the language cost direction.
 
 ## Formal feasibility schedule
 
-For each retained configuration, collect **four paired blocks** under one unchanged child cell:
+The parent schedule contains **six chronological macroblocks**, using every permutation of H/M/L exactly once:
 
-- two F# → C# blocks;
-- two C# → F# blocks.
+```text
+H M L
+M L H
+L H M
+H L M
+L M H
+M H L
+```
 
-This is the minimum balanced feasibility sample, not a significance study. Across the three configurations it yields 12 paired blocks and 24 language runs, plus non-counting calibrations.
+Across six macroblocks, each configuration appears twice in every within-macroblock position and every ordered configuration pair is balanced. Within each configuration, language order is balanced across six paired blocks:
 
-Use four chronological macroblocks. Every macroblock contains one paired block from H, M, and L. Rotate configuration order with a balanced Latin/Williams-style schedule, while each configuration's language order is balanced 2/2 across its four blocks. Generate and hash the schedule before freezing any child cell. Run the two languages within a pair as close together as practical and record provider/quota timestamps.
+- three F# → C#;
+- three C# → F#.
+
+The maximum completed family therefore contains 18 paired blocks and 36 language runs, plus non-counting calibrations.
+
+### Predeclared 4+2 feasibility gate
+
+The first stage executes macroblocks 1–4: four paired blocks per configuration, 12 pairs total. After auditing that stage, make one predeclared continuation decision using only apparatus stability and configuration difficulty—not the sign, magnitude, or apparent favorability of any F#–C# contrast.
+
+Continue to macroblocks 5–6 when:
+
+- accounting, protocol, provenance, and backend identity remain stable;
+- at least one retained configuration is informative rather than uniformly saturated or impossible;
+- no apparatus-stop condition has occurred.
+
+Stop and redesign rather than completing 5–6 when every retained configuration is saturated, every retained configuration is impossible, or a material apparatus/configuration change is required. The stage-1 observations remain a documented feasibility fragment and are never represented as a complete balanced family.
+
+If continued, the full six macroblocks become the Workstream D feasibility sample. Generate and hash the complete schedule before freezing any child cell. Run the two languages within a pair as close together as practical and record provider/quota timestamps.
 
 Do not adapt prompts, tasks, evaluator, harness, model, effort, scaffold, limits, or schedule after inspecting outcomes. Apparatus changes require a new protocol version and new cells.
 
@@ -96,9 +119,9 @@ Correctness and cost remain separate; cheap failure is not success.
 2. Number of tasks passed and first failed/stopped task.
 3. Discrete task survival through chain positions 001–008.
 4. Unconditional cumulative input tokens and agent-process wall time to terminal stop.
-5. Paired **common-prefix** cost: cumulative cost through the last task both languages validly attempted in the pair.
+5. Paired **common-exposure-prefix** cost through the highest task both languages entered in the pair, retaining whether either failed that task.
 
-The common-prefix estimand prevents an early-stopping language from appearing artificially cheap. Report it alongside, not instead of, full-chain outcomes.
+The common-exposure-prefix estimand prevents an early-stopping language from appearing artificially cheap while preserving the cost of its failing task. Report it alongside, not instead of, full-chain outcomes and terminal-stop cost. Also report the last task both languages passed as a separate descriptive checkpoint.
 
 ### Secondary outcomes
 
@@ -112,7 +135,7 @@ The common-prefix estimand prevents an early-stopping language from appearing ar
 
 ### Pairing and analysis
 
-Report configuration-specific paired differences and log ratios by task, common prefix, and aggregate. Show language order, macroblock, timestamp, and chain position. Use exploratory hierarchical or mixed models only to estimate variance components and interactions:
+Report configuration-specific paired differences and log ratios by task, common exposure prefix, and aggregate. Show language order, macroblock, timestamp, and chain position. Use exploratory hierarchical or mixed models only to estimate variance components and interactions:
 
 ```text
 outcome ~ language * configuration + order + chain_position + macroblock_time
@@ -121,14 +144,15 @@ outcome ~ language * configuration + order + chain_position + macroblock_time
 
 Use an appropriate binary/discrete-time model for task survival. Do not report a single pooled language coefficient without its configuration interaction, and do not condition all cost analysis on complete chains.
 
-No p-value, significance, or language-advantage claim is authorized from four pairs per configuration.
+No p-value, significance, or language-advantage claim is authorized from either four or six pairs per configuration.
 
 ## Inclusion, retries, and stopping
 
 Reuse the frozen failure taxonomy and fail-closed accounting rules. Candidate correctness failures are valid primary outcomes. Pre-candidate infrastructure-invalid attempts remain in the ledger and may be retried only under the preregistered sequential retry rule.
 
-There is no outcome-driven early stop within the 12 formal blocks. Stop the family only for:
+There is no outcome-driven early stop based on language contrasts. Stop the family only for:
 
+- the predeclared 4+2 difficulty/apparatus gate above;
 - protocol/provenance violation affecting comparability;
 - invalid or changed backend/configuration identification;
 - accounting schema incompatibility;
@@ -140,10 +164,10 @@ After a material apparatus change, close the affected cell and begin a new versi
 
 ## Decision report
 
-After the 12 paired blocks, produce a feasibility report covering:
+After stage 1—and again after the full family if continued—produce a feasibility report covering:
 
 - configuration-specific task survival and failure modes;
-- paired common-prefix and terminal-stop costs;
+- paired common-exposure-prefix and terminal-stop costs;
 - within-configuration stochastic/order variance;
 - language × configuration interaction uncertainty;
 - temporal/provider drift diagnostics;
@@ -156,7 +180,7 @@ Decision rules:
 
 - **All configurations saturated:** add a lower capability configuration or strengthen the late chain before confirmatory work.
 - **All configurations impossible:** step capability upward or simplify the problematic task contract.
-- **One or more informative configurations with stable apparatus:** select the smallest scientifically useful configuration set for confirmatory design.
+- **One or more informative configurations with stable apparatus:** complete macroblocks 5–6 if at stage 1, then select the smallest scientifically useful configuration set for confirmatory design.
 - **Large or sign-changing language × configuration variation:** treat capability interaction as central and stratify confirmatory inference.
 - **Configuration/scaffold variation dwarfs unstable language differences:** reframe the primary contribution toward agent/configuration sensitivity rather than a language ranking.
 - **Representation drift is frequent:** study drift/adherence as an outcome before attempting a representation-effect claim.
@@ -164,24 +188,27 @@ Decision rules:
 ## Implementation and review sequence
 
 1. Independently review this design; close all P1/P2 findings before implementation.
-2. Add a parent feasibility-family definition and deterministic macroblock schedule, or document that existing protocol machinery can validate equivalent child-cell files without extension.
+2. Add a parent feasibility-family definition and deterministic six-macroblock schedule, or document that existing protocol machinery can validate equivalent child-cell files without extension.
 3. Add model/configuration preflight and fail-closed validation for the exact reasoning/model settings selected.
-4. Generate three child definitions and the shared schedule; model-free validate hashes, manifests, task identity, descriptive-only scope, limits, and archive policy.
+4. Generate three child definitions and the shared schedule; model-free validate hashes, manifests, task identity, descriptive-only scope, limits, balance, and archive policy.
 5. Commit from a clean checkpoint and obtain green Linux/Windows CI.
 6. Freeze each child cell and archive its image/toolchain evidence.
-7. Run and audit one non-counting pair per candidate configuration; apply only the preregistered screening rules.
+7. Run and audit one non-counting pair per candidate configuration; apply only the preregistered screening rules and reverse-order boundary confirmation.
 8. If configuration selection changes, review and freeze replacement child cells.
-9. Collect the four paired blocks per retained configuration according to the immutable macroblock schedule.
-10. Audit/archive every attempt and produce the Workstream D feasibility report before any confirmatory, scaffold, representation, or repository-expansion run.
+9. Execute macroblocks 1–4 according to the immutable parent schedule.
+10. Apply only the predeclared apparatus/difficulty continuation gate.
+11. If continued, execute macroblocks 5–6 without any protocol change.
+12. Audit/archive every attempt and produce the Workstream D feasibility report before any confirmatory, scaffold, representation, or repository-expansion run.
 
 ## Definition of done
 
 Workstream D feasibility is complete when:
 
 - the design and analysis plan have independent approval with no unresolved P1/P2 findings;
-- three capability child cells and their parent schedule are cleanly frozen and auditable;
-- each retained configuration has a passing non-counting calibration;
-- 12 balanced formal paired blocks are complete or a preregistered apparatus-stop condition is documented;
+- three capability child cells and their complete six-macroblock parent schedule are cleanly frozen and auditable;
+- each retained configuration has a passing non-counting calibration and any boundary classification has reverse-order confirmation;
+- macroblocks 1–4 are complete and the preregistered continuation decision is recorded;
+- macroblocks 5–6 are complete when the continuation gate passes, or a preregistered redesign/stop disposition is documented;
 - all raw attempts are hash-preserved and every included run passes audit;
 - the feasibility report makes a documented confirmatory/reframe decision;
 - no claim exceeds the feasibility sample.
