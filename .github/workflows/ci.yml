@@ -28,6 +28,12 @@ jobs:
         run: python scripts/alf.py doctor --strict
       - name: Validate matched benchmark snapshots
         run: python scripts/alf.py validate
+      - name: Check C3 representation artifacts
+        run: python scripts/alf.py representation check
+      - name: Validate C3 descriptive treatment
+        run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
+      - name: Validate C3 deterministic treatment
+        run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json validate
       - name: Run scripted chain matrix
         run: python scripts/alf.py matrix --agent scripted --output results/ci
       - name: Summarize
@@ -62,3 +68,9 @@ jobs:
         run: python scripts/alf.py doctor --strict
       - name: Validate matched benchmark snapshots
         run: python scripts/alf.py validate
+      - name: Check C3 representation artifacts
+        run: python scripts/alf.py representation check
+      - name: Validate C3 descriptive treatment
+        run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
+      - name: Validate C3 deterministic treatment
+        run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json validate

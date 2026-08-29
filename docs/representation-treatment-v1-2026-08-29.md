@@ -1,7 +1,8 @@
 # C3 representation treatment v1 (preregistration)
 
-Status: design preregistered and independently approved with no remaining P1/P2
-findings; implementation and implementation review are pending.
+Status: design and implementation are complete, model-free validation passes,
+and independent implementation review is approved with no remaining P1/P2/P3
+findings. No protocol freeze or model run is authorized by this document.
 This is a separate artifact family for the inherited eight-task successor chain.
 The pilot, historical pair, C2 successor, and existing golds remain unchanged.
 
@@ -99,7 +100,7 @@ build/evaluator difference, failed idempotence, or drift invalidates the artifac
 Implementation adds `benchmarks/successor/representation-v1/` with
 `definition.json`, `role-inventory.json`, `exclusions.json`, `mapping.json`,
 `generator-version.json`, `source-manifest.json`, `reports/{fsharp,csharp}/`,
-`manifests/{descriptive,deterministic}.json`, and
+`{descriptive,deterministic}.manifest.json`, and
 `transformed/{descriptive,deterministic}/{baseline,gold/<task>/}`. The two
 runnable manifests are existing-schema-compatible: task text, cases, and
 workspace checks hash/equal C2; only repository/gold paths and explicit
@@ -146,10 +147,10 @@ public snapshot, transformed golds, equivalence, leakage, and reports; full
 cumulative scripted oracle/workspace checks and clean builds must pass. Abort
 and regenerate this artifact family on invariant failure, hidden-gold exposure,
 source drift, incomplete coverage, or unreviewed manual edit; retain failed
-artifacts and hashes. This design does not add code/dependencies, run agents,
-estimate effects, or authorize a freeze. Next: implement the transformer and
-reports, validate both languages and all eight gold stages, then obtain
-independent C3 review before defining and freezing a new cell.
+artifacts and hashes. This design does not run candidate agents, estimate
+effects, or authorize a freeze. The implementation and review gates below are
+now closed. Next: define and freeze a new cell, then run its non-counting
+difficulty pilot.
 
 ## Independent design-review disposition
 
@@ -159,3 +160,34 @@ with pinned C#/F# fixtures and fail-closed malformed-interpolation handling;
 (2) the public `error/error` serializer identifier pair and JSON key are explicit,
 with a machine-extracted identifier-level contract snapshot that fails on
 omission or casing error. This approval covers the design only.
+
+## Implementation validation and review — 2026-08-30
+
+The checked-in generator materializes canonical Git-blob bytes from C2 commit
+`4e58677e0bfff18c2104298ad35fc4e801bbd052`; `.gitattributes` preserves LF bytes
+for the generator and generated artifact family across platforms. It records 15
+paired roles and 964 eligible occurrences across 26 source snapshots (12 C# and
+14 F#), with the declared public inventory exact in both source and
+deterministic arms. Replacements, coverage ratios, collision checks, protected
+lexical chunks, public sequences, manifest contracts, provenance, and per-stage
+token metrics are computed and fail closed. Coverage is derived by independently
+rescanning every deterministic artifact, not copied from eligibility.
+
+Independent model-free evidence passed:
+
+- 26 focused representation tests, including adversarial scanner, source-drift,
+  stale-artifact, public/private `Overdue/overdue`, provenance, metric, and
+  offsetting coverage-deficit/surplus cases;
+- write-free deterministic regeneration of 64 artifact files, 100% coverage,
+  and 32 safe language/task artifact plans;
+- clean builds, cumulative evaluator cases, and workspace checks for both
+  runnable manifests and both languages through Tasks 001–008;
+- complete scripted C#/F# matrices for both descriptive and deterministic arms.
+
+The final independent implementation disposition is **APPROVE**, with no
+remaining P1/P2/P3 findings. The generated report deliberately retains
+`pending-external-model-free-validation`: environment-dependent validation
+results are review evidence recorded here rather than inputs to deterministic
+artifact generation. The post-review coverage-accounting repair did not change
+any transformed baseline or gold hash. Cross-platform CI remains the commit
+gate before protocol work proceeds.

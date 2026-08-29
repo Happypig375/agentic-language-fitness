@@ -12,6 +12,7 @@ from .runner import environment_snapshot, run_chain, validate_benchmark
 from .audit import audit_run
 from .protocol import validate_cell, write_frozen_manifest
 from .variance import calibration_fixture, markdown_report, variance_report
+from .representation import build_representation, check_representation
 
 
 def _root_and_manifest(args: argparse.Namespace) -> tuple[Path, dict[str, Any]]:
@@ -194,6 +195,15 @@ def cmd_variance_report(args: argparse.Namespace) -> int:
     print(json.dumps(summary, sort_keys=True))
     return 0 if report["structural_validation"]["ok"] else 1
 
+def cmd_representation(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    output = Path(args.output) if args.output else None
+    if output is not None and not output.is_absolute():
+        output = root / output
+    report = build_representation(root, output) if args.representation_command == "build" else check_representation(root, output)
+    print(json.dumps(report, indent=2, sort_keys=True))
+    return 0
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="alf", description="Agentic Language Fitness benchmark harness")
@@ -260,6 +270,12 @@ def build_parser() -> argparse.ArgumentParser:
     vr.add_argument("--power-simulations", type=int, default=2000)
     vr.add_argument("--seed", type=int, default=20260829)
     vr.set_defaults(func=cmd_variance_report)
+    representation = sub.add_parser("representation", help="Build or check the C3 representation treatment")
+    representation_sub = representation.add_subparsers(dest="representation_command", required=True)
+    for name in ("build", "check"):
+        rp = representation_sub.add_parser(name)
+        rp.add_argument("--output", help="Treatment artifact directory (defaults to benchmarks/successor/representation-v1)")
+        rp.set_defaults(func=cmd_representation)
     return parser
 
 

@@ -1,0 +1,138 @@
+open System
+open System.Text.Json
+
+[<CLIMutable>]
+type Customer =
+    { id: string
+      tier: string }
+
+[<CLIMutable>]
+type Order =
+    { id: string
+      createdAt: DateTimeOffset
+      status: string
+      priority: Nullable<int>
+      dueAt: Nullable<DateTimeOffset>
+      customer: Customer }
+
+[<CLIMutable>]
+type Request =
+    { operation: string
+      orders: Order array
+      asOf: Nullable<DateTimeOffset> }
+
+[<CLIMutable>]
+type Response = { ids: string array }
+
+let options =
+    JsonSerializerOptions(
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    )
+
+let isStatus actual expected =
+    String.Equals(actual, expected, StringComparison.OrdinalIgnoreCase)
+
+let isActive status =
+    isStatus status "pending" || isStatus status "processing"
+
+let priorityOf (order: Order) =
+    if order.priority.HasValue then order.priority.Value else 0
+
+let compareReady (left: Order) (right: Order) =
+    let byPriority = compare (priorityOf right) (priorityOf left)
+
+    if byPriority <> 0 then
+        byPriority
+    else
+        let byCreatedAt = DateTimeOffset.Compare(left.createdAt, right.createdAt)
+
+        if byCreatedAt <> 0 then
+            byCreatedAt
+        else
+            StringComparer.Ordinal.Compare(left.id, right.id)
+
+let compareDuePriorityId (left: Order) (right: Order) =
+    let byDueAt = DateTimeOffset.Compare(left.dueAt.Value, right.dueAt.Value)
+
+    if byDueAt <> 0 then
+        byDueAt
+    else
+        let byPriority = compare (priorityOf right) (priorityOf left)
+
+        if byPriority <> 0 then
+            byPriority
+        else
+            StringComparer.Ordinal.Compare(left.id, right.id)
+
+let ready (orders: Order array) =
+    orders
+    |> Array.filter (fun order -> isStatus order.status "pending")
+    |> Array.sortWith compareReady
+
+let overdue asOf (orders: Order array) =
+    orders
+    |> Array.filter (fun order ->
+        isActive order.status
+        && order.dueAt.HasValue
+        && order.dueAt.Value < asOf)
+    |> Array.sortWith compareDuePriorityId
+
+let atRisk (asOf: DateTimeOffset) (orders: Order array) =
+    let upperBound = asOf.AddHours(24.0)
+
+    orders
+    |> Array.filter (fun order ->
+        isActive order.status
+        && order.dueAt.HasValue
+        && order.dueAt.Value >= asOf
+        && order.dueAt.Value < upperBound)
+    |> Array.sortWith compareDuePriorityId
+
+let isVip (order: Order) =
+    not (isNull (box order.customer))
+    && (isStatus order.customer.tier "gold"
+        || isStatus order.customer.tier "platinum")
+
+let handle (request: Request) =
+    let selected =
+        match request.operation with
+        | operation when isStatus operation "ready" ->
+            ready request.orders
+        | operation when isStatus operation "overdue" ->
+            if not request.asOf.HasValue then
+                invalidArg "asOf" "asOf is required for overdue"
+
+            overdue request.asOf.Value request.orders
+        | operation when isStatus operation "atRisk" ->
+            if not request.asOf.HasValue then
+                raise (InvalidOperationException("asOf is required for atRisk"))
+
+            atRisk request.asOf.Value request.orders
+        | operation when isStatus operation "vipReady" ->
+            request.orders
+            |> ready
+            |> Array.filter isVip
+        | operation ->
+            raise (InvalidOperationException($"Unknown operation: {operation}"))
+
+    selected
+    |> Array.map (fun order -> order.id)
+    |> fun ids -> { ids = ids }
+
+let mutable running = true
+
+while running do
+    match Console.ReadLine() with
+    | null -> running <- false
+    | input ->
+        try
+            let request = JsonSerializer.Deserialize<Request>(input, options)
+
+            match request with
+            | null -> raise (InvalidOperationException("Request was null"))
+            | request ->
+                let response = handle request
+                Console.WriteLine(JsonSerializer.Serialize(response, options))
+        with ex ->
+            Console.WriteLine(JsonSerializer.Serialize({| error = ex.Message |}, options))

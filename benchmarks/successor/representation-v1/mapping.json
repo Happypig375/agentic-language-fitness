@@ -1,0 +1,141 @@
+{
+  "algorithm_domain": "alf-c3-role-v1",
+  "roles": [
+    {
+      "replacement": "loc_ey5euhrnbl",
+      "role_class": "local-variable",
+      "role_id": "local.input-line",
+      "source": {
+        "csharp": "line",
+        "fsharp": "input"
+      }
+    },
+    {
+      "replacement": "loc_zk64hdzcrs",
+      "role_class": "local-variable",
+      "role_id": "local.request",
+      "source": {
+        "csharp": "request",
+        "fsharp": "request"
+      }
+    },
+    {
+      "replacement": "loc_r43bavyf4z",
+      "role_class": "local-variable",
+      "role_id": "local.response",
+      "source": {
+        "csharp": "response",
+        "fsharp": "response"
+      }
+    },
+    {
+      "replacement": "loc_fnvfrnyz4a",
+      "role_class": "local-variable",
+      "role_id": "local.exception",
+      "source": {
+        "csharp": "ex",
+        "fsharp": "ex"
+      }
+    },
+    {
+      "replacement": "loc_dagq2dkqyn",
+      "role_class": "local-variable",
+      "role_id": "local.order-item",
+      "source": {
+        "csharp": "order",
+        "fsharp": "order"
+      }
+    },
+    {
+      "replacement": "fun_qbwdskpmpf",
+      "role_class": "private-helper-function",
+      "role_id": "helper.is-status",
+      "source": {
+        "csharp": "IsStatus",
+        "fsharp": "isStatus"
+      }
+    },
+    {
+      "replacement": "fun_7hdzz5dlwr",
+      "role_class": "private-helper-function",
+      "role_id": "helper.is-active",
+      "source": {
+        "csharp": "IsActive",
+        "fsharp": "isActive"
+      }
+    },
+    {
+      "replacement": "fun_svzzyc72ua",
+      "role_class": "private-helper-function",
+      "role_id": "helper.normalize-orders",
+      "source": {
+        "csharp": "NormalizeOrders",
+        "fsharp": "normalizeOrders"
+      }
+    },
+    {
+      "replacement": "fun_rtvkjd7gi7",
+      "role_class": "private-helper-function",
+      "role_id": "helper.ready",
+      "source": {
+        "csharp": "Ready",
+        "fsharp": "ready"
+      }
+    },
+    {
+      "replacement": "fun_jjxhcduzec",
+      "role_class": "private-helper-function",
+      "role_id": "helper.overdue",
+      "source": {
+        "csharp": "Overdue",
+        "fsharp": "overdue"
+      }
+    },
+    {
+      "replacement": "fun_6q4qho5po5",
+      "role_class": "private-helper-function",
+      "role_id": "helper.at-risk",
+      "source": {
+        "csharp": "AtRisk",
+        "fsharp": "atRisk"
+      }
+    },
+    {
+      "replacement": "fun_7j64sig4qk",
+      "role_class": "private-helper-function",
+      "role_id": "helper.is-vip",
+      "source": {
+        "csharp": "IsVip",
+        "fsharp": "isVip"
+      }
+    },
+    {
+      "replacement": "fun_53ppru7gia",
+      "role_class": "private-helper-function",
+      "role_id": "helper.canonical-target",
+      "source": {
+        "csharp": "CanonicalTarget",
+        "fsharp": "canonicalTarget"
+      }
+    },
+    {
+      "replacement": "fun_2eafckheko",
+      "role_class": "private-helper-function",
+      "role_id": "helper.transition",
+      "source": {
+        "csharp": "Transition",
+        "fsharp": "transition"
+      }
+    },
+    {
+      "replacement": "fun_l5rtlt5zd2",
+      "role_class": "private-helper-function",
+      "role_id": "helper.summarize",
+      "source": {
+        "csharp": "Summarize",
+        "fsharp": "summarize"
+      }
+    }
+  ],
+  "schema_version": 1
+}

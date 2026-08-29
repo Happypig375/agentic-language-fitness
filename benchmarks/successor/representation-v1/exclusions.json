@@ -1,0 +1,435 @@
+{
+  "entries": [
+    {
+      "id": "public-dto-types",
+      "names": [
+        "Customer",
+        "Order",
+        "Request",
+        "Response",
+        "TransitionResponse",
+        "SummaryResponse"
+      ]
+    },
+    {
+      "id": "serializer-fields",
+      "names": [
+        "Id/id",
+        "Tier/tier",
+        "CreatedAt/createdAt",
+        "Status/status",
+        "Priority/priority",
+        "DueAt/dueAt",
+        "Customer/customer",
+        "Operation/operation",
+        "Orders/orders",
+        "AsOf/asOf",
+        "ToStatus/toStatus",
+        "Ids/ids",
+        "Pending/pending",
+        "Processing/processing",
+        "Completed/completed",
+        "Cancelled/cancelled",
+        "Overdue/overdue",
+        "error/error"
+      ]
+    },
+    {
+      "id": "entrypoints-and-files",
+      "names": [
+        "OrderFlow",
+        "Program",
+        "Main",
+        "OrderFlowEngine",
+        "Handle/handle",
+        "Program.cs",
+        "Program.fs",
+        "OrderFlowEngine.cs",
+        "OrderFlowEngine.fs",
+        "OrderFlow.csproj",
+        "OrderFlow.fsproj"
+      ]
+    },
+    {
+      "id": "language-specific",
+      "names": [
+        "priorityOf",
+        "query",
+        "compareReady",
+        "compareDuePriorityId",
+        "running",
+        "Options/options"
+      ]
+    },
+    {
+      "id": "early-public-helpers",
+      "names": [
+        "IsStatus/isStatus",
+        "IsActive/isActive",
+        "NormalizeOrders/normalizeOrders",
+        "Ready/ready",
+        "Overdue/overdue",
+        "AtRisk/atRisk",
+        "IsVip/isVip",
+        "CanonicalTarget/canonicalTarget",
+        "Transition/transition",
+        "Summarize/summarize"
+      ]
+    },
+    {
+      "id": "unmatched-private-identifiers",
+      "names": [
+        "ids",
+        "selected",
+        "matches",
+        "target",
+        "source",
+        "expected",
+        "actual"
+      ]
+    }
+  ],
+  "per_snapshot": {
+    "csharp:baseline/OrderFlow.csproj": [],
+    "csharp:baseline/Program.cs": [],
+    "csharp:gold/001-priority/Program.cs": [],
+    "csharp:gold/002-overdue/Program.cs": [],
+    "csharp:gold/003-at-risk-window/Program.cs": [
+      {
+        "identifier": "IsStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "IsActive",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "AtRisk",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "csharp:gold/004-vip-ready/Program.cs": [
+      {
+        "identifier": "IsStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "IsActive",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "AtRisk",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "IsVip",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "csharp:gold/005-null-order-robustness/Program.cs": [
+      {
+        "identifier": "IsStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "IsActive",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "NormalizeOrders",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "AtRisk",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "IsVip",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "csharp:gold/006-transition-validation/Program.cs": [
+      {
+        "identifier": "IsStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "IsActive",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "NormalizeOrders",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "AtRisk",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "IsVip",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "CanonicalTarget",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "Transition",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "csharp:gold/007-query-engine-refactor/OrderFlowEngine.cs": [],
+    "csharp:gold/007-query-engine-refactor/Program.cs": [],
+    "csharp:gold/008-summary-api/OrderFlowEngine.cs": [],
+    "csharp:gold/008-summary-api/Program.cs": [],
+    "fsharp:baseline/OrderFlow.fsproj": [],
+    "fsharp:baseline/Program.fs": [
+      {
+        "identifier": "isStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "fsharp:gold/001-priority/Program.fs": [
+      {
+        "identifier": "isStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "fsharp:gold/002-overdue/Program.fs": [
+      {
+        "identifier": "isStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "fsharp:gold/003-at-risk-window/Program.fs": [
+      {
+        "identifier": "isStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "isActive",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "atRisk",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "fsharp:gold/004-vip-ready/Program.fs": [
+      {
+        "identifier": "isStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "isActive",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "atRisk",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "isVip",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "fsharp:gold/005-null-order-robustness/Program.fs": [
+      {
+        "identifier": "isStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "isActive",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "normalizeOrders",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "atRisk",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "isVip",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "fsharp:gold/006-transition-validation/Program.fs": [
+      {
+        "identifier": "isStatus",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "isActive",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "normalizeOrders",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "ready",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "overdue",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "atRisk",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "isVip",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "canonicalTarget",
+        "reason": "outside-private-engine-treatment-scope"
+      },
+      {
+        "identifier": "transition",
+        "reason": "outside-private-engine-treatment-scope"
+      }
+    ],
+    "fsharp:gold/007-query-engine-refactor/OrderFlow.fsproj": [],
+    "fsharp:gold/007-query-engine-refactor/OrderFlowEngine.fs": [],
+    "fsharp:gold/007-query-engine-refactor/Program.fs": [],
+    "fsharp:gold/008-summary-api/OrderFlow.fsproj": [],
+    "fsharp:gold/008-summary-api/OrderFlowEngine.fs": [],
+    "fsharp:gold/008-summary-api/Program.fs": []
+  },
+  "public_identifiers": {
+    "csharp": [
+      "AsOf",
+      "Cancelled",
+      "Completed",
+      "CreatedAt",
+      "Customer",
+      "DueAt",
+      "Handle",
+      "Id",
+      "Ids",
+      "Main",
+      "Operation",
+      "Options",
+      "Order",
+      "OrderFlow",
+      "OrderFlowEngine",
+      "Orders",
+      "Overdue",
+      "Pending",
+      "Priority",
+      "Processing",
+      "Program",
+      "Request",
+      "Response",
+      "Status",
+      "SummaryResponse",
+      "Tier",
+      "ToStatus",
+      "TransitionResponse",
+      "error"
+    ],
+    "fsharp": [
+      "Customer",
+      "Order",
+      "OrderFlow",
+      "OrderFlowEngine",
+      "Program",
+      "Request",
+      "Response",
+      "SummaryResponse",
+      "TransitionResponse",
+      "asOf",
+      "cancelled",
+      "completed",
+      "createdAt",
+      "customer",
+      "dueAt",
+      "error",
+      "handle",
+      "id",
+      "ids",
+      "operation",
+      "options",
+      "orders",
+      "overdue",
+      "pending",
+      "priority",
+      "processing",
+      "status",
+      "tier",
+      "toStatus"
+    ]
+  },
+  "public_serializer_literals": [
+    "error"
+  ],
+  "schema_version": 1
+}

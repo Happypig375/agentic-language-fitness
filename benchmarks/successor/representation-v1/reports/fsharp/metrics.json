@@ -1,0 +1,273 @@
+{
+  "language": "fsharp",
+  "proxy": {
+    "canonical_input": "compact sorted JSON with path and UTF-8 text for each stage file",
+    "encoding": "o200k_base",
+    "interpretation": "offline source proxy; not provider billing or Codex accounting",
+    "package": "tiktoken",
+    "version": "0.14.0"
+  },
+  "snapshots": {
+    "001-priority": {
+      "descriptive": {
+        "approx_lexical_tokens": 335,
+        "canonical_input_sha256": "44213cf57ea671933e284017c59c2812eb358851f5d9f5fde940822071ed3d5e",
+        "source_bytes": 1654,
+        "source_files": 1,
+        "source_lines": 55,
+        "tiktoken_count": 434,
+        "tiktoken_ids_sha256": "4bd0fddf75ac6862e6336943d9f889cd24b5e5c587c64ccea02c6aa9a929b34d",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 335,
+        "canonical_input_sha256": "5db68563f9b867d220d33745c14e6fb07e8493e6a24ba73d2645f9589cbac378",
+        "source_bytes": 1856,
+        "source_files": 1,
+        "source_lines": 55,
+        "tiktoken_count": 602,
+        "tiktoken_ids_sha256": "31575bd8ade32beda0d7210f0ed0248df1eebbb4b56a0826d2fa13452db14e13",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 202,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 168
+      }
+    },
+    "002-overdue": {
+      "descriptive": {
+        "approx_lexical_tokens": 482,
+        "canonical_input_sha256": "8357b63ccee7edb80bf861873f0259d499b93bdff19ce6ede5932412524e335e",
+        "source_bytes": 2336,
+        "source_files": 1,
+        "source_lines": 72,
+        "tiktoken_count": 613,
+        "tiktoken_ids_sha256": "adf6a26a78bcf06a910c1564991bf72d87ed2d57f2643cbb9a2dbe4dc713f959",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 482,
+        "canonical_input_sha256": "6e9428c5a659bea2562bde1ee32367b677c33ec24c97b0c29e328f1883c2a5c9",
+        "source_bytes": 2640,
+        "source_files": 1,
+        "source_lines": 72,
+        "tiktoken_count": 865,
+        "tiktoken_ids_sha256": "ac24a9c799b0805527004aad7f1ad24f34b9c4677418e97a25a6856a8100393b",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 304,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 252
+      }
+    },
+    "003-at-risk-window": {
+      "descriptive": {
+        "approx_lexical_tokens": 703,
+        "canonical_input_sha256": "cc803d0732e3fdf8a671c099e386f3b71b19e8b73aa79a6356e2981d750b4b05",
+        "source_bytes": 3707,
+        "source_files": 1,
+        "source_lines": 123,
+        "tiktoken_count": 967,
+        "tiktoken_ids_sha256": "d562de8be84039ff8e3456328866eadb0173f5a07dd5a70b02186f3be912f56d",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 703,
+        "canonical_input_sha256": "1bdaddd7b65482ac2e5f6197accd5a4d5dee13c3d73a2db36e3adf77e49a222d",
+        "source_bytes": 3996,
+        "source_files": 1,
+        "source_lines": 123,
+        "tiktoken_count": 1212,
+        "tiktoken_ids_sha256": "5d5249de6b29716d29f6a97cf73ac358f7e132c9f21d276998c6f03848b3a72d",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 289,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 245
+      }
+    },
+    "004-vip-ready": {
+      "descriptive": {
+        "approx_lexical_tokens": 786,
+        "canonical_input_sha256": "cae212fe35dfefccd4e508e6a1c97ec674e5a4e997cf767ef443e8833958905f",
+        "source_bytes": 4104,
+        "source_files": 1,
+        "source_lines": 138,
+        "tiktoken_count": 1078,
+        "tiktoken_ids_sha256": "79f2b43914317f1ca3df657e243c68a3ad762266af64ab89e63f2dd489da0c7c",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 786,
+        "canonical_input_sha256": "b0804a9eb470485c368b30bf78c0065f8b84eaec3a39408c70d8bafed301322a",
+        "source_bytes": 4436,
+        "source_files": 1,
+        "source_lines": 138,
+        "tiktoken_count": 1358,
+        "tiktoken_ids_sha256": "7f594e371a04b55dbaa0fb22543e09a6c3d2dbf53fd6a66caa14b480a8859fea",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 332,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 280
+      }
+    },
+    "005-null-order-robustness": {
+      "descriptive": {
+        "approx_lexical_tokens": 834,
+        "canonical_input_sha256": "bd74bb0daf468b55b468fe06994d75b747972c751f0dae43a3678962e910d019",
+        "source_bytes": 4368,
+        "source_files": 1,
+        "source_lines": 148,
+        "tiktoken_count": 1146,
+        "tiktoken_ids_sha256": "efdaa67b55d7e3604663f9685f355a44d30b6f01515c3cbbb79e6cdddb814d1c",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 834,
+        "canonical_input_sha256": "3ad2f7d57358f63a1dc065795e0ac4cc52c0d4850ecd05a757a62fde79599f71",
+        "source_bytes": 4706,
+        "source_files": 1,
+        "source_lines": 148,
+        "tiktoken_count": 1426,
+        "tiktoken_ids_sha256": "8bec02710e654317ba0d025d5983a2b1a8fa7ce0ce6958273f8914dbb4c1f4b7",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 338,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 280
+      }
+    },
+    "006-transition-validation": {
+      "descriptive": {
+        "approx_lexical_tokens": 1136,
+        "canonical_input_sha256": "b3c51ec5b13f07cc5c5614265f8f9b4401f5919cb55f4c98b30554701960980e",
+        "source_bytes": 6105,
+        "source_files": 1,
+        "source_lines": 201,
+        "tiktoken_count": 1562,
+        "tiktoken_ids_sha256": "f25b262f39c2b273fab1e4d9271685b7be312eae75303a7b68dc7d304727a431",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 1136,
+        "canonical_input_sha256": "da7ec4677c7e2fc69e6a85ddce87d0f1ce68f55eb6d33455535921bcb153af6f",
+        "source_bytes": 6531,
+        "source_files": 1,
+        "source_lines": 201,
+        "tiktoken_count": 1926,
+        "tiktoken_ids_sha256": "5494f8ac924418e80300c1bf54df0f12404ff23c6ab0d737207ac861ba38d9e8",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 426,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 364
+      }
+    },
+    "007-query-engine-refactor": {
+      "descriptive": {
+        "approx_lexical_tokens": 1243,
+        "canonical_input_sha256": "b071c898a459ddb7a16438d69ed8aeaf3112ec2da13e9954498e6ba8230956ae",
+        "source_bytes": 6642,
+        "source_files": 3,
+        "source_lines": 217,
+        "tiktoken_count": 1725,
+        "tiktoken_ids_sha256": "d3a1fa56c15b5fdc23579ed412b091355f3b40905c553aa6e5e70edcb66c45b0",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 1243,
+        "canonical_input_sha256": "65d6d68edeff98fd289cebe892e74dabb8730ceb6da712e75722be32fa312dc0",
+        "source_bytes": 7266,
+        "source_files": 3,
+        "source_lines": 217,
+        "tiktoken_count": 2308,
+        "tiktoken_ids_sha256": "4d684e84f3e4000dd8fe7debefe14f69fc38efb820fe498b225f582e4b887ce4",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 624,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 583
+      }
+    },
+    "008-summary-api": {
+      "descriptive": {
+        "approx_lexical_tokens": 1464,
+        "canonical_input_sha256": "2292d96d938af35c03df9340120d2992b3b58e6408823c51678e6f4755c6a2e4",
+        "source_bytes": 7999,
+        "source_files": 3,
+        "source_lines": 265,
+        "tiktoken_count": 2052,
+        "tiktoken_ids_sha256": "ba727898a1902fe1ac382c5654f50297be5cc499ed7d683d8ad9216defef9023",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 1464,
+        "canonical_input_sha256": "3ece66fbe5ac9fde7b7beeb1cfa3fd63ef133c8d99423a8ee9eae05d2df59301",
+        "source_bytes": 8746,
+        "source_files": 3,
+        "source_lines": 265,
+        "tiktoken_count": 2753,
+        "tiktoken_ids_sha256": "a9cd9795c8d2c319071e80f36df46732b62b90c8069624020c9becb828a99e3b",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 747,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 701
+      }
+    },
+    "baseline": {
+      "descriptive": {
+        "approx_lexical_tokens": 376,
+        "canonical_input_sha256": "7c59f516ca7f3db8338d90b3e9c29a703e8ff90092fc46ace2f0ca609dd8dfcb",
+        "source_bytes": 1810,
+        "source_files": 2,
+        "source_lines": 62,
+        "tiktoken_count": 504,
+        "tiktoken_ids_sha256": "40f297ace9826f02c75ba6bf88d7584f876d0b7254476983cb550aad237ecb27",
+        "treatment": "descriptive"
+      },
+      "deterministic": {
+        "approx_lexical_tokens": 376,
+        "canonical_input_sha256": "b9c1e92ed59258b00c195eedd36fe5ab3cc4b35dd0ff262d8878653dfac5452e",
+        "source_bytes": 1976,
+        "source_files": 2,
+        "source_lines": 62,
+        "tiktoken_count": 644,
+        "tiktoken_ids_sha256": "719995ce99796d196e71d0309ef1af3fb952209de87e25927e1623f8246f2356",
+        "treatment": "deterministic"
+      },
+      "signed_delta_deterministic_minus_descriptive": {
+        "approx_lexical_tokens": 0,
+        "source_bytes": 166,
+        "source_files": 0,
+        "source_lines": 0,
+        "tiktoken_count": 140
+      }
+    }
+  }
+}

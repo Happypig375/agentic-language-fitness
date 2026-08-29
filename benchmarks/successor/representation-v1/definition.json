@@ -1,0 +1,19 @@
+{
+  "algorithm": "sha256-role-digest-v1",
+  "algorithm_domain": "alf-c3-role-v1",
+  "id": "c3-representation-v1",
+  "languages": [
+    "csharp",
+    "fsharp"
+  ],
+  "schema_version": 1,
+  "snapshot_count": {
+    "csharp": 12,
+    "fsharp": 14
+  },
+  "source_commit": "4e58677e0bfff18c2104298ad35fc4e801bbd052",
+  "treatments": [
+    "descriptive",
+    "deterministic"
+  ]
+}

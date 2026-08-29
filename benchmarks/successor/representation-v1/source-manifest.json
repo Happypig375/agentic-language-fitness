@@ -1,0 +1,144 @@
+{
+  "files": {
+    "csharp": {
+      "baseline/OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "baseline/Program.cs": "018f2fda63bb33cb85995a47c0ffc25ec09153c1e970d063f0aa346e53e171d0",
+      "gold/001-priority/Program.cs": "eba02609b7c48993b40cfd9b96439eb6b7187063382f72d1d69ce3f5f704c7c5",
+      "gold/002-overdue/Program.cs": "38411c3f858360354354ad497f8a774ecd5c0845c4527275a5e0aab501a6d3fa",
+      "gold/003-at-risk-window/Program.cs": "b830ffab9a588073a72f961ea91dbd8c5ae72bda76a29974cb222c4980c6a54b",
+      "gold/004-vip-ready/Program.cs": "625b390e504e70ea98e04a1f08f1cdcc96f9f681914a8f88ab2998ed221ae9ad",
+      "gold/005-null-order-robustness/Program.cs": "c93aa5753bc2c6ad247cee69fd0ae099ee881a2cfeb7ddc2e91ecc8b6e337f2c",
+      "gold/006-transition-validation/Program.cs": "725929d39f7e877828909fc8bc1a0973defb98fc1f8986c4beac75f373ce6c4f",
+      "gold/007-query-engine-refactor/OrderFlowEngine.cs": "058e6fbb2d93caca0dae86709608a3eca4d833f17712828eb06ffb8332251312",
+      "gold/007-query-engine-refactor/Program.cs": "cbf4f0312b97b0cc60a64bdcb23f930e10c3d84949bc7c213549a1d74a5179a0",
+      "gold/008-summary-api/OrderFlowEngine.cs": "aff6b28fc615979a313888492e424461c04c39cc034d759f8d339345a03d8bae",
+      "gold/008-summary-api/Program.cs": "cbf4f0312b97b0cc60a64bdcb23f930e10c3d84949bc7c213549a1d74a5179a0"
+    },
+    "fsharp": {
+      "baseline/OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+      "baseline/Program.fs": "59c9b7206ad3c57042ebc330c40f5e822bb8acb10f2360be5349c2d6b6198795",
+      "gold/001-priority/Program.fs": "b83c612ac0c7aceeb808d6f76de942f2f70061dc43ec6fa681877d14430f966d",
+      "gold/002-overdue/Program.fs": "61b41f73f9b205b814d4748b965ffcd9be2c4606c93e8b56dca22769ca986b22",
+      "gold/003-at-risk-window/Program.fs": "60ad3c6e49306e2f5fb78087f5fc8429d395991d3d6d5f3905f9b1d0973c586b",
+      "gold/004-vip-ready/Program.fs": "fa57a505a6cf2a3a0e06f72ec874332fbd94e3ded369e1d81f104e990c017bdd",
+      "gold/005-null-order-robustness/Program.fs": "b831505323425e24e03536e28bbe82a18a9c7d7953e6f6c949e9514e8696f1e4",
+      "gold/006-transition-validation/Program.fs": "e1995467a30791511b1004084b7e1a662c7014a7e2e601e56cab37fccff46d55",
+      "gold/007-query-engine-refactor/OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+      "gold/007-query-engine-refactor/OrderFlowEngine.fs": "a50ea0e01aedf3e095c6ac50e161823d976b516cb2a724b60a191ec07c1cd829",
+      "gold/007-query-engine-refactor/Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e",
+      "gold/008-summary-api/OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+      "gold/008-summary-api/OrderFlowEngine.fs": "71b06ef968e66879cc33fe2948e6b6943583a73496f08d1d9a4d8553ae51eb96",
+      "gold/008-summary-api/Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e"
+    }
+  },
+  "generated_files": {
+    "descriptive": {
+      "csharp": {
+        "baseline/OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+        "baseline/Program.cs": "018f2fda63bb33cb85995a47c0ffc25ec09153c1e970d063f0aa346e53e171d0",
+        "gold/001-priority/Program.cs": "eba02609b7c48993b40cfd9b96439eb6b7187063382f72d1d69ce3f5f704c7c5",
+        "gold/002-overdue/Program.cs": "38411c3f858360354354ad497f8a774ecd5c0845c4527275a5e0aab501a6d3fa",
+        "gold/003-at-risk-window/Program.cs": "b830ffab9a588073a72f961ea91dbd8c5ae72bda76a29974cb222c4980c6a54b",
+        "gold/004-vip-ready/Program.cs": "625b390e504e70ea98e04a1f08f1cdcc96f9f681914a8f88ab2998ed221ae9ad",
+        "gold/005-null-order-robustness/Program.cs": "c93aa5753bc2c6ad247cee69fd0ae099ee881a2cfeb7ddc2e91ecc8b6e337f2c",
+        "gold/006-transition-validation/Program.cs": "725929d39f7e877828909fc8bc1a0973defb98fc1f8986c4beac75f373ce6c4f",
+        "gold/007-query-engine-refactor/OrderFlowEngine.cs": "058e6fbb2d93caca0dae86709608a3eca4d833f17712828eb06ffb8332251312",
+        "gold/007-query-engine-refactor/Program.cs": "cbf4f0312b97b0cc60a64bdcb23f930e10c3d84949bc7c213549a1d74a5179a0",
+        "gold/008-summary-api/OrderFlowEngine.cs": "aff6b28fc615979a313888492e424461c04c39cc034d759f8d339345a03d8bae",
+        "gold/008-summary-api/Program.cs": "cbf4f0312b97b0cc60a64bdcb23f930e10c3d84949bc7c213549a1d74a5179a0"
+      },
+      "fsharp": {
+        "baseline/OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+        "baseline/Program.fs": "59c9b7206ad3c57042ebc330c40f5e822bb8acb10f2360be5349c2d6b6198795",
+        "gold/001-priority/Program.fs": "b83c612ac0c7aceeb808d6f76de942f2f70061dc43ec6fa681877d14430f966d",
+        "gold/002-overdue/Program.fs": "61b41f73f9b205b814d4748b965ffcd9be2c4606c93e8b56dca22769ca986b22",
+        "gold/003-at-risk-window/Program.fs": "60ad3c6e49306e2f5fb78087f5fc8429d395991d3d6d5f3905f9b1d0973c586b",
+        "gold/004-vip-ready/Program.fs": "fa57a505a6cf2a3a0e06f72ec874332fbd94e3ded369e1d81f104e990c017bdd",
+        "gold/005-null-order-robustness/Program.fs": "b831505323425e24e03536e28bbe82a18a9c7d7953e6f6c949e9514e8696f1e4",
+        "gold/006-transition-validation/Program.fs": "e1995467a30791511b1004084b7e1a662c7014a7e2e601e56cab37fccff46d55",
+        "gold/007-query-engine-refactor/OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+        "gold/007-query-engine-refactor/OrderFlowEngine.fs": "a50ea0e01aedf3e095c6ac50e161823d976b516cb2a724b60a191ec07c1cd829",
+        "gold/007-query-engine-refactor/Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e",
+        "gold/008-summary-api/OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+        "gold/008-summary-api/OrderFlowEngine.fs": "71b06ef968e66879cc33fe2948e6b6943583a73496f08d1d9a4d8553ae51eb96",
+        "gold/008-summary-api/Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e"
+      }
+    },
+    "deterministic": {
+      "csharp": {
+        "baseline/OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+        "baseline/Program.cs": "f16a8131daa704834ac6c6383a7e2663bcad735f354cd49b31ff296ad0a8123e",
+        "gold/001-priority/Program.cs": "7628d95f0967a74f43cee4cc86c14274b3310bddc1de204e4b8a6b9e3dd753ee",
+        "gold/002-overdue/Program.cs": "754e4e8f4209278f186bd39b127660c7fd1ea05ffc5d23795f992d55558b2dd8",
+        "gold/003-at-risk-window/Program.cs": "4611853c0c3260b97c62af9b8534d333c2278cf6841f23d09b3bb3333ce19038",
+        "gold/004-vip-ready/Program.cs": "6dfb9db9ce4b14a31b519985178a365defdf01a811ec24dbe4761ff6e0ad6f90",
+        "gold/005-null-order-robustness/Program.cs": "386ae5f743debc4737abf3d1214b121b863bbef6424a842493d9ad0d233a91fa",
+        "gold/006-transition-validation/Program.cs": "a34af3a3ee9a61352c0a29a370b3fe5a2213607638317fbe60c85ab19bcd8c5e",
+        "gold/007-query-engine-refactor/OrderFlowEngine.cs": "7a1a098f6831603e5d0807c83e5e05639ca027a5ae2dd89f61431ac7299d9ad9",
+        "gold/007-query-engine-refactor/Program.cs": "12fc6895c67e8a0193af74e32aaa3fe8f1d91f939ff7bee7e009deb18d196c82",
+        "gold/008-summary-api/OrderFlowEngine.cs": "15ae65bad6524a17ad93f1e5b926d43dca1d9904cfb513a97d1aafd1775dcb7c",
+        "gold/008-summary-api/Program.cs": "12fc6895c67e8a0193af74e32aaa3fe8f1d91f939ff7bee7e009deb18d196c82"
+      },
+      "fsharp": {
+        "baseline/OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+        "baseline/Program.fs": "95dbee612e24da34bbd2bc57e8687880db88f05d042af832f7785c206ae3ae4d",
+        "gold/001-priority/Program.fs": "14f4451d5cbb2ce05d858eaa9fa1a6189188a1c748a18774dde6f85d6cfaec4b",
+        "gold/002-overdue/Program.fs": "662104a5fbf10381c31f87317e329afb735811d0ffc6d15ca783eb42acbeab3f",
+        "gold/003-at-risk-window/Program.fs": "92aa1b935511b5f5029c8919ceaa03c85d2120f58cb394d85461bd049080e6d9",
+        "gold/004-vip-ready/Program.fs": "0581f388143ba1574754d527cd045b1b1adb0f94e0e7c94fa6d2a689fd141c2c",
+        "gold/005-null-order-robustness/Program.fs": "e0745daae4d5093b5327ef1a61fd7ae5818a82d125bdf50d2ad9f981c2d44b3f",
+        "gold/006-transition-validation/Program.fs": "e3d3d6856f025a5f148d926035b1d3ea0a66c6308cfd57cce9dc89b0de11e2c8",
+        "gold/007-query-engine-refactor/OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+        "gold/007-query-engine-refactor/OrderFlowEngine.fs": "1ff2b9b341e4f9dbf371608c125819149e3fb4aa21f8248792ec99ba92b85e91",
+        "gold/007-query-engine-refactor/Program.fs": "7e79b908eaa9b26f969ad35a3c9b088e8eeb9e708d1c24f5e7211f0d35122e5d",
+        "gold/008-summary-api/OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+        "gold/008-summary-api/OrderFlowEngine.fs": "76c73103097b4abae1389b79dd224c4c847c17db71975a18d85dd4ded5c74b5c",
+        "gold/008-summary-api/Program.fs": "7e79b908eaa9b26f969ad35a3c9b088e8eeb9e708d1c24f5e7211f0d35122e5d"
+      }
+    }
+  },
+  "generator_source": {
+    "path": "src/alf/representation.py",
+    "sha256": "a236f9a0eabd38890f90cf15c1f54a357e551def3d6651116ba0a474638a120d"
+  },
+  "original_manifest": {
+    "path": "benchmarks/successor/manifest.json",
+    "sha256": "dd440baf352a3b33adc625d478df44424efb1069e1a479d2fbe8f086044a6f0d"
+  },
+  "schema_version": 1,
+  "source_commit": "4e58677e0bfff18c2104298ad35fc4e801bbd052",
+  "task_prompts": {
+    "001-priority": {
+      "path": "benchmarks/successor/tasks/001-priority/task.md",
+      "sha256": "4b003212969d3c3537f65d82320ba88ee42bb5a20a13e3ce6951f16dcfb1f1c0"
+    },
+    "002-overdue": {
+      "path": "benchmarks/successor/tasks/002-overdue/task.md",
+      "sha256": "c166e62c2ed2f915a2865555ad824a8cc63b74ef1980b43f0a6b5ce62a94545c"
+    },
+    "003-at-risk-window": {
+      "path": "benchmarks/successor/tasks/003-at-risk-window/task.md",
+      "sha256": "b37955c3b54b1a04a5359715969d7e97692cfe013fa22e6c4fd85a965a429199"
+    },
+    "004-vip-ready": {
+      "path": "benchmarks/successor/tasks/004-vip-ready/task.md",
+      "sha256": "90d06aa42a610bc8e55d5e8f03cb6d47e305ca3f044baf7cc4a4032a1151556e"
+    },
+    "005-null-order-robustness": {
+      "path": "benchmarks/successor/tasks/005-null-order-robustness/task.md",
+      "sha256": "4ce101299b1d61acf53d1e61344fbcee7f40a9ae7c88e1283b9e8ff5834c9c50"
+    },
+    "006-transition-validation": {
+      "path": "benchmarks/successor/tasks/006-transition-validation/task.md",
+      "sha256": "0ac889d9ea84732feffee90400461f985676cc1800dfb680d5542100db054a01"
+    },
+    "007-query-engine-refactor": {
+      "path": "benchmarks/successor/tasks/007-query-engine-refactor/task.md",
+      "sha256": "26ce7bb89282d4ba89e966e1abb2e15873314449ab19a4711809d0b7c303cbc5"
+    },
+    "008-summary-api": {
+      "path": "benchmarks/successor/tasks/008-summary-api/task.md",
+      "sha256": "4db339c6e5e95535ca8f4cfe3235b864372179cb15cc138b3592686fc5de1139"
+    }
+  }
+}

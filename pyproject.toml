@@ -7,7 +7,7 @@ name = "agentic-language-fitness"
 version = "0.1.0"
 description = "Measure lifetime coding-agent cost across matched programming-language representations"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["tiktoken==0.14.0"]
 
 [project.scripts]
 alf = "alf.cli:main"
