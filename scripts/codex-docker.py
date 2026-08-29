@@ -137,12 +137,26 @@ def image_identifier(image: str) -> str:
     try:
         result = subprocess.run(
             ["docker", "image", "inspect", image, "--format", "{{.Id}}"],
-            text=True, capture_output=True, check=False,
+            text=True, encoding="utf-8", errors="replace", capture_output=True, check=False,
         )
         value = (result.stdout or "").strip()
         return value if result.returncode == 0 and value else "unavailable"
     except (OSError, subprocess.SubprocessError):
         return "unavailable"
+
+
+def write_output(stream, value: str) -> None:
+    """Write candidate text without letting a narrow Windows console abort the run."""
+    try:
+        stream.write(value)
+    except UnicodeEncodeError:
+        buffer = getattr(stream, "buffer", None)
+        if buffer is not None:
+            buffer.write(value.encode("utf-8", errors="replace"))
+        else:
+            encoding = getattr(stream, "encoding", None) or "utf-8"
+            stream.write(value.encode(encoding, errors="replace").decode(encoding, errors="replace"))
+    stream.flush()
 
 
 def minimized_auth(source: Path | None) -> Path | None:
@@ -222,6 +236,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 auth_status = subprocess.run(
                     build_login_status_argv(auth, args.image),
                     text=True,
+                    encoding="utf-8",
+                    errors="replace",
                     capture_output=True,
                     timeout=30,
                     check=False,
@@ -242,6 +258,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 command,
                 input=SAFETY_PROMPT + task,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 capture_output=True,
                 timeout=timeout,
             )
@@ -258,10 +276,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     finally:
         if auth is not None:
             auth.unlink(missing_ok=True)
-    sys.stdout.write(completed.stdout)
-    sys.stdout.flush()
-    sys.stderr.write(completed.stderr)
-    sys.stderr.flush()
+    write_output(sys.stdout, completed.stdout)
+    write_output(sys.stderr, completed.stderr)
     write_usage(workspace, completed.stdout, args.model, args.image)
     sidecar = workspace / ".alf" / "usage.json"
     data = json.loads(sidecar.read_text(encoding="utf-8"))

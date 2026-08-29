@@ -15,6 +15,37 @@ SPEC.loader.exec_module(module)
 
 
 class CodexDockerTests(unittest.TestCase):
+    def test_non_cp1252_output_does_not_block_usage_sidecar(self):
+        class NarrowSink(StringIO):
+            encoding = "cp1252"
+
+            def write(self, value):
+                value.encode(self.encoding)
+                return super().write(value)
+
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            stdout = json.dumps({"type": "turn.completed", "usage": {
+                "input_tokens": 1, "cached_input_tokens": 0,
+                "cache_write_input_tokens": 0, "output_tokens": 1,
+                "reasoning_output_tokens": 0,
+            }, "message": "你好 😀"}, ensure_ascii=False) + "\n"
+
+            def run(command, **_kwargs):
+                if command[0:3] == ["docker", "image", "inspect"]:
+                    return type("Inspect", (), {"returncode": 0, "stdout": "sha256:test", "stderr": ""})()
+                return type("Done", (), {"returncode": 0, "stdout": stdout, "stderr": "错误 😀\n"})()
+
+            with (
+                patch.object(module.subprocess, "run", side_effect=run),
+                patch.object(module.sys, "stdout", NarrowSink()),
+                patch.object(module.sys, "stderr", NarrowSink()),
+            ):
+                self.assertEqual(module.main(["--workspace", str(workspace), "--prompt", "task"]), 0)
+            sidecar = json.loads((workspace / ".alf" / "usage.json").read_text(encoding="utf-8"))
+            self.assertTrue(sidecar["usage_available"])
+            self.assertTrue(sidecar["accounting_valid"])
+
     def test_reasoning_effort_is_pinned_in_wrapper_argv(self):
         with tempfile.TemporaryDirectory() as directory:
             with patch.dict(
@@ -45,8 +76,10 @@ class CodexDockerTests(unittest.TestCase):
                     "usage": {"input_tokens": 7, "output_tokens": 3},
                 }
             )
+            calls = []
 
-            def run(command, **_kwargs):
+            def run(command, **kwargs):
+                calls.append((command, kwargs))
                 if command[0:3] == ["docker", "image", "inspect"]:
                     return type(
                         "Inspect",
@@ -90,6 +123,10 @@ class CodexDockerTests(unittest.TestCase):
         self.assertEqual(
             sidecar["container_limits"], {"memory": "2g", "cpus": 2, "pids": 256}
         )
+        self.assertEqual(calls[0][1]["encoding"], "utf-8")
+        self.assertEqual(calls[0][1]["errors"], "replace")
+        self.assertEqual(calls[1][1]["encoding"], "utf-8")
+        self.assertEqual(calls[1][1]["errors"], "replace")
 
     def test_required_auth_preflight_failure_skips_candidate_call(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -127,6 +164,31 @@ class CodexDockerTests(unittest.TestCase):
         self.assertFalse(sidecar["auth_ok"])
         self.assertEqual(len(calls), 1)
         self.assertEqual(calls[0][0:3], ["docker", "image", "inspect"])
+
+    def test_auth_preflight_uses_utf8_replacement_decoding(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            auth = workspace / "auth.json"
+            auth.write_text("{}", encoding="utf-8")
+            calls = []
+
+            def run(command, **kwargs):
+                calls.append((command, kwargs))
+                if command[0:3] == ["docker", "image", "inspect"]:
+                    return type("Inspect", (), {"returncode": 0, "stdout": "sha256:test", "stderr": ""})()
+                if "login" in command:
+                    return type("Auth", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+                return type("Done", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+
+            with (
+                patch.object(module, "resolve_auth_path", return_value=auth),
+                patch.object(module.subprocess, "run", side_effect=run),
+                patch.object(module.sys, "stdout", new_callable=StringIO),
+            ):
+                self.assertEqual(module.main(["--workspace", str(workspace), "--prompt", "task", "--require-auth-preflight"]), 0)
+
+        self.assertEqual(calls[1][1]["encoding"], "utf-8")
+        self.assertEqual(calls[1][1]["errors"], "replace")
 
     def test_command_mounts_only_workspace_and_auth_read_only(self):
         with tempfile.TemporaryDirectory() as directory:
