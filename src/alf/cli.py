@@ -10,6 +10,7 @@ from typing import Any
 from .config import DEFAULT_MANIFEST, REQUIRED_DOTNET_SDK, find_repo_root, load_manifest
 from .runner import environment_snapshot, run_chain, validate_benchmark
 from .audit import audit_run
+from .protocol import validate_cell, write_frozen_manifest
 
 
 def _root_and_manifest(args: argparse.Namespace) -> tuple[Path, dict[str, Any]]:
@@ -59,6 +60,11 @@ def cmd_run(args: argparse.Namespace) -> int:
         require_usage=args.require_usage,
         timeout=args.timeout,
         max_tasks=args.max_tasks,
+        protocol_manifest=Path(args.protocol_manifest).resolve() if args.protocol_manifest else None,
+        block_id=args.block_id,
+        order=args.order,
+        attempt_id=args.attempt_id,
+        position=args.position,
     )
     result = json.loads((run_dir / "result.json").read_text(encoding="utf-8"))
     print(json.dumps({"run_dir": str(run_dir), "success": result["success"]}, indent=2))
@@ -66,6 +72,8 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 
 def cmd_matrix(args: argparse.Namespace) -> int:
+    if args.protocol_manifest or args.block_id or args.attempt_id or args.order or args.position:
+        raise ValueError("protocol runs must use two ordered `alf run` calls; matrix is not supported")
     if args.require_usage and args.agent != "command":
         raise ValueError("--require-usage is valid only with --agent command")
     root, manifest = _root_and_manifest(args)
@@ -87,6 +95,11 @@ def cmd_matrix(args: argparse.Namespace) -> int:
             require_usage=args.require_usage,
             timeout=args.timeout,
             max_tasks=args.max_tasks,
+            protocol_manifest=Path(args.protocol_manifest).resolve() if args.protocol_manifest else None,
+            block_id=args.block_id,
+            order=args.order,
+            attempt_id=args.attempt_id,
+            position=args.position,
         )
         result = json.loads((run_dir / "result.json").read_text(encoding="utf-8"))
         rows.append({"language": language.strip(), "run_dir": str(run_dir), "success": result["success"]})
@@ -147,6 +160,18 @@ def cmd_audit(args: argparse.Namespace) -> int:
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0 if report["ok"] else 1
 
+def cmd_protocol_validate(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    report = validate_cell(root, args.definition)
+    print(json.dumps(report, indent=2, sort_keys=True))
+    return 0 if report["ok"] else 1
+
+def cmd_protocol_freeze(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    path = write_frozen_manifest(root, args.definition, Path(args.output))
+    print(json.dumps({"manifest": str(path), "manifest_sha256": json.loads(path.read_text())["manifest_sha256"]}, indent=2))
+    return 0
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="alf", description="Agentic Language Fitness benchmark harness")
@@ -173,6 +198,11 @@ def build_parser() -> argparse.ArgumentParser:
         p.add_argument("--output", default="results")
         p.add_argument("--timeout", type=float, default=600)
         p.add_argument("--max-tasks", type=int)
+        p.add_argument("--protocol-manifest", help="Resolved frozen protocol manifest for an auditable run")
+        p.add_argument("--block-id")
+        p.add_argument("--order", choices=["csharp-first", "fsharp-first"])
+        p.add_argument("--attempt-id")
+        p.add_argument("--position", type=int, choices=[1, 2])
 
     run = sub.add_parser("run", help="Run one language through the maintenance chain")
     add_run_arguments(run, True)
@@ -190,6 +220,15 @@ def build_parser() -> argparse.ArgumentParser:
     audit = sub.add_parser("audit", help="Reconcile a run's task and aggregate artifacts")
     audit.add_argument("path")
     audit.set_defaults(func=cmd_audit)
+    protocol = sub.add_parser("protocol", help="Validate or freeze an experimental protocol cell")
+    protocol_sub = protocol.add_subparsers(dest="protocol_command", required=True)
+    pv = protocol_sub.add_parser("validate")
+    pv.add_argument("--definition", required=True)
+    pv.set_defaults(func=cmd_protocol_validate)
+    pf = protocol_sub.add_parser("freeze")
+    pf.add_argument("--definition", required=True)
+    pf.add_argument("--output", required=True)
+    pf.set_defaults(func=cmd_protocol_freeze)
     return parser
 
 

@@ -1,0 +1,33 @@
+{
+  "status": "derived-redacted-not-accepted-observation",
+  "selected_source": "recovered F# 001-priority and 002-overdue tasks",
+  "source_run_hash": "539576170a0009164fbb7b8462c7d94bebf8d7dbcc8a96edf75e0f4afbda74dd",
+  "source_hashes": {
+    "001-priority agent.stdout": "8ee22b9047b307dca241429086da6a7b986d685738e0c4ebc3d4f9ff2a8c3326",
+    "001-priority original events.jsonl (empty)": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "001-priority original task-result.json": "63f2b1977dc5e7825dc3de5b7289225574606f5a402016900316131c6ad8e722",
+    "002-overdue agent.stdout": "e7d99b36c6f31f3b8653b245b34f8d69855f71b5f7fd95b4e8167dca7dba34e8",
+    "002-overdue original events.jsonl (empty)": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "002-overdue original task-result.json": "85ff7d4cf48a3e3fc8e5887680dcc5acd3cae3d13df90165ea2985020949ab38",
+    "002-overdue final workspace .alf/usage.json": "bc5386a02bfc870465e2d3fd6614709d0846dd4f786b0332529c2df5ee1c12b4"
+  },
+  "observed_timings_seconds": {
+    "full_run_timestamp_delta": 297.617385,
+    "full_run_agent_process": 272.4700000000048,
+    "full_run_task_evaluator": 23.327000000001136,
+    "001-priority_task": 186.280462,
+    "task_and_selected_run_total": 110.009695,
+    "agent_process": 98.57900000000154,
+    "evaluator_build_plus_run": 11.218000000000757
+  },
+  "expected_audit": {
+    "ok": true,
+    "run_id": "legacy-redacted-fsharp-full",
+    "task_count": 2,
+    "event_count": 52,
+    "command_count": 16,
+    "file_change_count": 2,
+    "usage_records": 2,
+    "aggregate_usage": {"input_tokens": 317078, "cached_input_tokens": 276480, "cache_write_input_tokens": 0, "output_tokens": 5963, "reasoning_output_tokens": 2251, "tool_calls": 18}
+  }
+}

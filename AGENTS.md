@@ -16,16 +16,16 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-CI is green after commit `8711ea9ebceb39c18abd56659a5bf41e555f62d2`, and the A3 accounting implementation is materially advanced. Follow the immediate continuation order in `PLAN.md`:
+CI is green after commit `a882180234ee01dd3a6a101c916cc01159d1e0bf`. Historical recovery and real-output A3 reconciliation are complete. The `variance-v1` protocol apparatus passed independent review and model-free validation but is not yet committed or frozen. Follow the immediate continuation order in `PLAN.md`:
 
-1. recover and audit the exact historical raw run, or explicitly retire it as unaudited legacy evidence;
-2. complete accounting reconciliation with a real redacted fixture;
-3. freeze protocol, provenance, failure, inclusion, and order-schedule rules;
-4. run one non-counting audited calibration block;
-5. collect 10 new counterbalanced paired blocks under one unchanged cell;
-6. produce the variance/power decision report before extending the benchmark.
+1. commit the reviewed apparatus, then generate the resolved manifest from that clean HEAD;
+2. run one non-counting audited calibration block under the frozen manifest;
+3. collect 10 new counterbalanced paired blocks under one unchanged cell;
+4. produce the variance/power decision report before extending the benchmark.
 
-Do not use the historical Markdown token totals as validated data, do not reconstruct missing raw artifacts, and do not count the old pair as part of the planned 10-block sample.
+The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use the historical Markdown token totals as validated data, do not reconstruct or repair raw artifacts, and do not count the old pair as part of the planned 10-block sample.
+
+Do not launch a candidate/model call until the reviewed apparatus is committed and `results/variance-v1/resolved-manifest.json` has been generated successfully from that clean HEAD.
 
 ## Development agents versus benchmarked agents
 
@@ -58,4 +58,4 @@ For the isolated Codex path, build with `make docker-build`, smoke-test with `ma
 
 ## Historical exploratory result
 
-The 2026-08-26 pair is summarized in `docs/preliminary-results-2026-08-26.md`. Its expected raw directory was `results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3/`, but that directory is currently unavailable. Until the exact artifacts are recovered and pass `alf audit`, the pair is an unaudited smoke-test observation and is excluded from formal aggregates, variance estimation, and power analysis.
+The 2026-08-26 pair is summarized in `docs/preliminary-results-2026-08-26.md`. Its exact raw directory is recovered at `results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3/`, but the legacy artifacts fail `alf audit`; the pair remains an unaudited smoke-test observation excluded from formal aggregates, variance estimation, and power analysis.

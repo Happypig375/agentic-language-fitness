@@ -57,17 +57,27 @@ def build_docker_argv(
     auth_file: Path | None = None,
     model: str | None = None,
     docker_executable: str = "docker",
+    *,
+    reasoning_effort: str | None = None,
+    memory: str | None = None,
+    cpus: int | None = None,
+    pids_limit: int | None = None,
 ) -> list[str]:
     """Build argv using Docker --mount flags (never a shell command)."""
     for path in (workspace, auth_file):
         if path is not None and "," in str(path):
             raise ValueError("Docker mount paths containing commas are unsupported")
     name = f"alf-codex-{uuid.uuid4().hex[:16]}"
+    resolved_memory = memory or os.environ.get("ALF_DOCKER_MEMORY", "2g")
+    resolved_cpus = cpus if cpus is not None else int(os.environ.get("ALF_DOCKER_CPUS", "2"))
+    resolved_pids = pids_limit if pids_limit is not None else int(os.environ.get("ALF_DOCKER_PIDS", "256"))
+    if not resolved_memory or resolved_cpus <= 0 or resolved_pids <= 0:
+        raise ValueError("Docker memory, CPU, and PID limits must be positive")
     argv = [docker_executable, "run", "--rm", "-i", "--name", name,
             "--network", "bridge", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
-            "--pids-limit", os.environ.get("ALF_DOCKER_PIDS", "256"),
-            "--memory", os.environ.get("ALF_DOCKER_MEMORY", "2g"),
-            "--cpus", os.environ.get("ALF_DOCKER_CPUS", "2"), "--user", "codex",
+            "--pids-limit", str(resolved_pids),
+            "--memory", resolved_memory,
+            "--cpus", str(resolved_cpus), "--user", "codex",
             "--mount", f"type=bind,src={workspace.resolve()},dst=/workspace"]
     if auth_file is not None:
         argv.extend(["--mount", f"type=bind,src={auth_file.resolve()},dst=/home/codex/.codex/auth.json,readonly"])
@@ -78,6 +88,10 @@ def build_docker_argv(
     ])
     if model:
         argv.extend(["--model", model])
+    if reasoning_effort:
+        if reasoning_effort not in {"low", "medium", "high"}:
+            raise ValueError("reasoning_effort must be low, medium, or high")
+        argv.extend(["--config", f"model_reasoning_effort={reasoning_effort}"])
     argv.append("-")
     return argv
 
@@ -106,6 +120,7 @@ def write_usage(workspace: Path, stdout: str, model: str | None, image: str | No
         "image": image,
         "derived_from_codex_jsonl": True,
         "usage_available": bool(counts.get("usage_records") and counts.get("usage_valid")),
+        "usage_record_count": counts.get("usage_records", 0),
         "accounting_valid": bool(counts.get("accounting_valid")),
         "usage_errors": counts.get("usage_errors", []),
         "file_reads": counts.get("file_reads", 0),
@@ -160,6 +175,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--prompt-file", default=os.environ.get("ALF_PROMPT_FILE"))
     parser.add_argument("--prompt", default=None)
     parser.add_argument("--model", default=os.environ.get("ALF_MODEL") or os.environ.get("CODEX_MODEL"))
+    parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default=os.environ.get("ALF_REASONING_EFFORT"))
+    parser.add_argument("--memory", default=os.environ.get("ALF_DOCKER_MEMORY", "2g"))
+    parser.add_argument("--cpus", type=int, default=os.environ.get("ALF_DOCKER_CPUS", "2"))
+    parser.add_argument("--pids-limit", type=int, default=os.environ.get("ALF_DOCKER_PIDS", "256"))
+    parser.add_argument("--require-auth-preflight", action="store_true")
     parser.add_argument("--image", default=os.environ.get("ALF_CODEX_IMAGE") or os.environ.get("CODEX_IMAGE") or IMAGE_DEFAULT)
     parser.add_argument("--auth", default=os.environ.get("CODEX_AUTH_FILE"))
     args = parser.parse_args(argv)
@@ -176,21 +196,64 @@ def main(argv: Sequence[str] | None = None) -> int:
     auth = minimized_auth(auth_source)
     image_id = image_identifier(args.image)
     try:
-        command = build_docker_argv(workspace, args.image, auth, args.model)
+        command = build_docker_argv(
+            workspace,
+            args.image,
+            auth,
+            args.model,
+            reasoning_effort=args.reasoning_effort,
+            memory=args.memory,
+            cpus=args.cpus,
+            pids_limit=args.pids_limit,
+        )
     except Exception:
         if auth is not None:
             auth.unlink(missing_ok=True)
         raise
     name = command[command.index("--name") + 1]
     timeout = float(os.environ.get("ALF_TIMEOUT", "300"))
+    timed_out = False
+    auth_ok: bool | None = None
     try:
-        completed = subprocess.run(command, input=SAFETY_PROMPT + task, text=True, capture_output=True, timeout=timeout)
+        if args.require_auth_preflight:
+            if auth is None:
+                auth_ok = False
+            else:
+                auth_status = subprocess.run(
+                    build_login_status_argv(auth, args.image),
+                    text=True,
+                    capture_output=True,
+                    timeout=30,
+                    check=False,
+                )
+                auth_ok = auth_status.returncode == 0
+        if args.require_auth_preflight and not auth_ok:
+            completed = type(
+                "AuthFailure",
+                (),
+                {
+                    "stdout": "",
+                    "stderr": "Codex authentication preflight failed\n",
+                    "returncode": 78,
+                },
+            )()
+        else:
+            completed = subprocess.run(
+                command,
+                input=SAFETY_PROMPT + task,
+                text=True,
+                capture_output=True,
+                timeout=timeout,
+            )
     except subprocess.TimeoutExpired as exc:
+        timed_out = True
         subprocess.run(["docker", "rm", "-f", name], capture_output=True, check=False)
+
         class TimeoutResult:
             stdout = decode_output(exc.stdout)
             stderr = decode_output(exc.stderr)
             returncode = 124
+
         completed = TimeoutResult()
     finally:
         if auth is not None:
@@ -203,6 +266,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     sidecar = workspace / ".alf" / "usage.json"
     data = json.loads(sidecar.read_text(encoding="utf-8"))
     data["image_id"] = image_id
+    data["reasoning_effort"] = args.reasoning_effort
+    data["timed_out"] = timed_out
+    data["auth_ok"] = auth_ok
+    data["container_limits"] = {
+        "memory": args.memory,
+        "cpus": args.cpus,
+        "pids": args.pids_limit,
+    }
     sidecar.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
     return completed.returncode
 

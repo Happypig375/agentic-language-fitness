@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "cell_id": "variance-v1",
+  "description": "New counterbalanced F#/C# maintenance cell; not comparable with the unaudited 2026-08-26 pair.",
+  "benchmark_manifest": "benchmarks/pilot/manifest.json",
+  "benchmark_manifest_sha256": "3bc392b6014b3ef8cbb5211d2fd5e9f48ddf8a40f5aa165a0c78b1fc9d975a9e",
+  "task_hashes": {
+    "001-priority": "f4f5c955601e75c4f54c7f340712a413bf76544119212e192121f243575d2667",
+    "002-overdue": "13accefea35effaf32d0e18d8fe0684589b0301a24ba4ae71e962bb85cba686a"
+  },
+  "model": {
+    "snapshot": "gpt-5.4-mini-2026-03-17",
+    "reasoning_effort": "medium"
+  },
+  "codex": {
+    "cli_version": "0.149.1",
+    "image": "alf-codex:0.149.1",
+    "dockerfile": "Dockerfile.codex-agent"
+  },
+  "image_archive": {
+    "path": "X:\\backup20260827\\Archives\\SourceRepos\\agentic-language-fitness-images\\alf-codex-0.149.1-sha256-0320a60c5b2628ce.tar",
+    "bytes": 630053888,
+    "sha256": "55ee85f0656cef429d1cd40edced79782d54abb7b2180c9770c14bea06828ddf",
+    "local_image_id": "sha256:0320a60c5b2628cebeb2c897bbf80da949f3b9bb99fa61f5a3475c7276328756"
+  },
+  "toolchain": {
+    "dotnet_sdk": "10.0.302",
+    "target_framework": "net10.0"
+  },
+  "limits": {
+    "task_timeout_seconds": 600,
+    "evaluator_timeout_seconds": 300,
+    "memory": "2g",
+    "cpus": 2,
+    "pids": 256
+  },
+  "network_policy": "bridge network; candidate egress and external documentation are allowed equally for both languages; mounts are limited to /workspace plus the read-only minimized authentication file",
+  "documentation_policy": "No benchmark/evaluator/gold files or parent repository are exposed to candidate",
+  "artifact_policy": {
+    "raw": "retain every attempt outside Git",
+    "redaction": "remove credentials and prompt/transcript secrets",
+    "retention": "retain raw and hashes for the study record"
+  },
+  "failure_taxonomy": ["agent", "provider", "auth", "host", "evaluator", "timeout", "protocol", "accounting"],
+  "failure_precedence": [
+    "protocol",
+    "auth",
+    "provider",
+    "host",
+    "timeout",
+    "accounting",
+    "agent",
+    "evaluator"
+  ],
+  "inclusion": {
+    "formal_outcomes": "Include every protocol-valid scheduled candidate attempt in success and time outcomes, including candidate correctness failures, agent failures, candidate-agent timeouts, and task-evaluation process timeouts.",
+    "metric_missingness": "Use an attempt in a metric aggregate only when that metric is valid and available; token aggregates require a sidecar derived from preserved Codex JSONL with exactly one turn.completed usage record per ephemeral task invocation, while a timeout without terminal usage remains in success and time outcomes with token fields unavailable; zero or multiple terminal records are accounting-invalid rather than guessed or summed.",
+    "infrastructure_invalid": "Retain and report protocol, authentication, provider, host, and evaluator-infrastructure invalid attempts, but exclude them from paired performance estimates; evaluator infrastructure means a failed baseline or malformed evaluator envelope, while a valid task evaluator envelope reporting build, run, or case failure is a candidate outcome; accounting-invalid fields are excluded from their affected metric aggregates.",
+    "calibration": "The calibration block is non-counting and excluded from formal estimates.",
+    "sensitivity": "Report all failures and repeat analyses excluding any disputed category."
+  },
+  "retry_policy": "Retry only an attempt automatically classified as protocol/auth/provider/host/evaluator infrastructure-invalid and retryable. Number attempts sequentially per block position and atomically reserve the validated attempt ID as its run directory. The first candidate outcome, including agent failure, correctness failure, timeout, or accounting-invalid outcome, is the immutable primary and cannot be retried or replaced.",
+  "fresh_process": true,
+  "schedule_file": "protocols/variance-v1/schedule.json",
+  "raw_root": "results/variance-v1",
+  "retention": {
+    "location": "results/variance-v1 plus read-only study archive",
+    "period": "retain raw artifacts and full hashes for at least five years after study publication or closure",
+    "redaction": "credentials and transcript secrets removed before any curated fixture is committed; raw transcripts never enter Git"
+  }
+}

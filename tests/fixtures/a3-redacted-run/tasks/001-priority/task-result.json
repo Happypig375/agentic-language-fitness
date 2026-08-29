@@ -1,0 +1,20 @@
+{
+  "task_id": "001-priority",
+  "agent": {
+    "ok": true,
+    "usage": {"input_tokens": 233794, "cached_input_tokens": 206336, "cache_write_input_tokens": 0, "output_tokens": 3948, "reasoning_output_tokens": 1540, "tool_calls": 13},
+    "usage_available": true,
+    "accounting_valid": true,
+    "accounting_errors": [],
+    "event_count": 35,
+    "command_count": 12,
+    "file_change_count": 1,
+    "failed_event_count": 0,
+    "file_reads": 0,
+    "unique_file_reads": 0,
+    "file_revisits": 0,
+    "usage_record_count": 1
+  },
+  "success": true,
+  "task_total_wall_seconds": 186.280462
+}

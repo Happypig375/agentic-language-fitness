@@ -1,6 +1,6 @@
 # Historical exploratory paired result (2026-08-26)
 
-> **Provenance status as of 2026-08-29:** the expected raw run directory is currently unavailable. The figures below are retained as a historical smoke-test summary, but they have not been reconciled with the hardened `alf audit` accounting path. Exclude this pair from formal aggregates, variance estimation, power calculations, and language-effect claims unless the exact raw artifacts are recovered and pass audit. Do not reconstruct raw records from these totals.
+> **Provenance status as of 2026-08-29:** the exact raw run directory was recovered and hash-preserved; see `docs/historical-run-recovery-2026-08-29.md`. The legacy artifacts fail the hardened `alf audit` schema checks, so the figures below remain a historical smoke-test summary. Exclude this pair from formal aggregates, variance estimation, power calculations, and language-effect claims. Do not reconstruct or repair raw records from these totals.
 
 The container-isolated rerun reportedly completed both inherited tasks for both languages: F# 2/2 and C# 2/2, with all cumulative behavioral cases passing. This was one stochastic run per language over two small tasks; it does not estimate a language effect, uncertainty interval, significance, or causal conclusion.
 
@@ -18,13 +18,10 @@ The recorded aggregate input was nearly tied (F# +1.3%), but task direction reve
 
 The original note stated that all four processes exited successfully, builds had zero warnings/errors, and artifact scans found no credential leakage. Those statements also require the original artifacts for independent verification.
 
-The expected raw location was the local, ignored directory:
+The recovered working copy is the local, ignored directory:
 
 ```text
 results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3/
 ```
 
-Valid continuation outcomes are:
-
-1. recover the exact directory, preserve hashes, and run `alf audit`; or
-2. permanently classify this pair as unaudited legacy evidence and begin the formal dataset with a new frozen-protocol calibration and 10 new counterbalanced paired blocks.
+The exact artifacts are recovered, but the pair is permanently classified as unaudited legacy evidence because its schema predates the current accounting/provenance contract. Begin the formal dataset with a new frozen-protocol calibration and 10 new counterbalanced paired blocks.

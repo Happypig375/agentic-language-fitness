@@ -5,14 +5,34 @@ from pathlib import Path
 from alf.audit import audit_run
 
 class AuditTests(unittest.TestCase):
+    def test_reconciles_derived_redacted_recovered_fixture(self):
+        fixture = Path(__file__).parent / "fixtures" / "a3-redacted-run"
+        report = audit_run(fixture)
+        self.assertTrue(report["ok"], report["errors"])
+        result = json.loads((fixture / "result.json").read_text())
+        self.assertEqual(len(result["tasks"]), 2)
+        self.assertEqual(result["aggregate_usage"]["input_tokens"], 317078)
+        self.assertEqual(sum(t["agent"]["event_count"] for t in result["tasks"]), 52)
+        self.assertAlmostEqual(result["run_total_wall_seconds"], 297.617385)
+        self.assertAlmostEqual(result["tasks"][0]["task_total_wall_seconds"], 186.280462)
+        self.assertAlmostEqual(result["tasks"][1]["task_total_wall_seconds"], 110.009695)
+        selected_task = json.loads((fixture / "tasks" / "002-overdue" / "task-result.json").read_text())
+        self.assertAlmostEqual(selected_task["task_total_wall_seconds"], 110.009695)
+        provenance = json.loads((fixture / "provenance.json").read_text())
+        self.assertAlmostEqual(provenance["observed_timings_seconds"]["agent_process"], 98.57900000000154)
+        self.assertEqual(provenance["source_run_hash"], "539576170a0009164fbb7b8462c7d94bebf8d7dbcc8a96edf75e0f4afbda74dd")
+        self.assertEqual(provenance["source_hashes"]["001-priority agent.stdout"], "8ee22b9047b307dca241429086da6a7b986d685738e0c4ebc3d4f9ff2a8c3326")
+        self.assertEqual(provenance["source_hashes"]["002-overdue agent.stdout"], "e7d99b36c6f31f3b8653b245b34f8d69855f71b5f7fd95b4e8167dca7dba34e8")
+        self.assertTrue(provenance["expected_audit"]["ok"])
+
     def _derived_fixture(self):
         root = Path(tempfile.mkdtemp()); task_dir = root / "tasks" / "t1"; task_dir.mkdir(parents=True)
         usage = {k: 0 for k in ("input_tokens", "cached_input_tokens", "cache_write_input_tokens", "output_tokens", "reasoning_output_tokens", "tool_calls")}
         event = {"type": "turn.completed", "usage": {k: usage[k] for k in usage if k != "tool_calls"}}
         raw = json.dumps(event) + "\n"; (task_dir / "agent.stdout").write_text(raw); (task_dir / "events.jsonl").write_text(raw)
-        side = {**usage, "event_count": 1, "command_count": 0, "file_change_count": 0, "failed_event_count": 0, "file_reads": 0, "unique_file_reads": 0, "file_revisits": 0, "accounting_valid": True, "usage_available": True, "usage_errors": [], "derived_from_codex_jsonl": True}
+        side = {**usage, "event_count": 1, "command_count": 0, "file_change_count": 0, "failed_event_count": 0, "file_reads": 0, "unique_file_reads": 0, "file_revisits": 0, "usage_record_count": 1, "accounting_valid": True, "usage_available": True, "usage_errors": [], "derived_from_codex_jsonl": True}
         (task_dir / "usage.json").write_text(json.dumps(side))
-        agent = {"ok": True, "usage": usage, "usage_available": True, "accounting_valid": True, "accounting_errors": [], "event_count": 1, "command_count": 0, "file_change_count": 0, "failed_event_count": 0, "file_reads": 0, "unique_file_reads": 0, "file_revisits": 0}
+        agent = {"ok": True, "usage": usage, "usage_available": True, "accounting_valid": True, "accounting_errors": [], "event_count": 1, "command_count": 0, "file_change_count": 0, "failed_event_count": 0, "file_reads": 0, "unique_file_reads": 0, "file_revisits": 0, "usage_record_count": 1}
         tr = {"task_id": "t1", "agent": agent, "task_total_wall_seconds": 1, "success": True}; (task_dir / "task-result.json").write_text(json.dumps(tr))
         run = {"run_id": "x", "agent": "command", "require_usage": True, "tasks": [tr], "aggregate_usage": usage, "aggregate_usage_available": True, "aggregate_accounting_valid": True, "run_total_wall_seconds": 1, "evaluator_wall_seconds": 0, "agent_process_wall_seconds": 0, "success": True}
         (root / "result.json").write_text(json.dumps(run)); return root
@@ -25,6 +45,11 @@ class AuditTests(unittest.TestCase):
 
     def test_detects_sidecar_task_mismatch(self):
         root = self._derived_fixture(); side = root / "tasks" / "t1" / "usage.json"; side.write_text(side.read_text().replace('"event_count": 1', '"event_count": 2')); self.assertFalse(audit_run(root)["ok"])
+
+    def test_detects_sidecar_usage_record_count_mismatch(self):
+        root = self._derived_fixture(); side = root / "tasks" / "t1" / "usage.json"
+        side.write_text(side.read_text().replace('"usage_record_count": 1', '"usage_record_count": 2'))
+        self.assertFalse(audit_run(root)["ok"])
 
     def test_detects_task_result_run_mismatch(self):
         root = self._derived_fixture(); run = json.loads((root / "result.json").read_text()); run["tasks"][0]["success"] = False; (root / "result.json").write_text(json.dumps(run)); self.assertFalse(audit_run(root)["ok"])

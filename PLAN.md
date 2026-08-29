@@ -11,12 +11,14 @@ Completed:
 - cumulative language-neutral black-box evaluation;
 - fresh process and container per maintenance task with inherited candidate code;
 - isolated Codex command adapter with pinned CLI/image metadata;
-- green Linux and Windows CI on commit `8711ea9ebceb39c18abd56659a5bf41e555f62d2`;
+- green Linux and Windows CI on commit `a882180234ee01dd3a6a101c916cc01159d1e0bf`;
 - A3 accounting machinery: strict Codex usage validation and summation, stale-sidecar removal, required-usage mode, per-task sidecar preservation, separated timing categories, conservative file-read/revisit telemetry, and the read-only `alf audit` reconciler;
-- one historical exploratory F#/C# pair in which both languages completed both tasks.
+- exact recovery and hash-preservation of the historical exploratory F#/C# pair, with its legacy audit failure and exclusion recorded;
+- a derived, redacted two-task real-output fixture whose raw stdout, event copies, usage sidecars, task envelopes, run aggregates, timings, and source hashes reconcile exactly under `alf audit`;
+- a tracked `variance-v1` protocol draft plus fail-closed validation, clean-freeze, image-archive verification, pinned resource/authentication enforcement, attempt reservation, retry, classification, and inclusion machinery;
+- independent protocol review with no remaining P1/P2 findings and a model-free validation checkpoint: 67 affected tests, strict doctor, benchmark validation, both scripted chains, Docker smoke, protocol validation, real archive re-hash, A3 fixture audit, and both expected 21-error legacy audits. The dirty-tree freeze refusal was also verified. No resolved manifest or candidate run has been created yet.
 
-The historical pair is **not formal study data** at present. Its expected raw directory,
-`results/codex-docker-dotnet10-gpt-5.6-luna-seed20260826-rerun3/`, is unavailable, so the checked-in summary cannot be independently reconciled against raw JSONL with the new accounting audit. It must not be included in the planned 10-block variance dataset unless the exact artifacts are recovered and pass `alf audit` without reconstruction.
+The historical pair is **not formal study data**. The exact raw directory was recovered and hash-preserved on 2026-08-29, but its legacy artifacts fail the current `alf audit` schema checks; see `docs/historical-run-recovery-2026-08-29.md`. It remains excluded from the planned 10-block variance dataset.
 
 Even if recovered, the pair remains exploratory because it predates the current accounting/provenance protocol, used one F#-then-C# order, had only one stochastic observation per language, and saturated correctness on a two-task chain.
 
@@ -26,45 +28,43 @@ Remain in **Phase 1: measurement and feasibility**. The immediate objective is n
 
 Do not claim an F# advantage, begin confirmatory analysis, or expand to multiple repositories until these gates are met:
 
-1. cross-platform CI is green — **met**;
-2. the historical raw run is either recovered and audited or explicitly retired from analysis;
-3. usage/event accounting is reconciled against at least one real raw run fixture;
-4. protocol, provenance, failure, and inclusion rules are frozen before data collection;
-5. repeated counterbalanced pairs quantify stochastic, task, temporal, and order variance;
-6. the benchmark is recalibrated if correctness remains saturated.
+1. cross-platform CI is green — **met at `a882180234ee01dd3a6a101c916cc01159d1e0bf`**;
+2. the historical raw run is either recovered and audited or explicitly retired from analysis — **met: recovered, hash-preserved, legacy-audit failure recorded, excluded**;
+3. usage/event accounting is reconciled against at least one real raw run fixture — **met for the recovered one-record-per-task evidence**;
+4. protocol, provenance, failure, and inclusion rules are frozen before data collection — **implementation complete; clean committed freeze pending**;
+5. repeated counterbalanced pairs quantify stochastic, task, temporal, and order variance — **pending**;
+6. the benchmark is recalibrated if correctness remains saturated — **pending the variance report**.
 
 ## Immediate continuation order
 
-### 0. Resolve the historical-run status
+### 0. Resolve the historical-run status — complete: recovered, legacy audit failure
 
-Perform one explicit recovery pass for the exact original directory and its task-level raw files. Check the originating host/WSL environment, backups, archived terminal workspace, and any deliberately retained external run storage. Do not recreate raw artifacts from the Markdown totals.
+The explicit recovery pass found the exact original directory and task-level raw files in the original project mirror and preserved immutable/hash-checked copies. Search scope and hashes are recorded in `docs/historical-run-recovery-2026-08-29.md`. No raw artifact was recreated from Markdown totals.
 
-Two valid outcomes:
-
-- **Recovered:** preserve an immutable copy, calculate hashes, run `alf audit`, redact a small representative fixture, and document every discrepancy.
-- **Not recovered:** mark the pair permanently as an unaudited legacy smoke test, exclude it from every formal aggregate and power calculation, and use a new calibration run as the first auditable observation.
+The recovered copy runs through `alf audit` but reports `ok=false` for the documented legacy-schema discrepancies. It is therefore retained as hash-preserved exploratory evidence, excluded from every formal aggregate and power calculation, and not counted as a variance block. A new calibration run remains the first auditable observation.
 
 This decision must be recorded before interpreting the old token numbers further. Recovery failure is a provenance result, not a reason to block the project indefinitely.
 
-### 1. Complete A3 with a real reconciliation fixture
+### 1. Complete A3 with a real reconciliation fixture — complete for recovered evidence
 
 The accounting implementation is materially advanced but not scientifically complete until exercised against actual raw agent output.
 
-Required work:
+Completed work:
 
-- verify whether Codex CLI emits incremental or cumulative usage when more than one `turn.completed.usage` record appears;
-- reconcile raw `agent.stdout`, parsed `events.jsonl`, copied `usage.json`, embedded task results, and run aggregates;
-- confirm from the endpoint/version whether cached input is a subset of `input_tokens`, not an additive quantity;
-- preserve input, cached input, cache-write input, output, reasoning output, and tool calls separately;
-- test missing, malformed, negative, duplicated, and multi-record usage cases;
-- calibrate the conservative file-read/revisit extractor against real command events and document its recall limitations;
-- create a redacted raw-run fixture whose `alf audit` result and expected aggregate are unit-tested.
+- reconciled raw `agent.stdout`, redacted event copies, copied `usage.json`, embedded task results, timings, and run aggregates for both recovered F# tasks;
+- confirmed from the official usage definition that cached input is a subset/breakdown of input rather than an additive quantity;
+- preserved input, cached input, cache-write input, output, reasoning output, and tool calls separately;
+- retained tests for missing, malformed, negative, duplicated, and multi-record usage cases, and made accepted protocol accounting require exactly one derived terminal record per ephemeral task;
+- documented the conservative file-read/revisit extractor's grammar and recall limitations;
+- committed a redacted real-output fixture whose `alf audit` result and exact aggregate are unit-tested.
 
-If the historical run is unavailable, perform this step on the non-counting calibration run in step 3.
+Each recovered task has exactly one terminal usage record. The pinned Codex 0.149.1 schema and implementation identify the terminal counters as the turn's `ThreadTokenUsage.total`, but the recovered evidence cannot validate a multi-record aggregation rule. The accepted protocol therefore requires exactly one derived terminal record per one-turn ephemeral task; zero or multiple records make token accounting invalid and force protocol review rather than a guessed sum.
 
-**Exit:** a real raw fixture reproduces the recorded task and run aggregates exactly, accounting semantics are documented, and any unavailable telemetry remains unavailable rather than zero.
+**Exit met:** `tests/fixtures/a3-redacted-run` reproduces the recorded task and run aggregates exactly; `docs/accounting-reconciliation-2026-08-29.md` records semantics and limitations.
 
-### 2. Freeze protocol and provenance before accepted runs
+### 2. Freeze protocol and provenance before accepted runs — implementation complete; clean freeze pending
+
+The tracked draft is `protocols/variance-v1/definition.json`. It defines a new cell pinned to `gpt-5.4-mini-2026-03-17`, medium reasoning, Codex CLI/image `0.149.1`, immutable image ID and verified archive, .NET `10.0.302`, explicit Docker limits, one non-counting calibration, and ten pre-generated balanced formal blocks. It is not continuity with the historical Luna pair. The harness now fails closed on dirty or changed Git state, mismatched benchmark/task hashes, probes, image/archive, model/settings/limits, schedule position, attempt identity, retry eligibility, or inclusion disposition.
 
 Create a versioned protocol/manifest for the first variance cell. At minimum record:
 
@@ -84,9 +84,9 @@ A nominal `seed` may identify schedule generation and harness randomness. It mus
 
 If the original model/CLI/container combination cannot still be pinned, define a **new experimental cell**. Do not mix a changed backend or scaffold into the old pair as though it were a replication.
 
-**Exit:** a reviewer can determine in advance which attempts enter analysis and can reproduce every accepted aggregate from preserved artifacts.
+**Current status:** the tracked definition and implementation passed independent review and model-free validation. A resolved manifest deliberately does not exist because the working tree is uncommitted; the freeze command was verified to reject this state without creating `results/variance-v1`. The exact next action is a maintainer-authorized commit of the reviewed apparatus, followed by a freeze from that clean HEAD and then calibration. The exit is not met until the clean resolved manifest is retained.
 
-### 3. Run one non-counting end-to-end calibration block
+### 3. Run one non-counting end-to-end calibration block — next experimental action after clean freeze
 
 After steps 0–2, run one paired F#/C# block under the frozen protocol. Its purpose is apparatus verification, not estimation.
 
@@ -101,6 +101,8 @@ The calibration must:
 - expose any provider, timing, or read-telemetry incompatibility before the 10-block run.
 
 If the protocol or harness changes in response, increment the protocol version and repeat the calibration. The final calibration does not count toward the variance sample.
+
+No model-backed calibration has been launched for `variance-v1`.
 
 ### 4. Collect the counterbalanced variance pilot
 
@@ -154,21 +156,21 @@ Decision gate:
 - [x] Windows unit, doctor, and matched-snapshot validation job.
 - [x] Exact .NET SDK pin with feature-band roll-forward disabled.
 
-### A2. Protocol freeze — next after A3 disposition
+### A2. Protocol freeze — reviewed and model-free validated; clean committed freeze pending
 
-Complete immediate continuation steps 0–3.
+Commit the reviewed protocol apparatus, generate the resolved manifest from that clean HEAD, then complete calibration. The freeze must continue to fail closed if the commit, image, archive, toolchain, or host facts differ.
 
-### A3. Usage accounting — implementation complete, empirical reconciliation pending
+### A3. Usage accounting — real-output reconciliation complete
 
-The code path is now guarded and auditable. The remaining requirement is a real raw fixture and an explicit disposition of the missing historical run.
+The code path is guarded and auditable, the historical run has an explicit disposition, and the checked-in derived/redacted fixture reconciles the authentic single-record-per-task evidence. Accepted protocol runs fail accounting closed unless each ephemeral task has exactly one derived terminal usage record.
 
-### A4. Result provenance — not complete
+### A4. Result provenance — implementation complete; resolved manifest pending
 
-Complete the versioned manifest, hashes, retention policy, failure taxonomy, and inclusion rules before accepted variance runs.
+The versioned definition, hashes, retention policy, failure taxonomy, metric-specific inclusion rules, retry rules, and attempt reservation exist. Generate and retain the resolved manifest only from a reviewed, committed, clean checkout before any accepted run.
 
 ## Workstream B — Estimate stochastic and order variance
 
-Execute immediate continuation steps 4–5. The first formal cell should use one pin-able model/agent/scaffold configuration. The previously reported `gpt-5.6-luna`/Codex CLI `0.149.1` combination may be reused only if it can still be held constant and recorded; otherwise define a new cell rather than asserting continuity.
+Execute immediate continuation steps 4–5. The first formal cell is the new `variance-v1` configuration pinned in its tracked definition. Do not pool it with or describe it as a replication of the previously reported `gpt-5.6-luna` pair.
 
 ## Workstream C — Recalibrate the benchmark
 

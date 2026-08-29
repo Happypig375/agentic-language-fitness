@@ -18,11 +18,12 @@ def _nonnegative_int(value: Any) -> bool:
 
 
 class CommandAgent(Agent):
-    def __init__(self, command_template: str, *, require_usage: bool = False):
+    def __init__(self, command_template: str, *, require_usage: bool = False, expected_protocol: dict[str, Any] | None = None):
         if not command_template.strip():
             raise ValueError("--agent-command is required for the command adapter")
         self.command_template = command_template
         self.require_usage = require_usage
+        self.expected_protocol = expected_protocol
 
     def run(
         self,
@@ -74,8 +75,11 @@ class CommandAgent(Agent):
         data: dict[str, Any] = {}
         accounting_valid = not self.require_usage
         usage_available = False
+        auth_ok: bool | None = None
+        container_limits: dict[str, Any] | None = None
         accounting_errors: list[str] = []
         events: list[dict[str, Any]] = []
+        usage_record_count = 0
         if sidecar.is_file():
             try:
                 value = json.loads(sidecar.read_text(encoding="utf-8"))
@@ -89,6 +93,7 @@ class CommandAgent(Agent):
             derived = data.get("derived_from_codex_jsonl") is True
             if derived:
                 parsed_events, parsed_usage, parsed_counts = parse_codex_jsonl(process.stdout)
+                usage_record_count = parsed_counts["usage_records"]
                 usage_available = parsed_counts["usage_records"] > 0 and parsed_counts["usage_valid"]
                 accounting_valid = parsed_counts["accounting_valid"]
                 accounting_errors.extend(parsed_counts["usage_errors"])
@@ -101,6 +106,7 @@ class CommandAgent(Agent):
                              "file_change_count": parsed_counts["file_changes"], "failed_event_count": parsed_counts["failed_events"],
                              "file_reads": parsed_counts["file_reads"], "unique_file_reads": parsed_counts["unique_file_reads"],
                              "file_revisits": parsed_counts["file_revisits"]}
+                count_map["usage_record_count"] = parsed_counts["usage_records"]
                 for name, expected in count_map.items():
                     value = data.get(name)
                     if not _nonnegative_int(value) or value != expected:
@@ -127,6 +133,12 @@ class CommandAgent(Agent):
                 if _nonnegative_int(value):
                     setattr(usage, field, value)
             model = data.get("model") if isinstance(data.get("model"), str) else None
+            auth_ok = data.get("auth_ok") if isinstance(data.get("auth_ok"), bool) else None
+            container_limits = (
+                data.get("container_limits")
+                if isinstance(data.get("container_limits"), dict)
+                else None
+            )
             if not derived and not accounting_errors:
                 usage_available = True
         def count(name: str) -> int:
@@ -139,13 +151,59 @@ class CommandAgent(Agent):
             accounting_errors.append("required fresh usage sidecar is missing")
         if self.require_usage and not usage_available:
             accounting_valid = False
+        expected = self.expected_protocol
+        if expected:
+            pins = expected["definition"]
+            checks = {
+                "model": pins["model"]["snapshot"],
+                "reasoning_effort": pins["model"]["reasoning_effort"],
+                "image": pins["codex"]["image"],
+                "image_id": expected["image_id"],
+            }
+            for field, wanted in checks.items():
+                if data.get(field) != wanted:
+                    accounting_valid = False
+                    accounting_errors.append(f"protocol sidecar mismatch: {field}")
+            if data.get("derived_from_codex_jsonl") is not True:
+                accounting_valid = False
+                accounting_errors.append(
+                    "protocol sidecar mismatch: derived_from_codex_jsonl"
+                )
+            elif usage_record_count != 1:
+                accounting_valid = False
+                accounting_errors.append(
+                    "protocol accounting requires exactly one turn.completed usage record"
+                )
+            wanted_limits = {
+                "memory": pins["limits"]["memory"],
+                "cpus": pins["limits"]["cpus"],
+                "pids": pins["limits"]["pids"],
+            }
+            if container_limits != wanted_limits:
+                accounting_valid = False
+                accounting_errors.append("protocol sidecar mismatch: container_limits")
+            if not isinstance(data.get("auth_ok"), bool):
+                accounting_valid = False
+                accounting_errors.append("protocol sidecar mismatch: auth_ok")
+            wrapper_timed_out = data.get("timed_out")
+            if not isinstance(wrapper_timed_out, bool):
+                accounting_valid = False
+                accounting_errors.append("protocol sidecar mismatch: timed_out")
+            elif wrapper_timed_out != (process.returncode == 124):
+                accounting_valid = False
+                accounting_errors.append("protocol sidecar/process timeout mismatch")
+            elif wrapper_timed_out:
+                process.timed_out = True
         return AgentResult(
             process=process, usage=usage, model=model,
             event_count=count("event_count"), command_count=count("command_count"),
             file_change_count=count("file_change_count"), failed_event_count=count("failed_event_count"),
             file_reads=count("file_reads"), unique_file_reads=count("unique_file_reads"), file_revisits=count("file_revisits"),
+            usage_record_count=usage_record_count,
             accounting_valid=accounting_valid,
             usage_available=usage_available,
             accounting_errors=accounting_errors,
             events=events,
+            auth_ok=auth_ok,
+            container_limits=container_limits,
         )

@@ -126,7 +126,7 @@ def audit_run(run_dir: Path) -> dict[str, Any]:
             if result.get("agent") == "codex" and accounting_errors != counts["usage_errors"]:
                 errors.append(f"{task_id}: accounting_errors disagree with raw JSONL")
             expected = {"event_count": len(parsed_events), "command_count": counts["commands"], "file_change_count": counts["file_changes"],
-                        "failed_event_count": counts["failed_events"], "file_reads": counts["file_reads"], "unique_file_reads": counts["unique_file_reads"], "file_revisits": counts["file_revisits"]}
+                        "failed_event_count": counts["failed_events"], "file_reads": counts["file_reads"], "unique_file_reads": counts["unique_file_reads"], "file_revisits": counts["file_revisits"], "usage_record_count": counts["usage_records"]}
             for key, value in expected.items():
                 if agent.get(key) != value:
                     errors.append(f"{task_id}: {key} disagrees with raw JSONL")

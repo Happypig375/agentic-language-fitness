@@ -164,6 +164,7 @@ class CodexAgent(Agent):
             failed_event_count=counts["failed_events"],
             file_reads=counts["file_reads"], unique_file_reads=counts["unique_file_reads"],
             file_revisits=counts["file_revisits"],
+            usage_record_count=counts["usage_records"],
             events=events,
             accounting_valid=counts["accounting_valid"],
             usage_available=counts["usage_records"] > 0 and counts["usage_valid"],

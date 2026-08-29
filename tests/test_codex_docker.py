@@ -15,6 +15,119 @@ SPEC.loader.exec_module(module)
 
 
 class CodexDockerTests(unittest.TestCase):
+    def test_reasoning_effort_is_pinned_in_wrapper_argv(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with patch.dict(
+                module.os.environ,
+                {"ALF_DOCKER_MEMORY": "9g", "ALF_DOCKER_CPUS": "9", "ALF_DOCKER_PIDS": "999"},
+            ):
+                command = module.build_docker_argv(
+                    Path(directory),
+                    "image",
+                    model="gpt-test",
+                    reasoning_effort="medium",
+                    memory="2g",
+                    cpus=2,
+                    pids_limit=256,
+                )
+        self.assertIn("--ignore-user-config", command)
+        self.assertIn(["--config", "model_reasoning_effort=medium"], [command[i:i + 2] for i in range(len(command) - 1)])
+        self.assertEqual(command[command.index("--memory") + 1], "2g")
+        self.assertEqual(command[command.index("--cpus") + 1], "2")
+        self.assertEqual(command[command.index("--pids-limit") + 1], "256")
+
+    def test_main_records_reasoning_image_and_image_id_in_sidecar(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            stdout = json.dumps(
+                {
+                    "type": "turn.completed",
+                    "usage": {"input_tokens": 7, "output_tokens": 3},
+                }
+            )
+
+            def run(command, **_kwargs):
+                if command[0:3] == ["docker", "image", "inspect"]:
+                    return type(
+                        "Inspect",
+                        (),
+                        {"returncode": 0, "stdout": "sha256:test\n", "stderr": ""},
+                    )()
+                return type(
+                    "Done",
+                    (),
+                    {"returncode": 0, "stdout": stdout, "stderr": ""},
+                )()
+
+            with (
+                patch.object(module.subprocess, "run", side_effect=run),
+                patch.object(module.sys, "stdout", new_callable=StringIO),
+            ):
+                code = module.main(
+                    [
+                        "--workspace",
+                        str(workspace),
+                        "--prompt",
+                        "task",
+                        "--model",
+                        "gpt-test",
+                        "--reasoning-effort",
+                        "medium",
+                        "--image",
+                        "test-image",
+                    ]
+                )
+            sidecar = json.loads(
+                (workspace / ".alf" / "usage.json").read_text(encoding="utf-8")
+            )
+
+        self.assertEqual(code, 0)
+        self.assertEqual(sidecar["model"], "gpt-test")
+        self.assertEqual(sidecar["reasoning_effort"], "medium")
+        self.assertEqual(sidecar["image"], "test-image")
+        self.assertEqual(sidecar["image_id"], "sha256:test")
+        self.assertFalse(sidecar["timed_out"])
+        self.assertEqual(
+            sidecar["container_limits"], {"memory": "2g", "cpus": 2, "pids": 256}
+        )
+
+    def test_required_auth_preflight_failure_skips_candidate_call(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            calls = []
+
+            def run(command, **_kwargs):
+                calls.append(command)
+                return type(
+                    "Inspect",
+                    (),
+                    {"returncode": 0, "stdout": "sha256:test\n", "stderr": ""},
+                )()
+
+            with (
+                patch.object(module, "resolve_auth_path", return_value=None),
+                patch.object(module.subprocess, "run", side_effect=run),
+                patch.object(module.sys, "stdout", new_callable=StringIO),
+                patch.object(module.sys, "stderr", new_callable=StringIO),
+            ):
+                code = module.main(
+                    [
+                        "--workspace",
+                        str(workspace),
+                        "--prompt",
+                        "task",
+                        "--require-auth-preflight",
+                    ]
+                )
+            sidecar = json.loads(
+                (workspace / ".alf" / "usage.json").read_text(encoding="utf-8")
+            )
+
+        self.assertEqual(code, 78)
+        self.assertFalse(sidecar["auth_ok"])
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(calls[0][0:3], ["docker", "image", "inspect"])
+
     def test_command_mounts_only_workspace_and_auth_read_only(self):
         with tempfile.TemporaryDirectory() as directory:
             workspace = Path(directory) / "workspace"
@@ -43,6 +156,7 @@ class CodexDockerTests(unittest.TestCase):
         self.assertEqual(data["output_tokens"], 3)
         self.assertEqual(data["tool_calls"], 1)
         self.assertEqual(data["command_count"], 1)
+        self.assertEqual(data["usage_record_count"], 1)
         self.assertEqual(data["model"], "gpt-test")
 
     def test_image_identifier_handles_inspect_failure(self):
@@ -87,7 +201,11 @@ class CodexDockerTests(unittest.TestCase):
                 return type("Done", (), {"returncode": 0, "stdout": "", "stderr": ""})()
             with patch.object(module.subprocess, "run", side_effect=run), patch.object(module.sys, "stdout", new_callable=StringIO) as out:
                 code = module.main(["--workspace", str(workspace), "--prompt", "task"])
+            sidecar = json.loads(
+                (workspace / ".alf" / "usage.json").read_text(encoding="utf-8")
+            )
             self.assertEqual(code, 124)
+            self.assertTrue(sidecar["timed_out"])
             self.assertIn("snowman", out.getvalue())
             cleanup = next(call for call in calls if call[0][0][0:3] == ["docker", "rm", "-f"])[0][0]
             self.assertEqual(cleanup[0:3], ["docker", "rm", "-f"])

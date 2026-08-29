@@ -1,0 +1,20 @@
+{
+  "task_id": "002-overdue",
+  "agent": {
+    "ok": true,
+    "usage": {"input_tokens": 83284, "cached_input_tokens": 70144, "cache_write_input_tokens": 0, "output_tokens": 2015, "reasoning_output_tokens": 711, "tool_calls": 5},
+    "usage_available": true,
+    "accounting_valid": true,
+    "accounting_errors": [],
+    "event_count": 17,
+    "command_count": 4,
+    "file_change_count": 1,
+    "failed_event_count": 0,
+    "file_reads": 0,
+    "unique_file_reads": 0,
+    "file_revisits": 0,
+    "usage_record_count": 1
+  },
+  "success": true,
+  "task_total_wall_seconds": 110.009695
+}
