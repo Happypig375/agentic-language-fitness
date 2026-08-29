@@ -312,9 +312,11 @@ legacy/multi-file golds, workspace checks, fail-closed paths, and exact pilot
 baseline/Tasks 001/002 retention. Evidence includes 126 unit tests, strict
 doctor, legacy/successor validation and scripted matrices, serialized Task
 007/008 checks, focused path suites, 18 isolated gold builds, and independent
-harness-security and gold/equivalence reviews with no P1/P2 findings. **C3 is
-next:** implement and validate the representation treatment. The protocol
-freeze, difficulty pilot, and paid/model runs remain blocked. CI for C2 commit
+harness-security and gold/equivalence reviews with no P1/P2 findings. **C3
+design is preregistered and independently approved with no remaining P1/P2
+findings; implementation is next:** see
+`docs/representation-treatment-v1-2026-08-29.md`. The protocol freeze,
+difficulty pilot, and paid/model runs remain blocked. CI for C2 commit
 `4e58677e0bfff18c2104298ad35fc4e801bbd052` is green: GitHub Actions run
 `33258119571` (Linux 2m20s, Windows 2m23s; Node 20 deprecation warnings only).
 Historical fixtures and variance cells remain unchanged

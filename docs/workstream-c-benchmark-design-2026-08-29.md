@@ -1,8 +1,11 @@
 # Workstream C benchmark design
 
 Status: C2 implementation and model-free validation complete and independently
-approved, including the material legacy-behavior clarification below. No paid
-or model-backed run is authorized by this document; C3 is the next gate. CI for
+approved, including the material legacy-behavior clarification below. The C3
+representation design is preregistered and independently approved with no
+remaining P1/P2 findings, in
+`docs/representation-treatment-v1-2026-08-29.md`; implementation and
+implementation review remain pending. No paid or model-backed run is authorized by this document. CI for
 the C2 commit `4e58677e0bfff18c2104298ad35fc4e801bbd052` is green (GitHub
 Actions run `33258119571`; Linux 2m20s, Windows 2m23s; Node 20 deprecation
 warnings only).

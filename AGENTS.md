@@ -25,9 +25,10 @@ approved with no P1/P2 findings. Retained C#/F# Task 002 parameter casing
 differs, but the candidate-visible suffix-free exact strings are symmetric;
 Task 001/002 remain unchanged. The language-equivalence/error review gate is
 closed. C2 implementation and model-free validation are complete and approved.
-C3 representation treatment is the immediate next step and remains pending
-design/implementation/review. The new protocol freeze, difficulty pilot,
-paid/model runs, protocol freeze, and difficulty pilot remain blocked until
+C3 representation treatment is the immediate next step; its design is now
+preregistered and independently approved with no remaining P1/P2 findings;
+implementation and implementation review remain pending. The new protocol
+freeze, difficulty pilot, and paid/model runs remain blocked until
 their gates are complete. Main CI for C2 is green as recorded above.
 
 The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use their legacy Markdown token totals as validated data.
