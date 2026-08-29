@@ -1,4 +1,4 @@
-# difficulty-v1 protocol (definition pending freeze)
+# difficulty-v1 protocol (frozen pilot complete)
 
 This is the non-counting Workstream C difficulty pilot over the independently
 approved eight-task C3 chain. It uses the completed strongest configuration,
@@ -11,7 +11,17 @@ representations. The pilot uses Williams row 1 exactly:
 There is no randomization or seed. No formal blocks are scheduled; any future
 formal cell must repeat complete four-row superblocks.
 
-After review and a clean commit, freeze with:
+The reviewed cell was committed at
+`edc6f3cacfba2aac428a4c60ae426b1cf8f2922d`, passed cross-platform CI, and was
+then frozen from that clean checkout. The resolved manifest's internal
+SHA-256 is
+`c7754684dd999ac21a7a4bac5c0f6c71c4c03f363a0a10e5e81baac1b8c6ca3d`;
+the manifest file SHA-256 is
+`fe34d218e7a62a6341d85d5f548e5aad5c041e99ad8c605b464c0ecd7ce37e51`.
+The pilot is complete; outcomes, exclusions, raw-archive provenance, and the
+next decision gate are in `docs/difficulty-v1-results-2026-08-30.md`.
+
+The freeze commands used were:
 
 ```text
 python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json

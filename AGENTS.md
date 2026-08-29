@@ -16,7 +16,14 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Workstream C's matched eight-task chain and C3 representation treatment are implemented, model-free validated, independently approved, and green cross-platform at main commit `9e1a5a92674313ca6e5f33917b12cb93aa7e1026`, GitHub Actions run `33266189763` (Linux 3m53s, Windows 5m23s; Node 20 deprecation warnings only). Follow the next gate in `PLAN.md`: define and freeze a new protocol cell, then run its non-counting difficulty pilot. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run before the freeze is complete.
+`variance-v2` is complete and documented in
+`docs/variance-v2-results-2026-08-29.md`; its observations are a variance pilot,
+not evidence of a language advantage. Workstream C's matched eight-task chain,
+C3 representation treatment, and frozen non-counting `difficulty-v1` pilot are
+also complete. The cell was frozen at
+`edc6f3cacfba2aac428a4c60ae426b1cf8f2922d` after green GitHub Actions run
+`33269820641`; see `docs/difficulty-v1-results-2026-08-30.md` for the attempt,
+audit, archive, and interpretation record.
 
 The Workstream C design in
 `docs/workstream-c-benchmark-design-2026-08-29.md` is independently reviewed;
@@ -27,13 +34,22 @@ Task 001/002 remain unchanged. The language-equivalence/error review gate is
 closed. C2 implementation and model-free validation are complete and approved.
 C3 representation design, implementation, model-free validation, and
 independent implementation review are complete with no remaining P1/P2/P3
-findings. difficulty-v1 is implemented, model-free validated, and independently
-reviewed with no remaining P1/P2/P3 findings; it is pending commit, green
-cross-platform CI, and clean freeze, then its non-counting difficulty pilot.
-Paid/model runs remain blocked until the freeze is complete. C3 implementation commit
-`31430489102437a48d79fa611b8700e0e11e53fd` and the shallow-checkout CI repair
-at `9e1a5a92674313ca6e5f33917b12cb93aa7e1026` are both pushed; the green run is
-recorded above.
+findings. The difficulty pilot retained four valid primaries: three completed
+all eight tasks, while C# descriptive failed the frozen Task 007 structural
+acceptance checks. The F# deterministic primary remains valid for performance
+metrics but is excluded from representation analysis because candidate edits
+reintroduced descriptive aliases. One Williams row supports no language,
+representation, causal, or significance claim.
+
+The excluded F# attempt exposed a Windows CP1252/UTF-8 subprocess-decoding
+defect. The repair and direct-Unicode regression are committed at
+`73001e1fce14b367c5e257113e328fcfddfc349e` and green in GitHub Actions run
+`33275928430` (Linux 4m05s, Windows 5m27s; Node 20 deprecation annotations
+only). The apparatus gate is closed. The next milestone is Workstream D
+multi-configuration feasibility design, not immediate data collection. Any
+later paid/model run requires a newly reviewed, versioned cell and clean
+freeze; any representation follow-up must use complete counterbalanced blocks
+and explicitly handle treatment drift.
 
 The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use their legacy Markdown token totals as validated data.
 

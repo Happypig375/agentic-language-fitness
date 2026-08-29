@@ -2,7 +2,7 @@
 
 > **Canonical continuation plan.** Maintainer agents must read this file before substantial work. `AGENTS.md` is the automatically discovered entry point and routes agents here. Update this plan whenever the current checkpoint, ordering, or decision gates change.
 
-## Current checkpoint — 2026-08-29
+## Current checkpoint — 2026-08-30
 
 Variance-v2 status (2026-08-29): complete. The clean frozen cell, audited
 calibration, 10 counterbalanced paired blocks, external raw archive, and
@@ -10,7 +10,18 @@ reproducible variance/power reports are summarized in
 `docs/variance-v2-results-2026-08-29.md`. Accounting and provenance are stable,
 but near-saturated correctness plus order/stochastic variance overwhelm a
 plausible 7–8% effect at n=10; no language advantage or significance claim is
-supported. The next milestone is Workstream C benchmark recalibration.
+supported.
+
+Workstream C status (2026-08-30): complete for benchmark recalibration. The
+matched eight-task chain, C3 representation apparatus, reviewed
+`difficulty-v1` definition, clean freeze, four-condition non-counting pilot,
+audits, and read-only raw archive are complete; see
+`docs/difficulty-v1-results-2026-08-30.md`. Three of four primaries completed
+all eight tasks and the retained C# descriptive primary failed Task 007, so the
+strongest configuration is no longer saturated. The single Williams row does
+not identify a language or representation effect, and candidate-caused drift
+makes the F# deterministic representation observation non-interpretable. The
+next milestone is Workstream D multi-configuration feasibility design.
 
 Completed:
 
@@ -24,7 +35,8 @@ Completed:
 - exact recovery and hash-preservation of the historical exploratory F#/C# pair, with its legacy audit failure and exclusion recorded;
 - a derived, redacted two-task real-output fixture whose raw stdout, event copies, usage sidecars, task envelopes, run aggregates, timings, and source hashes reconcile exactly under `alf audit`;
 - a tracked `variance-v1`/`variance-v2` protocol apparatus plus fail-closed validation, clean-freeze, image-archive verification, pinned resource/authentication enforcement, attempt reservation, retry, classification, and inclusion machinery;
-- independent protocol review with no remaining P1/P2 findings and a model-free validation checkpoint; the v1 freeze was followed by the completed v2 clean freeze, calibration, formal paired cell, archive, and variance report (see the result document for hashes and outcomes).
+- independent protocol review with no remaining P1/P2 findings and a model-free validation checkpoint; the v1 freeze was followed by the completed v2 clean freeze, calibration, formal paired cell, archive, and variance report (see the result document for hashes and outcomes);
+- Workstream C's independently reviewed matched eight-task chain and representation treatment, plus the frozen, audited, externally archived `difficulty-v1` pilot.
 
 The historical pair is **not formal study data**. The exact raw directory was recovered and hash-preserved on 2026-08-29, but its legacy artifacts fail the current `alf audit` schema checks; see `docs/historical-run-recovery-2026-08-29.md`. It remains excluded from the planned 10-block variance dataset.
 
@@ -32,23 +44,33 @@ Even if recovered, the pair remains exploratory because it predates the current 
 
 ## Current decision
 
-Cross-platform CI is green at the variance-v2 frozen commit
-`5363e4be8fa6e6ebbcafe24e31f1ec152353b10e`.
+Cross-platform CI is green at the difficulty-v1 frozen commit
+`edc6f3cacfba2aac428a4c60ae426b1cf8f2922d` (GitHub Actions run
+`33269820641`). The post-pilot Windows UTF-8 repair is committed at
+`73001e1fce14b367c5e257113e328fcfddfc349e` and green in run `33275928430`
+(Linux 4m05s, Windows 5m27s; Node 20 deprecation annotations only).
 
 Remain in **Phase 1: measurement and feasibility**. The frozen-cell and
-variance milestone is complete. The immediate objective is Workstream C
-benchmark recalibration: design, review, and implement a longer matched chain.
+variance milestones and Workstream C recalibration are complete. The Windows
+UTF-8 subprocess repair exposed by the pilot is landed and green. The immediate
+objective is to design Workstream D's multi-configuration feasibility cells;
+this does not authorize immediate model runs.
 
-Do not claim an F# advantage, begin confirmatory analysis, or expand to multiple repositories until these gates are met:
+The following Phase 1 prerequisites are now met. Their completion does not
+support an F# advantage or authorize confirmatory analysis or repository
+expansion; follow the Workstream D gate first:
 
-1. cross-platform CI is green — **met at `5363e4be8fa6e6ebbcafe24e31f1ec152353b10e`**;
+1. cross-platform CI is green — **met at
+   `73001e1fce14b367c5e257113e328fcfddfc349e`, run `33275928430`**;
 2. the historical raw run is either recovered and audited or explicitly retired from analysis — **met: recovered, hash-preserved, legacy-audit failure recorded, excluded**;
 3. usage/event accounting is reconciled against at least one real raw run fixture — **met for the recovered one-record-per-task evidence**;
-4. protocol, provenance, failure, and inclusion rules are frozen before data collection — **met for variance-v2**;
+4. protocol, provenance, failure, and inclusion rules are frozen before data collection — **met for variance-v2 and difficulty-v1**;
 5. repeated counterbalanced pairs quantify stochastic, task, temporal, and order variance — **met: 10 paired blocks; see the variance report**;
-6. the benchmark is recalibrated if correctness remains saturated — **next: Workstream C**.
+6. the benchmark is recalibrated if correctness remains saturated — **met:
+   the eight-task difficulty pilot produced late, non-dominated acceptance and
+   trajectory variation; see the difficulty-v1 report**.
 
-## Immediate continuation order
+## Completed variance-v2 continuation history
 
 ### 0. Resolve the historical-run status — complete: recovered, legacy audit failure
 
@@ -183,9 +205,12 @@ The versioned definition, hashes, retention policy, failure taxonomy, metric-spe
 
 ## Workstream B — Estimate stochastic and order variance — complete
 
-The variance-v2 formal cell is complete. Do not pool it with the retired v1 attempt or describe it as a replication of the previously reported `gpt-5.6-luna` pair. Use its decision report to guide Workstream C.
+The variance-v2 formal cell is complete. Do not pool it with the retired v1
+attempt or describe it as a replication of the previously reported
+`gpt-5.6-luna` pair. Its decision report guided Workstream C and continues to
+inform Workstream D's repetition and design choices.
 
-## Workstream C — Recalibrate the benchmark
+## Workstream C — Recalibrate the benchmark — complete
 
 The 2/2 versus 2/2 exploratory result indicates that the chain is too small to measure correctness or defect escape. After the variance report:
 
@@ -200,7 +225,7 @@ The 2/2 versus 2/2 exploratory result indicates that the chain is too small to m
 
 ## Workstream D — Multi-configuration feasibility
 
-Only after A–C:
+With A–C complete, proceed by design first:
 
 - test at least three model/agent configurations spanning capability or scaffolds;
 - block and randomize language order within each configuration;
@@ -283,7 +308,7 @@ The immediate steps 2 (freeze), 3 (calibration), 4 (paired pilot), and 5
 (variance report), plus Workstream A2/A4 and Workstream B, are complete for
 variance-v2.
 
-## Workstream C next-milestone definition of done
+## Workstream C definition of done — met
 
 The benchmark recalibration is complete when a matched cumulative 5–10-task
 chain includes additive change, a cross-cutting schema change, bug diagnosis,
@@ -297,7 +322,7 @@ pilot. The chain, treatment apparatus, golds, and reviews must be complete
 before that new protocol cell is designed and frozen; the pilot follows the
 freeze and precedes any confirmatory run.
 
-## Workstream C gate status (current)
+## Workstream C gate status — complete
 
 The implementation-ready eight-task contract is in
 `docs/workstream-c-benchmark-design-2026-08-29.md`. Its material
@@ -315,11 +340,21 @@ doctor, legacy/successor validation and scripted matrices, serialized Task
 harness-security and gold/equivalence reviews with no P1/P2 findings. **C3 is
 implemented, model-free validated, and independently approved with no remaining
 P1/P2/P3 findings:** see
-`docs/representation-treatment-v1-2026-08-29.md`. **difficulty-v1 is now
-implemented, model-free validated, and independently reviewed with no remaining
-P1/P2/P3 findings; it is pending commit, green cross-platform CI, and clean
-freeze.** Then run its non-counting difficulty pilot. Paid/model runs remain
-blocked until those gates pass. CI for C2 commit
+`docs/representation-treatment-v1-2026-08-29.md`.
+
+**difficulty-v1 is complete.** Its reviewed definition was committed at
+`edc6f3cacfba2aac428a4c60ae426b1cf8f2922d`, passed GitHub Actions run
+`33269820641`, and was frozen from that clean checkpoint with the pinned image.
+The pilot retained four valid primaries and two excluded infrastructure-invalid
+attempts. Three primaries completed 8/8 tasks; C# descriptive stopped at the
+Task 007 structural acceptance checks. This is sufficient late,
+non-impossible task/trajectory variation to close the chain-difficulty gate.
+The F# deterministic primary is excluded only from representation analysis
+because candidate edits reintroduced descriptive aliases. See
+`docs/difficulty-v1-results-2026-08-30.md` for hashes, audits, metrics, and raw
+archive provenance.
+
+CI for C2 commit
 `4e58677e0bfff18c2104298ad35fc4e801bbd052` is green: GitHub Actions run
 `33258119571` (Linux 2m20s, Windows 2m23s; Node 20 deprecation warnings only).
 C3 implementation commit `31430489102437a48d79fa611b8700e0e11e53fd`
@@ -328,3 +363,26 @@ adds the full-history checkout required to verify the pinned C2 source commit;
 GitHub Actions run `33266189763` is green (Linux 3m53s, Windows 5m23s; Node 20
 deprecation warnings only). The C3 commit and cross-platform CI gate are closed.
 Historical fixtures and variance cells remain unchanged and excluded.
+
+No language, representation, causal, or significance claim follows from one
+non-counting Williams row. Do not pool it with the historical pair or
+variance-v2. The Windows UTF-8 repair prompted by the excluded F# attempt is
+committed at `73001e1fce14b367c5e257113e328fcfddfc349e` and green in run
+`33275928430`; that apparatus gate is closed. All later cells still require a
+new versioned clean freeze.
+
+## Immediate continuation order — Workstream D design
+
+Design multi-configuration feasibility before collecting more data:
+
+1. define the scientific comparison and metric-specific outcomes;
+2. select at least three model/agent configurations spanning capability or
+   scaffold;
+3. preregister exclusion, retry, stopping, and paired/hierarchical analysis
+   rules;
+4. derive repetitions from the observed pilot variance and schedule complete
+   counterbalanced blocks;
+5. if representation remains a factor, explicitly prevent or model treatment
+   drift;
+6. review the design independently, obtain green CI, and freeze each versioned
+   cell from a clean checkpoint before any paid/model run.
