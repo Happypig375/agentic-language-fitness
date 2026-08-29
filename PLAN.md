@@ -4,6 +4,14 @@
 
 ## Current checkpoint — 2026-08-29
 
+Variance-v2 status (2026-08-29): complete. The clean frozen cell, audited
+calibration, 10 counterbalanced paired blocks, external raw archive, and
+reproducible variance/power reports are summarized in
+`docs/variance-v2-results-2026-08-29.md`. Accounting and provenance are stable,
+but near-saturated correctness plus order/stochastic variance overwhelm a
+plausible 7–8% effect at n=10; no language advantage or significance claim is
+supported. The next milestone is Workstream C benchmark recalibration.
+
 Completed:
 
 - scoped and adversarial literature review with a narrowed, defensible research gap;
@@ -16,7 +24,7 @@ Completed:
 - exact recovery and hash-preservation of the historical exploratory F#/C# pair, with its legacy audit failure and exclusion recorded;
 - a derived, redacted two-task real-output fixture whose raw stdout, event copies, usage sidecars, task envelopes, run aggregates, timings, and source hashes reconcile exactly under `alf audit`;
 - a tracked `variance-v1`/`variance-v2` protocol apparatus plus fail-closed validation, clean-freeze, image-archive verification, pinned resource/authentication enforcement, attempt reservation, retry, classification, and inclusion machinery;
-- independent protocol review with no remaining P1/P2 findings and a model-free validation checkpoint: 67 affected tests, strict doctor, benchmark validation, both scripted chains, Docker smoke, protocol validation, real archive re-hash, A3 fixture audit, and both expected 21-error legacy audits. The dirty-tree freeze refusal was also verified. The v1 resolved manifest was clean-frozen with SHA-256 `0afe05f37d5fbfbe51cf336af1f515680b84856c99921041e7ea4a4cf82e08ca`; no v2 manifest or formal candidate run has been created.
+- independent protocol review with no remaining P1/P2 findings and a model-free validation checkpoint; the v1 freeze was followed by the completed v2 clean freeze, calibration, formal paired cell, archive, and variance report (see the result document for hashes and outcomes).
 
 The historical pair is **not formal study data**. The exact raw directory was recovered and hash-preserved on 2026-08-29, but its legacy artifacts fail the current `alf audit` schema checks; see `docs/historical-run-recovery-2026-08-29.md`. It remains excluded from the planned 10-block variance dataset.
 
@@ -24,16 +32,21 @@ Even if recovered, the pair remains exploratory because it predates the current 
 
 ## Current decision
 
-Remain in **Phase 1: measurement and feasibility**. The immediate objective is no longer to add features or languages; it is to produce a frozen, auditable first experimental cell.
+Cross-platform CI is green at the variance-v2 frozen commit
+`5363e4be8fa6e6ebbcafe24e31f1ec152353b10e`.
+
+Remain in **Phase 1: measurement and feasibility**. The frozen-cell and
+variance milestone is complete. The immediate objective is Workstream C
+benchmark recalibration: design, review, and implement a longer matched chain.
 
 Do not claim an F# advantage, begin confirmatory analysis, or expand to multiple repositories until these gates are met:
 
-1. cross-platform CI is green — **met at `7dda2bd232376b84968bd616a79d8043699c48c7`**;
+1. cross-platform CI is green — **met at `5363e4be8fa6e6ebbcafe24e31f1ec152353b10e`**;
 2. the historical raw run is either recovered and audited or explicitly retired from analysis — **met: recovered, hash-preserved, legacy-audit failure recorded, excluded**;
 3. usage/event accounting is reconciled against at least one real raw run fixture — **met for the recovered one-record-per-task evidence**;
-4. protocol, provenance, failure, and inclusion rules are frozen before data collection — **v1 freeze complete; v2 clean committed freeze pending**;
-5. repeated counterbalanced pairs quantify stochastic, task, temporal, and order variance — **pending**;
-6. the benchmark is recalibrated if correctness remains saturated — **pending the variance report**.
+4. protocol, provenance, failure, and inclusion rules are frozen before data collection — **met for variance-v2**;
+5. repeated counterbalanced pairs quantify stochastic, task, temporal, and order variance — **met: 10 paired blocks; see the variance report**;
+6. the benchmark is recalibrated if correctness remains saturated — **next: Workstream C**.
 
 ## Immediate continuation order
 
@@ -62,9 +75,9 @@ Each recovered task has exactly one terminal usage record. The pinned Codex 0.14
 
 **Exit met:** `tests/fixtures/a3-redacted-run` reproduces the recorded task and run aggregates exactly; `docs/accounting-reconciliation-2026-08-29.md` records semantics and limitations.
 
-### 2. Freeze protocol and provenance before accepted runs — implementation complete; clean freeze pending
+### 2. Freeze protocol and provenance before accepted runs — complete for variance-v2
 
-The next tracked cell is `protocols/variance-v2/definition.json`. It pins `gpt-5.4`, medium reasoning, Codex CLI/image `0.149.1`, the immutable image ID and verified archive, .NET `10.0.302`, explicit Docker limits, one non-counting calibration, and ten pre-generated balanced formal blocks. It is not continuity with either the retired v1 attempt or the historical Luna pair. The harness now fails closed on dirty or changed Git state, mismatched benchmark/task hashes, probes, image/archive, model/settings/limits, schedule position, attempt identity, retry eligibility, or inclusion disposition.
+The completed cell is defined by `protocols/variance-v2/definition.json`. It pins `gpt-5.4`, medium reasoning, Codex CLI/image `0.149.1`, the immutable image ID and verified archive, .NET `10.0.302`, explicit Docker limits, one non-counting calibration, and ten pre-generated balanced formal blocks. It is not continuity with either the retired v1 attempt or the historical Luna pair. The harness now fails closed on dirty or changed Git state, mismatched benchmark/task hashes, probes, image/archive, model/settings/limits, schedule position, attempt identity, retry eligibility, or inclusion disposition.
 
 Create a versioned protocol/manifest for the first variance cell. At minimum record:
 
@@ -84,9 +97,9 @@ A nominal `seed` may identify schedule generation and harness randomness. It mus
 
 If the original model/CLI/container combination cannot still be pinned, define a **new experimental cell**. Do not mix a changed backend or scaffold into the old pair as though it were a replication.
 
-**Current status:** `variance-v1` was clean-frozen with resolved-manifest SHA-256 `0afe05f37d5fbfbe51cf336af1f515680b84856c99921041e7ea4a4cf82e08ca`; its first C# calibration attempt (`calibration-01-csharp-01`) was provider-infrastructure-invalid because authenticated Codex rejected unsupported model `gpt-5.4-mini-2026-03-17`, before any candidate task edit or terminal usage. Position 2 and formal runs did not execute. The next cell is `variance-v2`: commit the reviewed apparatus, confirm CI is green from that clean commit, freeze `results/variance-v2/resolved-manifest.json`, then run its full non-counting calibration. The exit is not met until the v2 clean resolved manifest and calibration evidence are retained.
+**Current status:** `variance-v1` remains retired after its provider-invalid calibration attempt. `variance-v2` is now the completed cell: clean freeze, calibration, 10 formal paired blocks, archive, and decision report are retained. The result document records the exact provenance and exclusion rules.
 
-### 3. Run one non-counting end-to-end calibration block — next experimental action after clean freeze
+### 3. Run one non-counting end-to-end calibration block — complete for variance-v2
 
 After the v2 clean freeze, run one paired F#/C# block under the frozen protocol. Its purpose is apparatus verification, not estimation.
 
@@ -102,9 +115,9 @@ The calibration must:
 
 If the protocol or harness changes in response, increment the protocol version and repeat the calibration. The final calibration does not count toward the variance sample.
 
-The v1 calibration was attempted but was provider-invalid before any candidate outcome; v2 calibration remains pending.
+The v1 calibration was attempted but was provider-invalid before any candidate outcome; v2 calibration passed and is non-counting evidence only.
 
-### 4. Collect the counterbalanced variance pilot
+### 4. Collect the counterbalanced variance pilot — complete: 10 paired blocks
 
 Use the current small chain only to estimate stochastic and order variance. Under one unchanged protocol cell, collect at least **10 complete paired blocks**:
 
@@ -126,7 +139,7 @@ Primary pilot outcomes, interpreted jointly with correctness:
 
 The unaudited historical pair is not block 0 and is excluded from these ten blocks.
 
-### 5. Produce the variance and decision report
+### 5. Produce the variance and decision report — complete
 
 Before extending the benchmark, report:
 
@@ -156,7 +169,7 @@ Decision gate:
 - [x] Windows unit, doctor, and matched-snapshot validation job.
 - [x] Exact .NET SDK pin with feature-band roll-forward disabled.
 
-### A2. Protocol freeze — reviewed and model-free validated; clean committed freeze pending
+### A2. Protocol freeze — complete for variance-v2
 
 Commit the reviewed protocol apparatus, generate the resolved manifest from that clean HEAD, then complete calibration. The freeze must continue to fail closed if the commit, image, archive, toolchain, or host facts differ.
 
@@ -164,13 +177,13 @@ Commit the reviewed protocol apparatus, generate the resolved manifest from that
 
 The code path is guarded and auditable, the historical run has an explicit disposition, and the checked-in derived/redacted fixture reconciles the authentic single-record-per-task evidence. Accepted protocol runs fail accounting closed unless each ephemeral task has exactly one derived terminal usage record.
 
-### A4. Result provenance — implementation complete; resolved manifest pending
+### A4. Result provenance — complete for variance-v2
 
 The versioned definition, hashes, retention policy, failure taxonomy, metric-specific inclusion rules, retry rules, and attempt reservation exist. Generate and retain the resolved manifest only from a reviewed, committed, clean checkout before any accepted run.
 
-## Workstream B — Estimate stochastic and order variance
+## Workstream B — Estimate stochastic and order variance — complete
 
-Execute immediate continuation steps 4–5 after the v2 calibration. The first formal cell is the new `variance-v2` configuration pinned in its tracked definition. Do not pool it with the retired v1 attempt or describe it as a replication of the previously reported `gpt-5.6-luna` pair.
+The variance-v2 formal cell is complete. Do not pool it with the retired v1 attempt or describe it as a replication of the previously reported `gpt-5.6-luna` pair. Use its decision report to guide Workstream C.
 
 ## Workstream C — Recalibrate the benchmark
 
@@ -254,9 +267,9 @@ Reframe or stop if:
 
 Those outcomes remain scientifically useful: they would show that language choice is a weak lever compared with agent/scaffold, source quality, or stochastic trajectory effects.
 
-## Next milestone definition of done
+## Completed variance-v2 milestone definition of done
 
-The next milestone is complete when:
+The milestone was completed when:
 
 - the historical run is recovered and audited or explicitly retired;
 - a real raw fixture passes `alf audit` and guards accounting semantics in tests;
@@ -265,3 +278,19 @@ The next milestone is complete when:
 - 10 new counterbalanced paired blocks are preserved under one unchanged cell;
 - a variance and power report determines whether and how to extend the chain;
 - no language claim exceeds those observations.
+
+The immediate steps 2 (freeze), 3 (calibration), 4 (paired pilot), and 5
+(variance report), plus Workstream A2/A4 and Workstream B, are complete for
+variance-v2.
+
+## Workstream C next-milestone definition of done
+
+The benchmark recalibration is complete when a matched cumulative 5–10-task
+chain includes additive change, a cross-cutting schema change, bug diagnosis,
+a behavior-preserving refactor, and an API/backward-compatibility constraint;
+at least one within-language representation treatment is implemented and
+independently reviewed; cumulative black-box cases remain language-neutral with gold data
+outside candidate workspaces; both implementations pass idiomaticity and
+behavioral-equivalence review; and the longer chain produces measurable,
+non-dominated correctness and trajectory variation. Only then should a new
+protocol cell be designed and frozen before any paid/model run.

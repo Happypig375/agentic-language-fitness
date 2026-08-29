@@ -25,6 +25,20 @@ No single score is sufficient. Correctness is primary; cost metrics are interpre
 
 Report **tokens per correct task** and model success jointly rather than rewarding cheap failures.
 
+## Variance-pilot reporting
+
+For paired language runs, retain per-task and aggregate differences (F# − C#)
+and log ratios, with language order, chain position, block time, and temporal
+trend shown explicitly. Input-token totals include cached input as a component;
+cached input is not added again. Infrastructure-invalid attempts remain in the
+attempt ledger but are excluded from paired performance estimates under the
+frozen inclusion rules. Correctness failures remain valid primary observations
+for success and time outcomes.
+
+The 2026-08-29 variance-v2 report is a feasibility/variance pilot. Its sample
+does not support causal, significance, or language-advantage claims; report
+stochastic and order variance before interpreting small cost differences.
+
 ## Repository/context metrics
 
 - source files, bytes, lines, and approximate lexical tokens;

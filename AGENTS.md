@@ -16,16 +16,9 @@ When work changes project status, ordering, assumptions, or acceptance criteria,
 
 ## Current priority
 
-CI is green after commit `7dda2bd232376b84968bd616a79d8043699c48c7`. Historical recovery and real-output A3 reconciliation are complete. `variance-v1` was clean-frozen, but its first C# calibration attempt was provider-infrastructure-invalid because authenticated Codex rejected unsupported model `gpt-5.4-mini-2026-03-17`; no candidate task edit or terminal usage occurred, and position 2/formal runs did not execute. Follow the immediate continuation order in `PLAN.md`:
+`variance-v2` is complete and documented in `docs/variance-v2-results-2026-08-29.md`; its formal observations are a variance pilot, not evidence of a language advantage. Follow the next milestone in `PLAN.md`: design and independently review Workstream C's matched cumulative 5–10-task chain, implement and validate that longer benchmark chain, then define and freeze a new protocol cell. Keep the historical pair and retired v1 attempt excluded, and do not launch another paid/model run until the design and implementation are reviewed, validated, and main CI is green.
 
-1. commit the reviewed v2 apparatus, confirm CI, then generate `results/variance-v2/resolved-manifest.json` from that clean HEAD;
-2. run one non-counting audited v2 calibration block under the frozen manifest;
-3. collect 10 new counterbalanced paired blocks under one unchanged v2 cell;
-4. produce the variance/power decision report before extending the benchmark.
-
-The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use the historical Markdown token totals as validated data, do not reconstruct or repair raw artifacts, and do not count the old pair as part of the planned 10-block sample.
-
-Do not launch a candidate/model call until the reviewed v2 apparatus is committed and `results/variance-v2/resolved-manifest.json` has been generated successfully from that clean HEAD.
+The historical raw artifacts are recovered and hash-preserved, but fail the current audit schema; see `docs/historical-run-recovery-2026-08-29.md`. Do not use their legacy Markdown token totals as validated data.
 
 ## Development agents versus benchmarked agents
 

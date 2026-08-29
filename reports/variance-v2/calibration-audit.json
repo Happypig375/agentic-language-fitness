@@ -1,0 +1,348 @@
+{
+  "calibration_sha256": "25e74c0cdaf542b67f2469565e3cccac1c2590af4bf8d58508388ee921ead6ae",
+  "cell_id": "variance-v2",
+  "fresh_context_policy": "fresh candidate process and model conversation per task",
+  "manifest_sha256": "892cbd5416f8827a8c363b63b97cde8e7365687162996eb9961b61db597c6cd4",
+  "manifest_sources": {
+    "benchmark_manifest": {
+      "path": "benchmarks/pilot/manifest.json",
+      "sha256": "3ee650c22f227338b0fd06dcfc79aaf481dc410e05bdde327228d9e27f91b9cb"
+    },
+    "benchmark_task_order": [
+      "001-priority",
+      "002-overdue"
+    ],
+    "definition": {
+      "path": "protocols/variance-v2/definition.json",
+      "sha256": "d925cbc91fd74cbb4eddc218e7e1958051cd2ff0f3f795899580b1e777824145"
+    },
+    "git_head": "5363e4be8fa6e6ebbcafe24e31f1ec152353b10e",
+    "manifest_file_sha256": "7820cbe33f3ca394c8ffb174128be1a521689e1902c2a3d5042d5115817c997b",
+    "schedule": {
+      "path": "protocols/variance-v2/schedule.json",
+      "sha256": "0e9deb65c3f3a04b5b955431f04a35e6bb94d6af29f138686e5a6457af772210"
+    },
+    "source_set_sha256": "d546ea7019341bb73af9b573663624115a54e101f74e67a48153515c00a74094",
+    "task_prompts": {
+      "001-priority": {
+        "path": "benchmarks/pilot/tasks/001-priority/task.md",
+        "sha256": "4b003212969d3c3537f65d82320ba88ee42bb5a20a13e3ce6951f16dcfb1f1c0"
+      },
+      "002-overdue": {
+        "path": "benchmarks/pilot/tasks/002-overdue/task.md",
+        "sha256": "c166e62c2ed2f915a2865555ad824a8cc63b74ef1980b43f0a6b5ce62a94545c"
+      }
+    }
+  },
+  "primary_attempts": [
+    {
+      "accounting_valid": true,
+      "artifact_hashes": {
+        "files": [
+          {
+            "bytes": 8113,
+            "path": "calibration-01-csharp-01/protocol-manifest.json",
+            "sha256": "7820cbe33f3ca394c8ffb174128be1a521689e1902c2a3d5042d5115817c997b"
+          },
+          {
+            "bytes": 1367,
+            "path": "calibration-01-csharp-01/attempt.json",
+            "sha256": "86bca8aa106776d25e6a07bfc847a10a4b36d11b1030e81079e9b6d738ee95e4"
+          },
+          {
+            "bytes": 20329,
+            "path": "calibration-01-csharp-01/result.json",
+            "sha256": "9fe1e6b1af76c4996d54ab4c636ec5448e81ba01ed23bc36fff0407d1ebdc353"
+          },
+          {
+            "bytes": 6446,
+            "path": "calibration-01-csharp-01/tasks/001-priority/task-result.json",
+            "sha256": "04df56236381bdb9c8a839c9335850bb085ac3f07d9f5122aff4341712745ae3"
+          },
+          {
+            "bytes": 7264,
+            "path": "calibration-01-csharp-01/tasks/002-overdue/task-result.json",
+            "sha256": "60d55d417cebcc6e8247be9212e2beb827091e2e678f94b6cb5eb376f581cecf"
+          },
+          {
+            "bytes": 727,
+            "path": "calibration-01-csharp-01/tasks/001-priority/usage.json",
+            "sha256": "4af1c1b9c8ede8bd461b47f3998177473a017e7143abe7715f11c2f557dbacbc"
+          },
+          {
+            "bytes": 726,
+            "path": "calibration-01-csharp-01/tasks/002-overdue/usage.json",
+            "sha256": "cae8746a97bb8548f90dc0e8cdea13e78fbd71dbb50742dc482746ebf61197dc"
+          }
+        ],
+        "set_sha256": "a00cb5ebec4044d1d0633f4a652056a1fb83ad275a15b0e123b62093b67fc02c"
+      },
+      "attempt_id": "calibration-01-csharp-01",
+      "block_id": "calibration-01",
+      "failure_category": null,
+      "finished_at": "2026-08-29T10:16:38.663842+00:00",
+      "language": "csharp",
+      "metrics": {
+        "added_lines": 35,
+        "agent_process_wall_seconds": 136.29699999999139,
+        "cached_input_tokens": 153600,
+        "changed_files": 2,
+        "commands": 17,
+        "deleted_lines": 5,
+        "diff_bytes": 3492,
+        "evaluator_wall_seconds": 15.486000000004424,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "input_tokens": 185019,
+        "output_tokens": 3511,
+        "reasoning_output_tokens": 237,
+        "run_total_wall_seconds": 153.18700000000536,
+        "task_total_wall_seconds": 146.18700000000536,
+        "tool_calls": 20,
+        "unique_file_reads": 0
+      },
+      "order": "csharp-first",
+      "position": 1,
+      "source_tree": {
+        "file_count": 2,
+        "files": [
+          {
+            "bytes": 246,
+            "path": "OrderFlow.csproj",
+            "sha256": "091184f58af0beb2f404c01705712e4789955b5154f759ac633cc822ba024f3c"
+          },
+          {
+            "bytes": 3132,
+            "path": "Program.cs",
+            "sha256": "e620d485c918fe9fe89a4a21c5b7c3c1f76140f3e9b13bddd091553fab74fa30"
+          }
+        ],
+        "tree_sha256": "c0137ce728eb1dcfd7b91de49c50f923c4292c5d93f816129e4340194aefbec4"
+      },
+      "started_at": "2026-08-29T10:14:05.484837+00:00",
+      "success": true,
+      "tasks": [
+        {
+          "accounting_valid": true,
+          "failure_reason": null,
+          "finished_at": "2026-08-29T10:15:26.949841+00:00",
+          "fresh_process_recorded": true,
+          "input_includes_cached_valid": true,
+          "metrics": {
+            "added_lines": 3,
+            "agent_process_wall_seconds": 69.43799999999464,
+            "cached_input_tokens": 89088,
+            "changed_files": 1,
+            "commands": 9,
+            "deleted_lines": 1,
+            "diff_bytes": 833,
+            "evaluator_wall_seconds": 4.657000000006519,
+            "file_reads": 0,
+            "file_revisits": 0,
+            "input_tokens": 105276,
+            "output_tokens": 1594,
+            "reasoning_output_tokens": 88,
+            "task_total_wall_seconds": 74.46799999999348,
+            "tool_calls": 11,
+            "unique_file_reads": 0
+          },
+          "started_at": "2026-08-29T10:14:12.539842+00:00",
+          "success": true,
+          "task_id": "001-priority",
+          "usage_available": true,
+          "usage_record_count": 1
+        },
+        {
+          "accounting_valid": true,
+          "failure_reason": null,
+          "finished_at": "2026-08-29T10:16:38.662843+00:00",
+          "fresh_process_recorded": true,
+          "input_includes_cached_valid": true,
+          "metrics": {
+            "added_lines": 32,
+            "agent_process_wall_seconds": 66.85899999999674,
+            "cached_input_tokens": 64512,
+            "changed_files": 1,
+            "commands": 8,
+            "deleted_lines": 4,
+            "diff_bytes": 2659,
+            "evaluator_wall_seconds": 4.51600000000326,
+            "file_reads": 0,
+            "file_revisits": 0,
+            "input_tokens": 79743,
+            "output_tokens": 1917,
+            "reasoning_output_tokens": 149,
+            "task_total_wall_seconds": 71.71900000001187,
+            "tool_calls": 9,
+            "unique_file_reads": 0
+          },
+          "started_at": "2026-08-29T10:15:27.008808+00:00",
+          "success": true,
+          "task_id": "002-overdue",
+          "usage_available": true,
+          "usage_record_count": 1
+        }
+      ],
+      "usage_available": true
+    },
+    {
+      "accounting_valid": true,
+      "artifact_hashes": {
+        "files": [
+          {
+            "bytes": 8113,
+            "path": "calibration-01-fsharp-01/protocol-manifest.json",
+            "sha256": "7820cbe33f3ca394c8ffb174128be1a521689e1902c2a3d5042d5115817c997b"
+          },
+          {
+            "bytes": 1367,
+            "path": "calibration-01-fsharp-01/attempt.json",
+            "sha256": "a570a4193b9fdb9cf0cd9990cd656fb7591f5f2cf11d5d8f60a04fddb6c543a4"
+          },
+          {
+            "bytes": 20347,
+            "path": "calibration-01-fsharp-01/result.json",
+            "sha256": "87d4eb851d7f73a25b41e70effb04189c6277acf4bb7d425b9a130edccd473e0"
+          },
+          {
+            "bytes": 6447,
+            "path": "calibration-01-fsharp-01/tasks/001-priority/task-result.json",
+            "sha256": "93c922849f5c597ae264b80818b85c399d164adbd184bf42398827f7e6970adf"
+          },
+          {
+            "bytes": 7265,
+            "path": "calibration-01-fsharp-01/tasks/002-overdue/task-result.json",
+            "sha256": "74f7747d62ce619f4ee25b657be66df7bebe0ceb8a3edbc70050c673e4f1e4ad"
+          },
+          {
+            "bytes": 726,
+            "path": "calibration-01-fsharp-01/tasks/001-priority/usage.json",
+            "sha256": "33b160088f2b8325f0d06a5d39e2c38b21928526dc1b43dc457b283806abbf8d"
+          },
+          {
+            "bytes": 726,
+            "path": "calibration-01-fsharp-01/tasks/002-overdue/usage.json",
+            "sha256": "ebd3175aca55f40212a253ecba3337f9ef8d03e3e9ee0630e492da8dcdce9d36"
+          }
+        ],
+        "set_sha256": "600efc2957f509142712478c3cd57406e6ef83608f56edbc0584227252b7d6c7"
+      },
+      "attempt_id": "calibration-01-fsharp-01",
+      "block_id": "calibration-01",
+      "failure_category": null,
+      "finished_at": "2026-08-29T10:19:25.837656+00:00",
+      "language": "fsharp",
+      "metrics": {
+        "added_lines": 51,
+        "agent_process_wall_seconds": 119.82800000000861,
+        "cached_input_tokens": 134656,
+        "changed_files": 2,
+        "commands": 13,
+        "deleted_lines": 4,
+        "diff_bytes": 3525,
+        "evaluator_wall_seconds": 22.547999999980675,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "input_tokens": 154801,
+        "output_tokens": 3118,
+        "reasoning_output_tokens": 442,
+        "run_total_wall_seconds": 143.79699999999139,
+        "task_total_wall_seconds": 133.60899999999674,
+        "tool_calls": 15,
+        "unique_file_reads": 0
+      },
+      "order": "csharp-first",
+      "position": 2,
+      "source_tree": {
+        "file_count": 2,
+        "files": [
+          {
+            "bytes": 315,
+            "path": "OrderFlow.fsproj",
+            "sha256": "5e0010826b6a16ec61903bc7c3d97a31423bf228cc17a1203c51844f01e76a94"
+          },
+          {
+            "bytes": 3106,
+            "path": "Program.fs",
+            "sha256": "3c327eb8f2823db130daa475140810180e5926b5f375b5e784b5bd997d33430d"
+          }
+        ],
+        "tree_sha256": "55df332a77cdee686c8d3cc7100cbcc203bdc90e7135571ac30048bc0f25aeff"
+      },
+      "started_at": "2026-08-29T10:17:02.036653+00:00",
+      "success": true,
+      "tasks": [
+        {
+          "accounting_valid": true,
+          "failure_reason": null,
+          "finished_at": "2026-08-29T10:18:15.943838+00:00",
+          "fresh_process_recorded": true,
+          "input_includes_cached_valid": true,
+          "metrics": {
+            "added_lines": 17,
+            "agent_process_wall_seconds": 56.937999999994645,
+            "cached_input_tokens": 75520,
+            "changed_files": 1,
+            "commands": 7,
+            "deleted_lines": 2,
+            "diff_bytes": 1423,
+            "evaluator_wall_seconds": 6.39100000000326,
+            "file_reads": 0,
+            "file_revisits": 0,
+            "input_tokens": 90477,
+            "output_tokens": 1387,
+            "reasoning_output_tokens": 263,
+            "task_total_wall_seconds": 63.71799999999348,
+            "tool_calls": 8,
+            "unique_file_reads": 0
+          },
+          "started_at": "2026-08-29T10:17:12.286874+00:00",
+          "success": true,
+          "task_id": "001-priority",
+          "usage_available": true,
+          "usage_record_count": 1
+        },
+        {
+          "accounting_valid": true,
+          "failure_reason": null,
+          "finished_at": "2026-08-29T10:19:25.836656+00:00",
+          "fresh_process_recorded": true,
+          "input_includes_cached_valid": true,
+          "metrics": {
+            "added_lines": 34,
+            "agent_process_wall_seconds": 62.89000000001397,
+            "cached_input_tokens": 59136,
+            "changed_files": 1,
+            "commands": 6,
+            "deleted_lines": 2,
+            "diff_bytes": 2102,
+            "evaluator_wall_seconds": 6.60999999998603,
+            "file_reads": 0,
+            "file_revisits": 0,
+            "input_tokens": 64324,
+            "output_tokens": 1731,
+            "reasoning_output_tokens": 179,
+            "task_total_wall_seconds": 69.89100000000326,
+            "tool_calls": 7,
+            "unique_file_reads": 0
+          },
+          "started_at": "2026-08-29T10:18:16.021812+00:00",
+          "success": true,
+          "task_id": "002-overdue",
+          "usage_available": true,
+          "usage_record_count": 1
+        }
+      ],
+      "usage_available": true
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "accounting_valid_attempts": 2,
+    "fresh_process_records": 4,
+    "primary_attempts": 2,
+    "single_terminal_usage_tasks": 4,
+    "tasks": 4
+  },
+  "transcripts_included": false
+}

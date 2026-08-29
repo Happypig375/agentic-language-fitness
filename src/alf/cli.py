@@ -11,6 +11,7 @@ from .config import DEFAULT_MANIFEST, REQUIRED_DOTNET_SDK, find_repo_root, load_
 from .runner import environment_snapshot, run_chain, validate_benchmark
 from .audit import audit_run
 from .protocol import validate_cell, write_frozen_manifest
+from .variance import calibration_fixture, markdown_report, variance_report
 
 
 def _root_and_manifest(args: argparse.Namespace) -> tuple[Path, dict[str, Any]]:
@@ -172,6 +173,27 @@ def cmd_protocol_freeze(args: argparse.Namespace) -> int:
     print(json.dumps({"manifest": str(path), "manifest_sha256": json.loads(path.read_text())["manifest_sha256"]}, indent=2))
     return 0
 
+def cmd_variance_report(args: argparse.Namespace) -> int:
+    if args.bootstrap_samples <= 0 or args.power_simulations <= 0:
+        raise ValueError("bootstrap and power simulation counts must be positive")
+    report = variance_report(args.cell_root, bootstrap_samples=args.bootstrap_samples,
+                             power_simulations=args.power_simulations, seed=args.seed)
+    out_json, out_md = Path(args.output_json), Path(args.output_markdown)
+    out_json.parent.mkdir(parents=True, exist_ok=True); out_md.parent.mkdir(parents=True, exist_ok=True)
+    out_json.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    out_md.write_text(markdown_report(report), encoding="utf-8")
+    summary = {"output_json": str(out_json), "output_markdown": str(out_md),
+               "report_sha256": report["report_sha256"]}
+    if args.output_calibration:
+        calibration = calibration_fixture(report)
+        calibration_path = Path(args.output_calibration)
+        calibration_path.parent.mkdir(parents=True, exist_ok=True)
+        calibration_path.write_text(json.dumps(calibration, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        summary.update({"output_calibration": str(calibration_path),
+                        "calibration_sha256": calibration["calibration_sha256"]})
+    print(json.dumps(summary, sort_keys=True))
+    return 0 if report["structural_validation"]["ok"] else 1
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="alf", description="Agentic Language Fitness benchmark harness")
@@ -229,6 +251,15 @@ def build_parser() -> argparse.ArgumentParser:
     pf.add_argument("--definition", required=True)
     pf.add_argument("--output", required=True)
     pf.set_defaults(func=cmd_protocol_freeze)
+    vr = sub.add_parser("variance-report", help="Generate a deterministic post-hoc variance report")
+    vr.add_argument("cell_root")
+    vr.add_argument("--output-json", required=True)
+    vr.add_argument("--output-markdown", required=True)
+    vr.add_argument("--output-calibration", help="Optional redacted, self-hashed calibration fixture")
+    vr.add_argument("--bootstrap-samples", type=int, default=2000)
+    vr.add_argument("--power-simulations", type=int, default=2000)
+    vr.add_argument("--seed", type=int, default=20260829)
+    vr.set_defaults(func=cmd_variance_report)
     return parser
 
 

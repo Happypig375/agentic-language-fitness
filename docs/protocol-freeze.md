@@ -1,6 +1,6 @@
 # Variance-v2 protocol freeze
 
-`protocols/variance-v2/definition.json` is the tracked draft for the new formal
+`protocols/variance-v2/definition.json` is the tracked definition for the new formal
 cell. It pins `gpt-5.4` with medium reasoning, Codex CLI/image
 0.149.1, the .NET 10.0.302 toolchain, matched tasks, limits, isolation, and
 failure rules. `variance-v1`, which pinned `gpt-5.4-mini-2026-03-17`, was retired
@@ -19,7 +19,7 @@ manifest, and task prompts) use canonical UTF-8 bytes with CRLF and lone CR
 line endings normalized to LF before SHA-256. Binary image archives retain
 their raw-byte SHA-256.
 
-Validate the draft with:
+Validate the definition with:
 
 ```text
 python scripts/alf.py protocol validate --definition protocols/variance-v2/definition.json
@@ -41,8 +41,10 @@ SHA-256 before writing the resolved manifest. The retained image archive is
 expected local image ID
 `sha256:0320a60c5b2628cebeb2c897bbf80da949f3b9bb99fa61f5a3475c7276328756`.
 
-The definition remains draft/unfrozen until committed clean and a resolved
-manifest is generated. Raw attempts are retained, including retries. Formal
+The v2 definition was clean-frozen from commit
+`5363e4be8fa6e6ebbcafe24e31f1ec152353b10e`, with resolved-manifest SHA-256
+`892cbd5416f8827a8c363b63b97cde8e7365687162996eb9961b61db597c6cd4`.
+Raw attempts are retained, including retries. Formal
 success and time outcomes include protocol-valid candidate correctness
 failures, agent failures, and candidate-caused timeouts. Metric aggregates are
 availability-specific: token aggregates require valid usage accounting, while
@@ -64,8 +66,9 @@ CI, the clean freeze succeeded with resolved-manifest SHA-256
 `0afe05f37d5fbfbe51cf336af1f515680b84856c99921041e7ea4a4cf82e08ca`.
 The subsequent retained v1 calibration attempt was provider-invalid because
 `gpt-5.4-mini-2026-03-17` was unsupported; it produced no candidate outcome or
-terminal usage. This evidence does not make the v2 draft frozen and did not
-validate v2.
+terminal usage. This evidence did not validate v2. The v2 calibration and
+formal cell subsequently completed under the clean freeze; see
+`docs/variance-v2-results-2026-08-29.md`.
 
 Accepted token accounting also requires a sidecar derived from the preserved
 Codex JSONL and exactly one `turn.completed` usage record per ephemeral task
@@ -95,7 +98,7 @@ unresolved started attempt blocks another attempt for that position. Protocol
 run directories use the validated attempt ID and are created atomically, so
 concurrent invocations cannot reserve the same attempt.
 
-After freezing, the predeclared calibration commands are:
+The calibration commands used for the frozen cell were:
 
 ```text
 python scripts/alf.py run --language csharp --agent command --model gpt-5.4 --require-usage --output results/variance-v2 --timeout 600 --protocol-manifest results/variance-v2/resolved-manifest.json --block-id calibration-01 --order csharp-first --attempt-id calibration-01-csharp-01 --position 1
