@@ -1,388 +1,201 @@
 # Research plan
 
-> **Canonical continuation plan.** Maintainer agents must read this file before substantial work. `AGENTS.md` is the automatically discovered entry point and routes agents here. Update this plan whenever the current checkpoint, ordering, or decision gates change.
+> **Canonical continuation plan.** Maintainer agents must read this file before substantial work. `AGENTS.md` is the automatically discovered entry point and routes agents here. Update this plan whenever the checkpoint, ordering, assumptions, or decision gates change.
 
 ## Current checkpoint — 2026-08-30
 
-Variance-v2 status (2026-08-29): complete. The clean frozen cell, audited
-calibration, 10 counterbalanced paired blocks, external raw archive, and
-reproducible variance/power reports are summarized in
-`docs/variance-v2-results-2026-08-29.md`. Accounting and provenance are stable,
-but near-saturated correctness plus order/stochastic variance overwhelm a
-plausible 7–8% effect at n=10; no language advantage or significance claim is
-supported.
+The project remains in **Phase 1: measurement and feasibility**.
 
-Workstream C status (2026-08-30): complete for benchmark recalibration. The
-matched eight-task chain, C3 representation apparatus, reviewed
-`difficulty-v1` definition, clean freeze, four-condition non-counting pilot,
-audits, and read-only raw archive are complete; see
-`docs/difficulty-v1-results-2026-08-30.md`. Three of four primaries completed
-all eight tasks and the retained C# descriptive primary failed Task 007, so the
-strongest configuration is no longer saturated. The single Williams row does
-not identify a language or representation effect, and candidate-caused drift
-makes the F# deterministic representation observation non-interpretable. The
-next milestone is Workstream D multi-configuration feasibility design.
+Completed milestones:
 
-Completed:
+- **A — apparatus and provenance:** strict accounting, `alf audit`, exact toolchain/container pins, fail-closed protocol validation, external raw archives, retry/failure taxonomy, and green cross-platform CI;
+- **B — variance-v2:** audited calibration plus 10 counterbalanced F#/C# pairs on the original two-task chain; stochastic/order variance overwhelmed a plausible 7–8% token effect at `n=10`, and correctness was near-saturated;
+- **C — benchmark recalibration:** an independently reviewed matched eight-task F#/C# chain, descriptive/deterministic representation apparatus, and the frozen non-counting `difficulty-v1` pilot.
 
-- scoped and adversarial literature review with a narrowed, defensible research gap;
-- executable F#/C# paired pilot on .NET 10;
-- cumulative language-neutral black-box evaluation;
-- fresh process and container per maintenance task with inherited candidate code;
-- isolated Codex command adapter with pinned CLI/image metadata;
-- green Linux and Windows CI on commit `7dda2bd232376b84968bd616a79d8043699c48c7`;
-- A3 accounting machinery: strict Codex usage validation and summation, stale-sidecar removal, required-usage mode, per-task sidecar preservation, separated timing categories, conservative file-read/revisit telemetry, and the read-only `alf audit` reconciler;
-- exact recovery and hash-preservation of the historical exploratory F#/C# pair, with its legacy audit failure and exclusion recorded;
-- a derived, redacted two-task real-output fixture whose raw stdout, event copies, usage sidecars, task envelopes, run aggregates, timings, and source hashes reconcile exactly under `alf audit`;
-- a tracked `variance-v1`/`variance-v2` protocol apparatus plus fail-closed validation, clean-freeze, image-archive verification, pinned resource/authentication enforcement, attempt reservation, retry, classification, and inclusion machinery;
-- independent protocol review with no remaining P1/P2 findings and a model-free validation checkpoint; the v1 freeze was followed by the completed v2 clean freeze, calibration, formal paired cell, archive, and variance report (see the result document for hashes and outcomes);
-- Workstream C's independently reviewed matched eight-task chain and representation treatment, plus the frozen, audited, externally archived `difficulty-v1` pilot.
+The `difficulty-v1` pilot retained four valid primary conditions. Three completed all eight tasks; C# descriptive stopped at the frozen Task 007 structural acceptance checks. The stronger configuration is therefore no longer fully saturated. The F# deterministic candidate reintroduced descriptive aliases, making that representation observation non-interpretable under the pilot's per-protocol rule. One Williams row supports no language, representation, causal, or significance claim.
 
-The historical pair is **not formal study data**. The exact raw directory was recovered and hash-preserved on 2026-08-29, but its legacy artifacts fail the current `alf audit` schema checks; see `docs/historical-run-recovery-2026-08-29.md`. It remains excluded from the planned 10-block variance dataset.
+The Windows UTF-8 subprocess defect exposed by an excluded attempt is fixed and covered by regression tests. Latest pre-plan validated head `460b0f6148808ece8901742f91a350726ea9f279` passed GitHub Actions run `33276330023` on Linux and Windows, including protocol and both representation-arm validation.
 
-Even if recovered, the pair remains exploratory because it predates the current accounting/provenance protocol, used one F#-then-C# order, had only one stochastic observation per language, and saturated correctness on a two-task chain.
+Durable evidence:
+
+- `docs/variance-v2-results-2026-08-29.md`
+- `docs/workstream-c-benchmark-design-2026-08-29.md`
+- `docs/representation-treatment-v1-2026-08-29.md`
+- `docs/difficulty-v1-protocol-2026-08-30.md`
+- `docs/difficulty-v1-results-2026-08-30.md`
+- `docs/workstream-d-feasibility-design-2026-08-30.md`
+
+Historical and retired cells remain excluded as documented. Do not pool `difficulty-v1`, `variance-v2`, the historical Luna pair, or retired attempts.
 
 ## Current decision
 
-Cross-platform CI is green at the difficulty-v1 frozen commit
-`edc6f3cacfba2aac428a4c60ae426b1cf8f2922d` (GitHub Actions run
-`33269820641`). The post-pilot Windows UTF-8 repair is committed at
-`73001e1fce14b367c5e257113e328fcfddfc349e` and green in run `33275928430`
-(Linux 4m05s, Windows 5m27s; Node 20 deprecation annotations only).
+Proceed to **Workstream D multi-configuration feasibility by design first**. No paid/model run is authorized until the Workstream D design has independent approval, required protocol support is implemented and reviewed, CI is green, and each child cell is frozen from a clean checkpoint.
 
-Remain in **Phase 1: measurement and feasibility**. The frozen-cell and
-variance milestones and Workstream C recalibration are complete. The Windows
-UTF-8 subprocess repair exposed by the pilot is landed and green. The immediate
-objective is to design Workstream D's multi-configuration feasibility cells;
-this does not authorize immediate model runs.
+The primary language question and the unstable representation treatment are now split:
 
-The following Phase 1 prerequisites are now met. Their completion does not
-support an F# advantage or authorize confirmatory analysis or repository
-expansion; follow the Workstream D gate first:
+- **D-Language first:** canonical descriptive representation, F# versus C#, three capability configurations on one scaffold;
+- **D-Representation later:** a separate complete Williams-superblock study with intention-to-treat as the primary representation estimand and candidate-caused drift recorded as an outcome.
 
-1. cross-platform CI is green — **met at
-   `73001e1fce14b367c5e257113e328fcfddfc349e`, run `33275928430`**;
-2. the historical raw run is either recovered and audited or explicitly retired from analysis — **met: recovered, hash-preserved, legacy-audit failure recorded, excluded**;
-3. usage/event accounting is reconciled against at least one real raw run fixture — **met for the recovered one-record-per-task evidence**;
-4. protocol, provenance, failure, and inclusion rules are frozen before data collection — **met for variance-v2 and difficulty-v1**;
-5. repeated counterbalanced pairs quantify stochastic, task, temporal, and order variance — **met: 10 paired blocks; see the variance report**;
-6. the benchmark is recalibrated if correctness remains saturated — **met:
-   the eight-task difficulty pilot produced late, non-dominated acceptance and
-   trajectory variation; see the difficulty-v1 report**.
+This avoids a costly 2 × 2 × configuration factorial before treatment adherence and the language × capability interaction are understood.
 
-## Completed variance-v2 continuation history
+## Immediate continuation order
 
-### 0. Resolve the historical-run status — complete: recovered, legacy audit failure
+### D0. Independently review the Workstream D design
 
-The explicit recovery pass found the exact original directory and task-level raw files in the original project mirror and preserved immutable/hash-checked copies. Search scope and hashes are recorded in `docs/historical-run-recovery-2026-08-29.md`. No raw artifact was recreated from Markdown totals.
+Review `docs/workstream-d-feasibility-design-2026-08-30.md` for:
 
-The recovered copy runs through `alf audit` but reports `ok=false` for the documented legacy-schema discrepancies. It is therefore retained as hash-preserved exploratory evidence, excluded from every formal aggregate and power calculation, and not counted as a variance block. A new calibration run remains the first auditable observation.
+- scientific estimands and scope split;
+- configuration-selection rules;
+- common-prefix handling of early chain stops;
+- counterbalancing and temporal blocking;
+- inclusion, retry, and apparatus-stop rules;
+- representation intention-to-treat and drift handling;
+- feasibility sample size and decision gates.
 
-This decision must be recorded before interpreting the old token numbers further. Recovery failure is a provenance result, not a reason to block the project indefinitely.
+Close every P1/P2 finding before implementing protocol cells. This review is the next task. It does not authorize data collection.
 
-### 1. Complete A3 with a real reconciliation fixture — complete for recovered evidence
+### D1. Implement a feasibility-family protocol
 
-The accounting implementation is materially advanced but not scientifically complete until exercised against actual raw agent output.
+Use three child cells under a shared, immutable parent schedule:
 
-Completed work:
+1. **H — reference/high:** the existing `gpt-5.4`, medium-reasoning configuration if its exact preflight remains available;
+2. **M — reduced effort:** the same model/scaffold at a lower supported reasoning effort;
+3. **L — lower capability:** a lower-capability model on the same scaffold and a preregistered effort setting.
 
-- reconciled raw `agent.stdout`, redacted event copies, copied `usage.json`, embedded task results, timings, and run aggregates for both recovered F# tasks;
-- confirmed from the official usage definition that cached input is a subset/breakdown of input rather than an additive quantity;
-- preserved input, cached input, cache-write input, output, reasoning output, and tool calls separately;
-- retained tests for missing, malformed, negative, duplicated, and multi-record usage cases, and made accepted protocol accounting require exactly one derived terminal record per ephemeral task;
-- documented the conservative file-read/revisit extractor's grammar and recall limitations;
-- committed a redacted real-output fixture whose `alf audit` result and exact aggregate are unit-tested.
+The exact exposed IDs and settings are selected only after reviewed preflight criteria. Do not silently substitute aliases or change both model and scaffold in the first family.
 
-Each recovered task has exactly one terminal usage record. The pinned Codex 0.149.1 schema and implementation identify the terminal counters as the turn's `ThreadTokenUsage.total`, but the recovered evidence cannot validate a multi-record aggregation rule. The accepted protocol therefore requires exactly one derived terminal record per one-turn ephemeral task; zero or multiple records make token accounting invalid and force protocol review rather than a guessed sum.
+Protocol work must:
 
-**Exit met:** `tests/fixtures/a3-redacted-run` reproduces the recorded task and run aggregates exactly; `docs/accounting-reconciliation-2026-08-29.md` records semantics and limitations.
+- pin each child configuration, source commit, descriptive manifest, task hashes, model/effort, CLI/image/archive, limits, network/documentation policy, and raw-retention policy;
+- add or validate a parent macroblock schedule with four formal paired blocks per retained configuration;
+- balance F# → C# and C# → F# 2/2 within each configuration;
+- rotate H/M/L order across four chronological macroblocks;
+- fail closed on configuration drift or telemetry incompatibility;
+- keep candidate agents blind to research instructions.
 
-### 2. Freeze protocol and provenance before accepted runs — complete for variance-v2
+Obtain model-free validation, independent implementation review, green Linux/Windows CI, and a clean freeze before any model call.
 
-The completed cell is defined by `protocols/variance-v2/definition.json`. It pins `gpt-5.4`, medium reasoning, Codex CLI/image `0.149.1`, the immutable image ID and verified archive, .NET `10.0.302`, explicit Docker limits, one non-counting calibration, and ten pre-generated balanced formal blocks. It is not continuity with either the retired v1 attempt or the historical Luna pair. The harness now fails closed on dirty or changed Git state, mismatched benchmark/task hashes, probes, image/archive, model/settings/limits, schedule position, attempt identity, retry eligibility, or inclusion disposition.
+### D2. Run non-counting configuration calibrations
 
-Create a versioned protocol/manifest for the first variance cell. At minimum record:
+After freezing, run one audited descriptive F#/C# pair per candidate configuration.
 
-- protocol version and repository commit;
-- benchmark manifest and task-file hashes;
-- model identifier, agent product, CLI version, and exposed settings;
-- container tag and immutable image ID;
-- Python, Git, .NET SDK, OS, architecture, CPU/memory/process limits, and timeout;
-- network and documentation policy;
-- fresh-context and inherited-workspace semantics;
-- pre-generated paired-block order and block identifier;
-- raw-artifact location, file hashes, redaction policy, and retention policy;
-- inclusion/exclusion rules and a failure taxonomy covering agent, provider, authentication, host, evaluator, timeout, protocol, and accounting failures;
-- retry rules that retain every attempt and never silently substitute a successful rerun.
+Selection uses only preregistered difficulty/apparatus criteria, never the sign or magnitude of the language cost difference:
 
-A nominal `seed` may identify schedule generation and harness randomness. It must not be described as a model seed unless deterministic endpoint seeding is actually exposed.
+- H is retained as an upper anchor if apparatus-valid;
+- M/L are too easy if both languages complete 8/8 without a substantive failure;
+- M/L are too hard if neither reaches Task 006 or fewer than 8/16 possible task envelopes pass;
+- a provisionally informative configuration has at least one chain reach Task 007 and combined completion between those extremes.
 
-If the original model/CLI/container combination cannot still be pinned, define a **new experimental cell**. Do not mix a changed backend or scaffold into the old pair as though it were a replication.
+Calibrations are non-counting. Replacement configurations require reviewed new child cells and freezes.
 
-**Current status:** `variance-v1` remains retired after its provider-invalid calibration attempt. `variance-v2` is now the completed cell: clean freeze, calibration, 10 formal paired blocks, archive, and decision report are retained. The result document records the exact provenance and exclusion rules.
+### D3. Collect the fixed feasibility sample
 
-### 3. Run one non-counting end-to-end calibration block — complete for variance-v2
+For each retained H/M/L child cell, collect four formal paired blocks:
 
-After the v2 clean freeze, run one paired F#/C# block under the frozen protocol. Its purpose is apparatus verification, not estimation.
+- two F# → C#;
+- two C# → F#.
 
-The calibration must:
+Across three configurations this is 12 pairs and 24 language runs. It is a feasibility sample, not a significance study. Execute the immutable parent macroblock schedule, run both languages in a pair close together, preserve every attempt, and make no outcome-driven changes inside the family.
 
-- use the predeclared order for that block;
-- require valid usage accounting;
-- pass `alf audit` for both language runs;
-- preserve raw artifacts and hashes under the new provenance rules;
-- verify that fresh processes/containers and inherited task workspaces behave as specified;
-- produce a redacted fixture and machine-readable audit report;
-- expose any provider, timing, or read-telemetry incompatibility before the 10-block run.
+### D4. Analyze configuration-dependent feasibility
 
-If the protocol or harness changes in response, increment the protocol version and repeat the calibration. The final calibration does not count toward the variance sample.
+Primary outcomes:
 
-The v1 calibration was attempted but was provider-invalid before any candidate outcome; v2 calibration passed and is non-counting evidence only.
+1. full-chain success;
+2. tasks passed and first failure/stopping position;
+3. task survival through 001–008;
+4. unconditional cumulative input tokens and agent wall time to terminal stop;
+5. paired **common-prefix** cost through the last task both languages validly attempted.
 
-### 4. Collect the counterbalanced variance pilot — complete: 10 paired blocks
+Common-prefix cost prevents an early-stopping language from appearing artificially cheap. Report it jointly with correctness and terminal-stop cost.
 
-Use the current small chain only to estimate stochastic and order variance. Under one unchanged protocol cell, collect at least **10 complete paired blocks**:
+Secondary outcomes include cached/cache-write/output/reasoning tokens, evaluator/task/run time, commands and tool calls, compiler/test interactions, file changes, observed reads/revisits, diffs, structural failures, and classified infrastructure failures.
 
-- five blocks in F# → C# order;
-- five blocks in C# → F# order;
-- order pre-generated, committed or hashed, and interleaved;
-- both language runs in a block performed as close together as practical;
-- every attempt and timestamp retained to expose provider/load, quota, or temporal drift;
-- no inspection-driven changes to prompts, tasks, evaluator, harness, model, scaffold, or toolchain inside the cell.
+Report configuration-specific paired differences/log ratios and language × configuration uncertainty. No pooled universal language coefficient, p-value, significance, or advantage claim is authorized from four pairs per configuration.
 
-Primary pilot outcomes, interpreted jointly with correctness:
+### D5. Make the next scientific decision
 
-- full-chain and per-task success;
-- input and cached-input tokens;
-- output and reasoning tokens;
-- agent-process, evaluator, task-total, and run-total wall time;
-- tool calls, commands, compiler/test interactions, file changes, reads, and revisitations where observable;
-- behavioral regressions and classified failures.
+After the feasibility report:
 
-The unaudited historical pair is not block 0 and is excluded from these ten blocks.
+- **all configurations saturated:** use lower capability or strengthen late tasks;
+- **all impossible:** step capability upward or simplify the problematic task contract;
+- **stable informative configurations:** select the smallest scientifically useful confirmatory set and derive repetitions from observed variance;
+- **large/sign-changing language × configuration variation:** make capability interaction central and stratify future inference;
+- **configuration effects dominate unstable language differences:** reframe toward agent/configuration sensitivity;
+- **representation drift frequent:** study treatment adherence as an outcome before estimating a representation effect.
 
-### 5. Produce the variance and decision report — complete
+No matched-repository expansion or confirmatory study begins before this decision report.
 
-Before extending the benchmark, report:
+## Workstream D design constraints
 
-- paired language differences and log ratios by task and aggregate;
-- within-language and within-task variance;
-- order, block-time, and temporal-trend diagnostics;
-- success/failure distributions and reasons;
-- agreement between tokens, wall time, navigation, and repair behavior;
-- sensitivity to excluding infrastructure/provider failures under the frozen rules;
-- simulation-based sample-size estimates for plausible effects, including the approximately 7–8% token effect reported by the closest code-cleanliness predecessor.
+The detailed normative draft is `docs/workstream-d-feasibility-design-2026-08-30.md`.
 
-Ten blocks are a variance pilot, not a definitive hypothesis test.
+Key constraints:
 
-Decision gate:
+- descriptive representation only in the first language family;
+- same scaffold, isolation, tools, benchmark, evaluator, and policy across H/M/L;
+- separate versioned child cells, not informal model switching;
+- one audited non-counting calibration per candidate configuration;
+- four fixed paired blocks per retained configuration;
+- no adaptive stopping based on observed language direction;
+- candidate correctness failures remain valid outcomes;
+- pre-candidate infrastructure-invalid attempts follow frozen retry rules;
+- alternate scaffold comparison waits for equivalent accounting and becomes a separate matched-scaffold family;
+- future representation analysis uses intention-to-treat, with drift timing/counts retained rather than silently excluding nonadherent candidates.
 
-- **Accounting/provenance unstable:** fix the apparatus and start a new protocol cell.
-- **Variance overwhelms plausible effects:** increase repetitions, improve blocking, or reframe the study around scaffold/trajectory variance.
-- **Measurement stable but correctness saturated:** extend the chain before testing more models.
-- **Stable measurable variation:** proceed to benchmark recalibration and multi-configuration feasibility.
+## Workstream D definition of done
 
-## Workstream A — Stabilize and freeze the apparatus
+Workstream D feasibility is complete when:
 
-### A1. Cross-platform CI — complete
+- the design has independent approval with no unresolved P1/P2 findings;
+- three capability child cells and the parent schedule are cleanly frozen and auditable;
+- each retained configuration passes a non-counting calibration;
+- 12 balanced formal paired blocks are completed, or a preregistered apparatus-stop condition is documented;
+- every included run passes audit and all raw attempts are hash-preserved;
+- a feasibility report recommends confirmatory configuration(s), benchmark changes, scaffold work, representation follow-up, or a research reframe;
+- no claim exceeds the feasibility sample.
 
-- [x] Host-independent Windows path tests.
-- [x] Full Linux unit, doctor, snapshot, scripted-chain, container-build, and container-validation job.
-- [x] Windows unit, doctor, and matched-snapshot validation job.
-- [x] Exact .NET SDK pin with feature-band roll-forward disabled.
+## Completed workstreams
 
-### A2. Protocol freeze — complete for variance-v2
+### A — apparatus/provenance: complete for frozen cells
 
-Commit the reviewed protocol apparatus, generate the resolved manifest from that clean HEAD, then complete calibration. The freeze must continue to fail closed if the commit, image, archive, toolchain, or host facts differ.
+Accounting, protocol validation, clean-freeze checks, isolation, exact environment capture, failure taxonomy, retry handling, artifact auditing, and raw archival are operational. Any new cell must still repeat review, CI, and clean freeze.
 
-### A3. Usage accounting — real-output reconciliation complete
+### B — variance-v2: complete
 
-The code path is guarded and auditable, the historical run has an explicit disposition, and the checked-in derived/redacted fixture reconciles the authentic single-record-per-task evidence. Accepted protocol runs fail accounting closed unless each ephemeral task has exactly one derived terminal usage record.
+Ten balanced pairs on the original chain estimated stochastic/order variance and showed that a small language effect would require a much larger sample under that benchmark. See the variance report; do not reuse its observations as successor-chain data.
 
-### A4. Result provenance — complete for variance-v2
+### C — benchmark recalibration: complete
 
-The versioned definition, hashes, retention policy, failure taxonomy, metric-specific inclusion rules, retry rules, and attempt reservation exist. Generate and retain the resolved manifest only from a reviewed, committed, clean checkout before any accepted run.
+The eight-task successor chain, language-neutral oracle, structural/API checks, idiomaticity/equivalence review, representation apparatus, and `difficulty-v1` pilot closed the chain-difficulty gate. See the Workstream C and difficulty documents.
 
-## Workstream B — Estimate stochastic and order variance — complete
+## Later phases
 
-The variance-v2 formal cell is complete. Do not pool it with the retired v1
-attempt or describe it as a replication of the previously reported
-`gpt-5.6-luna` pair. Its decision report guided Workstream C and continues to
-inform Workstream D's repetition and design choices.
+### Phase 2 — matched repository expansion
 
-## Workstream C — Recalibrate the benchmark — complete
+Only after Workstream D, construct 3–5 independently reviewed paired applications at increasing sizes and architectural shapes. Each receives a preregistered 10–30-change chain with a common black-box oracle.
 
-The 2/2 versus 2/2 exploratory result indicates that the chain is too small to measure correctness or defect escape. After the variance report:
+### Phase 3 — mechanism ablations
 
-1. extend the existing application to a **5–10 task chain** before creating many repositories;
-2. include additive changes, a cross-cutting schema change, a bug diagnosis, a behavior-preserving refactor, and an API/backward-compatibility constraint;
-3. maintain cumulative black-box cases and keep gold/evaluator data outside candidate workspaces;
-4. independently review both implementations for idiomaticity and comparable architecture;
-5. add at least one within-language matched representation treatment—such as clean/noisy structure or descriptive/anonymized identifiers—to calibrate cross-language effects against ordinary source-form sensitivity;
-6. pilot a lower-capability configuration if the strongest configuration remains at 100% correctness.
+Separate the language label into formatting, names, type inference/annotations, idiomaticity, compiler feedback, documentation access, tokenizer fertility, source/context footprint, native training familiarity, and shared .NET transfer.
 
-**Exit:** the chain creates measurable variation without becoming dominated by impossible tasks, and language-neutral equivalence survives independent review.
+### Phase 4 — confirmatory longitudinal study
 
-## Workstream D — Multi-configuration feasibility
+Use preregistered full chains, fresh agents, preserved repository state, hierarchical/paired analysis, and sample sizes derived from feasibility variance. Estimate creation versus maintenance cost, semantic recovery, error compounding, escaped defects, and language × capability/repository-size interactions.
 
-With A–C complete, proceed by design first:
+### Phase 5 — generalization
 
-- test at least three model/agent configurations spanning capability or scaffolds;
-- block and randomize language order within each configuration;
-- keep one protocol version throughout each cell;
-- determine repetitions from pilot variance rather than an arbitrary final count;
-- preregister primary outcomes, exclusions, stopping rules, and hierarchical/paired analysis before confirmatory collection.
-
-Analyze language × task, language × model, language × scaffold, language × chain position, and language × order interactions. A universal language ranking is not the target.
-
-## Phase 2 — Matched repository expansion
-
-Create 3–5 independently reviewed paired .NET applications at increasing sizes and architectural shapes:
-
-- pure data transformation;
-- command-line application with persistence;
-- HTTP service;
-- event/state-machine domain;
-- library with public API compatibility constraints.
-
-Each receives a preregistered chain of 10–30 changes. Reuse or adapt established language-agnostic benchmark tasks where possible, while retaining native idiomatic implementations and a common black-box oracle.
-
-## Phase 3 — Mechanism ablations
-
-Separate the language label into candidate mechanisms:
-
-- formatting and lossless compaction;
-- descriptive versus anonymized identifiers;
-- inferred versus explicit types where legal;
-- idiomatic versus mechanical translation;
-- compiler/test feedback enabled versus restricted;
-- documentation retrieval enabled versus disabled;
-- tokenizer fertility and source/context footprint;
-- native corpus familiarity and shared .NET API transfer.
-
-The aim is to explain an effect, not merely rank languages.
-
-## Phase 4 — Confirmatory longitudinal study
-
-Run preregistered full chains with fresh agents while preserving only repository state. Estimate creation versus maintenance cost, semantic recovery, error compounding, escaped defects, language × repository-size and language × capability interactions, and whether one-shot and lifetime rankings differ.
-
-Use mixed-effects or hierarchical models that respect paired runs and dependence within evolving chains. Report distributions and uncertainty, not a single “best language” score.
-
-## Phase 5 — Generalization
-
-Add languages chosen to separate mechanisms:
-
-- Python: high familiarity, weak static verification;
-- TypeScript: high familiarity, gradual typing;
-- Rust: strong verification with higher repair interaction cost;
-- OCaml: ML-family representation with a smaller ecosystem;
-- a deliberately compact or transformed representation.
-
-The final deliverable should be a mechanism map and Pareto frontier for agentic software engineering, not advocacy for F#.
+Add languages chosen to separate mechanisms—such as Python, TypeScript, Rust, and OCaml—only after the F#/C# methodology is stable. The final deliverable is a mechanism map and Pareto frontier, not F# advocacy.
 
 ## Stop, reframe, or negative-result conditions
 
 Reframe or stop if:
 
 - prior work already performs the same controlled matched-language inherited-maintenance experiment;
-- paired implementations cannot be made comparably idiomatic and behaviorally equivalent;
-- measurement variance or provider drift overwhelms plausible language effects;
-- effects disappear after controlling for model familiarity, toolchain feedback, source cleanliness, or order;
-- cross-language differences are no larger or less stable than within-language representation perturbations.
+- paired implementations cannot remain comparably idiomatic and behaviorally equivalent;
+- provider/backend drift or measurement variance overwhelms plausible language effects;
+- language differences disappear after controlling for configuration, tooling, representation quality, or order;
+- cross-language differences are smaller or less stable than within-language representation perturbations;
+- the required confirmatory sample is impractical relative to the scientific value.
 
-Those outcomes remain scientifically useful: they would show that language choice is a weak lever compared with agent/scaffold, source quality, or stochastic trajectory effects.
-
-## Completed variance-v2 milestone definition of done
-
-The milestone was completed when:
-
-- the historical run is recovered and audited or explicitly retired;
-- a real raw fixture passes `alf audit` and guards accounting semantics in tests;
-- a frozen protocol manifest and failure/inclusion taxonomy exist;
-- a non-counting calibration block passes end to end;
-- 10 new counterbalanced paired blocks are preserved under one unchanged cell;
-- a variance and power report determines whether and how to extend the chain;
-- no language claim exceeds those observations.
-
-The immediate steps 2 (freeze), 3 (calibration), 4 (paired pilot), and 5
-(variance report), plus Workstream A2/A4 and Workstream B, are complete for
-variance-v2.
-
-## Workstream C definition of done — met
-
-The benchmark recalibration is complete when a matched cumulative 5–10-task
-chain includes additive change, a cross-cutting schema change, bug diagnosis,
-a behavior-preserving refactor, and an API/backward-compatibility constraint;
-at least one within-language representation treatment is implemented and
-independently reviewed; cumulative black-box cases remain language-neutral with gold data
-outside candidate workspaces; both implementations pass idiomaticity and
-behavioral-equivalence review; and the longer chain produces measurable,
-non-dominated correctness and trajectory variation in a frozen difficulty
-pilot. The chain, treatment apparatus, golds, and reviews must be complete
-before that new protocol cell is designed and frozen; the pilot follows the
-freeze and precedes any confirmatory run.
-
-## Workstream C gate status — complete
-
-The implementation-ready eight-task contract is in
-`docs/workstream-c-benchmark-design-2026-08-29.md`. Its material
-legacy-behavior clarification standardizes exact language-neutral serialized
-errors for unknown operations and missing/null `asOf`. Limited independent
-review is approved with no P1/P2 findings: retained C#/F# Task 002
-`ArgumentException` parameter casing differs, while the suffix-free exact
-strings are symmetric; Task 001/002 remain unchanged. The
-language-equivalence/error review gate is closed. **C1 and C2 are complete.**
-C2 delivered the eight-task cumulative chain and 90 final cases per language,
-legacy/multi-file golds, workspace checks, fail-closed paths, and exact pilot
-baseline/Tasks 001/002 retention. Evidence includes 126 unit tests, strict
-doctor, legacy/successor validation and scripted matrices, serialized Task
-007/008 checks, focused path suites, 18 isolated gold builds, and independent
-harness-security and gold/equivalence reviews with no P1/P2 findings. **C3 is
-implemented, model-free validated, and independently approved with no remaining
-P1/P2/P3 findings:** see
-`docs/representation-treatment-v1-2026-08-29.md`.
-
-**difficulty-v1 is complete.** Its reviewed definition was committed at
-`edc6f3cacfba2aac428a4c60ae426b1cf8f2922d`, passed GitHub Actions run
-`33269820641`, and was frozen from that clean checkpoint with the pinned image.
-The pilot retained four valid primaries and two excluded infrastructure-invalid
-attempts. Three primaries completed 8/8 tasks; C# descriptive stopped at the
-Task 007 structural acceptance checks. This is sufficient late,
-non-impossible task/trajectory variation to close the chain-difficulty gate.
-The F# deterministic primary is excluded only from representation analysis
-because candidate edits reintroduced descriptive aliases. See
-`docs/difficulty-v1-results-2026-08-30.md` for hashes, audits, metrics, and raw
-archive provenance.
-
-CI for C2 commit
-`4e58677e0bfff18c2104298ad35fc4e801bbd052` is green: GitHub Actions run
-`33258119571` (Linux 2m20s, Windows 2m23s; Node 20 deprecation warnings only).
-C3 implementation commit `31430489102437a48d79fa611b8700e0e11e53fd`
-is pushed. Main commit `9e1a5a92674313ca6e5f33917b12cb93aa7e1026`
-adds the full-history checkout required to verify the pinned C2 source commit;
-GitHub Actions run `33266189763` is green (Linux 3m53s, Windows 5m23s; Node 20
-deprecation warnings only). The C3 commit and cross-platform CI gate are closed.
-Historical fixtures and variance cells remain unchanged and excluded.
-
-No language, representation, causal, or significance claim follows from one
-non-counting Williams row. Do not pool it with the historical pair or
-variance-v2. The Windows UTF-8 repair prompted by the excluded F# attempt is
-committed at `73001e1fce14b367c5e257113e328fcfddfc349e` and green in run
-`33275928430`; that apparatus gate is closed. All later cells still require a
-new versioned clean freeze.
-
-## Immediate continuation order — Workstream D design
-
-Design multi-configuration feasibility before collecting more data:
-
-1. define the scientific comparison and metric-specific outcomes;
-2. select at least three model/agent configurations spanning capability or
-   scaffold;
-3. preregister exclusion, retry, stopping, and paired/hierarchical analysis
-   rules;
-4. derive repetitions from the observed pilot variance and schedule complete
-   counterbalanced blocks;
-5. if representation remains a factor, explicitly prevent or model treatment
-   drift;
-6. review the design independently, obtain green CI, and freeze each versioned
-   cell from a clean checkpoint before any paid/model run.
+These are useful outcomes: they may show that model/scaffold configuration, source quality, or stochastic trajectory is a stronger engineering lever than programming-language choice.
