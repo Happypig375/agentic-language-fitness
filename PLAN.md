@@ -2,7 +2,7 @@
 
 > **Canonical continuation plan.** Maintainer agents must read this file before substantial work. `AGENTS.md` is the automatically discovered entry point and routes agents here. Update this plan whenever the checkpoint, ordering, assumptions, or decision gates change.
 
-## Current checkpoint — 2026-08-30
+## Current checkpoint — 2026-08-31
 
 The project remains in **Phase 1: measurement and feasibility**.
 
@@ -129,10 +129,24 @@ See `docs/workstream-d-v2-calibration-incident-2026-08-31.md`; do not retry,
 pool, or synthesize the unresolved attempt. A versioned v3 successor is now
 the active design checkpoint.
 
-The next action is independent review/validation of v3, then checkpoint commit
-and push directly to `main` (no PR), green CI, and v3 child freezes with
-resolved manifests and hashes. No model call is authorized before these gates
-and host-memory headroom checks pass.
+V3 review/validation and clean-freeze gates are complete: commit
+`3cfe99b4289036782838b12217022384507b391e` was pushed directly to `main` (no
+PR), CI run `33326196680` passed Linux/Windows, and clean H/M/L freezes from
+that commit were independently verified. Schedule/catalog/child/configuration
+pins matched; image `sha256:0320a60c5b2628cebeb2c897bbf80da949f3b9bb99fa61f5a3475c7276328756`
+and archive exist; the tracked tree was clean and HEAD matched `origin/main`.
+The next action is D2 non-counting v3 calibrations, currently prohibited until
+a fresh per-task host-memory probe passes >=2,147,483,648 physical and
+>=6,442,450,944 commit bytes and there are no concurrent benchmark, maintainer
+subagent, or unrelated model runs. Current probes fail; calibration has not
+begun and no experimental outcome may be inferred.
+Independent verification recorded the following freeze-command / whole-file
+hashes: H `ffa03ad5ac578363348027215a2a142dd0c41f1e3e8965b7b0c4c7d120f0028b` /
+`124a887fd8819383a34927aa026f14ee307f7ecd644a2c3f189b1020169cf82e`, M
+`544e78a7423c258c59ff98a3087d29146f98c17927c950f65dc82cfd0594e77c` /
+`8dd061d4d3c5695248205e21d711443e79962e43d6c61b9e0ec55d8a180a362f`, and L
+`220507f31b3102043600f247442f3010b38702bc907cb6b712df12718240d71d` /
+`415b9d1716d167570a1bc87fffeefbe10058943df3a682f1c4786f01f1584734`.
 
 ### D2. Run non-counting configuration calibrations
 
