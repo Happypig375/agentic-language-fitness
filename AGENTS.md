@@ -7,7 +7,7 @@ This file is the repository-level instruction entry point for maintainer coding 
 Before substantial work:
 
 1. Read `PLAN.md`; it is the canonical checkpoint, ordering, and decision-gate document.
-2. Read `docs/workstream-d-feasibility-design-2026-08-30.md`; it is the normative draft for the next milestone.
+2. Read `docs/workstream-d-feasibility-design-2026-08-30.md`; it is the independently reviewed and approved design for the next milestone.
 3. Read `docs/difficulty-v1-results-2026-08-30.md` and `docs/variance-v2-results-2026-08-29.md` before interpreting the pilot evidence.
 4. Read `docs/protocol.md`, `docs/event-schema.md`, and `docs/environment.md` before changing isolation, telemetry, protocol, or run procedures.
 5. Read `docs/research-gap.md` and the literature-review addendum before changing novelty or contribution claims.
@@ -19,20 +19,18 @@ When work changes status, ordering, assumptions, acceptance criteria, or the sel
 
 Workstreams A–C are complete for the current pilot methodology. `variance-v2` established high stochastic/order variance on the short chain; `difficulty-v1` established that the reviewed eight-task chain is no longer fully saturated and exposed candidate-caused deterministic-representation drift.
 
-The next task is **Workstream D design review**, not another model run:
+D0 design review is closed **approved** with no remaining P0–P3 findings. The next task is **D1 implementation and model-free validation**, not a model run:
 
-1. independently review `docs/workstream-d-feasibility-design-2026-08-30.md`;
-2. close all P1/P2 findings;
-3. implement or validate one parent feasibility-family definition, its six-macroblock H/M/L schedule, and three child capability cells;
-4. model-free validate exact configuration, descriptive-only scope, hashes, limits, accounting, macroblock balance, and the preregistered 4+2 gate;
-5. obtain green Linux/Windows CI and freeze each child from a clean checkpoint;
-6. only then run non-counting configuration calibrations, including reverse-order confirmation before replacing a boundary M/L configuration.
+1. implement or validate one parent feasibility-family definition, its six-macroblock H/M/L schedule, and three child capability cells;
+2. model-free validate exact configuration, descriptive-only scope, hashes, limits, accounting, macroblock balance, and the preregistered 4+2 gate;
+3. obtain green Linux/Windows CI and freeze each child from a clean checkpoint;
+4. only then run non-counting configuration calibrations, including reverse-order confirmation before replacing a boundary M/L configuration.
 
 The first D-Language family deliberately uses only the canonical descriptive representation. Do not multiply the unstable representation treatment across model configurations. A later D-Representation family must use complete Williams superblocks and intention-to-treat as its primary estimand; candidate-caused drift is an outcome, not an automatic primary-analysis exclusion.
 
 The formal D-Language schedule is staged but fully predeclared: execute macroblocks 1–4, then use only apparatus stability and saturation/impossibility criteria to decide whether to complete macroblocks 5–6. Never use the sign or magnitude of the F#–C# difference as the continuation rule.
 
-No paid/model run is authorized by the current design draft.
+No paid/model run is authorized until D1 implementation review, model-free validation, green CI, and clean child freezes are complete.
 
 ## Development agents versus benchmarked agents
 

@@ -1,6 +1,6 @@
 # Workstream D multi-configuration feasibility design
 
-**Status:** design draft; no paid/model run is authorized by this document.
+**Status:** independently reviewed and approved design; no paid/model run is authorized by this document.
 
 **Date:** 2026-08-30
 
@@ -75,7 +75,39 @@ A single stochastic pair is too weak to replace a boundary configuration. If M/L
 
 ## Formal feasibility schedule
 
-The parent schedule contains **six chronological macroblocks**, using every permutation of H/M/L exactly once:
+The parent schedule contains **six chronological macroblocks**, using every permutation of H/M/L exactly once. The per-configuration language directions are fixed in advance:
+
+- H: F#→C#, C#→F#, F#→C#, C#→F#, F#→C#, C#→F#;
+- M: C#→F#, F#→C#, F#→C#, C#→F#, C#→F#, F#→C#;
+- L: F#→C#, C#→F#, C#→F#, F#→C#, C#→F#, F#→C#.
+
+The exact 18-slot schedule is:
+
+| Macroblock | Configuration | Language direction |
+|---:|:---:|:---:|
+| 1 | H | F#→C# |
+| 1 | M | C#→F# |
+| 1 | L | F#→C# |
+| 2 | M | F#→C# |
+| 2 | L | C#→F# |
+| 2 | H | C#→F# |
+| 3 | L | C#→F# |
+| 3 | H | F#→C# |
+| 3 | M | F#→C# |
+| 4 | H | C#→F# |
+| 4 | L | F#→C# |
+| 4 | M | C#→F# |
+| 5 | L | C#→F# |
+| 5 | M | C#→F# |
+| 5 | H | F#→C# |
+| 6 | M | F#→C# |
+| 6 | H | C#→F# |
+| 6 | L | F#→C# |
+
+For the specified table, the canonical schedule SHA-256 is
+`3bc3eaab8cc61097f59b098dc7753a9d452374d45438a31b8f465d85a56c1bd1`.
+
+The freeze artifact MUST state, hash, and validate all 18 assignments. Its canonical hash input is the UTF-8 bytes of newline-delimited ASCII records in table order, with a final newline and no header: `mb<macroblock>|<configuration>|<direction>`, where direction is `F#>C#` or `C#>F#`. The resulting SHA-256 is recorded in the parent and each child definition; any assignment, order, or direction mismatch fails closed. Model-free validation must confirm that macroblocks 1–4 contain 2/2 directions per configuration, all six macroblocks contain 3/3 per configuration, every macroblock mixes directions, and the overall schedule contains 9/9 directions.
 
 ```text
 H M L
@@ -104,6 +136,17 @@ Continue to macroblocks 5–6 when:
 - no apparatus-stop condition has occurred.
 
 Stop and redesign rather than completing 5–6 when every retained configuration is saturated, every retained configuration is impossible, or a material apparatus/configuration change is required. The stage-1 observations remain a documented feasibility fragment and are never represented as a complete balanced family.
+
+The preceding qualitative description is superseded by this deterministic Boolean gate. The stage-1 analysis population is the first protocol-valid candidate outcome for all eight scheduled language slots per configuration. Retryable pre-candidate infrastructure-invalid attempts remain retained in the ledger but are excluded from this population. Every slot must be resolved and audited; otherwise trigger an apparatus stop. Calibration observations are excluded.
+
+For each configuration, record survival/entry separately from completion. There are 64 possible task positions per configuration (8 slots × 8 tasks); an unentered position is not passed for the completion total. Let `passed_positions` be the number of positions passed by the first valid outcome in each slot. Classify deterministically:
+
+- **SATURATED** iff all eight chains complete 8/8;
+- **IMPOSSIBLE** iff no chain enters Task 006 **OR** `passed_positions < 32` of 64;
+- **INFORMATIVE** iff neither prior class applies, at least one chain enters Task 007, and at least one chain fails/stops before 8/8;
+- **INDETERMINATE** otherwise.
+
+Continue to macroblocks 5–6 iff there is no apparatus stop and at least one configuration is **INFORMATIVE**. Otherwise stop/redesign. This gate never uses language contrast direction or magnitude. An unresolved or unaudited stage-1 slot is an apparatus stop, not an `INDETERMINATE` outcome. The stage-1 observations remain a documented feasibility fragment and are never represented as a complete balanced family.
 
 If continued, the full six macroblocks become the Workstream D feasibility sample. Generate and hash the complete schedule before freezing any child cell. Run the two languages within a pair as close together as practical and record provider/quota timestamps.
 

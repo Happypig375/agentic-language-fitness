@@ -137,6 +137,16 @@ identifiers. This is observation only: never re-transform candidate code.
 Any representation invariant failure makes the affected checkpoint and
 interaction non-interpretable and aborts the relevant analysis.
 
+Clarifying boundary for a future D-Representation protocol: its intention-to-
+treat (ITT) primary analysis supersedes this v1 artifact family’s per-protocol
+exclusion only for candidate-caused post-assignment representation drift.
+Pre-candidate artifact, mapping, source, or instrument invariant failures, and
+technical scanner failures, still fail closed and invalidate the affected cell
+or checkpoint. The historical `difficulty-v1` rule remains intact: its
+candidate-caused drift observation stays excluded from that pilot’s
+per-protocol representation comparison and does not become an ITT estimate
+retroactively.
+
 Existing C2 directories and manifests are never edited; descriptive
 materialization is byte-identical to those clean sources.
 

@@ -40,7 +40,7 @@ This avoids a costly 2 × 2 × configuration factorial before treatment adherenc
 
 ## Immediate continuation order
 
-### D0. Independently review the Workstream D design
+### D0. Independently review the Workstream D design — complete
 
 Review `docs/workstream-d-feasibility-design-2026-08-30.md` for:
 
@@ -52,7 +52,31 @@ Review `docs/workstream-d-feasibility-design-2026-08-30.md` for:
 - representation intention-to-treat and drift handling;
 - feasibility sample size and decision gates.
 
-Close every P1/P2 finding before implementing protocol cells. This review is the next task. It does not authorize data collection.
+D0 was independently re-reviewed and approved with no remaining P0–P3 findings. It does not authorize data collection; D1 implementation and model-free validation are next.
+
+The design-review checkpoint now specifies a deterministic stage-1 4+2 rule
+(now approved at D0): analyze the first protocol-valid candidate
+outcome for all eight scheduled language slots per configuration across
+macroblocks 1–4; retain but exclude retryable pre-candidate infrastructure-
+invalid attempts; require every slot resolved and audited or stop the
+apparatus; exclude calibrations. With 64 possible task positions per
+configuration, classify SATURATED as eight 8/8 chains, IMPOSSIBLE as no Task
+006 entry or fewer than 32/64 positions passed, INFORMATIVE as neither prior
+class plus Task 007 entry and at least one pre-8/8 failure/stop, and
+INDETERMINATE otherwise. Continue to macroblocks 5–6 iff there is no apparatus
+stop and at least one configuration is INFORMATIVE.
+
+The exact frozen parent schedule is the 18-slot table in
+`docs/workstream-d-feasibility-design-2026-08-30.md`: macroblock rows
+`H(F→C), M(C→F), L(F→C)`; `M(F→C), L(C→F), H(C→F)`;
+`L(C→F), H(F→C), M(F→C)`; `H(C→F), L(F→C), M(C→F)`;
+`L(C→F), M(C→F), H(F→C)`; `M(F→C), H(C→F), L(F→C)`.
+The canonical 18-record ASCII input and SHA-256 are required at freeze;
+the specified table currently hashes to
+`3bc3eaab8cc61097f59b098dc7753a9d452374d45438a31b8f465d85a56c1bd1`;
+validation must show stage-1 2/2 directions per configuration, full-schedule
+3/3, mixed directions in every macroblock, and overall 9/9. D1 implementation
+and model-free validation are the next checkpoint.
 
 ### D1. Implement a feasibility-family protocol
 
@@ -134,7 +158,7 @@ No matched-repository expansion or confirmatory study begins before this decisio
 
 ## Workstream D design constraints
 
-The detailed normative draft is `docs/workstream-d-feasibility-design-2026-08-30.md`.
+The detailed independently reviewed and approved design is `docs/workstream-d-feasibility-design-2026-08-30.md`.
 
 Key constraints:
 
