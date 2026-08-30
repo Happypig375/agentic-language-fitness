@@ -58,3 +58,13 @@ Provider billing and token counts are not perfectly interchangeable. Report raw 
 ## Windows
 
 The Python harness and .NET projects are cross-platform. For consistent real-agent isolation, WSL2 or Linux containers are recommended. Native Windows runs should record shell, path, sandbox, and filesystem differences as environmental factors.
+
+## Workstream D configuration validation
+
+Each child uses the difficulty-v1 image, toolchain, limits, isolation, and
+accounting pins. `model.requested_id` is the exact string passed to the pinned
+Codex CLI; it is not a resolved-backend assertion. The model catalog is tracked
+and hashed, but provider/runtime identity is confirmed only by a later
+non-counting calibration after clean freezes. Conditional reverse calibration
+rows additionally require the audited primary-pair boundary decision described
+in the design. No model run is authorized during D1.

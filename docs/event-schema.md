@@ -33,3 +33,12 @@ A task result records:
   semantic recovery are excluded.
 
 The schema is versioned through `schema_version`. Consumers should ignore unknown fields and fail explicitly on unsupported major versions.
+
+## Schema v3 identity fields
+
+Workstream D events carry `family_id`, `configuration_id`, `pair_block_id`,
+`execution_position`, `macroblock` or `calibration_id`,
+`within_macroblock_position`, `stage`, `role`, `counting`,
+`family_definition_sha256`, `parent_schedule_sha256`, `catalog_sha256`, and
+`assignment_sha256`. Calibration events use an explicit non-counting role and
+never enter the formal assignment hash.

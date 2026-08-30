@@ -1,5 +1,23 @@
 # Workstream D multi-configuration feasibility design
 
+## D1 proposed configuration pins and catalog evidence
+
+The proposed catalog pins are H=`gpt-5.4` with medium reasoning, M=`gpt-5.4`
+with low reasoning, and L=`gpt-5.4-mini` with medium reasoning. Child
+definitions record these strings as `model.requested_id`; they are requested
+provider IDs, not claims about a resolved backend snapshot. The tracked
+preflight artifact records Codex 0.151.0 observations at
+`2026-08-30T10:11:28.955431800Z`, API visibility, and supported efforts for
+both slugs. These are catalog selections only: pinned CLI/provider execution
+is confirmed by a later non-counting calibration, and no run is authorized by
+D1.
+
+The frozen schedule makes the M/L reverse confirmations executable, but the
+runner does not infer a boundary classification from result files. An operator
+may invoke a conditional reverse row only after the corresponding primary pair
+has an audited, documented provisional too-easy or too-hard classification.
+Runtime row validation is not authorization to skip that decision record.
+
 **Status:** independently reviewed and approved design; no paid/model run is authorized by this document.
 
 **Date:** 2026-08-30

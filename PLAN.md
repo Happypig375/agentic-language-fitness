@@ -100,6 +100,22 @@ Protocol work must:
 
 Obtain model-free validation, independent implementation review, green Linux/Windows CI, and a clean freeze before any model call.
 
+D1 implementation, review, and model-free validation are complete and approved:
+the parent family/schema-v3 runtime, three H/M/L child definitions, and
+apparatus checks passed 61 focused tests plus the parent and child validators.
+The requested catalog configurations are H=`gpt-5.4` medium, M=`gpt-5.4`
+low, and L=`gpt-5.4-mini` medium; runtime availability remains deferred to
+the later non-counting calibration. The pinned image, Codex 0.149.1, and
+.NET 10.0.302 checks passed. No real manifest has been frozen and no model
+call has occurred. The remaining D1 subgates are direct commit/push, green
+Linux/Windows CI, then clean child freezes with resolved manifests and
+hashes.
+
+The next action is to commit and push this implementation directly to
+`main` (no PR), monitor CI to green, and freeze each child only from that
+clean committed head. Paid/model execution remains unauthorized until those
+freezes are independently checked.
+
 ### D2. Run non-counting configuration calibrations
 
 After freezing, run one audited descriptive F#/C# pair per candidate configuration.

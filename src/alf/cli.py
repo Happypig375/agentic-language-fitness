@@ -11,6 +11,7 @@ from .config import DEFAULT_MANIFEST, REQUIRED_DOTNET_SDK, find_repo_root, load_
 from .runner import environment_snapshot, run_chain, validate_benchmark
 from .audit import audit_run
 from .protocol import validate_cell, write_frozen_manifest
+from .workstream_d import validate_family
 from .variance import calibration_fixture, markdown_report, variance_report
 from .representation import build_representation, check_representation
 
@@ -168,6 +169,12 @@ def cmd_protocol_validate(args: argparse.Namespace) -> int:
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0 if report["ok"] else 1
 
+def cmd_protocol_family_validate(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    report = validate_family(root, args.definition)
+    print(json.dumps(report, indent=2, sort_keys=True))
+    return 0 if report["ok"] else 1
+
 def cmd_protocol_freeze(args: argparse.Namespace) -> int:
     root = Path(args.root).resolve() if args.root else find_repo_root()
     path = write_frozen_manifest(root, args.definition, Path(args.output))
@@ -257,6 +264,9 @@ def build_parser() -> argparse.ArgumentParser:
     pv = protocol_sub.add_parser("validate")
     pv.add_argument("--definition", required=True)
     pv.set_defaults(func=cmd_protocol_validate)
+    pfam = protocol_sub.add_parser("family-validate")
+    pfam.add_argument("--definition", required=True)
+    pfam.set_defaults(func=cmd_protocol_family_validate)
     pf = protocol_sub.add_parser("freeze")
     pf.add_argument("--definition", required=True)
     pf.add_argument("--output", required=True)

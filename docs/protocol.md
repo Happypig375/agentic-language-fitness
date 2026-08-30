@@ -107,3 +107,18 @@ same path used by the wrapper.
 ## Pilot line protocol
 
 Each input line is one JSON request; each output line is one JSON response. The evaluator starts one process per cumulative case batch and compares parsed JSON values, avoiding language-specific unit-test frameworks.
+
+## Workstream D schema v3
+
+The `workstream-d-language-v1` parent definition and H/M/L child definitions
+use schema v3. They share the immutable six-macroblock assignment hash and
+canonical descriptive manifest; each child selects only its configuration.
+Frozen provenance records family, configuration, pair execution position,
+macroblock or calibration ID, within-macroblock placement, stage, role, and
+counting status. `model.requested_id` and reasoning effort are checked against
+the tracked model-catalog preflight; the requested ID is not represented as a
+resolved backend snapshot. Execution remains unauthorized until the clean
+freeze and non-counting calibration gates pass. Conditional M/L reverse rows
+are runnable only after their primary calibration has a separately audited and
+documented boundary classification; the runner validates the frozen row but
+does not derive that classification.

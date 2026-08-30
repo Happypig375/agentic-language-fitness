@@ -426,13 +426,14 @@ def _prepare_protocol_run(
         )
 
     protocol = load_frozen_manifest(root, protocol_manifest)
-    # Keep v2's frozen manifest immutable; v1 callers historically receive identity.
-    if protocol.get("schema_version") == 2:
+    # Keep v2/v3 frozen manifests immutable; v1 callers historically receive identity.
+    if protocol.get("schema_version") in {2, 3}:
         protocol = dict(protocol)
     definition = protocol["definition"]
     schedule = protocol["schedule"]
 
     v2 = protocol.get("schema_version") == 2
+    v3 = protocol.get("schema_version") == 3
     selected_condition = None
     if v2:
         blocks = schedule.get("pilot") or []
@@ -454,12 +455,34 @@ def _prepare_protocol_run(
     if benchmark_manifest != tracked_benchmark:
         raise ValueError("loaded benchmark does not match the frozen protocol")
 
-    blocks = ([*schedule.get("pilot", [])] if v2 else [schedule["calibration"], *schedule["formal"]])
+    if v2:
+        blocks = [*schedule.get("pilot", [])]
+    elif v3:
+        configuration = definition.get("configuration_id")
+        if configuration not in {"H", "M", "L"}:
+            raise ValueError(
+                "schema-v3 protocol manifest must identify a child configuration"
+            )
+        if protocol.get("configuration_id") != configuration or protocol.get(
+            "family_id"
+        ) != definition.get("family_id"):
+            raise ValueError("protocol family/configuration identity mismatch")
+        blocks = [
+            row
+            for row in [
+                *schedule.get("calibration", []),
+                *schedule.get("formal", []),
+            ]
+            if row.get("configuration_id") == configuration
+        ]
+    else:
+        blocks = [schedule["calibration"], *schedule["formal"]]
     block = next((item for item in blocks if item.get("block_id") == block_id), None)
     if block is None:
         raise ValueError("protocol block is not in the frozen schedule")
     if not v2:
-        if position > len(block["order"]): raise ValueError("protocol position is invalid")
+        if position > len(block["order"]):
+            raise ValueError("protocol position is invalid")
         expected_order = f"{block['order'][0]}-first"
         expected_language = block["order"][position - 1]
         if order != expected_order or language != expected_language:
@@ -468,7 +491,10 @@ def _prepare_protocol_run(
     raw_root = (root / definition["raw_root"]).resolve()
     if output_root.resolve() != raw_root:
         raise ValueError("protocol output must be the definition's raw_root")
-    if model != definition["model"]["snapshot"]:
+    requested_model = (
+        definition["model"]["requested_id"] if v3 else definition["model"]["snapshot"]
+    )
+    if model != requested_model:
         raise ValueError("model does not match the frozen protocol")
     if timeout != definition["limits"]["task_timeout_seconds"]:
         raise ValueError("timeout does not match the frozen protocol")
@@ -550,7 +576,7 @@ def _prepare_protocol_run(
     wrapper = root / "scripts" / "codex-docker.py"
     command = (
         f'"{sys.executable}" "{wrapper}" --workspace "{{workspace}}" '
-        f'--prompt-file "{{prompt_file}}" --model "{definition["model"]["snapshot"]}" '
+        f'--prompt-file "{{prompt_file}}" --model "{requested_model}" '
         f'--reasoning-effort "{definition["model"]["reasoning_effort"]}" '
         f'--image "{definition["codex"]["image"]}" '
         f'--memory "{definition["limits"]["memory"]}" '
@@ -562,6 +588,9 @@ def _prepare_protocol_run(
         protocol["_selected_condition"] = selected_condition
         protocol["_condition_manifest"] = str(benchmark_path.relative_to(root)).replace("\\", "/")
         protocol["_condition_manifest_sha256"] = definition["conditions"][selected_condition].get("manifest_sha256")
+    if v3:
+        protocol["_workstream_d_row"] = block
+        protocol["_workstream_d_config"] = definition["configuration_id"]
     return protocol, command, attempt_number
 
 
@@ -640,7 +669,9 @@ def run_chain(
             "schedule_sha256": provenance["schedule_sha256"],
             "image": provenance["image"],
             "image_id": provenance["image_id"],
-            "model": provenance["definition"]["model"]["snapshot"],
+            "model": provenance["definition"]["model"].get(
+                "snapshot", provenance["definition"]["model"].get("requested_id")
+            ),
             "reasoning_effort": provenance["definition"]["model"]["reasoning_effort"],
             "block_id": block_id,
             "order": order,
@@ -667,6 +698,28 @@ def run_chain(
                 "schedule_counting": scheduled_block.get("counting"),
                 "schedule_role": scheduled_block.get("role"),
             })
+        if provenance.get("schema_version") == 3:
+            row = provenance["_workstream_d_row"]
+            run_provenance.update(
+                {
+                    "family_id": provenance["family_id"],
+                    "configuration_id": provenance["_workstream_d_config"],
+                    "pair_block_id": row["block_id"],
+                    "execution_position": position,
+                    "macroblock": row.get("macroblock"),
+                    "calibration_id": row.get("calibration_id"),
+                    "within_macroblock_position": row.get("within_macroblock_position"),
+                    "stage": row["stage"],
+                    "role": row["role"],
+                    "counting": row["counting"],
+                    "schedule_role": row["role"],
+                    "schedule_counting": row["counting"],
+                    "assignment_sha256": provenance["assignment_sha256"],
+                    "family_definition_sha256": provenance["family_definition_sha256"],
+                    "parent_schedule_sha256": provenance["parent_schedule_sha256"],
+                    "catalog_sha256": provenance["catalog_sha256"],
+                }
+            )
         copied = run_dir / "protocol-manifest.json"
         copied.write_bytes(Path(protocol_manifest).read_bytes())
         attempt_record_path = run_dir / "attempt.json"

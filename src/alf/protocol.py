@@ -18,6 +18,7 @@ from typing import Any, Callable
 
 SCHEMA_VERSION = 1
 SCHEMA_V2 = 2
+SCHEMA_V3 = 3
 SUPPORTED_REASONING_EFFORTS = {"low", "medium", "high"}
 CODEX_CLI_VERSION = "0.149.1"
 DOTNET_SDK_VERSION = "10.0.302"
@@ -815,6 +816,10 @@ def validate_cell(root: Path, definition_path: str | Path) -> dict[str, Any]:
         and value.get("cell_id") == "difficulty-v1"
     ):
         return _validate_cell_v2(root, definition_path)
+    if isinstance(value, dict) and value.get("schema_version") == SCHEMA_V3:
+        from .workstream_d import validate_child
+
+        return validate_child(root, definition_path)
     return _validate_cell_v1(root, definition_path)
 
 
@@ -1025,6 +1030,27 @@ def freeze_cell(
         "definition": definition,
         "schedule": report["schedule"],
     }
+    if definition.get("schema_version") == SCHEMA_V3:
+        family_definition_file = Path(report["family_definition_file"])
+        schedule_file = Path(report["schedule_file"])
+        catalog_file = Path(report["catalog_file"])
+        manifest.update(
+            {
+                "family_id": definition["family_id"],
+                "configuration_id": definition["configuration_id"],
+                "family_definition_file": family_definition_file.relative_to(
+                    root
+                ).as_posix(),
+                "family_definition_sha256": report["family_definition_sha256"],
+                "family_definition": report["family_definition"],
+                "parent_schedule_file": schedule_file.relative_to(root).as_posix(),
+                "parent_schedule_sha256": report["schedule_sha256"],
+                "catalog_file": catalog_file.relative_to(root).as_posix(),
+                "catalog_sha256": report["catalog_sha256"],
+                "catalog": report["catalog"],
+                "assignment_sha256": report["assignment_sha256"],
+            }
+        )
     manifest["manifest_sha256"] = canonical_json_hash(manifest)
     return manifest
 
@@ -1091,7 +1117,7 @@ def load_frozen_manifest(root: Path, manifest_path: str | Path) -> dict[str, Any
     value = _load_json(path, "protocol manifest")
     if not isinstance(value, dict):
         raise ValueError("protocol manifest must contain an object")
-    if value.get("schema_version") not in {SCHEMA_VERSION, SCHEMA_V2}:
+    if value.get("schema_version") not in {SCHEMA_VERSION, SCHEMA_V2, SCHEMA_V3}:
         raise ValueError("protocol manifest schema version is invalid")
     if value.get("frozen") is not True or value.get("dirty") is not False:
         raise ValueError("protocol manifest is not a clean frozen manifest")
@@ -1121,6 +1147,49 @@ def load_frozen_manifest(root: Path, manifest_path: str | Path) -> dict[str, Any
         raise ValueError("protocol definition hash mismatch")
     if value.get("schedule_sha256") != report["schedule_sha256"]:
         raise ValueError("protocol schedule hash mismatch")
+    if value.get("schema_version") == SCHEMA_V3:
+        family_definition_file = Path(report["family_definition_file"])
+        schedule_file = Path(report["schedule_file"])
+        catalog_file = Path(report["catalog_file"])
+        expected_v3 = {
+            "family_id": definition["family_id"],
+            "configuration_id": definition["configuration_id"],
+            "family_definition_file": family_definition_file.relative_to(
+                root
+            ).as_posix(),
+            "family_definition_sha256": report["family_definition_sha256"],
+            "family_definition": report["family_definition"],
+            "parent_schedule_file": schedule_file.relative_to(root).as_posix(),
+            "parent_schedule_sha256": report["schedule_sha256"],
+            "catalog_file": catalog_file.relative_to(root).as_posix(),
+            "catalog_sha256": report["catalog_sha256"],
+            "catalog": report["catalog"],
+            "assignment_sha256": report["assignment_sha256"],
+        }
+        for field, expected in expected_v3.items():
+            if value.get(field) != expected:
+                raise ValueError(f"protocol Workstream D {field} mismatch")
+        required_v3_fields = {
+            "schema_version",
+            "frozen",
+            "frozen_at",
+            "cell_id",
+            "git_head",
+            "dirty",
+            "definition_file",
+            "definition_sha256",
+            "schedule_sha256",
+            "image",
+            "image_id",
+            "environment",
+            "image_archive_verification",
+            "definition",
+            "schedule",
+            "manifest_sha256",
+            *expected_v3.keys(),
+        }
+        if set(value) != required_v3_fields:
+            raise ValueError("protocol Workstream D manifest fields mismatch")
     if value.get("image") != definition["codex"]["image"]:
         raise ValueError("protocol image tag mismatch")
     if value.get("image_id") != definition["image_archive"]["local_image_id"]:
