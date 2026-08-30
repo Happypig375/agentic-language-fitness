@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
 import os
 import subprocess
 import sys
 import tempfile
+import platform
 import uuid
 from pathlib import Path
 from typing import Sequence
@@ -15,6 +17,7 @@ from typing import Sequence
 # The command adapter launches this script with cwd set to the task workspace.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from alf.agents.codex import parse_codex_jsonl
+from alf.host_memory import evaluate_host_memory, parse_requirement
 
 IMAGE_DEFAULT = "alf-codex:0.149.1"
 SAFETY_PROMPT = (
@@ -207,6 +210,33 @@ def main(argv: Sequence[str] | None = None) -> int:
     else:
         task = sys.stdin.read()
     auth_source = resolve_auth_path(args.auth)
+    host_memory = None
+    try:
+        host_requirement = parse_requirement(os.environ.get("ALF_HOST_MEMORY"))
+        host_memory = evaluate_host_memory(host_requirement) if host_requirement else None
+    except Exception as exc:
+        host_memory = {"observed_at": datetime.now(timezone.utc).isoformat(),
+                       "platform": platform.system(), "thresholds": {},
+                       "probe_error": str(exc), "ok": False}
+    if host_memory is not None and not host_memory["ok"]:
+        target = workspace / ".alf" / "usage.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps({"model": args.model, "host_memory": host_memory,
+                                      "host_memory_gate": "failed", "returncode": 75,
+                                      "image": args.image, "image_id": "not-probed",
+                                      "reasoning_effort": args.reasoning_effort,
+                                      "container_limits": {"memory": args.memory, "cpus": args.cpus, "pids": args.pids_limit},
+                                      "auth_ok": None, "timed_out": False,
+                                      "derived_from_codex_jsonl": False,
+                                      "input_tokens": 0, "cached_input_tokens": 0,
+                                      "cache_write_input_tokens": 0, "output_tokens": 0,
+                                      "reasoning_output_tokens": 0, "tool_calls": 0,
+                                      "accounting_valid": False, "usage_available": False,
+                                      "usage_record_count": 0, "event_count": 0,
+                                      "command_count": 0, "file_change_count": 0,
+                                      "failed_event_count": 0, "file_reads": 0,
+                                      "unique_file_reads": 0, "file_revisits": 0}) + "\n", encoding="utf-8")
+        return 75
     auth = minimized_auth(auth_source)
     image_id = image_identifier(args.image)
     try:
@@ -290,6 +320,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "cpus": args.cpus,
         "pids": args.pids_limit,
     }
+    if host_memory is not None:
+        data["host_memory"] = host_memory
     sidecar.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
     return completed.returncode
 

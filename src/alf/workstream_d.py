@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import itertools
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -19,11 +20,11 @@ from .protocol import (
     tracked_text_sha256,
 )
 
-FAMILY_ID = "workstream-d-language-v2"
+FAMILY_ID = "workstream-d-language-v3"
 CONFIGURATIONS = ("H", "M", "L")
-FAMILY_DEFINITION = "protocols/workstream-d-language-v2/definition.json"
-SCHEDULE_FILE = "protocols/workstream-d-language-v2/schedule.json"
-CATALOG_FILE = "protocols/workstream-d-language-v2/model-catalog-preflight.json"
+FAMILY_DEFINITION = "protocols/workstream-d-language-v3/definition.json"
+SCHEDULE_FILE = "protocols/workstream-d-language-v3/schedule.json"
+CATALOG_FILE = "protocols/workstream-d-language-v3/model-catalog-preflight.json"
 BENCHMARK_MANIFEST = "benchmarks/successor/representation-v1/descriptive.manifest.json"
 BENCHMARK_MANIFEST_SHA256 = (
     "5d174f5703184381984ae068c22571b280be9881d6d8ed9941be713b89925749"
@@ -31,9 +32,9 @@ BENCHMARK_MANIFEST_SHA256 = (
 ASSIGNMENT_SHA256 = "3bc3eaab8cc61097f59b098dc7753a9d452374d45438a31b8f465d85a56c1bd1"
 
 PINS = {
-    "H": {"requested_id": "gpt-5.4", "reasoning_effort": "medium"},
-    "M": {"requested_id": "gpt-5.4", "reasoning_effort": "low"},
-    "L": {"requested_id": "gpt-5.4-mini", "reasoning_effort": "medium"},
+    "H": {"requested_id": "gpt-5.6-terra", "reasoning_effort": "medium"},
+    "M": {"requested_id": "gpt-5.6-luna", "reasoning_effort": "high"},
+    "L": {"requested_id": "gpt-5.6-luna", "reasoning_effort": "medium"},
 }
 
 _DIRECTION_ORDER = {
@@ -155,6 +156,18 @@ _COMMON_CHILD_PINS = {
         "cpus": 2,
         "pids": 256,
     },
+    "host_memory": {
+        "probe_scope": "immediately-before-each-candidate-task",
+        "minimum_available_physical_bytes": 2147483648,
+        "minimum_available_commit_bytes": 6442450944,
+        "failure_disposition": (
+            "explicit failed probe is host infrastructure-invalid and retryable; "
+            "never infer OOM from missing artifacts"
+        ),
+        "concurrency_policy": (
+            "no concurrent benchmark, maintainer subagent, or unrelated model run"
+        ),
+    },
     "network_policy": (
         "bridge network; candidate egress and external documentation are allowed "
         "equally for both languages; mounts are limited to /workspace plus "
@@ -228,6 +241,33 @@ _CHILD_FIELDS = {
     *_COMMON_CHILD_PINS.keys(),
 }
 
+# Immutable family specifications keep historical graphs auditable without
+# mutating module globals during validation.
+_V2_PINS = {
+    "H": {"requested_id": "gpt-5.4", "reasoning_effort": "medium"},
+    "M": {"requested_id": "gpt-5.4", "reasoning_effort": "low"},
+    "L": {"requested_id": "gpt-5.4-mini", "reasoning_effort": "medium"},
+}
+_V2_COMMON_CHILD_PINS = {k: v for k, v in _COMMON_CHILD_PINS.items() if k != "host_memory"}
+_V2_CHILD_FIELDS = _CHILD_FIELDS - {"host_memory"}
+
+
+@dataclass(frozen=True)
+class FamilySpec:
+    family_id: str
+    family_definition: str
+    schedule_file: str
+    catalog_file: str
+    pins: dict[str, dict[str, str]]
+    common_child_pins: dict[str, Any]
+    child_fields: set[str]
+
+
+_V3_SPEC = FamilySpec(FAMILY_ID, FAMILY_DEFINITION, SCHEDULE_FILE, CATALOG_FILE, PINS, _COMMON_CHILD_PINS, _CHILD_FIELDS)
+_V2_SPEC = FamilySpec("workstream-d-language-v2", "protocols/workstream-d-language-v2/definition.json", "protocols/workstream-d-language-v2/schedule.json", "protocols/workstream-d-language-v2/model-catalog-preflight.json", _V2_PINS, _V2_COMMON_CHILD_PINS, _V2_CHILD_FIELDS)
+_V1_SPEC = FamilySpec("workstream-d-language-v1", "protocols/workstream-d-language-v1/definition.json", "protocols/workstream-d-language-v1/schedule.json", "protocols/workstream-d-language-v1/model-catalog-preflight.json", _V2_PINS, _V2_COMMON_CHILD_PINS, _V2_CHILD_FIELDS)
+_FAMILY_SPECS = {s.family_id: s for s in (_V1_SPEC, _V2_SPEC, _V3_SPEC)}
+
 
 def canonical_assignment(rows: list[tuple[int, str, str]] | None = None) -> str:
     """Return the reviewed assignment's canonical newline-delimited encoding."""
@@ -262,7 +302,7 @@ def _expected_formal_row(
     }
 
 
-def validate_schedule(schedule: dict[str, Any]) -> list[str]:
+def validate_schedule(schedule: dict[str, Any], spec: FamilySpec = _V3_SPEC) -> list[str]:
     """Validate the approved schedule, calibrations, and balance invariants."""
 
     errors: list[str] = []
@@ -279,7 +319,7 @@ def validate_schedule(schedule: dict[str, Any]) -> list[str]:
         errors.append("schedule fields are invalid")
     if schedule.get("schema_version") != 3:
         errors.append("schedule.schema_version must be 3")
-    if schedule.get("family_id") != FAMILY_ID:
+    if schedule.get("family_id") != spec.family_id:
         errors.append("schedule family_id mismatch")
     if schedule.get("assignment_sha256") != ASSIGNMENT_SHA256:
         errors.append("schedule assignment_sha256 mismatch")
@@ -383,14 +423,14 @@ def _load_contained_json(
         return None, {}
 
 
-def _validate_catalog(catalog: dict[str, Any]) -> list[str]:
+def _validate_catalog(catalog: dict[str, Any], spec: FamilySpec = _V3_SPEC) -> list[str]:
     errors: list[str] = []
     models = catalog.get("models")
     if not isinstance(models, dict):
         return ["model catalog models must be an object"]
     if catalog.get("supported_in_api") is not True:
         errors.append("model catalog API support evidence is missing")
-    for configuration, pin in PINS.items():
+    for configuration, pin in spec.pins.items():
         requested_id = pin["requested_id"]
         item = models.get(requested_id)
         if not isinstance(item, dict):
@@ -536,37 +576,38 @@ def _validate_child_definition(
     schedule: dict[str, Any],
     catalog_file: Path | None,
     catalog: dict[str, Any],
+    spec: FamilySpec,
 ) -> dict[str, Any]:
     errors: list[str] = []
     configuration = definition.get("configuration_id")
-    if set(definition) != _CHILD_FIELDS:
+    if set(definition) != spec.child_fields:
         errors.append("child definition fields are incomplete or contain extras")
     if definition.get("schema_version") != 3:
         errors.append("schema_version must be 3")
-    if definition.get("family_id") != FAMILY_ID:
+    if definition.get("family_id") != spec.family_id:
         errors.append("family_id mismatch")
     if configuration not in CONFIGURATIONS:
         errors.append("configuration_id must be H, M, or L")
     else:
-        if definition.get("cell_id") != f"{FAMILY_ID}-{configuration.lower()}":
+        if definition.get("cell_id") != f"{spec.family_id}-{configuration.lower()}":
             errors.append("child cell_id mismatch")
         if definition.get("description") != (
             f"Workstream D descriptive-language feasibility child {configuration}."
         ):
             errors.append("child description mismatch")
-        if definition.get("model") != PINS[configuration]:
+        if definition.get("model") != spec.pins[configuration]:
             errors.append("child model pin mismatch")
         if definition.get("raw_root") != (
-            f"results/workstream-d-language-v2/{configuration.lower()}"
+            f"results/{spec.family_id}/{configuration.lower()}"
         ):
             errors.append("child raw_root mismatch")
     if definition.get("representation") != "descriptive":
         errors.append("child must be descriptive-only")
-    if definition.get("parent_definition") != FAMILY_DEFINITION:
+    if definition.get("parent_definition") != spec.family_definition:
         errors.append("child parent_definition mismatch")
-    if definition.get("schedule_file") != SCHEDULE_FILE:
+    if definition.get("schedule_file") != spec.schedule_file:
         errors.append("child schedule_file mismatch")
-    if definition.get("catalog_file") != CATALOG_FILE:
+    if definition.get("catalog_file") != spec.catalog_file:
         errors.append("child catalog_file mismatch")
     if definition.get("assignment_sha256") != ASSIGNMENT_SHA256:
         errors.append("child assignment_sha256 mismatch")
@@ -584,7 +625,7 @@ def _validate_child_definition(
         errors.append("child schedule hash mismatch")
     if definition.get("catalog_sha256") != actual_catalog_hash:
         errors.append("child catalog hash mismatch")
-    for field, expected in _COMMON_CHILD_PINS.items():
+    for field, expected in spec.common_child_pins.items():
         if definition.get(field) != expected:
             errors.append(f"child {field} pins are invalid")
     if set(definition.get("failure_taxonomy", [])) != REQUIRED_FAILURES:
@@ -611,7 +652,7 @@ def _validate_child_definition(
             "configuration_id": configuration,
             "definition_file": definition_file.relative_to(root).as_posix(),
             "definition_sha256": tracked_text_sha256(definition_file),
-            "model": PINS[configuration],
+            "model": spec.pins[configuration],
         }
         if entry != expected_entry:
             errors.append("parent child entry or definition hash mismatch")
@@ -637,8 +678,13 @@ def _validate_child_definition(
     return report
 
 
-def _validate_parent(root: Path, definition_file: Path) -> dict[str, Any]:
+def _validate_parent(root: Path, definition_file: Path, spec: FamilySpec) -> dict[str, Any]:
     errors: list[str] = []
+    try:
+        if definition_file != (root / spec.family_definition).resolve():
+            errors.append("family definition path does not match family_id")
+    except OSError:
+        errors.append("family definition path cannot be resolved")
     try:
         definition = _load_json(definition_file, "family definition")
     except ValueError as exc:
@@ -670,23 +716,27 @@ def _validate_parent(root: Path, definition_file: Path) -> dict[str, Any]:
         "assignment_sha256",
         "children",
     }
+    if "host_memory" in spec.common_child_pins:
+        expected_fields.add("host_memory")
     if set(definition) != expected_fields:
         errors.append("family definition fields are invalid")
     if definition.get("schema_version") != 3:
         errors.append("schema_version must be 3")
     if (
-        definition.get("family_id") != FAMILY_ID
-        or definition.get("cell_id") != FAMILY_ID
+        definition.get("family_id") != spec.family_id
+        or definition.get("cell_id") != spec.family_id
     ):
         errors.append("family identity mismatch")
     if definition.get("representation") != "descriptive":
         errors.append("family must be descriptive-only")
-    if definition.get("schedule_file") != SCHEDULE_FILE:
+    if definition.get("schedule_file") != spec.schedule_file:
         errors.append("family schedule_file mismatch")
-    if definition.get("catalog_file") != CATALOG_FILE:
+    if definition.get("catalog_file") != spec.catalog_file:
         errors.append("family catalog_file mismatch")
     if definition.get("assignment_sha256") != ASSIGNMENT_SHA256:
         errors.append("family assignment_sha256 mismatch")
+    if "host_memory" in spec.common_child_pins and definition.get("host_memory") != spec.common_child_pins["host_memory"]:
+        errors.append("family host_memory pins are invalid")
 
     schedule_file, schedule = _load_contained_json(
         root, definition.get("schedule_file"), "schedule_file", errors
@@ -694,8 +744,8 @@ def _validate_parent(root: Path, definition_file: Path) -> dict[str, Any]:
     catalog_file, catalog = _load_contained_json(
         root, definition.get("catalog_file"), "catalog_file", errors
     )
-    errors.extend(validate_schedule(schedule))
-    errors.extend(_validate_catalog(catalog))
+    errors.extend(validate_schedule(schedule, spec))
+    errors.extend(_validate_catalog(catalog, spec))
     actual_schedule_hash = (
         tracked_text_sha256(schedule_file)
         if schedule_file and schedule_file.is_file()
@@ -746,6 +796,7 @@ def _validate_parent(root: Path, definition_file: Path) -> dict[str, Any]:
             schedule,
             catalog_file,
             catalog,
+            spec,
         )
         child_reports[configuration] = child_report
         errors.extend(
@@ -753,7 +804,7 @@ def _validate_parent(root: Path, definition_file: Path) -> dict[str, Any]:
         )
 
     if len(child_reports) == 3:
-        common_fields = set(_COMMON_CHILD_PINS) | {
+        common_fields = set(spec.common_child_pins) | {
             "schema_version",
             "family_id",
             "representation",
@@ -812,7 +863,10 @@ def validate_family(root: Path, definition_path: str | Path) -> dict[str, Any]:
             "definition": candidate,
             "schedule": {},
         }
-    return _validate_parent(root, definition_file)
+    spec = _FAMILY_SPECS.get(candidate.get("family_id"))
+    if spec is None:
+        return {"ok": False, "errors": ["unsupported Workstream D family_id"], "definition": candidate, "schedule": {}}
+    return _validate_parent(root, definition_file, spec)
 
 
 def validate_child(root: Path, definition_path: str | Path) -> dict[str, Any]:
@@ -849,7 +903,10 @@ def validate_child(root: Path, definition_path: str | Path) -> dict[str, Any]:
             "definition": child,
             "schedule": {},
         }
-    parent_report = _validate_parent(root, parent_file)
+    spec = _FAMILY_SPECS.get(child.get("family_id"))
+    if spec is None:
+        return {"ok": False, "errors": ["unsupported Workstream D family_id"], "definition": child, "schedule": {}}
+    parent_report = _validate_parent(root, parent_file, spec)
     configuration = child["configuration_id"]
     report = parent_report.get("children", {}).get(configuration)
     if report is None:

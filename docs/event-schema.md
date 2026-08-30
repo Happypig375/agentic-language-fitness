@@ -42,3 +42,9 @@ Workstream D events carry `family_id`, `configuration_id`, `pair_block_id`,
 `family_definition_sha256`, `parent_schedule_sha256`, `catalog_sha256`, and
 `assignment_sha256`. Calibration events use an explicit non-counting role and
 never enter the formal assignment hash.
+
+Current events use `workstream-d-language-v3`; v1/v2 remain auditable. Each
+candidate task records an explicit immediately-before-task host-memory probe,
+thresholds, and pass/fail disposition. Missing, empty, or truncated artifacts
+are unresolved apparatus state and are never inferred to be OOM or a candidate
+outcome without explicit evidence.

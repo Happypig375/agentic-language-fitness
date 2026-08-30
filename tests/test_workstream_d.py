@@ -3,6 +3,7 @@ import json
 import shutil
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from unittest.mock import patch
 
@@ -26,15 +27,20 @@ from alf.workstream_d import (
     classify_stage1_family,
     stage1_slot_ids,
     validate_family,
+    validate_child,
     validate_schedule,
+    FAMILY_ID,
+    PINS,
+    _FAMILY_SPECS,
+    _validate_catalog,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-FAMILY_PATH = Path("protocols/workstream-d-language-v2/definition.json")
+FAMILY_PATH = Path("protocols/workstream-d-language-v3/definition.json")
 CHILD_PATHS = {
-    "H": Path("protocols/workstream-d-language-v2/h.json"),
-    "M": Path("protocols/workstream-d-language-v2/m.json"),
-    "L": Path("protocols/workstream-d-language-v2/l.json"),
+    "H": Path("protocols/workstream-d-language-v3/h.json"),
+    "M": Path("protocols/workstream-d-language-v3/m.json"),
+    "L": Path("protocols/workstream-d-language-v3/l.json"),
 }
 
 
@@ -53,7 +59,7 @@ class FamilyRepository:
         shutil.copy2(
             ROOT / "Dockerfile.codex-agent", self.root / "Dockerfile.codex-agent"
         )
-        target = self.root / "protocols" / "workstream-d-language-v2"
+        target = self.root / "protocols" / "workstream-d-language-v3"
         target.parent.mkdir(parents=True)
         shutil.copytree(ROOT / FAMILY_PATH.parent, target)
         treatment = self.root / "benchmarks" / "successor" / "representation-v1"
@@ -82,7 +88,7 @@ class FamilyRepository:
 
     def repin_schedule(self) -> None:
         schedule_hash = tracked_text_sha256(
-            self.root / "protocols/workstream-d-language-v2/schedule.json"
+            self.root / "protocols/workstream-d-language-v3/schedule.json"
         )
         parent = self.read(FAMILY_PATH)
         parent["schedule_sha256"] = schedule_hash
@@ -96,7 +102,7 @@ class FamilyRepository:
     def repin_catalog(self) -> None:
         catalog_hash = tracked_text_sha256(
             self.root
-            / "protocols/workstream-d-language-v2/model-catalog-preflight.json"
+            / "protocols/workstream-d-language-v3/model-catalog-preflight.json"
         )
         parent = self.read(FAMILY_PATH)
         parent["catalog_sha256"] = catalog_hash
@@ -109,6 +115,77 @@ class FamilyRepository:
 
     def close(self) -> None:
         self.directory.cleanup()
+
+
+class VersionCompatibilityTests(unittest.TestCase):
+    def test_all_family_versions_and_children_remain_auditable(self) -> None:
+        for version in ("v1", "v2", "v3"):
+            report = validate_family(ROOT, f"protocols/workstream-d-language-{version}/definition.json")
+            self.assertTrue(report["ok"], report["errors"])
+            for configuration in ("H", "M", "L"):
+                child = validate_child(ROOT, f"protocols/workstream-d-language-{version}/{configuration.lower()}.json")
+                self.assertTrue(child["ok"], child["errors"])
+
+    def test_all_family_versions_validate_deterministically_under_concurrency(self) -> None:
+        # Full graph validation is covered sequentially below; concurrent work
+        # intentionally uses only preloaded, small pure validation inputs.
+        jobs = []
+        for version in ("v1", "v2", "v3"):
+            spec = _FAMILY_SPECS[f"workstream-d-language-{version}"]
+            schedule = json.loads((ROOT / spec.schedule_file).read_text(encoding="utf-8"))
+            catalog = json.loads((ROOT / spec.catalog_file).read_text(encoding="utf-8"))
+            jobs.extend((schedule, catalog, spec) for _ in range(4))
+
+        def run(job):
+            schedule, catalog, spec = job
+            return validate_schedule(schedule, spec) + _validate_catalog(catalog, spec)
+
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            errors = list(executor.map(run, jobs))
+        self.assertTrue(all(not error for error in errors), errors)
+        self.assertEqual(FAMILY_ID, "workstream-d-language-v3")
+        self.assertEqual(PINS["H"], {"requested_id": "gpt-5.6-terra", "reasoning_effort": "medium"})
+
+    def test_cross_family_substitution_is_rejected_after_repinning(self) -> None:
+        repo = FamilyRepository()
+        try:
+            shutil.copytree(ROOT / "protocols" / "workstream-d-language-v2", repo.root / "protocols" / "workstream-d-language-v2")
+            parent = repo.read(FAMILY_PATH)
+            parent["schedule_file"] = "protocols/workstream-d-language-v2/schedule.json"
+            parent["schedule_sha256"] = tracked_text_sha256(repo.root / parent["schedule_file"])
+            repo.write(FAMILY_PATH, parent)
+            report = validate_family(repo.root, FAMILY_PATH)
+            self.assertFalse(report["ok"])
+            self.assertTrue(any("family schedule_file mismatch" in error for error in report["errors"]))
+
+            parent = repo.read(FAMILY_PATH)
+            parent["catalog_file"] = "protocols/workstream-d-language-v2/model-catalog-preflight.json"
+            parent["catalog_sha256"] = tracked_text_sha256(repo.root / parent["catalog_file"])
+            repo.write(FAMILY_PATH, parent)
+            report = validate_family(repo.root, FAMILY_PATH)
+            self.assertFalse(report["ok"])
+            self.assertTrue(any("family catalog_file mismatch" in error for error in report["errors"]))
+
+            parent = repo.read(FAMILY_PATH)
+            parent["schedule_file"] = "protocols/workstream-d-language-v3/schedule.json"
+            parent["catalog_file"] = "protocols/workstream-d-language-v3/model-catalog-preflight.json"
+            parent["schedule_sha256"] = tracked_text_sha256(repo.root / parent["schedule_file"])
+            parent["catalog_sha256"] = tracked_text_sha256(repo.root / parent["catalog_file"])
+            parent["children"]["H"]["definition_file"] = "protocols/workstream-d-language-v2/h.json"
+            parent["children"]["H"]["definition_sha256"] = tracked_text_sha256(repo.root / parent["children"]["H"]["definition_file"])
+            repo.write(FAMILY_PATH, parent)
+            report = validate_family(repo.root, FAMILY_PATH)
+            self.assertFalse(report["ok"])
+            self.assertTrue(any("child H" in error and "family_id mismatch" in error for error in report["errors"]))
+
+            # A v3-shaped parent must not become valid merely by being invoked
+            # through a historical path.
+            shutil.copy2(repo.root / FAMILY_PATH, repo.root / "protocols/workstream-d-language-v2/definition-v3-shaped.json")
+            report = validate_family(repo.root, "protocols/workstream-d-language-v2/definition-v3-shaped.json")
+            self.assertFalse(report["ok"])
+            self.assertTrue(any("family definition path does not match family_id" in error for error in report["errors"]))
+        finally:
+            repo.close()
 
 
 def _valid_probe() -> dict:
@@ -242,7 +319,7 @@ class WorkstreamDValidationTests(unittest.TestCase):
     def test_schedule_calibration_assignment_and_catalog_mutations_fail(self) -> None:
         repo = FamilyRepository()
         try:
-            schedule_path = Path("protocols/workstream-d-language-v2/schedule.json")
+            schedule_path = Path("protocols/workstream-d-language-v3/schedule.json")
             schedule = repo.read(schedule_path)
             schedule["formal"][0].update(
                 {"direction": "C#>F#", "order": ["csharp", "fsharp"]}
@@ -268,10 +345,10 @@ class WorkstreamDValidationTests(unittest.TestCase):
             repo.close()
             repo = FamilyRepository()
             catalog_path = Path(
-                "protocols/workstream-d-language-v2/model-catalog-preflight.json"
+                "protocols/workstream-d-language-v3/model-catalog-preflight.json"
             )
             catalog = repo.read(catalog_path)
-            catalog["models"]["gpt-5.4-mini"]["supported_in_api"] = False
+            catalog["models"]["gpt-5.6-luna"]["supported_in_api"] = False
             repo.write(catalog_path, catalog)
             repo.repin_catalog()
             report = validate_family(repo.root, FAMILY_PATH)
@@ -381,7 +458,7 @@ class WorkstreamDFreezeTests(unittest.TestCase):
         target = (
             self.repo.root
             / "results"
-            / "workstream-d-language-v2"
+            / "workstream-d-language-v3"
             / "h"
             / "resolved-manifest.json"
         )
@@ -391,16 +468,16 @@ class WorkstreamDFreezeTests(unittest.TestCase):
 
     def test_freeze_embeds_relative_family_schedule_catalog_and_identity(self) -> None:
         manifest = self._freeze()
-        self.assertEqual(manifest["family_id"], "workstream-d-language-v2")
+        self.assertEqual(manifest["family_id"], "workstream-d-language-v3")
         self.assertEqual(manifest["configuration_id"], "H")
         self.assertEqual(manifest["family_definition_file"], FAMILY_PATH.as_posix())
         self.assertEqual(
             manifest["parent_schedule_file"],
-            "protocols/workstream-d-language-v2/schedule.json",
+            "protocols/workstream-d-language-v3/schedule.json",
         )
         self.assertEqual(
             manifest["catalog_file"],
-            "protocols/workstream-d-language-v2/model-catalog-preflight.json",
+            "protocols/workstream-d-language-v3/model-catalog-preflight.json",
         )
         self.assertIsInstance(manifest["family_definition"], dict)
         self.assertEqual(manifest["assignment_sha256"], ASSIGNMENT_SHA256)
@@ -509,7 +586,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
             "language": "fsharp",
             "agent_name": "command",
             "output_root": self.output,
-            "model": "gpt-5.4",
+            "model": self.definition["model"]["requested_id"],
             "agent_command": None,
             "timeout": 600,
             "max_tasks": None,
@@ -593,7 +670,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
         prepared, command, attempt_number = self._prepare()
         self.assertEqual(attempt_number, 1)
         self.assertEqual(prepared["_workstream_d_row"]["within_macroblock_position"], 1)
-        self.assertIn('--model "gpt-5.4"', command)
+        self.assertIn('--model "gpt-5.6-terra"', command)
         self.assertIn('--reasoning-effort "medium"', command)
 
         self._prior_result()
@@ -657,7 +734,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
 
     def test_wrong_model_order_configuration_position_and_attempt_fail(self) -> None:
         cases = (
-            ({"model": "gpt-5.4-mini"}, "model"),
+            ({"model": "gpt-5.6-luna"}, "model"),
             ({"order": "csharp-first"}, "order"),
             ({"block_id": "mb01-m"}, "not in"),
             ({"position": 3}, "position"),
@@ -731,7 +808,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
                 language="fsharp",
                 agent_name="command",
                 output_root=self.output,
-                model="gpt-5.4",
+                model="gpt-5.6-terra",
                 timeout=600,
                 require_usage=True,
                 protocol_manifest=self.manifest_path,
@@ -742,7 +819,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
             )
         result = json.loads((run_dir / "result.json").read_text(encoding="utf-8"))
         provenance = result["provenance"]
-        self.assertEqual(provenance["family_id"], "workstream-d-language-v2")
+        self.assertEqual(provenance["family_id"], "workstream-d-language-v3")
         self.assertEqual(provenance["configuration_id"], "H")
         self.assertEqual(provenance["pair_block_id"], "mb01-h")
         self.assertEqual(provenance["execution_position"], 1)
@@ -772,7 +849,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
         }
         sidecar = {
             **{name: 0 for name in Usage.__dataclass_fields__},
-            "model": "gpt-5.4", "reasoning_effort": "medium",
+            "model": "gpt-5.6-terra", "reasoning_effort": "medium",
             "image": self.definition["codex"]["image"], "image_id": EXPECTED_IMAGE_ID,
             "timed_out": True, "auth_ok": True,
             "container_limits": {
@@ -818,7 +895,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
         ):
             run_dir = run_chain(
                 root=self.repo.root, manifest=benchmark, language="fsharp",
-                agent_name="command", output_root=self.output, model="gpt-5.4",
+                agent_name="command", output_root=self.output, model="gpt-5.6-terra",
                 timeout=600, require_usage=True, protocol_manifest=self.manifest_path,
                 block_id="cal-h-primary", order="fsharp-first",
                 attempt_id="cal-h-primary-fsharp-01", position=1,
@@ -827,7 +904,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
         attempt = json.loads((run_dir / "attempt.json").read_text(encoding="utf-8"))
         self.assertEqual(attempt["state"], "completed")
         self.assertFalse(result["success"])
-        self.assertFalse(result["disposition"]["retryable"], result["disposition"])
+        self.assertTrue(result["disposition"]["retryable"], result["disposition"])
         self.assertTrue((run_dir / "result.json").is_file())
 
 

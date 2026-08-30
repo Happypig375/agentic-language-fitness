@@ -121,15 +121,18 @@ zero terminal usage; post-processing crashed on legacy `model.snapshot`, so
 analyzable outcome. See `docs/workstream-d-v1-retirement-incident-2026-08-30.md`.
 Retire v1: do not retry, pool, or synthesize this attempt.
 
-The schema-aware v2 repair and complete replacement are implemented. Thirty-two
-focused tests and the v2 family/child validators pass. Independent code review,
-independent full model-free validation, direct commit/push, green CI, and clean
-v2 child freezes remain pending. No further model call is authorized until
-those gates pass.
+The schema-aware v2 repair and complete replacement were reviewed, pushed at
+`eed5b4dc9657366822cd3833a990dfd569b921e9`, passed CI `33309932298`, and were
+cleanly frozen. Its calibration is closed: M was confirmed too easy in both
+orders, while L/C# ended in a host OOM apparatus stop with no candidate outcome.
+See `docs/workstream-d-v2-calibration-incident-2026-08-31.md`; do not retry,
+pool, or synthesize the unresolved attempt. A versioned v3 successor is now
+the active design checkpoint.
 
-The next action is independent review/validation, then checkpoint commit and
-push directly to `main` (no PR), green CI, and v2 child freezes with resolved
-manifests and hashes.
+The next action is independent review/validation of v3, then checkpoint commit
+and push directly to `main` (no PR), green CI, and v3 child freezes with
+resolved manifests and hashes. No model call is authorized before these gates
+and host-memory headroom checks pass.
 
 ### D2. Run non-counting configuration calibrations
 

@@ -1,0 +1,84 @@
+{
+  "schema_version": 3,
+  "family_id": "workstream-d-language-v3",
+  "assignment_sha256": "3bc3eaab8cc61097f59b098dc7753a9d452374d45438a31b8f465d85a56c1bd1",
+  "calibration": [
+    {
+      "block_id": "cal-h-primary",
+      "calibration_id": "cal-h-primary",
+      "configuration_id": "H",
+      "order": ["fsharp", "csharp"],
+      "direction": "F#>C#",
+      "stage": 0,
+      "counting": false,
+      "role": "calibration-primary",
+      "conditional": false
+    },
+    {
+      "block_id": "cal-m-primary",
+      "calibration_id": "cal-m-primary",
+      "configuration_id": "M",
+      "order": ["csharp", "fsharp"],
+      "direction": "C#>F#",
+      "stage": 0,
+      "counting": false,
+      "role": "calibration-primary",
+      "conditional": false
+    },
+    {
+      "block_id": "cal-l-primary",
+      "calibration_id": "cal-l-primary",
+      "configuration_id": "L",
+      "order": ["fsharp", "csharp"],
+      "direction": "F#>C#",
+      "stage": 0,
+      "counting": false,
+      "role": "calibration-primary",
+      "conditional": false
+    },
+    {
+      "block_id": "cal-m-reverse",
+      "calibration_id": "cal-m-reverse",
+      "configuration_id": "M",
+      "order": ["fsharp", "csharp"],
+      "direction": "F#>C#",
+      "stage": 0,
+      "counting": false,
+      "role": "calibration-reverse-confirmation",
+      "conditional": true,
+      "condition": "run only when the primary pair classifies M as provisionally too easy or too hard"
+    },
+    {
+      "block_id": "cal-l-reverse",
+      "calibration_id": "cal-l-reverse",
+      "configuration_id": "L",
+      "order": ["csharp", "fsharp"],
+      "direction": "C#>F#",
+      "stage": 0,
+      "counting": false,
+      "role": "calibration-reverse-confirmation",
+      "conditional": true,
+      "condition": "run only when the primary pair classifies L as provisionally too easy or too hard"
+    }
+  ],
+  "formal": [
+    {"block_id": "mb01-h", "macroblock": 1, "within_macroblock_position": 1, "configuration_id": "H", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb01-m", "macroblock": 1, "within_macroblock_position": 2, "configuration_id": "M", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb01-l", "macroblock": 1, "within_macroblock_position": 3, "configuration_id": "L", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb02-m", "macroblock": 2, "within_macroblock_position": 1, "configuration_id": "M", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb02-l", "macroblock": 2, "within_macroblock_position": 2, "configuration_id": "L", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb02-h", "macroblock": 2, "within_macroblock_position": 3, "configuration_id": "H", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb03-l", "macroblock": 3, "within_macroblock_position": 1, "configuration_id": "L", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb03-h", "macroblock": 3, "within_macroblock_position": 2, "configuration_id": "H", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb03-m", "macroblock": 3, "within_macroblock_position": 3, "configuration_id": "M", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb04-h", "macroblock": 4, "within_macroblock_position": 1, "configuration_id": "H", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb04-l", "macroblock": 4, "within_macroblock_position": 2, "configuration_id": "L", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb04-m", "macroblock": 4, "within_macroblock_position": 3, "configuration_id": "M", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 1, "counting": true, "role": "primary"},
+    {"block_id": "mb05-l", "macroblock": 5, "within_macroblock_position": 1, "configuration_id": "L", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 2, "counting": true, "role": "primary"},
+    {"block_id": "mb05-m", "macroblock": 5, "within_macroblock_position": 2, "configuration_id": "M", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 2, "counting": true, "role": "primary"},
+    {"block_id": "mb05-h", "macroblock": 5, "within_macroblock_position": 3, "configuration_id": "H", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 2, "counting": true, "role": "primary"},
+    {"block_id": "mb06-m", "macroblock": 6, "within_macroblock_position": 1, "configuration_id": "M", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 2, "counting": true, "role": "primary"},
+    {"block_id": "mb06-h", "macroblock": 6, "within_macroblock_position": 2, "configuration_id": "H", "order": ["csharp", "fsharp"], "direction": "C#>F#", "stage": 2, "counting": true, "role": "primary"},
+    {"block_id": "mb06-l", "macroblock": 6, "within_macroblock_position": 3, "configuration_id": "L", "order": ["fsharp", "csharp"], "direction": "F#>C#", "stage": 2, "counting": true, "role": "primary"}
+  ]
+}

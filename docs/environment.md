@@ -73,4 +73,8 @@ The v1 family was clean-frozen and then retired after the first H/F# calibration
 became an unresolved apparatus-terminated attempt due to a post-process
 snapshot/requested_id validation crash. It has no analyzable outcome and is not
 pooled; do not synthesize missing logs/results or retry it. New calibration work
-uses the replacement v2 family only.
+uses v3: H=`gpt-5.6-terra` medium, M=`gpt-5.6-luna` high, and
+L=`gpt-5.6-luna` medium. A host-memory probe runs immediately before every
+candidate task and requires 2,147,483,648 physical and 6,442,450,944 commit
+bytes. Failed probes are host-invalid and retryable; missing artifacts never
+justify inferring OOM.

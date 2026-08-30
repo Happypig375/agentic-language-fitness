@@ -1,0 +1,36 @@
+{
+  "schema_version": 3,
+  "family_id": "workstream-d-language-v3",
+  "cell_id": "workstream-d-language-v3",
+  "description": "Workstream D descriptive-language multi-configuration feasibility family; model-free validation does not authorize execution.",
+  "representation": "descriptive",
+  "schedule_file": "protocols/workstream-d-language-v3/schedule.json",
+  "schedule_sha256": "73178e579cf77fd7b35731cc9fab952f73d3e10365fb2ac3196f161a8537179f",
+  "catalog_file": "protocols/workstream-d-language-v3/model-catalog-preflight.json",
+  "catalog_sha256": "d480d235be49be5f05364ae9d975d7e49d52f3856af44ec3f568ba47db86cd59",
+  "assignment_sha256": "3bc3eaab8cc61097f59b098dc7753a9d452374d45438a31b8f465d85a56c1bd1",
+  "host_memory": {"probe_scope": "immediately-before-each-candidate-task", "minimum_available_physical_bytes": 2147483648, "minimum_available_commit_bytes": 6442450944, "failure_disposition": "explicit failed probe is host infrastructure-invalid and retryable; never infer OOM from missing artifacts", "concurrency_policy": "no concurrent benchmark, maintainer subagent, or unrelated model run"},
+  "children": {
+    "H": {
+      "cell_id": "workstream-d-language-v3-h",
+      "configuration_id": "H",
+      "definition_file": "protocols/workstream-d-language-v3/h.json",
+      "definition_sha256": "2359f67bd2a2b19ad8cf29af798606142aec18ae4fcb8ec09fada1f560cb7a19",
+      "model": {"requested_id": "gpt-5.6-terra", "reasoning_effort": "medium"}
+    },
+    "M": {
+      "cell_id": "workstream-d-language-v3-m",
+      "configuration_id": "M",
+      "definition_file": "protocols/workstream-d-language-v3/m.json",
+      "definition_sha256": "5ce17d3fc9a1067651fc3438dcf3b6c462dc2be1b3e2724b119962cfa6a3bc7f",
+      "model": {"requested_id": "gpt-5.6-luna", "reasoning_effort": "high"}
+    },
+    "L": {
+      "cell_id": "workstream-d-language-v3-l",
+      "configuration_id": "L",
+      "definition_file": "protocols/workstream-d-language-v3/l.json",
+      "definition_sha256": "fe3e20316fa38355cc88c06489e411b375576358db11c81ed7a62f6c7afa2aec",
+      "model": {"requested_id": "gpt-5.6-luna", "reasoning_effort": "medium"}
+    }
+  }
+}

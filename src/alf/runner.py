@@ -116,6 +116,7 @@ def _agent_summary(result: AgentResult, log_paths: dict[str, str]) -> dict[str, 
         "agent_process_wall_seconds": result.process.duration_seconds,
         "auth_ok": result.auth_ok,
         "container_limits": result.container_limits,
+        "host_memory": result.host_memory,
     }
 
 
@@ -277,6 +278,10 @@ def _derive_protocol_disposition(run_result: dict[str, Any]) -> dict[str, Any]:
             *task_evaluator_processes,
             *task_processes,
         ]
+    )
+    host_ok = host_ok and not any(
+        isinstance(agent.get("host_memory"), dict) and agent["host_memory"].get("ok") is False
+        for agent in task_agents
     )
     timed_out = any(
         process.get("timed_out") is True
@@ -841,7 +846,7 @@ def run_chain(
                 "manifest_parent": getattr(manifest, "manifest_parent", None)
             }
             agent_task["_artifact_plan"] = planned_artifacts[task_index]
-        agent_result = agent.run(
+        agent_kwargs = dict(
             root=root,
             workspace=workspace,
             language=language,
@@ -849,6 +854,11 @@ def run_chain(
             task=agent_task,
             prompt=prompt,
             timeout=timeout,
+        )
+        if agent_name == "command":
+            agent_kwargs["host_memory"] = (provenance or {}).get("definition", {}).get("host_memory")
+        agent_result = agent.run(
+            **agent_kwargs,
         )
         aggregate_usage.add(agent_result.usage)
         aggregate_accounting_valid = (

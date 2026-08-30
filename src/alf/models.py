@@ -68,6 +68,7 @@ class AgentResult:
     accounting_errors: list[str] = field(default_factory=list)
     auth_ok: bool | None = None
     container_limits: dict[str, Any] | None = None
+    host_memory: dict[str, Any] | None = None
 
     @property
     def ok(self) -> bool:

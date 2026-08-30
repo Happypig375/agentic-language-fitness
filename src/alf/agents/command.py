@@ -35,6 +35,7 @@ class CommandAgent(Agent):
         task: dict[str, Any],
         prompt: str,
         timeout: float,
+        host_memory: dict[str, Any] | None = None,
     ) -> AgentResult:
         alf_dir = workspace / ".alf"
         alf_dir.mkdir(exist_ok=True)
@@ -68,6 +69,7 @@ class CommandAgent(Agent):
                 "ALF_TASK_ID": task["id"],
                 "ALF_LANGUAGE": language,
                 "ALF_TIMEOUT": str(timeout),
+                "ALF_HOST_MEMORY": json.dumps(host_memory) if host_memory else "",
             },
         )
         usage = Usage()
@@ -77,15 +79,18 @@ class CommandAgent(Agent):
         usage_available = False
         auth_ok: bool | None = None
         container_limits: dict[str, Any] | None = None
+        host_memory: dict[str, Any] | None = None
         accounting_errors: list[str] = []
         events: list[dict[str, Any]] = []
         usage_record_count = 0
+        gate_failed = False
         if sidecar.is_file():
             try:
                 value = json.loads(sidecar.read_text(encoding="utf-8"))
                 if not isinstance(value, dict):
                     raise ValueError("sidecar must contain a JSON object")
                 data = value
+                gate_failed = data.get("host_memory_gate") == "failed" and isinstance(data.get("host_memory"), dict)
             except (OSError, json.JSONDecodeError, ValueError) as exc:
                 accounting_errors.append(f"invalid usage sidecar: {exc}")
                 accounting_valid = False
@@ -139,6 +144,7 @@ class CommandAgent(Agent):
                 if isinstance(data.get("container_limits"), dict)
                 else None
             )
+            host_memory = data.get("host_memory") if isinstance(data.get("host_memory"), dict) else None
             if not derived and not accounting_errors:
                 usage_available = True
         def count(name: str) -> int:
@@ -198,6 +204,19 @@ class CommandAgent(Agent):
             if not isinstance(data.get("auth_ok"), bool):
                 accounting_valid = False
                 accounting_errors.append("protocol sidecar mismatch: auth_ok")
+            wanted_memory = pins.get("host_memory")
+            if wanted_memory is not None:
+                observed_memory = data.get("host_memory")
+                wanted_thresholds = {
+                    name: wanted_memory.get(name)
+                    for name in ("minimum_available_physical_bytes", "minimum_available_commit_bytes")
+                }
+                if not isinstance(observed_memory, dict) or observed_memory.get("thresholds") != wanted_thresholds:
+                    accounting_valid = False
+                    accounting_errors.append("protocol sidecar mismatch: host_memory thresholds")
+                elif not gate_failed and observed_memory.get("ok") is not True:
+                    accounting_valid = False
+                    accounting_errors.append("protocol sidecar mismatch: host_memory ok")
             wrapper_timed_out = data.get("timed_out")
             if not isinstance(wrapper_timed_out, bool):
                 accounting_valid = False
@@ -207,6 +226,42 @@ class CommandAgent(Agent):
                 accounting_errors.append("protocol sidecar/process timeout mismatch")
             elif wrapper_timed_out:
                 process.timed_out = True
+            if gate_failed:
+                wanted_memory = pins.get("host_memory", {})
+                observed = data.get("host_memory", {})
+                wanted_thresholds = {name: wanted_memory.get(name) for name in (
+                    "minimum_available_physical_bytes", "minimum_available_commit_bytes")}
+                gate_errors = []
+                expected_model = pins.get("model", {}).get("requested_id", pins.get("model", {}).get("snapshot"))
+                expected_limits = {"memory": pins.get("limits", {}).get("memory"),
+                                   "cpus": pins.get("limits", {}).get("cpus"),
+                                   "pids": pins.get("limits", {}).get("pids")}
+                exact = ((process.returncode == 75, "host gate returncode"),
+                         (data.get("model") == expected_model, "host gate model"),
+                         (data.get("reasoning_effort") == pins.get("model", {}).get("reasoning_effort"), "host gate reasoning_effort"),
+                         (data.get("image") == pins.get("codex", {}).get("image"), "host gate image"),
+                         (data.get("image_id") == "not-probed", "host gate image_id"),
+                         (data.get("container_limits") == expected_limits, "host gate container_limits"),
+                         (data.get("auth_ok") is None, "host gate auth_ok"),
+                         (data.get("timed_out") is False, "host gate timed_out"),
+                         (data.get("derived_from_codex_jsonl") is False, "host gate derived flag"),
+                         (data.get("host_memory_gate") == "failed", "host gate marker"),
+                         (observed.get("thresholds") == wanted_thresholds, "host gate thresholds"),
+                         (observed.get("ok") is False, "host gate ok"))
+                gate_errors.extend(f"protocol sidecar mismatch: {label}" for valid, label in exact if not valid)
+                zero_fields = tuple(usage.__dataclass_fields__) + ("event_count", "command_count", "file_change_count", "failed_event_count", "file_reads", "unique_file_reads", "file_revisits", "usage_record_count")
+                gate_errors.extend(f"protocol sidecar mismatch: {field} must be zero" for field in zero_fields if data.get(field) != 0)
+                if data.get("accounting_valid") is not False:
+                    gate_errors.append("protocol sidecar mismatch: host gate accounting_valid")
+                if data.get("usage_available") is not False:
+                    gate_errors.append("protocol sidecar mismatch: host gate usage_available")
+                if gate_errors:
+                    accounting_errors = gate_errors
+                    accounting_valid = False
+                else:
+                    accounting_valid = False
+                    usage_available = False
+                    accounting_errors = []
         return AgentResult(
             process=process, usage=usage, model=model,
             event_count=count("event_count"), command_count=count("command_count"),
@@ -219,4 +274,5 @@ class CommandAgent(Agent):
             events=events,
             auth_ok=auth_ok,
             container_limits=container_limits,
+            host_memory=host_memory,
         )

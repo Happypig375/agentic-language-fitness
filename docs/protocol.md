@@ -110,11 +110,13 @@ Each input line is one JSON request; each output line is one JSON response. The 
 
 ## Workstream D schema v3
 
-The current schema-v3 family is the replacement
-`workstream-d-language-v2`. The earlier `workstream-d-language-v1` family is
-retired and is retained only for audit history.
+The current schema-v3 family is `workstream-d-language-v3`. The earlier v1
+and v2 families are retired and retained only for audit history. v2 calibration
+closed after M was confirmed too easy and L/C# hit a host OOM apparatus stop;
+the unresolved attempt is not a candidate outcome and must not be retried,
+pooled, or synthesized.
 
-The v2 parent definition and H/M/L child definitions
+The v3 parent definition and H/M/L child definitions
 use schema v3. They share the immutable six-macroblock assignment hash and
 canonical descriptive manifest; each child selects only its configuration.
 Frozen provenance records family, configuration, pair execution position,
@@ -130,6 +132,8 @@ does not derive that classification.
 The v1 family was clean-frozen, then retired after its first H/F# calibration
 ended as an apparatus-terminated unresolved attempt: post-process snapshot
 validation crashed while the sidecar had timed out and no usage record. It has
-no analyzable outcome and must not be pooled. The replacement family is
-`workstream-d-language-v2`; do not synthesize missing result/log files or
-retry the v1 attempt. See `docs/workstream-d-v1-retirement-incident-2026-08-30.md`.
+no analyzable outcome and must not be pooled. The current family is
+`workstream-d-language-v3`; v2 calibration is closed after M was confirmed too
+easy and L/C# encountered host OOM pressure. Do not synthesize missing
+result/log files or retry unresolved attempts. See
+`docs/workstream-d-v2-calibration-incident-2026-08-31.md`.
