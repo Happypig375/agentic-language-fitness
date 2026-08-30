@@ -19,16 +19,16 @@ When work changes status, ordering, assumptions, acceptance criteria, or the sel
 
 Workstreams A–C are complete for the current pilot methodology. `variance-v2` established high stochastic/order variance on the short chain; `difficulty-v1` established that the reviewed eight-task chain is no longer fully saturated and exposed candidate-caused deterministic-representation drift.
 
-D0 design review is closed **approved** with no remaining P0–P3 findings. D1 implementation, independent review, and model-free validation are complete with no remaining P0–P3 findings; the next task is commit/push directly to `main` (no PR), green Linux/Windows CI, and clean child freezes—not a model run:
+D0 design review is closed **approved** with no remaining P0–P3 findings. D1 v1 was pushed directly to `main` at `965b44716470fc3f97cdd144aa0425594ceee8d9`; CI run `33308054052` passed on Linux/Windows, and v1 freezes plus manifest validation passed. Its first D2 attempt is an unresolved apparatus incident documented in `docs/workstream-d-v1-retirement-incident-2026-08-30.md`; v1 is retired and must not be retried, pooled, or synthesized. The schema-aware D1 v2 replacement is implemented; the next task is independent review/validation, checkpoint commit/push directly to `main` (no PR), green CI, and clean v2 child freezes—not a model run:
 
-1. commit/push the completed parent feasibility-family definition, six-macroblock H/M/L schedule, and three child capability cells;
-2. require green Linux/Windows CI, then freeze each child from the clean committed head and verify resolved manifests/hashes;
+1. independently review and fully model-free validate the v2 parent family, six-macroblock schedule, and three child capability cells (32 focused tests and validators currently pass);
+2. commit/push the v2 replacement, require green Linux/Windows CI, then freeze each child from the clean committed head and verify resolved manifests/hashes;
 3. only then run non-counting configuration calibrations, including reverse-order confirmation before replacing a boundary M/L configuration.
 
 The requested catalog settings are H `gpt-5.4` medium, M `gpt-5.4` low, and L
 `gpt-5.4-mini` medium; runtime availability is deferred to calibration. No
-real manifest is frozen and no model call is authorized until the CI and
-independent clean-freeze checks pass.
+v2 manifest is frozen and no further model call is authorized until review,
+validation, CI, and independent clean-freeze checks pass.
 
 The first D-Language family deliberately uses only the canonical descriptive representation. Do not multiply the unstable representation treatment across model configurations. A later D-Representation family must use complete Williams superblocks and intention-to-treat as its primary estimand; candidate-caused drift is an outcome, not an automatic primary-analysis exclusion.
 

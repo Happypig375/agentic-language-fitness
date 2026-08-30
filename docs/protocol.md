@@ -110,7 +110,11 @@ Each input line is one JSON request; each output line is one JSON response. The 
 
 ## Workstream D schema v3
 
-The `workstream-d-language-v1` parent definition and H/M/L child definitions
+The current schema-v3 family is the replacement
+`workstream-d-language-v2`. The earlier `workstream-d-language-v1` family is
+retired and is retained only for audit history.
+
+The v2 parent definition and H/M/L child definitions
 use schema v3. They share the immutable six-macroblock assignment hash and
 canonical descriptive manifest; each child selects only its configuration.
 Frozen provenance records family, configuration, pair execution position,
@@ -122,3 +126,10 @@ freeze and non-counting calibration gates pass. Conditional M/L reverse rows
 are runnable only after their primary calibration has a separately audited and
 documented boundary classification; the runner validates the frozen row but
 does not derive that classification.
+
+The v1 family was clean-frozen, then retired after its first H/F# calibration
+ended as an apparatus-terminated unresolved attempt: post-process snapshot
+validation crashed while the sidecar had timed out and no usage record. It has
+no analyzable outcome and must not be pooled. The replacement family is
+`workstream-d-language-v2`; do not synthesize missing result/log files or
+retry the v1 attempt. See `docs/workstream-d-v1-retirement-incident-2026-08-30.md`.

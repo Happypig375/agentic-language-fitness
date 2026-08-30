@@ -1,0 +1,35 @@
+{
+  "schema_version": 3,
+  "family_id": "workstream-d-language-v2",
+  "cell_id": "workstream-d-language-v2",
+  "description": "Workstream D descriptive-language multi-configuration feasibility family; model-free validation does not authorize execution.",
+  "representation": "descriptive",
+  "schedule_file": "protocols/workstream-d-language-v2/schedule.json",
+  "schedule_sha256": "3e3dfd6562b648840f636b97f34e520a0854bf32acc58e59a69c3f24de338c5f",
+  "catalog_file": "protocols/workstream-d-language-v2/model-catalog-preflight.json",
+  "catalog_sha256": "599d0c741d700e4a2439075c8c652623359d699206a061f21d076515bb54dc19",
+  "assignment_sha256": "3bc3eaab8cc61097f59b098dc7753a9d452374d45438a31b8f465d85a56c1bd1",
+  "children": {
+    "H": {
+      "cell_id": "workstream-d-language-v2-h",
+      "configuration_id": "H",
+      "definition_file": "protocols/workstream-d-language-v2/h.json",
+      "definition_sha256": "03fe179c5c23c4bb91a16a06afabec9f70d9c2f5c07b30a9421031998022a1f0",
+      "model": {"requested_id": "gpt-5.4", "reasoning_effort": "medium"}
+    },
+    "M": {
+      "cell_id": "workstream-d-language-v2-m",
+      "configuration_id": "M",
+      "definition_file": "protocols/workstream-d-language-v2/m.json",
+      "definition_sha256": "a88f30e685891aa5604aad785ca9bc904e70af2cca3d6e7fd87de2a2c053b703",
+      "model": {"requested_id": "gpt-5.4", "reasoning_effort": "low"}
+    },
+    "L": {
+      "cell_id": "workstream-d-language-v2-l",
+      "configuration_id": "L",
+      "definition_file": "protocols/workstream-d-language-v2/l.json",
+      "definition_sha256": "a2b98796d2e1beb13d1a2e5abe3345551712455b1cb3aaa4bf5468f5bee25f69",
+      "model": {"requested_id": "gpt-5.4-mini", "reasoning_effort": "medium"}
+    }
+  }
+}

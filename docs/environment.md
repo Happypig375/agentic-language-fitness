@@ -68,3 +68,9 @@ and hashed, but provider/runtime identity is confirmed only by a later
 non-counting calibration after clean freezes. Conditional reverse calibration
 rows additionally require the audited primary-pair boundary decision described
 in the design. No model run is authorized during D1.
+
+The v1 family was clean-frozen and then retired after the first H/F# calibration
+became an unresolved apparatus-terminated attempt due to a post-process
+snapshot/requested_id validation crash. It has no analyzable outcome and is not
+pooled; do not synthesize missing logs/results or retry it. New calibration work
+uses the replacement v2 family only.

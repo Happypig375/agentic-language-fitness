@@ -154,14 +154,27 @@ class CommandAgent(Agent):
         expected = self.expected_protocol
         if expected:
             pins = expected["definition"]
+            schema_version = expected.get("schema_version")
+            if schema_version == 3:
+                expected_model = pins.get("model", {}).get("requested_id")
+                model_field = "requested_id"
+            else:
+                expected_model = pins.get("model", {}).get("snapshot")
+                model_field = "snapshot"
             checks = {
-                "model": pins["model"]["snapshot"],
+                "model": expected_model,
                 "reasoning_effort": pins["model"]["reasoning_effort"],
                 "image": pins["codex"]["image"],
                 "image_id": expected["image_id"],
             }
+            if expected_model is None:
+                accounting_valid = False
+                accounting_errors.append(
+                    f"protocol definition missing model.{model_field}"
+                )
             for field, wanted in checks.items():
-                if data.get(field) != wanted:
+                actual = data.get("model") if field == "model" else data.get(field)
+                if actual != wanted:
                     accounting_valid = False
                     accounting_errors.append(f"protocol sidecar mismatch: {field}")
             if data.get("derived_from_codex_jsonl") is not True:

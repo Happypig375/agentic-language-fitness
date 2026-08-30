@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-08-30T10:11:28.955431800Z",
+  "observer": {"codex": "0.151.0"},
+  "supported_in_api": true,
+  "models": {
+    "gpt-5.4": {"slug":"gpt-5.4","supported_efforts":["low","medium","high","xhigh"],"visible":true,"supported_in_api":true},
+    "gpt-5.4-mini": {"slug":"gpt-5.4-mini","supported_efforts":["low","medium","high","xhigh"],"visible":true,"supported_in_api":true}
+  },
+  "official_references": [
+    "https://developers.openai.com/api/docs/models/gpt-5.4",
+    "https://developers.openai.com/api/docs/models/gpt-5.4-mini"
+  ],
+  "execution_status": "Pinned CLI runtime/provider execution is confirmed only by later non-counting calibration; no run is authorized."
+}

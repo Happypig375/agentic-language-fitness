@@ -1,0 +1,62 @@
+{
+  "schema_version": 3,
+  "family_id": "workstream-d-language-v2",
+  "cell_id": "workstream-d-language-v2-h",
+  "configuration_id": "H",
+  "description": "Workstream D descriptive-language feasibility child H.",
+  "representation": "descriptive",
+  "model": {"requested_id": "gpt-5.4", "reasoning_effort": "medium"},
+  "parent_definition": "protocols/workstream-d-language-v2/definition.json",
+  "schedule_file": "protocols/workstream-d-language-v2/schedule.json",
+  "schedule_sha256": "3e3dfd6562b648840f636b97f34e520a0854bf32acc58e59a69c3f24de338c5f",
+  "catalog_file": "protocols/workstream-d-language-v2/model-catalog-preflight.json",
+  "catalog_sha256": "599d0c741d700e4a2439075c8c652623359d699206a061f21d076515bb54dc19",
+  "assignment_sha256": "3bc3eaab8cc61097f59b098dc7753a9d452374d45438a31b8f465d85a56c1bd1",
+  "raw_root": "results/workstream-d-language-v2/h",
+  "benchmark_manifest": "benchmarks/successor/representation-v1/descriptive.manifest.json",
+  "benchmark_manifest_sha256": "5d174f5703184381984ae068c22571b280be9881d6d8ed9941be713b89925749",
+  "task_hashes": {
+    "001-priority": "4b003212969d3c3537f65d82320ba88ee42bb5a20a13e3ce6951f16dcfb1f1c0",
+    "002-overdue": "c166e62c2ed2f915a2865555ad824a8cc63b74ef1980b43f0a6b5ce62a94545c",
+    "003-at-risk-window": "b37955c3b54b1a04a5359715969d7e97692cfe013fa22e6c4fd85a965a429199",
+    "004-vip-ready": "90d06aa42a610bc8e55d5e8f03cb6d47e305ca3f044baf7cc4a4032a1151556e",
+    "005-null-order-robustness": "4ce101299b1d61acf53d1e61344fbcee7f40a9ae7c88e1283b9e8ff5834c9c50",
+    "006-transition-validation": "0ac889d9ea84732feffee90400461f985676cc1800dfb680d5542100db054a01",
+    "007-query-engine-refactor": "26ce7bb89282d4ba89e966e1abb2e15873314449ab19a4711809d0b7c303cbc5",
+    "008-summary-api": "4db339c6e5e95535ca8f4cfe3235b864372179cb15cc138b3592686fc5de1139"
+  },
+  "codex": {"cli_version": "0.149.1", "image": "alf-codex:0.149.1", "dockerfile": "Dockerfile.codex-agent"},
+  "image_archive": {
+    "path": "X:\\backup20260827\\Archives\\SourceRepos\\agentic-language-fitness-images\\alf-codex-0.149.1-sha256-0320a60c5b2628ce.tar",
+    "bytes": 630053888,
+    "sha256": "55ee85f0656cef429d1cd40edced79782d54abb7b2180c9770c14bea06828ddf",
+    "local_image_id": "sha256:0320a60c5b2628cebeb2c897bbf80da949f3b9bb99fa61f5a3475c7276328756"
+  },
+  "c3_source_commit": "4e58677e0bfff18c2104298ad35fc4e801bbd052",
+  "c3_artifacts": {
+    "definition": {"path": "benchmarks/successor/representation-v1/definition.json", "sha256": "e2c21b484da5cfd2e20b59548360b3102acbe0492925e1198c3f18eb4e95ef00"},
+    "mapping": {"path": "benchmarks/successor/representation-v1/mapping.json", "sha256": "7a1b36918a83b6cbad5093c797cc3e79503d97f1c245cfc6e781eb0c28e72546"},
+    "role_inventory": {"path": "benchmarks/successor/representation-v1/role-inventory.json", "sha256": "2a30fbe1474c8207da3ee315e45b6628f438fab2142a0b25a32eda795427dc41"},
+    "exclusions": {"path": "benchmarks/successor/representation-v1/exclusions.json", "sha256": "b742b889c367a967a00a755ccaae5eb970e423cd2c11b329e15978d559240079"},
+    "source_manifest": {"path": "benchmarks/successor/representation-v1/source-manifest.json", "sha256": "65339303386e2aa6c55ae4a6ede2843c99ec61eeb25b009bdd08d49ced4ec19d"},
+    "reports": {"path": "benchmarks/successor/representation-v1/reports.json", "sha256": "6f4f662f85eb9c3c0ab55cfbead40e741d8e16bf5edf6950cd542a0ce6008f14"}
+  },
+  "toolchain": {"dotnet_sdk": "10.0.302", "target_framework": "net10.0"},
+  "limits": {"task_timeout_seconds": 600, "evaluator_timeout_seconds": 300, "memory": "2g", "cpus": 2, "pids": 256},
+  "network_policy": "bridge network; candidate egress and external documentation are allowed equally for both languages; mounts are limited to /workspace plus minimized authentication file",
+  "documentation_policy": "No benchmark/evaluator/gold files or parent repository are exposed to candidate",
+  "artifact_policy": {"raw": "retain every attempt outside Git", "redaction": "remove credentials and prompt/transcript secrets", "retention": "retain raw and hashes for the study record"},
+  "failure_taxonomy": ["agent", "provider", "auth", "host", "evaluator", "timeout", "protocol", "accounting"],
+  "failure_precedence": ["protocol", "auth", "provider", "host", "timeout", "accounting", "agent", "evaluator"],
+  "inclusion": {
+    "formal_outcomes": "Retain the first protocol-valid candidate outcome for every formal language slot",
+    "metric_missingness": "Use only valid available metrics and retain terminal-stop outcomes",
+    "infrastructure_invalid": "Retain and report pre-candidate infrastructure failures; retry only under the frozen sequential policy",
+    "calibration": "Non-counting and excluded from the assignment and 4+2 gate",
+    "sensitivity": "Report all failures and common-exposure-prefix outcomes"
+  },
+  "retry_policy": "Retry only protocol/auth/provider/host/evaluator infrastructure-invalid attempts; retain every attempt and never replace a candidate outcome",
+  "fresh_process": true,
+  "accounting": "require a fresh valid usage sidecar; fail closed for usage metrics while retaining candidate outcomes",
+  "retention": {"location": "child raw_root plus read-only study archive", "period": "retain raw artifacts and hashes for at least five years", "redaction": "remove credentials and transcript secrets before curation"}
+}

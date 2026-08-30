@@ -6,7 +6,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.models import ProcessResult
+from alf.models import ProcessResult, Usage
+from alf.agents.command import CommandAgent
 from alf.protocol import (
     EXPECTED_IMAGE_ID,
     canonical_json_hash,
@@ -29,11 +30,11 @@ from alf.workstream_d import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-FAMILY_PATH = Path("protocols/workstream-d-language-v1/definition.json")
+FAMILY_PATH = Path("protocols/workstream-d-language-v2/definition.json")
 CHILD_PATHS = {
-    "H": Path("protocols/workstream-d-language-v1/h.json"),
-    "M": Path("protocols/workstream-d-language-v1/m.json"),
-    "L": Path("protocols/workstream-d-language-v1/l.json"),
+    "H": Path("protocols/workstream-d-language-v2/h.json"),
+    "M": Path("protocols/workstream-d-language-v2/m.json"),
+    "L": Path("protocols/workstream-d-language-v2/l.json"),
 }
 
 
@@ -52,7 +53,7 @@ class FamilyRepository:
         shutil.copy2(
             ROOT / "Dockerfile.codex-agent", self.root / "Dockerfile.codex-agent"
         )
-        target = self.root / "protocols" / "workstream-d-language-v1"
+        target = self.root / "protocols" / "workstream-d-language-v2"
         target.parent.mkdir(parents=True)
         shutil.copytree(ROOT / FAMILY_PATH.parent, target)
         treatment = self.root / "benchmarks" / "successor" / "representation-v1"
@@ -81,7 +82,7 @@ class FamilyRepository:
 
     def repin_schedule(self) -> None:
         schedule_hash = tracked_text_sha256(
-            self.root / "protocols/workstream-d-language-v1/schedule.json"
+            self.root / "protocols/workstream-d-language-v2/schedule.json"
         )
         parent = self.read(FAMILY_PATH)
         parent["schedule_sha256"] = schedule_hash
@@ -95,7 +96,7 @@ class FamilyRepository:
     def repin_catalog(self) -> None:
         catalog_hash = tracked_text_sha256(
             self.root
-            / "protocols/workstream-d-language-v1/model-catalog-preflight.json"
+            / "protocols/workstream-d-language-v2/model-catalog-preflight.json"
         )
         parent = self.read(FAMILY_PATH)
         parent["catalog_sha256"] = catalog_hash
@@ -241,7 +242,7 @@ class WorkstreamDValidationTests(unittest.TestCase):
     def test_schedule_calibration_assignment_and_catalog_mutations_fail(self) -> None:
         repo = FamilyRepository()
         try:
-            schedule_path = Path("protocols/workstream-d-language-v1/schedule.json")
+            schedule_path = Path("protocols/workstream-d-language-v2/schedule.json")
             schedule = repo.read(schedule_path)
             schedule["formal"][0].update(
                 {"direction": "C#>F#", "order": ["csharp", "fsharp"]}
@@ -267,7 +268,7 @@ class WorkstreamDValidationTests(unittest.TestCase):
             repo.close()
             repo = FamilyRepository()
             catalog_path = Path(
-                "protocols/workstream-d-language-v1/model-catalog-preflight.json"
+                "protocols/workstream-d-language-v2/model-catalog-preflight.json"
             )
             catalog = repo.read(catalog_path)
             catalog["models"]["gpt-5.4-mini"]["supported_in_api"] = False
@@ -380,7 +381,7 @@ class WorkstreamDFreezeTests(unittest.TestCase):
         target = (
             self.repo.root
             / "results"
-            / "workstream-d-language-v1"
+            / "workstream-d-language-v2"
             / "h"
             / "resolved-manifest.json"
         )
@@ -390,16 +391,16 @@ class WorkstreamDFreezeTests(unittest.TestCase):
 
     def test_freeze_embeds_relative_family_schedule_catalog_and_identity(self) -> None:
         manifest = self._freeze()
-        self.assertEqual(manifest["family_id"], "workstream-d-language-v1")
+        self.assertEqual(manifest["family_id"], "workstream-d-language-v2")
         self.assertEqual(manifest["configuration_id"], "H")
         self.assertEqual(manifest["family_definition_file"], FAMILY_PATH.as_posix())
         self.assertEqual(
             manifest["parent_schedule_file"],
-            "protocols/workstream-d-language-v1/schedule.json",
+            "protocols/workstream-d-language-v2/schedule.json",
         )
         self.assertEqual(
             manifest["catalog_file"],
-            "protocols/workstream-d-language-v1/model-catalog-preflight.json",
+            "protocols/workstream-d-language-v2/model-catalog-preflight.json",
         )
         self.assertIsInstance(manifest["family_definition"], dict)
         self.assertEqual(manifest["assignment_sha256"], ASSIGNMENT_SHA256)
@@ -741,7 +742,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
             )
         result = json.loads((run_dir / "result.json").read_text(encoding="utf-8"))
         provenance = result["provenance"]
-        self.assertEqual(provenance["family_id"], "workstream-d-language-v1")
+        self.assertEqual(provenance["family_id"], "workstream-d-language-v2")
         self.assertEqual(provenance["configuration_id"], "H")
         self.assertEqual(provenance["pair_block_id"], "mb01-h")
         self.assertEqual(provenance["execution_position"], 1)
@@ -753,6 +754,81 @@ class WorkstreamDRunnerTests(unittest.TestCase):
             (run_dir / "protocol-manifest.json").read_bytes(),
             self.manifest_path.read_bytes(),
         )
+
+    def test_v3_command_timeout_closes_attempt_without_raising(self) -> None:
+        protocol = dict(self.protocol)
+        protocol["_workstream_d_row"] = next(
+            row for row in protocol["schedule"]["calibration"]
+            if row["block_id"] == "cal-h-primary"
+        )
+        protocol["_workstream_d_config"] = "H"
+        prompt = self.repo.root / "timeout-prompt.md"
+        prompt.write_text("timeout", encoding="utf-8")
+        benchmark = {
+            "id": "v3-timeout-test", "languages": {"fsharp": {}},
+            "baseline_cases": [], "tasks": [{
+                "id": "001-timeout", "prompt": "timeout-prompt.md", "cases": [],
+            }],
+        }
+        sidecar = {
+            **{name: 0 for name in Usage.__dataclass_fields__},
+            "model": "gpt-5.4", "reasoning_effort": "medium",
+            "image": self.definition["codex"]["image"], "image_id": EXPECTED_IMAGE_ID,
+            "timed_out": True, "auth_ok": True,
+            "container_limits": {
+                "memory": self.definition["limits"]["memory"],
+                "cpus": self.definition["limits"]["cpus"],
+                "pids": self.definition["limits"]["pids"],
+            },
+            "event_count": 0, "command_count": 0, "file_change_count": 0,
+            "failed_event_count": 0, "file_reads": 0, "unique_file_reads": 0,
+            "file_revisits": 0, "usage_record_count": 0,
+            "accounting_valid": False, "usage_available": False,
+            "derived_from_codex_jsonl": True,
+            "usage_errors": ["no turn.completed usage records found"],
+        }
+        def initialize(_root, _manifest, _language, workspace):
+            workspace.mkdir(parents=True)
+        def command_process(*_args, **kwargs):
+            workspace = Path(kwargs["cwd"])
+            (workspace / ".alf").mkdir(exist_ok=True)
+            (workspace / ".alf" / "usage.json").write_text(json.dumps(sidecar), encoding="utf-8")
+            return ProcessResult(["command"], 124, "", "", 0.01)
+        with (
+            patch("alf.runner._prepare_protocol_run", return_value=(protocol, "command", 1)),
+            patch("alf.runner.init_workspace", side_effect=initialize),
+            patch("alf.runner.artifact_plan", return_value={}),
+            patch("alf.runner.merge_workspace_checks", return_value={"file_exists": [], "text_contains": [], "text_not_contains": []}),
+            patch(
+                "alf.runner.make_agent",
+                side_effect=lambda *_args, **kwargs: CommandAgent(
+                    "command",
+                    require_usage=True,
+                    expected_protocol=kwargs.get("expected_protocol"),
+                ),
+            ),
+            patch("alf.runner.evaluate_project", side_effect=[
+                {"ok": True}, {"ok": False, "build": {"returncode": 124, "timed_out": True, "missing_executable": False}},
+            ]),
+            patch("alf.runner.environment_snapshot", return_value={}),
+            patch("alf.runner.snapshot_repository", return_value={}),
+            patch("alf.runner.git_head", return_value="a" * 40),
+            patch("alf.runner.git_diff_metrics", return_value={}),
+            patch("alf.agents.command.run_process", side_effect=command_process),
+        ):
+            run_dir = run_chain(
+                root=self.repo.root, manifest=benchmark, language="fsharp",
+                agent_name="command", output_root=self.output, model="gpt-5.4",
+                timeout=600, require_usage=True, protocol_manifest=self.manifest_path,
+                block_id="cal-h-primary", order="fsharp-first",
+                attempt_id="cal-h-primary-fsharp-01", position=1,
+            )
+        result = json.loads((run_dir / "result.json").read_text(encoding="utf-8"))
+        attempt = json.loads((run_dir / "attempt.json").read_text(encoding="utf-8"))
+        self.assertEqual(attempt["state"], "completed")
+        self.assertFalse(result["success"])
+        self.assertFalse(result["disposition"]["retryable"], result["disposition"])
+        self.assertTrue((run_dir / "result.json").is_file())
 
 
 if __name__ == "__main__":

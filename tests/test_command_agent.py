@@ -19,6 +19,15 @@ class CommandAgentTests(unittest.TestCase):
             },
         }
 
+    def _expected_v3_protocol(self):
+        expected = self._expected_protocol()
+        expected["schema_version"] = 3
+        expected["definition"]["model"] = {
+            "requested_id": "m",
+            "reasoning_effort": "medium",
+        }
+        return expected
+
     def _protocol_sidecar(self, *, event_count=1, usage_available=True, accounting_valid=True, usage_errors=None):
         usage = {name: 0 for name in Usage.__dataclass_fields__}
         usage.update(
@@ -136,6 +145,45 @@ class CommandAgentTests(unittest.TestCase):
                     timeout=1,
                 )
 
+        self.assertTrue(got.process.timed_out)
+        self.assertFalse(got.accounting_valid)
+        self.assertFalse(got.ok)
+
+    def test_v3_requested_id_sidecar_is_valid(self):
+        expected = self._expected_v3_protocol()
+        raw = json.dumps({"type": "turn.completed", "usage": {name: 0 for name in Usage.__dataclass_fields__ if name != "tool_calls"}})
+        directory, got = self._run(self._protocol_sidecar(), raw, expected_protocol=expected)
+        directory.cleanup()
+        self.assertTrue(got.accounting_valid)
+
+    def test_v3_wrong_model_invalidates_accounting(self):
+        expected = self._expected_v3_protocol()
+        sidecar = self._protocol_sidecar()
+        sidecar["model"] = "wrong"
+        directory, got = self._run(sidecar, expected_protocol=expected)
+        directory.cleanup()
+        self.assertFalse(got.accounting_valid)
+        self.assertIn("protocol sidecar mismatch: model", got.accounting_errors)
+
+    def test_v3_timeout_without_usage_returns_invalid_result(self):
+        expected = self._expected_v3_protocol()
+        sidecar = self._protocol_sidecar(
+            event_count=0, usage_available=False, accounting_valid=False,
+            usage_errors=["no turn.completed usage records found"],
+        )
+        sidecar["timed_out"] = True
+        directory = tempfile.TemporaryDirectory()
+        root = Path(directory.name); workspace = root / "w"; workspace.mkdir()
+        def invoke(*_args, **_kwargs):
+            (workspace / ".alf").mkdir(exist_ok=True)
+            (workspace / ".alf" / "usage.json").write_text(json.dumps(sidecar), encoding="utf-8")
+            return ProcessResult(["tool"], 124, "", "", 1.0)
+        with patch("alf.agents.command.run_process", side_effect=invoke):
+            got = CommandAgent("tool", require_usage=True, expected_protocol=expected).run(
+                root=root, workspace=workspace, language="fsharp", language_config={},
+                task={"id": "t"}, prompt="p", timeout=1,
+            )
+        directory.cleanup()
         self.assertTrue(got.process.timed_out)
         self.assertFalse(got.accounting_valid)
         self.assertFalse(got.ok)

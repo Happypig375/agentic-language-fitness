@@ -24,6 +24,7 @@ Durable evidence:
 - `docs/difficulty-v1-protocol-2026-08-30.md`
 - `docs/difficulty-v1-results-2026-08-30.md`
 - `docs/workstream-d-feasibility-design-2026-08-30.md`
+- `docs/workstream-d-v1-retirement-incident-2026-08-30.md`
 
 Historical and retired cells remain excluded as documented. Do not pool `difficulty-v1`, `variance-v2`, the historical Luna pair, or retired attempts.
 
@@ -100,21 +101,35 @@ Protocol work must:
 
 Obtain model-free validation, independent implementation review, green Linux/Windows CI, and a clean freeze before any model call.
 
-D1 implementation, review, and model-free validation are complete and approved:
-the parent family/schema-v3 runtime, three H/M/L child definitions, and
-apparatus checks passed 61 focused tests plus the parent and child validators.
-The requested catalog configurations are H=`gpt-5.4` medium, M=`gpt-5.4`
-low, and L=`gpt-5.4-mini` medium; runtime availability remains deferred to
-the later non-counting calibration. The pinned image, Codex 0.149.1, and
-.NET 10.0.302 checks passed. No real manifest has been frozen and no model
-call has occurred. The remaining D1 subgates are direct commit/push, green
-Linux/Windows CI, then clean child freezes with resolved manifests and
-hashes.
+D1 implementation, review, and model-free validation were complete and
+approved for v1: the parent family/schema-v3 runtime, three H/M/L child
+definitions, and apparatus checks passed 61 focused tests plus the parent and
+child validators. The requested catalog configurations were H=`gpt-5.4`
+medium, M=`gpt-5.4` low, and L=`gpt-5.4-mini` medium; runtime availability
+remained deferred to the later non-counting calibration. The pinned image,
+Codex 0.149.1, and .NET 10.0.302 checks passed. The later v1 commit, CI, and
+clean-freeze results are recorded immediately below.
 
-The next action is to commit and push this implementation directly to
-`main` (no PR), monitor CI to green, and freeze each child only from that
-clean committed head. Paid/model execution remains unauthorized until those
-freezes are independently checked.
+The v1 implementation was pushed directly to `main` at
+`965b44716470fc3f97cdd144aa0425594ceee8d9`; GitHub Actions run
+`33308054052` passed on Linux and Windows (Node 20 warnings only), and v1
+child freezes plus independent manifest validation passed. The first D2
+attempt, `cal-h-primary-fsharp-01`, is an unresolved apparatus-terminated
+record: pins matched, but it timed out after 600 seconds with 19 events and
+zero terminal usage; post-processing crashed on legacy `model.snapshot`, so
+`result.json` is missing and audit fails. It remains started with no
+analyzable outcome. See `docs/workstream-d-v1-retirement-incident-2026-08-30.md`.
+Retire v1: do not retry, pool, or synthesize this attempt.
+
+The schema-aware v2 repair and complete replacement are implemented. Thirty-two
+focused tests and the v2 family/child validators pass. Independent code review,
+independent full model-free validation, direct commit/push, green CI, and clean
+v2 child freezes remain pending. No further model call is authorized until
+those gates pass.
+
+The next action is independent review/validation, then checkpoint commit and
+push directly to `main` (no PR), green CI, and v2 child freezes with resolved
+manifests and hashes.
 
 ### D2. Run non-counting configuration calibrations
 

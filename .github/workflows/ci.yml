@@ -36,10 +36,10 @@ jobs:
         run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate Workstream D family and child definitions
         run: |
-          python scripts/alf.py protocol family-validate --definition protocols/workstream-d-language-v1/definition.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v1/h.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v1/m.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v1/l.json
+          python scripts/alf.py protocol family-validate --definition protocols/workstream-d-language-v2/definition.json
+          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/h.json
+          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/m.json
+          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/l.json
       - name: Validate C3 descriptive treatment
         run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
       - name: Validate C3 deterministic treatment
@@ -86,10 +86,10 @@ jobs:
         run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate Workstream D family and child definitions
         run: |
-          python scripts/alf.py protocol family-validate --definition protocols/workstream-d-language-v1/definition.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v1/h.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v1/m.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v1/l.json
+          python scripts/alf.py protocol family-validate --definition protocols/workstream-d-language-v2/definition.json
+          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/h.json
+          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/m.json
+          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/l.json
       - name: Validate C3 descriptive treatment
         run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
       - name: Validate C3 deterministic treatment

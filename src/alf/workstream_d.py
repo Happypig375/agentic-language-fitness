@@ -19,11 +19,11 @@ from .protocol import (
     tracked_text_sha256,
 )
 
-FAMILY_ID = "workstream-d-language-v1"
+FAMILY_ID = "workstream-d-language-v2"
 CONFIGURATIONS = ("H", "M", "L")
-FAMILY_DEFINITION = "protocols/workstream-d-language-v1/definition.json"
-SCHEDULE_FILE = "protocols/workstream-d-language-v1/schedule.json"
-CATALOG_FILE = "protocols/workstream-d-language-v1/model-catalog-preflight.json"
+FAMILY_DEFINITION = "protocols/workstream-d-language-v2/definition.json"
+SCHEDULE_FILE = "protocols/workstream-d-language-v2/schedule.json"
+CATALOG_FILE = "protocols/workstream-d-language-v2/model-catalog-preflight.json"
 BENCHMARK_MANIFEST = "benchmarks/successor/representation-v1/descriptive.manifest.json"
 BENCHMARK_MANIFEST_SHA256 = (
     "5d174f5703184381984ae068c22571b280be9881d6d8ed9941be713b89925749"
@@ -557,7 +557,7 @@ def _validate_child_definition(
         if definition.get("model") != PINS[configuration]:
             errors.append("child model pin mismatch")
         if definition.get("raw_root") != (
-            f"results/workstream-d-language-v1/{configuration.lower()}"
+            f"results/workstream-d-language-v2/{configuration.lower()}"
         ):
             errors.append("child raw_root mismatch")
     if definition.get("representation") != "descriptive":
