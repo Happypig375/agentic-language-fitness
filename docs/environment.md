@@ -78,3 +78,13 @@ L=`gpt-5.6-luna` medium. A host-memory probe runs immediately before every
 candidate task and requires 2,147,483,648 physical and 6,442,450,944 commit
 bytes. Failed probes are host-invalid and retryable; missing artifacts never
 justify inferring OOM.
+
+The 2026-08-31 v3 H/F# calibration attempts show why this is a per-task gate,
+not a one-time launch check. Attempt `cal-h-primary-fsharp-01` was refused at
+Task 001. Attempt `-02` passed Task 001, but Docker WSL memory retention left
+only 1,334,538,240 physical bytes at the Task 002 probe. The complete partial
+attempt is host infrastructure-invalid and excluded. A later 600-second
+scripted wait could not establish 3.5 GiB of conservative launch headroom, so
+`-03` was not created. Resume the exact sequential ledger only on a quiescent
+higher-memory host; do not add an unreviewed between-task cache intervention.
+See `docs/workstream-d-v3-calibration-host-incident-2026-08-31.md`.

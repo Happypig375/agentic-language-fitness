@@ -23,7 +23,19 @@ D0 design review is closed **approved** with no remaining P0–P3 findings. D1 v
 
 The v3 catalog settings are H `gpt-5.6-terra` medium, M `gpt-5.6-luna` high, and L
 `gpt-5.6-luna` medium; runtime availability is deferred to calibration.
-The next action is D2 non-counting v3 calibrations, but they are prohibited until a fresh per-task host-memory probe passes >=2,147,483,648 physical and >=6,442,450,944 commit bytes and there are no concurrent benchmark, maintainer subagent, or unrelated model runs. Current probes fail; calibration has not begun and no experimental outcome may be inferred.
+The first v3 H/F# slot remains unresolved after two retained, retryable
+host-invalid attempts. `cal-h-primary-fsharp-01` was refused before any
+candidate process; `-02` completed Task 001 with valid accounting, then the
+Task 002 host-memory probe failed, so the frozen disposition excludes the
+entire partial attempt as `candidate_outcome=false`. A scripted 600-second
+high-headroom wait did not reserve `-03`. See
+`docs/workstream-d-v3-calibration-host-incident-2026-08-31.md`. Do not run H/C#
+or later calibrations without an eligible H/F# predecessor. The next action is
+to transfer the exact frozen ledger to a quiescent higher-memory host;
+`cal-h-primary-fsharp-03` is the next valid ID only after a fresh per-task probe
+passes >=2,147,483,648 physical and >=6,442,450,944 commit bytes and there are
+no concurrent benchmark, maintainer subagent, or unrelated model runs. No v3
+configuration or language outcome may be inferred.
 
 The first D-Language family deliberately uses only the canonical descriptive representation. Do not multiply the unstable representation treatment across model configurations. A later D-Representation family must use complete Williams superblocks and intention-to-treat as its primary estimand; candidate-caused drift is an outcome, not an automatic primary-analysis exclusion.
 

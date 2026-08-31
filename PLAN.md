@@ -135,11 +135,27 @@ PR), CI run `33326196680` passed Linux/Windows, and clean H/M/L freezes from
 that commit were independently verified. Schedule/catalog/child/configuration
 pins matched; image `sha256:0320a60c5b2628cebeb2c897bbf80da949f3b9bb99fa61f5a3475c7276328756`
 and archive exist; the tracked tree was clean and HEAD matched `origin/main`.
-The next action is D2 non-counting v3 calibrations, currently prohibited until
-a fresh per-task host-memory probe passes >=2,147,483,648 physical and
->=6,442,450,944 commit bytes and there are no concurrent benchmark, maintainer
-subagent, or unrelated model runs. Current probes fail; calibration has not
-begun and no experimental outcome may be inferred.
+The first D2 v3 H/F# slot remains unresolved after two retained attempts from
+the exact frozen commit. `cal-h-primary-fsharp-01` was explicitly refused by
+the Task 001 host-memory gate before any candidate process. Attempt `-02`
+produced a valid Task 001 candidate record, then the Task 002 probe failed;
+the frozen disposition therefore classifies the whole partial chain as
+retryable host infrastructure-invalid with `candidate_outcome=false`. Its
+partial candidate data are excluded. A separate 600-second, 35-sample scripted
+wait never reached the conservative 3.5 GiB launch-headroom condition and did
+not reserve `-03`. Both attempts are hash-preserved; see
+`docs/workstream-d-v3-calibration-host-incident-2026-08-31.md`.
+
+No H/F# primary exists, so H/C# and all later calibration rows remain blocked
+by the frozen predecessor rule. The next action is to transfer the exact
+frozen manifest plus the complete `-01`/`-02` ledger to a quiescent
+higher-memory host. `cal-h-primary-fsharp-03` is the next valid sequential ID
+only after the fresh per-task thresholds (>=2,147,483,648 physical and
+>=6,442,450,944 commit bytes) and concurrency policy pass. Do not relax the
+frozen thresholds, inject an unreviewed between-task memory intervention, or
+infer any configuration/language result from these infrastructure-invalid
+attempts.
+
 Independent verification recorded the following freeze-command / whole-file
 hashes: H `ffa03ad5ac578363348027215a2a142dd0c41f1e3e8965b7b0c4c7d120f0028b` /
 `124a887fd8819383a34927aa026f14ee307f7ecd644a2c3f189b1020169cf82e`, M

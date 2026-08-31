@@ -129,6 +129,15 @@ are runnable only after their primary calibration has a separately audited and
 documented boundary classification; the runner validates the frozen row but
 does not derive that classification.
 
+The first v3 H/F# calibration slot has no candidate outcome. Attempt
+`cal-h-primary-fsharp-01` failed its Task 001 host-memory probe; `-02` passed
+Task 001 but failed the Task 002 probe and is wholly excluded under the frozen
+host-invalid disposition. Both are retained and retryable. No position-2 H/C#
+run is eligible until a sequential H/F# retry produces the required retained
+predecessor. Continue only on a quiescent host that can sustain the frozen
+per-task thresholds; see
+`docs/workstream-d-v3-calibration-host-incident-2026-08-31.md`.
+
 The v1 family was clean-frozen, then retired after its first H/F# calibration
 ended as an apparatus-terminated unresolved attempt: post-process snapshot
 validation crashed while the sidecar had timed out and no usage record. It has
