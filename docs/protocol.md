@@ -85,13 +85,11 @@ elapsed intervals and are not additive substitutes for one another. Read telemet
 supports only simple `cat/head/tail/less/more`, `sed -n`, and `rg PATTERN PATH`
 forms with shell operators/options rejected; it does not infer semantic recovery.
 The container wrapper additionally records `event_count`, tool-specific counts, and the
-configured image identifier. Its temporary auth projection retains the `refresh_token`
-schema key but blanks its value; a short-lived access token can still be read by the
-unprivileged container process.
-
-To validate an auth projection without a model run, bind it read-only at
-`/home/codex/.codex/auth.json` and invoke `codex login status` in the image; this is the
-same path used by the wrapper.
+configured image identifier. If authentication is staged, project the complete Codex
+home into an ephemeral writable directory (including refresh credentials), mode 0600,
+and remove it after the run. Treat it as a password: never hash, log, commit, or expose
+it in a manifest. A credential-free model-free gate may validate the launcher separately;
+authentication is only used after the approved freeze gates.
 
 ## Fair-comparison rules
 
@@ -103,6 +101,21 @@ same path used by the wrapper.
 - Repeat stochastic cells and report uncertainty.
 - Review paired implementations for comparable architecture rather than mechanically forcing equal lines of code.
 - Keep hidden tests external to the agent environment.
+
+## Version and apparatus boundary
+
+The scientific protocol identity covers the treatment and candidate-visible
+semantics: model/effort, prompts, task chain, evaluator, schedule, estimand,
+and analysis. Runner Git revision, container digest, host/network profile, and
+attempt ID are separate provenance fields. A pre-candidate apparatus failure
+is retained and may be repaired/retried under the same scientific specification.
+Only candidate-observable runner/environment changes require a new apparatus
+identity and fresh calibration; only scientific treatment or semantic changes
+require a new scientific specification. Do not create a protocol version for
+ordinary launcher, Docker, SSH, authentication, or readiness fixes.
+
+For the remote profile, use the documented loopback CONNECT proxy and one
+foreground SSH fixed `-R` session. See `docs/remote-execution.md`.
 
 ## Pilot line protocol
 

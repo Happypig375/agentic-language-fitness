@@ -903,6 +903,14 @@ class WorkstreamDRunnerTests(unittest.TestCase):
         result = json.loads((run_dir / "result.json").read_text(encoding="utf-8"))
         attempt = json.loads((run_dir / "attempt.json").read_text(encoding="utf-8"))
         self.assertEqual(attempt["state"], "completed")
+        provenance = attempt["provenance"]
+        self.assertEqual(
+            provenance["scientific_spec_sha256"], provenance["definition_sha256"]
+        )
+        self.assertEqual(provenance["runner_revision"], provenance["git_head"])
+        self.assertRegex(provenance["environment_profile"], r"^sha256:[0-9a-f]{64}$")
+        self.assertRegex(provenance["route_profile_sha256"], r"^sha256:[0-9a-f]{64}$")
+        self.assertEqual(provenance["attempt_id"], "cal-h-primary-fsharp-01")
         self.assertFalse(result["success"])
         self.assertTrue(result["disposition"]["retryable"], result["disposition"])
         self.assertTrue((run_dir / "result.json").is_file())

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "profile_id": "remote-highmem-local-egress-r1",
+  "docker_network": {
+    "name": "alf-internal",
+    "internal": true,
+    "bridge_gateway": "172.30.0.1",
+    "no_proxy": ["127.0.0.1", "localhost"]
+  },
+  "connect_proxy": {
+    "local_bind": "127.0.0.1",
+    "local_port": 8888,
+    "remote_port": 43128,
+    "allowed_authority": "chatgpt.com:443",
+    "tls": "passthrough"
+  },
+  "ssh": {
+    "forward": "fixed-reverse",
+    "owns_remote_command": true,
+    "ambient_config": false
+  },
+  "authentication": {
+    "cache": "complete-ephemeral-writable",
+    "cleanup": "required"
+  }
+}

@@ -78,6 +78,10 @@ class CommandAgent(Agent):
         accounting_valid = not self.require_usage
         usage_available = False
         auth_ok: bool | None = None
+        auth_cache_staged: bool | None = None
+        auth_cleanup_ok: bool | None = None
+        route_profile_sha256: str | None = None
+        environment_profile_id: str | None = None
         container_limits: dict[str, Any] | None = None
         host_memory: dict[str, Any] | None = None
         accounting_errors: list[str] = []
@@ -139,6 +143,26 @@ class CommandAgent(Agent):
                     setattr(usage, field, value)
             model = data.get("model") if isinstance(data.get("model"), str) else None
             auth_ok = data.get("auth_ok") if isinstance(data.get("auth_ok"), bool) else None
+            auth_cache_staged = (
+                data.get("auth_cache_staged")
+                if isinstance(data.get("auth_cache_staged"), bool)
+                else None
+            )
+            auth_cleanup_ok = (
+                data.get("auth_cleanup_ok")
+                if isinstance(data.get("auth_cleanup_ok"), bool)
+                else None
+            )
+            route_profile_sha256 = (
+                data.get("route_profile_sha256")
+                if isinstance(data.get("route_profile_sha256"), str)
+                else None
+            )
+            environment_profile_id = (
+                data.get("environment_profile_id")
+                if isinstance(data.get("environment_profile_id"), str)
+                else None
+            )
             container_limits = (
                 data.get("container_limits")
                 if isinstance(data.get("container_limits"), dict)
@@ -204,6 +228,38 @@ class CommandAgent(Agent):
             if not isinstance(data.get("auth_ok"), bool):
                 accounting_valid = False
                 accounting_errors.append("protocol sidecar mismatch: auth_ok")
+            expected_route = expected.get("_route_profile_sha256")
+            if expected_route is not None:
+                if route_profile_sha256 != expected_route:
+                    accounting_valid = False
+                    accounting_errors.append(
+                        "protocol sidecar mismatch: route_profile_sha256"
+                    )
+                if environment_profile_id != expected.get("_environment_profile_id"):
+                    accounting_valid = False
+                    accounting_errors.append(
+                        "protocol sidecar mismatch: environment_profile_id"
+                    )
+            if expected.get("_require_auth_cleanup") is True and not gate_failed:
+                cleanup_mismatch = auth_cache_staged is None
+                if process.returncode == 79:
+                    cleanup_mismatch = not (
+                        auth_cache_staged is True and auth_cleanup_ok is False
+                    )
+                elif auth_cache_staged is True:
+                    cleanup_mismatch = auth_cleanup_ok is not True
+                elif auth_cache_staged is False:
+                    cleanup_mismatch = auth_cleanup_ok is not None
+                if cleanup_mismatch:
+                    accounting_valid = False
+                    accounting_errors.append(
+                        "protocol sidecar/process authentication cleanup mismatch"
+                    )
+                if process.returncode == 79 and auth_ok is not False:
+                    accounting_valid = False
+                    accounting_errors.append(
+                        "protocol cleanup failure must be classified as authentication infrastructure"
+                    )
             wanted_memory = pins.get("host_memory")
             if wanted_memory is not None:
                 observed_memory = data.get("host_memory")
@@ -242,7 +298,11 @@ class CommandAgent(Agent):
                          (data.get("image") == pins.get("codex", {}).get("image"), "host gate image"),
                          (data.get("image_id") == "not-probed", "host gate image_id"),
                          (data.get("container_limits") == expected_limits, "host gate container_limits"),
-                         (data.get("auth_ok") is None, "host gate auth_ok"),
+                          (data.get("auth_ok") is None, "host gate auth_ok"),
+                          (expected.get("_require_auth_cleanup") is not True or data.get("auth_cache_staged") is False, "host gate auth_cache_staged"),
+                          (expected.get("_require_auth_cleanup") is not True or data.get("auth_cleanup_ok") is None, "host gate auth_cleanup_ok"),
+                          (expected.get("_route_profile_sha256") is None or data.get("route_profile_sha256") == expected.get("_route_profile_sha256"), "host gate route_profile_sha256"),
+                          (expected.get("_route_profile_sha256") is None or data.get("environment_profile_id") == expected.get("_environment_profile_id"), "host gate environment_profile_id"),
                          (data.get("timed_out") is False, "host gate timed_out"),
                          (data.get("derived_from_codex_jsonl") is False, "host gate derived flag"),
                          (data.get("host_memory_gate") == "failed", "host gate marker"),
@@ -273,6 +333,10 @@ class CommandAgent(Agent):
             accounting_errors=accounting_errors,
             events=events,
             auth_ok=auth_ok,
+            auth_cache_staged=auth_cache_staged,
+            auth_cleanup_ok=auth_cleanup_ok,
+            route_profile_sha256=route_profile_sha256,
+            environment_profile_id=environment_profile_id,
             container_limits=container_limits,
             host_memory=host_memory,
         )

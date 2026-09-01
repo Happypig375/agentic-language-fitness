@@ -1,129 +1,123 @@
 # Agentic Language Fitness
 
-A reproducible pilot for measuring how programming-language choice changes the **lifetime computational cost and reliability of coding agents**.
+An auditable benchmark for measuring how programming language and agent
+configuration shape the reliability and lifetime computational cost of coding
+agents.
 
-The project does not assume that F# is better than C#, Python, Rust, or any other language. It tests a narrower causal question:
+ALF studies inherited maintenance: an agent understands an existing repository,
+changes it, verifies it, and hands the changed workspace to a fresh agent for
+the next change. The first language family compares semantically matched F# and
+C# services on .NET, holding runtime, packages, build system, external
+behavior, evaluator, and task chain closely aligned. This is a research
+workbench, not a leaderboard or a claim that one language is universally best.
 
-> When semantically equivalent software is represented in different programming languages, how much agent computation is required to correctly understand, change, verify, and maintain it over a sequence of inherited changes?
+## Why it is different
 
-The first controlled comparison is **F# versus C# on .NET 10**. Sharing the runtime, standard library, package ecosystem, build system, and external behavior removes many confounds that affect ordinary multilingual benchmarks.
+Most coding-agent benchmarks measure isolated tasks. ALF makes accumulated
+repository state part of the treatment: later agents inherit previous edits,
+misunderstandings, tests, and technical debt. It retains terminal stops and
+failed tasks, not only successful completions, and records hidden behavioral
+evaluation, source/representation checks, diffs, commands, timing, and token
+usage when available.
 
-## Research gap
+The narrow question is:
 
-Sequential maintenance is **not** the novelty: ChainSWE, SlopCodeBench, SWE-Chain, and SWE-CI already evaluate accumulated or iterative software state. Multilingual repository benchmarks also exist, while Tokenmaxxing directly shows that programming language changes agent token expenditure on small tasks.
+> When semantically equivalent software is represented in different programming
+> languages, how much agent computation is required to correctly understand,
+> change, verify, and maintain it over inherited changes?
 
-The narrower gap found in the search dated **2026-08-26** is the controlled intersection of those lines of work:
+The research gap is deliberately modest. Sequential maintenance and
+multilingual repository benchmarks already exist, and Tokenmaxxing shows that
+language can change token expenditure. ALF targets their controlled
+intersection: language as the independent variable inside inherited maintenance
+over behaviorally matched repositories while holding runtime, task sequence,
+oracle, agent configuration, and measurement protocol substantially constant.
+See the [literature review](docs/literature-review.md), [search
+log](docs/search-log.md), and [research-gap statement](docs/research-gap.md).
 
-> No published study found treats programming language as the independent variable inside an inherited maintenance experiment over semantically matched repositories while holding the runtime, task sequence, external behavioral oracle, agent configuration, and measurement protocol substantially constant.
+## Current evidence and status
 
-This project is therefore a controlled experimental extension and synthesis, not a claim to have invented sequential maintenance benchmarking. See [the literature review](docs/literature-review.md), [search log](docs/search-log.md), and [gap statement](docs/research-gap.md).
+The short `variance-v2` pilot found high stochastic and order variance on a
+two-task chain. The reviewed `difficulty-v1` successor is an eight-task chain
+that is no longer fully saturated, but it exposed candidate-caused
+representation drift. These are feasibility findings, not evidence that F# or
+C# is better.
 
-## What is executable now
+The current scientific family is Workstream D v3: canonical descriptive
+representation, three capability configurations, a predeclared counterbalanced
+schedule, non-counting calibration, and a staged continuation gate. V4–V13
+were apparatus-development attempts, not additional scientific treatments; the
+history and failure categories are summarized in the
+[postmortem](docs/apparatus-versioning-postmortem-2026-09-02.md). No v14 exists.
+The minimal remote runner has passed local model-free review but still awaits
+exact-commit CI and a real non-counting route shakedown. No paid/model run is
+authorized and no v3 language estimate or significance claim exists. Follow
+the [canonical plan](PLAN.md) for the live checkpoint.
 
-The repository contains a two-step pilot benchmark with behaviorally equivalent F# and C# implementations of a line-oriented JSON order-processing service.
+## How a chain works
 
-```text
-baseline -> 001-priority -> 002-overdue
-```
-
-The harness:
-
-- creates an isolated workspace from the language baseline;
-- starts a fresh agent process for every task while retaining the changed codebase;
-- builds with the .NET SDK;
-- evaluates cumulative hidden behavioral cases;
-- records source metrics, git diffs, process durations, tool/command counts, and token usage when exposed by the agent;
-- writes machine-readable JSON and JSONL artifacts.
-
-Three adapters are included:
-
-- `scripted`: applies checked-in gold snapshots to validate the harness without an LLM;
-- `codex`: runs a fresh non-interactive `codex exec --json --ephemeral` process per task;
-- `command`: invokes any external agent command and optionally reads a standard usage sidecar.
+For each language and ordered task, ALF creates a baseline workspace, starts a
+fresh agent process, retains successful changes, runs cumulative hidden
+behavioral and structural checks, and records the attempt. In container runs,
+gold snapshots, evaluator cases, parent repositories, credentials, and
+unrelated host files remain outside the candidate boundary. Primary analysis
+retains correctness and terminal-stop outcomes alongside unconditional cost;
+paired common-exposure-prefix cost prevents an early failure from looking
+artificially cheap.
 
 ## Quick start
 
 Requirements: Python 3.11+, Git, and .NET SDK 10.0.302.
 
-```bash
+```text
+python -m pip install -e .
+python -m unittest discover -s tests -v
 python scripts/alf.py doctor --strict
 python scripts/alf.py validate
 python scripts/alf.py matrix --agent scripted --output results/pilot
+python scripts/alf.py audit PATH_TO_RUN_DIRECTORY
 python scripts/alf.py summarize results/pilot
-
-# Optional editable installation exposes the shorter `alf` command:
-python -m pip install -e .
 ```
 
-Run a real Codex pilot after authenticating the Codex CLI:
+The scripted adapter applies checked-in gold snapshots without model/API calls,
+credentials, or paid usage. It is the recommended first check on a new machine.
 
-```bash
+## Real agents and remote execution
+
+After the required review, validation, freeze, and calibration gates:
+
+```text
 alf run --language fsharp --agent codex --model YOUR_MODEL --output results/codex
-alf run --language csharp --agent codex --model YOUR_MODEL --output results/codex
-alf summarize results/codex
 ```
 
-A provider-neutral command adapter is also available:
-
-```bash
-alf run \
-  --language fsharp \
-  --agent command \
-  --agent-command 'your-agent --workspace {workspace} --prompt-file {prompt_file}'
-```
-
-The command receives `ALF_WORKSPACE`, `ALF_TASK_ID`, `ALF_LANGUAGE`, and `ALF_PROMPT_FILE`. It may write `.alf/usage.json`; see [the protocol](docs/protocol.md).
-
-For container-isolated Codex runs, build the pinned image and use the host wrapper through
-the command adapter:
-
-```bash
-make docker-build
-make docker-smoke
-alf run --language fsharp --agent command --require-usage \
-  --agent-command 'python {root}/scripts/codex-docker.py --workspace {workspace} --prompt-file {prompt_file} --model YOUR_MODEL'
-```
-
-PowerShell (quote every path so Windows spaces and backslashes survive):
+For a memory-rich remote host whose model egress must use this machine, use the
+single foreground PowerShell runner (exact paths and command are environment
+specific):
 
 ```powershell
-alf run --language fsharp --agent command --require-usage --agent-command 'python "{root}\scripts\codex-docker.py" --workspace "{workspace}" --prompt-file "{prompt_file}" --model YOUR_MODEL'
+.\infra\remote-runner\run.ps1 -RemoteHost user@host -RemoteSshPort 830 -EnvironmentProfilePath .\infra\remote-runner\environment-profile.json -RemoteCommand 'exec /opt/alf/run.sh'
 ```
 
-The wrapper mounts only the task workspace read-write (Docker's default) at `/workspace` and (when found)
-one host Codex `auth.json` read-only at `/home/codex/.codex/auth.json`; it never mounts the
-repository, gold/evaluator data, or a broad `CODEX_HOME`. Set `CODEX_AUTH_FILE` or
-`CODEX_HOME` to choose authentication. Docker is the isolation boundary for the
-intentionally bypassed in-container approval/sandbox flags.
-Mount paths containing commas are rejected because Docker mount specifications use
-comma-delimited options. The container uses Docker's default bridge network, so it has
-egress; task prompts and image contents are therefore trusted inputs.
-The wrapper creates a temporary auth projection with refresh-token values blanked (the
-schema key is retained so Codex can deserialize it) and deletes it after the run. A
-short-lived access token may still be exposed to the container;
-only use trusted task prompts and a trusted Docker daemon.
+The tracked environment profile selects the dedicated internal Docker network,
+local proxy port, and exact bridge listener. `scripts/codex-docker.py` derives
+`HTTPS_PROXY` and `HTTP_PROXY` as `http://172.30.0.1:43128` from that profile.
+The server should restrict the account with
+`AllowTcpForwarding remote`, `GatewayPorts clientspecified`, and
+`PermitListen 172.30.0.1:43128`. Use explicit identity and known-hosts paths
+when possible. See [remote execution](docs/remote-execution.md).
 
-## Reproducibility and safety
-
-The default pilot is suitable for harness development, not yet for a publication-quality causal estimate. A credible experiment must pin the model and agent versions, randomize run order, repeat stochastic runs, isolate the workspace so the agent cannot read gold data or evaluator cases, and record exact toolchain/container versions. See [environmental assumptions](docs/environment.md).
+For Codex container authentication, stage the complete `auth.json` in an
+ephemeral writable `CODEX_HOME` with mode 0600, treat it as a password, and
+remove it after the run. Do not minimize, blank, hash, log, or commit it.
 
 ## Repository map
 
-- `src/alf/` — Python harness and agent adapters
-- `benchmarks/pilot/` — matched .NET projects, task specifications, tests, and gold snapshots
-- `docs/` — literature review, hypotheses, protocol, metrics, and experimental design
-- `tests/` — harness unit tests
-- `.github/workflows/ci.yml` — end-to-end scripted validation on Python 3.12 and .NET 10.0.302
+- `src/alf/` — harness, adapters, protocol, accounting, and audit logic
+- `benchmarks/pilot/` — matched .NET projects, tasks, evaluators, and snapshots
+- `docs/` — protocol, environment, design, results, and research context
+- `tests/` — unit and model-free regression tests
+- `scripts/alf.py` — command-line entry point
+- `PLAN.md` — canonical continuation order and decision gates
 
-## Status
-
-- [x] scoped literature review
-- [x] defensible gap statement
-- [x] executable paired-language pilot
-- [x] fresh-process chain runner
-- [x] Codex JSONL usage parser
-- [x] CI validation
-- [x] container-isolated preliminary real-agent run (see [tracked results note](docs/preliminary-results-2026-08-26.md))
-- [ ] larger matched repository family
-- [ ] preregistration and power analysis
-- [ ] multi-model repeated study
+No open-source license has yet been selected. Public visibility alone does not
+grant permission to redistribute or modify this code.

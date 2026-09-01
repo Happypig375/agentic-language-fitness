@@ -40,7 +40,12 @@ Workstream D events carry `family_id`, `configuration_id`, `pair_block_id`,
 `execution_position`, `macroblock` or `calibration_id`,
 `within_macroblock_position`, `stage`, `role`, `counting`,
 `family_definition_sha256`, `parent_schedule_sha256`, `catalog_sha256`, and
-`assignment_sha256`. Calibration events use an explicit non-counting role and
+`assignment_sha256`. Protocol attempt records additionally carry
+`scientific_spec_sha256`, `runner_revision`, `environment_profile`,
+`route_profile_sha256`, and `attempt_id`; these identities change
+independently. Task agent records reconcile the route profile plus
+`auth_cache_staged` and `auth_cleanup_ok` from the container sidecar.
+Calibration events use an explicit non-counting role and
 never enter the formal assignment hash.
 
 Current events use `workstream-d-language-v3`; v1/v2 remain auditable. Each

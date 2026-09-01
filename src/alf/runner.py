@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import platform
 import re
 import shutil
@@ -14,16 +15,51 @@ from typing import Any
 
 from .agents import CodexAgent, CommandAgent, ScriptedAgent
 from .evaluator import evaluate_project
+from .environment_profile import environment_profile_sha256, load_environment_profile
 from .metrics import git_diff_metrics, git_head, snapshot_repository
 from .models import AgentResult, Usage
 from .process import run_process
 from .benchmark_artifacts import artifact_plan, checks_for_language, copy_artifacts, merge_workspace_checks
-from .protocol import classify_failure, load_frozen_manifest
+from .protocol import canonical_json_hash, classify_failure, load_frozen_manifest
 from .audit import audit_representation_checkpoint
 
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def route_profile_identity(
+    root: Path, provenance: dict[str, Any]
+) -> tuple[str, str | None]:
+    """Return the exact non-secret route profile used by a protocol run."""
+    configured = os.environ.get("ALF_ENVIRONMENT_PROFILE_PATH")
+    profile_path: Path | None = None
+    if provenance.get("schema_version") == 3:
+        tracked = root / "infra" / "remote-runner" / "environment-profile.json"
+        if tracked.is_file():
+            profile_path = tracked
+            if configured:
+                requested = Path(configured).expanduser()
+                if not requested.is_absolute():
+                    requested = root / requested
+                if requested.resolve() != tracked.resolve():
+                    raise ValueError(
+                        "schema-v3 environment profile must be the tracked remote-runner profile"
+                    )
+    elif configured:
+        profile_path = Path(configured).expanduser()
+        if not profile_path.is_absolute():
+            profile_path = root / profile_path
+    if profile_path is not None:
+        profile = load_environment_profile(profile_path, repository_root=root)
+        return "sha256:" + environment_profile_sha256(profile), profile["profile_id"]
+
+    # Compatibility identity for older frozen fixtures and local protocol families.
+    legacy = {
+        "schema_version": 0,
+        "network_policy": provenance.get("definition", {}).get("network_policy"),
+    }
+    return "sha256:" + canonical_json_hash(legacy), None
 
 
 def command_version(command: list[str], cwd: Path) -> str | None:
@@ -115,6 +151,10 @@ def _agent_summary(result: AgentResult, log_paths: dict[str, str]) -> dict[str, 
         "accounting_errors": result.accounting_errors,
         "agent_process_wall_seconds": result.process.duration_seconds,
         "auth_ok": result.auth_ok,
+        "auth_cache_staged": result.auth_cache_staged,
+        "auth_cleanup_ok": result.auth_cleanup_ok,
+        "route_profile_sha256": result.route_profile_sha256,
+        "environment_profile_id": result.environment_profile_id,
         "container_limits": result.container_limits,
         "host_memory": result.host_memory,
     }
@@ -287,7 +327,10 @@ def _derive_protocol_disposition(run_result: dict[str, Any]) -> dict[str, Any]:
         process.get("timed_out") is True
         for process in [*task_processes, *task_evaluator_processes]
     )
-    auth_ok = not any(agent.get("auth_ok") is False for agent in task_agents)
+    auth_ok = not any(
+        agent.get("auth_ok") is False or agent.get("auth_cleanup_ok") is False
+        for agent in task_agents
+    )
     provider_ok = not any(
         process.get("returncode") not in (None, 0)
         and process.get("timed_out") is not True
@@ -589,6 +632,12 @@ def _prepare_protocol_run(
         f'--pids-limit {definition["limits"]["pids"]} '
         "--require-auth-preflight"
     )
+    if v3 and (root / "infra" / "remote-runner" / "environment-profile.json").is_file():
+        route_sha256, route_profile_id = route_profile_identity(root, protocol)
+        protocol["_route_profile_sha256"] = route_sha256
+        protocol["_environment_profile_id"] = route_profile_id
+        protocol["_require_auth_cleanup"] = True
+        command += " --environment-profile infra/remote-runner/environment-profile.json"
     if v2:
         protocol["_selected_condition"] = selected_condition
         protocol["_condition_manifest"] = str(benchmark_path.relative_to(root)).replace("\\", "/")
@@ -665,12 +714,36 @@ def run_chain(
     attempt_record_path: Path | None = None
     attempt_record: dict[str, Any] | None = None
     if provenance is not None:
+        environment_facts = provenance.get("environment")
+        if not isinstance(environment_facts, dict):
+            # Compatibility for older frozen fixtures; real freezes embed the
+            # complete environment probe.
+            environment_facts = {
+                "image": provenance["image"],
+                "image_id": provenance["image_id"],
+            }
+        route_profile_sha256 = provenance.get("_route_profile_sha256")
+        environment_profile_id = provenance.get("_environment_profile_id")
+        if not isinstance(route_profile_sha256, str):
+            route_profile_sha256, environment_profile_id = route_profile_identity(
+                root, provenance
+            )
+        combined_environment = {
+            "observed": environment_facts,
+            "route_profile_sha256": route_profile_sha256,
+        }
         run_provenance = {
             "manifest_file": "protocol-manifest.json",
             "manifest_sha256": provenance["manifest_sha256"],
             "cell_id": provenance["cell_id"],
             "git_head": provenance["git_head"],
             "definition_sha256": provenance["definition_sha256"],
+            "scientific_spec_sha256": provenance["definition_sha256"],
+            "runner_revision": provenance["git_head"],
+            "environment_profile": "sha256:"
+            + canonical_json_hash(combined_environment),
+            "environment_profile_id": environment_profile_id,
+            "route_profile_sha256": route_profile_sha256,
             "schedule_sha256": provenance["schedule_sha256"],
             "image": provenance["image"],
             "image_id": provenance["image_id"],

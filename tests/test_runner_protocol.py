@@ -710,6 +710,16 @@ class RunnerProtocolTests(unittest.TestCase):
         self.assertEqual(disposition["analysis_role"], "infrastructure-invalid")
         self.assertTrue(disposition["retryable"])
 
+        cleanup = json.loads(json.dumps(timeout))
+        cleanup["tasks"][0]["agent"]["process"]["timed_out"] = False
+        cleanup["tasks"][0]["agent"]["process"]["returncode"] = 79
+        cleanup["tasks"][0]["agent"]["auth_ok"] = True
+        cleanup["tasks"][0]["agent"]["auth_cleanup_ok"] = False
+        disposition = _derive_protocol_disposition(cleanup)
+        self.assertEqual(disposition["failure_category"], "auth")
+        self.assertEqual(disposition["analysis_role"], "infrastructure-invalid")
+        self.assertTrue(disposition["retryable"])
+
         provider = json.loads(json.dumps(auth))
         provider["tasks"][0]["agent"]["auth_ok"] = True
         provider["tasks"][0]["agent"]["usage_available"] = False

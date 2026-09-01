@@ -67,6 +67,10 @@ class AgentResult:
     usage_available: bool = False
     accounting_errors: list[str] = field(default_factory=list)
     auth_ok: bool | None = None
+    auth_cache_staged: bool | None = None
+    auth_cleanup_ok: bool | None = None
+    route_profile_sha256: str | None = None
+    environment_profile_id: str | None = None
     container_limits: dict[str, Any] | None = None
     host_memory: dict[str, Any] | None = None
 

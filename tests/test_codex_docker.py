@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 
 SCRIPT = Path(__file__).parents[1] / "scripts" / "codex-docker.py"
+PROFILE = Path(__file__).parents[1] / "infra" / "remote-runner" / "environment-profile.json"
 SPEC = importlib.util.spec_from_file_location("codex_docker", SCRIPT)
 assert SPEC and SPEC.loader
 module = importlib.util.module_from_spec(SPEC)
@@ -119,6 +120,8 @@ class CodexDockerTests(unittest.TestCase):
         self.assertEqual(sidecar["reasoning_effort"], "medium")
         self.assertEqual(sidecar["image"], "test-image")
         self.assertEqual(sidecar["image_id"], "sha256:test")
+        self.assertEqual(sidecar["docker_network"], "bridge")
+        self.assertIsInstance(sidecar["proxy_configured"], bool)
         self.assertFalse(sidecar["timed_out"])
         self.assertEqual(
             sidecar["container_limits"], {"memory": "2g", "cpus": 2, "pids": 256}
@@ -190,20 +193,106 @@ class CodexDockerTests(unittest.TestCase):
         self.assertEqual(calls[1][1]["encoding"], "utf-8")
         self.assertEqual(calls[1][1]["errors"], "replace")
 
-    def test_command_mounts_only_workspace_and_auth_read_only(self):
+    def test_command_mounts_only_workspace_and_writable_auth_home(self):
         with tempfile.TemporaryDirectory() as directory:
             workspace = Path(directory) / "workspace"
             workspace.mkdir()
-            auth = Path(directory) / "auth.json"
-            auth.write_text("{}", encoding="utf-8")
-            command = module.build_docker_argv(workspace, "test-image", auth, "gpt-test")
+            auth = Path(directory) / "auth-home"
+            auth.mkdir()
+            (auth / "auth.json").write_text("{}", encoding="utf-8")
+            with patch.dict(module.os.environ, {}, clear=True):
+                command = module.build_docker_argv(workspace, "test-image", auth, "gpt-test")
         self.assertEqual(command[0:2], ["docker", "run"])
         self.assertIn("-i", command)
         self.assertIn(f"type=bind,src={workspace.resolve()},dst=/workspace", command)
-        self.assertIn(f"type=bind,src={auth.resolve()},dst=/home/codex/.codex/auth.json,readonly", command)
+        self.assertIn(f"type=bind,src={auth.resolve()},dst={module.CONTAINER_CODEX_HOME}", command)
+        self.assertNotIn("readonly", " ".join(command))
+        self.assertIn(f"HOME={module.CONTAINER_CODEX_HOME}", command)
+        self.assertIn(f"CODEX_HOME={module.CONTAINER_CODEX_HOME}", command)
         self.assertEqual(command[-1], "-")
         self.assertIn("--dangerously-bypass-approvals-and-sandbox", command)
         self.assertNotIn("--privileged", command)
+
+    def test_remote_network_and_proxy_are_explicit_in_candidate_and_login(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory) / "workspace"
+            auth = Path(directory) / "auth-home"
+            workspace.mkdir()
+            auth.mkdir()
+            (auth / "auth.json").write_text("{}", encoding="utf-8")
+            kwargs = {
+                "docker_network": "alf-internal",
+                "https_proxy": "http://172.17.0.1:43128",
+                "http_proxy": "http://172.17.0.1:43128",
+                "no_proxy": "127.0.0.1,localhost",
+            }
+            with patch.dict(module.os.environ, {}, clear=True):
+                candidate = module.build_docker_argv(workspace, "image", auth, **kwargs)
+                login = module.build_login_status_argv(auth, "image", **kwargs)
+        for command in (candidate, login):
+            self.assertEqual(command[command.index("--network") + 1], "alf-internal")
+            self.assertIn("HTTPS_PROXY=http://172.17.0.1:43128", command)
+            self.assertIn("HTTP_PROXY=http://172.17.0.1:43128", command)
+            self.assertIn("NO_PROXY=127.0.0.1,localhost", command)
+            self.assertNotIn("readonly", " ".join(command))
+
+    def test_tracked_environment_profile_derives_and_records_exact_route(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            calls = []
+
+            def run(command, **_kwargs):
+                calls.append(command)
+                if command[0:3] == ["docker", "image", "inspect"]:
+                    return type("Inspect", (), {"returncode": 0, "stdout": "sha256:test", "stderr": ""})()
+                return type("Done", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+
+            with (
+                patch.dict(module.os.environ, {}, clear=True),
+                patch.object(module.subprocess, "run", side_effect=run),
+                patch.object(module.sys, "stdout", new_callable=StringIO),
+            ):
+                code = module.main([
+                    "--workspace", str(workspace), "--prompt", "task",
+                    "--environment-profile", str(PROFILE),
+                ])
+            sidecar = json.loads((workspace / ".alf" / "usage.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(code, 0)
+        candidate = next(command for command in calls if command[0:2] == ["docker", "run"])
+        self.assertEqual(candidate[candidate.index("--network") + 1], "alf-internal")
+        self.assertIn("HTTPS_PROXY=http://172.30.0.1:43128", candidate)
+        self.assertIn("HTTP_PROXY=http://172.30.0.1:43128", candidate)
+        self.assertEqual(sidecar["environment_profile_id"], "remote-highmem-local-egress-r1")
+        self.assertRegex(sidecar["route_profile_sha256"], r"^sha256:[0-9a-f]{64}$")
+
+    def test_tracked_environment_profile_rejects_route_override(self):
+        with tempfile.TemporaryDirectory() as directory, patch.dict(
+            module.os.environ, {}, clear=True
+        ):
+            with self.assertRaisesRegex(ValueError, "proxy"):
+                module.main([
+                    "--workspace", directory, "--prompt", "task",
+                    "--environment-profile", str(PROFILE),
+                    "--https-proxy", "http://172.30.0.1:43129",
+                ])
+
+    def test_proxy_credentials_and_invalid_network_are_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            with patch.dict(module.os.environ, {}, clear=True):
+                with self.assertRaisesRegex(ValueError, "unauthenticated"):
+                    module.build_docker_argv(
+                        workspace,
+                        "image",
+                        https_proxy="http://user:secret@127.0.0.1:8888",
+                    )
+                with self.assertRaisesRegex(ValueError, "network name"):
+                    module.build_docker_argv(
+                        workspace,
+                        "image",
+                        docker_network="--network=host",
+                    )
 
     def test_usage_parser_writes_aggregate_sidecar(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -234,19 +323,60 @@ class CodexDockerTests(unittest.TestCase):
             resolved = module.resolve_auth_path(None, {"HOME": str(home)})
         self.assertEqual(resolved, auth.resolve())
 
-    def test_auth_projection_removes_refresh_token(self):
+    def test_auth_copy_retains_refresh_token_and_exact_bytes(self):
         with tempfile.TemporaryDirectory() as directory:
             source = Path(directory) / "auth.json"
-            source.write_text('{"access_token":"a","refresh_token":"SECRET","tokens":{"refresh_token":"S"}}', encoding="utf-8")
-            projected = module.minimized_auth(source)
+            expected = b'{"access_token":"a","refresh_token":"SECRET","tokens":{"refresh_token":"S"}}\x00\xff'
+            source.write_bytes(expected)
+            projected = module.temporary_auth_copy(source)
             try:
-                text = projected.read_text(encoding="utf-8")
+                self.assertEqual((projected / "auth.json").read_bytes(), expected)
             finally:
-                projected.unlink(missing_ok=True)
-        self.assertIn("access_token", text)
-        self.assertIn("refresh_token", text)
-        self.assertNotIn("SECRET", text)
-        self.assertNotIn('"S"', text)
+                import shutil
+                shutil.rmtree(projected, ignore_errors=True)
+        self.assertFalse(projected.exists())
+
+    def test_auth_copy_none_is_none(self):
+        self.assertIsNone(module.temporary_auth_copy(None))
+
+    def test_auth_cleanup_is_verified(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory) / "auth-home"
+            home.mkdir()
+            (home / "auth.json").write_text("secret", encoding="utf-8")
+            module.remove_temporary_auth_home(home)
+            self.assertFalse(home.exists())
+
+        with patch.object(module.shutil, "rmtree", side_effect=OSError("denied")):
+            with self.assertRaisesRegex(RuntimeError, "failed to remove"):
+                module.remove_temporary_auth_home(Path("unremovable"))
+
+    def test_auth_cleanup_failure_preserves_output_metadata_and_fails_run(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            auth_home = workspace / "auth-home"
+            auth_home.mkdir()
+            (auth_home / "auth.json").write_text("secret", encoding="utf-8")
+
+            def run(command, **_kwargs):
+                if command[0:3] == ["docker", "image", "inspect"]:
+                    return type("Inspect", (), {"returncode": 0, "stdout": "sha256:test", "stderr": ""})()
+                return type("Done", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+
+            with (
+                patch.object(module, "temporary_auth_copy", return_value=auth_home),
+                patch.object(module, "remove_temporary_auth_home", side_effect=RuntimeError("denied")),
+                patch.object(module.subprocess, "run", side_effect=run),
+                patch.object(module.sys, "stdout", new_callable=StringIO),
+                patch.object(module.sys, "stderr", new_callable=StringIO),
+            ):
+                code = module.main(["--workspace", str(workspace), "--prompt", "task"])
+            sidecar = json.loads((workspace / ".alf" / "usage.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(code, 79)
+        self.assertTrue(sidecar["auth_cache_staged"])
+        self.assertFalse(sidecar["auth_cleanup_ok"])
+        self.assertFalse(sidecar["auth_ok"])
 
     def test_timeout_cleans_named_container_and_decodes_output(self):
         with tempfile.TemporaryDirectory() as directory:

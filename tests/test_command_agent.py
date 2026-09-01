@@ -26,6 +26,9 @@ class CommandAgentTests(unittest.TestCase):
             "requested_id": "m",
             "reasoning_effort": "medium",
         }
+        expected["_route_profile_sha256"] = "sha256:" + "b" * 64
+        expected["_environment_profile_id"] = "remote-test-r1"
+        expected["_require_auth_cleanup"] = True
         return expected
 
     def _protocol_sidecar(self, *, event_count=1, usage_available=True, accounting_valid=True, usage_errors=None):
@@ -38,6 +41,10 @@ class CommandAgentTests(unittest.TestCase):
                 "image_id": "sha256:" + "a" * 64,
                 "timed_out": False,
                 "auth_ok": True,
+                "auth_cache_staged": True,
+                "auth_cleanup_ok": True,
+                "route_profile_sha256": "sha256:" + "b" * 64,
+                "environment_profile_id": "remote-test-r1",
                 "container_limits": {"memory": "2g", "cpus": 2, "pids": 256},
                 "event_count": event_count,
                 "command_count": 0,
@@ -55,7 +62,7 @@ class CommandAgentTests(unittest.TestCase):
         )
         return usage
 
-    def _run(self, sidecar=None, stdout="", expected_protocol=None):
+    def _run(self, sidecar=None, stdout="", expected_protocol=None, returncode=0):
         directory = tempfile.TemporaryDirectory()
         root = Path(directory.name) / "root"; workspace = root / "workspace"; workspace.mkdir(parents=True)
         def invoke(*args, **kwargs):
@@ -63,7 +70,7 @@ class CommandAgentTests(unittest.TestCase):
                 (workspace / ".alf").mkdir(exist_ok=True)
                 text = sidecar if isinstance(sidecar, str) else json.dumps(sidecar)
                 (workspace / ".alf" / "usage.json").write_text(text, encoding="utf-8")
-            return ProcessResult(["ok"], 0, stdout, "", 0)
+            return ProcessResult(["ok"], returncode, stdout, "", 0)
         agent = CommandAgent(
             "tool", require_usage=True, expected_protocol=expected_protocol
         )
@@ -164,6 +171,66 @@ class CommandAgentTests(unittest.TestCase):
         directory.cleanup()
         self.assertFalse(got.accounting_valid)
         self.assertIn("protocol sidecar mismatch: model", got.accounting_errors)
+
+    def test_v3_route_and_cleanup_are_reconciled(self):
+        expected = self._expected_v3_protocol()
+        raw = json.dumps({"type": "turn.completed", "usage": {
+            name: 0 for name in Usage.__dataclass_fields__ if name != "tool_calls"
+        }})
+
+        wrong_route = self._protocol_sidecar()
+        wrong_route["route_profile_sha256"] = "sha256:" + "c" * 64
+        directory, got = self._run(wrong_route, raw, expected)
+        directory.cleanup()
+        self.assertFalse(got.accounting_valid)
+        self.assertIn(
+            "protocol sidecar mismatch: route_profile_sha256",
+            got.accounting_errors,
+        )
+
+        cleanup_failure = self._protocol_sidecar()
+        cleanup_failure["auth_ok"] = False
+        cleanup_failure["auth_cleanup_ok"] = False
+        directory, got = self._run(
+            cleanup_failure, raw, expected, returncode=79
+        )
+        directory.cleanup()
+        self.assertTrue(got.accounting_valid, got.accounting_errors)
+        self.assertFalse(got.auth_ok)
+        self.assertFalse(got.auth_cleanup_ok)
+        self.assertEqual(got.route_profile_sha256, expected["_route_profile_sha256"])
+
+        missing_auth = self._protocol_sidecar(
+            event_count=0,
+            usage_available=False,
+            accounting_valid=False,
+            usage_errors=["no turn.completed usage records found"],
+        )
+        missing_auth["usage_record_count"] = 0
+        missing_auth["auth_ok"] = False
+        missing_auth["auth_cache_staged"] = False
+        missing_auth["auth_cleanup_ok"] = None
+        directory, got = self._run(
+            missing_auth, "", expected, returncode=78
+        )
+        directory.cleanup()
+        self.assertFalse(got.auth_ok)
+        self.assertFalse(got.auth_cache_staged)
+        self.assertIsNone(got.auth_cleanup_ok)
+        self.assertNotIn(
+            "protocol sidecar/process authentication cleanup mismatch",
+            got.accounting_errors,
+        )
+
+        impossible_cleanup = dict(missing_auth)
+        directory, got = self._run(
+            impossible_cleanup, "", expected, returncode=79
+        )
+        directory.cleanup()
+        self.assertIn(
+            "protocol sidecar/process authentication cleanup mismatch",
+            got.accounting_errors,
+        )
 
     def test_v3_timeout_without_usage_returns_invalid_result(self):
         expected = self._expected_v3_protocol()
