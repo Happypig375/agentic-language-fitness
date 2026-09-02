@@ -4,16 +4,14 @@ Read `PLAN.md` before substantial work. It is the canonical checkpoint and order
 
 ## Current checkpoint
 
-Workstreams A–C and the Workstream D scientific design are complete. V3 is the current scientific configuration family (H=`gpt-5.6-terra` medium, M=`gpt-5.6-luna` high, L=`gpt-5.6-luna` medium). Its first H/F# calibration predecessor is unresolved because of host memory; no scientific conclusion is available.
+Workstreams A–C and the Workstream D scientific design are complete. V3 is the current scientific configuration family (H=`gpt-5.6-terra` medium, M=`gpt-5.6-luna` high, L=`gpt-5.6-luna` medium). Its ten-run non-counting calibration is complete: H is saturated; M/L are too easy in both primary and reverse order. No language conclusion is available.
 
-V4–V13 were apparatus-development attempts, not scientific families. Do not create v14. The replacement remote runner has passed local model-free validation and independent review; exact-commit CI and a real non-counting route shakedown remain before any paid/model run.
+V4–V13 were apparatus-development attempts, not scientific families. Do not create v14. The replacement remote runner passed exact-commit CI, route shakedown, clean freezes, and calibration; formal macroblocks 1–6 are blocked pending a reviewed successor design.
 
 ## Active gates
 
-1. Publish the reviewed runner revision and pass exact-commit Linux/Windows CI.
-2. Complete one real, non-counting end-to-end route shakedown.
-3. Pin/tag the runner revision and environment profile, then make clean v3 freezes and non-counting calibration decisions.
-4. Only after those gates may paid/model activity resume under the approved scientific schedule.
+1. Preserve the completed runner, route, freeze, and calibration evidence.
+2. Stop pending an explicitly reviewed successor scientific design/new specification; no paid/model run and no v14.
 
 Pre-candidate infrastructure failures are retained as attempts and may be fixed and retried under the same scientific specification. Change the scientific specification only when model, prompt, task, evaluator, candidate-visible semantics, or analysis changes. Keep candidate agents separate from these maintainer instructions.
 

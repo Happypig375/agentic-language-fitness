@@ -49,10 +49,11 @@ schedule, non-counting calibration, and a staged continuation gate. V4–V13
 were apparatus-development attempts, not additional scientific treatments; the
 history and failure categories are summarized in the
 [postmortem](docs/apparatus-versioning-postmortem-2026-09-02.md). No v14 exists.
-The minimal remote runner has passed local model-free review but still awaits
-exact-commit CI and a real non-counting route shakedown. No paid/model run is
-authorized and no v3 language estimate or significance claim exists. Follow
-the [canonical plan](PLAN.md) for the live checkpoint.
+The minimal remote runner passed exact-commit CI and a real non-counting route
+shakedown. V3 calibration is complete: H is saturated and M/L are too easy in
+both orders. Formal macroblocks 1–6 are blocked; no paid/model run, language
+estimate, or significance claim is authorized. See the [calibration report](reports/workstream-d-language-v3/calibration-report.md)
+and [canonical plan](PLAN.md).
 
 ## How a chain works
 

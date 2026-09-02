@@ -1,25 +1,25 @@
 # Research plan
 
-This is the canonical continuation plan. The scientific Workstream D design is approved; no paid/model run is authorized yet.
+This is the canonical continuation plan. The scientific Workstream D design is approved; no further paid/model run is authorized under v3.
 
 ## Scientific checkpoint
 
-V3 is the active scientific configuration family and preserves the reviewed Terra/Luna configuration change. Its first H/F# calibration predecessor is unresolved because of host memory; do not infer an outcome or run later slots. Earlier v1/v2 cells remain excluded as documented in their incident notes.
+V3 is the active scientific configuration family and preserves the reviewed Terra/Luna configuration change. Its ten-run non-counting calibration is complete: H is saturated; M and L were too easy in both primary and reverse order. No language effect is identified.
 
 V4–V13 are not scientific families. They were apparatus-development attempts covering Docker portability, egress, authentication, readiness, and SSH transport. Their rationale and disposition are summarized in the postmortem. There will be no v14.
 
 The replacement runner, environment-profile split, and failure reconciliation
 have passed the full 224-test local model-free suite, strict doctor, benchmark
 validation, PowerShell parsing, and independent review with no remaining
-P0–P3 findings. No Docker, SSH, provider authentication, candidate, or model
-activity occurred. Publication and exact-commit CI are the next gate.
+P0–P3 findings. Exact-commit CI, route shakedown, clean freezes, and the
+non-counting calibration are complete; formal macroblocks 1-6 are blocked
+pending a reviewed successor design.
 
 ## Ordered gates
 
-1. Publish the reviewed history cleanup and pass exact-commit Linux/Windows CI.
-2. Run one real container-level, non-counting shakedown through the exact route; test readiness and streaming without a study prompt or pooled observation.
-3. Tag/pin the runner Git revision, container digest, and environment profile.
-4. Create clean v3 freezes and perform only the approved non-counting calibration, then resume the predeclared schedule if its gates pass.
+1. Preserve the completed runner, route, freeze, and calibration evidence.
+2. Stop: the next action changes scientific treatment and requires an explicitly reviewed successor design/new scientific specification.
+3. No paid/model activity under v3; do not create v14.
 
 ## Identity and retry policy
 

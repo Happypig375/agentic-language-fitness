@@ -1,0 +1,845 @@
+{
+  "attempts": [
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 639488,
+        "input_tokens": 719615,
+        "output_tokens": 13233,
+        "reasoning_output_tokens": 1308,
+        "tool_calls": 38
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "d3fb56ec00c776053c2f58a10ac3ae0547f566cb1938d7ebf266641ff6aeb826"
+      },
+      "attempt_id": "cal-h-primary-csharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "H",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 177,
+        "changed_files": 8,
+        "deleted_lines": 169,
+        "diff_bytes": 22433
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T18:44:11.318005+00:00",
+      "language": "csharp",
+      "model": "gpt-5.6-terra",
+      "navigation_metrics": {
+        "command_count": 30,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "fsharp-first",
+      "position": 2,
+      "raw_inventory": {
+        "bytes": 1187278,
+        "file_count": 151,
+        "tree_sha256": "1419fca4bd32896a81e7d5c503139f125ad0a0bf72ab4e3e58613d284e7b8501"
+      },
+      "reasoning_effort": "medium",
+      "result_sha256": "ab65ec3cdc343d7485922df1e4957dd27be1edd5c17dd61deea36d98e505600e",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "9af6113a73e3b224195da3a0d82c0c28a3b5d3997259e8e8ed8ef68ccb1706bb"
+      },
+      "started_at": "2026-09-02T18:35:17.870855+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 502.3601946607232,
+        "evaluator_wall_seconds": 30.42654833663255,
+        "run_total_wall_seconds": 533.4471369199455,
+        "task_total_wall_seconds": 528.6420418759808
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 815872,
+        "input_tokens": 940493,
+        "output_tokens": 18185,
+        "reasoning_output_tokens": 3658,
+        "tool_calls": 49
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "c18724a33309340f82ea6291ff3af107bfb25d34f1f471d1c5d3413b9b057a98"
+      },
+      "attempt_id": "cal-h-primary-fsharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "H",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 213,
+        "changed_files": 9,
+        "deleted_lines": 196,
+        "diff_bytes": 24735
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T18:33:46.487531+00:00",
+      "language": "fsharp",
+      "model": "gpt-5.6-terra",
+      "navigation_metrics": {
+        "command_count": 38,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "fsharp-first",
+      "position": 1,
+      "raw_inventory": {
+        "bytes": 7094059,
+        "file_count": 182,
+        "tree_sha256": "52014bdbd7d467b58889f234f84567d12091e6db105b41e30f34215bada989d2"
+      },
+      "reasoning_effort": "medium",
+      "result_sha256": "ddb2b47829ae235b778a9ef175a8b36be4c38c6d7efcdd3772e999f6ac2664ba",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "e6433496ee8d833c9f8c0e149286ba0eebc93cb94a7c77bd7ca414dfaae0c4b3"
+      },
+      "started_at": "2026-09-02T18:22:15.187954+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 633.5683691939339,
+        "evaluator_wall_seconds": 56.93101852014661,
+        "run_total_wall_seconds": 691.2995796622708,
+        "task_total_wall_seconds": 684.5425760932267
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 798464,
+        "input_tokens": 894451,
+        "output_tokens": 20999,
+        "reasoning_output_tokens": 6269,
+        "tool_calls": 53
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "7a60e4114435144a6d8a492b968db17768cd1855af07895599beaaa8585e38ff"
+      },
+      "attempt_id": "cal-m-primary-csharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "M",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 184,
+        "changed_files": 8,
+        "deleted_lines": 171,
+        "diff_bytes": 23203
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T18:56:31.389698+00:00",
+      "language": "csharp",
+      "model": "gpt-5.6-luna",
+      "navigation_metrics": {
+        "command_count": 42,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "csharp-first",
+      "position": 1,
+      "raw_inventory": {
+        "bytes": 1213084,
+        "file_count": 151,
+        "tree_sha256": "3ecde686083245fc807c99f58072b68cfc1dd8a551ebb82c0648c36d2521c4f8"
+      },
+      "reasoning_effort": "high",
+      "result_sha256": "6b57a5308fc2616f6f0bc8a36177b38ad3e30aa9801fcf8023fd467e7e31abbc",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "ee8ea022e26d84882fbefe776f2bc44fa03db971e76c25aa0b05c8503d9348c9"
+      },
+      "started_at": "2026-09-02T18:46:25.219101+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 576.7871796237305,
+        "evaluator_wall_seconds": 28.68581494037062,
+        "run_total_wall_seconds": 606.170601467602,
+        "task_total_wall_seconds": 603.2175354324281
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 1072896,
+        "input_tokens": 1205991,
+        "output_tokens": 29160,
+        "reasoning_output_tokens": 10999,
+        "tool_calls": 70
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "bc6b9e04fcc947876821901dbdd73dd0f28e208b288f067590b9eaa02e125b24"
+      },
+      "attempt_id": "cal-m-primary-fsharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "M",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 194,
+        "changed_files": 9,
+        "deleted_lines": 187,
+        "diff_bytes": 22655
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T19:12:04.047896+00:00",
+      "language": "fsharp",
+      "model": "gpt-5.6-luna",
+      "navigation_metrics": {
+        "command_count": 58,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "csharp-first",
+      "position": 2,
+      "raw_inventory": {
+        "bytes": 7202873,
+        "file_count": 182,
+        "tree_sha256": "2ab3e8d6ffd9adacd8f0870681a5111a56aadcfc6b88efa7b1f2b69d3613791b"
+      },
+      "reasoning_effort": "high",
+      "result_sha256": "349d6083aa875c59b73c5156b6e456224ed5d184213465a9705cd03e1614bd29",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "80b73f4d25b89adfd8cff2899db7a372acac8602874544f8b8aec903ca2d60c7"
+      },
+      "started_at": "2026-09-02T18:57:26.832430+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 816.8754157405347,
+        "evaluator_wall_seconds": 59.51640736032277,
+        "run_total_wall_seconds": 877.2154685342684,
+        "task_total_wall_seconds": 868.3040980724618
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 725760,
+        "input_tokens": 847098,
+        "output_tokens": 20697,
+        "reasoning_output_tokens": 5650,
+        "tool_calls": 57
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "11c2a634793c92a8bda29bcb3355244cad34a50501cc18a7f024413fda3ea4f4"
+      },
+      "attempt_id": "cal-m-reverse-csharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "M",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 167,
+        "changed_files": 8,
+        "deleted_lines": 168,
+        "diff_bytes": 21244
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T19:38:57.311981+00:00",
+      "language": "csharp",
+      "model": "gpt-5.6-luna",
+      "navigation_metrics": {
+        "command_count": 47,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "fsharp-first",
+      "position": 2,
+      "raw_inventory": {
+        "bytes": 1249691,
+        "file_count": 151,
+        "tree_sha256": "da93553d175e93ca591f7f972673e7acccfe642b67d82af51db34d2a336a6572"
+      },
+      "reasoning_effort": "high",
+      "result_sha256": "6f8fb84bdb9e04743809b74a18f6fe164d59034ff5a7644d58509bd109f99f1d",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "82c5ed03f70dd70aa2f753ab0cc955bdd70b2f21d34557c31f15b524ce51024e"
+      },
+      "started_at": "2026-09-02T19:28:52.192859+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 573.4967645490542,
+        "evaluator_wall_seconds": 30.89728449564427,
+        "run_total_wall_seconds": 605.1191218262538,
+        "task_total_wall_seconds": 599.7121927486733
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 995072,
+        "input_tokens": 1151370,
+        "output_tokens": 29059,
+        "reasoning_output_tokens": 10754,
+        "tool_calls": 66
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "ae17214eb6644c247114def1e98d7d25abc82115792fe86bb85c909f44381166"
+      },
+      "attempt_id": "cal-m-reverse-fsharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "M",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 234,
+        "changed_files": 9,
+        "deleted_lines": 214,
+        "diff_bytes": 24648
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T19:27:53.852354+00:00",
+      "language": "fsharp",
+      "model": "gpt-5.6-luna",
+      "navigation_metrics": {
+        "command_count": 54,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "fsharp-first",
+      "position": 1,
+      "raw_inventory": {
+        "bytes": 7158747,
+        "file_count": 182,
+        "tree_sha256": "280be80ff1f175890192e867663250cbfadd9a6fefdfa99da7bc48e081bb8a6c"
+      },
+      "reasoning_effort": "high",
+      "result_sha256": "bef8c5275f6d409153009a5ff7497f6d8ee0c8457999f647ff33049a7df57a9c",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "ff7b8480cfb8cb90e212bc66aa18037d55519953c31bda4da5aa98f3f27fc11a"
+      },
+      "started_at": "2026-09-02T19:13:29.438115+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 806.5604360606521,
+        "evaluator_wall_seconds": 57.05851721484214,
+        "run_total_wall_seconds": 864.4142394931987,
+        "task_total_wall_seconds": 858.239072076045
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 673024,
+        "input_tokens": 786572,
+        "output_tokens": 15749,
+        "reasoning_output_tokens": 2904,
+        "tool_calls": 48
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "7e063eb9c48bb9bebeb6a9edfb8e6815a1fad2d7001fc547f8223486474bde2d"
+      },
+      "attempt_id": "cal-l-primary-csharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "L",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 136,
+        "changed_files": 8,
+        "deleted_lines": 146,
+        "diff_bytes": 20544
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T20:01:29.276826+00:00",
+      "language": "csharp",
+      "model": "gpt-5.6-luna",
+      "navigation_metrics": {
+        "command_count": 36,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "fsharp-first",
+      "position": 2,
+      "raw_inventory": {
+        "bytes": 1223492,
+        "file_count": 151,
+        "tree_sha256": "4d719ee6e3a8f607de8f0a56fd3ec8ce9e216a1b1040513c9a0d7ebcb2575cf9"
+      },
+      "reasoning_effort": "medium",
+      "result_sha256": "80b485cc7104e12882e72df5492dd98c40313f5518c1cb9bc684b84a27382287",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "1fc7463043ba43ede1c2a5e699a829083eb6371741325d2907e55f332facf826"
+      },
+      "started_at": "2026-09-02T19:53:01.660270+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 476.00327955465764,
+        "evaluator_wall_seconds": 30.897094884887338,
+        "run_total_wall_seconds": 507.61656229384243,
+        "task_total_wall_seconds": 502.32038650102913
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 986368,
+        "input_tokens": 1115697,
+        "output_tokens": 20950,
+        "reasoning_output_tokens": 4749,
+        "tool_calls": 64
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "adae318898801d057e8590a0861ae1e328d440053383e3451fd644d9d9a3bc72"
+      },
+      "attempt_id": "cal-l-primary-fsharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "L",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 212,
+        "changed_files": 9,
+        "deleted_lines": 208,
+        "diff_bytes": 25763
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T19:52:04.048217+00:00",
+      "language": "fsharp",
+      "model": "gpt-5.6-luna",
+      "navigation_metrics": {
+        "command_count": 47,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "fsharp-first",
+      "position": 1,
+      "raw_inventory": {
+        "bytes": 7169023,
+        "file_count": 182,
+        "tree_sha256": "bb0de266393ec8b25043d03f3fbfe3b04e328921a1136611bc492f4b6711cafb"
+      },
+      "reasoning_effort": "medium",
+      "result_sha256": "f5fe891236bd0bbf59d75b8bb38137496669470e401b954f67cb31b39c819cc6",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "06a7f72b7894048d86dfe985ca2eb65abad85637a1c9013c73ba4b5e689e592f"
+      },
+      "started_at": "2026-09-02T19:39:57.058082+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 671.542393900454,
+        "evaluator_wall_seconds": 54.6577157555148,
+        "run_total_wall_seconds": 726.9901268137619,
+        "task_total_wall_seconds": 720.9784952607006
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 657152,
+        "input_tokens": 755512,
+        "output_tokens": 16111,
+        "reasoning_output_tokens": 3103,
+        "tool_calls": 45
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "3c7fbaa7bfb021f3ea8aeb60a5dbd9d7e1bffcb8aeac70f80b97084e5964824d"
+      },
+      "attempt_id": "cal-l-reverse-csharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "L",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 187,
+        "changed_files": 8,
+        "deleted_lines": 169,
+        "diff_bytes": 22270
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T20:10:55.994298+00:00",
+      "language": "csharp",
+      "model": "gpt-5.6-luna",
+      "navigation_metrics": {
+        "command_count": 35,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "csharp-first",
+      "position": 1,
+      "raw_inventory": {
+        "bytes": 1211535,
+        "file_count": 151,
+        "tree_sha256": "b5f41650838f6f7da6ec9f98c0791993111a48f54d5e247171230c2f43d1cb33"
+      },
+      "reasoning_effort": "medium",
+      "result_sha256": "446e4014fcbde6b512f55ea27d94a03eb6cafeb8f5928f7e4257574636a4dccc",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "083df4ada09e8c63f332aa597eb8b3bb744dfaf45041f53fcb915e780521bd8a"
+      },
+      "started_at": "2026-09-02T20:02:26.490340+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 479.77006640378386,
+        "evaluator_wall_seconds": 29.03134883660823,
+        "run_total_wall_seconds": 509.50395339075476,
+        "task_total_wall_seconds": 506.04806711990386
+      }
+    },
+    {
+      "accounting_valid": true,
+      "aggregate_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 971776,
+        "input_tokens": 1099273,
+        "output_tokens": 21070,
+        "reasoning_output_tokens": 4325,
+        "tool_calls": 65
+      },
+      "artifact_hashes": {
+        "file_count": 19,
+        "set_sha256": "1adad4684bff0c936f35c60cadb1aec4473599f3f9ebff70b283473ee56f8d24"
+      },
+      "attempt_id": "cal-l-reverse-fsharp-01",
+      "audit": {
+        "errors": [],
+        "ok": true
+      },
+      "configuration_id": "L",
+      "counting": false,
+      "diff_metrics": {
+        "added_lines": 197,
+        "changed_files": 9,
+        "deleted_lines": 190,
+        "diff_bytes": 22465
+      },
+      "disposition": {
+        "analysis_role": "primary",
+        "candidate_outcome": true,
+        "classification_basis": "frozen deterministic runner rules",
+        "failure_category": null,
+        "include_paired_performance": true,
+        "include_success_time": true,
+        "include_usage_metrics": true,
+        "protocol_valid": true,
+        "retryable": false
+      },
+      "failure_counts": {
+        "agent_failures": 0,
+        "evaluator_failures": 0,
+        "failed_events": 0
+      },
+      "finished_at": "2026-09-02T20:24:08.505610+00:00",
+      "language": "fsharp",
+      "model": "gpt-5.6-luna",
+      "navigation_metrics": {
+        "command_count": 48,
+        "file_reads": 0,
+        "file_revisits": 0,
+        "unique_file_reads": 0
+      },
+      "order": "csharp-first",
+      "position": 2,
+      "raw_inventory": {
+        "bytes": 7164463,
+        "file_count": 182,
+        "tree_sha256": "12b7e409b97ef96490acbf14a613e2edc39452bc7d90847cc743d2b3ca53e55b"
+      },
+      "reasoning_effort": "medium",
+      "result_sha256": "6f97edc04d2d8fcab16ab892cc175d351c08d16819b4323225d7be5da0cfbcf8",
+      "source_tree": {
+        "file_count": 3,
+        "tree_sha256": "844de309854832ce52c7a0441023d3beadc572a70be8d36eed61375e85ad6f16"
+      },
+      "started_at": "2026-09-02T20:11:53.041550+00:00",
+      "state": "completed",
+      "success": true,
+      "successful_tasks": 8,
+      "task_count": 8,
+      "timing": {
+        "agent_process_wall_seconds": 677.5282131033018,
+        "evaluator_wall_seconds": 57.11125947441906,
+        "run_total_wall_seconds": 735.4640593798831,
+        "task_total_wall_seconds": 728.0421356633306
+      }
+    }
+  ],
+  "child_definition_hashes": {
+    "H": "f577bed8a1a6c46e2bceb39c9859a95de155dbf75f71d403a8fe670521779f03",
+    "L": "201c34def06a7b2a290947ac982afcf819b6ffd41d841a0efecbb92049122dbb",
+    "M": "2514ddac743e1b4e1890ced7a0f1c50f94469ebda17be93500db02f902f28b5c"
+  },
+  "decision": {
+    "H": "saturated reference",
+    "L": "primary too easy; reverse confirms too easy",
+    "M": "primary too easy; reverse confirms too easy",
+    "calibration": "complete",
+    "formal_macroblocks": "1-6 not authorized",
+    "formal_macroblocks_authorized": false,
+    "language_effect_claim": false,
+    "next_action": "stop; explicitly review a successor scientific design/new scientific specification before any further model run"
+  },
+  "environment_profile": {
+    "codex": "0.149.1",
+    "dotnet": "10.0.302",
+    "id": "remote-highmem-local-egress-r1",
+    "image_archive_bytes": 630053888,
+    "image_archive_sha256": "55ee85f0656cef429d1cd40edced79782d54abb7b2180c9770c14bea06828ddf",
+    "image_id": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+    "provenance_sha256": "sha256:b9da1fccb3de536fbd71a8e53f517583b1cf03f3eb336da7542ec7de8830c0e1"
+  },
+  "exact_ci": {
+    "platforms": [
+      "linux",
+      "windows"
+    ],
+    "run_id": "33665461443",
+    "runner_revision": "b180ed938b6286764e06ffee85a86381e8a14850",
+    "status": "success"
+  },
+  "family_id": "workstream-d-language-v3",
+  "hash_conventions": {
+    "artifact_set": "alf.variance._artifact_hashes",
+    "raw_inventory": "alf.variance._hash of sorted canonical rows with paths relative to configuration archive root",
+    "report": "alf.variance._hash(report without report_sha256)",
+    "result_sha256": "raw result.json bytes",
+    "source_tree": "alf.variance._source_tree"
+  },
+  "manifest_hashes": {
+    "H": "b76d9f0b89e6a19344c38fd4f5ce0e98a7c87edb70ab3bd8e8144024a5551dbf",
+    "L": "2d4f40659e8e7489ea10cfe939f6bd2d777e6320c9b59b0d937916d0f2b92910",
+    "M": "1de37f02b5d332715defd7a760268f7067c48a52eaf90fe83a8eb0c51ac3ea68"
+  },
+  "report_sha256": "dffa1df5d0b5864a4a696219169f5c8a5419fd633db74f6e095be76c004337cc",
+  "report_type": "workstream-d-v3-non-counting-calibration",
+  "route_shakedown": {
+    "id": "route-shakedown-20260903T014720-cdb9237c",
+    "raw_evidence_sha256": "04ee25a6364081970a81ce0f11f26c7810ea52f4808af177a9db36bf5b749adc",
+    "route_profile_sha256": "sha256:5bfd79ee77bd1d2b889491be59334729d3cd764c3c42fcb472051d1eccc3f039"
+  },
+  "runner_revision": "b180ed938b6286764e06ffee85a86381e8a14850",
+  "runner_tag": "runner-remote-highmem-local-egress-r1",
+  "schema_version": 1,
+  "scientific_hashes": {
+    "assignment": "3bc3eaab8cc61097f59b098dc7753a9d452374d45438a31b8f465d85a56c1bd1",
+    "benchmark_manifest": "5d174f5703184381984ae068c22571b280be9881d6d8ed9941be713b89925749",
+    "catalog": "d480d235be49be5f05364ae9d975d7e49d52f3856af44ec3f568ba47db86cd59",
+    "family_definition": "0d965f721acda2ac4aad01458561b4bdf18d09813832a35f544628dd0ba358ee",
+    "schedule": "73178e579cf77fd7b35731cc9fab952f73d3e10365fb2ac3196f161a8537179f"
+  },
+  "summary": {
+    "accounting_valid_runs": 10,
+    "protocol_valid_runs": 10,
+    "runs": 10,
+    "successful_runs": 10,
+    "successful_tasks": 80,
+    "tasks": 80
+  }
+}
