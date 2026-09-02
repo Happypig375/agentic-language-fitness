@@ -15,21 +15,21 @@
       "cell_id": "workstream-d-language-v3-h",
       "configuration_id": "H",
       "definition_file": "protocols/workstream-d-language-v3/h.json",
-      "definition_sha256": "2359f67bd2a2b19ad8cf29af798606142aec18ae4fcb8ec09fada1f560cb7a19",
+      "definition_sha256": "f577bed8a1a6c46e2bceb39c9859a95de155dbf75f71d403a8fe670521779f03",
       "model": {"requested_id": "gpt-5.6-terra", "reasoning_effort": "medium"}
     },
     "M": {
       "cell_id": "workstream-d-language-v3-m",
       "configuration_id": "M",
       "definition_file": "protocols/workstream-d-language-v3/m.json",
-      "definition_sha256": "5ce17d3fc9a1067651fc3438dcf3b6c462dc2be1b3e2724b119962cfa6a3bc7f",
+      "definition_sha256": "2514ddac743e1b4e1890ced7a0f1c50f94469ebda17be93500db02f902f28b5c",
       "model": {"requested_id": "gpt-5.6-luna", "reasoning_effort": "high"}
     },
     "L": {
       "cell_id": "workstream-d-language-v3-l",
       "configuration_id": "L",
       "definition_file": "protocols/workstream-d-language-v3/l.json",
-      "definition_sha256": "fe3e20316fa38355cc88c06489e411b375576358db11c81ed7a62f6c7afa2aec",
+      "definition_sha256": "201c34def06a7b2a290947ac982afcf819b6ffd41d841a0efecbb92049122dbb",
       "model": {"requested_id": "gpt-5.6-luna", "reasoning_effort": "medium"}
     }
   }

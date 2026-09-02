@@ -15,6 +15,7 @@ from .protocol import (
     DIFFICULTY_TASK_HASHES,
     FAILURE_PRECEDENCE,
     REQUIRED_FAILURES,
+    WORKSTREAM_D_V3_IMAGE_ID,
     _load_json,
     _repo_path,
     tracked_text_sha256,
@@ -145,7 +146,12 @@ _COMMON_CHILD_PINS = {
         "image": "alf-codex:0.149.1",
         "dockerfile": "Dockerfile.codex-agent",
     },
-    "image_archive": DIFFICULTY_IMAGE_ARCHIVE,
+    "image_archive": {
+        "path": ".artifacts/images/alf-codex-0.149.1-sha256-0320a60c5b2628ce.tar",
+        "bytes": DIFFICULTY_IMAGE_ARCHIVE["bytes"],
+        "sha256": DIFFICULTY_IMAGE_ARCHIVE["sha256"],
+        "local_image_id": WORKSTREAM_D_V3_IMAGE_ID,
+    },
     "c3_source_commit": DIFFICULTY_C3_SOURCE_COMMIT,
     "c3_artifacts": DIFFICULTY_C3_ARTIFACTS,
     "toolchain": {"dotnet_sdk": "10.0.302", "target_framework": "net10.0"},
@@ -171,7 +177,7 @@ _COMMON_CHILD_PINS = {
     "network_policy": (
         "bridge network; candidate egress and external documentation are allowed "
         "equally for both languages; mounts are limited to /workspace plus "
-        "minimized authentication file"
+        "complete ephemeral authentication cache"
     ),
     "documentation_policy": (
         "No benchmark/evaluator/gold files or parent repository are exposed to candidate"
@@ -248,7 +254,18 @@ _V2_PINS = {
     "M": {"requested_id": "gpt-5.4", "reasoning_effort": "low"},
     "L": {"requested_id": "gpt-5.4-mini", "reasoning_effort": "medium"},
 }
-_V2_COMMON_CHILD_PINS = {k: v for k, v in _COMMON_CHILD_PINS.items() if k != "host_memory"}
+# Preserve the frozen v1/v2 archive identity and candidate-visible wording;
+# only schema-v3 uses the Docker Config digest and portable archive path.
+_LEGACY_COMMON_CHILD_PINS = dict(_COMMON_CHILD_PINS)
+_LEGACY_COMMON_CHILD_PINS["image_archive"] = DIFFICULTY_IMAGE_ARCHIVE
+_LEGACY_COMMON_CHILD_PINS["network_policy"] = (
+    "bridge network; candidate egress and external documentation are allowed "
+    "equally for both languages; mounts are limited to /workspace plus "
+    "minimized authentication file"
+)
+_V2_COMMON_CHILD_PINS = {
+    k: v for k, v in _LEGACY_COMMON_CHILD_PINS.items() if k != "host_memory"
+}
 _V2_CHILD_FIELDS = _CHILD_FIELDS - {"host_memory"}
 
 

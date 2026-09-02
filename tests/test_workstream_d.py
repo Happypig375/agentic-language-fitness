@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 import shutil
 import tempfile
 import unittest
@@ -11,6 +12,7 @@ from alf.models import ProcessResult, Usage
 from alf.agents.command import CommandAgent
 from alf.protocol import (
     EXPECTED_IMAGE_ID,
+    WORKSTREAM_D_V3_IMAGE_ID,
     canonical_json_hash,
     freeze_cell,
     load_frozen_manifest,
@@ -118,6 +120,22 @@ class FamilyRepository:
 
 
 class VersionCompatibilityTests(unittest.TestCase):
+    def test_legacy_image_id_remains_v1_v2_only_and_v3_uses_config_digest(self) -> None:
+        for version in ("v1", "v2"):
+            report = validate_cell(
+                ROOT,
+                f"protocols/workstream-d-language-{version}/h.json",
+            )
+            self.assertTrue(report["ok"], report["errors"])
+            self.assertEqual(report["definition"]["image_archive"]["local_image_id"], EXPECTED_IMAGE_ID)
+
+        v3 = validate_cell(ROOT, CHILD_PATHS["H"])
+        self.assertTrue(v3["ok"], v3["errors"])
+        self.assertEqual(
+            v3["definition"]["image_archive"]["local_image_id"],
+            WORKSTREAM_D_V3_IMAGE_ID,
+        )
+
     def test_all_family_versions_and_children_remain_auditable(self) -> None:
         for version in ("v1", "v2", "v3"):
             report = validate_family(ROOT, f"protocols/workstream-d-language-{version}/definition.json")
@@ -200,7 +218,7 @@ def _valid_probe() -> dict:
         "dotnet": "10.0.302",
         "docker_client": "27.2.0",
         "docker_server": "27.2.0",
-        "image_id": EXPECTED_IMAGE_ID,
+        "image_id": WORKSTREAM_D_V3_IMAGE_ID,
         "image_platform": "linux/amd64",
         "image_size_bytes": 630_000_000,
         "container_codex": "codex-cli 0.149.1",
@@ -506,6 +524,34 @@ class WorkstreamDFreezeTests(unittest.TestCase):
                 self.assertEqual(manifest["configuration_id"], configuration)
                 self.assertEqual(manifest["definition"]["model"], definition["model"])
 
+    def test_relative_archive_path_resolves_against_repository_not_cwd(self) -> None:
+        definition = self.repo.read(CHILD_PATHS["H"])
+        observed: list[str] = []
+        outside = tempfile.TemporaryDirectory()
+        previous = Path.cwd()
+        try:
+            os.chdir(outside.name)
+            with patch("alf.protocol._git", side_effect=["", "a" * 40]):
+                freeze_cell(
+                    self.repo.root,
+                    CHILD_PATHS["H"],
+                    _probe=lambda *_: _valid_probe(),
+                    _archive_verifier=lambda archive: (
+                        observed.append(archive["path"]) or _valid_archive(definition)
+                    ),
+                )
+        finally:
+            os.chdir(previous)
+            outside.cleanup()
+        self.assertEqual(
+            observed,
+            [str((self.repo.root / definition["image_archive"]["path"]).resolve())],
+        )
+        self.assertEqual(
+            definition["image_archive"]["path"],
+            ".artifacts/images/alf-codex-0.149.1-sha256-0320a60c5b2628ce.tar",
+        )
+
     def test_rehashed_v3_field_and_embedded_object_tampering_fails_load(self) -> None:
         original = self._freeze()
         mutations = {
@@ -561,7 +607,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
             "definition_sha256": self.report["definition_sha256"],
             "schedule_sha256": self.report["schedule_sha256"],
             "image": self.definition["codex"]["image"],
-            "image_id": EXPECTED_IMAGE_ID,
+            "image_id": WORKSTREAM_D_V3_IMAGE_ID,
             "definition": self.definition,
             "schedule": self.report["schedule"],
             "family_id": self.definition["family_id"],
@@ -576,7 +622,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
         self.repo.close()
 
     @staticmethod
-    def _image_result(image_id: str = EXPECTED_IMAGE_ID) -> ProcessResult:
+    def _image_result(image_id: str = WORKSTREAM_D_V3_IMAGE_ID) -> ProcessResult:
         return ProcessResult(["docker"], 0, image_id + "\n", "", 0.01)
 
     def _prepare(self, **overrides):
@@ -850,7 +896,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
         sidecar = {
             **{name: 0 for name in Usage.__dataclass_fields__},
             "model": "gpt-5.6-terra", "reasoning_effort": "medium",
-            "image": self.definition["codex"]["image"], "image_id": EXPECTED_IMAGE_ID,
+            "image": self.definition["codex"]["image"], "image_id": WORKSTREAM_D_V3_IMAGE_ID,
             "timed_out": True, "auth_ok": True,
             "container_limits": {
                 "memory": self.definition["limits"]["memory"],

@@ -27,6 +27,11 @@ EXPECTED_IMAGE = "alf-codex:0.149.1"
 EXPECTED_IMAGE_ID = (
     "sha256:0320a60c5b2628cebeb2c897bbf80da949f3b9bb99fa61f5a3475c7276328756"
 )
+# Schema-v3 Workstream D records the image Config digest reported by Docker;
+# the retained OCI archive itself remains identified by its index digest.
+WORKSTREAM_D_V3_IMAGE_ID = (
+    "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116"
+)
 SCHEDULE_SEED = 20260829
 SCHEDULE_GENERATOR = (
     "Python 3.12: r=random.Random(20260829); "
@@ -977,6 +982,16 @@ def verify_image_archive(archive: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _archive_for_root(root: Path, archive: dict[str, Any]) -> dict[str, Any]:
+    """Resolve repository-relative archive metadata without mutating a definition."""
+
+    resolved = dict(archive)
+    archive_path = Path(archive["path"])
+    if not archive_path.is_absolute():
+        resolved["path"] = str((root / archive_path).resolve())
+    return resolved
+
+
 def freeze_cell(
     root: Path,
     definition_path: str | Path,
@@ -1002,7 +1017,7 @@ def freeze_cell(
         raise ValueError("environment probe must return an object")
     _validate_probe(facts, definition)
     archive_verification = (_archive_verifier or verify_image_archive)(
-        definition["image_archive"]
+        _archive_for_root(root, definition["image_archive"])
     )
     if (
         not isinstance(archive_verification, dict)

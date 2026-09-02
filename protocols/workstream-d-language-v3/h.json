@@ -27,10 +27,10 @@
   },
   "codex": {"cli_version": "0.149.1", "image": "alf-codex:0.149.1", "dockerfile": "Dockerfile.codex-agent"},
   "image_archive": {
-    "path": "X:\\backup20260827\\Archives\\SourceRepos\\agentic-language-fitness-images\\alf-codex-0.149.1-sha256-0320a60c5b2628ce.tar",
+    "path": ".artifacts/images/alf-codex-0.149.1-sha256-0320a60c5b2628ce.tar",
     "bytes": 630053888,
     "sha256": "55ee85f0656cef429d1cd40edced79782d54abb7b2180c9770c14bea06828ddf",
-    "local_image_id": "sha256:0320a60c5b2628cebeb2c897bbf80da949f3b9bb99fa61f5a3475c7276328756"
+    "local_image_id": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116"
   },
   "c3_source_commit": "4e58677e0bfff18c2104298ad35fc4e801bbd052",
   "c3_artifacts": {
@@ -44,7 +44,7 @@
   "toolchain": {"dotnet_sdk": "10.0.302", "target_framework": "net10.0"},
   "limits": {"task_timeout_seconds": 600, "evaluator_timeout_seconds": 300, "memory": "2g", "cpus": 2, "pids": 256},
   "host_memory": {"probe_scope": "immediately-before-each-candidate-task", "minimum_available_physical_bytes": 2147483648, "minimum_available_commit_bytes": 6442450944, "failure_disposition": "explicit failed probe is host infrastructure-invalid and retryable; never infer OOM from missing artifacts", "concurrency_policy": "no concurrent benchmark, maintainer subagent, or unrelated model run"},
-  "network_policy": "bridge network; candidate egress and external documentation are allowed equally for both languages; mounts are limited to /workspace plus minimized authentication file",
+  "network_policy": "bridge network; candidate egress and external documentation are allowed equally for both languages; mounts are limited to /workspace plus complete ephemeral authentication cache",
   "documentation_policy": "No benchmark/evaluator/gold files or parent repository are exposed to candidate",
   "artifact_policy": {"raw": "retain every attempt outside Git", "redaction": "remove credentials and prompt/transcript secrets", "retention": "retain raw and hashes for the study record"},
   "failure_taxonomy": ["agent", "provider", "auth", "host", "evaluator", "timeout", "protocol", "accounting"],
