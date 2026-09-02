@@ -19,6 +19,18 @@ Pre-candidate infrastructure failures are retained as attempts and may be fixed 
 
 See `docs/apparatus-versioning-postmortem-2026-09-02.md` for retired apparatus history and `docs/remote-execution.md` for transport design.
 
+## Autonomous stopping rules
+
+These rules specifically prevent a broad `/goal` or day-long agent task from turning one apparatus problem into another version cascade.
+
+- Every autonomous task must name one bounded artifact/gate, its acceptance criterion, and the conditions under which the agent must stop and report instead of continuing.
+- Do not interpret "make progress today", "finish this", or a similar open-ended goal as permission to redesign scientific protocol, runner architecture, transport, authentication, or environment indefinitely.
+- A pre-candidate infrastructure/transport/authentication failure is an apparatus failure. It does **not** create a new scientific version.
+- After **two failed attempts of the same failure class**, stop and return: the observed evidence/logs, the likely cause, what was already tried, and the smallest next options. Do not add another compatibility layer, alternate route, protocol version, or recovery subsystem on your own.
+- Stop immediately if the next step would change candidate-visible semantics, the scientific specification, the model/prompt/task/evaluator, or another frozen experimental condition.
+- Prefer simplifying or replacing a broken apparatus path over preserving multiple historical runtime routes. Git history is the audit trail.
+- Do not retry an ambiguous potentially billable candidate/model request automatically.
+
 ## Invariants
 
 - Keep F# and C# task text, ordered changes, evaluation, limits, and agent protocol matched.
