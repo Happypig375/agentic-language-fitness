@@ -133,12 +133,13 @@ This is the next bounded task. It uses no model endpoint.
 ### Required conditions
 
 1. Reconstruct a redacted frequency table of actual build/restore/run/test command-equivalence classes by language, task, and configuration.
-2. Replay only command forms that materially occurred in E1.
-3. Match the v3 package cache, configuration, environment variables, network/source reachability, and audit behavior as closely as can be demonstrated.
-4. For restore-capable command forms, add one explicit `NuGetAudit=false` counterfactual while holding all other conditions fixed.
-5. Preserve the existing offline E2 result as a separate ecology; do not overwrite or pool it.
-6. Report paired ratios and absolute deltas, diagnostic/output volume, and uncertainty.
-7. Compute a mechanical exposure envelope:
+2. Collapse only variants with demonstrably equivalent command semantics. Replay every semantically distinct compiler/test form and every class with material exposure, without reproducing incidental shell plumbing merely because its spelling differs.
+3. Replay only command forms that materially occurred in E1.
+4. Match the v3 package cache, configuration, environment variables, network/source reachability, and audit behavior as closely as can be demonstrated.
+5. For restore-capable command forms, add one explicit `NuGetAudit=false` counterfactual while holding all other conditions fixed.
+6. Preserve the existing offline E2 result as a separate ecology; do not overwrite or pool it.
+7. Report paired ratios and absolute deltas, diagnostic/output volume, and uncertainty.
+8. Compute a mechanical exposure envelope:
 
 ```text
 estimated direct tool time(language)
@@ -172,7 +173,7 @@ Selection is hypothesis-routing, not a language-effect estimate. Document the ta
 
 ### Configuration
 
-Use one exact model/scaffold setting. Prefer the lowest-cost configuration that still exhibited the repair signal, subject to current availability and reviewed preflight. Do not vary model, effort, and harness simultaneously.
+Use one exact model/scaffold setting selected for **nondegenerate first-patch outcomes on the chosen tasks**, not simply the lowest monetary cost or largest exploratory language difference. E1 makes M (`gpt-5.6-luna`, high) the provisional default because its observable F# first-post-edit builds were mixed at 10 successes, 3 failures, and 3 unavailable; L was near a floor at 0 successes, 13 failures, and 3 unavailable; H had 6 of 8 boundaries unavailable. Confirm the choice from task-level evidence and current preflight, document it before E3 outcomes exist, and freeze it. Do not vary model, effort, and harness simultaneously.
 
 ### Modes
 
