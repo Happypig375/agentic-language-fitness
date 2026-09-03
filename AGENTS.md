@@ -14,7 +14,7 @@ E1’s archive-only report reconciled 10 v3 runs and 80 tasks. The leading obser
 - evaluator time was approximately twice as large for F#;
 - observable pre-edit inspection/search differences were comparatively modest and cannot identify training familiarity.
 
-E2’s model-free offline baseline found near-parity source/token proxies and built-program run time, but F# restore/build was slower. The repeat-build ratio was about 3.1× and is the cleaner direct toolchain signal. The 8.403× restore ratio is audit/source sensitive: the offline run emitted 225 repeated F# `NU1900` lines. Do not transport that restore ratio to v3 without matching command, package-cache, network/source, and NuGet-audit conditions.
+E2’s model-free offline baseline found near-parity source/token proxies and built-program run time, but F# restore/build was slower. The repeat-build ratio was about 3.1× and is the cleaner direct toolchain signal. The 8.403× restore ratio is audit/source sensitive: the offline run emitted 225 repeated F# `NU1900` lines. Do not transport E2 timing to v3 without matching command semantics, package-cache and audit behavior, source/network access, host hardware, storage/filesystem, container, and resource limits.
 
 The joint evidence supports a coupled working hypothesis:
 
@@ -40,13 +40,13 @@ V4–V13 are apparatus-development history. Do not create v14. Reuse `runner-rem
 
 ## Next bounded task
 
-Implement and independently review **E2a: exact-command and environment-aligned model-free baseline**.
+Implement and independently review **E2a: exact-command, host, and environment-aligned model-free baseline**.
 
 E2a must use no candidate agent or model endpoint. It should:
 
 1. reconstruct a redacted frequency table of the command-equivalence classes actually observed in E1;
-2. benchmark only materially observed build/restore/run/test forms on matched repository states;
-3. match v3 build configuration, package cache, environment, audit behavior, and source/network reachability as closely as can be demonstrated;
+2. collapse only semantically equivalent variants and benchmark every materially observed distinct build/restore/run/test form;
+3. execute on the v3 remote host/profile when safely reproducible, matching image, CPU/memory/PID limits, storage/filesystem, build configuration, package cache, environment, audit behavior, and source/network reachability; explicitly bound any mismatch;
 4. add an otherwise matched `NuGetAudit=false` restore control;
 5. preserve the accepted offline E2 result as a separate ecology;
 6. report absolute seconds/output volume beside ratios;
@@ -61,7 +61,7 @@ Stop after E2a publication. Do not continue automatically into E3 and do not iss
 Design and independently review E3 under a new scientific specification:
 
 - matched gold predecessor snapshots;
-- one exact model/scaffold configuration;
+- one exact model/scaffold configuration selected for nondegenerate first-patch outcomes; M (`gpt-5.6-luna`, high) is the provisional default, while L is near a first-build floor and H has too much missingness;
 - one simple task, one type/validation task, and one multi-file/project/API task;
 - controller-defined first patch and external first build;
 - comprehension/localization auxiliary arm;
@@ -85,7 +85,7 @@ Use the same model for orchestrator and worker first. Do not build a generic mul
 - Aggregate input is total trajectory usage, not unique source memory.
 - A generation error can create much larger later input through diagnostics and replay.
 - Diagnostic occurrence counts are not independent defect counts.
-- E2 restore is offline and audit-sensitive; repeat build is the cleaner toolchain result.
+- E2 restore is offline, audit-sensitive, and host-sensitive; repeat build is the cleaner toolchain result within that apparatus.
 - Current repositories are too small to test context-window fit or semantic-density crossover.
 - Fresh-per-task v3 cannot test cross-task context pollution.
 - No result establishes a universal F#, C#, model, or harness ranking.
