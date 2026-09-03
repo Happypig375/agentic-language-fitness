@@ -51,7 +51,7 @@ E2 found source/token proxies near parity and built-program run ratios near 1.0.
 
 The repeat-build result is the cleanest direct compiler/toolchain signal because it excludes restore. Its mean absolute F#–C# gap was about 1.4 seconds per build. This can amplify repair-heavy trajectories but does not by itself explain hundreds of seconds of paired agent-process difference or any model-token difference.
 
-E2 fresh restore is environment-specific. The network-disabled condition emitted 225 F# `NU1900` lines, indicating unavailable package-vulnerability data. The immutable E2 result remains valid for that ecology, but the 8.403 ratio must not be transported to v3 candidate behavior without matching command, package-cache, audit, and source/network conditions.
+E2 fresh restore is environment-specific. The network-disabled condition emitted 225 F# `NU1900` lines, indicating unavailable package-vulnerability data. The immutable E2 result remains valid for that ecology, but the 8.403 ratio must not be transported to v3 candidate behavior without matching command, package-cache, audit, source/network, host, resource-limit, and filesystem conditions.
 
 ### Current bounded interpretation
 
@@ -75,12 +75,13 @@ The v3 repository was only about two thousand proxy source tokens. It measures a
 
 Insert a mandatory model-free **E2a command/environment alignment** before E3.
 
-The earlier plan moved directly from E2 to an E3 model pilot. Review found that this would carry two unresolved interpretation problems forward:
+The earlier plan moved directly from E2 to an E3 model pilot. Review found that this would carry three unresolved interpretation problems forward:
 
 1. E2 restore was measured offline with F#-only `NU1900` output and may not match v3 audit/source reachability;
-2. E2 used fixed command forms that may not match the build/restore/run commands actually used by v3 candidates.
+2. E2 used fixed command forms that may not match the build/restore/run commands actually used by v3 candidates;
+3. E2 ran on a GitHub-hosted Ubuntu worker rather than the v3 remote high-memory host/profile, so absolute timing attribution also depends on CPU, storage/filesystem, container, and resource-limit alignment.
 
-E2a corrects those issues without a model call. Only after E2a is reviewed and green may E3 be specified, frozen, and separately authorized.
+E2a corrects or explicitly bounds those issues without a model call. Only after E2a is reviewed and green may E3 be specified, frozen, and separately authorized.
 
 ## Immediate continuation order
 
@@ -95,7 +96,7 @@ Required work:
 1. Enumerate actual build, restore, run, test, project, and compound-command forms without publishing sensitive raw command text.
 2. Collapse only variants with demonstrably equivalent command semantics. Benchmark every semantically distinct compiler/test form and every class with material exposure; do not reproduce incidental shell plumbing merely because its exact spelling differed.
 3. Benchmark only materially observed forms against matched baseline/gold states.
-4. Match the v3 toolchain, package cache, environment variables, build configuration, audit behavior, and source/network reachability as closely as can be demonstrated.
+4. Execute on the v3 remote host/profile when it can be reproduced safely, matching the container image, CPU/memory/PID limits, storage/filesystem path, package cache, environment variables, build configuration, audit behavior, and source/network reachability. If any component cannot be matched, predeclare it and limit transportability rather than treating GitHub-hosted timings as interchangeable.
 5. For restore-capable forms, include an otherwise matched `NuGetAudit=false` control to bound vulnerability-audit delay.
 6. Keep the accepted offline E2 result separate; do not overwrite or pool it.
 7. Report paired absolute seconds and output/diagnostic volume beside every ratio.
@@ -114,7 +115,7 @@ E2a exit criteria:
 
 - exact command classes and frequencies reconcile to E1;
 - candidate-aligned and audit-off conditions are explicit and reproducible;
-- audit/network mismatch is either resolved or declared irreducible;
+- host/resource/filesystem and audit/network mismatches are resolved or explicitly bounded;
 - direct tool-latency exposure is compared in absolute seconds with the observed agent-time gap;
 - a report states which portion remains explainable only by model interaction/repair behavior;
 - independent review and exact-commit Linux/Windows CI pass.
@@ -258,8 +259,8 @@ The primary target is language × scale. A crossover is supported only if observ
 - E1/E2 are descriptive mechanism-routing evidence, not causal language inference.
 - Aggregate input tokens are trajectory usage, not unique source exposure.
 - The current small repository does not test context-window fit.
-- E2 restore is an offline, audit-sensitive ecological result until E2a establishes transportability.
-- E2 repeat-build latency is a real direct toolchain signal but does not by itself explain model-token usage.
+- E2 restore is an offline, audit- and host-sensitive ecological result until E2a establishes transportability.
+- E2 repeat-build latency is a real direct toolchain signal in its apparatus but does not by itself explain model-token usage.
 - Compiler warning occurrences are not independent defects.
 - Current fresh-per-task runs cannot establish cross-task context pollution.
 - No current result establishes an intrinsic or universal F#, C#, model, or harness ranking.
@@ -286,7 +287,7 @@ The primary target is language × scale. A crossover is supported only if observ
 
 ```text
 E1/E2 evidence — complete
-  -> E2a command/environment-aligned model-free correction
+  -> E2a command/host/environment-aligned model-free correction
   -> E3 reviewed first-pass/full-repair mechanism pilot
   -> E4 mechanism decision
   -> F1 fresh repair containment; F2 persistent context only if justified
