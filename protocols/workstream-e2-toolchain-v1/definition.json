@@ -1,0 +1,3879 @@
+{
+  "commands": {
+    "expanded_by_language": {
+      "csharp": {
+        "build": [
+          "dotnet",
+          "build",
+          "OrderFlow.csproj",
+          "--configuration",
+          "Release",
+          "--no-incremental",
+          "--no-restore",
+          "--nologo"
+        ],
+        "restore": [
+          "dotnet",
+          "restore",
+          "OrderFlow.csproj",
+          "--nologo"
+        ],
+        "run": [
+          "dotnet",
+          "run",
+          "--project",
+          "OrderFlow.csproj",
+          "--configuration",
+          "Release",
+          "--no-build"
+        ]
+      },
+      "fsharp": {
+        "build": [
+          "dotnet",
+          "build",
+          "OrderFlow.fsproj",
+          "--configuration",
+          "Release",
+          "--no-incremental",
+          "--no-restore",
+          "--nologo"
+        ],
+        "restore": [
+          "dotnet",
+          "restore",
+          "OrderFlow.fsproj",
+          "--nologo"
+        ],
+        "run": [
+          "dotnet",
+          "run",
+          "--project",
+          "OrderFlow.fsproj",
+          "--configuration",
+          "Release",
+          "--no-build"
+        ]
+      }
+    },
+    "templates": {
+      "build": [
+        "dotnet",
+        "build",
+        "<project>",
+        "--configuration",
+        "Release",
+        "--no-incremental",
+        "--no-restore",
+        "--nologo"
+      ],
+      "restore": [
+        "dotnet",
+        "restore",
+        "<project>",
+        "--nologo"
+      ],
+      "run": [
+        "dotnet",
+        "run",
+        "--project",
+        "<project>",
+        "--configuration",
+        "Release",
+        "--no-build"
+      ]
+    },
+    "timeout_seconds": 300
+  },
+  "definition_sha256": "09d5669fd554e611b4df505454a40f06a0e9b2a23c4a16a28c9cc94d640067f7",
+  "execution_contract": {
+    "environment_profile": "github-actions-ubuntu-24.04-dotnet10.0.302-offline-v1",
+    "fresh_regime": [
+      "restore",
+      "build",
+      "run",
+      "evaluator"
+    ],
+    "network": "container-only-loopback-no-usable-default-route",
+    "os_page_cache": "not-cleared-or-controlled",
+    "package_cache": "preexisting-and-byte-identical",
+    "preflight": "materialize-hash-static-obligations-and-workspace-checks-only",
+    "preflight_states": 18,
+    "raw_output": "external-to-git",
+    "repeat_regime": [
+      "build",
+      "run",
+      "evaluator"
+    ],
+    "rounds": 5,
+    "schedule_entries": 90,
+    "states": 18
+  },
+  "manifest": {
+    "normalized_sha256": "dd440baf352a3b33adc625d478df44424efb1069e1a479d2fbe8f086044a6f0d",
+    "path": "benchmarks/successor/manifest.json"
+  },
+  "schedule": [
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 1,
+      "position": 1,
+      "round": 1,
+      "stage": 2
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 1,
+      "position": 2,
+      "round": 1,
+      "stage": 2
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 2,
+      "position": 3,
+      "round": 1,
+      "stage": 0
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 2,
+      "position": 4,
+      "round": 1,
+      "stage": 0
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 3,
+      "position": 5,
+      "round": 1,
+      "stage": 5
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 3,
+      "position": 6,
+      "round": 1,
+      "stage": 5
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 4,
+      "position": 7,
+      "round": 1,
+      "stage": 1
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 4,
+      "position": 8,
+      "round": 1,
+      "stage": 1
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 5,
+      "position": 9,
+      "round": 1,
+      "stage": 8
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 5,
+      "position": 10,
+      "round": 1,
+      "stage": 8
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 6,
+      "position": 11,
+      "round": 1,
+      "stage": 4
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 6,
+      "position": 12,
+      "round": 1,
+      "stage": 4
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 7,
+      "position": 13,
+      "round": 1,
+      "stage": 7
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 7,
+      "position": 14,
+      "round": 1,
+      "stage": 7
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 8,
+      "position": 15,
+      "round": 1,
+      "stage": 3
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 8,
+      "position": 16,
+      "round": 1,
+      "stage": 3
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 9,
+      "position": 17,
+      "round": 1,
+      "stage": 6
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 9,
+      "position": 18,
+      "round": 1,
+      "stage": 6
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 1,
+      "position": 19,
+      "round": 2,
+      "stage": 8
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 1,
+      "position": 20,
+      "round": 2,
+      "stage": 8
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 2,
+      "position": 21,
+      "round": 2,
+      "stage": 2
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 2,
+      "position": 22,
+      "round": 2,
+      "stage": 2
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 3,
+      "position": 23,
+      "round": 2,
+      "stage": 4
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 3,
+      "position": 24,
+      "round": 2,
+      "stage": 4
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 4,
+      "position": 25,
+      "round": 2,
+      "stage": 5
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 4,
+      "position": 26,
+      "round": 2,
+      "stage": 5
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 5,
+      "position": 27,
+      "round": 2,
+      "stage": 6
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 5,
+      "position": 28,
+      "round": 2,
+      "stage": 6
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 6,
+      "position": 29,
+      "round": 2,
+      "stage": 1
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 6,
+      "position": 30,
+      "round": 2,
+      "stage": 1
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 7,
+      "position": 31,
+      "round": 2,
+      "stage": 0
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 7,
+      "position": 32,
+      "round": 2,
+      "stage": 0
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 8,
+      "position": 33,
+      "round": 2,
+      "stage": 3
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 8,
+      "position": 34,
+      "round": 2,
+      "stage": 3
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 9,
+      "position": 35,
+      "round": 2,
+      "stage": 7
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 9,
+      "position": 36,
+      "round": 2,
+      "stage": 7
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 1,
+      "position": 37,
+      "round": 3,
+      "stage": 3
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 1,
+      "position": 38,
+      "round": 3,
+      "stage": 3
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 2,
+      "position": 39,
+      "round": 3,
+      "stage": 8
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 2,
+      "position": 40,
+      "round": 3,
+      "stage": 8
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 3,
+      "position": 41,
+      "round": 3,
+      "stage": 1
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 3,
+      "position": 42,
+      "round": 3,
+      "stage": 1
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 4,
+      "position": 43,
+      "round": 3,
+      "stage": 6
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 4,
+      "position": 44,
+      "round": 3,
+      "stage": 6
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 5,
+      "position": 45,
+      "round": 3,
+      "stage": 5
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 5,
+      "position": 46,
+      "round": 3,
+      "stage": 5
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 6,
+      "position": 47,
+      "round": 3,
+      "stage": 0
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 6,
+      "position": 48,
+      "round": 3,
+      "stage": 0
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 7,
+      "position": 49,
+      "round": 3,
+      "stage": 7
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 7,
+      "position": 50,
+      "round": 3,
+      "stage": 7
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 8,
+      "position": 51,
+      "round": 3,
+      "stage": 4
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 8,
+      "position": 52,
+      "round": 3,
+      "stage": 4
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 9,
+      "position": 53,
+      "round": 3,
+      "stage": 2
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 9,
+      "position": 54,
+      "round": 3,
+      "stage": 2
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 1,
+      "position": 55,
+      "round": 4,
+      "stage": 7
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 1,
+      "position": 56,
+      "round": 4,
+      "stage": 7
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 2,
+      "position": 57,
+      "round": 4,
+      "stage": 3
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 2,
+      "position": 58,
+      "round": 4,
+      "stage": 3
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 3,
+      "position": 59,
+      "round": 4,
+      "stage": 5
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 3,
+      "position": 60,
+      "round": 4,
+      "stage": 5
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 4,
+      "position": 61,
+      "round": 4,
+      "stage": 4
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 4,
+      "position": 62,
+      "round": 4,
+      "stage": 4
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 5,
+      "position": 63,
+      "round": 4,
+      "stage": 0
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 5,
+      "position": 64,
+      "round": 4,
+      "stage": 0
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 6,
+      "position": 65,
+      "round": 4,
+      "stage": 8
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 6,
+      "position": 66,
+      "round": 4,
+      "stage": 8
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 7,
+      "position": 67,
+      "round": 4,
+      "stage": 1
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 7,
+      "position": 68,
+      "round": 4,
+      "stage": 1
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 8,
+      "position": 69,
+      "round": 4,
+      "stage": 6
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 8,
+      "position": 70,
+      "round": 4,
+      "stage": 6
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 9,
+      "position": 71,
+      "round": 4,
+      "stage": 2
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 9,
+      "position": 72,
+      "round": 4,
+      "stage": 2
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 1,
+      "position": 73,
+      "round": 5,
+      "stage": 5
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 1,
+      "position": 74,
+      "round": 5,
+      "stage": 5
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 2,
+      "position": 75,
+      "round": 5,
+      "stage": 6
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 2,
+      "position": 76,
+      "round": 5,
+      "stage": 6
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 3,
+      "position": 77,
+      "round": 5,
+      "stage": 0
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 3,
+      "position": 78,
+      "round": 5,
+      "stage": 0
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 4,
+      "position": 79,
+      "round": 5,
+      "stage": 8
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 4,
+      "position": 80,
+      "round": 5,
+      "stage": 8
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 5,
+      "position": 81,
+      "round": 5,
+      "stage": 1
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 5,
+      "position": 82,
+      "round": 5,
+      "stage": 1
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 6,
+      "position": 83,
+      "round": 5,
+      "stage": 7
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 6,
+      "position": 84,
+      "round": 5,
+      "stage": 7
+    },
+    {
+      "language": "fsharp",
+      "language_position": 1,
+      "pair_position": 7,
+      "position": 85,
+      "round": 5,
+      "stage": 2
+    },
+    {
+      "language": "csharp",
+      "language_position": 2,
+      "pair_position": 7,
+      "position": 86,
+      "round": 5,
+      "stage": 2
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 8,
+      "position": 87,
+      "round": 5,
+      "stage": 3
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 8,
+      "position": 88,
+      "round": 5,
+      "stage": 3
+    },
+    {
+      "language": "csharp",
+      "language_position": 1,
+      "pair_position": 9,
+      "position": 89,
+      "round": 5,
+      "stage": 4
+    },
+    {
+      "language": "fsharp",
+      "language_position": 2,
+      "pair_position": 9,
+      "position": 90,
+      "round": 5,
+      "stage": 4
+    }
+  ],
+  "schedule_seed": "alf-workstream-e2-paired-rounds-v1",
+  "schedule_sha256": "c6915378561201778e6cfdc139bd9deff0cb58d7621da3e45b5ec8dda27c37e1",
+  "schema_version": "alf.workstream-e2.definition.v1",
+  "source_serialization": "lf-normalized-utf8-files-v1",
+  "states": [
+    {
+      "case_count": 3,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 1851,
+          "kind": "source",
+          "lexical_units": 361,
+          "lines": 60,
+          "path": "Program.cs",
+          "sha256": "018f2fda63bb33cb85995a47c0ffc25ec09153c1e970d063f0aa346e53e171d0",
+          "tokenizer_proxy_tokens": 359
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 1851,
+        "source_files": 1,
+        "source_lexical_units": 361,
+        "source_lines": 60,
+        "source_tokenizer_proxy_tokens": 359,
+        "tree_bytes": 2089,
+        "tree_files": 2,
+        "tree_lexical_units": 418,
+        "tree_lines": 68,
+        "tree_tokenizer_proxy_tokens": 424
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "5b82d960fc8a8309a9f8f10e5c00d158540d4a0ab1ae3c893f1d00887cd6f500",
+      "stage": 0,
+      "stage_local_diff": {
+        "added_lines": 0,
+        "added_paths": [],
+        "changed_files": 0,
+        "deleted_lines": 0,
+        "deleted_paths": [],
+        "diff_bytes": 0,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 0,
+          "source_files": 0,
+          "source_lexical_units": 0,
+          "source_lines": 0,
+          "source_tokenizer_proxy_tokens": 0,
+          "tree_bytes": 0,
+          "tree_files": 0,
+          "tree_lexical_units": 0,
+          "tree_lines": 0,
+          "tree_tokenizer_proxy_tokens": 0
+        },
+        "modified_paths": []
+      },
+      "state_id": "csharp-s00-baseline",
+      "task_count": 0,
+      "task_id": "baseline",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 3,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [],
+      "files": [
+        {
+          "bytes": 304,
+          "kind": "project",
+          "lexical_units": 75,
+          "lines": 11,
+          "path": "OrderFlow.fsproj",
+          "sha256": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+          "tokenizer_proxy_tokens": 84
+        },
+        {
+          "bytes": 1506,
+          "kind": "source",
+          "lexical_units": 301,
+          "lines": 51,
+          "path": "Program.fs",
+          "sha256": "59c9b7206ad3c57042ebc330c40f5e822bb8acb10f2360be5349c2d6b6198795",
+          "tokenizer_proxy_tokens": 330
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 304,
+        "project_files": 1,
+        "project_lexical_units": 75,
+        "project_lines": 11,
+        "project_tokenizer_proxy_tokens": 84,
+        "source_bytes": 1506,
+        "source_files": 1,
+        "source_lexical_units": 301,
+        "source_lines": 51,
+        "source_tokenizer_proxy_tokens": 330,
+        "tree_bytes": 1810,
+        "tree_files": 2,
+        "tree_lexical_units": 376,
+        "tree_lines": 62,
+        "tree_tokenizer_proxy_tokens": 414
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "79efe0c1b083d93d3a0641825d1de22d0eb791d97bb2c55a9e38b23335130464",
+      "stage": 0,
+      "stage_local_diff": {
+        "added_lines": 0,
+        "added_paths": [],
+        "changed_files": 0,
+        "deleted_lines": 0,
+        "deleted_paths": [],
+        "diff_bytes": 0,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 0,
+          "source_files": 0,
+          "source_lexical_units": 0,
+          "source_lines": 0,
+          "source_tokenizer_proxy_tokens": 0,
+          "tree_bytes": 0,
+          "tree_files": 0,
+          "tree_lexical_units": 0,
+          "tree_lines": 0,
+          "tree_tokenizer_proxy_tokens": 0
+        },
+        "modified_paths": []
+      },
+      "state_id": "fsharp-s00-baseline",
+      "task_count": 0,
+      "task_id": "baseline",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 5,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 1951,
+          "kind": "source",
+          "lexical_units": 384,
+          "lines": 62,
+          "path": "Program.cs",
+          "sha256": "eba02609b7c48993b40cfd9b96439eb6b7187063382f72d1d69ce3f5f704c7c5",
+          "tokenizer_proxy_tokens": 383
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 1951,
+        "source_files": 1,
+        "source_lexical_units": 384,
+        "source_lines": 62,
+        "source_tokenizer_proxy_tokens": 383,
+        "tree_bytes": 2189,
+        "tree_files": 2,
+        "tree_lexical_units": 441,
+        "tree_lines": 70,
+        "tree_tokenizer_proxy_tokens": 448
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "58cf10a8715f05d93ca563fb1f8649bad38840d4b42795604f58a293504fef9b",
+      "stage": 1,
+      "stage_local_diff": {
+        "added_lines": 3,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 1,
+        "deleted_paths": [],
+        "diff_bytes": 712,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 100,
+          "source_files": 0,
+          "source_lexical_units": 23,
+          "source_lines": 2,
+          "source_tokenizer_proxy_tokens": 24,
+          "tree_bytes": 100,
+          "tree_files": 0,
+          "tree_lexical_units": 23,
+          "tree_lines": 2,
+          "tree_tokenizer_proxy_tokens": 24
+        },
+        "modified_paths": [
+          "Program.cs"
+        ]
+      },
+      "state_id": "csharp-s01-001-priority",
+      "task_count": 1,
+      "task_id": "001-priority",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 5,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 304,
+          "kind": "project",
+          "lexical_units": 75,
+          "lines": 11,
+          "path": "OrderFlow.fsproj",
+          "sha256": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+          "tokenizer_proxy_tokens": 84
+        },
+        {
+          "bytes": 1654,
+          "kind": "source",
+          "lexical_units": 335,
+          "lines": 55,
+          "path": "Program.fs",
+          "sha256": "b83c612ac0c7aceeb808d6f76de942f2f70061dc43ec6fa681877d14430f966d",
+          "tokenizer_proxy_tokens": 365
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 304,
+        "project_files": 1,
+        "project_lexical_units": 75,
+        "project_lines": 11,
+        "project_tokenizer_proxy_tokens": 84,
+        "source_bytes": 1654,
+        "source_files": 1,
+        "source_lexical_units": 335,
+        "source_lines": 55,
+        "source_tokenizer_proxy_tokens": 365,
+        "tree_bytes": 1958,
+        "tree_files": 2,
+        "tree_lexical_units": 410,
+        "tree_lines": 66,
+        "tree_tokenizer_proxy_tokens": 449
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "cf7ad490fdeb9e6fd43fdec610c71cd42bf9e6521c4ab9db933b36b597e05c8d",
+      "stage": 1,
+      "stage_local_diff": {
+        "added_lines": 6,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 2,
+        "deleted_paths": [],
+        "diff_bytes": 983,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 148,
+          "source_files": 0,
+          "source_lexical_units": 34,
+          "source_lines": 4,
+          "source_tokenizer_proxy_tokens": 35,
+          "tree_bytes": 148,
+          "tree_files": 0,
+          "tree_lexical_units": 34,
+          "tree_lines": 4,
+          "tree_tokenizer_proxy_tokens": 35
+        },
+        "modified_paths": [
+          "Program.fs"
+        ]
+      },
+      "state_id": "fsharp-s01-001-priority",
+      "task_count": 1,
+      "task_id": "001-priority",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 7,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 2939,
+          "kind": "source",
+          "lexical_units": 568,
+          "lines": 82,
+          "path": "Program.cs",
+          "sha256": "38411c3f858360354354ad497f8a774ecd5c0845c4527275a5e0aab501a6d3fa",
+          "tokenizer_proxy_tokens": 576
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 2939,
+        "source_files": 1,
+        "source_lexical_units": 568,
+        "source_lines": 82,
+        "source_tokenizer_proxy_tokens": 576,
+        "tree_bytes": 3177,
+        "tree_files": 2,
+        "tree_lexical_units": 625,
+        "tree_lines": 90,
+        "tree_tokenizer_proxy_tokens": 641
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "eab016da0d4da9eef076f4fd7cec8e05227720fa93fdcad3d9bdaa323db251e9",
+      "stage": 2,
+      "stage_local_diff": {
+        "added_lines": 29,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 9,
+        "deleted_paths": [],
+        "diff_bytes": 2602,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 988,
+          "source_files": 0,
+          "source_lexical_units": 184,
+          "source_lines": 20,
+          "source_tokenizer_proxy_tokens": 193,
+          "tree_bytes": 988,
+          "tree_files": 0,
+          "tree_lexical_units": 184,
+          "tree_lines": 20,
+          "tree_tokenizer_proxy_tokens": 193
+        },
+        "modified_paths": [
+          "Program.cs"
+        ]
+      },
+      "state_id": "csharp-s02-002-overdue",
+      "task_count": 2,
+      "task_id": "002-overdue",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 7,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 304,
+          "kind": "project",
+          "lexical_units": 75,
+          "lines": 11,
+          "path": "OrderFlow.fsproj",
+          "sha256": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+          "tokenizer_proxy_tokens": 84
+        },
+        {
+          "bytes": 2336,
+          "kind": "source",
+          "lexical_units": 482,
+          "lines": 72,
+          "path": "Program.fs",
+          "sha256": "61b41f73f9b205b814d4748b965ffcd9be2c4606c93e8b56dca22769ca986b22",
+          "tokenizer_proxy_tokens": 529
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 304,
+        "project_files": 1,
+        "project_lexical_units": 75,
+        "project_lines": 11,
+        "project_tokenizer_proxy_tokens": 84,
+        "source_bytes": 2336,
+        "source_files": 1,
+        "source_lexical_units": 482,
+        "source_lines": 72,
+        "source_tokenizer_proxy_tokens": 529,
+        "tree_bytes": 2640,
+        "tree_files": 2,
+        "tree_lexical_units": 557,
+        "tree_lines": 83,
+        "tree_tokenizer_proxy_tokens": 613
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "d75cfe0c06205142cc3578fecc70e492a1884b0c959232a85b60620f78fe1f87",
+      "stage": 2,
+      "stage_local_diff": {
+        "added_lines": 27,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 10,
+        "deleted_paths": [],
+        "diff_bytes": 2107,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 682,
+          "source_files": 0,
+          "source_lexical_units": 147,
+          "source_lines": 17,
+          "source_tokenizer_proxy_tokens": 164,
+          "tree_bytes": 682,
+          "tree_files": 0,
+          "tree_lexical_units": 147,
+          "tree_lines": 17,
+          "tree_tokenizer_proxy_tokens": 164
+        },
+        "modified_paths": [
+          "Program.fs"
+        ]
+      },
+      "state_id": "fsharp-s02-002-overdue",
+      "task_count": 2,
+      "task_id": "002-overdue",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 17,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 3973,
+          "kind": "source",
+          "lexical_units": 776,
+          "lines": 121,
+          "path": "Program.cs",
+          "sha256": "b830ffab9a588073a72f961ea91dbd8c5ae72bda76a29974cb222c4980c6a54b",
+          "tokenizer_proxy_tokens": 811
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 3973,
+        "source_files": 1,
+        "source_lexical_units": 776,
+        "source_lines": 121,
+        "source_tokenizer_proxy_tokens": 811,
+        "tree_bytes": 4211,
+        "tree_files": 2,
+        "tree_lexical_units": 833,
+        "tree_lines": 129,
+        "tree_tokenizer_proxy_tokens": 876
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "94e14cbe708adeda5f48babf9798d9da341703427c0a09a5dc9c4f55e81d1f80",
+      "stage": 3,
+      "stage_local_diff": {
+        "added_lines": 57,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 18,
+        "deleted_paths": [],
+        "diff_bytes": 4024,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 1034,
+          "source_files": 0,
+          "source_lexical_units": 208,
+          "source_lines": 39,
+          "source_tokenizer_proxy_tokens": 235,
+          "tree_bytes": 1034,
+          "tree_files": 0,
+          "tree_lexical_units": 208,
+          "tree_lines": 39,
+          "tree_tokenizer_proxy_tokens": 235
+        },
+        "modified_paths": [
+          "Program.cs"
+        ]
+      },
+      "state_id": "csharp-s03-003-at-risk-window",
+      "task_count": 3,
+      "task_id": "003-at-risk-window",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 17,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 304,
+          "kind": "project",
+          "lexical_units": 75,
+          "lines": 11,
+          "path": "OrderFlow.fsproj",
+          "sha256": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+          "tokenizer_proxy_tokens": 84
+        },
+        {
+          "bytes": 3707,
+          "kind": "source",
+          "lexical_units": 703,
+          "lines": 123,
+          "path": "Program.fs",
+          "sha256": "60ad3c6e49306e2f5fb78087f5fc8429d395991d3d6d5f3905f9b1d0973c586b",
+          "tokenizer_proxy_tokens": 844
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 304,
+        "project_files": 1,
+        "project_lexical_units": 75,
+        "project_lines": 11,
+        "project_tokenizer_proxy_tokens": 84,
+        "source_bytes": 3707,
+        "source_files": 1,
+        "source_lexical_units": 703,
+        "source_lines": 123,
+        "source_tokenizer_proxy_tokens": 844,
+        "tree_bytes": 4011,
+        "tree_files": 2,
+        "tree_lexical_units": 778,
+        "tree_lines": 134,
+        "tree_tokenizer_proxy_tokens": 928
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "5f334be70ddf7b7510bd2dae0da4063ccb967a0f2ddc1d16150ea7e7355e4c00",
+      "stage": 3,
+      "stage_local_diff": {
+        "added_lines": 70,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 19,
+        "deleted_paths": [],
+        "diff_bytes": 4548,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 1371,
+          "source_files": 0,
+          "source_lexical_units": 221,
+          "source_lines": 51,
+          "source_tokenizer_proxy_tokens": 315,
+          "tree_bytes": 1371,
+          "tree_files": 0,
+          "tree_lexical_units": 221,
+          "tree_lines": 51,
+          "tree_tokenizer_proxy_tokens": 315
+        },
+        "modified_paths": [
+          "Program.fs"
+        ]
+      },
+      "state_id": "fsharp-s03-003-at-risk-window",
+      "task_count": 3,
+      "task_id": "003-at-risk-window",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 24,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 4456,
+          "kind": "source",
+          "lexical_units": 889,
+          "lines": 137,
+          "path": "Program.cs",
+          "sha256": "625b390e504e70ea98e04a1f08f1cdcc96f9f681914a8f88ab2998ed221ae9ad",
+          "tokenizer_proxy_tokens": 923
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 4456,
+        "source_files": 1,
+        "source_lexical_units": 889,
+        "source_lines": 137,
+        "source_tokenizer_proxy_tokens": 923,
+        "tree_bytes": 4694,
+        "tree_files": 2,
+        "tree_lexical_units": 946,
+        "tree_lines": 145,
+        "tree_tokenizer_proxy_tokens": 988
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "ec2ef7f9d36f3d8bc47e61160e7446f4fc722c4e18960b7aa99afc6ec7faadf8",
+      "stage": 4,
+      "stage_local_diff": {
+        "added_lines": 16,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 0,
+        "deleted_paths": [],
+        "diff_bytes": 1331,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 483,
+          "source_files": 0,
+          "source_lexical_units": 113,
+          "source_lines": 16,
+          "source_tokenizer_proxy_tokens": 112,
+          "tree_bytes": 483,
+          "tree_files": 0,
+          "tree_lexical_units": 113,
+          "tree_lines": 16,
+          "tree_tokenizer_proxy_tokens": 112
+        },
+        "modified_paths": [
+          "Program.cs"
+        ]
+      },
+      "state_id": "csharp-s04-004-vip-ready",
+      "task_count": 4,
+      "task_id": "004-vip-ready",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 24,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 304,
+          "kind": "project",
+          "lexical_units": 75,
+          "lines": 11,
+          "path": "OrderFlow.fsproj",
+          "sha256": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+          "tokenizer_proxy_tokens": 84
+        },
+        {
+          "bytes": 4104,
+          "kind": "source",
+          "lexical_units": 786,
+          "lines": 138,
+          "path": "Program.fs",
+          "sha256": "fa57a505a6cf2a3a0e06f72ec874332fbd94e3ded369e1d81f104e990c017bdd",
+          "tokenizer_proxy_tokens": 939
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 304,
+        "project_files": 1,
+        "project_lexical_units": 75,
+        "project_lines": 11,
+        "project_tokenizer_proxy_tokens": 84,
+        "source_bytes": 4104,
+        "source_files": 1,
+        "source_lexical_units": 786,
+        "source_lines": 138,
+        "source_tokenizer_proxy_tokens": 939,
+        "tree_bytes": 4408,
+        "tree_files": 2,
+        "tree_lexical_units": 861,
+        "tree_lines": 149,
+        "tree_tokenizer_proxy_tokens": 1023
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "9e6779b230859681aaed8abf5ebc00808eacab3d10aeb99e9cfb608a90b958fd",
+      "stage": 4,
+      "stage_local_diff": {
+        "added_lines": 16,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 1,
+        "deleted_paths": [],
+        "diff_bytes": 1216,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 397,
+          "source_files": 0,
+          "source_lexical_units": 83,
+          "source_lines": 15,
+          "source_tokenizer_proxy_tokens": 95,
+          "tree_bytes": 397,
+          "tree_files": 0,
+          "tree_lexical_units": 83,
+          "tree_lines": 15,
+          "tree_tokenizer_proxy_tokens": 95
+        },
+        "modified_paths": [
+          "Program.fs"
+        ]
+      },
+      "state_id": "fsharp-s04-004-vip-ready",
+      "task_count": 4,
+      "task_id": "004-vip-ready",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 45,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 21,
+          "project_file_changed": false,
+          "task_id": "005-null-order-robustness",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 4533,
+          "kind": "source",
+          "lexical_units": 916,
+          "lines": 139,
+          "path": "Program.cs",
+          "sha256": "c93aa5753bc2c6ad247cee69fd0ae099ee881a2cfeb7ddc2e91ecc8b6e337f2c",
+          "tokenizer_proxy_tokens": 948
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 4533,
+        "source_files": 1,
+        "source_lexical_units": 916,
+        "source_lines": 139,
+        "source_tokenizer_proxy_tokens": 948,
+        "tree_bytes": 4771,
+        "tree_files": 2,
+        "tree_lexical_units": 973,
+        "tree_lines": 147,
+        "tree_tokenizer_proxy_tokens": 1013
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "2d854ffc46f90bd7e80015ed00a9b02011e7be6b788ce7df5631ddaa180aacbf",
+      "stage": 5,
+      "stage_local_diff": {
+        "added_lines": 10,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 8,
+        "deleted_paths": [],
+        "diff_bytes": 1904,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 77,
+          "source_files": 0,
+          "source_lexical_units": 27,
+          "source_lines": 2,
+          "source_tokenizer_proxy_tokens": 25,
+          "tree_bytes": 77,
+          "tree_files": 0,
+          "tree_lexical_units": 27,
+          "tree_lines": 2,
+          "tree_tokenizer_proxy_tokens": 25
+        },
+        "modified_paths": [
+          "Program.cs"
+        ]
+      },
+      "state_id": "csharp-s05-005-null-order-robustness",
+      "task_count": 5,
+      "task_id": "005-null-order-robustness",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 45,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 21,
+          "project_file_changed": false,
+          "task_id": "005-null-order-robustness",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 304,
+          "kind": "project",
+          "lexical_units": 75,
+          "lines": 11,
+          "path": "OrderFlow.fsproj",
+          "sha256": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+          "tokenizer_proxy_tokens": 84
+        },
+        {
+          "bytes": 4368,
+          "kind": "source",
+          "lexical_units": 834,
+          "lines": 148,
+          "path": "Program.fs",
+          "sha256": "b831505323425e24e03536e28bbe82a18a9c7d7953e6f6c949e9514e8696f1e4",
+          "tokenizer_proxy_tokens": 997
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 304,
+        "project_files": 1,
+        "project_lexical_units": 75,
+        "project_lines": 11,
+        "project_tokenizer_proxy_tokens": 84,
+        "source_bytes": 4368,
+        "source_files": 1,
+        "source_lexical_units": 834,
+        "source_lines": 148,
+        "source_tokenizer_proxy_tokens": 997,
+        "tree_bytes": 4672,
+        "tree_files": 2,
+        "tree_lexical_units": 909,
+        "tree_lines": 159,
+        "tree_tokenizer_proxy_tokens": 1081
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "39aebf46f1cc9b65a361117c1f15355067f75ae40ba998743ab74ca2d8337b5c",
+      "stage": 5,
+      "stage_local_diff": {
+        "added_lines": 15,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 5,
+        "deleted_paths": [],
+        "diff_bytes": 1677,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 264,
+          "source_files": 0,
+          "source_lexical_units": 48,
+          "source_lines": 10,
+          "source_tokenizer_proxy_tokens": 58,
+          "tree_bytes": 264,
+          "tree_files": 0,
+          "tree_lexical_units": 48,
+          "tree_lines": 10,
+          "tree_tokenizer_proxy_tokens": 58
+        },
+        "modified_paths": [
+          "Program.fs"
+        ]
+      },
+      "state_id": "fsharp-s05-005-null-order-robustness",
+      "task_count": 5,
+      "task_id": "005-null-order-robustness",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 77,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 21,
+          "project_file_changed": false,
+          "task_id": "005-null-order-robustness",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 32,
+          "project_file_changed": false,
+          "task_id": "006-transition-validation",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 6536,
+          "kind": "source",
+          "lexical_units": 1274,
+          "lines": 210,
+          "path": "Program.cs",
+          "sha256": "725929d39f7e877828909fc8bc1a0973defb98fc1f8986c4beac75f373ce6c4f",
+          "tokenizer_proxy_tokens": 1331
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 6536,
+        "source_files": 1,
+        "source_lexical_units": 1274,
+        "source_lines": 210,
+        "source_tokenizer_proxy_tokens": 1331,
+        "tree_bytes": 6774,
+        "tree_files": 2,
+        "tree_lexical_units": 1331,
+        "tree_lines": 218,
+        "tree_tokenizer_proxy_tokens": 1396
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "cae158598e5101aabdf3b2552e73540be17cc0c9bf2b9117bb531c4b04015661",
+      "stage": 6,
+      "stage_local_diff": {
+        "added_lines": 73,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 2,
+        "deleted_paths": [],
+        "diff_bytes": 2790,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 2003,
+          "source_files": 0,
+          "source_lexical_units": 358,
+          "source_lines": 71,
+          "source_tokenizer_proxy_tokens": 383,
+          "tree_bytes": 2003,
+          "tree_files": 0,
+          "tree_lexical_units": 358,
+          "tree_lines": 71,
+          "tree_tokenizer_proxy_tokens": 383
+        },
+        "modified_paths": [
+          "Program.cs"
+        ]
+      },
+      "state_id": "csharp-s06-006-transition-validation",
+      "task_count": 6,
+      "task_id": "006-transition-validation",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 77,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 1,
+        "static_source_inputs": [
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 21,
+          "project_file_changed": false,
+          "task_id": "005-null-order-robustness",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 32,
+          "project_file_changed": false,
+          "task_id": "006-transition-validation",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 304,
+          "kind": "project",
+          "lexical_units": 75,
+          "lines": 11,
+          "path": "OrderFlow.fsproj",
+          "sha256": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+          "tokenizer_proxy_tokens": 84
+        },
+        {
+          "bytes": 6105,
+          "kind": "source",
+          "lexical_units": 1136,
+          "lines": 201,
+          "path": "Program.fs",
+          "sha256": "e1995467a30791511b1004084b7e1a662c7014a7e2e601e56cab37fccff46d55",
+          "tokenizer_proxy_tokens": 1359
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 304,
+        "project_files": 1,
+        "project_lexical_units": 75,
+        "project_lines": 11,
+        "project_tokenizer_proxy_tokens": 84,
+        "source_bytes": 6105,
+        "source_files": 1,
+        "source_lexical_units": 1136,
+        "source_lines": 201,
+        "source_tokenizer_proxy_tokens": 1359,
+        "tree_bytes": 6409,
+        "tree_files": 2,
+        "tree_lexical_units": 1211,
+        "tree_lines": 212,
+        "tree_tokenizer_proxy_tokens": 1443
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "bad5a5bd583e648b273746fcb5014a58fd1ecea79ac8165b400f2ce2208ad069",
+      "stage": 6,
+      "stage_local_diff": {
+        "added_lines": 55,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 2,
+        "deleted_paths": [],
+        "diff_bytes": 2498,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 1737,
+          "source_files": 0,
+          "source_lexical_units": 302,
+          "source_lines": 53,
+          "source_tokenizer_proxy_tokens": 362,
+          "tree_bytes": 1737,
+          "tree_files": 0,
+          "tree_lexical_units": 302,
+          "tree_lines": 53,
+          "tree_tokenizer_proxy_tokens": 362
+        },
+        "modified_paths": [
+          "Program.fs"
+        ]
+      },
+      "state_id": "fsharp-s06-006-transition-validation",
+      "task_count": 6,
+      "task_id": "006-transition-validation",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 0,
+          "text_contains": 0,
+          "text_not_contains": 0
+        },
+        "paths": []
+      }
+    },
+    {
+      "case_count": 79,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 2,
+        "static_source_inputs": [
+          "OrderFlowEngine.cs",
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 21,
+          "project_file_changed": false,
+          "task_id": "005-null-order-robustness",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 32,
+          "project_file_changed": false,
+          "task_id": "006-transition-validation",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "OrderFlowEngine.cs",
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "007-query-engine-refactor",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 1,
+              "text_contains": 2,
+              "text_not_contains": 10
+            },
+            "paths": [
+              "OrderFlowEngine.cs",
+              "Program.cs"
+            ]
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 5703,
+          "kind": "source",
+          "lexical_units": 1137,
+          "lines": 183,
+          "path": "OrderFlowEngine.cs",
+          "sha256": "058e6fbb2d93caca0dae86709608a3eca4d833f17712828eb06ffb8332251312",
+          "tokenizer_proxy_tokens": 1185
+        },
+        {
+          "bytes": 909,
+          "kind": "source",
+          "lexical_units": 148,
+          "lines": 31,
+          "path": "Program.cs",
+          "sha256": "cbf4f0312b97b0cc60a64bdcb23f930e10c3d84949bc7c213549a1d74a5179a0",
+          "tokenizer_proxy_tokens": 162
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 6612,
+        "source_files": 2,
+        "source_lexical_units": 1285,
+        "source_lines": 214,
+        "source_tokenizer_proxy_tokens": 1347,
+        "tree_bytes": 6850,
+        "tree_files": 3,
+        "tree_lexical_units": 1342,
+        "tree_lines": 222,
+        "tree_tokenizer_proxy_tokens": 1412
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "a8ce5eb816e8a2fcf4c05fcbdfb529d77dac626cb375629ea5631f72698a195c",
+      "stage": 7,
+      "stage_local_diff": {
+        "added_lines": 184,
+        "added_paths": [
+          "OrderFlowEngine.cs"
+        ],
+        "changed_files": 2,
+        "deleted_lines": 180,
+        "deleted_paths": [],
+        "diff_bytes": 12406,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 76,
+          "source_files": 1,
+          "source_lexical_units": 11,
+          "source_lines": 4,
+          "source_tokenizer_proxy_tokens": 16,
+          "tree_bytes": 76,
+          "tree_files": 1,
+          "tree_lexical_units": 11,
+          "tree_lines": 4,
+          "tree_tokenizer_proxy_tokens": 16
+        },
+        "modified_paths": [
+          "Program.cs"
+        ]
+      },
+      "state_id": "csharp-s07-007-query-engine-refactor",
+      "task_count": 7,
+      "task_id": "007-query-engine-refactor",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 1,
+          "text_contains": 2,
+          "text_not_contains": 10
+        },
+        "paths": [
+          "OrderFlowEngine.cs",
+          "Program.cs"
+        ]
+      }
+    },
+    {
+      "case_count": 79,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "OrderFlowEngine.fs",
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 2,
+        "static_source_inputs": [
+          "OrderFlowEngine.fs",
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 21,
+          "project_file_changed": false,
+          "task_id": "005-null-order-robustness",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 32,
+          "project_file_changed": false,
+          "task_id": "006-transition-validation",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "OrderFlow.fsproj",
+            "OrderFlowEngine.fs",
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": true,
+          "task_id": "007-query-engine-refactor",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 1,
+              "text_contains": 2,
+              "text_not_contains": 10
+            },
+            "paths": [
+              "OrderFlowEngine.fs",
+              "Program.fs"
+            ]
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 349,
+          "kind": "project",
+          "lexical_units": 86,
+          "lines": 12,
+          "path": "OrderFlow.fsproj",
+          "sha256": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+          "tokenizer_proxy_tokens": 95
+        },
+        {
+          "bytes": 5477,
+          "kind": "source",
+          "lexical_units": 1023,
+          "lines": 179,
+          "path": "OrderFlowEngine.fs",
+          "sha256": "a50ea0e01aedf3e095c6ac50e161823d976b516cb2a724b60a191ec07c1cd829",
+          "tokenizer_proxy_tokens": 1234
+        },
+        {
+          "bytes": 816,
+          "kind": "source",
+          "lexical_units": 134,
+          "lines": 26,
+          "path": "Program.fs",
+          "sha256": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e",
+          "tokenizer_proxy_tokens": 153
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 349,
+        "project_files": 1,
+        "project_lexical_units": 86,
+        "project_lines": 12,
+        "project_tokenizer_proxy_tokens": 95,
+        "source_bytes": 6293,
+        "source_files": 2,
+        "source_lexical_units": 1157,
+        "source_lines": 205,
+        "source_tokenizer_proxy_tokens": 1387,
+        "tree_bytes": 6642,
+        "tree_files": 3,
+        "tree_lexical_units": 1243,
+        "tree_lines": 217,
+        "tree_tokenizer_proxy_tokens": 1482
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "cb498b2a360520fe7d931922a4d66149ad2903aae82d7e87490c156252cba7b1",
+      "stage": 7,
+      "stage_local_diff": {
+        "added_lines": 183,
+        "added_paths": [
+          "OrderFlowEngine.fs"
+        ],
+        "changed_files": 3,
+        "deleted_lines": 178,
+        "deleted_paths": [],
+        "diff_bytes": 12468,
+        "metric_deltas": {
+          "project_bytes": 45,
+          "project_files": 0,
+          "project_lexical_units": 11,
+          "project_lines": 1,
+          "project_tokenizer_proxy_tokens": 11,
+          "source_bytes": 188,
+          "source_files": 1,
+          "source_lexical_units": 21,
+          "source_lines": 4,
+          "source_tokenizer_proxy_tokens": 28,
+          "tree_bytes": 233,
+          "tree_files": 1,
+          "tree_lexical_units": 32,
+          "tree_lines": 5,
+          "tree_tokenizer_proxy_tokens": 39
+        },
+        "modified_paths": [
+          "OrderFlow.fsproj",
+          "Program.fs"
+        ]
+      },
+      "state_id": "fsharp-s07-007-query-engine-refactor",
+      "task_count": 7,
+      "task_id": "007-query-engine-refactor",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 1,
+          "text_contains": 2,
+          "text_not_contains": 10
+        },
+        "paths": [
+          "OrderFlowEngine.fs",
+          "Program.fs"
+        ]
+      }
+    },
+    {
+      "case_count": 90,
+      "compile_obligations": {
+        "declared_compile_includes": [],
+        "declared_compile_removes": [],
+        "mode": "sdk-default-source-discovery",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.csproj",
+        "static_source_input_count": 2,
+        "static_source_inputs": [
+          "OrderFlowEngine.cs",
+          "Program.cs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 21,
+          "project_file_changed": false,
+          "task_id": "005-null-order-robustness",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.cs"
+          ],
+          "cases_added": 32,
+          "project_file_changed": false,
+          "task_id": "006-transition-validation",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "OrderFlowEngine.cs",
+            "Program.cs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "007-query-engine-refactor",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 1,
+              "text_contains": 2,
+              "text_not_contains": 10
+            },
+            "paths": [
+              "OrderFlowEngine.cs",
+              "Program.cs"
+            ]
+          }
+        },
+        {
+          "artifact_targets": [
+            "OrderFlowEngine.cs",
+            "Program.cs"
+          ],
+          "cases_added": 11,
+          "project_file_changed": false,
+          "task_id": "008-summary-api",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 1
+            },
+            "paths": [
+              "Program.cs"
+            ]
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 238,
+          "kind": "project",
+          "lexical_units": 57,
+          "lines": 8,
+          "path": "OrderFlow.csproj",
+          "sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+          "tokenizer_proxy_tokens": 65
+        },
+        {
+          "bytes": 7191,
+          "kind": "source",
+          "lexical_units": 1377,
+          "lines": 243,
+          "path": "OrderFlowEngine.cs",
+          "sha256": "aff6b28fc615979a313888492e424461c04c39cc034d759f8d339345a03d8bae",
+          "tokenizer_proxy_tokens": 1473
+        },
+        {
+          "bytes": 909,
+          "kind": "source",
+          "lexical_units": 148,
+          "lines": 31,
+          "path": "Program.cs",
+          "sha256": "cbf4f0312b97b0cc60a64bdcb23f930e10c3d84949bc7c213549a1d74a5179a0",
+          "tokenizer_proxy_tokens": 162
+        }
+      ],
+      "language": "csharp",
+      "metrics": {
+        "project_bytes": 238,
+        "project_files": 1,
+        "project_lexical_units": 57,
+        "project_lines": 8,
+        "project_tokenizer_proxy_tokens": 65,
+        "source_bytes": 8100,
+        "source_files": 2,
+        "source_lexical_units": 1525,
+        "source_lines": 274,
+        "source_tokenizer_proxy_tokens": 1635,
+        "tree_bytes": 8338,
+        "tree_files": 3,
+        "tree_lexical_units": 1582,
+        "tree_lines": 282,
+        "tree_tokenizer_proxy_tokens": 1700
+      },
+      "project": "OrderFlow.csproj",
+      "source_tree_sha256": "33e748c3a89a22e0047cf4c885cbde2cf82449dc171c183c90a0af7554f46ff2",
+      "stage": 8,
+      "stage_local_diff": {
+        "added_lines": 60,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 0,
+        "deleted_paths": [],
+        "diff_bytes": 2132,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 1488,
+          "source_files": 0,
+          "source_lexical_units": 240,
+          "source_lines": 60,
+          "source_tokenizer_proxy_tokens": 288,
+          "tree_bytes": 1488,
+          "tree_files": 0,
+          "tree_lexical_units": 240,
+          "tree_lines": 60,
+          "tree_tokenizer_proxy_tokens": 288
+        },
+        "modified_paths": [
+          "OrderFlowEngine.cs"
+        ]
+      },
+      "state_id": "csharp-s08-008-summary-api",
+      "task_count": 8,
+      "task_id": "008-summary-api",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 1,
+          "text_contains": 2,
+          "text_not_contains": 11
+        },
+        "paths": [
+          "OrderFlowEngine.cs",
+          "Program.cs"
+        ]
+      }
+    },
+    {
+      "case_count": 90,
+      "compile_obligations": {
+        "declared_compile_includes": [
+          "OrderFlowEngine.fs",
+          "Program.fs"
+        ],
+        "declared_compile_removes": [],
+        "mode": "explicit-project-order",
+        "observed_compiler_inputs": null,
+        "project_file": "OrderFlow.fsproj",
+        "static_source_input_count": 2,
+        "static_source_inputs": [
+          "OrderFlowEngine.fs",
+          "Program.fs"
+        ],
+        "target_frameworks": [
+          "net10.0"
+        ]
+      },
+      "cumulative_task_obligations": [
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "001-priority",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": false,
+          "task_id": "002-overdue",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 10,
+          "project_file_changed": false,
+          "task_id": "003-at-risk-window",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 7,
+          "project_file_changed": false,
+          "task_id": "004-vip-ready",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 21,
+          "project_file_changed": false,
+          "task_id": "005-null-order-robustness",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "Program.fs"
+          ],
+          "cases_added": 32,
+          "project_file_changed": false,
+          "task_id": "006-transition-validation",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 0
+            },
+            "paths": []
+          }
+        },
+        {
+          "artifact_targets": [
+            "OrderFlow.fsproj",
+            "OrderFlowEngine.fs",
+            "Program.fs"
+          ],
+          "cases_added": 2,
+          "project_file_changed": true,
+          "task_id": "007-query-engine-refactor",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 1,
+              "text_contains": 2,
+              "text_not_contains": 10
+            },
+            "paths": [
+              "OrderFlowEngine.fs",
+              "Program.fs"
+            ]
+          }
+        },
+        {
+          "artifact_targets": [
+            "OrderFlow.fsproj",
+            "OrderFlowEngine.fs",
+            "Program.fs"
+          ],
+          "cases_added": 11,
+          "project_file_changed": true,
+          "task_id": "008-summary-api",
+          "workspace_checks": {
+            "counts": {
+              "file_exists": 0,
+              "text_contains": 0,
+              "text_not_contains": 1
+            },
+            "paths": [
+              "Program.fs"
+            ]
+          }
+        }
+      ],
+      "files": [
+        {
+          "bytes": 349,
+          "kind": "project",
+          "lexical_units": 86,
+          "lines": 12,
+          "path": "OrderFlow.fsproj",
+          "sha256": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+          "tokenizer_proxy_tokens": 95
+        },
+        {
+          "bytes": 6834,
+          "kind": "source",
+          "lexical_units": 1244,
+          "lines": 227,
+          "path": "OrderFlowEngine.fs",
+          "sha256": "71b06ef968e66879cc33fe2948e6b6943583a73496f08d1d9a4d8553ae51eb96",
+          "tokenizer_proxy_tokens": 1542
+        },
+        {
+          "bytes": 816,
+          "kind": "source",
+          "lexical_units": 134,
+          "lines": 26,
+          "path": "Program.fs",
+          "sha256": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e",
+          "tokenizer_proxy_tokens": 153
+        }
+      ],
+      "language": "fsharp",
+      "metrics": {
+        "project_bytes": 349,
+        "project_files": 1,
+        "project_lexical_units": 86,
+        "project_lines": 12,
+        "project_tokenizer_proxy_tokens": 95,
+        "source_bytes": 7650,
+        "source_files": 2,
+        "source_lexical_units": 1378,
+        "source_lines": 253,
+        "source_tokenizer_proxy_tokens": 1695,
+        "tree_bytes": 7999,
+        "tree_files": 3,
+        "tree_lexical_units": 1464,
+        "tree_lines": 265,
+        "tree_tokenizer_proxy_tokens": 1790
+      },
+      "project": "OrderFlow.fsproj",
+      "source_tree_sha256": "73b5151a2598ad80d0f355f34af47f76b6c14407636f18eaa00e89d807758ad9",
+      "stage": 8,
+      "stage_local_diff": {
+        "added_lines": 48,
+        "added_paths": [],
+        "changed_files": 1,
+        "deleted_lines": 0,
+        "deleted_paths": [],
+        "diff_bytes": 2046,
+        "metric_deltas": {
+          "project_bytes": 0,
+          "project_files": 0,
+          "project_lexical_units": 0,
+          "project_lines": 0,
+          "project_tokenizer_proxy_tokens": 0,
+          "source_bytes": 1357,
+          "source_files": 0,
+          "source_lexical_units": 221,
+          "source_lines": 48,
+          "source_tokenizer_proxy_tokens": 308,
+          "tree_bytes": 1357,
+          "tree_files": 0,
+          "tree_lexical_units": 221,
+          "tree_lines": 48,
+          "tree_tokenizer_proxy_tokens": 308
+        },
+        "modified_paths": [
+          "OrderFlowEngine.fs"
+        ]
+      },
+      "state_id": "fsharp-s08-008-summary-api",
+      "task_count": 8,
+      "task_id": "008-summary-api",
+      "workspace_checks": {
+        "counts": {
+          "file_exists": 1,
+          "text_contains": 2,
+          "text_not_contains": 11
+        },
+        "paths": [
+          "OrderFlowEngine.fs",
+          "Program.fs"
+        ]
+      }
+    }
+  ],
+  "tokenizer": {
+    "encoding": "o200k_base",
+    "package": "tiktoken",
+    "version": "0.14.0"
+  }
+}

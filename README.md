@@ -134,6 +134,7 @@ remove it after the run. Do not minimize, blank, hash, log, or commit it.
 - `src/alf/` — harness, adapters, protocol, accounting, and audit logic
 - `benchmarks/pilot/` — matched .NET projects, tasks, evaluators, and snapshots
 - `docs/` — protocol, environment, design, results, and research context
+- `protocols/workstream-e2-toolchain-v1/` — frozen offline E2 source/toolchain baseline
 - `tests/` — unit and model-free regression tests
 - `scripts/alf.py` — command-line entry point
 - `PLAN.md` — canonical continuation order and decision gates

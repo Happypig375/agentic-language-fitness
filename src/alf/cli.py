@@ -16,6 +16,9 @@ from .workstream_d import validate_family
 from .variance import calibration_fixture, markdown_report, variance_report
 from .representation import build_representation, check_representation
 from .workstream_e import analyze_archive, write_report
+from .workstream_e2 import check_definition, freeze_definition
+from .workstream_e2_report import audit_report
+from .workstream_e2_runner import run_baseline
 
 
 def _root_and_manifest(args: argparse.Namespace) -> tuple[Path, dict[str, Any]]:
@@ -223,6 +226,71 @@ def cmd_workstream_e(args: argparse.Namespace) -> int:
                       "tasks": report["totals"]["task_count"]}, sort_keys=True))
     return 0
 
+def cmd_e2_freeze(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    output = Path(args.output)
+    output = output if output.is_absolute() else root / output
+    definition = freeze_definition(root, args.manifest, output)
+    print(
+        json.dumps(
+            {
+                "definition": str(output),
+                "definition_sha256": definition["definition_sha256"],
+                "states": len(definition["states"]),
+                "schedule": len(definition["schedule"]),
+            },
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
+def cmd_e2_check(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    result = check_definition(root, args.definition, args.manifest)
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0 if result["ok"] else 1
+
+
+def cmd_e2_run(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    report = run_baseline(
+        root=root,
+        definition=args.definition,
+        manifest=args.manifest,
+        runner_git_sha=args.runner_git_sha,
+        container_image_id=args.container_image_id,
+        package_cache=args.package_cache,
+        raw_output=args.raw_output,
+        output_json=args.output_json,
+        output_markdown=args.output_markdown,
+    )
+    print(
+        json.dumps(
+            {
+                "output_json": args.output_json,
+                "output_markdown": args.output_markdown,
+                "report_sha256": report["report_sha256"],
+                "samples": len(report["samples"]),
+            },
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
+def cmd_e2_audit(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    definition_path = Path(args.definition)
+    definition_path = definition_path if definition_path.is_absolute() else root / definition_path
+    report_path = Path(args.report)
+    report_path = report_path if report_path.is_absolute() else root / report_path
+    definition = json.loads(definition_path.read_text(encoding="utf-8"))
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    result = audit_report(report, definition, Path(args.raw_output).resolve())
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0 if result["ok"] else 1
+
 
 def _sha40(value: str) -> str:
     if re.fullmatch(r"[0-9a-fA-F]{40}", value) is None:
@@ -311,6 +379,28 @@ def build_parser() -> argparse.ArgumentParser:
     e1.add_argument("--output-json", required=True)
     e1.add_argument("--output-markdown", required=True)
     e1.set_defaults(func=cmd_workstream_e)
+    e2 = sub.add_parser("e2", help="Run the offline model-free Workstream E2 baseline")
+    e2sub = e2.add_subparsers(dest="e2_command", required=True)
+    ef = e2sub.add_parser("freeze")
+    ef.add_argument("--output", required=True)
+    ef.set_defaults(func=cmd_e2_freeze)
+    ec = e2sub.add_parser("check")
+    ec.add_argument("--definition", required=True)
+    ec.set_defaults(func=cmd_e2_check)
+    er = e2sub.add_parser("run")
+    er.add_argument("--definition", required=True)
+    er.add_argument("--runner-git-sha", required=True, type=_sha40)
+    er.add_argument("--container-image-id", required=True)
+    er.add_argument("--package-cache", required=True)
+    er.add_argument("--raw-output", required=True)
+    er.add_argument("--output-json", required=True)
+    er.add_argument("--output-markdown", required=True)
+    er.set_defaults(func=cmd_e2_run)
+    ea = e2sub.add_parser("audit")
+    ea.add_argument("--definition", required=True)
+    ea.add_argument("--report", required=True)
+    ea.add_argument("--raw-output", required=True)
+    ea.set_defaults(func=cmd_e2_audit)
     return parser
 
 

@@ -4,6 +4,12 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      run_e2:
+        description: Run the frozen model-free E2 baseline after validation
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -32,6 +38,8 @@ jobs:
         run: python scripts/alf.py validate
       - name: Check C3 representation artifacts
         run: python scripts/alf.py representation check
+      - name: Check frozen Workstream E2 definition
+        run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2 check --definition protocols/workstream-e2-toolchain-v1/definition.json
       - name: Validate difficulty-v1 protocol definition
         run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate Workstream D family and child definitions
@@ -82,6 +90,8 @@ jobs:
         run: python scripts/alf.py validate
       - name: Check C3 representation artifacts
         run: python scripts/alf.py representation check
+      - name: Check frozen Workstream E2 definition
+        run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2 check --definition protocols/workstream-e2-toolchain-v1/definition.json
       - name: Validate difficulty-v1 protocol definition
         run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate Workstream D family and child definitions
@@ -94,3 +104,92 @@ jobs:
         run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
       - name: Validate C3 deterministic treatment
         run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json validate
+
+  e2-baseline:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_e2 }}
+    needs: [validate-linux, validate-windows]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build exact-commit E2 image
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/e2/cache" "$RUNNER_TEMP/e2/raw" "$RUNNER_TEMP/e2/report" "$RUNNER_TEMP/e2/work"
+          docker build \
+            --iidfile "$RUNNER_TEMP/e2/image-id.txt" \
+            --tag "agentic-language-fitness:e2-${GITHUB_SHA}" \
+            .
+      - name: Preseed the fixed NuGet package cache
+        shell: bash
+        run: |
+          docker run --rm \
+            --entrypoint /bin/sh \
+            --env DOTNET_CLI_TELEMETRY_OPTOUT=1 \
+            --env DOTNET_NOLOGO=1 \
+            --env NUGET_PACKAGES=/e2/cache \
+            --volume "$RUNNER_TEMP/e2/cache:/e2/cache" \
+            "agentic-language-fitness:e2-${GITHUB_SHA}" \
+            -c 'dotnet restore benchmarks/successor/repos/fsharp/v0/OrderFlow.fsproj --nologo && dotnet restore benchmarks/successor/repos/csharp/v0/OrderFlow.csproj --nologo'
+      - name: Run frozen E2 baseline without external networking
+        shell: bash
+        run: |
+          image_id="$(cat "$RUNNER_TEMP/e2/image-id.txt")"
+          docker run --rm \
+            --network none \
+            --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,size=256m \
+            --user "$(id -u):$(id -g)" \
+            --cap-drop ALL \
+            --security-opt no-new-privileges \
+            --pids-limit 512 \
+            --cpus 2 \
+            --memory 6g \
+            --memory-swap 6g \
+            --env TMPDIR=/e2/work \
+            --volume "$RUNNER_TEMP/e2/cache:/e2/cache:ro" \
+            --volume "$RUNNER_TEMP/e2/raw:/e2/raw" \
+            --volume "$RUNNER_TEMP/e2/report:/e2/report" \
+            --volume "$RUNNER_TEMP/e2/work:/e2/work" \
+            "agentic-language-fitness:e2-${GITHUB_SHA}" \
+            --manifest benchmarks/successor/manifest.json \
+            e2 run \
+            --definition protocols/workstream-e2-toolchain-v1/definition.json \
+            --runner-git-sha "$GITHUB_SHA" \
+            --container-image-id "$image_id" \
+            --package-cache /e2/cache \
+            --raw-output /e2/raw \
+            --output-json /e2/report/report.json \
+            --output-markdown /e2/report/report.md
+      - name: Audit report against raw evidence
+        shell: bash
+        run: |
+          docker run --rm \
+            --network none \
+            --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,size=256m \
+            --user "$(id -u):$(id -g)" \
+            --cap-drop ALL \
+            --security-opt no-new-privileges \
+            --env TMPDIR=/e2/work \
+            --volume "$RUNNER_TEMP/e2/raw:/e2/raw:ro" \
+            --volume "$RUNNER_TEMP/e2/report:/e2/report:ro" \
+            --volume "$RUNNER_TEMP/e2/work:/e2/work" \
+            "agentic-language-fitness:e2-${GITHUB_SHA}" \
+            --manifest benchmarks/successor/manifest.json \
+            e2 audit \
+            --definition protocols/workstream-e2-toolchain-v1/definition.json \
+            --report /e2/report/report.json \
+            --raw-output /e2/raw
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workstream-e2-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/e2/image-id.txt
+            ${{ runner.temp }}/e2/raw/
+            ${{ runner.temp }}/e2/report/
+          if-no-files-found: warn
+          retention-days: 30
