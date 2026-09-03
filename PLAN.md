@@ -1,6 +1,6 @@
 # Research plan
 
-This is the canonical continuation plan. Workstream D v3 is closed at its preregistered calibration stop; no further v3 model run is authorized.
+This is the canonical continuation plan. Workstream D v3 is closed at its preregistered calibration stop. The next phase investigates **why** F# cost more in the exploratory calibration before registering a larger language-cost comparison.
 
 ## Scientific checkpoint — 2026-09-03
 
@@ -9,161 +9,266 @@ Completed:
 - Workstreams A–C: accounting/provenance, variance-v2, the matched eight-task successor chain, and representation apparatus;
 - Workstream D scientific design, remote high-memory runner, route shakedown, exact-commit CI, clean v3 freezes, and ten audited non-counting calibrations;
 - v3 calibration disposition: H (`gpt-5.6-terra`, medium) saturated; M (`gpt-5.6-luna`, high) and L (`gpt-5.6-luna`, medium) were too easy in both primary and reverse order;
-- every retained v3 calibration run was protocol-valid, accounting-valid, successful 8/8, and free of agent/evaluator failure.
+- all ten retained v3 calibration runs were protocol-valid, accounting-valid, successful 8/8, and free of terminal agent/evaluator failure;
+- exploratory v3 finding: F# used more input tokens and agent-process time in all five F#/C# pairs, with geometric-mean ratios near 1.38.
 
-V4–V13 remain apparatus-development history, not scientific families. Do not create v14. The reviewed runner/environment identity remains `runner-remote-highmem-local-egress-r1`; a new scientific question requires a new scientific specification, not another apparatus-number cascade.
+V4–V13 remain apparatus-development history, not scientific families. Do not create v14. The reviewed runner/environment identity remains `runner-remote-highmem-local-egress-r1`. Scientific changes receive scientific-specification IDs; they do not trigger another runner-version cascade.
 
-## Interpretation of the new results
+Latest validated pre-mechanism head `af91fffcda41f51030eba1bcb970fd64c570541c` passed Linux and Windows CI. Any new implementation still requires its own exact-commit green CI before use.
 
-### What is established
+## Interpretation boundary
 
-The v3 calibration achieved its operational purpose and triggered the frozen stop condition. The selected configurations cannot be differentiated by full-chain correctness on this eight-task benchmark. Formal v3 macroblocks 1–6 remain permanently unauthorized.
+The v3 totals are **ecological trajectory costs**, not direct measurements of source compactness or model memory.
 
-### What is not established
+The current harness starts a fresh candidate process and conversation for every task. Therefore:
 
-The ten runs were non-counting calibration observations. They provide five F#/C# pairs, only one H pair, and no preregistered language-effect test. They do not establish statistical significance, a universal language ranking, or an F# disadvantage.
+- tool and compiler history can inflate context within a task;
+- that history does not carry from Task 001 into Task 002;
+- v3 does not test cumulative cross-task orchestrator context pollution;
+- persistent long-horizon memory and repair delegation require separate harness treatments.
 
-### Exploratory signal that changes the next design
+Total input tokens can be inflated by generation problems. A faulty patch leads to diagnostics, more tool calls, and repeated cached history, so a syntax/type failure may appear mainly as extra input rather than only extra output.
 
-Across all five pairs, F# used more input tokens and more agent-process time:
-
-- input-token F#/C# ratios: 1.307, 1.348, 1.359, 1.418, 1.455;
-- agent-time ratios: 1.261, 1.416, 1.406, 1.411, 1.412;
-- geometric means: 1.377 for input and 1.380 for agent time;
-- M and L retained the same direction under reverse language order.
-
-The corresponding geometric-mean ratios were 1.360 for output tokens, 1.306 for tool calls, and 1.903 for evaluator time. This is a strong hypothesis-generating signal that current model familiarity/tooling burden may dominate F# concision in the current small repository. It is not confirmatory evidence. See `docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md`.
+The final source snapshots are small and similarly sized. The current benchmark does not meaningfully test whether F# fits a large repository into context better than C#.
 
 ## Current decision
 
-Proceed to **Workstream E: successful-chain cost replication**, by design and review first.
+Proceed to **Workstream E: causal attribution**, not directly to a larger cost replication.
 
-Do not make the benchmark harder or lower capability merely to force failures. All-success paired chains are useful for the central cost question because both languages receive equal task exposure. A separate capability-boundary study may later investigate failure thresholds.
+The immediate question is whether the exploratory F# excess came from:
 
-No paid/model run is authorized until the Workstream E design is independently approved, measurement gaps are closed, the new scientific specification is implemented and reviewed, CI is green, and a clean freeze exists.
+1. static source/tokenization size;
+2. pre-edit comprehension or model familiarity;
+3. first-pass generation/syntax/type/API errors;
+4. compiler/test repair loops;
+5. F# project/build obligations and toolchain latency;
+6. repeated tool output and transcript replay;
+7. a combination of these.
+
+A registered successful-chain cost replication remains valuable, but only after the measurement can explain what its total-token endpoint contains.
+
+No paid/model run is authorized until the causal-attribution design is independently approved, archive-only and model-free analyses are complete, and any new scientific specification is reviewed and cleanly frozen.
 
 ## Immediate continuation order
 
-### E0. Independently review the successor design
+### E0. Independently review the causal-attribution design
 
-Review `docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md` for:
+Review:
 
-- the distinction between operational, exploratory, and confirmatory significance;
-- cost-focused use of a correctness-saturated chain;
-- practical-equivalence margin;
-- configuration strata and paired estimands;
-- sample-size/precision adaptation;
-- task-level reporting and early-stop handling;
-- ecological language-toolchain versus controlled-core interpretation;
-- mechanism-study ordering.
+```text
+docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md
+```
+
+Review especially:
+
+- distinction between unique source context, generated output, tool feedback, and replayed transcript;
+- fact that v3 is fresh-per-task and cannot establish cross-task context pollution;
+- diagnostic and command classification;
+- controlled use of gold predecessor snapshots;
+- comprehension, one-shot, and full-repair modes;
+- persistent-orchestrator and delegated-repair design;
+- total-system versus orchestrator-only cost;
+- anti-overengineering and stopping rules.
 
 Close every P1/P2 finding before implementation. This is the next bounded task.
 
-### E1. Close measurement/reporting gaps without changing candidate semantics
+### E1. Forensically attribute the existing v3 trajectories
 
-Before freezing a new scientific cell:
+Use only the preserved raw v3 archive. Do not issue a model request.
 
-1. add deterministic task-level and cumulative cost tables/curves to tracked reports;
-2. treat zero file-read/revisit values as unsupported unless a curated real-event fixture demonstrates parser coverage; prefer null/unavailable over false precision;
-3. add model-free repeated build/evaluator timing for every F#/C# benchmark stage;
-4. record candidate-visible source bytes, lines, lexical units, files, tokenizer-proxy counts, and diffs at each stage;
-5. audit language-specific task obligations, especially F# project-file/compile-order work in Tasks 007–008;
-6. preserve the distinction between model compute, ecological toolchain cost, and total wall time.
+Implement a deterministic, transcript-redacted analyzer that reports per task and run:
 
-Do not add syscall tracing, another remote route, or another apparatus version unless independent review finds the simpler event/reporting path insufficient.
+- source inspection/search/edit/build/test/project/environment command classes;
+- build attempts, first-pass success, first clean build, and nonzero exits;
+- compiler diagnostic codes and categories;
+- diagnostic/tool-output byte, line, and offline-token volume;
+- edit–build and test–edit repair cycles;
+- commands and time before/after first clean build;
+- output/reasoning/input/cached-input totals;
+- source files, bytes, lines, proxy tokens, project-file edits, and diffs at task boundaries;
+- unsupported fields as null, not zero.
 
-### E2. Freeze a new scientific specification, not v14
+Do not infer per-model-call usage, peak context, compaction, unique source exposure, or literal file-read counts unless the raw schema exposes them and fixtures validate the parser.
 
-Tentative scientific family ID: `successful-maintenance-cost-v1`.
+The report must distinguish these signatures:
 
-Reuse the existing reviewed runner and environment profile if their candidate-visible identity remains exact. The formal family uses:
+- lower first-build success and language-skewed diagnostics → generation/syntax/type mechanism;
+- more pre-edit inspection/reasoning with similar first-build success → familiarity/comprehension mechanism;
+- more failed build/test loops and cached input → repair amplification;
+- extra project-file work or successful compiler latency → ecological toolchain mechanism;
+- similar interactions but larger input per comparable cycle increasing with stage → static/context-size candidate;
+- cross-task context pollution → not identifiable from v3.
 
-- canonical descriptive representation only;
-- F# versus C# on the eight-task inherited chain;
-- H/M/L as separate configuration strata;
-- fresh process/container per task and inherited candidate workspace;
-- calibration observations excluded from formal estimates;
-- a new immutable, counterbalanced schedule.
+**Exit:** all retained v3 tasks have auditable command/diagnostic/repair classifications and an explicit observable/unobservable ledger.
 
-Primary outcomes:
+### E2. Establish model-free toolchain and source baselines
 
-1. paired log ratio of full-chain input tokens;
-2. full-chain correctness reported separately;
-3. paired log ratio of agent-process wall time.
+Under the pinned environment, repeatedly build and evaluate each F#/C# baseline and gold stage. Record cold/warm timing, output volume, warnings, files/modules compiled, and project-file obligations.
 
-Predeclare a reviewed practical-equivalence region, provisionally F#/C# = 0.90–1.10. Use two-sided inference.
+At every stage record:
 
-### E3. Collect a registered replication/precision stage
+- source files, bytes, lines, lexical units, and tokenizer-proxy counts;
+- project-file changes;
+- diff size;
+- task-specific obligations.
 
-After independent review, implementation, green CI, and clean freeze:
+Treat this as explanatory ecological cost. Do not mechanically subtract it from agent time, because compiler latency can change agent behavior.
 
-- complete six paired blocks per configuration;
-- use all six H/M/L order permutations;
-- balance language order 3/3 within each configuration;
-- total: 18 pairs and 36 language runs;
-- complete the stage regardless of observed language direction;
-- retain every attempt and preserve/audit raw evidence.
+Explicitly distinguish:
 
-After all stage-1 runs are complete, a preregistered blinded calculation may use within-configuration dispersion only—not the mean or sign—to decide whether precision requires extension to a maximum of 12 pairs per configuration. The exact rule and multiplicity handling must be frozen in advance.
+- **ecological language-stack cost:** idiomatic F#/C# plus their real .NET project/tooling behavior;
+- **controlled-core representation cost:** project mechanics neutralized in a later treatment.
 
-Correctness failures remain valid outcomes. If one language stops early, report terminal-stop cost and common-exposure-prefix cost rather than treating the failed run as cheaper success.
+### E3. Run a bounded causal mechanism pilot only when E1–E2 justify it
 
-### E4. Produce the Workstream E report
+Create a new reviewed scientific specification using matched gold predecessor snapshots, one preregistered model/scaffold configuration, and a small task subset spanning simple, type/validation, and multi-file/API work.
 
-Report:
+Compare:
 
-- configuration-specific paired input/time ratios and uncertainty;
-- full-chain success and task survival;
-- per-task/cumulative trajectories and chain-position interaction;
-- language-order, chronological, provider, and configuration diagnostics;
-- output/reasoning/tool/compiler/test decomposition;
-- model-free F#/C# evaluator/build baseline;
-- source-representation metrics;
-- practical-equivalence classification;
-- whether the observed v3 direction replicated in new formal data.
+1. **Comprehension/localization:** structured relevant files/symbols/invariants/plan; no edits or compiler feedback.
+2. **One-shot patch:** source inspection and one patch; no compile-and-repair loop.
+3. **Monolithic full agent:** normal inspect–edit–compile/test–repair.
 
-Do not pool v3 calibration, difficulty-v1, variance-v2, historical Luna, or retired apparatus attempts into formal Workstream E estimates.
+This separates semantic recovery, first-pass output ability, and repair amplification. Use the pilot only to choose the next causal treatment and estimate variance; do not build a large factorial.
 
-## Decision after Workstream E
+### E4. Make the mechanism decision
 
-### F# cost penalty replicates
+- Repair errors dominate → test compiler-feedback containment and repair delegation.
+- Pre-edit exploration dominates → test documentation/familiarity and retrieval support.
+- Project/toolchain obligations dominate → retain ecological study and add a controlled-core variant only if worthwhile.
+- Input per cycle grows with source stage despite similar behavior → prioritize repository-scale context pressure.
+- No stable attribution → replicate only if the required sample remains worthwhile; otherwise report ambiguity and measurement limits.
 
-Prioritize mechanism identification:
+## Workstream F — Context containment and repair delegation
 
-1. decompose cost by task and tool/compile/test behavior;
-2. run a matched documentation/familiarity intervention, using an F# primer and size-matched C# control;
-3. compare fresh-context and persistent-context regimes;
-4. create one medium-scale matched repository with real modules before creating several families;
-5. test whether the F#/C# ratio shrinks, persists, or reverses with repository size and maintenance depth.
+Run only if Workstream E shows meaningful repair/tool-output amplification.
 
-The practical conclusion would be limited to the tested model/scaffold/environment: current agents are more economical in C# on this small benchmark. It would not falsify a future or large-repository semantic-density crossover.
+### Scientific question
 
-### Signal disappears
+Can an explicit harness keep compiler/test repair chatter out of the strategic orchestrator’s context, and does this change later decision quality or the F#/C# cost ratio?
 
-Treat the v3 pattern as a calibration cluster. Re-estimate stochastic/provider variance and continue only if the required sample is scientifically and economically justified. A valid outcome is that scaffold/trajectory variance dominates language.
+A routing prompt alone is insufficient. The harness must enforce and separately account for contexts.
 
-### Large language × configuration interaction
+### Minimal 2 × 2 harness design
 
-Make model capability/training familiarity central. Report stratified effects; do not publish a pooled language ranking.
+Factors:
 
-### Toolchain difference explains most wall time but not tokens
+- memory: fresh orchestrator per task versus persistent orchestrator across the chain;
+- repair routing: inline/monolithic versus isolated repair worker.
 
-Separate ecological language-stack cost from model-compute cost. Follow with a controlled-core task family that neutralizes project-file and compiler obligations only if that mechanism question is worth the additional complexity.
+Conditions:
 
-## Longer-term approach
+| Condition | Purpose |
+|---|---|
+| Fresh + inline | Existing within-task baseline |
+| Fresh + delegated | Tests within-task context containment |
+| Persistent + inline | Tests cumulative cross-task tool/repair pollution |
+| Persistent + delegated | Tests whether repair isolation preserves strategic context |
 
-1. **Replicate cost** on successful fixed-exposure chains.
-2. **Explain cost** through model familiarity, compiler/tooling, source representation, task obligations, and navigation/reasoning behavior.
-3. **Test scale** with one medium matched repository and a longer maintenance history.
-4. **Test memory** with fresh versus persistent agent contexts.
-5. **Generalize cautiously** to another language or scaffold only after the F#/C# mechanism is understood.
-6. **Publish a mechanism map**, including negative or reversed findings, rather than advocacy for F# or any universal best language.
+Use the same model for orchestrator and worker first. Varying worker model is a later practical intervention.
+
+In delegated runs:
+
+1. the orchestrator interprets the task and makes the initial implementation;
+2. a deterministic controller runs build/tests;
+3. an ephemeral worker receives the current workspace or relevant files/diff plus raw diagnostics;
+4. the worker receives a small frozen repair budget;
+5. the orchestrator receives only a structured repair summary unless a preregistered semantic escalation occurs.
+
+Report separately:
+
+- total system cost;
+- orchestrator-only cost and available context/compaction telemetry;
+- worker cost;
+- diagnostic/tool-output volume withheld from the orchestrator;
+- repairs, escalations, correctness, task survival, and late-task decision quality;
+- language × memory × routing interactions.
+
+A delegated harness may improve orchestrator quality while increasing total cost. Both outcomes must remain visible.
+
+### Anti-overengineering constraint
+
+Do not construct a general multi-agent framework. Implement only the explicit controller required for the four conditions. Reuse the current remote route and runner. If per-agent accounting cannot be audited, stop rather than infer it. No recursive agents or dynamic routing in the first experiment.
+
+## Workstream G — Registered ecological cost replication
+
+After Workstream E—and Workstream F if indicated—register a successful-chain cost study.
+
+Primary outcomes should include:
+
+1. full-chain correctness;
+2. paired full-chain total input under the specified harness;
+3. first-pass compilation and repair-cycle burden;
+4. paired agent-process time;
+5. per-task and cumulative trajectory curves.
+
+Interpret total input as **model input processed over the complete trajectory**, not unique source context. Keep configuration strata separate. Exclude v3 calibration observations from formal estimates. A monolithic and delegated harness, if both studied, are separate harness strata rather than silently interchangeable implementations.
+
+## Workstream H — Test the original context-density hypothesis at scale
+
+Build one medium matched repository before multiplying repository families. Pilot repository/context sizes until retrieval or compaction pressure is actually observable.
+
+Measure:
+
+- candidate-visible repository tokens;
+- relevant-file/symbol retrieval recall and precision;
+- unique/repeated source and tool-output exposure where measurable;
+- maximum/terminal orchestrator context and compaction events where exposed;
+- fresh versus persistent context;
+- monolithic versus delegated repair;
+- task success and cost as chain depth grows.
+
+The semantic-density crossover hypothesis is supported only if F# becomes relatively cheaper or more reliable as context pressure increases after repair, tooling, and familiarity pathways are controlled or modeled.
+
+## Decision logic after causal work
+
+### F# excess is mainly first-pass/repair difficulty
+
+The practical conclusion is that current models/tooling make F# more expensive under the tested ecology. Test documentation/familiarity and isolated repair before making a broader language claim.
+
+### Delegation reduces orchestrator pollution but not total cost
+
+Report that harness architecture can preserve strategic context while language-specific repair burden remains. Optimize orchestration separately from total compute.
+
+### Delegation reduces both total and orchestrator cost
+
+Treat repair routing as a major agentic-language interaction and include harness design in future language comparisons.
+
+### Gap appears only under persistent or larger contexts
+
+The original context-density thesis becomes central; move to the medium-repository scale study.
+
+### Gap disappears after attribution controls
+
+Treat v3 as a calibration cluster or toolchain artifact. Reframe toward configuration/harness sensitivity if that is the stable finding.
+
+## Overall sequence
+
+```text
+E0 independent review
+  -> E1 archive-only forensic attribution
+  -> E2 model-free toolchain/source baseline
+  -> E3 bounded comprehension / one-shot / repair pilot
+  -> E4 causal decision
+  -> F explicit memory/routing experiment when justified
+  -> G registered ecological cost replication
+  -> H medium-scale context-pressure experiment
+```
+
+## Evidence and claim boundaries
+
+- V3 calibration is non-counting and excluded from future formal estimates.
+- The five same-direction pairs are a strong exploratory signal, not confirmatory significance.
+- Aggregate input tokens do not measure unique source memory.
+- Zero file-read/revisit values currently mean unsupported telemetry, not literal absence.
+- Current fresh-per-task runs do not test cross-task context degradation.
+- No result establishes an intrinsic or universal F#, C#, model, or harness ranking.
 
 ## Stop and anti-overengineering rules
 
 - Preserve the v3 evidence; do not reopen its blocked formal schedule.
-- Do not create v14 or another route/runner layer for a scientific-analysis change.
-- The next autonomous task is only E0 independent design review.
-- After two failures of the same apparatus class, stop and report rather than building another recovery subsystem.
-- Stop immediately before any candidate-visible or scientific-treatment change not covered by an approved specification.
-- No paid/model call until E0–E2 are complete and cleanly frozen.
+- Do not create v14 for a scientific-analysis change.
+- The next autonomous task is only E0 independent review.
+- After two failures of one apparatus class, stop and report instead of building another recovery subsystem.
+- Stop before changing candidate-visible semantics, model/prompt/task/evaluator, scientific estimands, or frozen conditions without approved design.
+- No paid/model call until E0–E2 are complete and any E3 specification is independently approved and cleanly frozen.
