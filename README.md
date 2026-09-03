@@ -51,36 +51,39 @@ F#/C# calibration pairs, with geometric-mean ratios near 1.38. These totals are
 ecological trajectory costs, not direct measurements of source compactness or
 model memory.
 
-Workstream E1 is complete. Its fail-closed, transcript-free analyzer reconciled
-all ten v3 runs and 80 tasks. All 25 observable failed candidate operations were
-builds; the 19 conservative repair cycles, all five project-file changes, and
-roughly twofold F# evaluator time route follow-up toward compiler-repair and
-ecological toolchain pathways. These are descriptive clues, not causal or
-universal language findings. Per-command timing, per-interaction usage, unique
-source exposure, replay, and context/compaction remain unavailable. See the
-[E1 disposition](docs/workstream-e1-v3-forensic-disposition-2026-09-03.md),
-[forensic report](reports/workstream-e-v3/forensic-report.md), and
-[causal-attribution design](docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md).
+Workstream E1 is complete. Its archive-only analyzer reconciled all ten v3 runs
+and 80 tasks. Among observable candidate operations, F# incurred 23 failed
+builds versus 2 for C#, 17 conservative repair cycles versus 2, all five
+committed project-file changes, nearly all compiler error/warning output, and
+about twice the evaluator duration. Observable pre-edit inspection/search was
+much less separated. The leading observed pathway is therefore first-pass and
+compiler/type/project difficulty followed by repair amplification, not static
+source size. Per-command timing, per-interaction usage, unique source exposure,
+replay, and context/compaction remain unavailable. See the
+[E1 disposition](docs/workstream-e1-v3-forensic-disposition-2026-09-03.md) and
+[forensic report](reports/workstream-e-v3/forensic-report.md).
 
-Workstream E2's measurement and report review are complete. Its offline baseline
-passed all 18 canonical states, 90 scheduled samples, 180 evaluator invocations,
-and 6,940 cumulative case exposures. Source/token proxies and built-program run
-time were near parity, but F# took about 3.1 times as long to build in both fresh
-and repeat workspaces and about 4.5 times as long across the fresh
-restore-through-evaluator composite in the pinned environment. This is
-ecological toolchain evidence, not a universal language ranking or a quantity to
-subtract mechanically from agent cost. Publication acceptance is conditional on
-exact-commit Linux and Windows CI for the commit containing the report. See the
-[E2 disposition](docs/workstream-e2-toolchain-disposition-2026-09-04.md) and
-[audited report](reports/workstream-e2-toolchain-v1/report.md).
+Workstream E2 is also complete. Its frozen model-free offline baseline passed
+all 18 canonical states and 90 scheduled entries. Source/token proxies and
+built-program execution were near parity, while F# repeat builds took about 3.1
+times as long as C# in that apparatus. The much larger 8.403 restore ratio is
+not yet transportable to v3: the offline condition emitted 225 repeated F#
+`NU1900` audit/source warnings, and E2's explicit restore/build/run commands may
+not match the forms candidates actually used. Toolchain latency can amplify a
+repair-heavy trajectory, but it cannot be mechanically subtracted from agent
+cost or assumed to explain model-token usage. See the
+[E2 disposition](docs/workstream-e2-toolchain-disposition-2026-09-04.md),
+[audited report](reports/workstream-e2-toolchain-v1/report.md), and
+[E1/E2 synthesis review](docs/workstream-e1-e2-synthesis-review-2026-09-04.md).
 
-After that publication CI gate is green, the sole next bounded step is to
-specify, independently review, and cleanly freeze E3's small
-comprehension/one-shot/full-repair pilot. Implementation and model execution
-require a separate continuation decision. Persistent
-orchestrator context and isolated repair workers also remain separate future
-treatments. No paid/model run is presently authorized; see the
-[canonical plan](PLAN.md).
+The sole next bounded step is **E2a**, a model-free alignment study. It will
+reconstruct the command-equivalence classes observed in E1, replay only the
+material build/restore/run/test forms under a v3-aligned environment, include a
+`NuGetAudit=false` counterfactual, and calculate an absolute command-count ×
+duration exposure envelope. E2a must stop after report, review, and exact-commit
+CI. E3's comprehension/one-shot/full-repair model pilot requires a separate
+reviewed specification and continuation decision. No paid/model run is
+presently authorized; see the [canonical plan](PLAN.md).
 
 V4–V13 were apparatus-development attempts, not additional scientific
 treatments; their history and failure categories are summarized in the
