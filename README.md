@@ -51,13 +51,16 @@ F#/C# calibration pairs, with geometric-mean ratios near 1.38. These totals are
 ecological trajectory costs, not direct measurements of source compactness or
 model memory.
 
-The current phase is **Workstream E causal attribution**. Before any larger
-cost replication, the project will analyze the preserved v3 command/build/test
-traces, establish model-free toolchain baselines, and—only under a new reviewed
-specification—separate comprehension, one-shot generation, and repair-loop
-cost. Persistent orchestrator context and isolated repair workers are later
-harness treatments because the current benchmark starts a fresh conversation
-for every task. No paid/model run is presently authorized. See the
+The current phase is **Workstream E causal attribution**. Its design has passed
+independent review with every P1/P2 finding closed. The next bounded step is a
+fail-closed, transcript-free analysis of the preserved v3 command/build/test
+traces; per-command timing, per-interaction usage, unique source exposure, and
+context/compaction remain explicitly unavailable. Model-free toolchain
+baselines follow as a separate step and—only under a new reviewed
+specification—a later pilot may separate comprehension, one-shot generation,
+and repair-loop cost. Persistent orchestrator context and isolated repair
+workers are later controlled harness treatments because the current benchmark
+starts a fresh conversation for every task. No paid/model run is presently authorized. See the
 [causal-attribution design](docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md),
 [calibration report](reports/workstream-d-language-v3/calibration-report.md),
 and [canonical plan](PLAN.md).

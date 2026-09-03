@@ -8,47 +8,59 @@ Workstreams A–C are complete. Workstream D v3 completed ten audited non-counti
 
 Exploratorily, F# used more total input tokens and agent time in all five F#/C# pairs, with geometric-mean ratios near 1.38. These totals are ecological trajectory costs, not direct measurements of source compactness or model memory.
 
-Interpret the current result as a possible **small-repository ecological overhead** under the tested models/scaffold: the project was only about two thousand proxy source tokens, correctness was saturated, and repository capacity was not limiting. In the conceptual decomposition `C_L(S) = A_L + B_L S`, v3 is informative mainly about the small-project intercept `A`, not the context-scale slope `B`. It neither establishes nor rules out a later F#/C# crossover under genuine retrieval, persistent-history, or compaction pressure.
+Interpret the current result as a possible **small-repository ecological overhead** under the tested models/scaffold: the project was only about two thousand proxy source tokens, correctness was saturated, and repository capacity was not limiting. In the conceptual decomposition `C_L(S) = A_L + B_L S`, v3 shows a local small-scale gap consistent with higher fixed overhead; one finite scale identifies neither `A` nor the context-scale slope `B`. It neither establishes nor rules out a later F#/C# crossover under genuine retrieval, persistent-history, or compaction pressure.
 
 The current candidate harness starts a fresh process/conversation per task. It can show within-task repair amplification, but it cannot show compile/tool history accumulating across the full eight-task chain. Long-horizon context pollution and repair delegation require separate persistent-context/harness treatments.
 
 V4–V13 remain apparatus-development history. Do not create v14. Reuse the reviewed runner/environment identity unless a separately justified candidate-visible change is required.
 
+The Workstream E causal-attribution design is independently approved with no
+remaining P1/P2 findings. Its archive-schema review confirmed that v3 preserves
+event order and task-level aggregates but not per-command timing,
+per-interaction usage, source exposure, replay, peak context, or compaction.
+
 ## Next bounded task
 
-Independently review:
+Implement **E1 archive-only forensic attribution** under:
 
 ```text
 docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md
 ```
 
-The design now makes causal attribution precede cost replication. Review:
+The analyzer/archive-processing path may use only the ten preserved v3
+calibration archives and make no model or outbound network request. Ordinary
+Git publication and CI control-plane activity are allowed, but they must not
+invoke the remote benchmark/model route.
+Build one deterministic analyzer/report schema scoped to the observed v3
+Linux/Bash event forms. It must:
 
-- unique source context versus aggregate input/replayed cached history;
-- small-repository intercept versus context-scale slope and observable crossover;
-- first-pass generation and compiler diagnostic classification;
-- build/test repair-loop attribution;
-- model familiarity and pre-edit exploration;
-- ecological project/toolchain obligations;
-- fresh versus persistent context;
-- inline versus isolated repair workers;
-- total-system versus orchestrator-only cost;
-- controlled use of gold predecessor snapshots;
-- anti-overengineering and stop rules.
+- fail closed on the calibration report, result, raw-inventory, task-envelope,
+  sidecar, audit, or task-boundary identity mismatch;
+- assign bounded multi-label command classes with explicit ambiguity and never
+  attribute a compound command's outer exit to an uncertain inner operation;
+- separate candidate activity from the harness evaluator and define the first
+  post-edit candidate build, diagnostics, and repair cycles conservatively;
+- publish only derived counts/codes/categories/hashes and transcript-free
+  fixtures—no commands, output, messages, thread IDs, host paths, or test input;
+- emit every unsupported timing, interaction, context, source-exposure,
+  evaluator-volume, or intermediate-patch field as `null` with a reason; and
+- pass independent implementation review and exact-commit Linux/Windows CI.
 
-Close all P1/P2 findings before implementation. No paid/model run is authorized by the draft.
+E1 closes only when all 80 tasks reconcile, every completed command event has a
+versioned classification/disposition, every observed event and bounded compound
+equivalence class has a redacted fixture, and the transcript-free report meets
+the design's exit contract. No paid/model run is authorized.
 
-## After design approval
+## After E1
 
 Proceed in this order:
 
-1. **Archive-only forensics:** classify existing v3 command events, builds, diagnostics, tests, edits, and repair cycles; generate task-level/cumulative reports without a model call.
-2. **Model-free baselines:** repeatedly build/evaluate every F#/C# stage and record source/token/project obligations.
-3. **Bounded mechanism pilot:** only under a new reviewed specification, compare comprehension/localization, one-shot patching, and monolithic full repair from matched gold predecessor snapshots.
-4. **Causal decision:** choose familiarity, repair, toolchain, context-scale, or harness-routing follow-up from the observed signatures.
-5. **Routing experiment when justified:** compare fresh/persistent orchestrator memory and inline/delegated repair with explicit per-agent accounting.
-6. **Registered small-repository cost replication:** estimate the fixed ecological overhead under equal successful task exposure; do not describe it as a context-density test.
-7. **Multi-scale context study:** test the original semantic-density hypothesis only across preregistered repository/working-set sizes that produce real retrieval or compaction pressure.
+1. **Model-free baselines:** execute the separately bounded 18-state/five-round E2 design and record source/token/project obligations.
+2. **Bounded mechanism pilot:** only under a new reviewed specification, compare comprehension/localization, one-shot patching, and monolithic full repair from matched gold predecessor snapshots.
+3. **Causal decision:** choose familiarity, repair, toolchain, context-scale, or harness-routing follow-up from the observed signatures.
+4. **Routing experiment when justified:** compare fresh/persistent orchestrator memory and inline/delegated repair with explicit per-agent accounting.
+5. **Registered small-repository cost replication:** estimate the local cost gap at the frozen small-repository scale under equal successful task exposure; do not describe it as an identified intercept or context-density test.
+6. **Multi-scale context study:** test the original semantic-density hypothesis only across preregistered repository/working-set sizes that produce real retrieval or compaction pressure.
 
 Do not build a generic multi-agent framework. A routing prompt alone is not a controlled treatment; any routing study must enforce separate contexts and record orchestrator and worker usage separately.
 
@@ -58,10 +70,10 @@ Do not build a generic multi-agent framework. A routing prompt alone is not a co
 - Five same-direction pairs are hypothesis-generating, not statistically confirmatory.
 - Aggregate input tokens are total model input processed over a trajectory, not unique source tokens.
 - A syntax/type error can inflate later input through diagnostics and repeated history; it is not confined to output tokens.
-- Zero recorded file reads currently means unsupported telemetry, not literal absence of reading.
+- Zero recorded file reads currently means unsupported telemetry, not literal absence of reading; E1 may classify bounded command evidence but cannot recover unique source exposure.
 - The small final repositories are similarly sized and do not test context-window fit.
 - Easy/all-success tasks permit equal-exposure cost comparison; they do not establish why one language costs more.
-- The current signal concerns the small-project intercept under this ecology, not the language-by-scale slope.
+- The current signal is a local small-scale ecological gap, not an identified mathematical intercept or language-by-scale slope.
 - Any crossover must be observed or tightly bounded in a registered scale experiment; never extrapolate it from source concision.
 - Current fresh-per-task runs do not test cross-task context degradation.
 - No result establishes an F#, C#, model, or harness advantage universally.
@@ -80,13 +92,13 @@ These instructions guide agents maintaining the research repository. Candidate a
 - Do not pool changed scientific specifications or candidate-visible environments.
 - Candidate correctness failures remain outcomes; only preregistered pre-candidate apparatus failures may be retried/excluded.
 - Separate static/source exposure, model output, tool feedback, total model input, toolchain time, orchestrator cost, worker cost, and end-to-end cost.
-- Separate small-project overhead estimates from language-by-scale estimates; neither substitutes for the other.
+- Separate local small-scale cost estimates from language-by-scale estimates; neither substitutes for the other, and one finite scale does not identify an intercept.
 - Unsupported telemetry is null/unavailable, never a fabricated zero.
 
 ## Autonomous stopping rules
 
 - Every autonomous task must name one bounded artifact/gate and its acceptance criterion.
-- The next task ends after independent review and closure of design findings; it does not proceed automatically into implementation or model runs.
+- The next task ends after E1 implementation, transcript-free reporting, independent implementation review, and exact-commit CI; it does not proceed automatically into E2 or model runs.
 - After two failures of the same apparatus class, stop and report instead of adding another compatibility or recovery layer.
 - Stop before changing candidate-visible semantics, model/prompt/task/evaluator, scientific estimands, harness memory/routing, or another frozen condition without approved design.
 - Prefer deterministic archive analysis and model-free evidence before constructing new agent infrastructure.
