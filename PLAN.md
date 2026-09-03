@@ -10,12 +10,13 @@ Completed:
 - Workstream D scientific design, remote high-memory runner, route shakedown, exact-commit CI, clean v3 freezes, and ten audited non-counting calibrations;
 - v3 calibration disposition: H (`gpt-5.6-terra`, medium) saturated; M (`gpt-5.6-luna`, high) and L (`gpt-5.6-luna`, medium) were too easy in both primary and reverse order;
 - all ten retained v3 calibration runs were protocol-valid, accounting-valid, successful 8/8, and free of terminal agent/evaluator failure;
-- exploratory v3 finding: F# used more input tokens and agent-process time in all five F#/C# pairs, with geometric-mean ratios near 1.38.
-- Workstream E causal-attribution design independently approved with every P1/P2 finding closed; its archive-schema review established the exact v3 observability and missingness boundary.
+- exploratory v3 finding: F# used more input tokens and agent-process time in all five F#/C# pairs, with geometric-mean ratios near 1.38;
+- Workstream E causal-attribution design independently approved with every P1/P2 finding closed; its archive-schema review established the exact v3 observability and missingness boundary; and
+- Workstream E1 archive-only forensic attribution: ten runs/80 tasks reconciled, transcript-free report SHA `644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d`, and implementation independently approved.
 
 V4–V13 remain apparatus-development history, not scientific families. Do not create v14. The reviewed runner/environment identity remains `runner-remote-highmem-local-egress-r1`. Scientific changes receive scientific-specification IDs; they do not trigger another runner-version cascade.
 
-Latest validated pre-mechanism head `af91fffcda41f51030eba1bcb970fd64c570541c` passed Linux and Windows CI. Any new implementation still requires its own exact-commit green CI before use.
+Analyzer implementation head `82c8c6bdc429f0819a718ce6c4d567fe0a30e88a` passed exact-commit Linux and Windows CI. Every new implementation or report publication still requires its own exact-commit green CI before use.
 
 ## Interpretation boundary
 
@@ -83,7 +84,7 @@ Workstream E attributes the first question's overhead pathways. Workstream H est
 
 ## Current decision
 
-Proceed to **Workstream E: causal attribution**, not directly to a larger cost replication.
+Proceed to **Workstream E2: model-free toolchain and source baselines**, not directly to a model-backed mechanism pilot or larger cost replication.
 
 The immediate question is whether the exploratory F# excess came from:
 
@@ -95,13 +96,17 @@ The immediate question is whether the exploratory F# excess came from:
 6. repeated tool output and transcript replay;
 7. a combination of these.
 
-Treat this as attribution of the observed local small-repository ecological gap
-and of pathways consistent with fixed overhead. It identifies neither `A` nor
-the scale-dependent term `B`.
+E1 found that all 25 observable failed candidate operations were builds, with 19
+conservative repair cycles. F# had the larger failed-build/repair burden in each
+configuration, all five project-file changes, and approximately twice the
+evaluator time. This prioritizes compiler-repair and ecological toolchain
+pathways, but remains descriptive hypothesis routing. It identifies no cause,
+training familiarity, universal language effect, intercept `A`, or
+scale-dependent term `B`.
 
 A registered successful-chain cost replication remains valuable, but only after the measurement can explain what its total-token endpoint contains. A repository-scale experiment remains necessary even if the small-repository penalty replicates.
 
-No paid/model run is authorized until the causal-attribution design is independently approved, archive-only and model-free analyses are complete, and any new scientific specification is reviewed and cleanly frozen.
+No paid/model run is authorized until E2 is complete and any E3 scientific specification is independently reviewed and cleanly frozen.
 
 ## Immediate continuation order
 
@@ -133,13 +138,13 @@ source/diagnostic tokens, peak context, or compaction. Compound commands require
 bounded multi-label classification and explicit ambiguity. No model call was
 made during review.
 
-### E1. Forensically attribute the existing v3 trajectories
+### E1. Forensically attribute the existing v3 trajectories — complete
 
-This is the next bounded task. The analyzer and archive-processing path may use
-only the preserved raw v3 archive and may issue no model or outbound network
-request. Ordinary Git publication and CI control-plane activity are allowed;
-they must not invoke the remote benchmark/model route. Implement one
-deterministic analyzer/report schema under the approved design.
+The deterministic analyzer used only the preserved raw v3 archive and issued no
+model or outbound network request. Analyzer commit
+`82c8c6bdc429f0819a718ce6c4d567fe0a30e88a` passed independent review and
+exact-commit Linux/Windows CI. Ordinary Git publication and CI control-plane
+activity remain allowed; they must not invoke the remote benchmark/model route.
 
 First fail closed on the calibration-report self-hash, the exact ten-attempt
 roster, every result/raw-inventory/artifact/source-tree identity, all 80 task
@@ -181,14 +186,17 @@ Use the report only to route hypotheses:
 The stage trend is descriptive only. It cannot estimate the repository-scale
 slope `B`.
 
-**Exit:** every retained task reconciles to its artifact hashes and boundary
-commits; every completed command has a versioned classification/disposition;
-diagnostic/repair rules cover every observed bounded event equivalence class;
-candidate/evaluator activity is separate; the missingness ledger is complete;
-the transcript-free report passes independent implementation review and
-exact-commit Linux/Windows CI. Stop before E2.
+**Exit satisfied:** every retained task reconciled to its artifact hashes and
+boundary commits; every completed command has a versioned
+classification/disposition; diagnostic/repair rules cover every observed
+bounded event equivalence class; candidate/evaluator activity is separate; and
+the missingness ledger is complete. The implementation passed independent review
+and exact-commit CI. The transcript-free report publication commit is accepted
+only when its own exact-commit Linux/Windows CI is green. See
+`docs/workstream-e1-v3-forensic-disposition-2026-09-03.md` and
+`reports/workstream-e-v3/forensic-report.md`.
 
-### E2. Establish model-free toolchain and source baselines
+### E2. Establish model-free toolchain and source baselines — next bounded task
 
 As a separate bounded continuation under the pinned environment, materialize and
 hash all 18 canonical states (baseline plus eight cumulative gold stages per
@@ -421,8 +429,8 @@ Treat v3 as a calibration cluster or toolchain artifact. Reframe toward configur
 
 ```text
 E0 independent review (complete)
-  -> E1 archive-only forensic attribution
-  -> E2 model-free toolchain/source baseline
+  -> E1 archive-only forensic attribution (complete)
+  -> E2 model-free toolchain/source baseline (next)
   -> E3 bounded comprehension / one-shot / repair pilot
   -> E4 causal decision
   -> F explicit memory/routing experiment when justified
@@ -446,7 +454,7 @@ E0 independent review (complete)
 
 - Preserve the v3 evidence; do not reopen its blocked formal schedule.
 - Do not create v14 for a scientific-analysis change.
-- The next autonomous task is only E1 archive implementation/reporting through independent implementation review and exact-commit CI; stop before E2.
+- The next autonomous task is only E2 model-free reporting through independent implementation review and exact-commit CI; stop before E3.
 - After two failures of one apparatus class, stop and report instead of building another recovery subsystem.
 - Stop before changing candidate-visible semantics, model/prompt/task/evaluator, scientific estimands, or frozen conditions without approved design.
 - No paid/model call until E0–E2 are complete and any E3 specification is independently approved and cleanly frozen.

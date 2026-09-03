@@ -14,53 +14,58 @@ The current candidate harness starts a fresh process/conversation per task. It c
 
 V4–V13 remain apparatus-development history. Do not create v14. Reuse the reviewed runner/environment identity unless a separately justified candidate-visible change is required.
 
-The Workstream E causal-attribution design is independently approved with no
-remaining P1/P2 findings. Its archive-schema review confirmed that v3 preserves
-event order and task-level aggregates but not per-command timing,
-per-interaction usage, source exposure, replay, peak context, or compaction.
+Workstream E1 archive-only attribution is complete and independently approved.
+The analyzer reconciled all ten runs, 80 tasks, 435 completed commands, all 11
+observed event shapes, and all 12 observed command-equivalence classes. Analyzer
+commit `82c8c6bdc429f0819a718ce6c4d567fe0a30e88a` passed exact-commit
+Linux/Windows CI. The transcript-free report hash is
+`644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d`.
+The report publication commit is accepted only after its own exact-commit
+Linux/Windows CI is green.
+
+E1 routes attention toward compiler-repair and ecological toolchain pathways:
+all 25 observable failed candidate operations were builds, with 19 conservative
+repair cycles; F# had the larger failed-build/repair burden in every
+configuration, all five project-file changes, and about twice the evaluator
+time. This is descriptive hypothesis routing, not a causal or universal
+language claim. See `reports/workstream-e-v3/forensic-report.md` and
+`docs/workstream-e1-v3-forensic-disposition-2026-09-03.md`.
 
 ## Next bounded task
 
-Implement **E1 archive-only forensic attribution** under:
+After the E1 report publication commit passes exact-commit CI, execute **E2
+model-free language/toolchain baselines** under:
 
 ```text
 docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md
 ```
 
-The analyzer/archive-processing path may use only the ten preserved v3
-calibration archives and make no model or outbound network request. Ordinary
-Git publication and CI control-plane activity are allowed, but they must not
-invoke the remote benchmark/model route.
-Build one deterministic analyzer/report schema scoped to the observed v3
-Linux/Bash event forms. It must:
+E2 is offline and model-free: do not invoke the remote runner, proxy route, or
+any model endpoint. Materialize and hash the baseline plus eight cumulative gold
+states for each language (18 states total). Run exactly five preregistered paired
+rounds in the hashed interleaved order. Each state/round gets a fresh workspace
+without `bin`/`obj` followed by one immediate same-workspace repeat; call these
+fresh-workspace and repeat-workspace, never machine-cold/warm.
 
-- fail closed on the calibration report, result, raw-inventory, task-envelope,
-  sidecar, audit, or task-boundary identity mismatch;
-- assign bounded multi-label command classes with explicit ambiguity and never
-  attribute a compound command's outer exit to an uncertain inner operation;
-- separate candidate activity from the harness evaluator and define the first
-  post-edit candidate build, diagnostics, and repair cycles conservatively;
-- publish only derived counts/codes/categories/hashes and transcript-free
-  fixtures—no commands, output, messages, thread IDs, host paths, or test input;
-- emit every unsupported timing, interaction, context, source-exposure,
-  evaluator-volume, or intermediate-patch field as `null` with a reason; and
-- pass independent implementation review and exact-commit Linux/Windows CI.
+Use only the fixed restore, Release no-incremental/no-restore build, and no-build
+evaluator commands in the approved design. Keep package cache and network policy
+fixed. Record the specified timing/output/warning measures, source/token proxies,
+project-file changes, diffs, and task obligations. Every state/repetition must
+pass its cumulative evaluator and identity checks; there is no adaptive extension
+or selective silent retry.
 
-E1 closes only when all 80 tasks reconcile, every completed command event has a
-versioned classification/disposition, every observed event and bounded compound
-equivalence class has a redacted fixture, and the transcript-free report meets
-the design's exit contract. No paid/model run is authorized.
+E2 closes only after its deterministic report passes independent implementation
+review and exact-commit Linux/Windows CI. Stop before E3 or any paid/model call.
 
-## After E1
+## After E2
 
 Proceed in this order:
 
-1. **Model-free baselines:** execute the separately bounded 18-state/five-round E2 design and record source/token/project obligations.
-2. **Bounded mechanism pilot:** only under a new reviewed specification, compare comprehension/localization, one-shot patching, and monolithic full repair from matched gold predecessor snapshots.
-3. **Causal decision:** choose familiarity, repair, toolchain, context-scale, or harness-routing follow-up from the observed signatures.
-4. **Routing experiment when justified:** compare fresh/persistent orchestrator memory and inline/delegated repair with explicit per-agent accounting.
-5. **Registered small-repository cost replication:** estimate the local cost gap at the frozen small-repository scale under equal successful task exposure; do not describe it as an identified intercept or context-density test.
-6. **Multi-scale context study:** test the original semantic-density hypothesis only across preregistered repository/working-set sizes that produce real retrieval or compaction pressure.
+1. **Bounded mechanism pilot:** only under a new reviewed specification, compare comprehension/localization, one-shot patching, and monolithic full repair from matched gold predecessor snapshots.
+2. **Causal decision:** choose familiarity, repair, toolchain, context-scale, or harness-routing follow-up from the observed signatures.
+3. **Routing experiment when justified:** compare fresh/persistent orchestrator memory and inline/delegated repair with explicit per-agent accounting.
+4. **Registered small-repository cost replication:** estimate the local cost gap at the frozen small-repository scale under equal successful task exposure; do not describe it as an identified intercept or context-density test.
+5. **Multi-scale context study:** test the original semantic-density hypothesis only across preregistered repository/working-set sizes that produce real retrieval or compaction pressure.
 
 Do not build a generic multi-agent framework. A routing prompt alone is not a controlled treatment; any routing study must enforce separate contexts and record orchestrator and worker usage separately.
 
@@ -98,7 +103,7 @@ These instructions guide agents maintaining the research repository. Candidate a
 ## Autonomous stopping rules
 
 - Every autonomous task must name one bounded artifact/gate and its acceptance criterion.
-- The next task ends after E1 implementation, transcript-free reporting, independent implementation review, and exact-commit CI; it does not proceed automatically into E2 or model runs.
+- The next task ends after E2 reporting, independent implementation review, and exact-commit CI; it does not proceed automatically into E3 or model runs.
 - After two failures of the same apparatus class, stop and report instead of adding another compatibility or recovery layer.
 - Stop before changing candidate-visible semantics, model/prompt/task/evaluator, scientific estimands, harness memory/routing, or another frozen condition without approved design.
 - Prefer deterministic archive analysis and model-free evidence before constructing new agent infrastructure.

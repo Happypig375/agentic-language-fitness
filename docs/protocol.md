@@ -1,5 +1,23 @@
 # Experimental protocol
 
+## Workstream E1 disposition
+
+E1 reconciled ten preserved v3 runs and 80 tasks using analyzer commit
+`82c8c6bdc429f0819a718ce6c4d567fe0a30e88a`; report SHA:
+`644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d`.
+The implementation commit passed exact-commit Linux/Windows CI; report
+publication is accepted only when its own exact-commit CI is green. All 25
+observable failed candidate operations were builds, with 19 conservative repair
+cycles; F# carried the larger failed-build/repair burden in every configuration,
+all five project-file changes, and about twice the evaluator time. These are
+archive-only descriptive routing signals, not causal or universal findings.
+Per-command timing, per-interaction usage, unique source exposure, replay, peak
+context, and compaction are unavailable. See
+`reports/workstream-e-v3/forensic-report.md` and
+`docs/workstream-e1-v3-forensic-disposition-2026-09-03.md`.
+E2 is the next gate: 18 canonical states, exactly five paired rounds,
+fresh/repeat workspaces, model-free/offline, then review and exact-commit CI.
+
 ## Unit of execution
 
 A **run** is one language implementation traversing an ordered task chain. The workspace begins from that language's baseline and retains successful code changes. Each task launches a new agent process and a new model conversation.

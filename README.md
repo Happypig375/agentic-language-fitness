@@ -51,19 +51,23 @@ F#/C# calibration pairs, with geometric-mean ratios near 1.38. These totals are
 ecological trajectory costs, not direct measurements of source compactness or
 model memory.
 
-The current phase is **Workstream E causal attribution**. Its design has passed
-independent review with every P1/P2 finding closed. The next bounded step is a
-fail-closed, transcript-free analysis of the preserved v3 command/build/test
-traces; per-command timing, per-interaction usage, unique source exposure, and
-context/compaction remain explicitly unavailable. Model-free toolchain
-baselines follow as a separate step and—only under a new reviewed
-specification—a later pilot may separate comprehension, one-shot generation,
-and repair-loop cost. Persistent orchestrator context and isolated repair
-workers are later controlled harness treatments because the current benchmark
-starts a fresh conversation for every task. No paid/model run is presently authorized. See the
-[causal-attribution design](docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md),
-[calibration report](reports/workstream-d-language-v3/calibration-report.md),
-and [canonical plan](PLAN.md).
+Workstream E1 is complete. Its fail-closed, transcript-free analyzer reconciled
+all ten v3 runs and 80 tasks. All 25 observable failed candidate operations were
+builds; the 19 conservative repair cycles, all five project-file changes, and
+roughly twofold F# evaluator time route follow-up toward compiler-repair and
+ecological toolchain pathways. These are descriptive clues, not causal or
+universal language findings. Per-command timing, per-interaction usage, unique
+source exposure, replay, and context/compaction remain unavailable. See the
+[E1 disposition](docs/workstream-e1-v3-forensic-disposition-2026-09-03.md),
+[forensic report](reports/workstream-e-v3/forensic-report.md), and
+[causal-attribution design](docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md).
+
+The sole next bounded step is E2: offline, model-free source and toolchain
+baselines over 18 canonical states and exactly five paired rounds. A later
+model-backed pilot requires a new independently reviewed and cleanly frozen
+specification. Persistent orchestrator context and isolated repair workers also
+remain separate future treatments. No paid/model run is presently authorized;
+see the [canonical plan](PLAN.md).
 
 V4–V13 were apparatus-development attempts, not additional scientific
 treatments; their history and failure categories are summarized in the
