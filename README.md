@@ -43,17 +43,28 @@ that is no longer fully saturated, but it exposed candidate-caused
 representation drift. These are feasibility findings, not evidence that F# or
 C# is better.
 
-The current scientific family is Workstream D v3: canonical descriptive
-representation, three capability configurations, a predeclared counterbalanced
-schedule, non-counting calibration, and a staged continuation gate. V4–V13
-were apparatus-development attempts, not additional scientific treatments; the
-history and failure categories are summarized in the
-[postmortem](docs/apparatus-versioning-postmortem-2026-09-02.md). No v14 exists.
-The minimal remote runner passed exact-commit CI and a real non-counting route
-shakedown. V3 calibration is complete: H is saturated and M/L are too easy in
-both orders. Formal macroblocks 1–6 are blocked; no paid/model run, language
-estimate, or significance claim is authorized. See the [calibration report](reports/workstream-d-language-v3/calibration-report.md)
+Workstream D v3 used the canonical descriptive representation with Terra/Luna
+capability configurations. Its ten audited non-counting calibrations all
+completed 8/8 tasks, so the frozen difficulty rule blocked formal v3
+macroblocks. Exploratorily, F# used more total input and agent time in all five
+F#/C# calibration pairs, with geometric-mean ratios near 1.38. These totals are
+ecological trajectory costs, not direct measurements of source compactness or
+model memory.
+
+The current phase is **Workstream E causal attribution**. Before any larger
+cost replication, the project will analyze the preserved v3 command/build/test
+traces, establish model-free toolchain baselines, and—only under a new reviewed
+specification—separate comprehension, one-shot generation, and repair-loop
+cost. Persistent orchestrator context and isolated repair workers are later
+harness treatments because the current benchmark starts a fresh conversation
+for every task. No paid/model run is presently authorized. See the
+[causal-attribution design](docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md),
+[calibration report](reports/workstream-d-language-v3/calibration-report.md),
 and [canonical plan](PLAN.md).
+
+V4–V13 were apparatus-development attempts, not additional scientific
+treatments; their history and failure categories are summarized in the
+[postmortem](docs/apparatus-versioning-postmortem-2026-09-02.md). No v14 exists.
 
 ## How a chain works
 
