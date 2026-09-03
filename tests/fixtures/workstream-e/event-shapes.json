@@ -1,0 +1,16 @@
+{
+  "fixture_type": "synthetic-redacted-event-shape-cases",
+  "cases": [
+    {"fixture_id": "thread.started", "event": {"type": "thread.started", "thread_id": "synthetic-thread"}, "expected_shape_key": "thread.started"},
+    {"fixture_id": "turn.started", "event": {"type": "turn.started"}, "expected_shape_key": "turn.started"},
+    {"fixture_id": "turn.completed", "event": {"type": "turn.completed", "usage": {}}, "expected_shape_key": "turn.completed"},
+    {"fixture_id": "item.started:command_execution", "event": {"type": "item.started", "item": {"id": "synthetic-command", "type": "command_execution", "status": "in_progress", "command": "bash -lc 'true'"}}, "expected_shape_key": "item.started:command_execution"},
+    {"fixture_id": "item.completed:command_execution", "event": {"type": "item.completed", "item": {"id": "synthetic-command", "type": "command_execution", "status": "completed", "command": "bash -lc 'true'", "exit_code": 0, "aggregated_output": ""}}, "expected_shape_key": "item.completed:command_execution"},
+    {"fixture_id": "item.started:file_change", "event": {"type": "item.started", "item": {"id": "synthetic-change", "type": "file_change", "status": "in_progress", "changes": {"path": "Synthetic.cs", "kind": "update"}}}, "expected_shape_key": "item.started:file_change"},
+    {"fixture_id": "item.completed:file_change", "event": {"type": "item.completed", "item": {"id": "synthetic-change", "type": "file_change", "status": "completed", "changes": {"path": "Synthetic.cs", "kind": "update"}}}, "expected_shape_key": "item.completed:file_change"},
+    {"fixture_id": "item.completed:agent_message", "event": {"type": "item.completed", "item": {"id": "synthetic-message", "type": "agent_message", "text": "synthetic completion"}}, "expected_shape_key": "item.completed:agent_message"},
+    {"fixture_id": "item.started:todo_list", "event": {"type": "item.started", "item": {"id": "synthetic-todo", "type": "todo_list", "items": []}}, "expected_shape_key": "item.started:todo_list"},
+    {"fixture_id": "item.updated:todo_list", "event": {"type": "item.updated", "item": {"id": "synthetic-todo", "type": "todo_list", "items": []}}, "expected_shape_key": "item.updated:todo_list"},
+    {"fixture_id": "item.completed:todo_list", "event": {"type": "item.completed", "item": {"id": "synthetic-todo", "type": "todo_list", "items": []}}, "expected_shape_key": "item.completed:todo_list"}
+  ]
+}

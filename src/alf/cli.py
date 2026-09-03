@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -14,6 +15,7 @@ from .protocol import validate_cell, write_frozen_manifest
 from .workstream_d import validate_family
 from .variance import calibration_fixture, markdown_report, variance_report
 from .representation import build_representation, check_representation
+from .workstream_e import analyze_archive, write_report
 
 
 def _root_and_manifest(args: argparse.Namespace) -> tuple[Path, dict[str, Any]]:
@@ -211,6 +213,22 @@ def cmd_representation(args: argparse.Namespace) -> int:
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0
 
+def cmd_workstream_e(args: argparse.Namespace) -> int:
+    report = analyze_archive(args.calibration_report, args.archive_root, args.analyzer_git_sha)
+    write_report(report, args.output_json, args.output_markdown)
+    print(json.dumps({"output_json": args.output_json,
+                      "output_markdown": args.output_markdown,
+                      "report_sha256": report["report_sha256"],
+                      "runs": report["totals"]["run_count"],
+                      "tasks": report["totals"]["task_count"]}, sort_keys=True))
+    return 0
+
+
+def _sha40(value: str) -> str:
+    if re.fullmatch(r"[0-9a-fA-F]{40}", value) is None:
+        raise argparse.ArgumentTypeError("must be exactly 40 hexadecimal characters")
+    return value.lower()
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="alf", description="Agentic Language Fitness benchmark harness")
@@ -286,6 +304,13 @@ def build_parser() -> argparse.ArgumentParser:
         rp = representation_sub.add_parser(name)
         rp.add_argument("--output", help="Treatment artifact directory (defaults to benchmarks/successor/representation-v1)")
         rp.set_defaults(func=cmd_representation)
+    e1 = sub.add_parser("e1-report", aliases=["e1"], help="Analyze preserved v3 archives (archive-only, no model/network access)")
+    e1.add_argument("--calibration-report", required=True)
+    e1.add_argument("--archive-root", required=True)
+    e1.add_argument("--analyzer-git-sha", required=True, type=_sha40)
+    e1.add_argument("--output-json", required=True)
+    e1.add_argument("--output-markdown", required=True)
+    e1.set_defaults(func=cmd_workstream_e)
     return parser
 
 

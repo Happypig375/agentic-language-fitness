@@ -1,0 +1,20 @@
+{
+  "fixture_type": "synthetic-redacted-command-equivalence-cases",
+  "cases": [
+    {"fixture_id": "atomic", "command": "bash -lc 'true'", "expected_equivalence_classes": ["atomic"], "selected_labels": ["other"], "ambiguous": false},
+    {"fixture_id": "and-if", "command": "bash -lc 'rg synthetic src && true'", "expected_equivalence_classes": ["and-if"], "selected_labels": ["other", "search"], "ambiguous": false},
+    {"fixture_id": "pipeline", "command": "bash -lc 'rg synthetic src | head -n 1'", "expected_equivalence_classes": ["pipeline"], "selected_labels": ["search", "source_inspection"], "ambiguous": false},
+    {"fixture_id": "or-if", "command": "bash -lc 'false || true'", "expected_equivalence_classes": ["or-if"], "selected_labels": ["other"], "ambiguous": false},
+    {"fixture_id": "sequence", "command": "bash -lc 'true; true'", "expected_equivalence_classes": ["sequence"], "selected_labels": ["other"], "ambiguous": false},
+    {"fixture_id": "newline", "command": "bash -lc \"true\ntrue\"", "expected_equivalence_classes": ["newline"], "selected_labels": ["other"], "ambiguous": false},
+    {"fixture_id": "mixed-restore-build-run", "command": "bash -lc 'dotnet restore App && dotnet build App && dotnet run --project App'", "expected_equivalence_classes": ["and-if", "mixed-restore-build-run"], "selected_labels": ["build", "project_configuration", "test_or_run"], "ambiguous": false},
+    {"fixture_id": "quoted-data-argument", "command": "bash -lc 'echo \"{\\\"synthetic\\\":\\\"value\\\"}\"'", "expected_equivalence_classes": ["atomic", "quoted-data-argument"], "selected_labels": ["other"], "ambiguous": false},
+    {"fixture_id": "input-redirection", "command": "bash -lc 'head -n 1 < Synthetic.cs'", "expected_equivalence_classes": ["atomic", "input-redirection"], "selected_labels": ["source_inspection"], "ambiguous": false},
+    {"fixture_id": "output-redirection", "command": "bash -lc 'printf synthetic > Synthetic.cs'", "expected_equivalence_classes": ["atomic", "output-redirection"], "selected_labels": ["edit"], "ambiguous": false},
+    {"fixture_id": "append-redirection", "command": "bash -lc 'printf synthetic >> Synthetic.cs'", "expected_equivalence_classes": ["atomic", "output-redirection", "append-redirection"], "selected_labels": ["edit"], "ambiguous": false},
+    {"fixture_id": "stderr-redirection", "command": "bash -lc 'true 2> synthetic.err'", "expected_equivalence_classes": ["atomic", "output-redirection", "stderr-redirection"], "selected_labels": ["other"], "ambiguous": false},
+    {"fixture_id": "heredoc-ambiguous", "command": "bash -lc \"true <<'END'\nEND\"", "expected_equivalence_classes": ["newline", "input-redirection", "heredoc-ambiguous"], "selected_labels": ["other"], "ambiguous": true},
+    {"fixture_id": "substitution-ambiguous", "command": "bash -lc 'echo $(pwd)'", "alternate_cases": [{"command": "bash -lc 'echo `pwd`'", "expected_equivalence_classes": ["atomic", "substitution-ambiguous"]}], "expected_equivalence_classes": ["atomic", "substitution-ambiguous", "parentheses-ambiguous"], "selected_labels": ["other"], "ambiguous": true},
+    {"fixture_id": "parentheses-ambiguous", "command": "bash -lc '(true)'", "expected_equivalence_classes": ["atomic", "parentheses-ambiguous"], "selected_labels": [], "ambiguous": true}
+  ]
+}
