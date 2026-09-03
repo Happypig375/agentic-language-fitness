@@ -29,7 +29,50 @@ The current harness starts a fresh candidate process and conversation for every 
 
 Total input tokens can be inflated by generation problems. A faulty patch leads to diagnostics, more tool calls, and repeated cached history, so a syntax/type failure may appear mainly as extra input rather than only extra output.
 
-The final source snapshots are small and similarly sized. The current benchmark does not meaningfully test whether F# fits a large repository into context better than C#.
+The final source snapshots are small and similarly sized—roughly two thousand offline proxy tokens and two or three source/project files. Repository capacity was not a meaningful limiting factor. The agent could inspect the whole project without choosing among a large set of distant modules, although the current telemetry does not prove that every file was included in every model request.
+
+### Small-repository intercept versus context-scale slope
+
+Use the following as a conceptual decomposition, not a claim that cost is literally linear:
+
+\[
+C_L(S) = A_L + B_L S,
+\]
+
+where:
+
+- `C_L(S)` is agent cost for language `L` at repository/context scale `S`;
+- `A_L` is the small-project overhead from model familiarity, first-pass generation, compiler/type interaction, project mechanics, repair behavior, and fixed toolchain cost;
+- `B_L` is the marginal cost of recovering and maintaining additional source, dependencies, tool history, and architectural state as the relevant working set grows.
+
+The current small, correctness-saturated benchmark primarily provides exploratory evidence about the **intercept**:
+
+\[
+A_{F\#} > A_{C\#}
+\]
+
+under the tested models, scaffold, tasks, and .NET ecology. It does not estimate either language's scale slope. In particular, it does not establish whether:
+
+\[
+B_{F\#} < B_{C\#},\quad B_{F\#} = B_{C\#},\quad\text{or}\quad B_{F\#} > B_{C\#}.
+\]
+
+A delayed semantic-density crossover remains possible if F# has a higher fixed overhead but a lower marginal context/recovery cost. In the simple conceptual model, the crossover would occur at:
+
+\[
+S^* = \frac{A_{F\#}-A_{C\#}}{B_{C\#}-B_{F\#}},
+\]
+
+but no crossover may be reported from extrapolation. It must be observed or tightly bounded in a preregistered scale experiment with real retrieval, context, or compaction pressure.
+
+The tasks being easy enough for every retained run to succeed is useful for **equal-exposure cost measurement**: both languages completed the same eight changes, so neither appears cheaper because it failed early. It is not evidence that easy tasks inherently make F# expensive. Rather, the lack of context pressure gives source compactness little opportunity to offset familiarity, generation, repair, and tooling overhead.
+
+Accordingly, maintain two separate questions:
+
+1. **Small-repository ecological cost:** which language currently costs more when the whole relevant project is comfortably manageable and both chains succeed?
+2. **Scale-dependent context efficiency:** how does the relative cost and reliability change as repository size, relevant working set, persistent history, retrieval burden, and compaction pressure grow?
+
+Workstream E attributes the first question's overhead pathways. Workstream H estimates the second question's language-by-scale interaction and tests for a crossover.
 
 ## Current decision
 
@@ -45,7 +88,9 @@ The immediate question is whether the exploratory F# excess came from:
 6. repeated tool output and transcript replay;
 7. a combination of these.
 
-A registered successful-chain cost replication remains valuable, but only after the measurement can explain what its total-token endpoint contains.
+Treat this as attribution of the current small-repository overhead `A`, not yet as a test of the scale-dependent term `B`.
+
+A registered successful-chain cost replication remains valuable, but only after the measurement can explain what its total-token endpoint contains. A repository-scale experiment remains necessary even if the small-repository penalty replicates.
 
 No paid/model run is authorized until the causal-attribution design is independently approved, archive-only and model-free analyses are complete, and any new scientific specification is reviewed and cleanly frozen.
 
@@ -62,6 +107,7 @@ docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md
 Review especially:
 
 - distinction between unique source context, generated output, tool feedback, and replayed transcript;
+- distinction between small-repository intercept and context-scale slope/crossover;
 - fact that v3 is fresh-per-task and cannot establish cross-task context pollution;
 - diagnostic and command classification;
 - controlled use of gold predecessor snapshots;
@@ -86,6 +132,7 @@ Implement a deterministic, transcript-redacted analyzer that reports per task an
 - commands and time before/after first clean build;
 - output/reasoning/input/cached-input totals;
 - source files, bytes, lines, proxy tokens, project-file edits, and diffs at task boundaries;
+- interaction count and input/output per comparable interaction where the event schema permits it;
 - unsupported fields as null, not zero.
 
 Do not infer per-model-call usage, peak context, compaction, unique source exposure, or literal file-read counts unless the raw schema exposes them and fixtures validate the parser.
@@ -98,6 +145,8 @@ The report must distinguish these signatures:
 - extra project-file work or successful compiler latency → ecological toolchain mechanism;
 - similar interactions but larger input per comparable cycle increasing with stage → static/context-size candidate;
 - cross-task context pollution → not identifiable from v3.
+
+The stage trend is descriptive only. Because the current project remains tiny at every stage, a growing per-task gap cannot by itself estimate the repository-scale slope `B`.
 
 **Exit:** all retained v3 tasks have auditable command/diagnostic/repair classifications and an explicit observable/unobservable ledger.
 
@@ -131,12 +180,14 @@ Compare:
 
 This separates semantic recovery, first-pass output ability, and repair amplification. Use the pilot only to choose the next causal treatment and estimate variance; do not build a large factorial.
 
+The comprehension condition estimates small-project semantic recovery, not context-window pressure. It becomes a context-density test only when repeated at preregistered repository/working-set scales in Workstream H.
+
 ### E4. Make the mechanism decision
 
 - Repair errors dominate → test compiler-feedback containment and repair delegation.
 - Pre-edit exploration dominates → test documentation/familiarity and retrieval support.
 - Project/toolchain obligations dominate → retain ecological study and add a controlled-core variant only if worthwhile.
-- Input per cycle grows with source stage despite similar behavior → prioritize repository-scale context pressure.
+- Input per cycle grows with source stage despite similar behavior → treat it as a candidate scale mechanism, then test it under real repository pressure in Workstream H.
 - No stable attribution → replicate only if the required sample remains worthwhile; otherwise report ambiguity and measurement limits.
 
 ## Workstream F — Context containment and repair delegation
@@ -186,13 +237,17 @@ Report separately:
 
 A delegated harness may improve orchestrator quality while increasing total cost. Both outcomes must remain visible.
 
+This workstream tests transcript containment, not source semantic density by itself. A smaller persistent-orchestrator F#/C# gap under delegation would show that repair history mediates part of the ecological gap; it would not establish a source-size crossover.
+
 ### Anti-overengineering constraint
 
 Do not construct a general multi-agent framework. Implement only the explicit controller required for the four conditions. Reuse the current remote route and runner. If per-agent accounting cannot be audited, stop rather than infer it. No recursive agents or dynamic routing in the first experiment.
 
-## Workstream G — Registered ecological cost replication
+## Workstream G — Registered small-repository ecological cost replication
 
-After Workstream E—and Workstream F if indicated—register a successful-chain cost study.
+After Workstream E—and Workstream F if indicated—register a successful-chain cost study on the current benchmark.
+
+This workstream estimates the current regime's paired small-project overhead. It should not be described as a test of which language uses a large context window more efficiently.
 
 Primary outcomes should include:
 
@@ -204,27 +259,84 @@ Primary outcomes should include:
 
 Interpret total input as **model input processed over the complete trajectory**, not unique source context. Keep configuration strata separate. Exclude v3 calibration observations from formal estimates. A monolithic and delegated harness, if both studied, are separate harness strata rather than silently interchangeable implementations.
 
-## Workstream H — Test the original context-density hypothesis at scale
+A replicated F# penalty would support `A_F# > A_C#` for the tested ecology. It would not determine the relative scale slopes or rule out a later crossover.
 
-Build one medium matched repository before multiplying repository families. Pilot repository/context sizes until retrieval or compaction pressure is actually observable.
+## Workstream H — Test the original context-density hypothesis across scale
 
-Measure:
+The current repository is too small to test whether concise or semantically dense source preserves agent memory. Build one matched, scalable repository architecture before multiplying independent repository families.
 
-- candidate-visible repository tokens;
-- relevant-file/symbol retrieval recall and precision;
-- unique/repeated source and tool-output exposure where measurable;
+### Scientific question
+
+How does the paired F#/C# cost and reliability ratio change as the candidate-visible repository, task-relevant working set, architectural distance, persistent history, and tool-output burden grow?
+
+The primary target is the **language × scale interaction**, not the average language coefficient.
+
+### Scale design
+
+Use several preregistered size/pressure levels generated from one reviewed matched architecture, for example:
+
+1. current small baseline;
+2. medium multi-module repository;
+3. large repository with distributed but known relevant dependencies;
+4. a pressure level at which retrieval omissions, compaction, or working-set tradeoffs are actually observed.
+
+Do not inflate size with inert filler. Added modules must create realistic navigation or dependency obligations, and the evaluator must know the gold relevant-file/symbol set. Keep external behavior and task families matched across languages.
+
+Pilot only enough to locate meaningful pressure levels, then freeze the scale points before formal collection. If every level remains comfortably retrievable with no compaction or relevant-context tradeoff, the study has not tested the context-density hypothesis and must not report a null crossover conclusion.
+
+### Context regimes
+
+Separate rather than silently combine:
+
+- fresh context per task;
+- persistent orchestrator context across the chain;
+- inline repair;
+- delegated repair when Workstream F establishes an auditable implementation.
+
+Do not begin with the full factorial. First choose the smallest set needed to estimate the language-by-scale interaction under the practical baseline; add memory/routing strata only when justified by Workstream F.
+
+### Required measurements
+
+- candidate-visible repository and task-relevant token size;
+- relevant-file and symbol retrieval recall/precision;
+- architectural distance between task entry point and affected code;
+- unique and repeated source/tool-output exposure where measurable;
+- number of model interactions and input per interaction;
 - maximum/terminal orchestrator context and compaction events where exposed;
-- fresh versus persistent context;
-- monolithic versus delegated repair;
-- task success and cost as chain depth grows.
+- diagnostic/tool-output volume;
+- fresh versus persistent context state;
+- orchestrator and worker cost separately when delegated;
+- task success, escaped regressions, and late-chain decision quality;
+- total ecological cost as chain depth and scale grow.
 
-The semantic-density crossover hypothesis is supported only if F# becomes relatively cheaper or more reliable as context pressure increases after repair, tooling, and familiarity pathways are controlled or modeled.
+Unsupported telemetry remains unavailable rather than estimated.
+
+### Analysis
+
+Use paired, configuration-specific models that expose the interaction, conceptually:
+
+```text
+log(cost) ~ language * log(repository_or_relevant_working_set_tokens)
+            + task + order + time + configuration
+            + (1 | matched_pair) + (1 | task_family)
+```
+
+Model correctness/retrieval with suitable hierarchical binary or ordinal models. Report observed scale-specific ratios and uncertainty before any fitted crossover.
+
+A semantic-density crossover is supported only when:
+
+- the language × scale interaction is stable across preregistered tasks/blocks;
+- F# becomes relatively cheaper or more reliable as genuine context pressure increases;
+- repair, toolchain, and familiarity pathways are measured or modeled;
+- the estimated crossover lies inside the observed scale range or a narrowly supported interpolation range.
+
+Do not claim a crossover from extrapolating the small-project intercept. If F# remains more expensive at all observed scales, report the range over which no crossover was found rather than claiming none can ever exist.
 
 ## Decision logic after causal work
 
 ### F# excess is mainly first-pass/repair difficulty
 
-The practical conclusion is that current models/tooling make F# more expensive under the tested ecology. Test documentation/familiarity and isolated repair before making a broader language claim.
+The practical conclusion is that current models/tooling make F# more expensive under the tested small-project ecology. Test documentation/familiarity and isolated repair before making a broader language claim.
 
 ### Delegation reduces orchestrator pollution but not total cost
 
@@ -234,9 +346,13 @@ Report that harness architecture can preserve strategic context while language-s
 
 Treat repair routing as a major agentic-language interaction and include harness design in future language comparisons.
 
-### Gap appears only under persistent or larger contexts
+### F# relative cost improves with real scale/context pressure
 
-The original context-density thesis becomes central; move to the medium-repository scale study.
+The original context-density thesis gains support. Estimate the observed slope and crossover range rather than generalizing beyond the tested models, repositories, and harnesses.
+
+### F# small-project gap persists without scale improvement
+
+Conclude that model familiarity, generation, repair, and/or tooling dominate semantic-density benefits throughout the observed range. This remains conditional on the tested ecology.
 
 ### Gap disappears after attribution controls
 
@@ -251,17 +367,20 @@ E0 independent review
   -> E3 bounded comprehension / one-shot / repair pilot
   -> E4 causal decision
   -> F explicit memory/routing experiment when justified
-  -> G registered ecological cost replication
-  -> H medium-scale context-pressure experiment
+  -> G registered small-repository ecological cost replication
+  -> H preregistered multi-scale context-pressure experiment
 ```
 
 ## Evidence and claim boundaries
 
 - V3 calibration is non-counting and excluded from future formal estimates.
-- The five same-direction pairs are a strong exploratory signal, not confirmatory significance.
+- The five same-direction pairs are a strong exploratory small-repository signal, not confirmatory significance.
 - Aggregate input tokens do not measure unique source memory.
+- The current result primarily concerns fixed small-project ecological overhead, not the marginal context-cost slope.
+- Easy/all-success tasks provide equal exposure for cost comparison but do not test capability boundaries or context pressure.
 - Zero file-read/revisit values currently mean unsupported telemetry, not literal absence.
 - Current fresh-per-task runs do not test cross-task context degradation.
+- A later crossover remains possible but unestablished; it must be tested across observed pressure levels rather than inferred from source concision.
 - No result establishes an intrinsic or universal F#, C#, model, or harness ranking.
 
 ## Stop and anti-overengineering rules
