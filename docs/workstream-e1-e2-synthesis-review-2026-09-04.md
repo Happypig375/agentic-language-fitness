@@ -89,6 +89,12 @@ A model-free timing ratio is explanatory only for operations actually encountere
 
 **Correction:** extract the exact bounded E1 command-equivalence classes and benchmark only the relevant model-free forms under an explicitly matched environment profile.
 
+### P1 — E2 host and resource conditions are not the v3 execution profile
+
+E2 ran in a GitHub-hosted Ubuntu Actions container, while v3 candidate trajectories ran through the reviewed remote high-memory profile. Absolute compiler and restore timings can depend on CPU, storage/filesystem, container image, package-cache placement, memory/CPU/PID limits, and host load even when the .NET SDK version is the same.
+
+**Correction:** execute E2a on the v3 remote host/profile when safely reproducible, or explicitly bound every remaining mismatch. Do not treat GitHub-hosted timing as a direct component of remote candidate wall time.
+
 ### P1 — E3 must make first-pass boundaries controller-observable
 
 E1 could identify only 46 of 80 first-post-edit build outcomes; 34 remained unavailable because v3 was not designed around a controller-defined first patch and first build. Repeating that event ambiguity would defeat the main causal question.
@@ -135,7 +141,7 @@ This is the next bounded task. It uses no model endpoint.
 1. Reconstruct a redacted frequency table of actual build/restore/run/test command-equivalence classes by language, task, and configuration.
 2. Collapse only variants with demonstrably equivalent command semantics. Replay every semantically distinct compiler/test form and every class with material exposure, without reproducing incidental shell plumbing merely because its spelling differs.
 3. Replay only command forms that materially occurred in E1.
-4. Match the v3 package cache, configuration, environment variables, network/source reachability, and audit behavior as closely as can be demonstrated.
+4. Execute on the v3 remote host/profile when it can be reproduced safely, matching the container image, CPU/memory/PID limits, storage/filesystem path, package cache, environment variables, build configuration, network/source reachability, and audit behavior. If any component cannot be matched, predeclare it and limit transportability.
 5. For restore-capable command forms, add one explicit `NuGetAudit=false` counterfactual while holding all other conditions fixed.
 6. Preserve the existing offline E2 result as a separate ecology; do not overwrite or pool it.
 7. Report paired ratios and absolute deltas, diagnostic/output volume, and uncertainty.
@@ -151,7 +157,7 @@ This estimate is a timing counterfactual only. It is not subtracted from agent c
 ### E2a exit criteria
 
 - exact E1 command forms and their frequency are auditable without publishing sensitive raw commands;
-- audit/network/source conditions are explicit and matched or declared unmatched;
+- audit/network/source and host/resource/filesystem conditions are matched or explicitly bounded;
 - the `NU1900` contribution is bounded by the audit-on/audit-off contrast;
 - direct tool-latency exposure is compared with the observed agent-time gap in absolute seconds;
 - the report states what remains attributable only to model interaction and repair behavior;
@@ -225,7 +231,7 @@ Do not build persistent orchestration before F1 demonstrates auditable context s
 
 ```text
 E1/E2 synthesis review — complete
-  -> E2a exact-command/environment model-free alignment
+  -> E2a exact-command/host/environment model-free alignment
   -> E3 reviewed one-shot/full-repair mechanism pilot
   -> comprehension/familiarity follow-up as indicated
   -> F1 fresh repair containment, then F2 persistence only if justified
@@ -237,6 +243,6 @@ E1/E2 synthesis review — complete
 
 The current evidence supports only this bounded interpretation:
 
-> In the tested small-repository ecology, F# incurred more observable build failures, diagnostics, repair cycles, project work, model usage, and time than C#. A slower F# toolchain amplified that pathway. Static source size and built-program runtime do not explain the observed gap, while hidden model familiarity, unique source exposure, and persistent context effects remain unidentified.
+> In the tested small-repository ecology, F# incurred more observable build failures, diagnostics, repair cycles, project work, model usage, and time than C#. A slower F# toolchain amplified that pathway. Static source size and built-program runtime do not explain the observed gap, while hidden model familiarity, unique source exposure, persistent context effects, and exact cross-host timing attribution remain unidentified.
 
 It does not establish an intrinsic language ranking, a training-corpus cause, a context-density slope, or a crossover.
