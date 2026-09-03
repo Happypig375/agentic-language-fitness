@@ -93,12 +93,13 @@ Use the preserved E1 raw archive and classifications to construct a redacted inv
 Required work:
 
 1. Enumerate actual build, restore, run, test, project, and compound-command forms without publishing sensitive raw command text.
-2. Benchmark only materially observed forms against matched baseline/gold states.
-3. Match the v3 toolchain, package cache, environment variables, build configuration, audit behavior, and source/network reachability as closely as can be demonstrated.
-4. For restore-capable forms, include an otherwise matched `NuGetAudit=false` control to bound vulnerability-audit delay.
-5. Keep the accepted offline E2 result separate; do not overwrite or pool it.
-6. Report paired absolute seconds and output/diagnostic volume beside every ratio.
-7. Compute a mechanical tool-exposure envelope using observed E1 invocation counts and model-free operation timings:
+2. Collapse only variants with demonstrably equivalent command semantics. Benchmark every semantically distinct compiler/test form and every class with material exposure; do not reproduce incidental shell plumbing merely because its exact spelling differed.
+3. Benchmark only materially observed forms against matched baseline/gold states.
+4. Match the v3 toolchain, package cache, environment variables, build configuration, audit behavior, and source/network reachability as closely as can be demonstrated.
+5. For restore-capable forms, include an otherwise matched `NuGetAudit=false` control to bound vulnerability-audit delay.
+6. Keep the accepted offline E2 result separate; do not overwrite or pool it.
+7. Report paired absolute seconds and output/diagnostic volume beside every ratio.
+8. Compute a mechanical tool-exposure envelope using observed E1 invocation counts and model-free operation timings:
 
 ```text
 estimated direct tool time(language)
@@ -106,8 +107,8 @@ estimated direct tool time(language)
 ```
 
 This is an explanatory timing counterfactual, not a subtraction from agent cost and not a mediation estimate.
-8. Determine whether `NU1900` or equivalent audit output appeared in the v3 candidate command streams. Absence, presence, or unobservability must be explicit.
-9. Preserve unsupported timing or command details as unavailable rather than guessing.
+9. Determine whether `NU1900` or equivalent audit output appeared in the v3 candidate command streams. Absence, presence, or unobservability must be explicit.
+10. Preserve unsupported timing or command details as unavailable rather than guessing.
 
 E2a exit criteria:
 
@@ -136,7 +137,7 @@ Task selection is hypothesis-routing and the pilot is non-confirmatory. Do not c
 
 #### Configuration
 
-Use one exact model/scaffold setting, preferably the lowest-cost configuration that still showed the repair signal, subject to reviewed availability/preflight. Do not vary model, effort, and harness simultaneously.
+Use one exact model/scaffold setting selected for **nondegenerate first-patch outcomes on the chosen tasks**, not merely the lowest monetary cost or the largest exploratory F#/C# gap. E1 makes M (`gpt-5.6-luna`, high) the provisional default: its observable F# first-post-edit builds were mixed at 10 successes, 3 failures, and 3 unavailable, whereas L was near a floor at 0 successes, 13 failures, and 3 unavailable; H had 6 of 8 boundaries unavailable. Confirm this choice against task-level evidence and current model preflight, document it before outcomes exist, and freeze it. Do not vary model, effort, and harness simultaneously.
 
 #### Modes
 
