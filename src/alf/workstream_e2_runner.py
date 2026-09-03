@@ -53,6 +53,7 @@ from .workstream_e2_report import (
 
 
 WARNING_RE = re.compile(rb"\bwarning(?:\s+([A-Za-z]+\d+))?\b", re.IGNORECASE)
+WARNING_SUMMARY_RE = re.compile(rb"^\s*\d+\s+warning\(s\)\s*$", re.IGNORECASE)
 
 
 def _cases(manifest: dict[str, Any], stage: int) -> list[dict[str, Any]]:
@@ -141,6 +142,8 @@ def _warning_summary(stdout: bytes, stderr: bytes) -> dict[str, Any]:
     codes: Counter[str] = Counter()
     line_hashes: list[str] = []
     for line in (stdout + b"\n" + stderr).splitlines():
+        if WARNING_SUMMARY_RE.fullmatch(line):
+            continue
         match = WARNING_RE.search(line)
         if not match:
             continue

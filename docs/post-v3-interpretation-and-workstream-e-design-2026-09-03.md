@@ -1,7 +1,7 @@
 # Post-v3 causal attribution and successor design
 
 **Date:** 2026-09-03  
-**Status:** independently reviewed and approved with no remaining P1/P2 findings. E1 archive-only implementation is the next gate; no paid/model run is authorized.
+**Status:** independently reviewed and approved with no remaining P1/P2 findings. E1 is complete; E2 measurement/report review are complete and publication acceptance is exact-commit CI-gated. E3 specification and independent review become the next gate only after that CI passes. No paid/model run is authorized.
 
 ## Evidence boundary
 
@@ -279,6 +279,21 @@ distributions, project/source obligations, environment/load metadata, and an
 explicit missingness ledger. Any failed gold evaluation or changed environment
 fails the baseline rather than being silently rerun.
 
+**Execution status — 2026-09-04:** E2 measurement is complete at runner commit
+`b953dac54c03087ae46689bc62a3221c3c9d3f97`. All 18 states, 90 schedule
+entries, 180 evaluator invocations, and 6,940 cumulative case exposures passed;
+the package cache and evidence inventory reconciled. Source/token proxy size and
+built-program run time were near parity, while paired F#/C# geometric-mean
+ratios were 8.403 for fresh restore, 3.037 for fresh build, 3.117 for repeat
+build, and 4.490 for the fresh composite. The immutable report's generic
+warning count includes `.NET` summary-footer false matches; the disposition
+provides the corrected code-bearing interpretation. See
+`reports/workstream-e2-toolchain-v1/` and
+`docs/workstream-e2-toolchain-disposition-2026-09-04.md`.
+
+Publication acceptance is conditional on exact-commit Linux and Windows CI for
+the commit containing the report. E3 is not active until both jobs are green.
+
 ### E3 — Minimal controlled mechanism pilot
 
 Only after E1–E2 and review, define a new scientific specification using matched
@@ -461,9 +476,10 @@ None supports a universal language ranking without broader models, scaffolds, re
 
 ## Gate
 
-E0 is approved. The next bounded task is **E1 only**: implement and validate the
-deterministic archive analyzer, fixtures, and transcript-free report under the
-identity, observability, classifier, privacy, and exit contracts above. Close
-independent implementation review and exact-commit Linux/Windows CI before
-using the report. Stop after E1 is closed; E2 is a separate continuation. No
-new model call, subagent framework, or scientific cell is authorized yet.
+After the E2 report-publication commit passes exact-commit Linux and Windows CI,
+the next bounded task is **E3 specification only**: define
+the matched predecessor identities, task subset, three mode boundaries,
+controller authority, outcomes, accounting, failure handling, and stopping
+rules; then obtain independent review and a clean freeze. Stop before E3
+implementation or execution. No model call, subagent framework, or new
+scientific observation is authorized by this design-status update.

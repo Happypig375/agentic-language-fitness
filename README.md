@@ -62,12 +62,25 @@ source exposure, replay, and context/compaction remain unavailable. See the
 [forensic report](reports/workstream-e-v3/forensic-report.md), and
 [causal-attribution design](docs/post-v3-interpretation-and-workstream-e-design-2026-09-03.md).
 
-The sole next bounded step is E2: offline, model-free source and toolchain
-baselines over 18 canonical states and exactly five paired rounds. A later
-model-backed pilot requires a new independently reviewed and cleanly frozen
-specification. Persistent orchestrator context and isolated repair workers also
-remain separate future treatments. No paid/model run is presently authorized;
-see the [canonical plan](PLAN.md).
+Workstream E2's measurement and report review are complete. Its offline baseline
+passed all 18 canonical states, 90 scheduled samples, 180 evaluator invocations,
+and 6,940 cumulative case exposures. Source/token proxies and built-program run
+time were near parity, but F# took about 3.1 times as long to build in both fresh
+and repeat workspaces and about 4.5 times as long across the fresh
+restore-through-evaluator composite in the pinned environment. This is
+ecological toolchain evidence, not a universal language ranking or a quantity to
+subtract mechanically from agent cost. Publication acceptance is conditional on
+exact-commit Linux and Windows CI for the commit containing the report. See the
+[E2 disposition](docs/workstream-e2-toolchain-disposition-2026-09-04.md) and
+[audited report](reports/workstream-e2-toolchain-v1/report.md).
+
+After that publication CI gate is green, the sole next bounded step is to
+specify, independently review, and cleanly freeze E3's small
+comprehension/one-shot/full-repair pilot. Implementation and model execution
+require a separate continuation decision. Persistent
+orchestrator context and isolated repair workers also remain separate future
+treatments. No paid/model run is presently authorized; see the
+[canonical plan](PLAN.md).
 
 V4–V13 were apparatus-development attempts, not additional scientific
 treatments; their history and failure categories are summarized in the
@@ -135,6 +148,7 @@ remove it after the run. Do not minimize, blank, hash, log, or commit it.
 - `benchmarks/pilot/` — matched .NET projects, tasks, evaluators, and snapshots
 - `docs/` — protocol, environment, design, results, and research context
 - `protocols/workstream-e2-toolchain-v1/` — frozen offline E2 source/toolchain baseline
+- `reports/` — publishable audited aggregates; raw evidence remains outside Git
 - `tests/` — unit and model-free regression tests
 - `scripts/alf.py` — command-line entry point
 - `PLAN.md` — canonical continuation order and decision gates

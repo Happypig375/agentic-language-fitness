@@ -184,6 +184,15 @@ class WorkstreamE2DefinitionTests(unittest.TestCase):
 
 
 class WorkstreamE2RunnerPrimitiveTests(unittest.TestCase):
+    def test_warning_summary_ignores_build_footers_but_keeps_diagnostics(self) -> None:
+        summary = e2_runner._warning_summary(
+            b"warning CS1234: first\n  0 Warning(s)\n  2 Warning(s)\n",
+            b"warning: uncoded\nwarning FS5678: second\n",
+        )
+        self.assertEqual(summary["count"], 3)
+        self.assertEqual(summary["codes"], {"CS1234": 1, "FS5678": 1, "UNSPECIFIED": 1})
+        self.assertEqual(len(summary["line_sha256"]), 3)
+
     def test_fresh_workspace_rejects_bin_and_obj(self) -> None:
         for name in ("bin", "obj", "BIN"):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as directory:

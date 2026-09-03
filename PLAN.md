@@ -2,7 +2,7 @@
 
 This is the canonical continuation plan. Workstream D v3 is closed at its preregistered calibration stop. The next phase investigates **why** F# cost more in the exploratory calibration before registering a larger language-cost comparison.
 
-## Scientific checkpoint — 2026-09-03
+## Scientific checkpoint — 2026-09-04
 
 Completed:
 
@@ -12,11 +12,16 @@ Completed:
 - all ten retained v3 calibration runs were protocol-valid, accounting-valid, successful 8/8, and free of terminal agent/evaluator failure;
 - exploratory v3 finding: F# used more input tokens and agent-process time in all five F#/C# pairs, with geometric-mean ratios near 1.38;
 - Workstream E causal-attribution design independently approved with every P1/P2 finding closed; its archive-schema review established the exact v3 observability and missingness boundary; and
-- Workstream E1 archive-only forensic attribution: ten runs/80 tasks reconciled, transcript-free report SHA `644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d`, and implementation independently approved.
+- Workstream E1 archive-only forensic attribution: ten runs/80 tasks reconciled, transcript-free report SHA `644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d`, and implementation independently approved; and
+- Workstream E2 model-free toolchain/source measurement and report review: all 18 frozen states, 90 schedule entries, 180 evaluator invocations, and 6,940 cumulative case exposures passed; report self-hash `2e4381ab67dd4cc7aed24c323e8edbd30bf83dd29bafc58554615bcd6f24c49a`.
 
 V4–V13 remain apparatus-development history, not scientific families. Do not create v14. The reviewed runner/environment identity remains `runner-remote-highmem-local-egress-r1`. Scientific changes receive scientific-specification IDs; they do not trigger another runner-version cascade.
 
-Analyzer implementation head `82c8c6bdc429f0819a718ce6c4d567fe0a30e88a` passed exact-commit Linux and Windows CI. Every new implementation or report publication still requires its own exact-commit green CI before use.
+Analyzer implementation head `82c8c6bdc429f0819a718ce6c4d567fe0a30e88a` and E2 runner head `b953dac54c03087ae46689bc62a3221c3c9d3f97` passed exact-commit Linux and Windows CI. Every new implementation or report publication still requires its own exact-commit green CI before use.
+
+E2 publication acceptance, and therefore activation of E3 as the next gate, is
+conditional on exact-commit Linux and Windows CI for the commit containing this
+report publication. Until both jobs are green, stop at E2.
 
 ## Interpretation boundary
 
@@ -84,7 +89,9 @@ Workstream E attributes the first question's overhead pathways. Workstream H est
 
 ## Current decision
 
-Proceed to **Workstream E2: model-free toolchain and source baselines**, not directly to a model-backed mechanism pilot or larger cost replication.
+After the E2 report-publication commit passes exact-commit Linux and Windows CI,
+proceed only to **Workstream E3 specification and independent review**, not yet
+to a model-backed mechanism run or larger cost replication.
 
 The immediate question is whether the exploratory F# excess came from:
 
@@ -104,9 +111,20 @@ pathways, but remains descriptive hypothesis routing. It identifies no cause,
 training familiarity, universal language effect, intercept `A`, or
 scale-dependent term `B`.
 
+E2 then found near-parity source/token proxy size and built-program run time,
+while F# restore, build, and restore-through-evaluator composite time were
+substantially higher in the pinned offline .NET environment. Repeat-workspace
+build time remained about 3.1 times C#, and Task 007 alone required an explicit
+F# project compile-order edit. These results strengthen the toolchain/project
+and repair-feedback route, but do not isolate causality or identify model
+familiarity. See
+`docs/workstream-e2-toolchain-disposition-2026-09-04.md`.
+
 A registered successful-chain cost replication remains valuable, but only after the measurement can explain what its total-token endpoint contains. A repository-scale experiment remains necessary even if the small-repository penalty replicates.
 
-No paid/model run is authorized until E2 is complete and any E3 scientific specification is independently reviewed and cleanly frozen.
+No paid/model run is presently authorized. The next bounded artifact is an E3
+scientific specification that must be independently reviewed and cleanly frozen;
+executing it is a separate continuation decision.
 
 ## Immediate continuation order
 
@@ -196,7 +214,7 @@ only when its own exact-commit Linux/Windows CI is green. See
 `docs/workstream-e1-v3-forensic-disposition-2026-09-03.md` and
 `reports/workstream-e-v3/forensic-report.md`.
 
-### E2. Establish model-free toolchain and source baselines — next bounded task
+### E2. Establish model-free toolchain and source baselines — measurement complete; publication CI-gated
 
 As a separate bounded continuation under the pinned environment, materialize and
 hash all 18 canonical states (baseline plus eight cumulative gold stages per
@@ -226,7 +244,25 @@ their real .NET project/tooling behavior. A controlled-core representation-cost
 variant that neutralizes project mechanics is a later, separately reviewed
 treatment.
 
-### E3. Run a bounded causal mechanism pilot only when E1–E2 justify it
+**Measurement exit satisfied:** the accepted attempt at runner commit
+`b953dac54c03087ae46689bc62a3221c3c9d3f97` matched all 18 frozen states and
+completed all 90 schedule entries. Both regimes and all 180 evaluator
+invocations passed, covering 6,940 cumulative cases; the package cache was
+unchanged and the raw inventory reconciled. Across 45 matched stage-by-round
+pairs, the geometric-mean F#/C# ratios were 8.403 for fresh restore, 3.037 for
+fresh build, 3.117 for repeat build, 4.490 for the fresh composite, and 0.988
+and 0.984 for fresh and repeat run time. The immutable report's generic warning
+field includes 180 false matches from `.NET` summary footers; raw diagnostics
+show zero code-bearing C# warning lines and 225 F# `NU1900` lines. The parser is
+corrected prospectively without altering or rerunning the accepted baseline.
+See `reports/workstream-e2-toolchain-v1/` and
+`docs/workstream-e2-toolchain-disposition-2026-09-04.md`.
+
+The report becomes an accepted publication only when the exact commit containing
+it passes Linux and Windows CI. That condition does not require another run or
+another status-only commit.
+
+### E3. Specify a bounded causal mechanism pilot — next design gate
 
 Create a new reviewed scientific specification using matched gold predecessor snapshots: Task 001 uses the clean baseline and Task `n` uses the canonical gold state after Task `n-1`. Hash and validate each predecessor and never expose current/future gold, evaluator cases, or obligation maps. Use one preregistered model/scaffold configuration and a small task subset spanning simple, type/validation, and multi-file/API work.
 
@@ -430,8 +466,8 @@ Treat v3 as a calibration cluster or toolchain artifact. Reframe toward configur
 ```text
 E0 independent review (complete)
   -> E1 archive-only forensic attribution (complete)
-  -> E2 model-free toolchain/source baseline (next)
-  -> E3 bounded comprehension / one-shot / repair pilot
+  -> E2 model-free toolchain/source baseline (measurement complete; publication CI-gated)
+  -> E3 bounded comprehension / one-shot / repair specification (next after green publication CI)
   -> E4 causal decision
   -> F explicit memory/routing experiment when justified
   -> G registered small-repository ecological cost replication
@@ -454,7 +490,7 @@ E0 independent review (complete)
 
 - Preserve the v3 evidence; do not reopen its blocked formal schedule.
 - Do not create v14 for a scientific-analysis change.
-- The next autonomous task is only E2 model-free reporting through independent implementation review and exact-commit CI; stop before E3.
+- After this publication's exact-commit CI is green, the next autonomous task is only the E3 scientific specification through independent review and clean freeze; stop before implementation or any model run.
 - After two failures of one apparatus class, stop and report instead of building another recovery subsystem.
 - Stop before changing candidate-visible semantics, model/prompt/task/evaluator, scientific estimands, or frozen conditions without approved design.
-- No paid/model call until E0–E2 are complete and any E3 specification is independently approved and cleanly frozen.
+- No paid/model call is presently authorized; E3 execution requires a separately approved continuation after its specification is independently approved and cleanly frozen.
