@@ -1,3 +1,4 @@
 /src/alf/representation.py text eol=lf
 /benchmarks/successor/representation-v1/** text eol=lf
 /reports/workstream-e2-toolchain-v1/** text eol=lf
+/reports/workstream-e2a-host-aligned-v1/** text eol=lf

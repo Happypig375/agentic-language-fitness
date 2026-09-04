@@ -47,6 +47,7 @@ from alf.workstream_e2a import (
     environment_contract,
     freeze,
     inventory,
+    markdown_report,
     report,
     validate_report,
     validate_environment,
@@ -56,6 +57,10 @@ import alf.workstream_e2a as e2a_module
 
 ROOT = Path(__file__).resolve().parents[1]
 E2_DEFINITION_PATH = ROOT / "protocols" / "workstream-e2-toolchain-v1" / "definition.json"
+E2A_DEFINITION_PATH = ROOT / "protocols" / "workstream-e2a-host-aligned-v1" / "definition.json"
+E2A_INVENTORY_PATH = ROOT / "protocols" / "workstream-e2a-host-aligned-v1" / "inventory.json"
+E2A_REPORT_PATH = ROOT / "reports" / "workstream-e2a-host-aligned-v1" / "report.json"
+E2A_MARKDOWN_PATH = ROOT / "reports" / "workstream-e2a-host-aligned-v1" / "report.md"
 MANIFEST_PATH = ROOT / "benchmarks" / "successor" / "manifest.json"
 RUNNER_SHA = "a" * 40
 
@@ -798,6 +803,19 @@ class E2aTests(unittest.TestCase):
             args = parser.parse_args(["e2a", command, *arguments])
             self.assertTrue(callable(args.func))
             self.assertNotEqual(getattr(args.func, "__name__", ""), "<lambda>")
+
+    def test_published_report_integrity_and_deterministic_markdown(self):
+        definition = json.loads(E2A_DEFINITION_PATH.read_text(encoding="utf-8"))
+        inventory_data = json.loads(E2A_INVENTORY_PATH.read_text(encoding="utf-8"))
+        report_data = json.loads(E2A_REPORT_PATH.read_text(encoding="utf-8"))
+
+        self.assertEqual(
+            report_data["report_sha256"],
+            "66e37e1086159e462aafee684108f3cda431368da1daa1900971bfdfe88a0aeb",
+        )
+        self.assertTrue(validate_report(report_data, definition, inventory_data)["ok"])
+        published_markdown = E2A_MARKDOWN_PATH.read_bytes().decode("utf-8")
+        self.assertEqual(published_markdown, markdown_report(report_data))
 
 
 if __name__ == "__main__":

@@ -1,5 +1,7 @@
 # Workstream E2a: host-aligned exact-command baseline
 
+**Status:** complete and published (1,020 samples; five paired rounds).
+
 E2a is a model-free follow-up to the accepted E1 and E2 descriptive work. It
 measures the materially distinct `dotnet` command forms authenticated from the
 retained v3 event streams on the v3 remote host/profile. It does not start a
@@ -49,3 +51,9 @@ python scripts/alf.py --manifest benchmarks/successor/manifest.json e2a check \
 The remote run uses `infra/remote-runner/run-e2a.sh`. That wrapper executes the
 entire source tree archived from the runner commit and keeps the archive
 read-only inside the container.
+
+See the [E2a disposition](../../docs/workstream-e2a-disposition-2026-09-04.md)
+and [published report](../../reports/workstream-e2a-host-aligned-v1/report.md)
+for results, hashes, CI evidence, and transportability bounds. The current
+bounded task ends after E2a publication; E3 requires a separately reviewed
+scientific specification and decision. No model call is authorized here.

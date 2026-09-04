@@ -1,6 +1,6 @@
 # Research plan
 
-This is the canonical continuation plan. Workstream D v3 is closed. Workstreams E1 and E2 are complete and accepted within their stated evidence boundaries. The current phase aligns those measurements before any new model-backed causal pilot.
+This is the canonical continuation plan. Workstream D v3 is closed. Workstreams E1, E2, and E2a are complete and accepted within their stated evidence boundaries. The current bounded task ends after E2a publication; any model-backed causal pilot requires a new reviewed decision.
 
 ## Scientific checkpoint — 2026-09-04
 
@@ -10,7 +10,8 @@ Completed and preserved:
 - Workstream D v3: reviewed remote runner, route shakedown, clean freezes, and ten audited non-counting calibrations;
 - Workstream E1: archive-only forensic attribution over 10 runs and 80 tasks, report SHA-256 `644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d`;
 - Workstream E2: model-free toolchain/source baseline over 18 states and 90 schedule entries, report SHA-256 `2e4381ab67dd4cc7aed24c323e8edbd30bf83dd29bafc58554615bcd6f24c49a`;
-- exact-commit Linux and Windows CI for the E1 and E2 implementations and publications.
+- Workstream E2a: exact-command, host/environment-aligned model-free baseline, 1,020 samples in five paired rounds; report file SHA-256 `e392ed7dfeb29732b4a5d5b64b9e9b2cdc090b99ad221bdaf557ef02252d57fe`;
+- exact-commit Linux and Windows CI for the E1, E2, and E2a implementations and publications.
 
 V4–V13 remain apparatus-development history, not scientific families. Do not create v14. Reuse `runner-remote-highmem-local-egress-r1` unless a separately reviewed candidate-visible change is necessary. Scientific changes receive scientific-specification IDs rather than runner-version numbers.
 
@@ -20,7 +21,7 @@ The authoritative synthesis and review is:
 docs/workstream-e1-e2-synthesis-review-2026-09-04.md
 ```
 
-No model or paid run is currently authorized.
+No model or paid run is currently authorized. See the [E2a disposition](docs/workstream-e2a-disposition-2026-09-04.md) and [published report](reports/workstream-e2a-host-aligned-v1/report.md).
 
 ## What E1 and E2 now indicate
 
@@ -73,7 +74,16 @@ The v3 repository was only about two thousand proxy source tokens. It measures a
 
 ## Current decision
 
-Insert a mandatory model-free **E2a command/environment alignment** before E3.
+E2a is complete. It strengthens the coupled repair/invocation-count plus
+compiler/audit amplification hypothesis while preserving near-parity test,
+direct-DLL, and most built-program run behavior. This remains descriptive,
+not causal or universal; E2 remains a separate offline ecology. The next
+separately reviewed step is an E3 scientific specification. Do not begin E3,
+create v14, or issue a model request without a separate maintainer/user decision.
+
+The mandatory model-free **E2a command/environment alignment** is complete and
+published. Its results and bounds are recorded in the E2a disposition linked
+above.
 
 The earlier plan moved directly from E2 to an E3 model pilot. Review found that this would carry three unresolved interpretation problems forward:
 
@@ -81,13 +91,15 @@ The earlier plan moved directly from E2 to an E3 model pilot. Review found that 
 2. E2 used fixed command forms that may not match the build/restore/run commands actually used by v3 candidates;
 3. E2 ran on a GitHub-hosted Ubuntu worker rather than the v3 remote high-memory host/profile, so absolute timing attribution also depends on CPU, storage/filesystem, container, and resource-limit alignment.
 
-E2a corrects or explicitly bounds those issues without a model call. Only after E2a is reviewed and green may E3 be specified, frozen, and separately authorized.
+E2a corrected or explicitly bounded those issues without a model call. E3 may
+now be specified only as a separately reviewed, frozen, and separately
+authorized step.
 
 ## Immediate continuation order
 
 ### E2a — Exact-command and environment-aligned model-free baseline
 
-**This is the next bounded task. No model endpoint, candidate agent, or paid request is permitted.**
+**Completed. No model endpoint, candidate agent, or paid request was used.**
 
 Use the preserved E1 raw archive and classifications to construct a redacted inventory of the bounded command-equivalence classes that actually occurred, by language, task, and configuration.
 
@@ -259,7 +271,7 @@ The primary target is language × scale. A crossover is supported only if observ
 - E1/E2 are descriptive mechanism-routing evidence, not causal language inference.
 - Aggregate input tokens are trajectory usage, not unique source exposure.
 - The current small repository does not test context-window fit.
-- E2 restore is an offline, audit- and host-sensitive ecological result until E2a establishes transportability.
+- E2 restore is a permanently separate offline, audit- and host-sensitive ecology; E2a does not pool with it or establish universal transportability, but bounds the aligned v3 remote ecology.
 - E2 repeat-build latency is a real direct toolchain signal in its apparatus but does not by itself explain model-token usage.
 - Compiler warning occurrences are not independent defects.
 - Current fresh-per-task runs cannot establish cross-task context pollution.
@@ -277,8 +289,8 @@ The primary target is language × scale. A crossover is supported only if observ
 
 ## Autonomous stopping rules
 
-- The next autonomous task is only E2a implementation, review, report, and exact-commit CI.
-- It may not continue into E3 specification or any model run automatically.
+- The E2a bounded task is complete. The next permissible work is a separately reviewed E3 scientific specification only.
+- E3 execution and any model run remain separately unauthorized.
 - After two failures of the same apparatus class, stop and report instead of adding another compatibility or recovery layer.
 - Stop before changing candidate-visible semantics, model/prompt/task/evaluator, harness memory/routing, or a frozen scientific condition without reviewed authorization.
 - Prefer bounded deterministic analysis and reuse of the existing runner over new infrastructure.

@@ -1,7 +1,7 @@
 # E1/E2 synthesis review and corrected successor gate
 
 **Date:** 2026-09-04  
-**Status:** E1 and E2 evidence accepted; successor design approved only after the mandatory model-free E2a alignment step below. No model call is authorized.
+**Status:** E1, E2, and E2a evidence accepted within stated boundaries; E2a is complete and published. No model call is authorized.
 
 ## Review scope
 
@@ -14,6 +14,7 @@ Reviewed evidence:
 - `reports/workstream-e2-toolchain-v1/report.{md,json}`;
 - `docs/workstream-e2-toolchain-disposition-2026-09-04.md`;
 - the E1/E2 analyzers, protocols, command definitions, missingness ledgers, and exact-commit CI records.
+- `docs/workstream-e2a-disposition-2026-09-04.md` and `reports/workstream-e2a-host-aligned-v1/report.{md,json}`.
 
 The immutable E1 and E2 reports remain unchanged. This document qualifies their joint interpretation and controls the successor design.
 
@@ -128,7 +129,41 @@ First test fresh-context inline repair versus fresh-context isolated repair. Onl
 
 ## E2a — Command- and environment-aligned model-free baseline
 
-This is the next bounded task. It uses no model endpoint.
+E2a is complete and published. It used no model endpoint, candidate agent,
+Codex process, authentication, or paid request. See the [E2a disposition](workstream-e2a-disposition-2026-09-04.md)
+for the complete identity ledger, results, hashes, CI, and bounds.
+
+It completed 1,020 samples in five paired rounds. Audit-on aggregate means were
+restore 1.377/7.801 s (C#/F#, gap +6.424 s, 5.664×), build 1.583/8.065 s
+(+6.483 s, 4.577×), run 0.995/1.404 s (+0.409 s, 1.109×), test
+0.664/0.653 s (−0.011 s, 0.985×), and direct DLL 0.128/0.131 s
+(+0.004 s, 1.029×). F# restore was 7.801/2.076 s audit-on/off; eligible
+build 11.628/5.430 s and run 12.252/6.371 s. F# `NU1900` was 435/0 audit-on/off,
+and the authenticated v3 streams contained 197 F#/0 C# lines.
+
+The mechanical invocation-count × duration envelope is reported beside E1
+agent seconds and is not subtracted, called mediation, or treated as a percent
+explained. E2 remains a separate offline ecology. E2a strengthens the coupled
+repair/invocation-count plus compiler/audit amplification hypothesis, while
+near-parity test, direct-DLL, and most built-program run behavior remain. The
+interpretation is descriptive, not causal or universal.
+
+### Frozen E2a conditions and evidence boundary
+
+E2a matched the v3 remote host/profile and pinned image/resource/storage setup.
+Host Python 3.10.12 passed full E1 plus raw audit; the pinned
+`alf-codex:0.149.1` Python 3.12.3 network-none/read-only audit passed with the
+same report hash. Analyzer exact-commit Linux and Windows CI succeeded in
+[Actions run 33890449685](https://github.com/Happypig375/agentic-language-fitness/actions/runs/33890449685); E2 was intentionally skipped.
+Finite derived summary floats use a 1e-12 tolerance only; measurements,
+identities, raw evidence, structure, and self-hashes are exact.
+
+Bounds remain: canonical gold successors stand in for intermediate edits; fresh
+caches do not reproduce unknown within-task history; shell commands use semantic
+replay; host/page-cache load was observed, not controlled; and candidate/auth
+behavior was absent. `NU1900` counts are repeated ecology-dependent lines, not
+defects. E2a therefore bounds direct tool exposure but cannot reproduce a
+candidate trajectory or identify a causal decomposition.
 
 ### Inputs
 

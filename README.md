@@ -76,18 +76,18 @@ cost or assumed to explain model-token usage. See the
 [audited report](reports/workstream-e2-toolchain-v1/report.md), and
 [E1/E2 synthesis review](docs/workstream-e1-e2-synthesis-review-2026-09-04.md).
 
-The sole next bounded step is **E2a**, a model-free alignment study. It will
-reconstruct the command-equivalence classes observed in E1, replay only the
-material build/restore/run/test forms under a v3-aligned environment, include a
-`NuGetAudit=false` counterfactual, and calculate an absolute command-count ×
-duration exposure envelope. E2a must stop after report, review, and exact-commit
-CI. E3's comprehension/one-shot/full-repair model pilot requires a separate
-reviewed specification and continuation decision. No paid/model run is
-presently authorized; see the [canonical plan](PLAN.md).
-
 V4–V13 were apparatus-development attempts, not additional scientific
 treatments; their history and failure categories are summarized in the
 [postmortem](docs/apparatus-versioning-postmortem-2026-09-02.md). No v14 exists.
+
+Workstream E2a is complete and published: 1,020 model-free samples in five
+paired rounds reconstructed redacted E1 command-equivalence classes, replayed
+materially observed forms under the v3 environment, added a `NuGetAudit=false`
+control, and calculated an absolute command-count × duration exposure envelope.
+See the [E2a disposition](docs/workstream-e2a-disposition-2026-09-04.md) and
+[published report](reports/workstream-e2a-host-aligned-v1/report.md). The next
+permissible work is a separately reviewed E3 specification; no model call is
+authorized without a separate maintainer/user decision.
 
 ## How a chain works
 
