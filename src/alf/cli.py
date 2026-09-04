@@ -19,6 +19,14 @@ from .workstream_e import analyze_archive, write_report
 from .workstream_e2 import check_definition, freeze_definition
 from .workstream_e2_report import audit_report
 from .workstream_e2_runner import run_baseline
+from .workstream_e2a import (
+    audit as e2a_audit,
+    check as e2a_check,
+    freeze as e2a_freeze,
+    inventory as e2a_inventory,
+    report as e2a_report,
+    run as e2a_run,
+)
 
 
 def _root_and_manifest(args: argparse.Namespace) -> tuple[Path, dict[str, Any]]:
@@ -291,6 +299,120 @@ def cmd_e2_audit(args: argparse.Namespace) -> int:
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0 if result["ok"] else 1
 
+def cmd_e2a_inventory(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    report = _e2a_repo_path(root, args.report)
+    archive = _e2a_repo_path(root, args.archive_root)
+    output = _e2a_repo_path(root, args.output)
+    result = e2a_inventory(report, archive, output)
+    print(json.dumps({
+        "inventory_sha256": result["inventory_sha256"],
+        "forms": len(result["form_catalog"]),
+        "frequency_rows": len(result["frequencies"]),
+    }, sort_keys=True))
+    return 0
+
+
+def _e2a_repo_path(root: Path, value: str) -> Path:
+    path = Path(value)
+    return (path if path.is_absolute() else root / path).resolve()
+
+
+def cmd_e2a_freeze(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    inventory_path = _e2a_repo_path(root, args.inventory)
+    e2_path = _e2a_repo_path(root, args.e2_definition)
+    output = _e2a_repo_path(root, args.output)
+    e2_check = check_definition(root, e2_path, args.manifest)
+    if not e2_check["ok"]:
+        print(json.dumps(e2_check, indent=2, sort_keys=True))
+        return 1
+    inventory_data = json.loads(inventory_path.read_text(encoding="utf-8"))
+    e2_data = json.loads(e2_path.read_text(encoding="utf-8"))
+    result = e2a_freeze(
+        inventory_data,
+        e2_data,
+        output,
+        e2a_runner_git_sha=args.runner_git_sha,
+    )
+    print(json.dumps({
+        "definition_sha256": result["definition_sha256"],
+        "schedule_entries": len(result["schedule"]),
+    }, sort_keys=True))
+    return 0
+
+
+def cmd_e2a_check(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    definition_path = _e2a_repo_path(root, args.definition)
+    inventory_path = _e2a_repo_path(root, args.inventory)
+    e2_path = _e2a_repo_path(root, args.e2_definition)
+    e2_check = check_definition(root, e2_path, args.manifest)
+    result = e2a_check(
+        json.loads(definition_path.read_text(encoding="utf-8")),
+        json.loads(inventory_path.read_text(encoding="utf-8")),
+        json.loads(e2_path.read_text(encoding="utf-8")),
+    )
+    if not e2_check["ok"]:
+        result["ok"] = False
+        result["errors"] = sorted(set(result["errors"] + ["accepted_e2_canonical_check_failed"]))
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0 if result["ok"] else 1
+
+
+def cmd_e2a_run(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    result = e2a_run(
+        root=root,
+        definition=args.definition,
+        inventory_path=args.inventory,
+        e2_definition=args.e2_definition,
+        manifest=args.manifest,
+        observed_environment=args.observed_environment,
+        runner_git_sha=args.runner_git_sha,
+        work_root=args.work_root,
+        raw_output=args.raw_output,
+    )
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0
+
+
+def cmd_e2a_report(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    definition_path = _e2a_repo_path(root, args.definition)
+    inventory_path = _e2a_repo_path(root, args.inventory)
+    result = e2a_report(
+        definition=json.loads(definition_path.read_text(encoding="utf-8")),
+        inventory_data=json.loads(inventory_path.read_text(encoding="utf-8")),
+        raw_output=args.raw_output,
+        output_json=args.output_json,
+        output_markdown=args.output_markdown,
+    )
+    print(json.dumps({
+        "report_sha256": result["report_sha256"],
+        "samples": len(result["samples"]),
+    }, sort_keys=True))
+    return 0
+
+
+def cmd_e2a_audit(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve() if args.root else find_repo_root()
+    definition = json.loads(_e2a_repo_path(root, args.definition).read_text(encoding="utf-8"))
+    inventory_data = json.loads(_e2a_repo_path(root, args.inventory).read_text(encoding="utf-8"))
+    report_data = json.loads(_e2a_repo_path(root, args.report).read_text(encoding="utf-8"))
+    e1_report = _e2a_repo_path(root, args.e1_report) if args.e1_report else None
+    archive_root = _e2a_repo_path(root, args.archive_root) if args.archive_root else None
+    result = e2a_audit(
+        definition=definition,
+        inventory_data=inventory_data,
+        report_data=report_data,
+        raw_output=args.raw_output,
+        e1_report=e1_report,
+        archive_root=archive_root,
+    )
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0 if result["ok"] else 1
+
 
 def _sha40(value: str) -> str:
     if re.fullmatch(r"[0-9a-fA-F]{40}", value) is None:
@@ -401,6 +523,55 @@ def build_parser() -> argparse.ArgumentParser:
     ea.add_argument("--report", required=True)
     ea.add_argument("--raw-output", required=True)
     ea.set_defaults(func=cmd_e2_audit)
+    e2a = sub.add_parser("e2a", help="Exact-command model-free E2a alignment")
+    e2asub = e2a.add_subparsers(dest="e2a_command", required=True)
+    e2a_inventory_parser = e2asub.add_parser(
+        "inventory", help="Authenticate E1 and write the redacted command-form inventory"
+    )
+    e2a_inventory_parser.add_argument("--report", "--e1-report", dest="report", required=True)
+    e2a_inventory_parser.add_argument("--archive-root", "--archive", dest="archive_root", required=True)
+    e2a_inventory_parser.add_argument("--output", required=True)
+    e2a_inventory_parser.set_defaults(func=cmd_e2a_inventory)
+
+    e2a_freeze_parser = e2asub.add_parser("freeze", help="Freeze the form-derived paired schedule")
+    e2a_freeze_parser.add_argument("--inventory", required=True)
+    e2a_freeze_parser.add_argument("--e2-definition", required=True)
+    e2a_freeze_parser.add_argument("--runner-git-sha", required=True, type=_sha40)
+    e2a_freeze_parser.add_argument("--output", required=True)
+    e2a_freeze_parser.set_defaults(func=cmd_e2a_freeze)
+
+    e2a_check_parser = e2asub.add_parser("check", help="Recompute and validate an E2a freeze")
+    e2a_check_parser.add_argument("--definition", required=True)
+    e2a_check_parser.add_argument("--inventory", required=True)
+    e2a_check_parser.add_argument("--e2-definition", required=True)
+    e2a_check_parser.set_defaults(func=cmd_e2a_check)
+
+    e2a_run_parser = e2asub.add_parser("run", help="Execute the model-free schedule")
+    e2a_run_parser.add_argument("--definition", required=True)
+    e2a_run_parser.add_argument("--inventory", required=True)
+    e2a_run_parser.add_argument("--e2-definition", required=True)
+    e2a_run_parser.add_argument("--observed-environment", required=True)
+    e2a_run_parser.add_argument("--runner-git-sha", required=True, type=_sha40)
+    e2a_run_parser.add_argument("--work-root", required=True)
+    e2a_run_parser.add_argument("--raw-output", required=True)
+    e2a_run_parser.set_defaults(func=cmd_e2a_run)
+
+    e2a_report_parser = e2asub.add_parser("report", help="Synthesize a publish-safe audited report")
+    e2a_report_parser.add_argument("--definition", required=True)
+    e2a_report_parser.add_argument("--inventory", required=True)
+    e2a_report_parser.add_argument("--raw-output", required=True)
+    e2a_report_parser.add_argument("--output-json", required=True)
+    e2a_report_parser.add_argument("--output-markdown", required=True)
+    e2a_report_parser.set_defaults(func=cmd_e2a_report)
+
+    e2a_audit_parser = e2asub.add_parser("audit", help="Reconcile report and external raw evidence")
+    e2a_audit_parser.add_argument("--definition", required=True)
+    e2a_audit_parser.add_argument("--inventory", required=True)
+    e2a_audit_parser.add_argument("--report", required=True)
+    e2a_audit_parser.add_argument("--raw-output", required=True)
+    e2a_audit_parser.add_argument("--e1-report")
+    e2a_audit_parser.add_argument("--archive-root")
+    e2a_audit_parser.set_defaults(func=cmd_e2a_audit)
     return parser
 
 
