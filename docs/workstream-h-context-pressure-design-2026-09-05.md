@@ -1,301 +1,115 @@
-# Workstream H context-pressure design
+# Workstream H: source capacity, context use, and retrieval
 
-**Date:** 2026-09-05  
-**Status:** Future design note. This does not supersede the current E3a specification gate and authorizes no model call.
+**Revised:** 2026-09-05. Future design under [PLAN.md](../PLAN.md). This document does not authorize construction of a large suite or any live model run.
 
-## Question
+## Questions, not assumed advantages
 
-Can a semantically denser language fit more useful software into the same model context, and does that change agent performance when a repository comfortably fits, nearly fills, or exceeds the usable context window?
+At the same semantic task and source-access budget, does one implementation fit more useful material, use it more reliably, or retrieve it more economically? F# brevity in lines is not evidence of fewer model tokens, and fewer tokens is not evidence of better understanding.
 
-The answer cannot be inferred from total agent input tokens. Those combine source, instructions, prior model output, tool results, diagnostics, and replay. Workstream H must directly control candidate-visible source and tool feedback.
+Distinguish three outcomes: serialized capacity; task correctness under a budget; and ecological trajectory cost. A small-repository penalty cannot identify an intercept or scale slope across unobserved sizes. Any linear cost/crossover sketch is illustrative; fit flexible curves or preregistered contrasts once multiple scales exist.
 
-## Core refinement: context pressure has two axes
+## Size is not simultaneous necessity
 
-Whole-repository size and task-relevant working-set size are not interchangeable.
+Record separately:
 
-Let:
+- `T_repo`: eligible repository source, build metadata, and documentation;
+- `T_ref`: source in a reviewed reference solution's conservative relevance/dependency set;
+- `T_exposed`: source actually returned to the candidate;
+- `T_resident`: source and summaries still present in each active request;
+- cumulative model input, which includes replay and is not any of the above.
 
-- `W_eff` be the effective usable model context observed under the frozen model/scaffold;
-- `P_fixed` be the fixed system/task/instruction prefix;
-- `R_output` be the reserved output/reasoning allowance;
-- `R_tool` be the controlled tool-feedback allowance;
-- `B_source = W_eff - P_fixed - R_output - R_tool` be the candidate-visible source budget;
-- `T_repo,L(n)` be all candidate-visible repository tokens for language `L` at semantic scale `n`;
-- `T_rel,L(n,t)` be the transitive task-relevant source closure for task `t`;
-- `rho_repo = T_repo / B_source`;
-- `rho_rel = T_rel / B_source`.
+A transitive dependency closure is neither a minimal sufficient explanation nor a lower bound on memory. A global change may be solved by interfaces, a fold over modules, streaming checks, or a compact summary. Even when `T_ref` exceeds the window, do not claim all of it must be resident simultaneously. The scientific question is how well a declared retrieval/memory policy solves the task.
 
-The primary design therefore varies both `rho_repo` and `rho_rel`.
+Relevance annotations may have multiple sufficient alternatives. Validate them using independent solutions, sensitivity/fault checks, dependency analysis, and documented uncertainty. Do not score valid alternative navigation as failure merely because it differs from one gold patch.
 
-| Repository | Relevant closure | Main bottleneck |
-|---|---|---|
-| small | small | fixed language/model/tool overhead |
-| large or over-window | small enough to fit | search and retrieval selectivity |
-| near-window | near-window | long-context utilization and positional effects |
-| over-window | over-window | summarization, eviction, decomposition, or external memory |
+## Request budget and observability
 
-A repository that exceeds the window while the relevant closure is small is chiefly a retrieval problem. A task whose relevant closure itself exceeds the window is a context-capacity and decomposition problem even with perfect retrieval.
-
-## Can F# fit more?
-
-This is an empirical outcome, not an assumption. For every semantic scale, tokenize the exact candidate-visible F# and C# sources using the frozen model tokenizer and report:
+For an endpoint where context is a joint input-plus-output limit, reserve output once and enforce:
 
 ```text
-T_repo,F#(n) / T_repo,C#(n)
-T_rel,F#(n,t) / T_rel,C#(n,t)
+fixed prefix + current source + retained summaries/history
++ tool wrappers/feedback + output reserve <= verified request cap
 ```
 
-Characters, lines, and lexical units remain explanatory secondary measures. The current small successor benchmark does not demonstrate an F# token advantage; its final F# and C# token proxies were near parity.
+For an input-only endpoint cap, use its documented accounting instead. Do not subtract output or a safety allowance twice from an already-reduced effective limit. The per-request ledger must state the convention, safety margin, treatment cap, and any provider-hidden/unattributed remainder.
 
-Define semantic capacity at source budget `B` as:
+`B_source` is the source allocation after fixed prefix, retained-memory, feedback, and endpoint-appropriate output allowances. These allocations are experimental choices and remain separate from the model's physical maximum. A harness context setting or early auto-compaction threshold does not change model architecture and may not enforce the requested cap. Verify actual request behavior; fail closed on unexpected overflow/truncation.
+
+Use the endpoint's exact input counter/tokenizer if supported. Otherwise pin and label a proxy and bound its error against observed request totals. Approximate source-size results remain useful, but an exact claim that one language physically fits and the other does not requires verified full-request accounting near that boundary. Do not require access to hidden reasoning text or invent its token decomposition. Cached input remains context occupancy even when billing differs.
+
+Separate the hard accepted request limit from the empirically useful length at a stated accuracy criterion. Useful length is an outcome, can be task/position dependent, and may be far below the accepted limit. A cap at 32K on a larger model is a software-budget intervention, not evidence about native 32K or million-token model behavior.
+
+## Start small and identify one contrast
+
+H0 is model-free: one paired exemplar, exact/proxy serialization audit, synthetic controller fixtures, budget enforcement, and known eviction/reread cases. Do not initially build all domains, sizes, retrieval algorithms, and memory policies.
+
+Then propose a bounded non-counting pilot on the same model with a few semantic sizes and a few software-enforced budgets. Example budgets of 32K/64K/128K are provisional cost choices, not defaults or authorizations. Replicate absolute long inputs only after the accounting and workload review pass.
+
+Vary repository distractor load separately from task-required semantic work where possible. Useful task families are local changes with bounded evidence; distributed integration; and broader transformations that may or may not admit compact contracts. All added modules must do real tested work, not merely contain active-looking repeated boilerplate. Report template duplication and generator ancestry; generated sizes are not independent real repositories.
+
+## Access conditions
+
+### H1: supplied source, no retrieval or execution feedback
+
+Where the full eligible source fits the declared source budget, serialize it into the first request. Use a fixed task response format, normally one patch, and score externally. No source tools, hidden language-server checks, compiler feedback, or automatic compaction in this condition. Refuse an oversized prompt rather than silently truncate it.
+
+Counterbalance relevant material's prompt positions using the same semantic order/permutations for both languages. Preserve project compile-order metadata separately. Report normalized token position as well as file order. Avoid forcing identical byte offsets through padding in the primary comparison.
+
+### H2: bounded selective retrieval
+
+Expose a realistic, reproducible repository map and a small tool set such as tree listing, text/symbol search, and token-bounded chunk reading. Index preparation and map size count toward resource/context accounting. Keep semantic mappings used by the evaluator out of candidate-visible tools.
+
+Freeze indexing, ranking, top-k/results caps, serialization, source eligibility, documentation access, and search/read budgets. Equal schemas alone do not ensure equal retrieval quality. Freeze comparable language-service support, or name differences as part of a separate ecological treatment.
+
+Measure calls, bytes/tokens returned, unique material, repeated requests, reference-set recall/precision with uncertainty, and final task quality. A token limit can split a function; preserve context/continuation markers consistently. Budget exhaustion is a treatment outcome, not a reason to silently raise the cap.
+
+**Deduplicate only resident, unchanged chunks.** Use content/version identities, not path alone. After eviction, compaction, or edits, a repeated read must be able to return actual current content and is charged/logged again. A pointer to missing text is not memory. Blanket suppression of rereads would selectively damage the over-window condition.
+
+### H3: managed memory when evidence does not all remain resident
+
+Choose one simple declared retention/summary policy first. Preserve raw material externally, expose only retained state, and record eviction, summary production, retrieval, and recomputation costs. Test whether compact contracts or streaming solve the task before labeling it capacity-limited.
+
+A model-made summary or subagent is an additional model intervention and has its own budget/accounting; it is not a free preprocessing step. No silent general-purpose compaction. Fresh-per-task versus persistent history is a separate factor, introduced only when required by the question.
+
+### Required overlap
+
+Use at least some identical below-boundary tasks under both H1 and H2. Otherwise access regime is perfectly confounded with size: an apparent boundary effect could be a switch from supplied source to retrieval. Above the H1 limit, record H1 as infeasible under that budget, not as an executed model failure. Do not estimate an unconstrained language × scale × access factorial where cells cannot exist.
+
+## Fair comparison and scale selection
+
+Primary paired comparisons use the same semantic workload, model, budget, output allowance, task, and access policy. Serialization lengths are outcomes; do not equalize them by adding code or removing behavior. Freeze scales independently of the direction of F#/C# results.
+
+Plot performance against semantic size and measured occupancy, but equal occupancy achieved by different-sized systems is not a clean test of ease of understanding. It changes task complexity. Use within-task budget sweeps, an explicit semantic-size term, or cautiously labelled descriptive interpolation; do not conclude superior reasoning from equal-occupancy plots alone.
+
+Define serialized capacity as the largest measured semantic configuration whose **specified source bundle** fits a verified request. This is not the largest program the model can maintain: selective retrieval and abstractions can exceed it. Report capacity separately from accuracy and cost. The original fit hypothesis is unsupported for any tested family/tokenizer without a measured token advantage; do not discard that family to search only for favorable examples.
+
+Near-boundary levels, multiple useful-length measurements, and wider absolute lengths belong to a later reviewed design. No obligatory five/six-level or three-domain factorial is imposed on the initial feasibility pilot. A crossover claim requires an observed, replicated change within the tested range with uncertainty, not extrapolation from the small-repository result.
+
+## Tools, feedback, and endpoints
+
+Compiler/test feedback is absent from the primary source-context comparison. A separately named repair condition may use the clean E3a controller and development feedback, never final-holdout feedback. Source inspection itself is not pollution; it is the mechanism being measured. Log retrieval wrappers, previous model output, stale-source versions, diagnostics, and summaries separately from current source.
+
+The primary H1/H2 patch endpoint is joint build and final-holdout behavioral correctness at fixed budget. Report format/build/API failures separately so generation difficulty is not mistaken for retrieval failure. A bounded auxiliary read-only task may help distinguish localization from patch generation, but it changes the intervention and must be specified rather than silently added to every prompt.
+
+Other outcomes include total/provider input and output; declared token subsets; source exposure/retention; search/read budget use; tool and model latency; compaction events; defects; and output truncation. Missing telemetry limits only the claims that depend on it. A context-mechanism arm cannot proceed if its own visible request composition is unauditable.
+
+## Sequence and decision
+
+H may be proposed after a usable controller and workload gate, without completing optional F or G studies. Present authorization remains E3a preparation only. A small source-only H pilot does not require exhaustive explanation of repair behavior because its primary arm has no repair feedback.
 
 ```text
-Capacity_L(B) = maximum semantic scale n for which T_rel,L(n,t) <= B
+reviewed workload/exemplar + H0 model-free budget checks
+  -> separately authorized bounded H1/H2 overlap pilot
+  -> review accuracy, generation failures, size and retrieval evidence
+  -> justified absolute-length or H3 memory study
 ```
 
-and, where meaningful:
+Stop for leakage, untracked context/compaction, invalid workload equivalence, exhausted limits, or a material policy change. A disappointing language effect is a reportable finding, not permission to alter tasks or keep adding levels. Evidence about this family/model/harness is not an intrinsic language ranking.
 
-```text
-Fit advantage(B) = Capacity_F#(B) / Capacity_C#(B)
-```
+## Supporting sources and limits
 
-The ecological effect of interest occurs when the same functionality fits under `B_source` in one language but not the other. This threshold result must be accompanied by continuous performance curves, not reported as a single hand-selected crossover.
+- Hsieh et al., RULER, https://arxiv.org/abs/2404.06654 : accepted/advertised length and successful task use are different; the paper is not evidence of an F# effect.
+- OpenAI reasoning guide, https://developers.openai.com/api/docs/guides/reasoning : verify endpoint-specific context/output accounting and retained state for the pinned model.
+- Codex configuration reference, https://developers.openai.com/codex/config-reference/ : configuration is version dependent; pin and test the installed harness rather than importing a current default into a historical run.
 
-## Pressure levels
-
-Use at least five or six preregistered levels rather than only three points. Suggested targets are fractions of `B_source`, not the advertised context window:
-
-### Full-source levels
-
-- small: approximately 0.05–0.10;
-- moderate: approximately 0.30–0.40;
-- large but comfortable: approximately 0.60;
-- near-fit: approximately 0.80;
-- boundary: approximately 0.90–0.95 after all reserves.
-
-### Over-window levels
-
-- retrieval pressure: `rho_repo` approximately 1.25–2.0 while `rho_rel < 0.5`;
-- mixed pressure: `rho_repo > 1` and `rho_rel` approximately 0.8–1.0;
-- decomposition pressure: `rho_rel` approximately 1.25 and, if feasible, 2.0 or more.
-
-Exact targets must be recalculated from the effective context window actually reported by the pinned harness. The model’s advertised window is not the source budget.
-
-## Three access regimes
-
-### H1 — Full-source, no-tool context
-
-Use when the complete candidate-visible repository fits below `B_source`.
-
-- Serialize all source directly into the initial context.
-- Permit no source-reading, shell, build, test, or network tools.
-- Ask for a structured localization answer and/or one patch.
-- Build and evaluate externally after the model response.
-- Disable automatic compaction or set its threshold above the frozen request while remaining safely below the hard context cap.
-- Counterbalance the prompt position of relevant modules; do not let beginning/end placement become a language confound.
-
-This is the cleanest test of whether one language represents the same semantic system more compactly and whether the model can use that long context.
-
-### H2 — Controlled selective retrieval
-
-Use when the whole repository exceeds `B_source` but a useful task-relevant subset can fit.
-
-Expose only a fixed repository map/index initially. Replace arbitrary shell access with controller-owned tools such as:
-
-```text
-list_tree()
-search_symbols(query)
-search_text(query)
-read_chunk(file_id, start, end)
-```
-
-Controls:
-
-- identical tool schemas and per-call token limits across languages;
-- canonical, language-neutral file IDs where possible;
-- fixed chunk serialization and line-number overhead;
-- a fixed total retrieval-token budget or a preregistered free-budget ecological condition;
-- duplicate chunks returned as short references instead of replaying their full text, while logging reread requests;
-- raw tool output stored outside model context;
-- no build/test feedback during the primary retrieval measurement;
-- no arbitrary `cat`, `rg`, shell pipelines, or unbounded diagnostics.
-
-The model may choose which source to retrieve. Call count, unique source tokens, repeated-read requests, and retrieval precision are outcomes, not nuisances.
-
-### H3 — Managed over-window working set
-
-Use when the task-relevant closure itself exceeds `B_source`.
-
-A perfect retriever cannot place all required source in one request. The harness must therefore freeze an explicit memory policy, for example:
-
-- model-selected chunk retention and eviction;
-- deterministic LRU retention;
-- structured summaries with immutable source references;
-- hierarchical module/interface summaries;
-- decomposed subproblems with externally retained intermediate state.
-
-Do not silently rely on whatever compaction behavior a general-purpose agent happens to use. Compaction, eviction, summary creation, and source rereads become named experimental mechanisms with separate accounting.
-
-## Controlling tool-call context pollution
-
-Tool pollution can be strongly controlled, although the model’s need to request more source remains a valid outcome.
-
-Primary controls:
-
-1. The controller owns restore, build, test, and evaluation.
-2. Dependencies are pre-restored and vulnerability audit is disabled inside the edit–compile loop.
-3. Candidate-visible compiler/test feedback is absent in the full-source and retrieval-primary arms, or is supplied only through a fixed versioned diagnostic packet in a separately named repair arm.
-4. Source tools have fixed per-result and total token budgets.
-5. Repeated identical chunks are not resent verbatim.
-6. Full raw outputs remain outside the model transcript.
-7. `tool_output_token_limit`, effective context, and auto-compaction settings are pinned and recorded where the scaffold exposes them.
-8. Every request records fixed-prefix tokens, source tokens, tool-output tokens, prior-model-output tokens, and total active-context tokens separately where available.
-
-This creates a clean source/context study. A normal free-tool Codex run may be retained as a secondary ecological stratum, but it must not be pooled with the controlled arm.
-
-## Context-window control
-
-For current OpenAI models, the advertised model window is larger than the source budget because instructions, output, reasoning, and tools also consume capacity. Codex additionally exposes configuration for model context, auto-compaction threshold, and tool-output retention, but the experiment must verify the effective window and compaction events from the actual pinned session rather than assuming configuration equals behavior.
-
-Two stages are recommended:
-
-### H0 — Budget-capped apparatus pilot
-
-Use artificial effective budgets such as 32K, 64K, and 128K to validate scaling, retrieval, eviction, and accounting cheaply. This can establish algorithmic threshold behavior but not million-token model quality.
-
-### H1/H2 — Absolute-length validation
-
-Repeat a bounded subset at real long-context lengths under the actual model window. Include levels below and above any provider pricing or compaction thresholds. Do not generalize a small artificial cap to absolute million-token attention behavior without this validation.
-
-## Scalable repository family
-
-Do not add inert filler. Construct one language-neutral semantic specification that produces or governs idiomatic paired implementations with active modules and known dependency edges.
-
-Every added module must:
-
-- participate in baseline behavior or invariants;
-- be exercised by tests;
-- be eligible to become relevant to a task;
-- contribute realistic symbols, types, calls, and dependencies;
-- be independently reviewed for comparable F#/C# architecture and idiomaticity.
-
-Use at least three task families:
-
-1. **Local:** a constant-size relevant closure hidden among increasing distractors. This tests retrieval.
-2. **Distributed:** several distant modules and dependency paths are relevant. This tests architectural navigation and integration.
-3. **Global:** the relevant closure grows with repository scale. This tests source capacity, long-context use, and decomposition.
-
-A language cannot receive credit for fitting the whole repository when the task only needs one obvious file; conversely, retrieval cannot solve a genuinely global task whose required closure exceeds the window.
-
-## Position and serialization controls
-
-Long-context performance may depend on where relevant information appears. For direct full-source prompts:
-
-- freeze a canonical serialization format;
-- counterbalance relevant files across early, middle, and late prompt positions;
-- separate prompt serialization order from language compilation order;
-- preserve project/dependency metadata so reordering does not erase semantics;
-- report language × scale × relevant-position interactions.
-
-## Primary outcomes
-
-### Representation and capacity
-
-- exact model-token counts for full repository and task-relevant closure;
-- semantic scale or number of active modules fitting in `B_source`;
-- F#/C# fit-capacity ratio;
-- source, project, interface, and documentation token decomposition.
-
-### Full-context utilization
-
-- localization accuracy;
-- one-shot build and behavioral correctness;
-- relevant-position sensitivity;
-- output/reasoning cost at fixed semantic scale and fixed occupancy.
-
-### Retrieval
-
-- relevant-file and relevant-symbol recall/precision;
-- unique source tokens retrieved;
-- retrieval calls and repeated-read requests;
-- irrelevant source tokens exposed;
-- correctness per retrieved token;
-- time to first relevant file and complete relevant closure.
-
-### Context and memory
-
-- active-context tokens per request;
-- maximum and terminal context;
-- fixed prefix, source, tool, prior-output, and diagnostic components;
-- compaction/eviction/summary events;
-- tokens dropped, summarized, and reread;
-- fresh versus persistent context as separate treatments.
-
-### Engineering outcomes
-
-- first-patch compilation and behavioral success;
-- later repair burden in a separately named feedback condition;
-- regressions;
-- total ecological model and tool cost.
-
-## Analysis
-
-The primary ecological analysis uses the same semantic scale in both languages and asks whether one implementation fits and performs better as the window boundary is approached.
-
-A conceptual model is:
-
-```text
-outcome ~ language * scale * access_regime
-        + task_family + relevant_position + order + model/scaffold
-        + matched_repository/task effects
-```
-
-Report curves against both:
-
-- semantic scale, which captures practical capacity per amount of software;
-- normalized occupancy `rho_rel` and `rho_repo`, which captures model behavior at the same context pressure.
-
-These answer different questions and must not be collapsed.
-
-A crossover is supported only if it occurs inside the observed preregistered scale range with genuine context pressure. Do not extrapolate it from small repositories.
-
-## Interpretation cases
-
-- F# fits more semantic modules but performs similarly at equal occupancy: evidence for representational capacity, not superior long-context reasoning.
-- F# performs better at the same occupancy: evidence that its representation is easier to use, conditional on tokenizer/model/scaffold.
-- F# retrieves fewer tokens for equal correctness in over-window repositories: evidence for lower task-relevant recovery cost.
-- F# remains costlier despite fitting more: fixed familiarity/generation/tool overhead dominates the tested range.
-- No F# token advantage appears: the semantic-density premise fails for this repository family/tokenizer, even if lines or characters are fewer.
-- A benefit appears only with controlled tools but disappears under free-tool ecology: harness/tool policy dominates the practical result.
-
-## Sequencing
-
-Workstream H remains downstream of E3a and the deterministic tool-policy decision:
-
-```text
-E3a first-patch/repair mechanism
-  -> E3b/F0 deterministic tool policy when justified
-  -> optional F1/F2 context containment
-  -> H0 budget-capped context apparatus pilot
-  -> H1 full-source small-to-near-window study
-  -> H2 over-window controlled-retrieval study
-  -> H3 over-window relevant-closure/decomposition study
-```
-
-The controlled/hygienic tool path is primary so audit, implicit restore, compiler feedback, and raw tool chatter do not swamp the language × context-pressure effect. Ecological free-tool conditions remain separately named secondary strata.
-
-## Stop conditions
-
-Stop or redesign if:
-
-- F# and C# paired implementations cannot be made semantically and architecturally comparable;
-- added modules are inert filler or template duplication rather than realistic active code;
-- exact candidate-visible context composition cannot be reconstructed;
-- the scaffold silently changes effective context or compaction policy;
-- relevant-position effects dominate and cannot be counterbalanced;
-- over-window retrieval tools differ materially by language;
-- observed scale effects are only tool/repair effects already identified by E2a/E3 rather than source/context effects.
-
-## Claim boundary
-
-This design can test whether F# represents more useful software within a fixed candidate-visible context and whether that changes comprehension, patching, or retrieval as the repository crosses the context boundary. It cannot establish an intrinsic language ranking independent of tokenizer, model, scaffold, repository domain, tool policy, or implementation style.
+Sources checked 2026-09-05. These support the accounting/evaluation cautions, not the proposed language hypothesis or an already completed H experiment.

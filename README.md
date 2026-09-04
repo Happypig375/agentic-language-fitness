@@ -1,48 +1,36 @@
 # Agentic Language Fitness
 
-An auditable benchmark for measuring how programming language and agent configuration shape the reliability and lifetime computational cost of coding agents.
+ALF investigates how programming-language implementation, model configuration, and harness policy affect the cost and reliability of coding-agent maintenance. Its first paired workload uses F# and C# on .NET. This is a research workbench, not a leaderboard or evidence that one language is universally best.
 
-ALF studies inherited maintenance: an agent understands an existing repository, changes it, verifies it, and hands the changed workspace to a fresh agent for the next change. The first language family compares behaviorally matched F# and C# services on .NET, closely aligning semantic tasks, external behavior, evaluator, runtime family, and measurement protocol. Language-specific compiler, project, package, and tool behavior remain part of the ecological treatment and are controlled separately where the research question requires it. This is a research workbench, not a leaderboard or a claim that one language is universally best.
+## Start here
 
-## Why it is different
+[PLAN.md](PLAN.md) is the canonical checkpoint and next assignment. [AGENTS.md](AGENTS.md) routes maintainer agents to it. The [plan review](docs/plan-review-2026-09-05.md) records the latest methodological corrections.
 
-Most coding-agent benchmarks measure isolated tasks. ALF makes accumulated repository state part of the treatment: later agents inherit previous edits, misunderstandings, tests, and technical debt. It retains terminal stops and failed tasks, not only successful completions, and records hidden behavioral evaluation, source/representation checks, diffs, commands, timing, and token usage when available.
+**Current boundary:** E1, E2, and E2a are complete. Prepare the controlled E3a first-submission/repair specification and minimal model-free fixtures for review. No live candidate request or experiment is authorized by this repository. Review readiness, executable freeze, and permission to consume model quota are separate states.
 
-The narrow question is:
+The current rules are in [experimental design](docs/experimental-design.md), [metrics](docs/metrics.md), [workload validity and review gates](docs/workload-validity-and-review-gates-2026-09-05.md), and the future [context-pressure design](docs/workstream-h-context-pressure-design-2026-09-05.md). Dated predecessor proposals explain history; they are not competing current plans. Already frozen protocols/results retain their original identities and must not be retrospectively changed.
 
-> When semantically equivalent software is represented in different programming languages, how much agent computation is required to correctly understand, change, verify, and maintain it over inherited changes?
+## Question and evidence
 
-The research gap is deliberately modest. Sequential maintenance and multilingual repository benchmarks already exist, and Tokenmaxxing shows that language can change token expenditure. ALF targets their controlled intersection: language as the independent variable inside inherited maintenance over behaviorally matched repositories while holding task sequence, oracle, agent configuration, and measurement protocol substantially constant, while explicitly measuring ecological toolchain differences rather than pretending they do not exist. See the [literature review](docs/literature-review.md), [search log](docs/search-log.md), and [research-gap statement](docs/research-gap.md).
+> For the same semantic maintenance task, how do particular language implementations, models, and tool policies change first-patch quality, repair burden, source retrieval, and total trajectory resources?
 
-## Current evidence and status
+Inherited maintenance, multilingual benchmarks, and token-cost studies already exist. ALF explores their controlled intersection; it does not claim to have invented those components. The [literature review](docs/literature-review.md), [search log](docs/search-log.md), and [gap statement](docs/research-gap.md) are dated working material, not proof of exhaustive novelty. Primary citations and scope should be reverified before publication.
 
-The short `variance-v2` pilot found high stochastic and order variance on a two-task chain. The reviewed `difficulty-v1` successor is an eight-task chain that exposed candidate-caused representation drift. These are feasibility findings, not evidence that F# or C# is universally better.
+The short `variance-v2` pilot found substantial stochastic/order variation. The eight-task `difficulty-v1` successor exposed representation drift. D v3's ten non-counting calibrations all passed the eight-task chain; exploratory F#/C# input and agent-time ratios were near 1.38. These are aggregate costs in a particular ecology, not direct measurements of source density or context capacity.
 
-Workstream D v3 used the canonical descriptive representation with Terra/Luna capability configurations. Its ten audited non-counting calibrations all completed 8/8 tasks, so the frozen difficulty rule blocked formal v3 macroblocks. Exploratorily, F# used more total input and agent time in all five F#/C# calibration pairs, with geometric-mean ratios near 1.38. These totals are ecological trajectory costs, not direct measurements of source compactness or model memory.
+[E1](docs/workstream-e1-v3-forensic-disposition-2026-09-03.md) recovered more F# failed builds, repair cycles, and project edits. Those failures include dependency/environment problems as well as source errors; missing first-build boundaries were not imputed. [E2](docs/workstream-e2-toolchain-disposition-2026-09-04.md) measured an offline model-free toolchain baseline. [E2a](docs/workstream-e2a-disposition-2026-09-04.md) aligned command forms and the v3 host, finding both more F# dotnet invocations and slower restore/build-capable commands.
 
-Workstream E1 reconstructed the archived trajectories. Among observable candidate operations, F# incurred 23 failed builds versus 2 for C#, 17 conservative repair cycles versus 2, all five committed project-file changes, nearly all compiler diagnostic output, and about twice the evaluator duration. Observable pre-edit inspection/search was much less separated. The failed-build total includes dependency/restore failures as well as genuine source syntax/type/project errors, so it cannot be read as 23 bad F# patches. The leading observed pathway is nevertheless first-patch/compiler/type/project difficulty followed by repair amplification, not static source size. Per-interaction usage, unique source exposure, replay, and context/compaction remain unavailable. See the [E1 disposition](docs/workstream-e1-v3-forensic-disposition-2026-09-03.md) and [forensic report](reports/workstream-e-v3/forensic-report.md).
+E2a also identified a major deployment-specific amplifier: vulnerability audit was enabled while NuGet reachability was blocked and caches were fresh. Removing audit from the repair loop removed much of the restore delay and warning output, while a no-restore compilation gap remained. The legacy constrained-network audit-on condition is historical/stress evidence, not a normal developer baseline. Mechanical timing envelopes do not identify how many model tokens or seconds were causally attributable to each mechanism.
 
-Workstream E2 measured canonical source states and a fixed offline toolchain path. Source/token proxies and built-program execution were near parity, while F# builds were slower. Its large restore ratio was audit/source and host sensitive, so it was retained as a separate offline ecology rather than transported directly to v3. See the [E2 disposition](docs/workstream-e2-toolchain-disposition-2026-09-04.md) and [E2 report](reports/workstream-e2-toolchain-v1/report.md).
+Current work separates controlled first-patch/repair behavior from tool policy. Future H work tests source capacity and retrieval without assuming F# is shorter or that an entire dependency closure must fit simultaneously. H does not have to wait for optional subagent or large cost-replication studies. See [PLAN.md](PLAN.md) for the conditional branches.
 
-Workstream E2a then aligned command semantics and the v3 remote host/profile. It authenticated all 435 completed v3 command events and 258 benchmark `dotnet` operations, reducing them to 23 semantic forms, and executed 1,020 model-free samples in five paired rounds. Across the retained v3 runs, F# issued 163 benchmark tool operations versus 95 for C#. On the aligned host, restore/build-capable F# operations were substantially slower; pure tests and direct-DLL execution were near parity.
+## Evaluation principles
 
-E2a isolated a major tool-policy amplifier: `NuGetAudit=false` reduced F# restore from about 7.8 seconds to about 2.1 seconds and removed repeated `NU1900` output. The authenticated v3 streams themselves contained 197 F# `NU1900` lines and zero C# lines. The v3 internal proxy allowed model traffic but blocked NuGet source reachability while audit remained enabled and homes/caches were fresh. The original v3 condition is therefore specifically a **legacy constrained-network audit-on** ecology, not a general default developer environment. A sizeable no-restore F# compiler/toolchain gap remained after audit was disabled.
+Candidates receive the approved predecessor and task, not successor gold, future tasks, research outcomes, or final holdout cases. Development checks may supply feedback; final holdout results may not guide feedback or stopping. Candidate source and project files execute in restricted sandboxes with model credentials and scoring machinery outside their reach.
 
-The frequency-weighted mechanical tool-time gap was large relative to observed agent wall-time differences, but it is descriptive—not a causal percentage or a value to subtract from agent cost. Model-token differences still require additional interactions, diagnostics, feedback, and replay. See the [E2a disposition](docs/workstream-e2a-disposition-2026-09-04.md), [published E2a report](reports/workstream-e2a-host-aligned-v1/report.md), and [successor review](docs/workstream-e2a-review-and-successor-revision-2026-09-05.md).
+Report all valid assigned attempts jointly with correctness. A cheap early failure is not efficient completion. Provider token totals, visible-source estimates, active context, direct tool latency, and end-to-end cost are separate measures. Matched implementations do not establish an intrinsic language effect, and public/native repositories need a sampling frame before claims of representativeness.
 
-The next bounded step is specification and independent review of E3a, a controlled shared-prefix first-patch and bounded-repair pilot. Its controller will preflight dependencies, remove audit and implicit-restore variation, own the first patch/build boundary, distinguish source failures from environment failures, and retain round-level model and tool evidence. No model call is currently authorized.
-
-Before any repair subagent is built, a later E3b/F0 treatment will test deterministic single-agent tool policy: audit outside the edit–compile loop, no implicit restore, no-build/direct execution, and bounded duplicate-free feedback with full raw evidence retained separately. Its ecological comparator must be explicitly intended and reproducible—preferably online with audit source reachability verified—rather than silently reusing the legacy blocked-source condition. See the [canonical plan](PLAN.md).
-
-V4–V13 were apparatus-development attempts, not additional scientific treatments; their history and failure categories are summarized in the [postmortem](docs/apparatus-versioning-postmortem-2026-09-02.md). No v14 exists.
-
-## How a chain works
-
-For each language and ordered task, ALF creates a baseline workspace, starts a fresh agent process, retains successful changes, runs cumulative hidden behavioral and structural checks, and records the attempt. In container runs, gold snapshots, evaluator cases, parent repositories, credentials, and unrelated host files remain outside the candidate boundary. Primary analysis retains correctness and terminal-stop outcomes alongside unconditional cost; paired common-exposure-prefix cost prevents an early failure from looking artificially cheap.
-
-Controlled mechanism treatments may deliberately replace free tool choice with a controller-owned compile/evaluation path. Those treatments are named separately from ecological free-tool runs and are never pooled as though they were the same harness.
-
-## Quick start
+## Model-free quick start
 
 Requirements: Python 3.11+, Git, and .NET SDK 10.0.302.
 
@@ -56,36 +44,30 @@ python scripts/alf.py audit PATH_TO_RUN_DIRECTORY
 python scripts/alf.py summarize results/pilot
 ```
 
-The scripted adapter applies checked-in gold snapshots without model/API calls, credentials, or paid usage. It is the recommended first check on a new machine.
+The scripted adapter copies gold snapshots to validate machinery without a model request. Its passing results are not coding-agent performance. Existing commands above are not an E3a implementation; that controlled protocol remains in preparation.
 
 ## Real agents and remote execution
 
-After the required review, validation, freeze, and calibration gates:
+Only after explicit approval of the relevant protocol, resource ceiling, and exact validated implementation:
 
 ```text
 alf run --language fsharp --agent codex --model YOUR_MODEL --output results/codex
 ```
 
-For a memory-rich remote host whose model egress must use this machine, use the single foreground PowerShell runner; exact paths and commands are environment specific:
+This generic adapter command is not a frozen scientific run and does not implement future E3a/H controls by itself.
 
-```powershell
-.\infra\remote-runner\run.ps1 -RemoteHost user@host -RemoteSshPort 830 -EnvironmentProfilePath .\infra\remote-runner\environment-profile.json -RemoteCommand 'exec /opt/alf/run.sh'
-```
+For the existing high-memory remote host/local-egress arrangement, use the canonical foreground launcher documented in [remote execution](docs/remote-execution.md) and the [environment](docs/environment.md). Reuse it rather than creating new proxy/version layers. The [apparatus postmortem](docs/apparatus-versioning-postmortem-2026-09-02.md) distinguishes V4–V13 development attempts from scientific specifications.
 
-The tracked environment profile selects the dedicated internal Docker network, local proxy port, and exact bridge listener. `scripts/codex-docker.py` derives `HTTPS_PROXY` and `HTTP_PROXY` from that profile. The server should restrict the account with `AllowTcpForwarding remote`, `GatewayPorts clientspecified`, and the corresponding `PermitListen`. Use explicit identity and known-hosts paths when possible. See [remote execution](docs/remote-execution.md).
-
-For Codex container authentication, stage the complete `auth.json` in an ephemeral writable `CODEX_HOME` with mode 0600, treat it as a password, and remove it after the run. Do not minimize, blank, hash, log, or commit it.
+Authentication files are secrets: never log or commit them, and keep them inaccessible to candidate code/tools. Verify credential isolation before running a new controlled candidate; an instruction not to read credentials is not an access boundary. Do not alter existing remote security/network policy during a documentation or scientific-design task.
 
 ## Repository map
 
-- `src/alf/` — harness, adapters, protocol, accounting, and audit logic
-- `benchmarks/pilot/` and `benchmarks/successor/` — matched .NET projects, tasks, evaluators, and snapshots
-- `docs/` — protocol, environment, design, results, reviews, and research context
-- `protocols/workstream-e2-toolchain-v1/` — frozen offline E2 source/toolchain baseline
-- `protocols/workstream-e2a-host-aligned-v1/` — frozen host-aligned command baseline
-- `reports/` — publishable audited aggregates; raw evidence remains outside Git
-- `tests/` — unit and model-free regression tests
-- `scripts/alf.py` — command-line entry point
-- `PLAN.md` — canonical continuation order and decision gates
+- `src/alf/`, `scripts/alf.py`: harness, adapters, accounting, audit, and CLI;
+- `benchmarks/`: paired applications, tasks, development/evaluator material, and gold snapshots; the full tree is never a candidate mount;
+- `protocols/`: named frozen definitions and schedules;
+- `reports/`: curated aggregates; raw evidence storage follows each protocol;
+- `docs/`: current linked rules plus dated historical designs/dispositions;
+- `tests/`: unit and model-free regression tests;
+- `infra/remote-runner/`: existing remote apparatus.
 
-No open-source license has yet been selected. Public visibility alone does not grant permission to redistribute or modify this code.
+No open-source license has been selected.

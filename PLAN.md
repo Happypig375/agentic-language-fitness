@@ -1,344 +1,113 @@
 # Research plan
 
-This is the canonical continuation plan. Workstream D v3 is closed. Workstreams E1, E2, and E2a are complete and accepted within their stated evidence boundaries. The project now separates controlled first-patch/repair mechanisms from ecological tool policy before considering repair subagents or a larger replication.
+**Reviewed:** 2026-09-05. This is the canonical plan for future work, not an execution authorization. Historical results and frozen protocols are unchanged.
 
-## Scientific checkpoint — 2026-09-05
+## Start here and document authority
 
-Completed and preserved:
+Read this file first. `AGENTS.md` is a short maintainer entry point, not a second scientific plan.
 
-- Workstreams A–C: accounting/provenance, `variance-v2`, the matched eight-task successor chain, and representation apparatus;
-- Workstream D v3: reviewed remote runner, clean freezes, and ten audited non-counting calibrations;
-- Workstream E1: archive-only forensic attribution over 10 runs and 80 tasks, report SHA-256 `644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d`;
-- Workstream E2: offline model-free source/toolchain baseline over 18 states and 90 schedule entries, report SHA-256 `2e4381ab67dd4cc7aed24c323e8edbd30bf83dd29bafc58554615bcd6f24c49a`;
-- Workstream E2a: exact-command, v3-host-aligned model-free baseline over 1,020 samples in five paired rounds, report file SHA-256 `e392ed7dfeb29732b4a5d5b64b9e9b2cdc090b99ad221bdaf557ef02252d57fe`;
-- exact-commit Linux and Windows CI for the accepted E1/E2/E2a implementations and publications.
+- Current design/analysis rules: [experimental design](docs/experimental-design.md) and [metrics](docs/metrics.md).
+- New workloads and review boundaries: [workload validity and review gates](docs/workload-validity-and-review-gates-2026-09-05.md).
+- Future context experiment: [Workstream H](docs/workstream-h-context-pressure-design-2026-09-05.md).
+- This correction pass: [plan review](docs/plan-review-2026-09-05.md).
 
-Authoritative current review:
+Dated E/D proposals and review notes explain earlier decisions; they do not override these current documents. An explicitly authorized, frozen protocol governs its own run. A conflict between that protocol, a new instruction, and this plan requires review, not silent reinterpretation or retrospective changes to collected data. Repository documentation alone cannot authorize experiments.
 
-```text
-docs/workstream-e2a-review-and-successor-revision-2026-09-05.md
-```
+## Accepted evidence and limits
 
-Supporting evidence:
+Workstreams A–C and D v3 are closed. E1, E2, and E2a are complete within their recorded boundaries:
 
-```text
-docs/workstream-e1-v3-forensic-disposition-2026-09-03.md
-docs/workstream-e2-toolchain-disposition-2026-09-04.md
-docs/workstream-e2a-disposition-2026-09-04.md
-reports/workstream-e-v3/forensic-report.md
-reports/workstream-e2-toolchain-v1/report.md
-reports/workstream-e2a-host-aligned-v1/report.md
-```
+| Evidence | Finding | Boundary |
+|---|---|---|
+| [D v3](docs/workstream-d-v3-calibration-disposition-2026-09-03.md) | Ten non-counting calibrations completed all eight tasks; exploratory F#/C# input and agent-time ratios were near 1.38. | Five pairs from three configurations, not a confirmatory language estimate. |
+| [E1](docs/workstream-e1-v3-forensic-disposition-2026-09-03.md) | F# had more observed build failures, repair cycles, and project-file changes. | Failed builds include dependency/environment failures; first-build boundaries were sometimes unavailable. |
+| [E2](docs/workstream-e2-toolchain-disposition-2026-09-04.md) | Source-token proxies and program execution were near parity; offline tool timings differed. | Different host/command ecology from v3. |
+| [E2a](docs/workstream-e2a-disposition-2026-09-04.md) | Host-aligned replay confirmed more F# dotnet invocations, slower builds, and a large blocked-source NuGet-audit amplifier. | Gold-state timing replay is not causal mediation of agent time or tokens. |
 
-V4–V13 remain apparatus-development history, not scientific families. Do not create v14. Reuse `runner-remote-highmem-local-egress-r1` unless a separately reviewed candidate-visible change is necessary. Scientific changes receive scientific-specification IDs rather than runner-version numbers.
+Reports remain in `reports/`; retain their original hashes and provenance. Do not rewrite historical artifacts to fit the new interpretation.
 
-No model or paid run is currently authorized. The next bounded task is E3a specification and independent review only.
+The leading hypotheses are first-patch source/type/project difficulty, feedback-driven repair, and environment/tool amplification. Inspection counts alone cannot establish equal comprehension. Aggregate input is repeated trajectory usage, not unique source or peak context. Current small-repository observations cannot estimate a language-by-scale slope, a future crossover, or an intrinsic language property. A linear intercept/slope sketch is only intuition, not an identified model from these observations.
 
-## What the current evidence shows
+Keep three tool ecologies separate: controlled pre-restored/audit-off; intended online audit-reachable development; and legacy constrained-network audit-on. The last is historical/stress evidence, not a universal default. Dependency security checks remain outside the controlled repair loop; disabling audit in a benchmark is not a recommendation to abandon auditing in production.
 
-### E1: observable divergence occurs mainly in build and repair behavior
+## Current authorized scope and next handoff
 
-Across the ten v3 calibration runs:
+**Next bounded assignment: make E3a review-ready without live candidate-model requests.** Prepare the specification, selected-task audit, minimal deterministic controller fixtures, and model-free validation needed to review feasibility. Reuse existing runner/accounting components. Do not build E3b/F0, a generic agent framework, or Workstream H in this assignment.
 
-- 25 observable candidate failures were all build failures;
-- F# accounted for 23 failed builds versus 2 for C#;
-- F# accounted for 17 conservative repair cycles versus 2 for C#;
-- identifiable first-post-edit failures were 17 for F# and 2 for C#, while 34 boundaries remained unavailable rather than imputed;
-- all five committed project-file changes were F#;
-- F# carried nearly all observed compiler diagnostic output;
-- evaluator duration was approximately twice as large for F# in every configuration.
+Produce a review packet with the proposed task IDs, one model/effort setting, sample and spend ceilings, repair budget, feedback policy, first-patch application rules, analysis table, source/fixture identities, and exact CI status. Resolve ordinary implementation defects within that scope; return when the packet is ready or a material blocker remains. This plan review is not independent approval of an E3a protocol that has not yet been written.
 
-Observable pre-edit inspection/search differences were comparatively modest. E1 therefore prioritizes first-patch generation, compiler/type/project interaction, and repair amplification. It does not identify hidden reasoning or training familiarity.
+A mock can establish controller behavior and session-ID plumbing, not prove live provider continuation. Mark live continuation and provider-specific usage semantics pending. A subsequent explicitly authorized, bounded integration/calibration stage may verify them; if its result requires a scientific change, stop and revise before collecting the pilot. No self-issued approval or `freeze` file grants permission to run.
 
-The failed-build count combines source-code failures with dependency/restore and project/tool failures. In H, the recorded F# error occurrences were dependency/restore errors rather than source syntax/type errors. In L, 14 of 64 F# error occurrences were dependency/restore errors, while genuine parse/indentation and type/record errors also occurred. Future reports must separate these classes rather than equating every failed build with a bad patch.
+## E3a — Controlled shared-prefix first patch and bounded repair
 
-Diagnostic line occurrences are output-volume observations, not independent defects. Use failed operation episodes, unique diagnostic codes/categories per episode, and repair transitions as the main units.
+### Question and sampling
 
-### E2a: F# both invoked more tools and paid more per restore/build-capable operation
+For matched canonical predecessor states under one fixed controller policy, estimate first-patch correctness and the subsequent resource burden of bounded repair. This is a mechanism-enriched, non-confirmatory pilot, not representative maintenance or lifetime cost.
 
-E2a authenticated all 435 completed v3 command events and 258 benchmark `dotnet` operations, reducing them to 23 semantic forms. The exposure inventory contains 163 F# and 95 C# benchmark invocations. Per configuration:
+Select a minimal set from existing tasks: a low-diagnostic additive task, a type/validation task, and a multi-file/API task. Document archived evidence and all selection decisions. Do not enlarge the set or choose replacements after seeing new language outcomes. Historical Luna-high is a provisional setting only; verify the exposed model/effort and record actual version information before execution. No silent model substitutions.
 
-| Configuration | C# invocations | F# invocations |
-|---|---:|---:|
-| H | 16 | 29 |
-| L | 41 | 72 |
-| M | 38 | 62 |
+Candidates may receive the approved predecessor source, including a predecessor obtained from the gold archive. They must not receive the task's target/successor solution, future changes, research instructions, prior comparative outcomes, or final holdout cases. F#/C# syntax cannot be blinded; the research hypothesis and treatment labels can.
 
-Audit-on command-cell means on the v3 host/profile were:
+### One common trajectory prefix
 
-| Operation | C# mean | F# mean | Absolute gap | Paired ratio |
-|---|---:|---:|---:|---:|
-| restore | 1.377 s | 7.801 s | +6.424 s | 5.664× |
-| build | 1.583 s | 8.065 s | +6.483 s | 4.577× |
-| mixed run forms | 0.995 s | 1.404 s | +0.409 s | 1.109× |
-| test | 0.664 s | 0.653 s | −0.011 s | 0.985× |
-| direct DLL | 0.128 s | 0.131 s | +0.004 s | 1.029× |
+1. Outside candidate interaction, materialize and preflight the predecessor against its own existing contract, not the new feature tests. Pre-restore the locked dependencies with audit out of the edit loop.
+2. Provide identical task information and authority, with language-appropriate paths. Permit only reviewed source-inspection operations. No candidate build/test execution, hidden language-server diagnostics, network access, or unbounded shell bypass in this controlled arm.
+3. Capture one submitted patch or workspace diff. Multiple internal edits before submission are permitted only under the frozen protocol; no execution feedback is supplied before submission.
+4. Apply it deterministically in a separate sandbox; preserve the original submission. Invalid patch format/application is an output failure, not an uncharged harness repair. Do not manually fix candidate patches.
+5. Run the fixed controller build with `--no-restore` and the declared development checks. Remove stale outputs and demonstrate that evaluated binaries correspond to the submitted source. Preflight failures are apparatus failures; a candidate's forbidden dependency/framework changes are protocol violations, not excludable infrastructure accidents. Permit task-required source-file/compile-order changes explicitly.
+6. Continue only submissions failing the **development** stopping criterion, for the frozen repair-round and total-resource budget. Return versioned compiler/development-test feedback. A submission passing development checks stops even if it later fails the final holdout.
+7. Score the first submission and terminal submission with a separate, sealed final holdout. Holdout outputs, examples, pass/fail bits, and stopping decisions never enter candidate feedback. Run holdout scoring after the trajectory or through an isolated scorer that cannot affect continuation.
 
-These operation means are unweighted command-cell summaries. The frequency-weighted mechanical envelope is the relevant descriptive comparison to v3:
+The one-shot endpoint is the shared prefix, not a separate stochastic run. Record incremental repair cost as the resources after first submission. This is not a causal estimate of the benefit of feedback versus extra thinking; that would require a separately randomized continuation control. Conditional-on-failure repair comparisons have selected different error populations and are descriptive.
 
-| Configuration | Mechanical F#−C# gap | Observed E1 agent F#−C# gap |
-|---|---:|---:|
-| H | 113.1 s | 131.2 s |
-| L | 286.7 s | 393.3 s |
-| M | 209.8 s | 473.2 s |
+### Feedback, authority, and memory
 
-The envelope is not subtracted from agent time, called mediation, or converted into a causal percent explained. It uses successful gold successors and fresh caches rather than actual intermediate candidate states and cache histories. It nevertheless shows that direct tool exposure is large and cannot be treated as a minor nuisance.
+The specification must partition development-feedback tests from final holdout tests. Public task examples may be in the development set. The holdout needs independent cases and fault/property checks; it cannot be a renamed copy of the feedback set. Score declared API/structural obligations only; never demand canonical internal layout without stating it in the task.
 
-### NuGet audit is a measured but non-general default amplifier
+Use deterministic diagnostic extraction, stable ordering, explicit truncation markers, preserved error codes/locations, and a fixed token/size cap. Preserve full raw output externally. Do not use a new LLM summarizer in this first treatment. Add checks that a larger F# diagnostic set is not silently deprived of essential information by the cap.
 
-With audit enabled, F# restore averaged 7.801 seconds; with `NuGetAudit=false`, it averaged 2.076 seconds. Restore-capable F# build/run forms also lost roughly six seconds when audit was disabled, while C# audit effects were approximately zero.
+Freeze the memory treatment: same-session continuation with preserved provider state, explicit transcript replay, or fresh-context repair. These are distinct. Verify live behavior during an authorized integration stage; do not claim hidden-state equivalence from matching text or a thread ID alone.
 
-E2a emitted 435 F# `NU1900` lines under audit-on and none under audit-off. The authenticated v3 streams contained 197 F# `NU1900` lines and zero C# lines. These are repeated output lines, not independent defects.
+Candidate-written code and project files are untrusted execution inputs. Evaluation stays sandboxed with resource limits and without model credentials, host mounts, future gold, or writable scoring machinery. Authentication is infrastructure-only, never candidate-readable.
 
-The v3/E2a profile allowed model traffic through its internal proxy but blocked NuGet source reachability, while using fresh homes/caches. Thus the original v3 condition is specifically **legacy constrained-network audit-on**, not a general “default ecological” developer environment. It accurately measures that deployment constraint but must not be the primary general language-cost stratum.
+### Outcomes and budget
 
-Use explicit tool/network strata:
+Use one primary endpoint: **first-submission joint build and final-holdout behavioral correctness**. Separately report patch-format, compilation, declared API, development-test, and final-holdout outcomes; terminal correctness; failure categories; and resource use.
 
-1. **controlled offline/hygienic:** pre-restored dependencies, `NuGetAudit=false` inside the edit–compile loop, fixed no-restore builds;
-2. **online audit-reachable ecological:** audit enabled with source reachability and cache policy verified;
-3. **legacy constrained-network audit-on:** retained as historical/stress evidence, not pooled with the first two.
+For every trajectory and round retain observable input/cache/output/reasoning categories, submission identity, controller tool time, raw and candidate-visible feedback volume, status, retries, and timeouts. Do not sum provider token subsets twice. Keep unsupported fields null and distinguish provider totals from visible-text proxies. Record actual attempts, including those with invalid accounting.
 
-A sizeable compiler/toolchain difference remains after disabling audit. Representative no-restore F# builds retained roughly 3.2–3.5× ratios and absolute gaps around 2.6–2.8 seconds. Pure execution, tests, and direct-DLL execution were near parity.
+Before requesting execution, freeze the number of task pairs/repetitions, order schedule, maximum model calls, per-request/per-trajectory output and time budgets, spend or subscription-usage ceiling, retry policy, and stop rules. Finite worst-case usage must be calculable. No live request, including a capability or continuation smoke test, is free merely because it is non-counting.
 
-Future reporting must distinguish pure execution from `run` commands that implicitly build or restore. A single `run` category is not mechanistically meaningful.
+Report all valid assigned trajectories jointly with correctness. Successful first submissions contribute zero incremental repair cost to the unconditional summary. Retain failed/timeout trajectories and missing observations; do not select only successful chains or repair successes. Use task-paired summaries with uncertainty; three selected tasks do not support a universal language effect.
 
-## Interpretation boundary
+## After E3a: choose a branch, not every workstream
 
-The leading bounded pathway is:
+| Branch | When justified | Scope |
+|---|---|---|
+| E3b/F0 tool-policy intervention | A practical command/feedback policy comparison would answer a remaining question. | Compare named policies with equal authority; one policy change at a time where attribution matters. No need to re-prove the already measured audit delay. |
+| Familiarity/localization follow-up | Initial patch failures remain unexplained under clean tools. | A small specified documentation, API/interop, or read-only intervention; distinguish changed evidence from model capability. |
+| H context study | A scalable paired workload and auditable source budget can test the original hypothesis. | H0 model-free preparation, then a bounded context pilot after separate review. **Not dependent on F1/F2 or completion of G.** |
+| G small-workload replication | Precision or replication would change a practical conclusion. | Fresh registered data in a named ecology; not a mandatory detour before H. |
+| F repair isolation | Evidence specifically motivates orchestrator-context containment and simple policy is insufficient. | Same-model isolated versus inline repair first, with total and per-agent accounting. Persistent context is a later distinct question, not contingent on a favorable fresh-context cost result. |
 
-```text
-some combination of first-patch source/type/project difficulty
-  -> more F# build attempts and repairs
-  -> more diagnostics and model turns
-  -> more model input/output
+E2a already motivates hygienic tools for all controlled experiments. Making those controls usable does not require running a separate model-backed hygiene study. Do not require every hypothesis to be explained before testing source/context behavior without repair feedback.
 
-plus constrained-network audit, implicit restore, and compiler latency
-  -> more direct waiting and repeated output per relevant operation
-  -> amplification of repair-heavy trajectories
-```
+A later repair-routing experiment must separate smaller orchestrator context from lower total cost. Externally retained state, worker calls, summaries, and rereads all cost resources. Do not add recursive workers, dynamic routing, new proxies, or compatibility frameworks speculatively.
 
-Static source size and built-program runtime do not explain the observed small-repository gap. E1/E2a do not yet identify whether genuine first-patch difficulty comes from syntax, type inference, .NET interop, project mechanics, or lower model familiarity.
+## Review and execution boundaries
 
-Tool latency cannot by itself explain model tokens. It affects model usage through additional calls, diagnostics, feedback, and replay. Per-round usage and exact context exposure were not retained in v3.
+Use one bounded authorization packet, not an arbitrary duration or commit count. Distinguish review readiness, scientific acceptance, frozen executable identity, and execution permission. Completing one does not imply the others.
 
-The repository was only about two thousand source-proxy tokens. It measures a local small-repository ecological gap, not context-window fitness or a language-by-scale slope. Any semantic-density crossover must be observed under genuine retrieval, persistent-history, or compaction pressure.
+For a frozen authorized batch, the agent may execute the agreed batch and produce the predeclared audit/descriptive report. Human review is required at scientific changes, resource limits, integration failures, or the planned end—not automatically after every pair. Operational checkpoints may be automatic; keep comparative results masked from decisions to extend formal collection unless a sequential rule was registered. No outcome-driven sample extension or redesign inside execution.
 
-## Current decision
-
-Revise the successor program as follows:
-
-1. **E3a controlled shared-prefix first-patch and repair pilot** — isolate source/type/project generation and bounded repair under a fixed audit-off, no-restore controller path.
-2. **E3b/F0 deterministic tool-policy pilot** — test whether simple single-agent hygiene removes practical ecological overhead before constructing subagents.
-3. **F1 isolated repair worker** — only if meaningful repair/context burden remains after tool hygiene.
-4. **F2 persistent orchestrator** — only after F1 demonstrates auditable context separation.
-
-A standalone comprehension arm is no longer co-primary. E1 did not show a large consistent pre-edit navigation difference. Localization may be an auxiliary structured measure or a conditional follow-up if E3a does not account for the pattern.
-
-## Immediate continuation order
-
-### E3a — Specify a controlled shared-prefix first-patch and bounded-repair pilot
-
-**Next bounded task: specification, deterministic fixtures/identities, independent review, clean freeze, and exact-commit CI only. Do not invoke a model.**
-
-#### Scientific questions
-
-Under a fixed controller-owned compile/evaluation path that removes dependency reachability, vulnerability-audit, and implicit-restore variation:
-
-1. Are F# first patches less likely to compile or satisfy behavior?
-2. Which source/project diagnostic categories differ?
-3. What incremental model/tool cost follows when failed first patches receive bounded repair feedback?
-
-#### Task set
-
-Freeze a minimal mechanism-spanning set using only E1/E2/E2a evidence:
-
-- one simple, low-diagnostic additive task;
-- one type/validation task with observed F# source diagnostics;
-- one multi-file/project/API task, normally Task 007 or 008.
-
-Use the canonical gold predecessor for each task. Task selection is hypothesis-routing, and the pilot is non-confirmatory. The specification should document the task-level archived evidence before any new outcome exists.
-
-#### Configuration
-
-Use one exact model/scaffold setting selected for nondegenerate first-patch outcomes. M (`gpt-5.6-luna`, high) is the preferred provisional choice because its archived first-build outcomes were mixed and its E2a mechanical envelope left a substantial unresolved agent-time difference. L was near a first-build floor, while H had substantial first-build missingness and little residual wall-time gap beyond the mechanical envelope. Confirm current availability before freeze. Do not vary model, effort, and harness simultaneously.
-
-#### Shared-prefix staged design
-
-Do not run independent one-shot and repair agents with different stochastic first patches. Instead:
-
-1. materialize and verify the matched source-only gold predecessor;
-2. preflight restore/build the unchanged predecessor outside candidate interaction;
-3. restore dependencies with `NuGetAudit=false` and freeze the resolved inputs;
-4. give every candidate the same initial prompt and authority;
-5. obtain exactly one candidate patch without build/test feedback;
-6. preserve and apply that patch once in an external controller workspace;
-7. run a fixed no-restore build and direct/no-build evaluator;
-8. record the resulting first-patch build and behavioral endpoint;
-9. successful first patches stop;
-10. failed first patches may continue through a frozen number of repair rounds, each receiving a bounded versioned feedback packet.
-
-The one-shot endpoint is therefore observed for every trajectory. Post-first-patch cost is recorded as incremental repair cost; it is not called causal mediation.
-
-Same-context continuation must be demonstrated and frozen. If the harness cannot resume the same candidate context after controller feedback, the treatment must be labelled **fresh-context repair** and may not be described as monolithic continuation. Do not silently change memory policy.
-
-Candidate agents may inspect allowed source but may not invoke arbitrary `dotnet`, test, network, or shell build forms in this controlled mechanism treatment. Free tool choice remains a separately named ecological treatment.
-
-#### Failure taxonomy
-
-Classify first-patch and repair outcomes as:
-
-- syntax/indentation;
-- type/record/overload or API;
-- project/compile-order;
-- dependency/restore/audit/environment;
-- behavioral test failure after successful build;
-- unclassified/unavailable.
-
-Any predecessor preflight or pre-patch dependency failure is apparatus/environment failure, not candidate failure.
-
-#### Required per-round evidence
-
-For every model round record separately:
-
-- input, cached input, output, and reasoning tokens;
-- process/model wall time;
-- patch identity and size;
-- controller restore/build/run/evaluator duration;
-- raw diagnostic/output identity and volume;
-- exact candidate-visible diagnostic packet identity and volume;
-- first-build and behavioral outcome;
-- unique diagnostic codes/categories;
-- repair count and terminal correctness.
-
-Preserve full raw tool output outside candidate context. Unsupported provider telemetry remains null rather than zero.
-
-A small structured localization response may be embedded before the patch only if independent review concludes it will not materially alter patch generation. Otherwise defer comprehension/localization.
-
-#### E3a stopping rule
-
-Predeclare task identities, model/effort, sample size, order, shared-prefix policy, patch format, controller commands, same-context continuation mechanism, diagnostic packet policy, retries, exclusions, evidence retention, and stopping. Stop after the non-confirmatory pilot and produce a mechanism decision. Do not expand into a language × model × task × mode factorial.
-
-### E3b / F0 — Deterministic tool-policy pilot
-
-Run only after E3a shows that repair/tool feedback is a meaningful pathway. Compare the intended practical ecological policy with a hygienic single-agent condition while holding model, tasks, starting states, and repair authority fixed.
-
-The hygienic condition should implement only reviewed deterministic policy:
-
-- run vulnerability audit once at a controlled boundary or disable it inside the edit–compile loop;
-- avoid implicit restore in repeated builds;
-- avoid `dotnet run` forms that rebuild when direct/no-build execution suffices;
-- bound and deduplicate irrelevant repeated warning output before model feedback;
-- preserve full raw output outside model context.
-
-The primary ecological comparator must be explicitly intended and reproducible, preferably online audit-reachable development with source and cache behavior verified. Do not silently reuse the legacy blocked-source audit-on condition as “default”; it may remain an optional stress stratum.
-
-Report separately:
-
-- correctness and first-patch correctness;
-- total input/output/reasoning;
-- direct tool time;
-- tool invocation count;
-- raw versus candidate-visible diagnostic volume;
-- repair count and terminal wall time.
-
-This simple harness intervention precedes subagents. If it removes the relevant excess without harming correctness, do not build repair-worker infrastructure.
-
-### E4 — Mechanism decision
-
-After E3a and, when justified, E3b/F0:
-
-- first patches differ under the controlled path → prioritize syntax/type/API/project-generation mechanisms;
-- first patches are similar but repair cost differs → prioritize diagnostic interpretation and repair amplification;
-- hygienic tool policy removes the practical ecological gap → treat tool policy as the primary intervention;
-- comprehension remains unexplained → run a separately reviewed localization/familiarity treatment;
-- similar interaction counts but input per round grows with scale → proceed toward Workstream H;
-- no stable attribution → replicate only if the required sample remains scientifically and economically justified.
-
-Do not convert these non-confirmatory pilots into a universal language ranking.
-
-## Conditional Workstream F — Context containment and repair delegation
-
-### F1 — Fresh inline versus fresh isolated repair
-
-Run only if meaningful repair/context burden remains after deterministic tool hygiene.
-
-Use the same model for orchestrator and worker first. The harness—not a prompt—must enforce separate processes/contexts and separate accounting. A deterministic controller runs builds/tests. The worker receives the bounded relevant workspace/diff plus diagnostics; the orchestrator receives only a frozen structured result unless a preregistered semantic escalation occurs.
-
-Report total system cost, orchestrator-only cost, worker cost, raw diagnostic volume withheld from the orchestrator, correctness, repair attempts, and escalations.
-
-### F2 — Persistent context only after F1
-
-Only if F1 has auditable per-agent accounting and a meaningful containment result, add persistent inline and persistent delegated conditions. This tests cross-task context pollution.
-
-Do not build recursive agents, dynamic routing, a generic multi-agent framework, or cheaper-worker variants before the same-model containment effect is understood.
-
-## Workstream G — Registered small-repository replication
-
-After causal attribution, register only the harness strata justified by E3/F:
-
-- controlled offline/hygienic;
-- online audit-reachable ecological;
-- delegated repair, only if F1 is viable.
-
-Do not pool them. The legacy constrained-network audit-on v3 condition is historical/stress evidence, not the primary replication target.
-
-Primary outcomes should include full-chain correctness, first-patch build and behavioral success, failure category, repair burden, paired total input, paired agent time, direct tool time, and per-task cumulative trajectories. V3 calibration observations remain excluded from formal estimates.
-
-## Workstream H — Multi-scale context-pressure study
-
-The original semantic-density hypothesis is tested only here.
-
-Use a matched scalable architecture and preregister realistic source/working-set levels that create navigation and dependency obligations. Do not add inert filler. The evaluator must know the relevant files and symbols.
-
-Use the controlled/hygienic tool path as the primary mechanism condition so known audit/implicit-restore and compiler fixed costs do not swamp the language × scale estimate. An online audit-reachable ecology may be secondary; the legacy blocked-source condition is not the primary scale treatment.
-
-Measure candidate-visible repository and task-relevant tokens, retrieval recall/precision, architectural distance, interactions, input per interaction, unique/repeated source and tool exposure where available, maximum/terminal context, compaction, fresh versus persistent context, correctness, regressions, and total ecological cost.
-
-A crossover is supported only if observed inside the preregistered scale range under genuine context pressure. Never extrapolate it from the current small-project gap.
-
-## Evidence and claim boundaries
-
-- V3 calibrations are non-counting and excluded from future formal estimates.
-- E1/E2/E2a are descriptive mechanism-routing evidence, not causal language inference.
-- E2 and E2a are separate ecologies and are not pooled.
-- The v3/E2a audit-on result is a constrained-network stress ecology, not a universal default.
-- Unweighted command-cell ratios are not frequency-weighted v3 effects.
-- The mechanical exposure envelope is not a mediation estimate or a quantity to subtract from agent time.
-- Failed builds include environment/dependency failures as well as source failures.
-- Audit-warning line counts are repeated output, not independent defects.
-- Aggregate input is trajectory usage, not unique source exposure.
-- The current repository does not test context-window fit.
-- Fresh-per-task v3 cannot establish cross-task context pollution.
-- No current result establishes an intrinsic or universal F#, C#, model, or harness ranking.
-
-## Research invariants
-
-- Keep semantic tasks, starting states, evaluator, limits, and candidate authority matched within each treatment.
-- Keep candidate agents blind to `AGENTS.md`, `PLAN.md`, hypotheses, prior outcomes, treatment labels, gold states, and hidden evaluator cases.
-- Never expose credentials, parent repositories, unrelated host files, future gold, or evaluator cases.
-- Record every attempt; never silently replace an ambiguous or potentially billable request.
-- Keep scientific specification, runner, environment, model, effort, schedule, and attempt identities separate.
-- Separate source exposure, model output, tool feedback, total input, direct tool time, orchestrator cost, worker cost, and end-to-end cost.
-- Unsupported telemetry is null/unavailable, never zero.
-- Preserve immutable E1/E2/E2a artifacts; corrections belong in addenda or new reports.
-
-## Autonomous stopping rules
-
-- The next autonomous task is E3a scientific specification, fixtures/identities, independent review, clean freeze, and exact-commit CI only.
-- It may not execute the pilot or invoke a model automatically.
-- After two failures of one apparatus class, stop and report instead of adding another compatibility or recovery layer.
-- Stop before changing candidate-visible semantics, model/prompt/task/evaluator, tool-feedback policy, harness memory/routing, or another frozen scientific condition without reviewed authorization.
-- Prefer deterministic tool hygiene before multi-agent infrastructure.
-
-## Overall sequence
-
-```text
-E1/E2/E2a evidence — complete
-  -> E3a controlled shared-prefix first-patch/repair specification and pilot
-  -> E3b/F0 deterministic tool-policy pilot when justified
-  -> E4 mechanism decision
-  -> F1 fresh isolated repair only if hygiene is insufficient
-  -> F2 persistent context only if F1 works
-  -> G registered small-repository replication by named tool/harness stratum
-  -> H medium/large language × context-pressure study
-```
+Ordinary tests and CI fixes can continue within scope. Repeated failures of the same unresolved apparatus class should trigger a stop rather than a new layer. A pending CI run is pending, not success; only applicable checks need to be rerun for documentation-only changes. Experimental execution requires the approved exact code/specification identity and required checks.
+
+## Non-negotiable evidence rules
+
+- Reports and frozen experiments remain immutable; corrections are labelled and linked.
+- Matched implementations estimate a particular implementation/model/harness contrast, not pure syntax or an intrinsic language effect.
+- Whole-repository size, conservative dependency closure, actual working context, cumulative tokens, and relevant information are different quantities.
+- F# token savings and long-context benefits are hypotheses, not inclusion criteria. Near-window success may fail before the hard cap; over-window tasks may be solved by contracts or streaming.
+- Native-repository evidence needs a sampling frame and remains observational. A public repository is not automatically representative.
+- Development-agent review may be AI-assisted but is not automatically independent human expertise. Record reviewer identity/type, evidence, limitations, and unresolved objections.
+- Reuse the canonical runner. V4–V13 are apparatus history; do not restart version inflation. Change frozen candidate-visible policy only through a reviewed new scientific specification.
