@@ -23,6 +23,13 @@ Read:
 docs/workstream-e2a-review-and-successor-revision-2026-09-05.md
 docs/workstream-e2a-disposition-2026-09-04.md
 reports/workstream-e2a-host-aligned-v1/report.md
+docs/workload-validity-and-review-gates-2026-09-05.md
+```
+
+For future context-pressure work also read:
+
+```text
+docs/workstream-h-context-pressure-design-2026-09-05.md
 ```
 
 V4–V13 are apparatus-development history. Do not create v14. Preserve immutable E1/E2/E2a evidence; corrections belong in addenda or new reports.
@@ -45,6 +52,27 @@ E3a must:
 10. remain non-confirmatory and stop after its frozen sample.
 
 Candidates may inspect allowed source but may not choose arbitrary build/run/test commands in this controlled mechanism treatment. Free tool choice is a separately named ecological treatment.
+
+## Workload validity
+
+A controlled paired benchmark and a representative native workload answer different questions and must not be pooled.
+
+- **Controlled paired layer:** same semantic system, task sequence, external oracle, candidate-visible information, and harness policy, with independently reviewed idiomatic F# and C# implementations.
+- **Native ecological layer:** real repositories and accepted maintenance changes, stratified by domain, scale, task family, dependency complexity, test quality, and documentation. This validates transfer but is observational rather than a causal language estimate.
+
+Before any new repository family receives model runs, require the workload-validity dossier in `docs/workload-validity-and-review-gates-2026-09-05.md`. In particular:
+
+- sample task templates from both F# and C# real maintenance histories before seeing outcomes;
+- balance local bugs, additive work, cross-cutting changes, refactors, public-API compatibility, multi-module integration, robustness, and suitable concurrency/performance work;
+- use one language-neutral behavior/invariant contract but author each implementation natively rather than mechanically translating it;
+- compare semantic structure and task-relevant dependency closures, not equal lines of code;
+- obtain language-specific idiomaticity review plus a separate paired semantic review;
+- include multiple domains, including both .NET-interop-heavy and F#-native modeling workloads;
+- use active tested modules rather than inert context filler;
+- report both same-semantic-scale and same-normalized-context-occupancy analyses;
+- record unavoidable language-specific obligations instead of silently equalizing or ignoring them.
+
+A benchmark may legitimately be controlled but not representative, or representative but not causally matched. Never use “fair and representative” as an unreviewed blanket label.
 
 ## Later ordering
 
@@ -91,14 +119,32 @@ Candidate agents must remain blind to `AGENTS.md`, `PLAN.md`, hypotheses, prior 
 - Separate source exposure, model output, tool feedback, total input, direct tool time, orchestrator cost, worker cost, and end-to-end cost.
 - Unsupported telemetry is null/unavailable, never zero.
 - Preserve full raw tool output outside candidate context when a bounded feedback packet is used.
-- Never pool controlled offline/hygienic, online audit-reachable, legacy blocked-source, or delegated-agent strata.
+- Never pool controlled offline/hygienic, online audit-reachable, legacy blocked-source, native ecological, or delegated-agent strata.
 
-## Autonomous stopping rules
+## Autonomous stopping and review cadence
 
-- The current task ends after E3a specification/review/freeze/CI; it may not execute the pilot or invoke a model.
-- After two failures of one apparatus class, stop and report instead of adding another route or compatibility layer.
-- Stop before changing candidate-visible semantics, model/prompt/task/evaluator, tool-feedback policy, harness memory/routing, or a frozen scientific condition without reviewed authorization.
-- Prefer deterministic tool hygiene before multi-agent infrastructure.
+The unit of autonomous progress is **one scientific gate**, not elapsed time, commit count, or a whole workstream. Finish the gate completely—implementation, tests, documentation, review disposition, clean freeze, and exact-head CI where applicable—then return for review rather than beginning the next gate.
+
+Gate order:
+
+1. question/workload sampling and inclusion rules;
+2. one paired exemplar, semantic map, idiomaticity review, oracle, and mutation checks;
+3. apparatus implementation, fixtures, model-free validation, freeze, and CI;
+4. preregistered non-counting calibration execution and archive/audit;
+5. one predeclared formal macroblock or configuration cell;
+6. frozen analysis and interpretation.
+
+Design, model execution, analysis, and redesign must be separate autonomous tasks. During formal collection, review continuation using protocol validity and infrastructure health only—not the sign or size of the emerging language effect.
+
+### Current stop point
+
+The current maintainer task ends after E3a specification/review/freeze/CI. It may not execute E3a, invoke a model, implement E3b/F0, build repair subagents, or start Workstream H.
+
+After explicit authorization, an execution agent may run the complete frozen non-counting E3a pilot and archive/audit every attempt, then must return before interpreting results or changing the protocol.
+
+For Workstream H, return after each of these gates: workload sampling frame; one small/medium paired exemplar and dossier; scalable construction plus model-free H0 validation; one non-counting low-budget calibration; each preregistered pressure macroblock; and absolute long-context validation.
+
+Return immediately if the estimand, workload sample, task semantics, oracle, candidate-visible information, tool policy, model, scaffold, context policy, retrieval policy, or ecological stratum would change; if a pair cannot be both idiomatic and behaviorally equivalent; if outcomes could contaminate an unfrozen design; if exact context/model identity is unavailable; after two failures of one apparatus class; or whenever the current gate’s acceptance criteria are met.
 
 ## Validation
 
