@@ -4,8 +4,10 @@ from collections import Counter
 import copy
 import hashlib
 import json
+import math
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 from alf.cli import build_parser
@@ -46,8 +48,10 @@ from alf.workstream_e2a import (
     freeze,
     inventory,
     report,
+    validate_report,
     validate_environment,
 )
+import alf.workstream_e2a as e2a_module
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -593,6 +597,192 @@ class E2aTests(unittest.TestCase):
         )
         self.assertFalse(audited["ok"])
         self.assertIn("raw_inventory_disk_mismatch", audited["errors"])
+
+    def test_derived_summary_float_drift_is_bounded_and_audit_rebuild_uses_it(self):
+        run_root = self.base / "summary-comparison-run"
+        raw = run_root / "raw"
+        _synthetic_raw(raw, self.definition, self.inventory)
+        built = report(
+            definition=self.definition,
+            inventory_data=self.inventory,
+            raw_output=raw,
+        )
+
+        def mutate_summary_float(document, section):
+            if section == "absolute_distributions":
+                cell = document[section][0]["wall_seconds"]
+            elif section == "paired_language_effects":
+                cell = document[section][0]["csharp_wall_seconds"]
+            elif section == "audit_contrasts":
+                cell = document[section][0]["audit_on_wall_seconds"]
+            else:
+                cell = document[section]["by_configuration_and_language"][0]
+                cell = {"value": cell["mechanical_tool_exposure_seconds"]}
+            if section == "mechanical_tool_exposure_envelope":
+                document[section]["by_configuration_and_language"][0][
+                    "mechanical_tool_exposure_seconds"
+                ] = math.nextafter(cell["value"], math.inf)
+            else:
+                cell["mean"] = math.nextafter(cell["mean"], math.inf)
+
+        for section in (
+            "absolute_distributions",
+            "paired_language_effects",
+            "audit_contrasts",
+            "mechanical_tool_exposure_envelope",
+        ):
+            self.assertTrue(e2a_module._derived_json_equal(built[section], built[section]))
+
+            tiny = copy.deepcopy(built)
+
+            # Keep the fixture's known first float stable while exercising the
+            # same recursive shape for every approved derived section.
+            if section == "absolute_distributions":
+                tiny[section][0]["wall_seconds"]["mean"] = math.nextafter(
+                    tiny[section][0]["wall_seconds"]["mean"], math.inf
+                )
+                too_far = copy.deepcopy(built)
+                too_far[section][0]["wall_seconds"]["mean"] += 1e-6
+            elif section == "paired_language_effects":
+                tiny[section][0]["csharp_wall_seconds"]["mean"] = math.nextafter(
+                    tiny[section][0]["csharp_wall_seconds"]["mean"], math.inf
+                )
+                too_far = copy.deepcopy(built)
+                too_far[section][0]["csharp_wall_seconds"]["mean"] += 1e-6
+            elif section == "audit_contrasts":
+                tiny[section][0]["audit_on_wall_seconds"]["mean"] = math.nextafter(
+                    tiny[section][0]["audit_on_wall_seconds"]["mean"], math.inf
+                )
+                too_far = copy.deepcopy(built)
+                too_far[section][0]["audit_on_wall_seconds"]["mean"] += 1e-6
+            else:
+                tiny[section]["by_configuration_and_language"][0][
+                    "mechanical_tool_exposure_seconds"
+                ] = math.nextafter(
+                    tiny[section]["by_configuration_and_language"][0][
+                        "mechanical_tool_exposure_seconds"
+                    ], math.inf
+                )
+                too_far = copy.deepcopy(built)
+                too_far[section]["by_configuration_and_language"][0][
+                    "mechanical_tool_exposure_seconds"
+                ] += 1e-6
+            tiny.pop("report_sha256")
+            self.assertTrue(validate_report(
+                _finish_hash(tiny, "report_sha256"), self.definition, self.inventory
+            )["ok"])
+            too_far.pop("report_sha256")
+            self.assertIn(
+                f"report_{section.replace('mechanical_tool_exposure_envelope', 'exposure_envelope')}_mismatch",
+                validate_report(
+                    _finish_hash(too_far, "report_sha256"), self.definition, self.inventory
+                )["errors"],
+            )
+
+        rebuilt = copy.deepcopy(built)
+        rebuilt["absolute_distributions"][0]["wall_seconds"]["mean"] = math.nextafter(
+            rebuilt["absolute_distributions"][0]["wall_seconds"]["mean"], math.inf
+        )
+        rebuilt.pop("report_sha256")
+        rebuilt = _finish_hash(rebuilt, "report_sha256")
+        with mock.patch.object(e2a_module, "_build_report", return_value=rebuilt):
+            audited = audit(
+                definition=self.definition,
+                inventory_data=self.inventory,
+                report_data=built,
+                raw_output=raw,
+            )
+        self.assertTrue(audited["ok"], audited["errors"])
+
+        for section in (
+            "absolute_distributions",
+            "paired_language_effects",
+            "audit_contrasts",
+            "mechanical_tool_exposure_envelope",
+        ):
+            rebuilt = copy.deepcopy(built)
+            mutate_summary_float(rebuilt, section)
+            rebuilt.pop("report_sha256")
+            rebuilt = _finish_hash(rebuilt, "report_sha256")
+            with mock.patch.object(e2a_module, "_build_report", return_value=rebuilt):
+                audited = audit(
+                    definition=self.definition,
+                    inventory_data=self.inventory,
+                    report_data=built,
+                    raw_output=raw,
+                )
+            self.assertTrue(audited["ok"], (section, audited["errors"]))
+
+        invalid_rebuilt = copy.deepcopy(rebuilt)
+        invalid_rebuilt["report_sha256"] = "0" * 64
+        with mock.patch.object(e2a_module, "_build_report", return_value=invalid_rebuilt):
+            audited = audit(
+                definition=self.definition,
+                inventory_data=self.inventory,
+                report_data=built,
+                raw_output=raw,
+            )
+        self.assertFalse(audited["ok"])
+        self.assertIn("report_differs_from_raw_recomputation", audited["errors"])
+
+        sample_tampered = copy.deepcopy(built)
+        sample_tampered["samples"][0]["wall_seconds"] = math.nextafter(
+            sample_tampered["samples"][0]["wall_seconds"], math.inf
+        )
+        sample_tampered.pop("report_sha256")
+        sample_tampered = _finish_hash(sample_tampered, "report_sha256")
+        audited = audit(
+            definition=self.definition,
+            inventory_data=self.inventory,
+            report_data=sample_tampered,
+            raw_output=raw,
+        )
+        self.assertFalse(audited["ok"])
+        self.assertIn("report_differs_from_raw_recomputation", audited["errors"])
+
+    def test_derived_comparison_rejects_structure_types_nonfinite_and_sample_drift(self):
+        self.assertFalse(e2a_module._derived_json_equal({"x": [1]}, {"x": [1, 2]}))
+        self.assertFalse(e2a_module._derived_json_equal({"x": 1}, {"x": True}))
+        self.assertFalse(e2a_module._derived_json_equal({"x": float("nan")}, {"x": 1.0}))
+        self.assertFalse(e2a_module._derived_json_equal({"x": float("inf")}, {"x": 1.0}))
+        self.assertFalse(e2a_module._json_equal_exact({"x": 1}, {"x": True}))
+
+    def test_valid_rehash_structural_and_scalar_mutations_fail_validation(self):
+        run_root = self.base / "summary-structure-run"
+        raw = run_root / "raw"
+        _synthetic_raw(raw, self.definition, self.inventory)
+        built = report(
+            definition=self.definition,
+            inventory_data=self.inventory,
+            raw_output=raw,
+        )
+
+        mutations = []
+        string_mutation = copy.deepcopy(built)
+        string_mutation["absolute_distributions"][0]["operation"] = "tampered"
+        mutations.append(string_mutation)
+        missing_key = copy.deepcopy(built)
+        missing_key["absolute_distributions"][0].pop("operation")
+        mutations.append(missing_key)
+        extra_key = copy.deepcopy(built)
+        extra_key["absolute_distributions"][0]["unexpected"] = 1
+        mutations.append(extra_key)
+        reordered = copy.deepcopy(built)
+        reordered["absolute_distributions"][:2] = reordered["absolute_distributions"][1::-1]
+        mutations.append(reordered)
+        int_float = copy.deepcopy(built)
+        int_float["absolute_distributions"][0]["wall_seconds"]["count"] = 5.0
+        mutations.append(int_float)
+        nonfinite = copy.deepcopy(built)
+        nonfinite["absolute_distributions"][0]["wall_seconds"]["mean"] = float("nan")
+        mutations.append(nonfinite)
+
+        for mutated in mutations:
+            mutated.pop("report_sha256")
+            validated = validate_report(
+                _finish_hash(mutated, "report_sha256"), self.definition, self.inventory
+            )
+            self.assertFalse(validated["ok"])
 
     def test_cli_has_complete_non_lambda_surface(self):
         parser = build_parser()

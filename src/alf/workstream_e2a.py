@@ -181,6 +181,76 @@ def _finish_hash(document: dict[str, Any], field: str) -> dict[str, Any]:
     return result
 
 
+# These are derived summaries whose floating-point reductions can differ by a
+# tiny amount across Python versions.  Everything else in a report remains an
+# exact, type-sensitive comparison (including identities and hashes).
+_DERIVED_SUMMARY_FIELDS = frozenset({
+    "absolute_distributions",
+    "paired_language_effects",
+    "audit_contrasts",
+    "mechanical_tool_exposure_envelope",
+})
+
+
+def _json_equal_exact(left: Any, right: Any) -> bool:
+    """Compare JSON-like values exactly, including scalar types."""
+
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        return (
+            set(left) == set(right)
+            and all(_json_equal_exact(left[key], right[key]) for key in left)
+        )
+    if isinstance(left, list):
+        return len(left) == len(right) and all(
+            _json_equal_exact(a, b) for a, b in zip(left, right)
+        )
+    return left == right
+
+
+def _derived_json_equal(left: Any, right: Any) -> bool:
+    """Compare one approved derived section with tightly bounded float drift."""
+
+    if isinstance(left, float) or isinstance(right, float):
+        return (
+            isinstance(left, float)
+            and isinstance(right, float)
+            and math.isfinite(left)
+            and math.isfinite(right)
+            and math.isclose(left, right, rel_tol=1e-12, abs_tol=1e-12)
+        )
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        return (
+            set(left) == set(right)
+            and all(_derived_json_equal(left[key], right[key]) for key in left)
+        )
+    if isinstance(left, list):
+        return len(left) == len(right) and all(
+            _derived_json_equal(a, b) for a, b in zip(left, right)
+        )
+    return left == right
+
+
+def _report_recomputation_equal(actual: dict[str, Any], expected: dict[str, Any]) -> bool:
+    """Compare rebuilt reports, tolerating only approved derived summaries."""
+
+    if set(actual) != set(expected):
+        return False
+    # A genuine rebuild incorporates any tolerated derived-float drift into
+    # its own checksum.  Validate each document independently, while keeping
+    # all other identity/non-derived fields exact.
+    if not _self_hash(actual, "report_sha256") or not _self_hash(expected, "report_sha256"):
+        return False
+    return all(
+        (_derived_json_equal(actual[key], expected[key]) if key in _DERIVED_SUMMARY_FIELDS
+         else True if key == "report_sha256" else _json_equal_exact(actual[key], expected[key]))
+        for key in actual
+    )
+
+
 def _normalise_language(value: Any) -> str:
     language = str(value).casefold()
     _require(language in LANGUAGES, "e1_language_invalid")
@@ -2430,13 +2500,25 @@ def validate_report(
     if isinstance(samples, list):
         try:
             catalog = {row["form_id"]: row for row in inventory_data["form_catalog"]}
-            if report_data.get("absolute_distributions") != _absolute_summaries(samples, catalog):
+            if not _derived_json_equal(
+                report_data.get("absolute_distributions"),
+                _absolute_summaries(samples, catalog),
+            ):
                 errors.append("report_absolute_distributions_mismatch")
-            if report_data.get("paired_language_effects") != _paired_language_summaries(samples, catalog):
+            if not _derived_json_equal(
+                report_data.get("paired_language_effects"),
+                _paired_language_summaries(samples, catalog),
+            ):
                 errors.append("report_paired_language_effects_mismatch")
-            if report_data.get("audit_contrasts") != _audit_contrast_summaries(samples, catalog):
+            if not _derived_json_equal(
+                report_data.get("audit_contrasts"),
+                _audit_contrast_summaries(samples, catalog),
+            ):
                 errors.append("report_audit_contrasts_mismatch")
-            if report_data.get("mechanical_tool_exposure_envelope") != _exposure_envelope(samples, inventory_data):
+            if not _derived_json_equal(
+                report_data.get("mechanical_tool_exposure_envelope"),
+                _exposure_envelope(samples, inventory_data),
+            ):
                 errors.append("report_exposure_envelope_mismatch")
         except (E2aError, KeyError, TypeError, ValueError, statistics.StatisticsError):
             errors.append("report_summary_recomputation_failed")
@@ -2680,7 +2762,7 @@ def audit(
                 measurement=measurement,
                 raw_inventory=raw_inventory,
             )
-            if expected != report_data:
+            if not _report_recomputation_equal(report_data, expected):
                 errors.append("report_differs_from_raw_recomputation")
         except E2aError as exc:
             errors.append(exc.code)
