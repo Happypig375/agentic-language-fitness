@@ -1,7 +1,7 @@
 # E2a review and successor-plan revision
 
 **Date:** 2026-09-05  
-**Status:** E2a accepted within its stated bounds. This review changes the successor experiment from a broad three-arm pilot to a staged controlled-mechanism and tool-hygiene program. It authorizes specification work only, not a model call.
+**Status:** E2a accepted within its stated bounds. This review changes the successor experiment from a broad three-arm pilot to a staged controlled-mechanism and tool-policy program. It authorizes specification work only, not a model call.
 
 ## Evidence reviewed
 
@@ -39,15 +39,29 @@ On the same host/profile, audit-on command-cell means were:
 
 The unweighted operation ratios describe command cells, not the frequency-weighted v3 experience. For v3 attribution, the command-frequency exposure envelope is the relevant descriptive summary.
 
-### 2. NuGet audit is a major ecological amplifier and was actually present in v3
+### 2. NuGet audit is a major amplifier and was actually present in v3
 
 With audit enabled, F# restore averaged 7.801 seconds; with `NuGetAudit=false`, it averaged 2.076 seconds. Eligible F# build and run forms also lost roughly six seconds when audit was disabled because those forms could perform implicit restore. Corresponding C# audit deltas were approximately zero.
 
-E2a observed 435 F# `NU1900` lines under audit-on and none under audit-off. More importantly, the authenticated v3 candidate streams themselves contained 197 F# `NU1900` lines and zero C# lines. The offline E2 warning was therefore not merely a GitHub Actions artifact: the same audit/source pathway was active in the agent ecology.
+E2a observed 435 F# `NU1900` lines under audit-on and none under audit-off. More importantly, the authenticated v3 candidate streams themselves contained 197 F# `NU1900` lines and zero C# lines. The E2 warning was therefore not merely a GitHub Actions artifact: the same audit/source pathway was active in v3.
 
 These are repeated emitted lines, not independent defects. Audit delay and audit-output replay must be treated as a tool-policy factor, not as evidence that F# syntax is intrinsically difficult.
 
-### 3. A direct compiler/toolchain difference remains after removing audit
+### 3. V3's audit condition is a constrained-network stress ecology, not a general default
+
+The v3/E2a remote profile routed model traffic through the internal proxy while NuGet source reachability was blocked. It also used fresh per-sample homes/caches. Consequently, vulnerability audit was enabled in an environment where its source could not be reached, and the same failed lookup could recur.
+
+E2a accurately reproduces and explains that v3 ecology. It does **not** establish that ordinary online development with reachable NuGet sources incurs the same audit delay. The earlier label “default ecological” is therefore too broad.
+
+Use explicit names going forward:
+
+1. **controlled offline/hygienic:** dependencies pre-restored, `NuGetAudit=false` inside the edit–compile loop, fixed no-restore builds;
+2. **online audit-reachable ecological:** audit enabled with the configured source demonstrably reachable and cache policy frozen;
+3. **legacy constrained-network audit-on:** v3's blocked-source condition, retained as historical/stress evidence rather than the primary replication target.
+
+Do not pool these strata or use the legacy condition as the default estimate of language cost.
+
+### 4. A direct compiler/toolchain difference remains after removing audit
 
 Disabling audit does not erase the F# toolchain difference. Representative no-restore builds remained around 3.2–3.5 times C# on the v3 host, with absolute gaps around 2.6–2.8 seconds. Build forms that still performed restore remained roughly 2.7–2.9 times C# with audit disabled.
 
@@ -63,7 +77,7 @@ Future reports must therefore distinguish:
 
 A single `run` category hides the mechanism.
 
-### 4. Direct tool exposure is large enough to matter for wall time, but it does not explain model tokens by itself
+### 5. Direct tool exposure is large enough to matter for wall time, but it does not explain model tokens by itself
 
 The frequency-weighted mechanical envelope was:
 
@@ -77,98 +91,113 @@ These quantities are close enough in scale that direct tool waiting and invocati
 
 This comparison is not a causal percentage explained. E2a used successful gold successors, fresh caches, and standardized command replay rather than the actual intermediate candidate states and cache histories. A failing compile may finish earlier or later than a successful gold build, and tool latency can alter subsequent model behavior. The envelope must not be subtracted from agent time or called mediation.
 
-Tool waiting also cannot directly explain the input-token difference. It affects model cost only through mechanisms such as additional tool calls, diagnostic text, extra repair turns, and replayed history. E1 and E2a jointly support that pathway, but per-interaction usage was not retained in v3.
+Tool waiting also cannot directly explain the input-token difference. It affects model cost only through additional tool calls, diagnostic text, extra repair turns, and replayed history. E1 and E2a jointly support that pathway, but per-interaction usage was not retained in v3.
+
+### 6. Failed builds are not all source-generation failures
+
+The headline 23 F# versus 2 C# failed-build count combines source-code errors with dependency/restore and project/tool failures. In the H aggregate, the recorded F# error occurrences were `NETSDK1064` dependency/restore errors rather than syntax/type errors. In the L aggregate, 14 of 64 F# error occurrences were dependency/restore errors, while the remaining observed errors included real parse/indentation and type/record categories.
+
+Therefore E1 supports “more failed F# build episodes” but does not support “all failed F# builds were bad F# patches.” Future reports must classify terminal and first-build outcomes into at least:
+
+- source syntax/indentation;
+- type/record/overload or API;
+- project/compile-order;
+- dependency/restore/audit/environment;
+- behavioral test failure after a successful build;
+- unclassified/unavailable.
+
+The controlled E3 path must preflight and restore the unchanged predecessor before the candidate patch, then build with `--no-restore`, so dependency reachability cannot masquerade as first-patch code failure.
 
 ## Corrected interpretation
 
 The strongest bounded explanation is now:
 
 ```text
-lower first-patch reliability / greater type-project uncertainty
+some combination of first-patch source/type/project difficulty
   -> more F# build attempts and repairs
   -> more diagnostics and model turns
   -> more model input/output
 
-language-specific restore/audit and compiler latency
-  -> more direct waiting per relevant tool operation
-  -> more diagnostic output, especially when implicit restore is repeated
+plus constrained-network audit, implicit restore, and compiler latency
+  -> more direct waiting and repeated output per relevant operation
+  -> amplification of repair-heavy trajectories
 ```
 
-Static source size and built-program runtime are poor explanations for the observed small-repository gap. E2a still does not identify whether the first-patch difference comes from syntax, type inference, .NET interop, project mechanics, or lower model familiarity.
+Static source size and built-program runtime are poor explanations for the observed small-repository gap. E2a still does not identify whether the genuine first-patch difference comes from syntax, type inference, .NET interop, project mechanics, or lower model familiarity.
 
 ## Mandatory successor corrections
 
-### P1 — Controlled mechanism work must remove accidental audit and implicit-restore variation
+### P1 — Controlled mechanism work must remove audit, restore, and environment ambiguity
 
-The next causal pilot must not let an incidental vulnerability audit dominate the comparison. For controlled first-patch and repair measurement:
+For controlled first-patch and repair measurement:
 
-- perform restore outside the candidate interaction with `NuGetAudit=false`;
-- use a fixed no-restore build command;
+- verify the canonical predecessor builds before the candidate acts;
+- restore dependencies outside candidate interaction with `NuGetAudit=false`;
+- use a fixed no-restore build command after applying the patch;
 - execute the built DLL or an equivalent no-build evaluator path;
-- keep audit-on/default behavior as a separately named ecological treatment rather than an uncontrolled nuisance.
+- classify any pre-patch restore/build failure as apparatus/environment failure, not candidate failure;
+- keep online audit-reachable behavior as a separately named ecological treatment.
 
-This does not declare audit unimportant. It separates model/language generation behavior from a known tool-policy amplifier.
+This separates model/language generation behavior from a known tool-policy amplifier without pretending that audit and toolchain costs are practically irrelevant.
 
-### P1 — The controller must own the first patch, build, and repair boundary
+### P1 — Use a shared-prefix staged trajectory, not duplicate one-shot and repair runs
 
-E1 left 34 of 80 first-post-edit build outcomes unavailable. E3 must make every boundary observable:
+A separate one-shot arm and full-repair arm would waste model calls and introduce stochastic first-patch differences. Instead:
 
-1. materialize the matched gold predecessor;
-2. obtain exactly one candidate patch without build/test feedback;
-3. preserve and apply that patch once;
-4. run the fixed external restore/build/evaluator protocol;
-5. record diagnostics, bytes, duration, and outcome;
-6. only in the repair condition, provide a bounded diagnostic packet and permit a frozen number of repair rounds.
+1. every run receives the same initial prompt and authority;
+2. every run produces one preserved first patch without compiler/test feedback;
+3. the controller evaluates that patch externally, yielding the one-shot endpoint;
+4. failed first patches may then continue, under a preregistered rule, through a small bounded repair sequence;
+5. successful first patches stop without unnecessary repair.
 
-Candidate agents must not choose arbitrary build/run forms in this controlled mechanism experiment.
+The first-patch endpoint and incremental post-feedback cost are then observed on the same trajectory. This is still not a causal mediation decomposition. If the harness cannot resume the **same candidate context** after controller feedback, the condition must be labelled fresh-context repair and must not be described as monolithic continuation. Same-context continuation or an explicit fresh-context treatment must be demonstrated and frozen in the specification.
 
-### P1 — Record each repair round separately
+### P1 — Record each model and repair round separately
 
-For every model round, retain separate input, cached input, output, reasoning, wall time, patch identity, diagnostic packet identity, and controller tool time. Record full raw tool output outside the candidate context and the exact bounded text supplied back to the candidate.
+For every round, retain separate input, cached input, output, reasoning, wall time, patch identity, diagnostic-packet identity, and controller tool time. Record full raw tool output outside candidate context and the exact bounded text supplied back to the candidate.
 
-Without round-level accounting, the study would again be unable to distinguish first-pass output ability from repair amplification and transcript replay.
+Without round-level accounting, the study would again be unable to distinguish first-patch output ability from repair amplification and transcript replay.
 
 ### P2 — Demote the standalone comprehension arm
 
 E1 did not show a large, consistent pre-edit navigation separation, whereas build/repair separation was substantial. A separate comprehension arm would add an entire treatment before the leading pathway is resolved.
 
-The first E3 specification should therefore use two primary modes:
-
-1. one-shot patch;
-2. controller-mediated bounded repair.
-
-A small structured localization response may be embedded as an auxiliary measure before the patch, provided independent review concludes that it will not materially distort patch generation. Otherwise, comprehension/localization becomes a conditional follow-up only if first-patch and repair outcomes fail to account for the cost pattern.
+A small structured localization response may be embedded before the patch only if independent review concludes that it will not materially distort patch generation. Otherwise, comprehension/localization becomes a conditional follow-up if controlled first-patch and repair outcomes fail to account for the cost pattern.
 
 ### P2 — Test deterministic tool hygiene before subagents
 
 E2a identifies a simpler intervention than repair delegation:
 
-- disable vulnerability audit inside the edit–compile loop and run security audit once at a controlled boundary;
+- run vulnerability audit once at a controlled boundary, not repeatedly inside the edit–compile loop;
 - avoid implicit restore in repeated builds;
 - avoid `dotnet run` forms that rebuild when direct/no-build execution suffices;
 - bound and deduplicate irrelevant repeated warning output before it enters model context;
-- preserve raw output separately for auditability.
+- preserve full raw output separately for auditability.
 
-This tool-policy treatment should precede any multi-agent repair worker. If deterministic hygiene removes most of the excess cost without harming correctness, subagent infrastructure is unnecessary.
+This tool-policy treatment should precede any repair worker. If deterministic hygiene removes most of the excess cost without harming correctness, subagent infrastructure is unnecessary.
 
 ## Revised successor sequence
 
-### E3a — Controlled first-patch and repair pilot
+### E3a — Controlled shared-prefix first-patch and repair pilot
 
-Use matched gold predecessors, one reviewed model/scaffold configuration, and a minimal task set spanning simple additive, type/validation, and multi-file/project/API work. Luna high remains the provisional configuration because its archived first-build outcomes were mixed rather than at a floor or ceiling.
+Use matched gold predecessors, one reviewed model/scaffold configuration, and a minimal task set spanning simple additive, type/validation, and multi-file/project/API work. Luna high remains the preferred provisional configuration because its archived first-build outcomes were mixed and its E2a mechanical envelope left a substantial unresolved agent-time difference; Luna medium was near a first-build floor.
 
-Primary comparison:
+All runs share one first-patch phase. The controller evaluates that patch under the hygienic fixed path. Failed patches then receive a small bounded same-context repair budget if the harness can prove same-context continuation; otherwise fresh repair is a separately named treatment.
 
-- one-shot patch with no candidate-visible compiler feedback;
-- the same controlled first-patch contract followed by a small, controller-mediated repair budget.
+The pilot is non-confirmatory and selects the next mechanism treatment. It does not estimate a universal language effect.
 
-The controller uses audit-off restore, fixed no-restore build, and direct/no-build evaluation. The pilot is non-confirmatory and selects the next mechanism treatment; it does not estimate a universal language effect.
+### E3b / F0 — Tool-policy pilot
 
-### E3b / F0 — Tool-hygiene policy pilot
+Only after E3a establishes a meaningful repair/tool-feedback pathway, compare the intended practical ecology with a hygienic single-agent condition while holding model, tasks, starting states, and repair authority fixed.
 
-Only after E3a establishes a meaningful repair/tool-feedback pathway, compare a small ecological default-tool condition with a hygienic single-agent condition. Keep the model, tasks, and starting states fixed. The hygienic condition changes only reviewed tool policy; it does not introduce subagents.
+The primary ecological comparator should be either:
 
-Report total model cost, direct tool time, diagnostic bytes supplied to the model, correctness, and repair count separately.
+- online audit-reachable development with its source and cache policy verified; or
+- another explicitly intended deployment policy.
+
+Do not silently reuse v3's blocked-source audit-on condition as “default.” It may remain an optional stress stratum.
+
+Report total model cost, direct tool time, raw and candidate-visible diagnostic bytes, correctness, and repair count separately.
 
 ### F1 — Isolated repair worker, only if F0 is insufficient
 
@@ -180,16 +209,16 @@ Add persistent inline and persistent delegated conditions only if F1 demonstrate
 
 ### G — Registered small-repository replication
 
-Treat default ecological, hygienic single-agent, and delegated-agent setups as separate harness strata. Do not pool them. Replicate only the strata justified by E3/F.
+Treat controlled offline/hygienic, online audit-reachable ecological, and delegated-agent setups as separate harness strata. Do not pool them. The legacy constrained-network audit-on v3 condition is historical/stress evidence, not the primary replication target.
 
 ### H — Multi-scale context-pressure study
 
-Use the controlled/hygienic tool path as the primary mechanism condition so a known restore/audit/compiler fixed cost does not swamp the language × scale estimate. An ecological default-tool stratum may be secondary. Context-density claims still require real retrieval, persistent-history, or compaction pressure.
+Use the controlled/hygienic tool path as the primary mechanism condition so known audit/implicit-restore and compiler fixed costs do not swamp the language × scale estimate. An online audit-reachable ecology may be secondary. Context-density claims still require real retrieval, persistent-history, or compaction pressure.
 
 ## Claim boundary
 
 E2a supports this bounded statement:
 
-> On the v3 host and command ecology, F# trajectories both invoked more `dotnet` operations and paid substantially more for restore/build-capable operations. NuGet audit was a major F#-specific amplifier and appeared in the actual v3 streams; a sizeable compiler/toolchain gap remained with audit disabled. These direct tool effects are large relative to the observed wall-time gap, while the model-token gap still requires extra interactions, feedback, and replay.
+> On the v3 host and constrained-network command ecology, F# trajectories invoked more `dotnet` operations and paid substantially more for restore/build-capable operations. Vulnerability audit against an unreachable source was a major F#-specific amplifier and appeared in the actual v3 streams; a sizeable compiler/toolchain gap remained with audit disabled. These direct tool effects are large relative to the observed wall-time gap, while the model-token gap still requires extra interactions, feedback, and replay.
 
 It does not identify intrinsic language difficulty, training-corpus familiarity, a causal percentage of agent cost, a context-scale slope, or a universal ranking.

@@ -1,6 +1,6 @@
 # Research plan
 
-This is the canonical continuation plan. Workstream D v3 is closed. Workstreams E1, E2, and E2a are complete and accepted within their stated evidence boundaries. The project now separates controlled model/language mechanisms from ecological tool policy before considering repair subagents or a larger replication.
+This is the canonical continuation plan. Workstream D v3 is closed. Workstreams E1, E2, and E2a are complete and accepted within their stated evidence boundaries. The project now separates controlled first-patch/repair mechanisms from ecological tool policy before considering repair subagents or a larger replication.
 
 ## Scientific checkpoint — 2026-09-05
 
@@ -11,7 +11,7 @@ Completed and preserved:
 - Workstream E1: archive-only forensic attribution over 10 runs and 80 tasks, report SHA-256 `644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d`;
 - Workstream E2: offline model-free source/toolchain baseline over 18 states and 90 schedule entries, report SHA-256 `2e4381ab67dd4cc7aed24c323e8edbd30bf83dd29bafc58554615bcd6f24c49a`;
 - Workstream E2a: exact-command, v3-host-aligned model-free baseline over 1,020 samples in five paired rounds, report file SHA-256 `e392ed7dfeb29732b4a5d5b64b9e9b2cdc090b99ad221bdaf557ef02252d57fe`;
-- exact-commit Linux and Windows CI for the accepted implementations and publications.
+- exact-commit Linux and Windows CI for the accepted E1/E2/E2a implementations and publications.
 
 Authoritative current review:
 
@@ -45,10 +45,12 @@ Across the ten v3 calibration runs:
 - F# accounted for 17 conservative repair cycles versus 2 for C#;
 - identifiable first-post-edit failures were 17 for F# and 2 for C#, while 34 boundaries remained unavailable rather than imputed;
 - all five committed project-file changes were F#;
-- F# carried nearly all observed compiler diagnostic errors and repeated nullability warnings;
+- F# carried nearly all observed compiler diagnostic output;
 - evaluator duration was approximately twice as large for F# in every configuration.
 
-Observable pre-edit inspection/search differences were comparatively modest. E1 therefore prioritizes first-patch generation, type/compiler interaction, project obligations, and repair amplification. It does not identify hidden reasoning or training familiarity.
+Observable pre-edit inspection/search differences were comparatively modest. E1 therefore prioritizes first-patch generation, compiler/type/project interaction, and repair amplification. It does not identify hidden reasoning or training familiarity.
+
+The failed-build count combines source-code failures with dependency/restore and project/tool failures. In H, the recorded F# error occurrences were dependency/restore errors rather than source syntax/type errors. In L, 14 of 64 F# error occurrences were dependency/restore errors, while genuine parse/indentation and type/record errors also occurred. Future reports must separate these classes rather than equating every failed build with a bad patch.
 
 Diagnostic line occurrences are output-volume observations, not independent defects. Use failed operation episodes, unique diagnostic codes/categories per episode, and repair transitions as the main units.
 
@@ -80,106 +82,119 @@ These operation means are unweighted command-cell summaries. The frequency-weigh
 | L | 286.7 s | 393.3 s |
 | M | 209.8 s | 473.2 s |
 
-The envelope is not subtracted from agent time, called mediation, or converted into a causal percent explained. It uses successful gold successors and fresh caches rather than actual intermediate candidate states and cache histories. It nevertheless shows that direct tool exposure is of the same order as a substantial part of the wall-time difference and cannot be treated as negligible.
+The envelope is not subtracted from agent time, called mediation, or converted into a causal percent explained. It uses successful gold successors and fresh caches rather than actual intermediate candidate states and cache histories. It nevertheless shows that direct tool exposure is large and cannot be treated as a minor nuisance.
 
-### NuGet audit is a real ecological amplifier
+### NuGet audit is a measured but non-general default amplifier
 
 With audit enabled, F# restore averaged 7.801 seconds; with `NuGetAudit=false`, it averaged 2.076 seconds. Restore-capable F# build/run forms also lost roughly six seconds when audit was disabled, while C# audit effects were approximately zero.
 
-E2a emitted 435 F# `NU1900` lines under audit-on and none under audit-off. The authenticated v3 candidate streams contained 197 F# `NU1900` lines and zero C# lines. These are repeated output lines, not independent defects.
+E2a emitted 435 F# `NU1900` lines under audit-on and none under audit-off. The authenticated v3 streams contained 197 F# `NU1900` lines and zero C# lines. These are repeated output lines, not independent defects.
 
-A sizeable compiler/toolchain difference remains after disabling audit. Representative no-restore builds retained roughly 3.2–3.5× F#/C# ratios and absolute gaps around 2.6–2.8 seconds on the v3 host. Pure execution, direct-DLL execution, and test behavior were near parity.
+The v3/E2a profile allowed model traffic through its internal proxy but blocked NuGet source reachability, while using fresh homes/caches. Thus the original v3 condition is specifically **legacy constrained-network audit-on**, not a general “default ecological” developer environment. It accurately measures that deployment constraint but must not be the primary general language-cost stratum.
 
-Future reporting must distinguish pure execution from `run` forms that implicitly build or restore. A single `run` category is not mechanistically meaningful.
+Use explicit tool/network strata:
+
+1. **controlled offline/hygienic:** pre-restored dependencies, `NuGetAudit=false` inside the edit–compile loop, fixed no-restore builds;
+2. **online audit-reachable ecological:** audit enabled with source reachability and cache policy verified;
+3. **legacy constrained-network audit-on:** retained as historical/stress evidence, not pooled with the first two.
+
+A sizeable compiler/toolchain difference remains after disabling audit. Representative no-restore F# builds retained roughly 3.2–3.5× ratios and absolute gaps around 2.6–2.8 seconds. Pure execution, tests, and direct-DLL execution were near parity.
+
+Future reporting must distinguish pure execution from `run` commands that implicitly build or restore. A single `run` category is not mechanistically meaningful.
 
 ## Interpretation boundary
 
 The leading bounded pathway is:
 
 ```text
-lower first-patch reliability / greater type-project uncertainty
+some combination of first-patch source/type/project difficulty
   -> more F# build attempts and repairs
   -> more diagnostics and model turns
   -> more model input/output
 
-language-specific compiler and restore/audit behavior
-  -> more direct waiting and output per relevant tool operation
+plus constrained-network audit, implicit restore, and compiler latency
+  -> more direct waiting and repeated output per relevant operation
   -> amplification of repair-heavy trajectories
 ```
 
-Static source size and built-program runtime do not explain the observed small-repository gap. E1/E2a do not yet identify whether first-patch difficulty comes from syntax, type inference, .NET interop, project mechanics, or lower model familiarity.
+Static source size and built-program runtime do not explain the observed small-repository gap. E1/E2a do not yet identify whether genuine first-patch difficulty comes from syntax, type inference, .NET interop, project mechanics, or lower model familiarity.
 
-Tool latency cannot by itself explain model tokens. It affects model usage only through additional calls, diagnostics, feedback, and replay. Per-round usage and exact context exposure were not retained in v3.
+Tool latency cannot by itself explain model tokens. It affects model usage through additional calls, diagnostics, feedback, and replay. Per-round usage and exact context exposure were not retained in v3.
 
 The repository was only about two thousand source-proxy tokens. It measures a local small-repository ecological gap, not context-window fitness or a language-by-scale slope. Any semantic-density crossover must be observed under genuine retrieval, persistent-history, or compaction pressure.
 
 ## Current decision
 
-Revise E3 from a broad three-arm experiment into a staged program:
+Revise the successor program as follows:
 
-1. **E3a controlled first-patch and repair pilot** — isolate first-patch validity and bounded repair under a fixed, audit-off, controller-owned tool path.
-2. **E3b/F0 deterministic tool-hygiene pilot** — test whether simple tool policy removes the ecological overhead before constructing subagents.
+1. **E3a controlled shared-prefix first-patch and repair pilot** — isolate source/type/project generation and bounded repair under a fixed audit-off, no-restore controller path.
+2. **E3b/F0 deterministic tool-policy pilot** — test whether simple single-agent hygiene removes practical ecological overhead before constructing subagents.
 3. **F1 isolated repair worker** — only if meaningful repair/context burden remains after tool hygiene.
 4. **F2 persistent orchestrator** — only after F1 demonstrates auditable context separation.
 
-A standalone comprehension arm is no longer co-primary. E1 did not show a large consistent pre-edit navigation difference. Localization may be an auxiliary structured measure or a conditional follow-up if E3a fails to account for the pattern.
+A standalone comprehension arm is no longer co-primary. E1 did not show a large consistent pre-edit navigation difference. Localization may be an auxiliary structured measure or a conditional follow-up if E3a does not account for the pattern.
 
 ## Immediate continuation order
 
-### E3a — Specify a controlled first-patch and bounded-repair pilot
+### E3a — Specify a controlled shared-prefix first-patch and bounded-repair pilot
 
 **Next bounded task: specification, deterministic fixtures/identities, independent review, clean freeze, and exact-commit CI only. Do not invoke a model.**
 
-#### Scientific question
+#### Scientific questions
 
-Under a fixed controller-owned compile/evaluation path that removes vulnerability-audit and implicit-restore variation:
+Under a fixed controller-owned compile/evaluation path that removes dependency reachability, vulnerability-audit, and implicit-restore variation:
 
 1. Are F# first patches less likely to compile or satisfy behavior?
-2. Which diagnostic categories differ?
-3. How much additional model/tool usage arises when bounded repair is allowed?
+2. Which source/project diagnostic categories differ?
+3. What incremental model/tool cost follows when failed first patches receive bounded repair feedback?
 
 #### Task set
 
 Freeze a minimal mechanism-spanning set using only E1/E2/E2a evidence:
 
 - one simple, low-diagnostic additive task;
-- one type/validation task with observed F# diagnostics;
+- one type/validation task with observed F# source diagnostics;
 - one multi-file/project/API task, normally Task 007 or 008.
 
-Use the canonical gold predecessor for each task. Task selection is hypothesis-routing, and the pilot is non-confirmatory.
+Use the canonical gold predecessor for each task. Task selection is hypothesis-routing, and the pilot is non-confirmatory. The specification should document the task-level archived evidence before any new outcome exists.
 
 #### Configuration
 
-Use one exact model/scaffold setting selected for nondegenerate first-patch outcomes. M (`gpt-5.6-luna`, high) remains the provisional default because its archived F# first-build outcomes were mixed; L was near a first-build floor and H had excessive boundary missingness. Confirm the choice from task-level evidence and current availability before freeze. Do not vary model, effort, and harness simultaneously.
+Use one exact model/scaffold setting selected for nondegenerate first-patch outcomes. M (`gpt-5.6-luna`, high) is the preferred provisional choice because its archived first-build outcomes were mixed and its E2a mechanical envelope left a substantial unresolved agent-time difference. L was near a first-build floor, while H had substantial first-build missingness and little residual wall-time gap beyond the mechanical envelope. Confirm current availability before freeze. Do not vary model, effort, and harness simultaneously.
 
-#### Common controller path
+#### Shared-prefix staged design
 
-For both languages and both modes:
+Do not run independent one-shot and repair agents with different stochastic first patches. Instead:
 
-1. materialize and verify the matched source-only predecessor;
-2. obtain exactly one candidate patch without candidate-visible build/test feedback;
-3. preserve and apply the patch once;
-4. evaluate in an external controller workspace;
-5. perform restore with `NuGetAudit=false` outside candidate interaction;
-6. use a fixed no-restore build command;
-7. execute the built DLL or another fixed no-build evaluator path;
-8. retain full raw output outside candidate context and record exactly what feedback, if any, is supplied to the candidate.
+1. materialize and verify the matched source-only gold predecessor;
+2. preflight restore/build the unchanged predecessor outside candidate interaction;
+3. restore dependencies with `NuGetAudit=false` and freeze the resolved inputs;
+4. give every candidate the same initial prompt and authority;
+5. obtain exactly one candidate patch without build/test feedback;
+6. preserve and apply that patch once in an external controller workspace;
+7. run a fixed no-restore build and direct/no-build evaluator;
+8. record the resulting first-patch build and behavioral endpoint;
+9. successful first patches stop;
+10. failed first patches may continue through a frozen number of repair rounds, each receiving a bounded versioned feedback packet.
 
-Candidate agents may inspect allowed source but may not invoke arbitrary `dotnet`, test, network, or shell build forms in this controlled mechanism treatment. Default free-tool behavior remains an ecological treatment for E3b/G.
+The one-shot endpoint is therefore observed for every trajectory. Post-first-patch cost is recorded as incremental repair cost; it is not called causal mediation.
 
-#### Primary modes
+Same-context continuation must be demonstrated and frozen. If the harness cannot resume the same candidate context after controller feedback, the treatment must be labelled **fresh-context repair** and may not be described as monolithic continuation. Do not silently change memory policy.
 
-1. **One-shot patch**
-   - one controller-recorded multi-file patch;
-   - no compiler/test feedback before terminal external evaluation.
+Candidate agents may inspect allowed source but may not invoke arbitrary `dotnet`, test, network, or shell build forms in this controlled mechanism treatment. Free tool choice remains a separately named ecological treatment.
 
-2. **Controller-mediated bounded repair**
-   - the same first-patch contract and external first build;
-   - only after the first result, a frozen number of repair rounds;
-   - each round receives a bounded, versioned diagnostic packet;
-   - no implicit restore, vulnerability-audit output, or unrelated repeated warnings enter candidate context.
+#### Failure taxonomy
 
-A small structured localization response may be embedded before the patch only if independent review concludes that it will not materially alter patch generation. Otherwise defer comprehension/localization.
+Classify first-patch and repair outcomes as:
+
+- syntax/indentation;
+- type/record/overload or API;
+- project/compile-order;
+- dependency/restore/audit/environment;
+- behavioral test failure after successful build;
+- unclassified/unavailable.
+
+Any predecessor preflight or pre-patch dependency failure is apparatus/environment failure, not candidate failure.
 
 #### Required per-round evidence
 
@@ -188,30 +203,34 @@ For every model round record separately:
 - input, cached input, output, and reasoning tokens;
 - process/model wall time;
 - patch identity and size;
-- controller restore/build/run/evaluator durations;
+- controller restore/build/run/evaluator duration;
 - raw diagnostic/output identity and volume;
 - exact candidate-visible diagnostic packet identity and volume;
 - first-build and behavioral outcome;
 - unique diagnostic codes/categories;
 - repair count and terminal correctness.
 
-This closes the v3 missingness around first patch, first build, and phase usage. One-shot versus repair remains a policy contrast, not an algebraic mediation subtraction.
+Preserve full raw tool output outside candidate context. Unsupported provider telemetry remains null rather than zero.
+
+A small structured localization response may be embedded before the patch only if independent review concludes it will not materially alter patch generation. Otherwise defer comprehension/localization.
 
 #### E3a stopping rule
 
-Predeclare task identities, model/effort, sample size, mode order, patch format, controller commands, diagnostic packet policy, retries, exclusions, evidence retention, and stopping. Stop after the non-confirmatory pilot and produce a mechanism decision. Do not expand into a language × model × task × mode factorial.
+Predeclare task identities, model/effort, sample size, order, shared-prefix policy, patch format, controller commands, same-context continuation mechanism, diagnostic packet policy, retries, exclusions, evidence retention, and stopping. Stop after the non-confirmatory pilot and produce a mechanism decision. Do not expand into a language × model × task × mode factorial.
 
-### E3b / F0 — Deterministic tool-hygiene policy pilot
+### E3b / F0 — Deterministic tool-policy pilot
 
-Run only after E3a shows that repair/tool feedback is a meaningful pathway. Compare a small default ecological single-agent condition with a hygienic single-agent condition while holding model, task, starting state, and repair authority fixed.
+Run only after E3a shows that repair/tool feedback is a meaningful pathway. Compare the intended practical ecological policy with a hygienic single-agent condition while holding model, tasks, starting states, and repair authority fixed.
 
 The hygienic condition should implement only reviewed deterministic policy:
 
-- perform vulnerability audit once at a controlled boundary or disable it inside the edit–compile loop;
+- run vulnerability audit once at a controlled boundary or disable it inside the edit–compile loop;
 - avoid implicit restore in repeated builds;
 - avoid `dotnet run` forms that rebuild when direct/no-build execution suffices;
 - bound and deduplicate irrelevant repeated warning output before model feedback;
 - preserve full raw output outside model context.
+
+The primary ecological comparator must be explicitly intended and reproducible, preferably online audit-reachable development with source and cache behavior verified. Do not silently reuse the legacy blocked-source audit-on condition as “default”; it may remain an optional stress stratum.
 
 Report separately:
 
@@ -230,7 +249,7 @@ After E3a and, when justified, E3b/F0:
 
 - first patches differ under the controlled path → prioritize syntax/type/API/project-generation mechanisms;
 - first patches are similar but repair cost differs → prioritize diagnostic interpretation and repair amplification;
-- audit/tool hygiene removes the ecological gap → treat tool policy as the primary practical intervention;
+- hygienic tool policy removes the practical ecological gap → treat tool policy as the primary intervention;
 - comprehension remains unexplained → run a separately reviewed localization/familiarity treatment;
 - similar interaction counts but input per round grows with scale → proceed toward Workstream H;
 - no stable attribution → replicate only if the required sample remains scientifically and economically justified.
@@ -257,11 +276,13 @@ Do not build recursive agents, dynamic routing, a generic multi-agent framework,
 
 After causal attribution, register only the harness strata justified by E3/F:
 
-- default ecological single-agent;
-- hygienic single-agent;
+- controlled offline/hygienic;
+- online audit-reachable ecological;
 - delegated repair, only if F1 is viable.
 
-Do not pool them. Primary outcomes should include full-chain correctness, first-patch build/behavioral success, repair burden, paired total input, paired agent time, and per-task cumulative trajectories. V3 calibration observations remain excluded from formal estimates.
+Do not pool them. The legacy constrained-network audit-on v3 condition is historical/stress evidence, not the primary replication target.
+
+Primary outcomes should include full-chain correctness, first-patch build and behavioral success, failure category, repair burden, paired total input, paired agent time, direct tool time, and per-task cumulative trajectories. V3 calibration observations remain excluded from formal estimates.
 
 ## Workstream H — Multi-scale context-pressure study
 
@@ -269,7 +290,7 @@ The original semantic-density hypothesis is tested only here.
 
 Use a matched scalable architecture and preregister realistic source/working-set levels that create navigation and dependency obligations. Do not add inert filler. The evaluator must know the relevant files and symbols.
 
-Use the controlled/hygienic tool path as the primary mechanism condition so a known restore/audit/compiler fixed cost does not swamp the language × scale estimate. A default ecological tool stratum may be secondary.
+Use the controlled/hygienic tool path as the primary mechanism condition so known audit/implicit-restore and compiler fixed costs do not swamp the language × scale estimate. An online audit-reachable ecology may be secondary; the legacy blocked-source condition is not the primary scale treatment.
 
 Measure candidate-visible repository and task-relevant tokens, retrieval recall/precision, architectural distance, interactions, input per interaction, unique/repeated source and tool exposure where available, maximum/terminal context, compaction, fresh versus persistent context, correctness, regressions, and total ecological cost.
 
@@ -280,12 +301,14 @@ A crossover is supported only if observed inside the preregistered scale range u
 - V3 calibrations are non-counting and excluded from future formal estimates.
 - E1/E2/E2a are descriptive mechanism-routing evidence, not causal language inference.
 - E2 and E2a are separate ecologies and are not pooled.
+- The v3/E2a audit-on result is a constrained-network stress ecology, not a universal default.
 - Unweighted command-cell ratios are not frequency-weighted v3 effects.
-- The mechanical exposure envelope is not a mediation estimate or quantity to subtract from agent time.
-- Audit warnings are repeated output lines, not independent defects.
-- Aggregate input is trajectory usage, not unique source memory.
+- The mechanical exposure envelope is not a mediation estimate or a quantity to subtract from agent time.
+- Failed builds include environment/dependency failures as well as source failures.
+- Audit-warning line counts are repeated output, not independent defects.
+- Aggregate input is trajectory usage, not unique source exposure.
 - The current repository does not test context-window fit.
-- Fresh-per-task v3 cannot test cross-task context pollution.
+- Fresh-per-task v3 cannot establish cross-task context pollution.
 - No current result establishes an intrinsic or universal F#, C#, model, or harness ranking.
 
 ## Research invariants
@@ -311,11 +334,11 @@ A crossover is supported only if observed inside the preregistered scale range u
 
 ```text
 E1/E2/E2a evidence — complete
-  -> E3a controlled first-patch and bounded-repair specification/pilot
-  -> E3b/F0 deterministic tool-hygiene policy pilot when justified
+  -> E3a controlled shared-prefix first-patch/repair specification and pilot
+  -> E3b/F0 deterministic tool-policy pilot when justified
   -> E4 mechanism decision
   -> F1 fresh isolated repair only if hygiene is insufficient
   -> F2 persistent context only if F1 works
-  -> G registered small-repository replication by named harness stratum
+  -> G registered small-repository replication by named tool/harness stratum
   -> H medium/large language × context-pressure study
 ```
