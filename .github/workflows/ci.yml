@@ -40,6 +40,8 @@ jobs:
         run: python scripts/alf.py representation check
       - name: Check frozen Workstream E2 definition
         run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2 check --definition protocols/workstream-e2-toolchain-v1/definition.json
+      - name: Check frozen Workstream E2a definition
+        run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2a check --definition protocols/workstream-e2a-host-aligned-v1/definition.json --inventory protocols/workstream-e2a-host-aligned-v1/inventory.json --e2-definition protocols/workstream-e2-toolchain-v1/definition.json
       - name: Validate difficulty-v1 protocol definition
         run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate Workstream D family and child definitions
@@ -92,6 +94,8 @@ jobs:
         run: python scripts/alf.py representation check
       - name: Check frozen Workstream E2 definition
         run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2 check --definition protocols/workstream-e2-toolchain-v1/definition.json
+      - name: Check frozen Workstream E2a definition
+        run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2a check --definition protocols/workstream-e2a-host-aligned-v1/definition.json --inventory protocols/workstream-e2a-host-aligned-v1/inventory.json --e2-definition protocols/workstream-e2-toolchain-v1/definition.json
       - name: Validate difficulty-v1 protocol definition
         run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate Workstream D family and child definitions

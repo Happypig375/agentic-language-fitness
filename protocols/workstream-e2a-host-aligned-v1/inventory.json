@@ -1,0 +1,1477 @@
+{
+  "denominator": {
+    "benchmark_dotnet_operations": 258,
+    "completed_command_events": 435,
+    "dotnet_environment_queries_excluded": 7,
+    "operation_totals": {
+      "build": 119,
+      "direct": 1,
+      "restore": 14,
+      "run": 120,
+      "test": 4
+    }
+  },
+  "e1_agent_process_wall_seconds": [
+    {
+      "configuration_id": "H",
+      "language": "csharp",
+      "mean_seconds": 502.3601946607232,
+      "run_count": 1,
+      "total_seconds": 502.3601946607232
+    },
+    {
+      "configuration_id": "H",
+      "language": "fsharp",
+      "mean_seconds": 633.5683691939339,
+      "run_count": 1,
+      "total_seconds": 633.5683691939339
+    },
+    {
+      "configuration_id": "L",
+      "language": "csharp",
+      "mean_seconds": 477.88667297922075,
+      "run_count": 2,
+      "total_seconds": 955.7733459584415
+    },
+    {
+      "configuration_id": "L",
+      "language": "fsharp",
+      "mean_seconds": 674.5353035018779,
+      "run_count": 2,
+      "total_seconds": 1349.0706070037559
+    },
+    {
+      "configuration_id": "M",
+      "language": "csharp",
+      "mean_seconds": 575.1419720863923,
+      "run_count": 2,
+      "total_seconds": 1150.2839441727847
+    },
+    {
+      "configuration_id": "M",
+      "language": "fsharp",
+      "mean_seconds": 811.7179259005934,
+      "run_count": 2,
+      "total_seconds": 1623.4358518011868
+    }
+  ],
+  "form_catalog": [
+    {
+      "audit_eligible": true,
+      "configuration": "debug",
+      "flags": [],
+      "form_id": "form-0e61b927152ad4aa",
+      "input_transport": "none",
+      "operation": "restore",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": true,
+      "configuration": "debug",
+      "flags": [
+        "--ignore-failed-sources"
+      ],
+      "form_id": "form-1291d1adebaf93d1",
+      "input_transport": "none",
+      "operation": "restore",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-build",
+        "--no-restore"
+      ],
+      "form_id": "form-3318ac702e2a2303",
+      "input_transport": "pipeline",
+      "operation": "run",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-restore"
+      ],
+      "form_id": "form-3da1eea2e6fdc2ce",
+      "input_transport": "none",
+      "operation": "build",
+      "project_mode": "positional-project"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-build"
+      ],
+      "form_id": "form-4173ceefd9ab3d20",
+      "input_transport": "pipeline",
+      "operation": "run",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-build",
+        "--no-restore"
+      ],
+      "form_id": "form-41de0218a97feb51",
+      "input_transport": "pipeline",
+      "operation": "run",
+      "project_mode": "option-project"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-restore"
+      ],
+      "form_id": "form-4322f88a13c7bc79",
+      "input_transport": "none",
+      "operation": "build",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-build"
+      ],
+      "form_id": "form-4dbeb44293358931",
+      "input_transport": "input-redirection",
+      "operation": "run",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-restore"
+      ],
+      "form_id": "form-4e6ce4fa80260684",
+      "input_transport": "none",
+      "operation": "test",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-restore",
+        "--nologo"
+      ],
+      "form_id": "form-62fccf232488c40f",
+      "input_transport": "none",
+      "operation": "build",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": true,
+      "configuration": "debug",
+      "flags": [],
+      "form_id": "form-6311f3089a3fe56f",
+      "input_transport": "input-redirection",
+      "operation": "run",
+      "project_mode": "option-project"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-build"
+      ],
+      "form_id": "form-76b207f2e5ea05d5",
+      "input_transport": "pipeline",
+      "operation": "run",
+      "project_mode": "option-project"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-restore",
+        "--nologo"
+      ],
+      "form_id": "form-829bfa98a73e6646",
+      "input_transport": "pipeline",
+      "operation": "run",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": true,
+      "configuration": "debug",
+      "flags": [],
+      "form_id": "form-85c96331412e9f8c",
+      "input_transport": "none",
+      "operation": "restore",
+      "project_mode": "positional-project"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-build"
+      ],
+      "form_id": "form-8dbc61371c91197f",
+      "input_transport": "input-redirection",
+      "operation": "run",
+      "project_mode": "option-project"
+    },
+    {
+      "audit_eligible": true,
+      "configuration": "debug",
+      "flags": [],
+      "form_id": "form-95c252f778b70638",
+      "input_transport": "none",
+      "operation": "build",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": true,
+      "configuration": "debug",
+      "flags": [],
+      "form_id": "form-99b4e9461d620e05",
+      "input_transport": "none",
+      "operation": "build",
+      "project_mode": "positional-project"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-build",
+        "--no-restore"
+      ],
+      "form_id": "form-a73adc0f545210e8",
+      "input_transport": "none",
+      "operation": "test",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-restore"
+      ],
+      "form_id": "form-b5ec78b85ff7a1da",
+      "input_transport": "pipeline",
+      "operation": "run",
+      "project_mode": "option-project"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-build",
+        "--nologo"
+      ],
+      "form_id": "form-cc6f7230ce3280a8",
+      "input_transport": "pipeline",
+      "operation": "run",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [
+        "--no-restore"
+      ],
+      "form_id": "form-cd02eb97c5cc435a",
+      "input_transport": "pipeline",
+      "operation": "run",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": true,
+      "configuration": "debug",
+      "flags": [
+        "--nologo"
+      ],
+      "form_id": "form-f135b0b833548d26",
+      "input_transport": "none",
+      "operation": "build",
+      "project_mode": "cwd"
+    },
+    {
+      "audit_eligible": false,
+      "configuration": "debug",
+      "flags": [],
+      "form_id": "form-fb5776eeb54d0d0f",
+      "input_transport": "input-redirection",
+      "operation": "direct",
+      "project_mode": "direct-dll"
+    }
+  ],
+  "frequencies": [
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "csharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4dbeb44293358931",
+      "language": "csharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4dbeb44293358931",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4dbeb44293358931",
+      "language": "csharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-3318ac702e2a2303",
+      "language": "csharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-95c252f778b70638",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "H",
+      "count": 3,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "H",
+      "count": 2,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4dbeb44293358931",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-62fccf232488c40f",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "H",
+      "count": 2,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-95c252f778b70638",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "H",
+      "count": 3,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-95c252f778b70638",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "H",
+      "count": 3,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "H",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "H",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "csharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-3318ac702e2a2303",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-3318ac702e2a2303",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-62fccf232488c40f",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 4,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "csharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "csharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "L",
+      "count": 5,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-62fccf232488c40f",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-95c252f778b70638",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "L",
+      "count": 5,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "L",
+      "count": 3,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-95c252f778b70638",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-3318ac702e2a2303",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-3da1eea2e6fdc2ce",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-85c96331412e9f8c",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-3318ac702e2a2303",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "L",
+      "count": 1,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "L",
+      "count": 2,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-4dbeb44293358931",
+      "language": "csharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "csharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "M",
+      "count": 3,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "M",
+      "count": 3,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-8dbc61371c91197f",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-4dbeb44293358931",
+      "language": "csharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-8dbc61371c91197f",
+      "language": "csharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 3,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-4dbeb44293358931",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-6311f3089a3fe56f",
+      "language": "csharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "csharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "csharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 3,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-829bfa98a73e6646",
+      "language": "csharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "csharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-f135b0b833548d26",
+      "language": "csharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "csharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "csharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-a73adc0f545210e8",
+      "language": "csharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-3318ac702e2a2303",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "M",
+      "count": 4,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "001-priority"
+    },
+    {
+      "configuration_id": "M",
+      "count": 5,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-95c252f778b70638",
+      "language": "fsharp",
+      "task_id": "002-overdue"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-41de0218a97feb51",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 3,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-b5ec78b85ff7a1da",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "003-at-risk-window"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-1291d1adebaf93d1",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-3318ac702e2a2303",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-cd02eb97c5cc435a",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "004-vip-ready"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-95c252f778b70638",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-fb5776eeb54d0d0f",
+      "language": "fsharp",
+      "task_id": "005-null-order-robustness"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-4173ceefd9ab3d20",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 3,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-4dbeb44293358931",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-4e6ce4fa80260684",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-95c252f778b70638",
+      "language": "fsharp",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "configuration_id": "M",
+      "count": 3,
+      "form_id": "form-76b207f2e5ea05d5",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-99b4e9461d620e05",
+      "language": "fsharp",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-0e61b927152ad4aa",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-4322f88a13c7bc79",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 2,
+      "form_id": "form-4dbeb44293358931",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-4e6ce4fa80260684",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-cc6f7230ce3280a8",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    },
+    {
+      "configuration_id": "M",
+      "count": 1,
+      "form_id": "form-f135b0b833548d26",
+      "language": "fsharp",
+      "task_id": "008-summary-api"
+    }
+  ],
+  "inventory_sha256": "794591e97d150bdc13d7a9079cee72cbd92f3057a639f71addc71c3f5fad4de3",
+  "nu1900": {
+    "by_configuration_and_language": [
+      {
+        "configuration_id": "H",
+        "language": "csharp",
+        "occurrences": 0
+      },
+      {
+        "configuration_id": "H",
+        "language": "fsharp",
+        "occurrences": 41
+      },
+      {
+        "configuration_id": "L",
+        "language": "csharp",
+        "occurrences": 0
+      },
+      {
+        "configuration_id": "L",
+        "language": "fsharp",
+        "occurrences": 88
+      },
+      {
+        "configuration_id": "M",
+        "language": "csharp",
+        "occurrences": 0
+      },
+      {
+        "configuration_id": "M",
+        "language": "fsharp",
+        "occurrences": 68
+      }
+    ],
+    "by_language": {
+      "csharp": 0,
+      "fsharp": 197
+    },
+    "status": "observed-in-authenticated-v3-command-streams",
+    "unit": "emitted diagnostic lines, not independent defects"
+  },
+  "privacy": {
+    "absolute_paths": "omitted",
+    "candidate_and_thread_identifiers": "omitted",
+    "raw_commands": "external-only",
+    "raw_output": "external-only"
+  },
+  "schema_version": "alf.workstream-e2a.inventory.v1",
+  "source": {
+    "e1_report_sha256": "644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d",
+    "event_digest_roster_sha256": "64d7c96f83f212e201cd91a927b967ada061a7cc5766494e15b35a6621d28773",
+    "family_id": "workstream-d-language-v3",
+    "run_count": 10,
+    "task_count": 80
+  }
+}
