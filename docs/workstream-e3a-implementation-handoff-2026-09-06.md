@@ -5,6 +5,11 @@ of proposal `19b1902be59324b98741ccb6c3a8396de962f5f7`, pulled at `5c10d13`.
 Implementation review is **self-review and model-free testing**, not independent
 implementation approval, human language-expert review, a freeze, or live permission.
 
+**Status: implementation present; sandbox validation blocked.** Stop after two
+dependency-preparation failures. No further preparation attempt or live call is
+authorized by this checkpoint. The documentation-only stop commit skips CI so
+that publishing this boundary does not launch a third sandbox attempt.
+
 ## Delivered boundary
 
 - `src/alf/workstream_e3a.py`: safe submission application, development-only
@@ -54,8 +59,11 @@ Scientific specification canonical SHA-256:
 `8bc53d30e45dfa72b087225f89c9e5547266f05b47e4306e2b326d951888bc62`.
 The regenerated [packet](../protocols/workstream-e3a-v1/review-packet.json) records
 LF-normalized implementation/test hashes separately from that specification.
-The Git commit containing this handoff is the implementation identity; exact-head
-CI and uploaded artifacts, not this document alone, establish its test status.
+Implementation identity: `9168153f0cc788fe03ddd6596f4c32eaa8b0af93` (the later
+stop-checkpoint commit changes documentation only). Its
+[exact-code CI run](https://github.com/Happypig375/agentic-language-fitness/actions/runs/33992404283)
+is **not green**. Uploaded artifacts, not a generated identity, establish scope.
+The Windows job completed successfully; the Linux sandbox-preparation step failed.
 
 Local Windows checks include strict doctor (Python 3.12.2, .NET 10.0.302),
 focused mock/controller tests and **27 trusted fixture builds**. The fixtures
@@ -72,6 +80,21 @@ and adds a regression. Candidate UID, capabilities and read-only mounts are
 unchanged. The absence probe checks actual research/auth paths rather than
 rejecting the approved image's empty `/workspace` directory. These are ordinary
 runner fixes; the scientific specification and authorization do not change.
+
+The second Linux attempt at `9168153` passed **344 unit tests and 27 trusted
+builds**, then failed on `docker cp <owned-container>:/work/obj <private-seed>`.
+The cache-permission correction had passed. The sandbox artifact has
+`passed=false`, empty `checks`/`evaluations`, zero model/count calls, and no
+reported cleanup failure. **No network, memory, output or other sandbox probe
+completed.** The administrative helper retained the failed command but not its
+stderr, so the precise export cause is not established. Do not claim a proven
+tmpfs or ownership diagnosis from this message alone.
+
+This is the second failure in the dependency-preparation apparatus class.
+Stop here under the repository rule; do not retire the scientific specification,
+increase a version, add a fallback or silently rerun it. If continuation is
+approved, first capture bounded Docker-export diagnostics model-free and choose
+one direct trusted seed-export path. Preserve candidate mount/privilege limits.
 
 Reproduction and CI scopes:
 
@@ -115,7 +138,10 @@ Ancillary count-call pricing/account conditions remain unverified: mocks use an
 explicit zero-rate fixture, not a claim that the endpoint is free. A live rate
 card must bound these charges within the total authorization.
 
-Restore/verify the intended image and evaluate the existing transport connection
+**Immediate next decision:** whether to authorize resuming that bounded,
+model-free preparation diagnosis. Sandbox validation must pass before advancing.
+
+After it passes, restore/verify the intended image and evaluate the existing transport connection
 without widening candidate mounts or authority. Then obtain separate approval
 for **at most two generations / $0.05 on an unrelated trivial task**, verifying
 actual account/model access, rates, count/create agreement, response chaining,
