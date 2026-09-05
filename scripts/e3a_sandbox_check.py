@@ -76,8 +76,10 @@ def check(output: Path, *, ci_sdk_fixture=False) -> dict:
                 "writable_tmp_and_work": "touch /tmp/probe /work/probe",
                 "readonly_source_seed_cache_root": "! touch /input/probe && ! touch /seed/probe && ! touch /packages/probe && ! touch /probe",
                 "credentials_scorer_socket_absent": 'test -z "${OPENAI_API_KEY+x}${CODEX_HOME+x}${HTTPS_PROXY+x}" && '
-                    'test ! -e /root/.codex/auth.json && test ! -e /tmp/auth.json && test ! -e /var/run/docker.sock && '
-                    'test ! -e /app && test ! -e /workspace && test ! -e /input/AGENTS.md && test ! -e /input/holdout-cases.json',
+                    'test ! -e /root/.codex/auth.json && test ! -e /home/codex/.codex/auth.json && '
+                    'test ! -e /tmp/auth.json && test ! -e /var/run/docker.sock && '
+                    'test ! -e /app/src/alf && test ! -e /workspace/src/alf && test ! -e /workspace/benchmarks && '
+                    'test ! -e /workspace/AGENTS.md && test ! -e /input/AGENTS.md && test ! -e /input/holdout-cases.json',
                 "network_route_blocked": "! /bin/bash -c 'exec 3<>/dev/tcp/1.1.1.1/443'",
             }
             for label, command in checks.items():

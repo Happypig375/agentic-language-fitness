@@ -344,6 +344,27 @@ class BatchTests(unittest.TestCase):
 
 
 class SandboxUnitTests(unittest.TestCase):
+    def test_trusted_permission_cleanup_excludes_host_owned_mount_root(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluator = DockerEvaluator.__new__(DockerEvaluator)
+            evaluator.spec, evaluator.language, evaluator.project = SPEC, "csharp", "OrderFlow.csproj"
+            evaluator.baseline = snapshot(ROOT, MANIFEST, "csharp", 0)
+            evaluator.base = Path(tmp)
+            evaluator.cache, evaluator.seed = Path(tmp) / "packages", Path(tmp) / "seed"
+            evaluator.cache.mkdir()
+            evaluator.seed.mkdir()
+            evaluator.prepared_identity = None
+            evaluator.image, evaluator.fixture_only, evaluator.evidence = "fixture", True, []
+            commands = []
+            def execute(name, command, timeout):
+                commands.append(command)
+                return {"returncode": 0, "stdout": "10.0.302" if command == ["dotnet", "--version"] else "",
+                        "stderr": "", "timed_out": False, "output_limit_exceeded": False}
+            evaluator._exec, evaluator._admin = execute, lambda args: "fixture"
+            evaluator._create, evaluator._remove = lambda mounts: "fixture", lambda name: None
+            evaluator.prepare()
+            self.assertIn(["find", "/packages", "-mindepth", "1", "-exec", "chmod", "a+rwX", "{}", "+"], commands)
+
     def test_container_policy_has_no_host_workspace_credentials_or_network(self):
         with tempfile.TemporaryDirectory() as tmp:
             args = container_arguments("fixture", SPEC["environment"]["container_image_id"], SPEC["environment"],

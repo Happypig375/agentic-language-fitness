@@ -64,6 +64,15 @@ alternative, explicitly check stage-005/006 inherited priority behavior, and
 compile eight architecture regressions. They are not arbitrary-code sandbox
 evidence or language-performance observations.
 
+The local full suite passed 343 tests at initial implementation `a558c82`.
+Its first Linux CI sandbox attempt (run `33992030653`) stopped during trusted
+cache preparation: UID 1000 could not chmod the host-owned mount root. The
+follow-up limits permission cleanup to preparer-owned contents (`find -mindepth 1`)
+and adds a regression. Candidate UID, capabilities and read-only mounts are
+unchanged. The absence probe checks actual research/auth paths rather than
+rejecting the approved image's empty `/workspace` directory. These are ordinary
+runner fixes; the scientific specification and authorization do not change.
+
 Reproduction and CI scopes:
 
 ```text

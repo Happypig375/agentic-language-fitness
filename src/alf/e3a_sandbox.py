@@ -197,8 +197,12 @@ class DockerEvaluator:
             # Cache is inside our private 0700 host directory. Make its trusted
             # preparer's files removable by the host owner; candidate mounts
             # remain read-only, regardless of these filesystem permissions.
-            if not self._ok(self._exec(name, ["chmod", "-R", "a+rwX", "/packages"], 10)):
-                raise SandboxFailure("trusted cache cleanup permissions failed")
+            # The mount root belongs to the host UID, not necessarily 1000.
+            # Only its contents were created (and are owned) by this preparer.
+            permissions = self._exec(name, ["find", "/packages", "-mindepth", "1", "-exec",
+                                           "chmod", "a+rwX", "{}", "+"], 10)
+            if not self._ok(permissions):
+                raise SandboxFailure("trusted cache cleanup permissions failed: " + permissions["stdout"] + permissions["stderr"])
             self._admin(["cp", f"{name}:/work/obj", str(self.seed / "obj")])
             self._admin(["cp", f"{name}:/work/packages.lock.json", str(self.seed / "packages.lock.json")])
             self.prepared_identity = (tree_identity(self.seed), tree_identity(self.cache))
