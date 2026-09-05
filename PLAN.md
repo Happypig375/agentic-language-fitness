@@ -17,11 +17,13 @@ A–C and D v3 are closed. E1/E2/E2a are accepted within their recorded boundari
 
 Keep controlled pre-restored/audit-off, intended online audit-reachable, and legacy constrained-network audit-on ecologies identifiable. Disabling audit in the measured loop is not a recommendation to abandon production dependency auditing. Aggregate input is repeated trajectory usage, not unique source or peak context. The tiny current repository cannot identify a scale slope or future crossover.
 
-## E3a disposition — preparation complete, bounded implementation next
+## E3a disposition — bounded implementation handoff
 
 The packet at **`19b1902be59324b98741ccb6c3a8396de962f5f7`** has been read and reviewed in a second AI session. Exact-commit CI run **33972207924** completed successfully on Linux and Windows, including the trusted E3a fixtures. This is not human-expert approval or evidence of an operational API client/sandbox.
 
 **Decision: accept the narrow design for minimal implementation with required corrections.** See [the current disposition](docs/workstream-e3a-review-disposition-2026-09-06.md). Do not repeat packet preparation or expand the scientific design. The original packet remains a reviewed, unfrozen proposal; its implementing successor must update the specification, generated identities and regression tests consistently.
+
+**Implementation checkpoint:** the R1–R4 controller/adapter/evaluator, model-free regressions and regenerated packet are now in the tree. See [the implementation handoff](docs/workstream-e3a-implementation-handoff-2026-09-06.md) for exact specification/source identities, evidence scope and remaining conditions; require exact-head CI. The remote host is reachable but lacks the pinned image. CI's explicitly labelled SDK sandbox fixture does not verify the intended remote profile. The next decision is the separately authorized integration below, not another design-preparation cycle or automatic pilot.
 
 Retain Tasks 001/006/007, one provisional Luna-high setting, four paired repetitions per task, one initial submission and at most two repairs. This gives 24 trajectories, 12 pairs, and at most 72 generation requests. The task sample is deliberately diagnostic and non-confirmatory, not representative maintenance. Accept full-source/no-tools API access as a named scientific scaffold proposal, not historical Codex M or a verified account entitlement.
 
@@ -36,7 +38,7 @@ The task-001 Int32.MinValue holdout is valid under the stated integer contract e
 
 At currently documented rates, using a conservative $0.25 per million input reservation and $1.20 output gives a generation envelope of **$1.2976128** for the maximum pilot, within the proposed $2 ceiling, and **$0.0360448** for two integration generations, within $0.05. These are proposals conditional on actual rates/access and successful pre-dispatch enforcement, not spending already incurred or an automatic run authorization. Model-request ceilings and ancillary HTTP/count calls are distinct; record both.
 
-### Next bounded assignment
+### Bounded implementation scope (handoff above)
 
 Implement the minimum E3a request/controller path and isolated evaluator needed for this specification, reusing existing materialization, accounting, pinned toolchain and remote transport. Add no new proxy, daemon, model-routing framework, worker agents or backend matrix.
 

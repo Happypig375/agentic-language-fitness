@@ -1,15 +1,20 @@
 {
-  "status": "review-only-not-frozen",
+  "status": "bounded-implementation-not-frozen",
   "execution_authorized": false,
-  "scientific_specification_sha256": "f5057714e7dde2b08fd81314e14f83dde0b2810ccbcf51352926086c34613243",
+  "scientific_specification_sha256": "8bc53d30e45dfa72b087225f89c9e5547266f05b47e4306e2b326d951888bc62",
   "text_lf_sha256": {
-    "protocols/workstream-e3a-v1/specification.json": "601e97b24fbcc229323340300f9321deec3b664ac1c3cf440163c89b3a15d2b1",
-    "protocols/workstream-e3a-v1/candidate-instructions.md": "d77bd43e46407ad7a2743b071bb3e807189d70a9efc5ff18fd960498455afecb",
+    "protocols/workstream-e3a-v1/specification.json": "437f601b176277101ffedbbfd786c5bf7053b9165a4cffcc21ff12f30deffc16",
+    "protocols/workstream-e3a-v1/candidate-instructions.md": "c8d337cbb2d53ce0be5ab44dfc521e79039ea8c64ca699f318a7432d987389b6",
     "protocols/workstream-e3a-v1/baseline-contract.md": "242b01204047c17536c6e8d6c6d59aff0b8e191ce6bade4f03a24d953c6745cd",
     "protocols/workstream-e3a-v1/holdout-cases.json": "65c4ecb6842972f6e3cc60c553c49a34cd30ac76c9d0ea3e3c7c7c21a1c06b14",
-    "src/alf/workstream_e3a.py": "e4c54f04e89b54dc8056143f8fab3d1e1cdac86e3c8a7d2e2faa80c830bbedf9",
-    "scripts/e3a_check.py": "96df5951b49f3d15dadb1878e27f8cc4a6f84ec291ddcb64e69f113a1e995e54",
-    "tests/test_workstream_e3a.py": "83196c6390e0e121566602b36696ca461299583512221e23c10cf8383086a801"
+    "src/alf/workstream_e3a.py": "1076e78772d17562f9acd54a247c8aa7d72fe2380c8fc0641305569fc58697aa",
+    "src/alf/e3a_api.py": "656534c42c47cb1eda04fd1212006a70b8653864ecb6e1a2d25c067b66d016e3",
+    "src/alf/e3a_runner.py": "331f26ecf2d812b4c121f962d4d38a7a1fb256a27f696dc6635bb5a4b7210630",
+    "src/alf/e3a_sandbox.py": "9c739ea6c2ac5dc10cd59eb24bf73a179ccf9dd94b6fcbc6050d4b6238c23074",
+    "scripts/e3a_check.py": "9e70f56a0c9bc65754672a10b841bdfc22a93ee11a6a2a8c7efbc010a24afd58",
+    "scripts/e3a_sandbox_check.py": "73a0fe3906ad0e097931b44e81c57af1cd611ccf5a04a5aafb27c24de821a1ae",
+    "tests/test_workstream_e3a.py": "17d5f2428170ba2468ed8cf6928583fe41aa2b24c6d3adfae80b5c21344f497c",
+    "tests/test_e3a_implementation.py": "e678e069dd866966a6ecab48021a3f86af366c0f044c6e04fa9eadfbeb75055c"
   },
   "e1_report_identity": "644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d",
   "tokenizer_proxy": {
@@ -30,12 +35,12 @@
             "OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
             "Program.cs": "018f2fda63bb33cb85995a47c0ffc25ec09153c1e970d063f0aa346e53e171d0"
           },
-          "candidate_payload_sha256": "ed775fa77fdf21cb3fec5d2d0520fb52ec7fbbef2ac8f025c51cb64517210fa0",
+          "candidate_payload_sha256": "1de2731abe53215cd30fb9653cac4340a6f2ac5c662e3f23a1cff703ef2b1e36",
           "source_and_project_utf8_bytes": 2089,
           "source_and_project_lines": 68,
           "source_and_project_tokenizer_proxy": 424,
-          "payload_utf8_bytes": 6019,
-          "payload_tokenizer_proxy": 1304
+          "payload_utf8_bytes": 6175,
+          "payload_tokenizer_proxy": 1334
         },
         "fsharp": {
           "predecessor_sha256": "fe68e5f132f044891d9376d8b1e592c8716071554c445dcfd75630c7555641ef",
@@ -44,12 +49,12 @@
             "OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
             "Program.fs": "59c9b7206ad3c57042ebc330c40f5e822bb8acb10f2360be5349c2d6b6198795"
           },
-          "candidate_payload_sha256": "788ce4d8759ecc9e1cbe9170a2872e2f549766d91936f5e7e63c8c989d1cba0c",
+          "candidate_payload_sha256": "7df445a7e659dddb251f8868ba2c0c38f275b18bc315e216d8f0de92945f3e4f",
           "source_and_project_utf8_bytes": 1810,
           "source_and_project_lines": 62,
           "source_and_project_tokenizer_proxy": 414,
-          "payload_utf8_bytes": 5732,
-          "payload_tokenizer_proxy": 1278
+          "payload_utf8_bytes": 5888,
+          "payload_tokenizer_proxy": 1308
         }
       },
       "development_cases": 5,
@@ -167,12 +172,12 @@
             "OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
             "Program.cs": "c93aa5753bc2c6ad247cee69fd0ae099ee881a2cfeb7ddc2e91ecc8b6e337f2c"
           },
-          "candidate_payload_sha256": "9f091c374604b4ee25eb476e0c70d14d8599aaffba2fed1db883f667582eadb0",
+          "candidate_payload_sha256": "431d3c3a422441108e4cc6deaff89d094bd3fdae54cde32b6c915d9fb68f7c19",
           "source_and_project_utf8_bytes": 4771,
           "source_and_project_lines": 147,
           "source_and_project_tokenizer_proxy": 1013,
-          "payload_utf8_bytes": 13120,
-          "payload_tokenizer_proxy": 3011
+          "payload_utf8_bytes": 13276,
+          "payload_tokenizer_proxy": 3041
         },
         "fsharp": {
           "predecessor_sha256": "992bb6cceb22eee7f16fd9cdb367a8e1aa5541d454e4d43966fd867b59f5684b",
@@ -181,12 +186,12 @@
             "OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
             "Program.fs": "b831505323425e24e03536e28bbe82a18a9c7d7953e6f6c949e9514e8696f1e4"
           },
-          "candidate_payload_sha256": "2ce614a0a9665cbf448e536f7d29780d6b4f98513f941e6fd705402d5f6f7ba0",
+          "candidate_payload_sha256": "033b7cdf5868310856f448381bc6ec5ada98d023a8ca8d611591e34f6ea02de3",
           "source_and_project_utf8_bytes": 4672,
           "source_and_project_lines": 159,
           "source_and_project_tokenizer_proxy": 1081,
-          "payload_utf8_bytes": 13029,
-          "payload_tokenizer_proxy": 3052
+          "payload_utf8_bytes": 13185,
+          "payload_tokenizer_proxy": 3082
         }
       },
       "development_cases": 77,
@@ -320,12 +325,12 @@
             "OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
             "Program.cs": "725929d39f7e877828909fc8bc1a0973defb98fc1f8986c4beac75f373ce6c4f"
           },
-          "candidate_payload_sha256": "181f9b499d45e66dba49a3725a94c05bd1dd3bf078fd35cf3436dbb87bceeded",
+          "candidate_payload_sha256": "841953e31ce320d4b4b276269e88c20ee4d0498e6d1131a0a1cf78c2ae9296bd",
           "source_and_project_utf8_bytes": 6774,
           "source_and_project_lines": 218,
           "source_and_project_tokenizer_proxy": 1396,
-          "payload_utf8_bytes": 16119,
-          "payload_tokenizer_proxy": 3680
+          "payload_utf8_bytes": 16275,
+          "payload_tokenizer_proxy": 3710
         },
         "fsharp": {
           "predecessor_sha256": "f72b3b1f76267a01da23f7af07087787a42f1fa12cef46e60b008a4e9d1c1451",
@@ -334,12 +339,12 @@
             "OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
             "Program.fs": "e1995467a30791511b1004084b7e1a662c7014a7e2e601e56cab37fccff46d55"
           },
-          "candidate_payload_sha256": "9de88dc0223ef4fb21f8183656eb7cdc8b1e7e9356e659f778c94a3805a14d70",
+          "candidate_payload_sha256": "d243b9e39bb1fbf6967f1a96ab323e589283aa304724f9780cb3a214e37bea6e",
           "source_and_project_utf8_bytes": 6409,
           "source_and_project_lines": 212,
           "source_and_project_tokenizer_proxy": 1443,
-          "payload_utf8_bytes": 15748,
-          "payload_tokenizer_proxy": 3650
+          "payload_utf8_bytes": 15904,
+          "payload_tokenizer_proxy": 3680
         }
       },
       "development_cases": 79,
@@ -463,7 +468,7 @@
     "max_output_tokens_including_reasoning": 589824,
     "max_request_wait_seconds": 8640,
     "max_trajectory_seconds": 14400,
-    "uncached_price_upper_bound_usd": 1.179648,
+    "generation_reservation_upper_usd": "1.2976128",
     "authorized_requests": 0
   },
   "schedule": [
@@ -588,6 +593,12 @@
       "language": "fsharp"
     }
   ],
-  "independent_review": "pending",
+  "design_review": {
+    "type": "second-ai-session",
+    "commit": "19b1902be59324b98741ccb6c3a8396de962f5f7",
+    "disposition": "docs/workstream-e3a-review-disposition-2026-09-06.md",
+    "decision": "accepted-for-bounded-implementation-with-R1-R4"
+  },
+  "implementation_review": "self-review-and-model-free-tests-not-independent-approval",
   "live_validation": "not-authorized"
 }

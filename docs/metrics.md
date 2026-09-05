@@ -1,12 +1,12 @@
 # Metrics and interpretation
 
-**Revised:** 2026-09-05. Measurement rules for new studies; historical schemas/results remain unchanged. Read [PLAN.md](../PLAN.md) and the frozen protocol for the specific experiment.
+**Revised:** 2026-09-06. Measurement rules for new studies; historical schemas/results remain unchanged. Read [PLAN.md](../PLAN.md) and the frozen protocol for the specific experiment.
 
 ## Preserve outcome dimensions
 
 For each assigned trajectory retain: request/attempt status; protocol and accounting validity; submission-format/application status; build status; declared API/development-test status; sealed holdout correctness; terminal reason; and resource use. Do not reduce all of these to one success flag for scientific analysis.
 
-For E3a, the proposed primary endpoint is first-submission joint build and holdout behavioral correctness. Terminal correctness and cost remain important secondary outcomes. A passing compiler is not proof of correct behavior; an unavailable outcome is not a pass. First-pass refers to the submitted patch boundary, not the first internal editing action.
+For E3a, the [pre-freeze R1 correction](workstream-e3a-review-disposition-2026-09-06.md) makes the primary endpoint first-submission task completion: format, compilation, holdout behavior and all declared obligations. Task 007 requires source-bound live-extraction/IO-boundary judgement; missing required evidence is null, while a known failure dominates missingness. Report build-plus-behavior separately. Terminal completion and cost remain secondary outcomes. First-pass refers to the submitted patch boundary, not the first internal editing action; historical outcomes are not rescored.
 
 ## Model usage
 

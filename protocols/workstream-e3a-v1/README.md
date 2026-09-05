@@ -1,9 +1,12 @@
 # E3a review packet: shared first submission and bounded repair
 
-**2026-09-05 — proposal, not a freeze or execution permission.** Prepared and
-self-reviewed by the current Codex maintainer session (AI). No independent AI
-session, language expert, or human has approved this specification. No candidate
-model request, live continuation probe, or paid review agent was used.
+**Updated 2026-09-06 — bounded implementation, not a freeze or execution permission.**
+The proposal at `19b1902be59324b98741ccb6c3a8396de962f5f7` received a
+[second AI-session review](../../docs/workstream-e3a-review-disposition-2026-09-06.md),
+accepting implementation with R1–R4 corrections. That is not human-expert sign-off
+or independent approval of the implementation. Implementation review in this
+session is self-review plus model-free tests. No candidate request, live
+continuation probe, or paid review agent was used.
 
 The [specification](specification.json) and generated [review packet](review-packet.json)
 contain the proposed identities, exact schedule, source/payload hashes, archived
@@ -11,7 +14,8 @@ selection observations, and budget calculation. `review-packet.json` is a drift
 check, not a certificate or a second protocol. Source text identities normalize
 checkout line endings to LF; JSON identities use the existing canonical hash.
 The implementing Git commit and its CI checks are separate from the scientific
-specification hash. This packet does not create an executable candidate runner.
+specification hash. The [implementation handoff](../../docs/workstream-e3a-implementation-handoff-2026-09-06.md)
+separates implemented helpers, tested boundaries, and unresolved live/deployment gates.
 
 ## Question and selected workload
 
@@ -66,9 +70,10 @@ holdout, edit the archived target, or recalculate E1/E2/E2a.
 
 The task contract says integer priority and does not exclude that value. The
 proposal therefore keeps the case for both languages. Gold is a source archive,
-not the final oracle. An independent reviewer must disposition this finding and
-the new expectations before collection. An accepted alternative implementation
-must satisfy the contract; matching the archived algorithm is not required.
+not the final oracle. The second AI-session review accepted this boundary. A
+trusted widened-integer F# alternative passes it. Explicit stage-005/006
+predecessor checks also pass without source changes: those stages already use
+safe priority comparison. Matching the archived algorithm is not required.
 
 ## Candidate information, patch, and controller
 
@@ -86,9 +91,10 @@ named new scaffold proposal, not the historical Codex M treatment and not a
 claim that subscription access implies API access. The existing adapter permits
 shell execution and the Docker wrapper supplies authentication in that execution
 environment. They cannot be silently reused as E3a's authority boundary. This
-packet adds no API client, dependency, authentication handling, proxy, or remote
-launcher. Acceptance of this scaffold and a minimal implementing adapter is a
-maintainer decision before integration.
+implementation now adds one disabled-by-default Responses path, an injected
+controller, and a Linux Docker evaluator. It adds no proxy, daemon, routing
+framework, dependency, or subscription-backed fallback. Local API-to-remote
+evaluator integration remains unverified; no unattended live CLI is exposed.
 
 The fixture policy is deliberately small:
 
@@ -103,9 +109,11 @@ The fixture policy is deliberately small:
    automatic syntax cleanup. The source/response byte and file-count caps are
    in the specification. An invalid submission consumes its round unchanged.
 3. Validate project policy before building. Dependencies/framework/build targets
-   stay fixed; F# may change simple Compile entries, each source exactly once,
-   `Program.fs` last. This allows the stated engine extraction. A forbidden
-   change ends the trajectory as a protocol violation, not an apparatus exclusion.
+   stay fixed; F# may change simple Compile entries. Safe omitted, duplicate,
+   missing-file or wrong-order entries and malformed allowed XML retain the
+   submitted state and receive repairable project feedback without compilation.
+   Correct projects include each source once, `Program.fs` last. Traversal,
+   expansions, imports, targets and other forbidden changes remain terminal.
 4. Build in a **fresh isolated evaluation workspace** with copied locked restore
    metadata/cache, no old `bin` or configuration intermediates. Use the exact
    fixed `dotnet build --no-restore --no-incremental` command; only a successful
@@ -130,8 +138,9 @@ The fixture policy is deliberately small:
    count as failures; unavailable scoring from apparatus failure stays unknown.
    Neither holdout scores nor cases can affect continuation, feedback, or sampling.
 
-Sandbox enforcement is **pending**, not established by pure Python validation.
-The intended evaluator reuses the pinned existing image/remote compute path,
+Sandbox code is implemented; **intended remote integration remains pending**.
+Pure helper tests and trusted host builds are not sandbox evidence. The evaluator
+requires the pinned existing image on a Linux Docker host,
 2 CPUs, 6 GiB RAM, 512 PIDs, no network, non-root, dropped capabilities,
 read-only root/cache, bounded writable workspace and `/tmp`, and no credentials,
 full repository, target source, or scorer mount. Locks and image/SDK must agree.
@@ -147,7 +156,9 @@ remote sandbox, and is not a substitute for that integration gate.
 
 ## Development feedback and holdout separation
 
-`e3a-diagnostics-v1` preserves full raw output outside the candidate payload.
+`e3a-diagnostics-v1` preserves raw output outside the candidate payload, subject
+to an explicit 1 MiB combined stdout/stderr operation cap. Overflow terminates
+the operation; omitted bytes are unavailable, not silently claimed as retained.
 Use the pinned SDK's English plain-text diagnostics with fixed `/work` paths.
 A compiler error/warning header starts a diagnostic block; continuation lines
 stay with it. Sort exact distinct blocks with errors first, then lexical order;
@@ -157,8 +168,10 @@ The packet records raw/visible UTF-8 bytes, visible hash, block counts, omission
 and a truncation marker. Its cap is **8,192 UTF-8 bytes**, not a claimed exact
 provider token count. All returned feedback also counts toward request input.
 
-If a distinct error block cannot fit intact, retain evidence and stop the batch
-as a feedback-cap apparatus failure. Do not silently give F# a shortened error
+If a distinct error block cannot fit intact, retain evidence and stop only that
+trajectory as `feedback-budget-exhausted`. Continue unrelated planned slots.
+Do not construct feedback after the last allowed round. Controller-format or
+security faults still stop the batch. Do not silently give F# a shortened error
 or dynamically enlarge one language's cap. Many repeated/large F# diagnostics,
 multiline type context, warning overflow, and C# errors have deterministic tests.
 Review a cap change before execution; no new scientific version is needed for
@@ -176,14 +189,18 @@ priority or change transition rejection behavior in the actual compiled source;
 both language holdouts reject their corresponding faults. They are finite
 sensitivity checks, not proof of exhaustive equivalence.
 
-For task 007, report architecture separately using the declared rubric: models
+For task 007, include architecture in task completion and report it separately:
+models
 and live dispatch in the engine file; Program only IO/JSON/error adaptation and
 engine call; F# compilation order. File existence and passing behavior cannot
 prove live architecture. Do not reuse old string checks as that proof or reject
 alternative correct internal names. A reviewer blinded to new costs/behavioral
 scores must examine first/terminal source under this rubric; unavailable review
-is null. It never triggers model repair and is not silently folded into the
-primary behavioral endpoint.
+is null. Each judgement identifies the submitted source hash, reviewer ID and
+reviewer type. Known failed obligations dominate missing evidence. No-op,
+empty-engine and dead-duplicate fixtures fail completion even if behavior
+passes; alternative extracted internal naming remains eligible. Architecture
+scoring never triggers repair. Build-plus-behavior remains a separate endpoint.
 
 ## Memory, accounting, schedule, and proposed ceilings
 
@@ -201,8 +218,9 @@ backend configuration, response IDs and request IDs (when exposed), SDK/transpor
 revision and usage. A missing snapshot identifier is null, not an invented pin;
 collection requires a reviewed disposition of that reproducibility limit. The
 [model documentation](https://developers.openai.com/api/docs/models/gpt-5.6-luna)
-lists high effort and, checked 2026-09-05, standard input/output rates of
-$0.20/$1.20 per million tokens. Account access, actual backend version, exact
+lists high effort and, checked 2026-09-06, standard input/output rates of
+$0.20/$1.20 per million tokens and a 1.25× input cache-write premium. Reserve
+all input at $0.25/M and output at $1.20/M. Account access, actual backend version, exact
 input counting and current prices must be verified before an authorized batch.
 No subscription-to-dollar conversion is asserted.
 
@@ -215,17 +233,24 @@ No subscription-to-dollar conversion is asserted.
 | Per trajectory | ≤600 s from first dispatch through final scoring; refuse work that cannot fit remaining budget |
 | Controller operations | Build ≤60 s; development batch ≤10 s; holdout batch ≤10 s; preflight outside trajectory and separately timed |
 | Pilot token upper envelope | 2,359,296 input + 589,824 output; subsets not added again |
-| Pilot spend | Formula ≤$1.179648 at the checked uncached rates; **hard authorization ceiling proposed: $2**, not an entitlement |
-| Separate integration proposal | ≤2 model requests on an unrelated trivial task, same per-request limits, ≤$0.05; no pilot included |
+| Pilot spend | Conservative generation envelope $1.2976128; **proposed hard ceiling $2**, including separately bounded ancillary count charges |
+| Separate integration proposal | ≤2 generations on an unrelated trivial task; generation envelope $0.0360448; total ≤$0.05; no pilot included |
 | Authorized now | **0 candidate requests; $0 experiment spend** |
 
 The input ceiling is a **pre-dispatch requirement**, not merely an after-the-fact
-usage assertion. The future adapter must demonstrate a conservative bound or
-supported exact count over wrappers and the entire retained chain, reserve the
-worst-case request cost before dispatch, enforce output/deadline limits, and
-stop rather than truncate context or silently fall back. The current fixtures
-only check arithmetic and stop on reported overruns; they do not implement a
-provider budget guard. A chain that cannot fit ends budget-limited and stays in
+usage assertion. The adapter sends the exact instructions, input, tools,
+reasoning configuration and retained-response ID to the supported
+[input-count endpoint](https://developers.openai.com/api/reference/resources/responses/subresources/input_tokens/methods/count),
+then reserves Decimal worst-case generation cost before dispatch. Fixed
+instructions are resupplied on every chain call. Effective context is explicitly
+`all_turns`; count/create agreement, returned model/tier/effort and usage are
+checked. Mock equality is not provider verification. Count HTTP attempts and
+generation dispatch attempts are separate, each bounded; ambiguous generations
+retain their entire reservation and are never retried. Optional usage remains
+null and observed dollar charges remain unavailable (the guard uses a bound).
+Actual ancillary count pricing must be explicitly bounded before live use; mock
+tests assume zero only as fixture data, not a documented billing guarantee.
+A chain that cannot fit ends budget-limited and stays in
 the assigned sample. The small output budget may truncate a high-effort response
 before code; this is retained failure, not permission to resample. Official
 [reasoning documentation](https://developers.openai.com/api/docs/guides/reasoning)
@@ -250,8 +275,8 @@ maintainer preparation is outside benchmark cost and not inferred to cost zero.
 
 | Endpoint / resource | Rule |
 |---|---|
-| **Primary** | First-submission joint compilation and final-holdout behavioral correctness, all assigned attempts |
-| Separate outcomes | Format, compilation, development, final holdout, declared architecture, terminal correctness, failure categories and missing scoring |
+| **Primary** | First-submission task completion: format, compilation, holdout behavior and all declared obligations, all assigned attempts |
+| Separate outcomes | Build-plus-behavior, format, compilation, development, holdout, architecture review/type, terminal completion, failures and missing scoring |
 | Resource phases | Initial request/evaluation; subsequent repair requests/evaluations; final scoring; setup; end-to-end separately (no overlapping sums) |
 | Repair burden | Successful first submission has zero incremental repair; failure-conditioned repair is a labelled selected subset |
 | Pair summaries | For each task show all four language-paired correctness differences and token/time differences, mean and min/max; report coverage |
@@ -271,14 +296,17 @@ repeated apparatus failure, deadline/spend ceilings, or scientific deviation.
 
 ```text
 python -m unittest discover -s tests -p test_workstream_e3a.py -v
+python -m unittest discover -s tests -p test_e3a_implementation.py -v
 python scripts/e3a_check.py
 python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures.json
+python scripts/e3a_sandbox_check.py --output results/e3a-sandbox.json
 ```
 
 The model-free checks cover submission policy, mock lineage and request count,
 feedback truncation, usage missingness/subsets, schedule/budget, disjoint holdout,
 payload boundaries, and packet drift. Trusted fixtures build predecessor, target,
-and semantic fault for each task/language (**18 builds**) using SDK 10.0.302,
+and semantic fault for each task/language, a contract-correct F# priority
+alternative and eight compiled architecture regressions (**27 builds**) using SDK 10.0.302,
 pre-restore/audit-off, a fixed no-restore build and direct-DLL execution. They
 seed/remove a stale binary and verify source/lock identities. They explicitly
 assert the archived priority defect, not universal reference correctness.
@@ -295,11 +323,13 @@ reject case-colliding paths, retain invalid/null usage, allow task-required F#
 compile entries, and keep terminal format failure distinct from last applied
 source. The archived target defect and scaffold limitations remain explicit.
 
-**Next decision:** independent protocol review and maintainer disposition of
-the task/oracle limitation, API/no-tools scaffold, budget, and architecture
-rubric. Only after acceptance should the smallest adapter/isolated evaluator be
-implemented and checked. A separately authorized two-request integration must
-then demonstrate provider continuation/usage, account/model access, budget
-enforcement and sandbox boundaries before any pilot authorization/freeze. If
-those checks change the scientific policy, review again before collection.
-This packet stops here; E3b/F0, H and generic routing remain out of scope.
+The sandbox command is Linux/Docker-only and fails closed if the exact image is
+absent. Linux CI additionally exercises it with `--ci-sdk-fixture` against the
+exact SDK base from `Dockerfile.codex-agent`, never the image containing the
+research repository. That result is labelled non-experimental, not remote proof.
+
+**Next decision:** resolve the intended image/remote integration and actual
+account/rate/count conditions, then separately authorize the proposed two-request
+integration on an unrelated task. Neither this implementation nor passing mocks
+authorizes it or the pilot. Review any scientific policy change before freeze
+and collection. E3b/F0, H and generic routing remain out of scope.

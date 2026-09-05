@@ -6,9 +6,9 @@ Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint 
 
 E1/E2/E2a are complete. The E3a packet at `19b1902be59324b98741ccb6c3a8396de962f5f7` passed its Linux/Windows fixture checks and has received a second AI-session review. The [disposition](docs/workstream-e3a-review-disposition-2026-09-06.md) accepts the narrow design **for bounded implementation with R1–R4 corrections**, not as a working or authorized live experiment.
 
-The next assignment is the minimal E3a no-tools controller/adapter and isolated evaluator, with mock transport and model-free tests. Implement the disposition's task-completion rubric, repairable safe Compile mistakes, trajectory-local feedback exhaustion, and conservative pre-dispatch budget/count guard. Update the unfrozen specification, generated packet, and tests together. Do not restart design preparation or add tasks/scaffolds/workstreams.
+The bounded E3a no-tools controller/adapter and isolated evaluator are implemented with R1–R4 corrections, regenerated identities and model-free tests. Read the [implementation handoff](docs/workstream-e3a-implementation-handoff-2026-09-06.md) and check exact-head CI. Do not restart packet preparation or expand tasks/scaffolds/workstreams. Intended remote deployment remains unverified: the remote host currently lacks the pinned image; CI's SDK fixture is not a replacement experimental profile.
 
-No live candidate request or continuation smoke test is authorized by these files. Account access, actual provider continuation/counting and remote sandbox integration remain unverified. Return after implementation/model-free evidence and applicable exact-commit CI, before the separately capped live integration or pilot. Do not replace the API proposal with a subscription-backed adapter silently.
+No live candidate request or continuation smoke test is authorized by these files. Account access, rates/count charges, actual provider continuation/counting and remote sandbox integration remain unverified. The next decision is separately capped integration (at most two generations/$0.05), not automatic pilot execution. Do not replace the API proposal with a subscription-backed adapter silently.
 
 ## Read only what applies
 
@@ -42,7 +42,8 @@ Return at implementation completion, material scientific/security change, exhaus
 python -m unittest discover -s tests -v
 python scripts/e3a_check.py
 python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures.json
+python scripts/e3a_sandbox_check.py --output results/e3a-sandbox.json
 python scripts/alf.py doctor --strict
 ```
 
-The current e3a_check script builds trusted fixtures only; it is not an arbitrary-candidate evaluator. Use checks appropriate to the change and report their actual scope.
+e3a_check builds trusted fixtures only; it is not an arbitrary-candidate evaluator. e3a_sandbox_check requires Linux Docker and the exact image; its explicit CI SDK-fixture mode is model-free, non-experimental evidence only. Use checks appropriate to the change and report their actual scope.

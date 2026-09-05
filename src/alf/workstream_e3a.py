@@ -1,7 +1,7 @@
-"""Pure E3a review fixtures. No provider client, shell, or candidate-code execution.
+"""E3a submission policy, controller, and post-trajectory scoring.
 
-These helpers make the proposed boundaries testable. They are not a live runner
-or evidence that a provider preserves state, enforces budgets, or isolates code.
+Transport and isolated evaluation are injected; this module never executes code
+or interprets candidate text as a command. Mocks do not verify provider behavior.
 """
 from __future__ import annotations
 
@@ -10,7 +10,9 @@ import hashlib
 import json
 import random
 import re
+import time
 import xml.etree.ElementTree as ET
+from decimal import Decimal
 from pathlib import Path
 from typing import Any, Callable
 
@@ -19,7 +21,7 @@ from .workstream_e2 import _materialize
 
 PACKET_DIR = "protocols/workstream-e3a-v1"
 ERROR_LINE = re.compile(r"\b(?:fatal\s+)?error\b", re.I)
-USAGE_FIELDS = ("input_tokens", "cached_input_tokens", "output_tokens", "reasoning_output_tokens")
+USAGE_FIELDS = ("input_tokens", "cached_input_tokens", "cache_write_input_tokens", "output_tokens", "reasoning_output_tokens")
 
 
 class SubmissionError(ValueError):
@@ -76,10 +78,10 @@ def budget(spec: dict) -> dict:
         "max_output_tokens_including_reasoning": output_ceiling,
         "max_request_wait_seconds": calls * limits["request_timeout_seconds"],
         "max_trajectory_seconds": trajectories * limits["trajectory_timeout_seconds"],
-        "uncached_price_upper_bound_usd": round((
-            input_ceiling * limits["uncached_input_usd_per_million"]
-            + output_ceiling * limits["output_usd_per_million"]
-        ) / 1_000_000, 6),
+        "generation_reservation_upper_usd": str((
+            input_ceiling * Decimal(str(limits["reservation_input_usd_per_million"]))
+            + output_ceiling * Decimal(str(limits["output_usd_per_million"]))
+        ) / Decimal(1_000_000)),
         "authorized_requests": limits["current_authorized_requests"],
     }
 
@@ -131,7 +133,10 @@ def structural_development(source: dict[str, str], language: str, task_id: str) 
         if f"OrderFlowEngine.{ext}" not in source:
             errors.append(f"ERROR architecture: required OrderFlowEngine.{ext} is missing")
         if language == "fsharp":
-            includes = [n.get("Include") for n in ET.fromstring(source["OrderFlow.fsproj"]).iter("Compile")]
+            try:
+                includes = [n.get("Include") for n in ET.fromstring(source["OrderFlow.fsproj"]).iter("Compile")]
+            except ET.ParseError:
+                includes = []
             if "OrderFlowEngine.fs" not in includes or "Program.fs" not in includes or (
                 includes.index("OrderFlowEngine.fs") > includes.index("Program.fs")
             ):
@@ -171,7 +176,32 @@ def _project_shape(text: str, *, strip_compile: bool) -> bytes:
     return ET.tostring(tree)
 
 
-def apply_submission(before: dict[str, str], raw: str, language: str, spec: dict) -> dict[str, str]:
+def project_development(source: dict[str, str], language: str) -> dict:
+    """Safe project mistakes are failed submissions, never compiled or fixed here."""
+    errors = []
+    ext = "fs" if language == "fsharp" else "cs"
+    try:
+        tree = ET.fromstring(source[f"OrderFlow.{ext}proj"])
+    except ET.ParseError:
+        errors.append("ERROR project: malformed project XML")
+    else:
+        if language == "fsharp":
+            includes = [node.get("Include") for node in tree.iter("Compile")]
+            sources = {p for p in source if p.endswith(".fs")}
+            if len(includes) != len(set(includes)):
+                errors.append("ERROR project: duplicate Compile Include")
+            for path in sorted(set(includes) - sources):
+                errors.append(f"ERROR project: Compile source missing: {path}")
+            for path in sorted(sources - set(includes)):
+                errors.append(f"ERROR project: source omitted from Compile: {path}")
+            if includes[-1:] != ["Program.fs"]:
+                errors.append("ERROR project: Program.fs must compile last")
+    return {"passed": not errors, "build_passed": False if errors else None,
+            "category": "project", "output": "\n".join(errors)}
+
+
+def apply_submission(before: dict[str, str], raw: str, language: str, spec: dict,
+                     *, project_reference: str | None = None) -> dict[str, str]:
     """Atomic in-memory replacements. The caller retains original raw bytes first."""
     if language not in {"csharp", "fsharp"}:
         raise ValueError("unsupported language")
@@ -207,14 +237,39 @@ def apply_submission(before: dict[str, str], raw: str, language: str, spec: dict
         len(text.encode("utf-8")) for text in after.values()
     ) > spec["authority"]["max_workspace_bytes"]:
         raise SubmissionError("workspace ceiling exceeded")
-    if _project_shape(before[project], strip_compile=language == "fsharp") != _project_shape(
-        after[project], strip_compile=language == "fsharp"
+    text = after[project]
+    # Screen forbidden constructs even when XML is malformed. Malformed allowed
+    # syntax is retained but NEVER sent to MSBuild. Repairs use the original
+    # canonical project reference, not the previous malformed project.
+    allowed_tags = {"Project", "PropertyGroup", "OutputType", "TargetFramework", "ImplicitUsings", "Nullable"}
+    if language == "fsharp":
+        allowed_tags |= {"ItemGroup", "Compile"}
+    if "<!" in text or "<?" in text or re.search(r"[$@%]\(", text) or any(
+        tag not in allowed_tags for tag in re.findall(r"</?([\w:.-]+)", text)
+    ):
+        raise PolicyViolation("forbidden project construct or expansion")
+    # Recognizable unsafe values stay terminal even if a later XML delimiter is
+    # missing. Incomplete allowed XML is retained, but never compiled.
+    for _, include in re.findall(r'''<Compile\b[^>]*\bInclude\s*=\s*(["'])(.*?)\1''', text, re.S):
+        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*\.fs", include):
+            raise PolicyViolation("Compile must name a simple approved root-level source")
+    reference = project_reference if project_reference is not None else before[project]
+    for tag in ("OutputType", "TargetFramework", "ImplicitUsings", "Nullable"):
+        actual = re.findall(r"<" + tag + r">\s*([^<]*?)\s*</" + tag + r">", text)
+        expected = re.findall(r"<" + tag + r">\s*([^<]*?)\s*</" + tag + r">", reference)
+        if actual and actual != expected:
+            raise PolicyViolation("project framework/build settings changed")
+    try:
+        tree = ET.fromstring(text)
+    except ET.ParseError:
+        return after  # project_development emits a repairable failure
+    for node in tree.iter("Compile"):
+        if set(node.attrib) != {"Include"} or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*\.fs", node.get("Include", "")):
+            raise PolicyViolation("Compile must name a simple approved root-level source")
+    if _project_shape(reference, strip_compile=language == "fsharp") != _project_shape(
+        text, strip_compile=language == "fsharp"
     ):
         raise PolicyViolation("project framework/dependencies/build settings changed")
-    if language == "fsharp":
-        includes = [node.attrib.get("Include") for node in ET.fromstring(after[project]).iter("Compile")]
-        if len(includes) != len(set(includes)) or set(includes) != set(sources) or includes[-1:] != ["Program.fs"]:
-            raise PolicyViolation("compile entries must include each source once with Program last")
     return after
 
 
@@ -268,6 +323,7 @@ def normalize_usage(raw: dict | None) -> dict:
     values = {
         "input_tokens": raw.get("input_tokens"),
         "cached_input_tokens": details_in.get("cached_tokens") if isinstance(details_in, dict) else None,
+        "cache_write_input_tokens": details_in.get("cache_write_tokens") if isinstance(details_in, dict) else None,
         "output_tokens": raw.get("output_tokens"),
         "reasoning_output_tokens": details_out.get("reasoning_tokens") if isinstance(details_out, dict) else None,
     }
@@ -276,10 +332,15 @@ def normalize_usage(raw: dict | None) -> dict:
         if value is not None and (type(value) is not int or value < 0):
             invalid.append(name)
             values[name] = None
-    for total, subset in [("input_tokens", "cached_input_tokens"), ("output_tokens", "reasoning_output_tokens")]:
+    for total, subset in [("input_tokens", "cached_input_tokens"), ("input_tokens", "cache_write_input_tokens"),
+                          ("output_tokens", "reasoning_output_tokens")]:
         if values[total] is not None and values[subset] is not None and values[subset] > values[total]:
             invalid.append(subset)
             values[subset] = None
+    if all(values[k] is not None for k in ["input_tokens", "cached_input_tokens", "cache_write_input_tokens"]) and (
+        values["cached_input_tokens"] + values["cache_write_input_tokens"] > values["input_tokens"]
+    ):
+        invalid.append("input_token_subsets")
     total = raw.get("total_tokens")
     if total is not None and (type(total) is not int or total < 0 or (
         values["input_tokens"] is not None and values["output_tokens"] is not None
@@ -297,63 +358,143 @@ def usage_sum(rounds: list[dict]) -> dict:
             for key in USAGE_FIELDS}
 
 
-def simulate_trajectory(before: dict[str, str], language: str, spec: dict,
-                        session: Callable, develop: Callable) -> dict:
-    """Scripted responses only. No holdout input is accepted by this function.
+def run_trajectory(before: dict[str, str], language: str, spec: dict,
+                   session: Callable, develop: Callable, *, task_id: str,
+                   record: Callable = lambda event: None,
+                   clock: Callable = time.monotonic, deadline: float | None = None) -> dict:
+    """One shared prefix; no holdout or rubric input can affect continuation.
 
-    `session` and `develop` are injected test fixtures; this helper does not
-    implement a live transport, timing watchdog, persistence, or sandbox.
+    Session and evaluator enforce their own operation deadlines and isolation.
+    A durable recorder must be supplied by the batch runner before dispatch.
     """
     current = copy.deepcopy(before)
     previous_id = None
     packet = None
     rounds = []
     stop = "repair-budget"
+    batch_stop = False
+    deadline = deadline if deadline is not None else clock() + spec["budgets"]["trajectory_timeout_seconds"]
+    project = "OrderFlow.fsproj" if language == "fsharp" else "OrderFlow.csproj"
     for index in range(1 + spec["controller"]["max_repair_rounds"]):
-        response = session(previous_id, copy.deepcopy(current), copy.deepcopy(packet))
+        if clock() >= deadline:
+            stop = "trajectory-deadline"
+            break
+        round_started = clock()
+        response = session(previous_id, copy.deepcopy(current), copy.deepcopy(packet), deadline)
         row = {"round": index, "previous_response_id": previous_id,
                "response_id": response.get("id"), "status": response.get("status"),
                "submission": response.get("text"), "usage": normalize_usage(response.get("usage")),
+               "request_elapsed_seconds": response.get("elapsed_seconds"), "phase_elapsed_seconds": clock() - round_started,
                "development": None, "feedback": None, "applied_sha256": None, "applied_source": None}
         rounds.append(row)  # retain timeouts/ambiguous requests and partial usage
+        record({"event": "submission-received", "row": copy.deepcopy(row), "response": response})
         if response.get("status") != "completed" or not response.get("id") or not isinstance(response.get("text"), str):
-            stop = "request-incomplete-or-ambiguous"
+            stop, batch_stop = response.get("failure", "request-incomplete-or-ambiguous"), True
             break
         previous_id = response["id"]
         try:
-            current = apply_submission(current, response["text"], language, spec)
+            current = apply_submission(current, response["text"], language, spec, project_reference=before[project])
         except PolicyViolation as exc:
-            row["development"] = {"passed": False, "category": "protocol-violation", "output": str(exc)}
+            row["development"] = {"passed": False, "build_passed": False, "category": "protocol-violation", "output": str(exc)}
             stop = "protocol-violation"
+            batch_stop = bool(response.get("batch_stop") or row["usage"]["invalid_fields"] or
+                              not row["usage"]["totals_available"])
             break
         except SubmissionError as exc:
-            development = {"passed": False, "category": "patch-format", "output": str(exc)}
+            development = {"passed": False, "build_passed": False, "category": "patch-format", "output": str(exc)}
         else:
             row["applied_sha256"] = canonical_json_hash(current)
             row["applied_source"] = copy.deepcopy(current)
-            development = develop(copy.deepcopy(current), index)
+            development = project_development(current, language)
+            if development["passed"]:
+                development = structural_development(current, language, task_id)
+            if development["passed"]:
+                try:
+                    development = develop(copy.deepcopy(current), index, deadline)
+                except Exception as exc:
+                    development = {"passed": None, "build_passed": None, "category": "evaluator-failure",
+                                   "output": type(exc).__name__, "batch_stop": True}
+        if not isinstance(development, dict) or not isinstance(development.get("output"), str) or (
+            development.get("passed") is not None and type(development.get("passed")) is not bool
+        ) or not isinstance(development.get("category"), str) or (
+            development.get("passed") is None and not development.get("batch_stop")
+        ):
+            development = {"passed": None, "build_passed": None, "category": "controller-feedback-failure",
+                           "output": "malformed evaluator result", "batch_stop": True}
         row["development"] = copy.deepcopy(development)
+        row["phase_elapsed_seconds"] = clock() - round_started
+        record({"event": "development-finished", "round": index, "development": development})
+        if response.get("batch_stop"):
+            stop, batch_stop = response.get("failure", "provider-failure"), True
+            break
+        if development.get("batch_stop"):
+            stop, batch_stop = development["category"], True
+            break
         usage = row["usage"]
         if usage["invalid_fields"] or not usage["totals_available"]:
-            stop = "accounting-unavailable-or-invalid"
+            stop, batch_stop = "accounting-unavailable-or-invalid", True
             break
         if (usage["input_tokens"] > spec["budgets"]["request_input_tokens"] or
                 usage["output_tokens"] > spec["budgets"]["request_output_tokens_including_reasoning"]):
-            stop = "reported-request-budget-exceeded"
+            stop, batch_stop = "reported-request-budget-exceeded", True
             break
         if development["passed"]:
             stop = "development-passed"
             break
+        if clock() >= deadline or development["category"] == "trajectory-deadline":
+            stop = "trajectory-deadline"
+            break
+        if index == spec["controller"]["max_repair_rounds"]:
+            break  # no next recipient; raw output is already retained
         # Every failing development-case line must start with ERROR. Raw compiler
         # output is retained separately; the envelope guarantees a failure reason.
-        raw_feedback = f"ERROR {development['category']}\n" + development["output"]
-        packet = feedback_packet(raw_feedback, spec["controller"]["feedback_bytes"])
+        try:
+            raw_feedback = f"ERROR {development['category']}\n" + development["output"]
+            packet = feedback_packet(raw_feedback, spec["controller"]["feedback_bytes"])
+        except (TypeError, ValueError, UnicodeError):
+            stop, batch_stop = "controller-feedback-failure", True
+            break
         row["feedback"] = packet
         if packet["essential_error_overflow"]:
-            stop = "feedback-cap-apparatus-failure"
+            stop = "feedback-budget-exhausted"
             break
-    return {"rounds": rounds, "stop": stop, "last_applied_source": current,
-            "first_submission_source": rounds[0]["applied_source"],
-            "terminal_submission_source": rounds[-1]["applied_source"],
+    return {"rounds": rounds, "stop": stop, "batch_stop": batch_stop, "last_applied_source": current,
+            "first_submission_source": rounds[0]["applied_source"] if rounds else None,
+            "terminal_submission_source": rounds[-1]["applied_source"] if rounds else None,
             "first_phase_usage": usage_sum(rounds[:1]), "repair_usage": usage_sum(rounds[1:]),
-            "total_usage": usage_sum(rounds), "live_evidence": False}
+            "total_usage": usage_sum(rounds)}
+
+
+def all_required(values: list[bool | None]) -> bool | None:
+    """Known failure dominates unavailable evidence; unknown is never success."""
+    if any(value is False for value in values):
+        return False
+    return True if all(value is True for value in values) else None
+
+
+def score_submission(row: dict | None, holdout: dict | None, *, task_id: str,
+                     language: str, review: dict | None = None, allow_fixture_review: bool = False) -> dict:
+    """Post-trajectory endpoint. Review is explicit source-bound evidence, not AI judging."""
+    source = row.get("applied_source") if row else None
+    development = (row or {}).get("development") or {}
+    fmt = source is not None if row and isinstance(row.get("submission"), str) else None
+    build = (holdout or {}).get("build_passed", development.get("build_passed"))
+    behavior = (holdout or {}).get("passed")
+    obligations = True
+    if task_id == "007-query-engine-refactor":
+        file_order = structural_development(source, language, task_id)["passed"] if source else None
+        rubric = [None, None, None]
+        if review is not None:
+            if (not source or review.get("source_sha256") != canonical_json_hash(source)
+                    or not review.get("reviewer_id") or review.get("reviewer_type") not in {"human", "ai-session", "scripted-fixture"}):
+                raise ValueError("architecture review must identify its source and reviewer")
+            if review["reviewer_type"] == "scripted-fixture" and not allow_fixture_review:
+                raise ValueError("scripted review is evidence only for model-free fixture reports")
+            rubric = [review.get(key) for key in ["domain_model_in_engine", "live_dispatch_in_engine", "program_io_boundary"]]
+            if any(v is not None and type(v) is not bool for v in rubric):
+                raise ValueError("architecture judgements must be true, false, or null")
+        obligations = all_required([file_order, *rubric])
+    return {"format": fmt, "build": build, "holdout_behavior": behavior,
+            "declared_obligations": obligations, "architecture_review": copy.deepcopy(review),
+            "build_and_behavior": all_required([build, behavior]),
+            "task_completion": all_required([fmt, build, behavior, obligations])}

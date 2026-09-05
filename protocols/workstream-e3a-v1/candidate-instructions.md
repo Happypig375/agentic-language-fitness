@@ -29,7 +29,9 @@ is available before the first submission. If development checks fail, up to two
 repair submissions may follow in this conversation. Each repair applies to the
 current accepted source snapshot supplied with the feedback. Invalid JSON or
 file replacement leaves that snapshot unchanged and consumes the submission.
-A forbidden project change ends the trajectory as a protocol violation.
+A forbidden project change ends the trajectory as a protocol violation. Safe
+missing, duplicate, or misordered Compile entries are project errors: the
+submitted snapshot is retained and may be repaired within the same budget.
 
 Development examples and compiler/development feedback are the only execution
 information available. Keep the line-delimited JSON program protocol and

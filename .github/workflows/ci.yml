@@ -34,6 +34,10 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Check E3a review packet and trusted model-free fixtures
         run: python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures-linux.json
+      - name: Check E3a sandbox on an explicitly non-experimental SDK fixture
+        run: |
+          docker pull mcr.microsoft.com/dotnet/sdk:10.0.302@sha256:72dd743782f2ae7e5476fd64f6a460045e3998dc862218b80e6944cba79a01b0
+          python scripts/e3a_sandbox_check.py --ci-sdk-fixture --output results/e3a-sandbox-ci-fixture.json
       - name: Environment check
         run: python scripts/alf.py doctor --strict
       - name: Validate matched benchmark snapshots

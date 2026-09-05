@@ -22,8 +22,28 @@ from alf.protocol import canonical_json_hash  # noqa: E402
 from alf.workstream_e2 import _get_encoding, TOKENIZER_ENCODING, TOKENIZER_VERSION  # noqa: E402
 from alf.workstream_e3a import (  # noqa: E402
     PACKET_DIR, apply_submission, budget, candidate_payload, development_cases,
-    holdout_cases, read_json, schedule, snapshot, structural_development,
+    holdout_cases, read_json, schedule, score_submission, snapshot, structural_development,
 )
+
+
+def architecture_fixtures(manifest: dict, language: str) -> dict:
+    """Finite trusted regression sources, NEVER candidate prompt material."""
+    before, target = [snapshot(ROOT, manifest, language, stage) for stage in (6, 7)]
+    ext = "cs" if language == "csharp" else "fs"
+    engine, project = f"OrderFlowEngine.{ext}", f"OrderFlow.{ext}proj"
+    empty = {**before, engine: "// deliberately empty engine\n" if language == "csharp" else "module OrderFlowEngine\n"}
+    if language == "fsharp":
+        empty[project] = target[project]
+    dead = {**empty, engine: target[engine].replace("namespace OrderFlow;", "namespace Unused;")}
+    alternative = {p: text.replace("OrderFlowEngine", "QueryKernel") if not p.endswith("proj") else text
+                   for p, text in target.items()}
+    return {"unchanged": before, "empty-engine": empty, "dead-duplicate": dead, "alternative-naming": alternative}
+
+
+def fixture_review(source: dict, passed: bool) -> dict:
+    return {"source_sha256": canonical_json_hash(source), "reviewer_type": "scripted-fixture",
+            "reviewer_id": "repository-owned-task007-regression-v1", "domain_model_in_engine": passed,
+            "live_dispatch_in_engine": passed, "program_io_boundary": passed}
 
 
 def make_packet() -> dict:
@@ -35,7 +55,9 @@ def make_packet() -> dict:
     for name in ["specification.json", "candidate-instructions.md", "baseline-contract.md", "holdout-cases.json"]:
         path = f"{PACKET_DIR}/{name}"
         identities[path] = hashlib.sha256((ROOT / path).read_text(encoding="utf-8").encode("utf-8")).hexdigest()
-    for path in ["src/alf/workstream_e3a.py", "scripts/e3a_check.py", "tests/test_workstream_e3a.py"]:
+    for path in ["src/alf/workstream_e3a.py", "src/alf/e3a_api.py", "src/alf/e3a_runner.py", "src/alf/e3a_sandbox.py",
+                 "scripts/e3a_check.py", "scripts/e3a_sandbox_check.py", "tests/test_workstream_e3a.py",
+                 "tests/test_e3a_implementation.py"]:
         identities[path] = hashlib.sha256((ROOT / path).read_text(encoding="utf-8").encode("utf-8")).hexdigest()
     tasks = []
     for task_id in spec["tasks"]:
@@ -77,12 +99,16 @@ def make_packet() -> dict:
                       "development_cases": len(dev), "holdout_cases": len(holdout),
                       "development_sha256": canonical_json_hash(dev), "holdout_sha256": canonical_json_hash(holdout),
                       "archived_observations": observations})
-    return {"status": "review-only-not-frozen", "execution_authorized": False,
+    return {"status": spec["status"], "execution_authorized": False,
             "scientific_specification_sha256": canonical_json_hash(spec), "text_lf_sha256": identities,
             "e1_report_identity": archive["report_sha256"],
             "tokenizer_proxy": {"package": "tiktoken", "version": TOKENIZER_VERSION, "encoding": TOKENIZER_ENCODING,
                                 "actual_provider_input": False}, "tasks": tasks, "budget": budget(spec),
-            "schedule": schedule(spec), "independent_review": "pending", "live_validation": "not-authorized"}
+            "schedule": schedule(spec), "design_review": {"type": "second-ai-session",
+                "commit": spec["reviewed_proposal_commit"], "disposition": spec["disposition"],
+                "decision": "accepted-for-bounded-implementation-with-R1-R4"},
+            "implementation_review": "self-review-and-model-free-tests-not-independent-approval",
+            "live_validation": "not-authorized"}
 
 
 def build_fixtures() -> dict:
@@ -97,9 +123,18 @@ def build_fixtures() -> dict:
         for task_id in spec["tasks"]:
             stage = next(i + 1 for i, task in enumerate(manifest["tasks"]) if task["id"] == task_id)
             for language in spec["languages"]:
-                for role, s in [("predecessor", stage - 1), ("archived-target", stage), ("fault", stage)]:
+                roles = [("predecessor", stage - 1), ("archived-target", stage), ("fault", stage)]
+                if stage == 1 and language == "fsharp":
+                    roles.append(("contract-correct-alternative", stage))
+                variants = architecture_fixtures(manifest, language) if stage == 7 else {}
+                roles += [(name, stage) for name in variants]
+                for role, s in roles:
                     source = snapshot(ROOT, manifest, language, s)
                     ext = "cs" if language == "csharp" else "fs"
+                    if role in variants:
+                        source = variants[role]
+                    if role == "contract-correct-alternative":
+                        source["Program.fs"] = source["Program.fs"].replace("-(priorityOf order)", "-(int64 (priorityOf order))")
                     if role == "fault":
                         path = f"{'OrderFlowEngine' if stage == 7 else 'Program'}.{ext}"
                         if stage == 1:
@@ -110,7 +145,7 @@ def build_fixtures() -> dict:
                         if old not in source[path]:
                             raise RuntimeError("fixed fault no longer matches archived source")
                         source[path] = source[path].replace(old, new)
-                    if role != "predecessor" and not structural_development(source, language, task_id)["passed"]:
+                    if role not in {"predecessor", "unchanged"} and not structural_development(source, language, task_id)["passed"]:
                         raise RuntimeError("archived fixture violates declared file/order checks")
                     work = base / f"{task_id}-{language}-{role}"
                     work.mkdir()
@@ -148,6 +183,9 @@ def build_fixtures() -> dict:
                         raise RuntimeError("build changed submitted source")
                     suites = {"preflight": development_cases(manifest, s)} if role == "predecessor" else {
                         "development": development_cases(manifest, stage), "holdout": holdout_cases(ROOT, task_id)}
+                    if role == "predecessor" and stage >= 6:
+                        suites["inherited-priority-extremes"] = [c for c in holdout_cases(ROOT, "001-priority")
+                            if c["name"] == "priority-extremes-default-and-ordinal-ties"]
                     outcomes = {}
                     for name, cases in suites.items():
                         process = run_process(spec["environment"]["execute"], cwd=work, env=env, timeout=10,
@@ -169,7 +207,15 @@ def build_fixtures() -> dict:
                         for name, result in outcomes.items():
                             if result["failures"] != (expected_failure if name == "holdout" else []):
                                 raise RuntimeError(f"unexpected trusted fixture result: {task_id} {language} {role} {outcomes}")
-                    evidence.append({"task": task_id, "language": language, "role": role,
+                    scoring = None
+                    if role in variants:
+                        scoring = score_submission({"submission": json.dumps({"files": source}), "applied_source": source},
+                            {"build_passed": True, "passed": not outcomes["holdout"]["failures"]},
+                            task_id=task_id, language=language, review=fixture_review(source, role == "alternative-naming"),
+                            allow_fixture_review=True)
+                        if scoring["task_completion"] != (role == "alternative-naming"):
+                            raise RuntimeError("architecture regression received incorrect completion credit")
+                    evidence.append({"task": task_id, "language": language, "role": role, "scoring": scoring,
                                      "source_sha256": canonical_json_hash(source), "lock_sha256": lock_hash,
                                      "binary_sha256": hashlib.sha256(stale.read_bytes()).hexdigest(), "outcomes": outcomes})
     return {"fixture_only": True, "candidate_model_calls": 0, "sandbox_verified": False, "platform": sys.platform,

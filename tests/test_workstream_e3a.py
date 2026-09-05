@@ -11,7 +11,7 @@ from alf.config import load_manifest
 from alf.workstream_e3a import (
     PACKET_DIR, PolicyViolation, SubmissionError, apply_submission, budget,
     candidate_payload, development_cases, feedback_packet, holdout_cases,
-    normalize_usage, read_json, schedule, simulate_trajectory, snapshot, structural_development, usage_sum,
+    normalize_usage, project_development, read_json, schedule, run_trajectory, snapshot, structural_development, usage_sum,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +37,7 @@ class E3aReviewFixtures(unittest.TestCase):
         self.assertEqual(limits["max_requests"], 72)
         self.assertEqual(limits["max_input_tokens"], 2359296)
         self.assertEqual(limits["max_output_tokens_including_reasoning"], 589824)
-        self.assertEqual(limits["uncached_price_upper_bound_usd"], 1.179648)
+        self.assertEqual(limits["generation_reservation_upper_usd"], "1.2976128")
         self.assertEqual(limits["authorized_requests"], 0)
         self.assertFalse(self.spec["execution_authorized"])
 
@@ -98,8 +98,8 @@ class E3aReviewFixtures(unittest.TestCase):
             for language, project in [("csharp", "OrderFlow.csproj"), ("fsharp", "OrderFlow.fsproj")]:
                 with self.subTest(language=language), self.assertRaises(PolicyViolation):
                     apply_submission(self.before[language], json.dumps({"files": {project: change(self.before[language][project])}}), language, self.spec)
-        with self.assertRaises(PolicyViolation):
-            apply_submission(self.before["fsharp"], json.dumps({"files": {"Extra.fs": "module Extra"}}), "fsharp", self.spec)
+        extra = apply_submission(self.before["fsharp"], json.dumps({"files": {"Extra.fs": "module Extra"}}), "fsharp", self.spec)
+        self.assertFalse(project_development(extra, "fsharp")["passed"])
 
     def test_feedback_complete_errors_stable_deduplicated_and_bounded(self):
         raw = "p.fs(1,2): error FS0001: mismatch\np.cs(2,3): error CS0029: mismatch\nwarning FS3261: nullable\n"
@@ -130,11 +130,11 @@ class E3aReviewFixtures(unittest.TestCase):
 
     def run_fixture(self, replies, checks):
         calls = []
-        def session(previous, source, feedback):
+        def session(previous, source, feedback, deadline):
             calls.append((previous, source, feedback))
             return replies[len(calls) - 1]
-        result = simulate_trajectory(self.before["csharp"], "csharp", self.spec, session,
-                                     lambda source, index: checks[index])
+        result = run_trajectory(self.before["csharp"], "csharp", self.spec, session,
+                               lambda source, index, end: checks[index], task_id="001-priority", clock=lambda: 0)
         return result, calls
 
     def test_passing_first_patch_stops_regardless_of_later_holdout_result(self):
@@ -161,7 +161,7 @@ class E3aReviewFixtures(unittest.TestCase):
         self.assertEqual(result["total_usage"]["input_tokens"], 20)
         self.assertEqual(result["total_usage"]["output_tokens"], 12)
         self.assertEqual(result["repair_usage"]["input_tokens"], 10)
-        self.assertFalse(result["live_evidence"])
+        self.assertFalse(result["batch_stop"])
 
     def test_invalid_format_consumes_all_rounds_without_manual_repair(self):
         result, calls = self.run_fixture([self.response(i, "not JSON") for i in range(3)], [])
@@ -192,7 +192,8 @@ class E3aReviewFixtures(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         result, calls = self.run_fixture([self.response(0)], [{"passed": False, "category": "build",
             "output": "\n".join(f"p.fs({i},1): error FS0001: mismatch" for i in range(500))}])
-        self.assertEqual(result["stop"], "feedback-cap-apparatus-failure")
+        self.assertEqual(result["stop"], "feedback-budget-exhausted")
+        self.assertFalse(result["batch_stop"])
         self.assertEqual(len(calls), 1)
 
     def test_usage_subsets_missingness_and_invalid_totals(self):

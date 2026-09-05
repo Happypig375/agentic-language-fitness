@@ -6,3 +6,6 @@
 /src/alf/workstream_e3a.py text eol=lf
 /scripts/e3a_check.py text eol=lf
 /tests/test_workstream_e3a.py text eol=lf
+/src/alf/e3a_*.py text eol=lf
+/scripts/e3a_sandbox_check.py text eol=lf
+/tests/test_e3a_implementation.py text eol=lf
