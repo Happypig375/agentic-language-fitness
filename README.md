@@ -6,7 +6,7 @@ ALF investigates how programming-language implementation, model configuration, a
 
 [PLAN.md](PLAN.md) is the canonical checkpoint and next assignment. [AGENTS.md](AGENTS.md) routes maintainer agents to it. The [plan review](docs/plan-review-2026-09-05.md) records the latest methodological corrections.
 
-**Current boundary:** E1, E2, and E2a are complete. Prepare the controlled E3a first-submission/repair specification and minimal model-free fixtures for review. No live candidate request or experiment is authorized by this repository. Review readiness, executable freeze, and permission to consume model quota are separate states.
+**Current boundary:** E1, E2, and E2a are complete. The [E3a first-submission/repair review packet](protocols/workstream-e3a-v1/README.md) and model-free fixtures are ready for independent review and maintainer disposition. They include a newly detected archived priority boundary defect, preserved as an addendum rather than rewriting historical results. No live candidate request or experiment is authorized by this repository. Review readiness, executable freeze, and permission to consume model quota are separate states.
 
 The current rules are in [experimental design](docs/experimental-design.md), [metrics](docs/metrics.md), [workload validity and review gates](docs/workload-validity-and-review-gates-2026-09-05.md), and the future [context-pressure design](docs/workstream-h-context-pressure-design-2026-09-05.md). Dated predecessor proposals explain history; they are not competing current plans. Already frozen protocols/results retain their original identities and must not be retrospectively changed.
 
@@ -44,7 +44,7 @@ python scripts/alf.py audit PATH_TO_RUN_DIRECTORY
 python scripts/alf.py summarize results/pilot
 ```
 
-The scripted adapter copies gold snapshots to validate machinery without a model request. Its passing results are not coding-agent performance. Existing commands above are not an E3a implementation; that controlled protocol remains in preparation.
+The scripted adapter copies gold snapshots to validate machinery without a model request. Its passing results are not coding-agent performance. Existing commands above are not an E3a implementation; the E3a packet has its own model-free review checks and no live candidate adapter.
 
 ## Real agents and remote execution
 

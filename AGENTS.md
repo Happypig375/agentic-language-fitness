@@ -4,7 +4,7 @@ Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint 
 
 ## Current boundary
 
-E1/E2/E2a are complete. The next assignment is an **E3a review-ready specification and minimal model-free fixtures**, not experimental execution. Prepare the task rationale, first-patch/repair policy, feedback/holdout separation, accounting, finite budget proposal, and validation packet. Reuse existing runner components. Return when review-ready or materially blocked.
+E1/E2/E2a are complete. The [E3a review packet](protocols/workstream-e3a-v1/README.md) and minimal model-free fixtures are prepared for independent review and maintainer disposition, not experimental execution. Its oracle limitation, proposed no-tools scaffold, and unverified live gates are explicit. Follow `PLAN.md`; no model-consuming continuation or new adapter is authorized by this handoff.
 
 Do not launch live candidate requests, continuation smoke tests, new paid review agents, E3b/F0, subagents, or H runs without explicit authorization. This does not prohibit the already authorized maintainer assistant from reading, editing, reasoning, or running ordinary model-free tests. A local freeze or self-review cannot authorize model consumption.
 

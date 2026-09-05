@@ -1,0 +1,40 @@
+{
+  "priority": [
+    {
+      "name": "priority-extremes-default-and-ordinal-ties",
+      "input": {"operation": "ready", "orders": [
+        {"id": "low", "status": "pending", "priority": -2147483648, "createdAt": "2024-01-01T00:00:00Z"},
+        {"id": "a", "status": "pending", "createdAt": "2025-07-01T02:00:00+02:00"},
+        {"id": "Z", "status": "PENDING", "priority": 0, "createdAt": "2025-07-01T00:00:00Z"},
+        {"id": "early", "status": "pending", "priority": 0, "createdAt": "2025-06-30T23:59:59Z"},
+        {"id": "excluded", "status": "completed", "priority": 2147483647, "createdAt": "2020-01-01T00:00:00Z"},
+        {"id": "high", "status": "PeNdInG", "priority": 2147483647, "createdAt": "2026-01-01T00:00:00Z"}
+      ]},
+      "expected": {"ids": ["high", "early", "Z", "a", "low"]}
+    },
+    {
+      "name": "same-priority-timezone-tie-is-ordinal-not-input-order",
+      "input": {"operation": "ready", "orders": [
+        {"id": "p-9", "status": "pending", "priority": -3, "createdAt": "2025-07-02T08:00:00+08:00"},
+        {"id": "p-10", "status": "pending", "priority": -3, "createdAt": "2025-07-02T00:00:00Z"}
+      ]},
+      "expected": {"ids": ["p-10", "p-9"]}
+    }
+  ],
+  "transitions": [
+    {"name": "missing-id-precedes-other-faults", "input": {"operation": "transition", "toStatus": "", "orders": [null, {"id": "collision", "status": "completed"}, {"id": "collision", "status": "pending"}]}, "expected": {"error": "id is required for transition"}},
+    {"name": "missing-target-precedes-duplicate", "input": {"operation": "transition", "id": "collision", "toStatus": null, "orders": [null, {"id": "collision", "status": "completed"}, {"id": "collision", "status": "pending"}]}, "expected": {"error": "toStatus is required for transition"}},
+    {"name": "duplicate-precedes-invalid-status", "input": {"operation": "transition", "id": "collision", "toStatus": "other", "orders": [null, {"id": "collision", "status": "completed"}, {"id": "collision", "status": "pending"}]}, "expected": {"error": "duplicate order id for transition"}},
+    {"name": "case-sensitive-selection-amid-null-and-case-neighbor", "input": {"operation": "transition", "id": "Case-9", "toStatus": "CaNcElLeD", "orders": [null, {"id": "case-9", "status": "completed"}, {"id": "Case-9", "status": "PROCESSING"}]}, "expected": {"id": "Case-9", "status": "cancelled"}},
+    {"name": "case-mismatch-is-not-found-even-with-invalid-target", "input": {"operation": "transition", "id": "CASE-9", "toStatus": "other", "orders": [{"id": "case-9", "status": "pending"}]}, "expected": {"error": "order not found for transition"}},
+    {"name": "whitespace-id-is-not-empty", "input": {"operation": "transition", "id": " ", "toStatus": "processing", "orders": [{"id": " ", "status": "pending"}]}, "expected": {"id": " ", "status": "processing"}},
+    {"name": "stateless-first", "input": {"operation": "transition", "id": "repeat-83", "toStatus": "processing", "orders": [{"id": "repeat-83", "status": "pending"}]}, "expected": {"id": "repeat-83", "status": "processing"}},
+    {"name": "stateless-repeat-same-process", "input": {"operation": "transition", "id": "repeat-83", "toStatus": "processing", "orders": [{"id": "repeat-83", "status": "pending"}]}, "expected": {"id": "repeat-83", "status": "processing"}},
+    {"name": "stateless-following-query", "input": {"operation": "ready", "orders": [{"id": "repeat-83", "status": "pending", "createdAt": "2025-12-11T00:00:00Z"}]}, "expected": {"ids": ["repeat-83"]}}
+  ],
+  "inherited_queries": [
+    {"name": "overdue-strict-boundary-mixed-status-null", "input": {"operation": "overdue", "asOf": "2025-09-02T00:00:00Z", "orders": [null, {"id": "equal", "status": "pending", "dueAt": "2025-09-02T02:00:00+02:00"}, {"id": "before", "status": "PROCESSING", "dueAt": "2025-09-01T23:59:59Z"}, {"id": "closed", "status": "completed", "dueAt": "2025-08-01T00:00:00Z"}, {"id": "absent", "status": "pending"}]}, "expected": {"ids": ["before"]}},
+    {"name": "risk-half-open-window-with-offsets", "input": {"operation": "atRisk", "asOf": "2025-09-02T00:00:00Z", "orders": [{"id": "upper", "status": "processing", "dueAt": "2025-09-03T00:00:00Z"}, {"id": "lower", "status": "pending", "dueAt": "2025-09-02T08:00:00+08:00"}, {"id": "inside", "status": "processing", "dueAt": "2025-09-02T23:59:59Z"}, {"id": "before", "status": "pending", "dueAt": "2025-09-01T23:59:59Z"}]}, "expected": {"ids": ["lower", "inside"]}},
+    {"name": "vip-composes-eligibility-and-priority", "input": {"operation": "vipReady", "orders": [null, {"id": "missing", "status": "pending", "priority": 999}, {"id": "gold-low", "status": "pending", "priority": -1, "customer": {"tier": "GOLD"}}, {"id": "platinum-high", "status": "PENDING", "priority": 3, "customer": {"tier": "PlAtInUm"}}, {"id": "closed-gold", "status": "completed", "priority": 9, "customer": {"tier": "gold"}}, {"id": "null-tier", "status": "pending", "customer": {"tier": null}}]}, "expected": {"ids": ["platinum-high", "gold-low"]}}
+  ]
+}

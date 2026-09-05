@@ -1,0 +1,593 @@
+{
+  "status": "review-only-not-frozen",
+  "execution_authorized": false,
+  "scientific_specification_sha256": "f5057714e7dde2b08fd81314e14f83dde0b2810ccbcf51352926086c34613243",
+  "text_lf_sha256": {
+    "protocols/workstream-e3a-v1/specification.json": "601e97b24fbcc229323340300f9321deec3b664ac1c3cf440163c89b3a15d2b1",
+    "protocols/workstream-e3a-v1/candidate-instructions.md": "d77bd43e46407ad7a2743b071bb3e807189d70a9efc5ff18fd960498455afecb",
+    "protocols/workstream-e3a-v1/baseline-contract.md": "242b01204047c17536c6e8d6c6d59aff0b8e191ce6bade4f03a24d953c6745cd",
+    "protocols/workstream-e3a-v1/holdout-cases.json": "65c4ecb6842972f6e3cc60c553c49a34cd30ac76c9d0ea3e3c7c7c21a1c06b14",
+    "src/alf/workstream_e3a.py": "e4c54f04e89b54dc8056143f8fab3d1e1cdac86e3c8a7d2e2faa80c830bbedf9",
+    "scripts/e3a_check.py": "96df5951b49f3d15dadb1878e27f8cc4a6f84ec291ddcb64e69f113a1e995e54",
+    "tests/test_workstream_e3a.py": "83196c6390e0e121566602b36696ca461299583512221e23c10cf8383086a801"
+  },
+  "e1_report_identity": "644273ac0f25a32138d50d919ff15677b6ed9639a23198e0c719d154da94901d",
+  "tokenizer_proxy": {
+    "package": "tiktoken",
+    "version": "0.14.0",
+    "encoding": "o200k_base",
+    "actual_provider_input": false
+  },
+  "tasks": [
+    {
+      "task_id": "001-priority",
+      "predecessor_stage": 0,
+      "source": {
+        "csharp": {
+          "predecessor_sha256": "fa03c847628e284acea99a0f1674aee336ad6b26e92a8a9591de9e992b949a92",
+          "archived_target_sha256": "1af40d08dabd839f86f67c0eb2f23c063964277338d5b60177d8f52336c32ed4",
+          "predecessor_files": {
+            "OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+            "Program.cs": "018f2fda63bb33cb85995a47c0ffc25ec09153c1e970d063f0aa346e53e171d0"
+          },
+          "candidate_payload_sha256": "ed775fa77fdf21cb3fec5d2d0520fb52ec7fbbef2ac8f025c51cb64517210fa0",
+          "source_and_project_utf8_bytes": 2089,
+          "source_and_project_lines": 68,
+          "source_and_project_tokenizer_proxy": 424,
+          "payload_utf8_bytes": 6019,
+          "payload_tokenizer_proxy": 1304
+        },
+        "fsharp": {
+          "predecessor_sha256": "fe68e5f132f044891d9376d8b1e592c8716071554c445dcfd75630c7555641ef",
+          "archived_target_sha256": "2ddb5d7c93f01cb25a3a24d3bf9d970aa2c3efbf87d378ccc33ce35635034a34",
+          "predecessor_files": {
+            "OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+            "Program.fs": "59c9b7206ad3c57042ebc330c40f5e822bb8acb10f2360be5349c2d6b6198795"
+          },
+          "candidate_payload_sha256": "788ce4d8759ecc9e1cbe9170a2872e2f549766d91936f5e7e63c8c989d1cba0c",
+          "source_and_project_utf8_bytes": 1810,
+          "source_and_project_lines": 62,
+          "source_and_project_tokenizer_proxy": 414,
+          "payload_utf8_bytes": 5732,
+          "payload_tokenizer_proxy": 1278
+        }
+      },
+      "development_cases": 5,
+      "holdout_cases": 2,
+      "development_sha256": "2275770723dcc61b6bde2da72b61b495ec1b76702e8140ee0f048e67f2bc0d6f",
+      "holdout_sha256": "dee5ce097735d18497f1767bf65d76a787f18befa1a5278905724bbd00e69cdd",
+      "archived_observations": [
+        {
+          "attempt_id": "cal-h-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "H",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-h-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "H",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-l-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "L",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-l-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "L",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-l-reverse-csharp-01",
+          "language": "csharp",
+          "configuration": "L",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-l-reverse-fsharp-01",
+          "language": "fsharp",
+          "configuration": "L",
+          "first_post_edit_build": "failure",
+          "repair_cycles": 2,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "FS0597": 4,
+            "NETSDK1064": 2
+          }
+        },
+        {
+          "attempt_id": "cal-m-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "M",
+          "first_post_edit_build": "success",
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-m-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "M",
+          "first_post_edit_build": "success",
+          "repair_cycles": 1,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "NETSDK1064": 2
+          }
+        },
+        {
+          "attempt_id": "cal-m-reverse-csharp-01",
+          "language": "csharp",
+          "configuration": "M",
+          "first_post_edit_build": "success",
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-m-reverse-fsharp-01",
+          "language": "fsharp",
+          "configuration": "M",
+          "first_post_edit_build": null,
+          "repair_cycles": 1,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "NETSDK1064": 2
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "006-transition-validation",
+      "predecessor_stage": 5,
+      "source": {
+        "csharp": {
+          "predecessor_sha256": "072799bb076c2d70d65f7cabc126fcdc057ea468b3914fdd480675a8e50d5cf5",
+          "archived_target_sha256": "258b22b23243ca6980b6f4d2aace648858e0f558b46a044fed7aab53bbd70e00",
+          "predecessor_files": {
+            "OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+            "Program.cs": "c93aa5753bc2c6ad247cee69fd0ae099ee881a2cfeb7ddc2e91ecc8b6e337f2c"
+          },
+          "candidate_payload_sha256": "9f091c374604b4ee25eb476e0c70d14d8599aaffba2fed1db883f667582eadb0",
+          "source_and_project_utf8_bytes": 4771,
+          "source_and_project_lines": 147,
+          "source_and_project_tokenizer_proxy": 1013,
+          "payload_utf8_bytes": 13120,
+          "payload_tokenizer_proxy": 3011
+        },
+        "fsharp": {
+          "predecessor_sha256": "992bb6cceb22eee7f16fd9cdb367a8e1aa5541d454e4d43966fd867b59f5684b",
+          "archived_target_sha256": "f72b3b1f76267a01da23f7af07087787a42f1fa12cef46e60b008a4e9d1c1451",
+          "predecessor_files": {
+            "OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+            "Program.fs": "b831505323425e24e03536e28bbe82a18a9c7d7953e6f6c949e9514e8696f1e4"
+          },
+          "candidate_payload_sha256": "2ce614a0a9665cbf448e536f7d29780d6b4f98513f941e6fd705402d5f6f7ba0",
+          "source_and_project_utf8_bytes": 4672,
+          "source_and_project_lines": 159,
+          "source_and_project_tokenizer_proxy": 1081,
+          "payload_utf8_bytes": 13029,
+          "payload_tokenizer_proxy": 3052
+        }
+      },
+      "development_cases": 77,
+      "holdout_cases": 39,
+      "development_sha256": "0ba8a4d6a6b0fa6d2f4a1ce99a320d5f2412176021ebf629ca88c9fb40dd0003",
+      "holdout_sha256": "31a459eca035f90db96c38d16eb5d7a83e00936fa90d52173b326b1c1ac7171f",
+      "archived_observations": [
+        {
+          "attempt_id": "cal-h-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "H",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-h-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "H",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "FS3261": 10
+          }
+        },
+        {
+          "attempt_id": "cal-l-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "L",
+          "first_post_edit_build": "failure",
+          "repair_cycles": 1,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "CS0029": 2
+          }
+        },
+        {
+          "attempt_id": "cal-l-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "L",
+          "first_post_edit_build": "failure",
+          "repair_cycles": 2,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "FS0001": 12,
+            "FS0764": 2,
+            "FS1129": 4,
+            "FS3261": 36,
+            "NETSDK1064": 2
+          }
+        },
+        {
+          "attempt_id": "cal-l-reverse-csharp-01",
+          "language": "csharp",
+          "configuration": "L",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-l-reverse-fsharp-01",
+          "language": "fsharp",
+          "configuration": "L",
+          "first_post_edit_build": "failure",
+          "repair_cycles": 1,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "FS0001": 2,
+            "FS3261": 40
+          }
+        },
+        {
+          "attempt_id": "cal-m-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "M",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-m-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "M",
+          "first_post_edit_build": "failure",
+          "repair_cycles": 2,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "FS0001": 4,
+            "FS0039": 2,
+            "FS0764": 6,
+            "FS1129": 12,
+            "FS3261": 28,
+            "FS3566": 2,
+            "NETSDK1064": 2
+          }
+        },
+        {
+          "attempt_id": "cal-m-reverse-csharp-01",
+          "language": "csharp",
+          "configuration": "M",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-m-reverse-fsharp-01",
+          "language": "fsharp",
+          "configuration": "M",
+          "first_post_edit_build": "success",
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "FS3261": 20
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "predecessor_stage": 6,
+      "source": {
+        "csharp": {
+          "predecessor_sha256": "258b22b23243ca6980b6f4d2aace648858e0f558b46a044fed7aab53bbd70e00",
+          "archived_target_sha256": "7bed422fb8ae11147939973bb89bd5fc10ed26856a3aa8502123eee59f909f6f",
+          "predecessor_files": {
+            "OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+            "Program.cs": "725929d39f7e877828909fc8bc1a0973defb98fc1f8986c4beac75f373ce6c4f"
+          },
+          "candidate_payload_sha256": "181f9b499d45e66dba49a3725a94c05bd1dd3bf078fd35cf3436dbb87bceeded",
+          "source_and_project_utf8_bytes": 6774,
+          "source_and_project_lines": 218,
+          "source_and_project_tokenizer_proxy": 1396,
+          "payload_utf8_bytes": 16119,
+          "payload_tokenizer_proxy": 3680
+        },
+        "fsharp": {
+          "predecessor_sha256": "f72b3b1f76267a01da23f7af07087787a42f1fa12cef46e60b008a4e9d1c1451",
+          "archived_target_sha256": "53a20231120cd69ed2d540c47b9dff1d5b77a37391381445c8b8ec875ad9495b",
+          "predecessor_files": {
+            "OrderFlow.fsproj": "7b6fad9919c74fff6648464957e2c253a158d6d63c7e1d576c9c8740c160930d",
+            "Program.fs": "e1995467a30791511b1004084b7e1a662c7014a7e2e601e56cab37fccff46d55"
+          },
+          "candidate_payload_sha256": "9de88dc0223ef4fb21f8183656eb7cdc8b1e7e9356e659f778c94a3805a14d70",
+          "source_and_project_utf8_bytes": 6409,
+          "source_and_project_lines": 212,
+          "source_and_project_tokenizer_proxy": 1443,
+          "payload_utf8_bytes": 15748,
+          "payload_tokenizer_proxy": 3650
+        }
+      },
+      "development_cases": 79,
+      "holdout_cases": 39,
+      "development_sha256": "687d3c1783f28fb27879830df8d87ffe7c56a1c90e20aeb0ebfe012bfedc028d",
+      "holdout_sha256": "31a459eca035f90db96c38d16eb5d7a83e00936fa90d52173b326b1c1ac7171f",
+      "archived_observations": [
+        {
+          "attempt_id": "cal-h-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "H",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-h-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "H",
+          "first_post_edit_build": "failure",
+          "repair_cycles": 0,
+          "project_mutations": 1,
+          "diagnostic_codes": {
+            "FS3261": 18,
+            "NETSDK1064": 2
+          }
+        },
+        {
+          "attempt_id": "cal-l-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "L",
+          "first_post_edit_build": "success",
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {
+            "CS0105": 2
+          }
+        },
+        {
+          "attempt_id": "cal-l-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "L",
+          "first_post_edit_build": "failure",
+          "repair_cycles": 0,
+          "project_mutations": 1,
+          "diagnostic_codes": {
+            "FS3261": 28,
+            "NETSDK1064": 2
+          }
+        },
+        {
+          "attempt_id": "cal-l-reverse-csharp-01",
+          "language": "csharp",
+          "configuration": "L",
+          "first_post_edit_build": "success",
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-l-reverse-fsharp-01",
+          "language": "fsharp",
+          "configuration": "L",
+          "first_post_edit_build": "failure",
+          "repair_cycles": 0,
+          "project_mutations": 1,
+          "diagnostic_codes": {
+            "FS3261": 30,
+            "NETSDK1064": 2
+          }
+        },
+        {
+          "attempt_id": "cal-m-primary-csharp-01",
+          "language": "csharp",
+          "configuration": "M",
+          "first_post_edit_build": "success",
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-m-primary-fsharp-01",
+          "language": "fsharp",
+          "configuration": "M",
+          "first_post_edit_build": "success",
+          "repair_cycles": 0,
+          "project_mutations": 1,
+          "diagnostic_codes": {
+            "FS3261": 28
+          }
+        },
+        {
+          "attempt_id": "cal-m-reverse-csharp-01",
+          "language": "csharp",
+          "configuration": "M",
+          "first_post_edit_build": null,
+          "repair_cycles": 0,
+          "project_mutations": 0,
+          "diagnostic_codes": {}
+        },
+        {
+          "attempt_id": "cal-m-reverse-fsharp-01",
+          "language": "fsharp",
+          "configuration": "M",
+          "first_post_edit_build": "success",
+          "repair_cycles": 0,
+          "project_mutations": 1,
+          "diagnostic_codes": {
+            "FS3261": 20
+          }
+        }
+      ]
+    }
+  ],
+  "budget": {
+    "trajectories": 24,
+    "task_pairs": 12,
+    "max_requests": 72,
+    "max_input_tokens": 2359296,
+    "max_output_tokens_including_reasoning": 589824,
+    "max_request_wait_seconds": 8640,
+    "max_trajectory_seconds": 14400,
+    "uncached_price_upper_bound_usd": 1.179648,
+    "authorized_requests": 0
+  },
+  "schedule": [
+    {
+      "task_id": "006-transition-validation",
+      "repetition": 1,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "006-transition-validation",
+      "repetition": 1,
+      "language": "csharp"
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "repetition": 1,
+      "language": "csharp"
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "repetition": 1,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "001-priority",
+      "repetition": 1,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "001-priority",
+      "repetition": 1,
+      "language": "csharp"
+    },
+    {
+      "task_id": "006-transition-validation",
+      "repetition": 2,
+      "language": "csharp"
+    },
+    {
+      "task_id": "006-transition-validation",
+      "repetition": 2,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "001-priority",
+      "repetition": 2,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "001-priority",
+      "repetition": 2,
+      "language": "csharp"
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "repetition": 2,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "repetition": 2,
+      "language": "csharp"
+    },
+    {
+      "task_id": "006-transition-validation",
+      "repetition": 3,
+      "language": "csharp"
+    },
+    {
+      "task_id": "006-transition-validation",
+      "repetition": 3,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "repetition": 3,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "repetition": 3,
+      "language": "csharp"
+    },
+    {
+      "task_id": "001-priority",
+      "repetition": 3,
+      "language": "csharp"
+    },
+    {
+      "task_id": "001-priority",
+      "repetition": 3,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "006-transition-validation",
+      "repetition": 4,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "006-transition-validation",
+      "repetition": 4,
+      "language": "csharp"
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "repetition": 4,
+      "language": "csharp"
+    },
+    {
+      "task_id": "007-query-engine-refactor",
+      "repetition": 4,
+      "language": "fsharp"
+    },
+    {
+      "task_id": "001-priority",
+      "repetition": 4,
+      "language": "csharp"
+    },
+    {
+      "task_id": "001-priority",
+      "repetition": 4,
+      "language": "fsharp"
+    }
+  ],
+  "independent_review": "pending",
+  "live_validation": "not-authorized"
+}

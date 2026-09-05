@@ -32,7 +32,11 @@ Keep three tool ecologies separate: controlled pre-restored/audit-off; intended 
 
 ## Current authorized scope and next handoff
 
-**Next bounded assignment: make E3a review-ready without live candidate-model requests.** Prepare the specification, selected-task audit, minimal deterministic controller fixtures, and model-free validation needed to review feasibility. Reuse existing runner/accounting components. Do not build E3b/F0, a generic agent framework, or Workstream H in this assignment.
+**E3a preparation handoff:** the [review packet](protocols/workstream-e3a-v1/README.md) proposes Tasks 001/006/007, Luna-high, a 24-trajectory/72-request maximum, and a $2 pilot ceiling. It includes selected-source/archive identities, deterministic controller fixtures, new development-disjoint holdout cases, and trusted .NET checks. This is AI self-review only; independent acceptance, executable freeze, and all live authorization remain pending. Current authorized candidate requests/spend are zero.
+
+The audit found an Int32.MinValue negation defect in the archived F# task-001 target; the new fixture records it without rewriting historical gold or reports. The packet also proposes a local no-tools API scaffold because the existing shell-enabled adapter does not enforce E3a authority. Neither proposal is an approved live implementation. See the packet's findings, reproducible checks, and next decision; exact-commit CI must be checked on the implementing head.
+
+**Next bounded assignment: review and disposition this E3a packet.** Do not start a candidate request or continuation probe, build a new adapter without acceptance, or continue into E3b/F0, a generic agent framework, or Workstream H automatically. Reuse existing runner/accounting components when a minimal implementation is subsequently approved.
 
 Produce a review packet with the proposed task IDs, one model/effort setting, sample and spend ceilings, repair budget, feedback policy, first-patch application rules, analysis table, source/fixture identities, and exact CI status. Resolve ordinary implementation defects within that scope; return when the packet is ready or a material blocker remains. This plan review is not independent approval of an E3a protocol that has not yet been written.
 
