@@ -16,7 +16,8 @@ from unittest.mock import patch
 from alf.config import load_manifest
 from alf.e3a_api import BudgetGuard, GuardFailure, HttpTransport, ResponsesAdapter
 from alf.e3a_runner import run_batch
-from alf.e3a_sandbox import DockerEvaluator, SandboxFailure, bounded_process, container_arguments
+from alf.e3a_sandbox import DockerEvaluator, SandboxFailure, bounded_process, container_arguments, tree_identity
+from alf.models import ProcessResult
 from alf.protocol import canonical_json_hash
 from alf.workstream_e3a import (PACKET_DIR, PolicyViolation, apply_submission, candidate_payload,
     feedback_packet, project_development, read_json, run_trajectory, score_submission, snapshot)
@@ -344,7 +345,17 @@ class BatchTests(unittest.TestCase):
 
 
 class SandboxUnitTests(unittest.TestCase):
-    def test_trusted_permission_cleanup_excludes_host_owned_mount_root(self):
+    def test_admin_failure_keeps_bounded_diagnostic(self):
+        evaluator = DockerEvaluator.__new__(DockerEvaluator)
+        evaluator.base, evaluator.docker = ROOT, ["docker"]
+        failure = ProcessResult(["docker", "inspect"], 1, "", "missing tmpfs source: " + "x" * 5000, 0)
+        with patch("alf.e3a_sandbox.run_process", return_value=failure), self.assertRaises(SandboxFailure) as raised:
+            evaluator._admin(["inspect", "fixture"])
+        self.assertIn("missing tmpfs source:", str(raised.exception))
+        self.assertIn("[truncated]", str(raised.exception))
+        self.assertLess(len(str(raised.exception)), 4200)
+
+    def test_trusted_export_and_cleanup_never_use_docker_cp_or_change_mount_roots(self):
         with tempfile.TemporaryDirectory() as tmp:
             evaluator = DockerEvaluator.__new__(DockerEvaluator)
             evaluator.spec, evaluator.language, evaluator.project = SPEC, "csharp", "OrderFlow.csproj"
@@ -355,15 +366,44 @@ class SandboxUnitTests(unittest.TestCase):
             evaluator.seed.mkdir()
             evaluator.prepared_identity = None
             evaluator.image, evaluator.fixture_only, evaluator.evidence = "fixture", True, []
-            commands = []
+            commands, mounts, administration, removed = [], [], [], []
             def execute(name, command, timeout):
                 commands.append(command)
                 return {"returncode": 0, "stdout": "10.0.302" if command == ["dotnet", "--version"] else "",
                         "stderr": "", "timed_out": False, "output_limit_exceeded": False}
-            evaluator._exec, evaluator._admin = execute, lambda args: "fixture"
-            evaluator._create, evaluator._remove = lambda mounts: "fixture", lambda name: None
-            evaluator.prepare()
-            self.assertIn(["find", "/packages", "-mindepth", "1", "-exec", "chmod", "a+rwX", "{}", "+"], commands)
+            def create(values):
+                mounts.extend(values)
+                return "fixture"
+            def admin(args):
+                administration.append(args)
+                return "fixture"
+            evaluator._exec, evaluator._admin = execute, admin
+            evaluator._create, evaluator._remove = create, removed.append
+            result = evaluator.prepare()
+            self.assertIn(["cp", "-R", "/work/obj", "/work/packages.lock.json", "/seed-out/"], commands)
+            self.assertIn(["find", "/packages", "/seed-out", "-mindepth", "1", "-exec", "chmod", "a+rwX", "{}", "+"], commands)
+            self.assertIn((evaluator.seed, "/seed-out", True), mounts)
+            self.assertNotIn("cp", [args[0] for args in administration])
+            self.assertEqual(removed, ["fixture"])
+            self.assertEqual(result["export"]["returncode"], 0)
+
+            # A partial restore must still permit host-side cleanup and remove
+            # the container. It must not publish a usable prepared identity.
+            evaluator.prepared_identity = None
+            (evaluator.base / "restore-input").rename(evaluator.base / "first-restore-input")
+            commands.clear()
+            def fail_restore(name, command, timeout):
+                result = execute(name, command, timeout)
+                if command[0] == "/bin/sh":
+                    result.update(returncode=1, stderr="fixture restore failure")
+                return result
+            evaluator._exec = fail_restore
+            with self.assertRaisesRegex(SandboxFailure, "fixture restore failure"):
+                evaluator.prepare()
+            self.assertTrue(any(command[0] == "find" for command in commands))
+            self.assertFalse(any(command[0] == "cp" for command in commands))
+            self.assertEqual(removed, ["fixture", "fixture"])
+            self.assertIsNone(evaluator.prepared_identity)
 
     def test_container_policy_has_no_host_workspace_credentials_or_network(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -379,6 +419,34 @@ class SandboxUnitTests(unittest.TestCase):
             self.assertNotIn(str(ROOT), " ".join(args))
             with self.assertRaises(SandboxFailure):
                 container_arguments("fixture", "mutable:tag", SPEC["environment"], [])
+
+    def test_candidate_evaluation_cannot_write_the_preparation_export_mount(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluator = DockerEvaluator.__new__(DockerEvaluator)
+            evaluator.spec, evaluator.language, evaluator.project = SPEC, "csharp", "OrderFlow.csproj"
+            evaluator.baseline = snapshot(ROOT, MANIFEST, "csharp", 0)
+            evaluator.base = Path(tmp)
+            evaluator.seed, evaluator.cache = Path(tmp) / "seed", Path(tmp) / "packages"
+            evaluator.seed.mkdir()
+            evaluator.cache.mkdir()
+            evaluator.prepared_identity = (tree_identity(evaluator.seed), tree_identity(evaluator.cache))
+            evaluator.evidence = []
+            mounts, commands, removed = [], [], []
+            def create(values):
+                mounts.extend(values)
+                return "fixture"
+            def execute(name, command, timeout, input_text=""):
+                commands.append(command)
+                return {"returncode": 0 if command[0] == "/bin/sh" else 1,
+                        "stdout": "", "stderr": "", "timed_out": False, "output_limit_exceeded": False}
+            evaluator._create, evaluator._exec, evaluator._remove = create, execute, removed.append
+            result = evaluator.evaluate(evaluator.baseline, [], time.monotonic() + 5)
+            self.assertEqual({target: writable for _, target, writable in mounts},
+                             {"/input": False, "/seed": False, "/packages": False})
+            self.assertFalse(result["build_passed"])
+            self.assertIsNone(result["binary_sha256"])
+            self.assertEqual(len(commands), 2)  # copy + failing build; no program
+            self.assertEqual(removed, ["fixture"])
 
     def test_windows_has_no_host_execution_fallback(self):
         with patch("alf.e3a_sandbox.os.name", "nt"), self.assertRaises(SandboxFailure):

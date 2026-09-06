@@ -1,0 +1,12 @@
+{
+  "candidate_model_calls": 0,
+  "checks": {},
+  "count_http_calls": 0,
+  "evaluations": [],
+  "failure": "Docker administration failed: cp alf-e3a-fca8de096f0045bb928fe5809a780bb6:/work/obj: Error response from daemon: Could not find the file /work/obj in container alf-e3a-fca8de096f0045bb928fe5809a780bb6",
+  "failure_type": "SandboxFailure",
+  "intended_remote_environment_verified": false,
+  "passed": false,
+  "platform": "linux",
+  "scope": "ci-sdk-fixture"
+}

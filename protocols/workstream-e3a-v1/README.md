@@ -16,6 +16,9 @@ checkout line endings to LF; JSON identities use the existing canonical hash.
 The implementing Git commit and its CI checks are separate from the scientific
 specification hash. The [implementation handoff](../../docs/workstream-e3a-implementation-handoff-2026-09-06.md)
 separates implemented helpers, tested boundaries, and unresolved live/deployment gates.
+The later [remote sandbox fix](../../docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md)
+records passing model-free checks on the intended host with the exact specified
+image. It does not establish end-to-end API/remote wiring or live provider behavior.
 
 ## Question and selected workload
 
@@ -328,7 +331,7 @@ absent. Linux CI additionally exercises it with `--ci-sdk-fixture` against the
 exact SDK base from `Dockerfile.codex-agent`, never the image containing the
 research repository. That result is labelled non-experimental, not remote proof.
 
-**Next decision:** resolve the intended image/remote integration and actual
+**Next decision:** verify the remaining API/controller-to-remote wiring and actual
 account/rate/count conditions, then separately authorize the proposed two-request
 integration on an unrelated task. Neither this implementation nor passing mocks
 authorizes it or the pilot. Review any scientific policy change before freeze

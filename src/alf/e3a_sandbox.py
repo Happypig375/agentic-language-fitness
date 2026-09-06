@@ -144,7 +144,9 @@ class DockerEvaluator:
     def _admin(self, args: list[str], *, required=True) -> str:
         result = run_process(self.docker + args, cwd=self.base, timeout=15)
         if required and not result.ok:
-            raise SandboxFailure("Docker administration failed: " + " ".join(args[:2]))
+            captured = (result.stderr or result.stdout).strip()
+            detail = captured[:4096] + (" [truncated]" if len(captured) > 4096 else "")
+            raise SandboxFailure("Docker administration failed: " + " ".join(args[:2]) + ": " + detail)
         return result.stdout.strip() if result.ok else ""
 
     def _create(self, mounts: list[tuple[Path, str, bool]]) -> str:
@@ -181,7 +183,11 @@ class DockerEvaluator:
         inputs.chmod(0o755)
         (inputs / self.project).write_text(self.baseline[self.project], encoding="utf-8", newline="\n")
         (inputs / self.project).chmod(0o644)
-        name = self._create([(inputs, "/input", False), (self.cache, "/packages", True)])
+        # Only trusted preparation can write this private export directory.
+        # Candidate containers receive the resulting seed read-only at /seed.
+        self.seed.chmod(0o777)
+        name = self._create([(inputs, "/input", False), (self.cache, "/packages", True),
+                             (self.seed, "/seed-out", True)])
         try:
             sdk = self._exec(name, ["dotnet", "--version"], 15)
             if not self._ok(sdk) or sdk["stdout"].strip() != self.spec["environment"]["sdk"]:
@@ -194,24 +200,28 @@ class DockerEvaluator:
             restored = self._exec(name, ["/bin/sh", "-c", script], 60)
             if not self._ok(restored):
                 raise SandboxFailure("offline dependency preparation failed: " + restored["stdout"] + restored["stderr"])
-            # Cache is inside our private 0700 host directory. Make its trusted
-            # preparer's files removable by the host owner; candidate mounts
-            # remain read-only, regardless of these filesystem permissions.
-            # The mount root belongs to the host UID, not necessarily 1000.
-            # Only its contents were created (and are owned) by this preparer.
-            permissions = self._exec(name, ["find", "/packages", "-mindepth", "1", "-exec",
-                                           "chmod", "a+rwX", "{}", "+"], 10)
-            if not self._ok(permissions):
-                raise SandboxFailure("trusted cache cleanup permissions failed: " + permissions["stdout"] + permissions["stderr"])
-            self._admin(["cp", f"{name}:/work/obj", str(self.seed / "obj")])
-            self._admin(["cp", f"{name}:/work/packages.lock.json", str(self.seed / "packages.lock.json")])
-            self.prepared_identity = (tree_identity(self.seed), tree_identity(self.cache))
-            result = {"seed_sha256": self.prepared_identity[0], "cache_sha256": self.prepared_identity[1],
-                      "image": self.image, "fixture_only": self.fixture_only, "restore": restored}
-            self.evidence.append({"preparation": result})
-            return result
+            # docker cp cannot see this tmpfs through its archive view. Copy
+            # inside the running namespace into the trusted export mount.
+            exported = self._exec(name, ["cp", "-R", "/work/obj", "/work/packages.lock.json", "/seed-out/"], 15)
+            if not self._ok(exported):
+                raise SandboxFailure("trusted restore export failed: " + exported["stdout"] + exported["stderr"])
         finally:
-            self._remove(name)
+            try:
+                # Private parent is 0700. Only preparer-owned CONTENTS may be
+                # chmodded: mount roots belong to the host UID (possibly not
+                # 1000). Do this on failure too, so partial restores clean up.
+                permissions = self._exec(name, ["find", "/packages", "/seed-out", "-mindepth", "1", "-exec",
+                                               "chmod", "a+rwX", "{}", "+"], 10)
+                if not self._ok(permissions):
+                    raise SandboxFailure("trusted preparation cleanup permissions failed: " + permissions["stdout"] + permissions["stderr"])
+            finally:
+                self._remove(name)
+                self.seed.chmod(0o755)
+        self.prepared_identity = (tree_identity(self.seed), tree_identity(self.cache))
+        result = {"seed_sha256": self.prepared_identity[0], "cache_sha256": self.prepared_identity[1],
+                  "image": self.image, "fixture_only": self.fixture_only, "restore": restored, "export": exported}
+        self.evidence.append({"preparation": result})
+        return result
 
     def evaluate(self, source: dict[str, str], cases: list[dict], deadline: float) -> dict:
         # Defense in depth for direct evaluator callers, not only the controller.

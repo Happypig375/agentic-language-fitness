@@ -7,7 +7,9 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
+import platform
 import sys
 import time
 from pathlib import Path
@@ -17,6 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from alf.config import load_manifest  # noqa: E402
 from alf.e3a_sandbox import DockerEvaluator, SandboxFailure  # noqa: E402
+from alf.protocol import canonical_json_hash  # noqa: E402
 from alf.workstream_e2 import _atomic_json  # noqa: E402
 from alf.workstream_e3a import PACKET_DIR, development_cases, read_json, snapshot  # noqa: E402
 
@@ -29,6 +32,10 @@ def check(output: Path, *, ci_sdk_fixture=False) -> dict:
     spec = read_json(ROOT / PACKET_DIR / "specification.json")
     manifest = load_manifest(ROOT, spec["manifest"])
     result = {"candidate_model_calls": 0, "count_http_calls": 0, "platform": sys.platform,
+              "python_version": platform.python_version(), "host_platform": platform.platform(),
+              "specification_sha256": canonical_json_hash(spec),
+              "source_lf_sha256": {path: hashlib.sha256((ROOT / path).read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+                  for path in ("src/alf/e3a_sandbox.py", "src/alf/workstream_e3a.py", "scripts/e3a_sandbox_check.py")},
               "scope": "ci-sdk-fixture" if ci_sdk_fixture else "specified-image-on-current-linux-host",
               "intended_remote_environment_verified": False, "checks": {}, "evaluations": []}
     evaluators = []

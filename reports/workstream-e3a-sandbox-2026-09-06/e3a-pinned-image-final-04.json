@@ -1,0 +1,277 @@
+{
+  "candidate_model_calls": 0,
+  "checks": {
+    "credentials_scorer_socket_absent": {
+      "duration_seconds": 0.11523836106061935,
+      "observed_output_bytes": 0,
+      "output_limit_exceeded": false,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "",
+      "timed_out": false
+    },
+    "descendant_container_removed": true,
+    "effective_policy": {
+      "CapDrop": [
+        "ALL"
+      ],
+      "Memory": 6442450944,
+      "MemorySwap": 6442450944,
+      "NanoCpus": 2000000000,
+      "NetworkMode": "none",
+      "PidsLimit": 512,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ]
+    },
+    "effective_privilege_bounds": {
+      "duration_seconds": 0.11525293067097664,
+      "observed_output_bytes": 0,
+      "output_limit_exceeded": false,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "",
+      "timed_out": false
+    },
+    "fresh_binary_and_failed_build_no_execution": true,
+    "memory_bound_probe": {
+      "events": {
+        "high": "0",
+        "low": "0",
+        "max": "37",
+        "oom": "1",
+        "oom_group_kill": "0",
+        "oom_kill": "1"
+      },
+      "fixture_limit_bytes": 134217728,
+      "process": {
+        "duration_seconds": 0.7858770210295916,
+        "observed_output_bytes": 0,
+        "output_limit_exceeded": false,
+        "returncode": 137,
+        "stderr": "",
+        "stdout": "",
+        "timed_out": false
+      }
+    },
+    "network_route_blocked": {
+      "duration_seconds": 0.10496886167675257,
+      "observed_output_bytes": 107,
+      "output_limit_exceeded": false,
+      "returncode": 0,
+      "stderr": "/bin/bash: connect: Network is unreachable\n/bin/bash: line 1: /dev/tcp/1.1.1.1/443: Network is unreachable\n",
+      "stdout": "",
+      "timed_out": false
+    },
+    "output_limit": {
+      "duration_seconds": 0.09950295463204384,
+      "observed_output_bytes": 1052654,
+      "output_limit_exceeded": true,
+      "returncode": -13,
+      "timed_out": false
+    },
+    "readonly_source_seed_cache_root": {
+      "duration_seconds": 0.10490632057189941,
+      "observed_output_bytes": 228,
+      "output_limit_exceeded": false,
+      "returncode": 0,
+      "stderr": "touch: cannot touch '/input/probe': Read-only file system\ntouch: cannot touch '/seed/probe': Read-only file system\ntouch: cannot touch '/packages/probe': Read-only file system\ntouch: cannot touch '/probe': Read-only file system\n",
+      "stdout": "",
+      "timed_out": false
+    },
+    "timeout_with_descendant": {
+      "duration_seconds": 0.26529602613300085,
+      "observed_output_bytes": 0,
+      "output_limit_exceeded": false,
+      "returncode": -9,
+      "stderr": "",
+      "stdout": "",
+      "timed_out": true
+    },
+    "writable_tmp_and_work": {
+      "duration_seconds": 0.10518109612166882,
+      "observed_output_bytes": 0,
+      "output_limit_exceeded": false,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "",
+      "timed_out": false
+    }
+  },
+  "count_http_calls": 0,
+  "evaluations": [
+    {
+      "failed_build": {
+        "binary_sha256": null,
+        "build_passed": false,
+        "category": "build",
+        "operations": [
+          {
+            "build": {
+              "duration_seconds": 1.5990478126332164,
+              "observed_output_bytes": 466,
+              "output_limit_exceeded": false,
+              "returncode": 1,
+              "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+              "stdout": "/work/Program.cs(1,6): error CS1002: ; expected [/work/OrderFlow.csproj]\n/work/Program.cs(1,20): error CS1002: ; expected [/work/OrderFlow.csproj]\n\nBuild FAILED.\n\n/work/Program.cs(1,6): error CS1002: ; expected [/work/OrderFlow.csproj]\n/work/Program.cs(1,20): error CS1002: ; expected [/work/OrderFlow.csproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:01.19\n",
+              "timed_out": false
+            }
+          }
+        ],
+        "output": "/work/Program.cs(1,6): error CS1002: ; expected [/work/OrderFlow.csproj]\n/work/Program.cs(1,20): error CS1002: ; expected [/work/OrderFlow.csproj]\n\nBuild FAILED.\n\n/work/Program.cs(1,6): error CS1002: ; expected [/work/OrderFlow.csproj]\n/work/Program.cs(1,20): error CS1002: ; expected [/work/OrderFlow.csproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:01.19\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+        "passed": false,
+        "submitted_sha256": "94966fec0a04aae1b5c4a489f8cd6e34ed1a6cfec7afd85667666adacbf72a89"
+      },
+      "language": "csharp",
+      "positive": {
+        "binary_sha256": "838d6d21569db4dd132378c33c0067c12728a077a93fd78df292d5a8f66f024a",
+        "build_passed": true,
+        "category": "development",
+        "operations": [
+          {
+            "build": {
+              "duration_seconds": 3.3344089752063155,
+              "observed_output_bytes": 227,
+              "output_limit_exceeded": false,
+              "returncode": 0,
+              "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+              "stdout": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.93\n",
+              "timed_out": false
+            }
+          },
+          {
+            "program": {
+              "duration_seconds": 0.2067893547937274,
+              "observed_output_bytes": 126,
+              "output_limit_exceeded": false,
+              "returncode": 0,
+              "stderr": "",
+              "stdout": "{\"ids\":[\"a\",\"b\",\"c\"]}\n{\"ids\":[]}\n{\"error\":\"Request was null\"}\n{\"ids\":[\"early\",\"a\",\"z\",\"low\"]}\n{\"ids\":[\"implicit\",\"negative\"]}\n",
+              "timed_out": false
+            }
+          }
+        ],
+        "output": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.93\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n\n",
+        "passed": true,
+        "submitted_sha256": "1af40d08dabd839f86f67c0eb2f23c063964277338d5b60177d8f52336c32ed4"
+      },
+      "preparation": {
+        "cache_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "export": {
+          "duration_seconds": 0.10614018701016903,
+          "observed_output_bytes": 0,
+          "output_limit_exceeded": false,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "",
+          "timed_out": false
+        },
+        "fixture_only": false,
+        "image": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+        "restore": {
+          "duration_seconds": 1.5368984704837203,
+          "observed_output_bytes": 182,
+          "output_limit_exceeded": false,
+          "returncode": 0,
+          "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+          "stdout": "  Determining projects to restore...\n  Restored /work/OrderFlow.csproj (in 146 ms).\n",
+          "timed_out": false
+        },
+        "seed_sha256": "910346d13b08e348fc41c991b6eb9d4b21b576601b0a85a5c99970a264aabe71"
+      }
+    },
+    {
+      "failed_build": {
+        "binary_sha256": null,
+        "build_passed": false,
+        "category": "build",
+        "operations": [
+          {
+            "build": {
+              "duration_seconds": 2.7976668989285827,
+              "observed_output_bytes": 392,
+              "output_limit_exceeded": false,
+              "returncode": 1,
+              "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+              "stdout": "/work/Program.fs(1,1): error FS0039: The value or constructor 'this' is not defined. [/work/OrderFlow.fsproj]\n\nBuild FAILED.\n\n/work/Program.fs(1,1): error FS0039: The value or constructor 'this' is not defined. [/work/OrderFlow.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:02.35\n",
+              "timed_out": false
+            }
+          }
+        ],
+        "output": "/work/Program.fs(1,1): error FS0039: The value or constructor 'this' is not defined. [/work/OrderFlow.fsproj]\n\nBuild FAILED.\n\n/work/Program.fs(1,1): error FS0039: The value or constructor 'this' is not defined. [/work/OrderFlow.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:02.35\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+        "passed": false,
+        "submitted_sha256": "07ae9bb96ccb64c195b09c8b876a6b8f55f4a5945311245539fc50b3b99a159b"
+      },
+      "language": "fsharp",
+      "positive": {
+        "binary_sha256": "c045ded733659f7044695187de6c21ea1426d73235b599d04e91c71bfb7c426d",
+        "build_passed": true,
+        "category": "development",
+        "operations": [
+          {
+            "build": {
+              "duration_seconds": 3.7529397336766124,
+              "observed_output_bytes": 227,
+              "output_limit_exceeded": false,
+              "returncode": 0,
+              "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+              "stdout": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.35\n",
+              "timed_out": false
+            }
+          },
+          {
+            "program": {
+              "duration_seconds": 0.22672962304204702,
+              "observed_output_bytes": 126,
+              "output_limit_exceeded": false,
+              "returncode": 0,
+              "stderr": "",
+              "stdout": "{\"ids\":[\"a\",\"b\",\"c\"]}\n{\"ids\":[]}\n{\"error\":\"Request was null\"}\n{\"ids\":[\"early\",\"a\",\"z\",\"low\"]}\n{\"ids\":[\"implicit\",\"negative\"]}\n",
+              "timed_out": false
+            }
+          }
+        ],
+        "output": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.35\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n\n",
+        "passed": true,
+        "submitted_sha256": "2ddb5d7c93f01cb25a3a24d3bf9d970aa2c3efbf87d378ccc33ce35635034a34"
+      },
+      "preparation": {
+        "cache_sha256": "6521113f868a31bf4e0458f40b8b28ab2b6518f16683b9191bd22f4705c0dc3d",
+        "export": {
+          "duration_seconds": 0.10552164819091558,
+          "observed_output_bytes": 0,
+          "output_limit_exceeded": false,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "",
+          "timed_out": false
+        },
+        "fixture_only": false,
+        "image": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+        "restore": {
+          "duration_seconds": 1.9950832454487681,
+          "observed_output_bytes": 182,
+          "output_limit_exceeded": false,
+          "returncode": 0,
+          "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+          "stdout": "  Determining projects to restore...\n  Restored /work/OrderFlow.fsproj (in 637 ms).\n",
+          "timed_out": false
+        },
+        "seed_sha256": "8fb509211ce33ce8ee4dc39eaa11c62305cb7be61d0c1cd4787dbe209ea60b20"
+      }
+    }
+  ],
+  "host_platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+  "intended_remote_environment_verified": false,
+  "passed": true,
+  "platform": "linux",
+  "python_version": "3.11.15",
+  "scope": "specified-image-on-current-linux-host",
+  "source_lf_sha256": {
+    "scripts/e3a_sandbox_check.py": "dd3d570fdb80186ded4a1288abc1fb9355d3a0c64b88b9e2d8424e6e153099a7",
+    "src/alf/e3a_sandbox.py": "0b5d2763800792791df8481ff563f41faa214362781fd937c1325fe6a7d03d0c",
+    "src/alf/workstream_e3a.py": "1076e78772d17562f9acd54a247c8aa7d72fe2380c8fc0641305569fc58697aa"
+  },
+  "specification_sha256": "8bc53d30e45dfa72b087225f89c9e5547266f05b47e4306e2b326d951888bc62"
+}

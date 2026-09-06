@@ -5,7 +5,9 @@ of proposal `19b1902be59324b98741ccb6c3a8396de962f5f7`, pulled at `5c10d13`.
 Implementation review is **self-review and model-free testing**, not independent
 implementation approval, human language-expert review, a freeze, or live permission.
 
-**Status: implementation present; sandbox validation blocked.** Stop after two
+**Historical checkpoint, superseded by the [authorized remote fix and sandbox evidence](workstream-e3a-remote-sandbox-fix-2026-09-06.md).** The user subsequently permitted model-free fixes on the reachable remote host. The two failures and original stop below remain the record of this earlier checkpoint; the later report corrects the archive-availability finding. Neither checkpoint authorizes live calls.
+
+**Status at this checkpoint: implementation present; sandbox validation blocked.** Stop after two
 dependency-preparation failures. No further preparation attempt or live call is
 authorized by this checkpoint. The documentation-only stop commit skips CI so
 that publishing this boundary does not launch a third sandbox attempt.
