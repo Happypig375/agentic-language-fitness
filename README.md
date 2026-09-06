@@ -8,6 +8,9 @@ ALF investigates how programming-language implementation, model configuration, a
 
 **Current boundary:** E1, E2, and E2a are complete. The [E3a first-submission/repair packet](protocols/workstream-e3a-v1/README.md) received a second AI-session review and has a bounded no-tools implementation. Its [model-free sandbox checks now pass on the remote host with the exact specified image](docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md); end-to-end API/remote integration remains unverified. Archived results remain unchanged. No live candidate request or experiment is authorized; implementation, verified operation, executable freeze, and spending permission are separate states.
 
+The maintainer requires the existing **local OAuth-backed Codex** implementation, as in earlier model-backed runs. An API key is not a new prerequisite. E3a's still-unfrozen direct-API counting, continuation and dollar-budget assumptions must be reconciled with that implementation before candidate calls; see [the current authentication direction](PLAN.md#maintainer-authentication-direction-2026-09-06).
+The [2026-09-06 capability handoff](docs/workstream-e3a-codex-capability-2026-09-06.md) records model-free fixture evidence and the remaining reviewed mismatch; it does not establish OAuth or authorize live calls.
+
 The current rules are in [experimental design](docs/experimental-design.md), [metrics](docs/metrics.md), [workload validity and review gates](docs/workload-validity-and-review-gates-2026-09-05.md), and the future [context-pressure design](docs/workstream-h-context-pressure-design-2026-09-05.md). Dated predecessor proposals explain history; they are not competing current plans. Already frozen protocols/results retain their original identities and must not be retrospectively changed.
 
 ## Question and evidence

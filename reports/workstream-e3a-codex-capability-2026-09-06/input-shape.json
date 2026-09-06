@@ -1,0 +1,195 @@
+{
+  "argv": [
+    "codex",
+    "exec",
+    "--json",
+    "--ephemeral",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--sandbox",
+    "workspace-write",
+    "--cd",
+    "/tmp/e3a-codex-check-4ofr2tem/work",
+    "--color",
+    "never",
+    "--model",
+    "gpt-5.6-luna",
+    "--config",
+    "model_provider=fixture",
+    "--config",
+    "model_providers.fixture.name=fixture",
+    "--config",
+    "model_providers.fixture.base_url=http://127.0.0.1:33571/v1",
+    "--config",
+    "model_providers.fixture.requires_openai_auth=false",
+    "--config",
+    "model_providers.fixture.request_max_retries=0",
+    "--config",
+    "model_providers.fixture.stream_max_retries=0",
+    "--config",
+    "model_providers.fixture.wire_api=responses",
+    "--config",
+    "model_reasoning_effort=high",
+    "-"
+  ],
+  "candidate_model_calls": 0,
+  "cli_event_types": [
+    "thread.started",
+    "turn.started",
+    "item.completed",
+    "turn.completed"
+  ],
+  "cli_nested_item_types": [
+    "agent_message"
+  ],
+  "cli_turn_completed_usage": {
+    "cached_input_tokens": 0,
+    "input_tokens": 11,
+    "output_tokens": 4,
+    "reasoning_output_tokens": 0
+  },
+  "elapsed_seconds": 5.719,
+  "fixture_error": [],
+  "fixture_final_text": "fixture capability probe.",
+  "fixture_only": true,
+  "fixture_usage": {
+    "input_tokens": 11,
+    "output_tokens": 4,
+    "total_tokens": 15
+  },
+  "oauth_integration_verified": false,
+  "observed_tool_events": [],
+  "probe_passed": true,
+  "real_provider_http_calls": 0,
+  "request_bodies": [
+    {
+      "api_key_header_present": false,
+      "authorization_header_present": false,
+      "body_bytes": 35449,
+      "content_encoding": null,
+      "fields_present": {
+        "include": true,
+        "input": true,
+        "instructions": false,
+        "max_output_tokens": false,
+        "parallel_tool_calls": true,
+        "previous_response_id": false,
+        "reasoning": true,
+        "store": true,
+        "text": true,
+        "tool_choice": true,
+        "tools": false
+      },
+      "header_names": [
+        "accept",
+        "content-length",
+        "content-type",
+        "host",
+        "originator",
+        "session-id",
+        "thread-id",
+        "user-agent",
+        "x-client-request-id",
+        "x-codex-beta-features",
+        "x-codex-turn-metadata",
+        "x-codex-window-id",
+        "x-openai-internal-codex-responses-lite"
+      ],
+      "include": [
+        "reasoning.encrypted_content"
+      ],
+      "input_bytes": 34139,
+      "input_declaration_names": [],
+      "input_lexical_markers": {
+        "# Tools": false,
+        "## Tools": false,
+        "apply_patch": true,
+        "exec_command": true,
+        "functions.": false,
+        "namespace functions": false,
+        "shell_command": false
+      },
+      "input_messages": [
+        {
+          "content_bytes": [
+            4
+          ],
+          "content_types": [
+            "NoneType"
+          ],
+          "role": "developer"
+        },
+        {
+          "content_bytes": [
+            17766
+          ],
+          "content_types": [
+            "input_text"
+          ],
+          "role": "developer"
+        },
+        {
+          "content_bytes": [
+            2853,
+            515
+          ],
+          "content_types": [
+            "input_text",
+            "input_text"
+          ],
+          "role": "developer"
+        },
+        {
+          "content_bytes": [
+            888
+          ],
+          "content_types": [
+            "input_text"
+          ],
+          "role": "user"
+        },
+        {
+          "content_bytes": [
+            64
+          ],
+          "content_types": [
+            "input_text"
+          ],
+          "role": "user"
+        }
+      ],
+      "input_sha256": "a22360bfcf51e7872e404f6337e0192bbe8b2e2d0656358f9ab3faada16aaa61",
+      "json": true,
+      "model": "gpt-5.6-luna",
+      "parallel_tool_calls": false,
+      "path": "/v1/responses",
+      "reasoning": {
+        "context": "all_turns",
+        "effort": "high"
+      },
+      "request_keys": [
+        "client_metadata",
+        "include",
+        "input",
+        "model",
+        "parallel_tool_calls",
+        "prompt_cache_key",
+        "reasoning",
+        "store",
+        "stream",
+        "text",
+        "tool_choice"
+      ],
+      "store": false,
+      "text": {},
+      "tool_choice": "auto"
+    }
+  ],
+  "request_count": 1,
+  "returncode": 0,
+  "stderr_bytes": 203,
+  "stderr_tail": null,
+  "stdout_bytes": 361,
+  "timed_out": false,
+  "version": "codex-cli 0.149.1"
+}

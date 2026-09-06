@@ -8,6 +8,14 @@ or independent approval of the implementation. Implementation review in this
 session is self-review plus model-free tests. No candidate request, live
 continuation probe, or paid review agent was used.
 
+**Subsequent maintainer direction (2026-09-06):** reuse the existing local
+OAuth-backed Codex implementation. The direct-API proposal below does not impose
+an API-key prerequisite or justify a new authentication/relay layer. Its
+no-tools/counting/continuation and dollar-budget assumptions still need to be
+reconciled with the canonical Codex runner before execution; they are not proven
+equivalent by a successful OAuth login. See [the current plan](../../PLAN.md#maintainer-authentication-direction-2026-09-06).
+The specification and reviewed artifacts remain unchanged pending that resolution.
+
 The [specification](specification.json) and generated [review packet](review-packet.json)
 contain the proposed identities, exact schedule, source/payload hashes, archived
 selection observations, and budget calculation. `review-packet.json` is a drift
@@ -19,6 +27,11 @@ separates implemented helpers, tested boundaries, and unresolved live/deployment
 The later [remote sandbox fix](../../docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md)
 records passing model-free checks on the intended host with the exact specified
 image. It does not establish end-to-end API/remote wiring or live provider behavior.
+
+The [canonical Codex capability handoff](../../docs/workstream-e3a-codex-capability-2026-09-06.md)
+records two isolated fixture probes of the required OAuth runner path. They are
+model-free evidence only; no OAuth access, real-provider continuation, exact
+counting, subscription pricing, or E3a no-tools authority is thereby established.
 
 ## Question and selected workload
 
