@@ -10,7 +10,7 @@ The bounded E3a no-tools controller/adapter and isolated evaluator contain R1–
 
 The pinned image is now restored on the remote host. Standalone sandbox evidence is not end-to-end Windows/API-to-remote integration. That wiring, account access, rates/count charges and provider continuation/counting remain unverified. No live call is authorized: the later two-generation/$0.05 integration and pilot still require separate approval. Do not switch images, scaffolds or subscription backends silently.
 
-**Current auth direction:** the user requires the existing local OAuth-backed Codex implementation and canonical remote launcher. Do not ask for an API key or create another authentication/proxy relay. E3a's API-specific assumptions must be reconciled with that runner, not relabelled as proven OAuth behavior. Follow the [current authentication direction](PLAN.md#maintainer-authentication-direction-2026-09-06) for model-free verification and review of material mismatches; do not invent subscription-to-dollar semantics.
+**Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) is review-ready after separate maintainer-AI review, not adopted or activated. The user requires existing local OAuth and the canonical remote launcher; no API key or new relay. Visible-history replay and turn/time/byte limits require explicit maintainer adoption of their scientific and overshoot-risk changes. No-tools enforcement remains a prerequisite. Adoption, model-free implementation evidence, and separate live-run permission remain distinct gates; see [PLAN.md](PLAN.md#maintainer-authentication-direction-2026-09-06).
 
 ## Read only what applies
 

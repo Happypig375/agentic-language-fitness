@@ -16,6 +16,8 @@ reconciled with the canonical Codex runner before execution; they are not proven
 equivalent by a successful OAuth login. See [the current plan](../../PLAN.md#maintainer-authentication-direction-2026-09-06).
 The specification and reviewed artifacts remain unchanged pending that resolution.
 
+The narrow [OAuth/Codex amendment draft](oauth-amendment.md) proposes visible-transcript replay and CLI post-turn resource alarms for review. It is documentation only: no runtime, specification identity, execution authorization, live access, or historical artifact changes are implied.
+
 The [specification](specification.json) and generated [review packet](review-packet.json)
 contain the proposed identities, exact schedule, source/payload hashes, archived
 selection observations, and budget calculation. `review-packet.json` is a drift
