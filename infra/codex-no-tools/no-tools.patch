@@ -1,0 +1,820 @@
+diff --git a/codex-rs/codex-api/src/common.rs b/codex-rs/codex-api/src/common.rs
+index ef28c6a..e0b4e08 100644
+--- a/codex-rs/codex-api/src/common.rs
++++ b/codex-rs/codex-api/src/common.rs
+@@ -78,6 +78,11 @@ pub enum ResponseEvent {
+     SafetyBuffering(SafetyBuffering),
+     OutputItemDone(ResponseItem),
+     OutputItemAdded(ResponseItem),
++    /// A recognized output-item event whose payload could not be deserialized.
++    /// The payload is intentionally not retained; policy-enforcing clients must fail closed.
++    UnparseableOutputItem,
++    /// A recognized tool-input event that carries no complete output item.
++    ToolCallInputEvent,
+     /// Emitted when the server includes `OpenAI-Model` on the stream response.
+     /// This can differ from the requested model when backend safety routing applies.
+     ServerModel(String),
+diff --git a/codex-rs/codex-api/src/sse/responses.rs b/codex-rs/codex-api/src/sse/responses.rs
+index 3712b28..63e72cb 100644
+--- a/codex-rs/codex-api/src/sse/responses.rs
++++ b/codex-rs/codex-api/src/sse/responses.rs
+@@ -356,6 +356,7 @@ pub fn process_responses_event(
+                 }
+                 debug!("failed to parse ResponseItem from output_item.done");
+             }
++            return Ok(Some(ResponseEvent::UnparseableOutputItem));
+         }
+         "response.output_text.delta" => {
+             if let Some(delta) = event.delta {
+@@ -372,6 +373,7 @@ pub fn process_responses_event(
+                     delta,
+                 }));
+             }
++            return Ok(Some(ResponseEvent::ToolCallInputEvent));
+         }
+         "response.reasoning_summary_text.delta" => {
+             if let (Some(delta), Some(summary_index)) = (event.delta, event.summary_index) {
+@@ -486,6 +488,7 @@ pub fn process_responses_event(
+                 }
+                 debug!("failed to parse ResponseItem from output_item.added");
+             }
++            return Ok(Some(ResponseEvent::UnparseableOutputItem));
+         }
+         "response.reasoning_summary_part.added" => {
+             if let Some(summary_index) = event.summary_index {
+@@ -506,6 +509,14 @@ pub fn process_responses_event(
+         | "response.reasoning_summary_part.done"
+         | "responsesapi.websocket_timing" => {
+             trace!("unhandled responses event: {}", event.kind);
++            if matches!(
++                event.kind.as_str(),
++                "response.custom_tool_call_input.done"
++                    | "response.function_call_arguments.delta"
++                    | "response.function_call_arguments.done"
++            ) {
++                return Ok(Some(ResponseEvent::ToolCallInputEvent));
++            }
+         }
+         kind if kind.ends_with(".delta") => {
+             trace!("unhandled responses event: {kind}");
+@@ -861,6 +872,52 @@ mod tests {
+         }
+     }
+ 
++    #[test]
++    fn malformed_output_items_emit_payload_free_marker() {
++        let added: ResponsesStreamEvent = serde_json::from_value(json!({
++            "type": "response.output_item.added",
++            "item": {"type": "function_call"}
++        }))
++        .expect("event should deserialize");
++        let done: ResponsesStreamEvent = serde_json::from_value(json!({
++            "type": "response.output_item.done"
++        }))
++        .expect("event should deserialize");
++        assert!(matches!(
++            process_responses_event(added),
++            Ok(Some(ResponseEvent::UnparseableOutputItem))
++        ));
++        assert!(matches!(
++            process_responses_event(done),
++            Ok(Some(ResponseEvent::UnparseableOutputItem))
++        ));
++        let unknown: ResponsesStreamEvent = serde_json::from_value(json!({
++            "type": "response.output_item.done",
++            "item": {"type": "future_provider_item"}
++        }))
++        .expect("event should deserialize");
++        assert!(matches!(
++            process_responses_event(unknown),
++            Ok(Some(ResponseEvent::OutputItemDone(ResponseItem::Other)))
++        ));
++    }
++
++    #[test]
++    fn recognized_tool_input_events_emit_policy_marker_when_not_consumable() {
++        for kind in [
++            "response.function_call_arguments.delta",
++            "response.function_call_arguments.done",
++            "response.custom_tool_call_input.done",
++        ] {
++            let event: ResponsesStreamEvent =
++                serde_json::from_value(json!({"type": kind})).expect("event should deserialize");
++            assert!(matches!(
++                process_responses_event(event),
++                Ok(Some(ResponseEvent::ToolCallInputEvent))
++            ));
++        }
++    }
++
+     #[test]
+     fn parses_cache_write_token_usage() {
+         let usage: ResponseCompletedUsage = serde_json::from_value(json!({
+@@ -1009,7 +1066,8 @@ mod tests {
+                 delta,
+             } if item_id == "ctc_1" && call_id == "call_1" && delta == "*** Begin"
+         );
+-        assert_matches!(&events[1], ResponseEvent::Completed { .. });
++        assert_matches!(&events[1], ResponseEvent::ToolCallInputEvent);
++        assert_matches!(&events[2], ResponseEvent::Completed { .. });
+     }
+ 
+     #[tokio::test]
+diff --git a/codex-rs/core/config.schema.json b/codex-rs/core/config.schema.json
+index d9084d3..94df726 100644
+--- a/codex-rs/core/config.schema.json
++++ b/codex-rs/core/config.schema.json
+@@ -676,6 +676,9 @@
+             "network_proxy": {
+               "$ref": "#/definitions/FeatureToml_for_NetworkProxyConfigToml"
+             },
++            "no_tools": {
++              "type": "boolean"
++            },
+             "non_prefixed_mcp_tool_names": {
+               "$ref": "#/definitions/FeatureToml_for_NonPrefixedMcpToolNamesConfigToml"
+             },
+@@ -5576,6 +5579,9 @@
+         "network_proxy": {
+           "$ref": "#/definitions/FeatureToml_for_NetworkProxyConfigToml"
+         },
++        "no_tools": {
++          "type": "boolean"
++        },
+         "non_prefixed_mcp_tool_names": {
+           "$ref": "#/definitions/FeatureToml_for_NonPrefixedMcpToolNamesConfigToml"
+         },
+diff --git a/codex-rs/core/src/client.rs b/codex-rs/core/src/client.rs
+index f26d419..2e8c616 100644
+--- a/codex-rs/core/src/client.rs
++++ b/codex-rs/core/src/client.rs
+@@ -149,6 +149,8 @@ pub const X_CODEX_PARENT_THREAD_ID_HEADER: &str = "x-codex-parent-thread-id";
+ pub const X_CODEX_WINDOW_ID_HEADER: &str = "x-codex-window-id";
+ pub const X_OPENAI_MEMGEN_REQUEST_HEADER: &str = "x-openai-memgen-request";
+ pub const X_OPENAI_SUBAGENT_HEADER: &str = "x-openai-subagent";
++pub(crate) const NO_TOOLS_POLICY_ERROR: &str =
++    "no-tools policy rejected an unsolicited tool response item";
+ pub const X_RESPONSESAPI_INCLUDE_TIMING_METRICS_HEADER: &str =
+     "x-responsesapi-include-timing-metrics";
+ const X_CODEX_WS_STREAM_REQUEST_START_MS_CLIENT_METADATA_KEY: &str =
+@@ -257,6 +259,7 @@ pub struct ModelClient {
+     agent_identity_policy: AgentIdentityAuthPolicy,
+     prompt_cache_key_override: Option<String>,
+     http_client_factory: HttpClientFactory,
++    no_tools: bool,
+ }
+ 
+ /// A turn-scoped streaming session created from a [`ModelClient`].
+@@ -471,9 +474,23 @@ impl ModelClient {
+             agent_identity_policy,
+             prompt_cache_key_override: None,
+             http_client_factory,
++            no_tools: false,
+         }
+     }
+ 
++    /// Enables the bounded, opt-in native no-tools control for subsequent turn sessions.
++    ///
++    /// The default client remains tool-capable. This control only changes Responses request
++    /// declarations and rejects any unsolicited tool response before it reaches turn dispatch.
++    pub fn with_no_tools(mut self) -> Self {
++        self.no_tools = true;
++        self
++    }
++
++    pub(crate) fn with_no_tools_if(self, enabled: bool) -> Self {
++        if enabled { self.with_no_tools() } else { self }
++    }
++
+     pub(crate) fn with_prompt_cache_key_override(
+         mut self,
+         prompt_cache_key_override: Option<String>,
+@@ -852,6 +869,9 @@ impl ModelClient {
+         responses_metadata: &CodexResponsesMetadata,
+     ) -> Result<ResponsesApiRequest> {
+         let mut input = prompt.get_formatted_input_for_request(model_info.use_responses_lite);
++        if self.no_tools {
++            input.retain(|item| !matches!(item, ResponseItem::AdditionalTools { .. }));
++        }
+         let is_openai = self.state.provider.info().is_openai();
+         if !is_openai {
+             for item in &mut input {
+@@ -866,16 +886,19 @@ impl ModelClient {
+             }
+         }
+         let (instructions, tools) = if model_info.use_responses_lite {
+-            let tools = if self.state.provider.capabilities().namespace_tools {
+-                create_tools_json_for_responses_lite(&prompt.tools)?
+-            } else {
+-                create_tools_json_for_responses_api(&prompt.tools)?
+-            };
+-            let mut prefix = vec![ResponseItem::AdditionalTools {
+-                id: None,
+-                role: "developer".to_string(),
+-                tools,
+-            }];
++            let mut prefix = Vec::new();
++            if !self.no_tools {
++                let tools = if self.state.provider.capabilities().namespace_tools {
++                    create_tools_json_for_responses_lite(&prompt.tools)?
++                } else {
++                    create_tools_json_for_responses_api(&prompt.tools)?
++                };
++                prefix.push(ResponseItem::AdditionalTools {
++                    id: None,
++                    role: "developer".to_string(),
++                    tools,
++                });
++            }
+             if !prompt.base_instructions.text.is_empty() {
+                 prefix.push(ResponseItem::Message {
+                     id: None,
+@@ -892,7 +915,10 @@ impl ModelClient {
+         } else {
+             (
+                 prompt.base_instructions.text.clone(),
+-                Some(create_tools_raw_json_for_responses_api(&prompt.tools)?.into()),
++                (!self.no_tools)
++                    .then(|| create_tools_raw_json_for_responses_api(&prompt.tools))
++                    .transpose()?
++                    .map(Into::into),
+             )
+         };
+         let reasoning = Self::build_reasoning(model_info, effort, summary);
+@@ -926,8 +952,10 @@ impl ModelClient {
+             instructions,
+             input,
+             tools,
+-            tool_choice: "auto".to_string(),
+-            parallel_tool_calls: prompt.parallel_tool_calls && !model_info.use_responses_lite,
++            tool_choice: if self.no_tools { "none" } else { "auto" }.to_string(),
++            parallel_tool_calls: prompt.parallel_tool_calls
++                && !model_info.use_responses_lite
++                && !self.no_tools,
+             reasoning: Some(reasoning),
+             store: false,
+             stream: true,
+@@ -1519,6 +1547,7 @@ impl ModelClientSession {
+                         request_session_telemetry,
+                         inference_trace_attempt,
+                         Arc::clone(&self.client.state.provider),
++                        self.client.no_tools,
+                     );
+                     return Ok(stream);
+                 }
+@@ -1755,6 +1784,7 @@ impl ModelClientSession {
+                 request_session_telemetry,
+                 inference_trace_attempt,
+                 Arc::clone(&self.client.state.provider),
++                self.client.no_tools,
+             );
+             self.websocket_session.last_response_rx = Some(last_request_rx);
+             return Ok(WebsocketStreamOutcome::Stream(stream));
+@@ -1988,6 +2018,7 @@ fn map_response_stream(
+     session_telemetry: SessionTelemetry,
+     inference_trace_attempt: InferenceTraceAttempt,
+     provider: SharedModelProvider,
++    no_tools: bool,
+ ) -> (ResponseStream, oneshot::Receiver<LastResponse>) {
+     let codex_api::ResponseStream {
+         rx_event,
+@@ -2003,6 +2034,7 @@ fn map_response_stream(
+         session_telemetry,
+         inference_trace_attempt,
+         provider,
++        no_tools,
+     )
+ }
+ 
+@@ -2012,6 +2044,7 @@ fn map_response_events<S>(
+     session_telemetry: SessionTelemetry,
+     inference_trace_attempt: InferenceTraceAttempt,
+     provider: SharedModelProvider,
++    no_tools: bool,
+ ) -> (ResponseStream, oneshot::Receiver<LastResponse>)
+ where
+     S: futures::Stream<Item = std::result::Result<ResponseEvent, ApiError>>
+@@ -2051,6 +2084,46 @@ where
+                 break;
+             };
+             match event {
++                Ok(ResponseEvent::UnparseableOutputItem) if !no_tools => {
++                    // Preserve the historical default behavior: malformed output items are
++                    // ignored when no policy is enabled.
++                    continue;
++                }
++                Ok(ResponseEvent::UnparseableOutputItem) if no_tools => {
++                    let err = CodexErr::Fatal(NO_TOOLS_POLICY_ERROR.to_string());
++                    inference_trace_attempt.record_failed(&err, upstream_request_id, &items_added);
++                    let _ = tx_event.send(Err(err)).await;
++                    return;
++                }
++                Ok(ResponseEvent::ToolCallInputEvent) if !no_tools => continue,
++                Ok(ResponseEvent::ToolCallInputEvent) if no_tools => {
++                    let err = CodexErr::Fatal(NO_TOOLS_POLICY_ERROR.to_string());
++                    inference_trace_attempt.record_failed(&err, upstream_request_id, &items_added);
++                    let _ = tx_event.send(Err(err)).await;
++                    return;
++                }
++                Ok(ResponseEvent::ToolCallInputDelta { .. }) if no_tools => {
++                    let err = CodexErr::Fatal(NO_TOOLS_POLICY_ERROR.to_string());
++                    inference_trace_attempt.record_failed(&err, upstream_request_id, &items_added);
++                    let _ = tx_event.send(Err(err)).await;
++                    return;
++                }
++                Ok(ResponseEvent::OutputItemAdded(item))
++                    if no_tools && is_tool_response_item(&item) =>
++                {
++                    let err = CodexErr::Fatal(NO_TOOLS_POLICY_ERROR.to_string());
++                    inference_trace_attempt.record_failed(&err, upstream_request_id, &items_added);
++                    let _ = tx_event.send(Err(err)).await;
++                    return;
++                }
++                Ok(ResponseEvent::OutputItemDone(item))
++                    if no_tools && is_tool_response_item(&item) =>
++                {
++                    let err = CodexErr::Fatal(NO_TOOLS_POLICY_ERROR.to_string());
++                    inference_trace_attempt.record_failed(&err, upstream_request_id, &items_added);
++                    let _ = tx_event.send(Err(err)).await;
++                    return;
++                }
+                 Ok(ResponseEvent::OutputItemDone(item)) => {
+                     items_added.push(item.clone());
+                     if tx_event
+@@ -2154,6 +2227,23 @@ where
+     )
+ }
+ 
++fn is_tool_response_item(item: &ResponseItem) -> bool {
++    matches!(
++        item,
++        ResponseItem::AdditionalTools { .. }
++            | ResponseItem::FunctionCall { .. }
++            | ResponseItem::FunctionCallOutput { .. }
++            | ResponseItem::CustomToolCall { .. }
++            | ResponseItem::CustomToolCallOutput { .. }
++            | ResponseItem::LocalShellCall { .. }
++            | ResponseItem::ToolSearchCall { .. }
++            | ResponseItem::ToolSearchOutput { .. }
++            | ResponseItem::WebSearchCall { .. }
++            | ResponseItem::ImageGenerationCall { .. }
++            | ResponseItem::Other
++    )
++}
++
+ /// Handles a 401 response by optionally refreshing ChatGPT tokens once.
+ ///
+ /// When refresh succeeds, the caller should retry the API call; otherwise
+diff --git a/codex-rs/core/src/client_tests.rs b/codex-rs/core/src/client_tests.rs
+index 58f2f5f..04e8970 100644
+--- a/codex-rs/core/src/client_tests.rs
++++ b/codex-rs/core/src/client_tests.rs
+@@ -296,6 +296,75 @@ fn test_session_telemetry() -> SessionTelemetry {
+     )
+ }
+ 
++#[test]
++fn no_tools_request_omits_declarations_and_selects_none() {
++    let client = test_model_client(SessionSource::Cli).with_no_tools();
++    let prompt = Prompt {
++        input: vec![ResponseItem::AdditionalTools {
++            id: None,
++            role: "developer".to_string(),
++            tools: Vec::new(),
++        }],
++        ..Prompt::default()
++    };
++    let request = client
++        .build_responses_request(
++            &prompt,
++            &test_model_info(),
++            None,
++            codex_protocol::config_types::ReasoningSummary::None,
++            None,
++            &test_responses_metadata_for_client(
++                &client,
++                None,
++                format!("{}:0", client.state.thread_id),
++                None,
++                TestCodexResponsesRequestKind::Turn,
++            ),
++        )
++        .expect("request should build");
++    assert!(request.tools.is_none());
++    assert_eq!(request.tool_choice, "none");
++    assert!(!request.parallel_tool_calls);
++    assert!(
++        !request
++            .input
++            .iter()
++            .any(|item| matches!(item, ResponseItem::AdditionalTools { .. }))
++    );
++}
++
++#[test]
++fn no_tools_responses_lite_omits_additional_tools() {
++    let client = test_model_client(SessionSource::Cli).with_no_tools();
++    let mut model_info = test_model_info();
++    model_info.use_responses_lite = true;
++    let request = client
++        .build_responses_request(
++            &Prompt::default(),
++            &model_info,
++            None,
++            codex_protocol::config_types::ReasoningSummary::None,
++            None,
++            &test_responses_metadata_for_client(
++                &client,
++                None,
++                format!("{}:0", client.state.thread_id),
++                None,
++                TestCodexResponsesRequestKind::Turn,
++            ),
++        )
++        .expect("request should build");
++    assert!(request.tools.is_none());
++    assert_eq!(request.tool_choice, "none");
++    assert!(
++        !request
++            .input
++            .iter()
++            .any(|item| matches!(item, ResponseItem::AdditionalTools { .. }))
++    );
++}
++
+ #[test]
+ fn ultra_reasoning_uses_max_for_requests() {
+     assert_eq!(
+@@ -596,6 +665,7 @@ async fn dropped_response_stream_traces_cancelled_partial_output() -> anyhow::Re
+         test_session_telemetry(),
+         attempt,
+         test_model_provider(),
++        /*no_tools*/ false,
+     );
+ 
+     let observed = stream
+@@ -625,6 +695,186 @@ async fn dropped_response_stream_traces_cancelled_partial_output() -> anyhow::Re
+     Ok(())
+ }
+ 
++#[tokio::test]
++async fn no_tools_rejects_tool_item_before_dispatch() {
++    let item = ResponseItem::FunctionCall {
++        id: None,
++        name: "exec_command".to_string(),
++        namespace: None,
++        arguments: "{}".to_string(),
++        encrypted_function_args: None,
++        call_id: "call-1".to_string(),
++        internal_chat_message_metadata_passthrough: None,
++    };
++    let api_stream = futures::stream::iter([
++        Ok(ResponseEvent::OutputItemAdded(item)),
++        Ok(ResponseEvent::Completed {
++            response_id: "resp-1".to_string(),
++            token_usage: None,
++            end_turn: Some(true),
++        }),
++    ]);
++    let (mut stream, _) = super::map_response_events(
++        None,
++        api_stream,
++        test_session_telemetry(),
++        InferenceTraceAttempt::disabled(),
++        test_model_provider(),
++        /*no_tools*/ true,
++    );
++    let error = stream
++        .next()
++        .await
++        .expect("policy error should be emitted")
++        .expect_err("tool output must be rejected");
++    assert_eq!(
++        error.to_string(),
++        format!("Fatal error: {}", super::NO_TOOLS_POLICY_ERROR)
++    );
++    assert!(stream.next().await.is_none());
++}
++
++#[tokio::test]
++async fn default_mapper_drops_unparseable_but_preserves_other() {
++    let stream = futures::stream::iter([
++        Ok(ResponseEvent::UnparseableOutputItem),
++        Ok(ResponseEvent::ToolCallInputEvent),
++        Ok(ResponseEvent::OutputItemDone(ResponseItem::Other)),
++    ]);
++    let (mut mapped, _) = super::map_response_events(
++        None,
++        stream,
++        test_session_telemetry(),
++        InferenceTraceAttempt::disabled(),
++        test_model_provider(),
++        /*no_tools*/ false,
++    );
++    assert!(matches!(
++        mapped.next().await,
++        Some(Ok(ResponseEvent::OutputItemDone(ResponseItem::Other)))
++    ));
++    assert!(mapped.next().await.is_none());
++}
++
++#[tokio::test]
++async fn no_tools_mapper_rejects_unparseable_output_item() {
++    let stream = futures::stream::iter([Ok(ResponseEvent::UnparseableOutputItem)]);
++    let (mut mapped, _) = super::map_response_events(
++        None,
++        stream,
++        test_session_telemetry(),
++        InferenceTraceAttempt::disabled(),
++        test_model_provider(),
++        /*no_tools*/ true,
++    );
++    let error = mapped
++        .next()
++        .await
++        .expect("policy error should be emitted")
++        .expect_err("no-tools must fail closed on malformed output");
++    assert_eq!(
++        error.to_string(),
++        format!("Fatal error: {}", super::NO_TOOLS_POLICY_ERROR)
++    );
++}
++
++#[tokio::test]
++async fn no_tools_mapper_rejects_tool_input_event() {
++    let stream = futures::stream::iter([Ok(ResponseEvent::ToolCallInputEvent)]);
++    let (mut mapped, _) = super::map_response_events(
++        None,
++        stream,
++        test_session_telemetry(),
++        InferenceTraceAttempt::disabled(),
++        test_model_provider(),
++        /*no_tools*/ true,
++    );
++    let error = mapped
++        .next()
++        .await
++        .expect("policy error should be emitted")
++        .expect_err("no-tools must fail closed on tool input");
++    assert_eq!(
++        error.to_string(),
++        format!("Fatal error: {}", super::NO_TOOLS_POLICY_ERROR)
++    );
++}
++
++#[tokio::test]
++async fn no_tools_http_loopback_rejects_added_tool_with_one_request() -> anyhow::Result<()> {
++    let server = MockServer::start().await;
++    let mut provider =
++        create_oss_provider_with_base_url(&format!("{}/v1", server.uri()), WireApi::Responses);
++    provider.supports_websockets = false;
++    let client = ModelClient::new(
++        None,
++        AgentIdentityAuthPolicy::JwtOnly,
++        ThreadId::new(),
++        provider,
++        SessionSource::Cli,
++        "test_originator".to_string(),
++        None,
++        false,
++        false,
++        None,
++        false,
++        None,
++        HttpClientFactory::new(OutboundProxyPolicy::ReqwestDefault),
++    )
++    .with_no_tools();
++    let response_mock = Mock::given(method("POST"))
++        .and(path("/v1/responses"))
++        .respond_with(ResponseTemplate::new(200).set_body_raw(
++            "event: response.output_item.added\ndata: {\"type\":\"response.output_item.added\",\"item\":{\"type\":\"function_call\",\"id\":\"fc\",\"call_id\":\"call\",\"name\":\"exec_command\",\"arguments\":\"\"}}\n\n",
++            "text/event-stream",
++        ))
++        .expect(1);
++    response_mock.mount(&server).await;
++    let metadata = test_responses_metadata_for_client(
++        &client,
++        None,
++        format!("{}:0", client.state.thread_id),
++        None,
++        TestCodexResponsesRequestKind::Turn,
++    );
++    let mut session = client.new_session();
++    let mut stream = session
++        .stream(
++            &Prompt::default(),
++            &test_model_info(),
++            &test_session_telemetry(),
++            None,
++            codex_protocol::config_types::ReasoningSummary::None,
++            None,
++            &metadata,
++            &InferenceTraceContext::disabled(),
++        )
++        .await?;
++    let error = loop {
++        match stream.next().await.expect("loopback policy error") {
++            Ok(ResponseEvent::RateLimits(_)) | Ok(ResponseEvent::ModelsEtag(_)) => continue,
++            Ok(event) => panic!("unexpected exposed event before policy error: {event:?}"),
++            Err(error) => break error,
++        }
++    };
++    assert_eq!(
++        error.to_string(),
++        format!("Fatal error: {}", super::NO_TOOLS_POLICY_ERROR)
++    );
++    drop(stream);
++    let requests = server
++        .received_requests()
++        .await
++        .expect("loopback request should be captured");
++    assert_eq!(requests.len(), 1);
++    let body = requests[0]
++        .body_json::<serde_json::Value>()
++        .expect("request body should be JSON");
++    assert!(body["tools"].is_null());
++    assert_eq!(body["tool_choice"], "none");
++    Ok(())
++}
++
+ #[tokio::test]
+ async fn response_stream_records_last_model_feedback_ids() {
+     let tags = Arc::new(Mutex::new(BTreeMap::new()));
+@@ -646,6 +896,7 @@ async fn response_stream_records_last_model_feedback_ids() {
+         test_session_telemetry(),
+         InferenceTraceAttempt::disabled(),
+         test_model_provider(),
++        /*no_tools*/ false,
+     );
+ 
+     while stream.next().await.is_some() {}
+@@ -830,6 +1081,7 @@ async fn dropped_backpressured_response_stream_traces_cancelled_partial_output()
+         test_session_telemetry(),
+         attempt,
+         test_model_provider(),
++        /*no_tools*/ false,
+     );
+ 
+     // Fill the mapper channel with non-terminal events, then yield one output
+diff --git a/codex-rs/core/src/session/session.rs b/codex-rs/core/src/session/session.rs
+index c0b0407..6e5265b 100644
+--- a/codex-rs/core/src/session/session.rs
++++ b/codex-rs/core/src/session/session.rs
+@@ -1409,6 +1409,7 @@ impl Session {
+                     attestation_provider,
+                     config.http_client_factory(),
+                 )
++                .with_no_tools_if(config.features.enabled(Feature::NoTools))
+                 .with_prompt_cache_key_override(
+                     crate::guardian::prompt_cache_key_override_for_review_session(
+                         &session_configuration.session_source,
+diff --git a/codex-rs/core/src/session/turn.rs b/codex-rs/core/src/session/turn.rs
+index c7d7c63..e8d1ecb 100644
+--- a/codex-rs/core/src/session/turn.rs
++++ b/codex-rs/core/src/session/turn.rs
+@@ -2294,6 +2294,8 @@ async fn try_run_sampling_request(
+ 
+         match event {
+             ResponseEvent::Created => {}
++            ResponseEvent::UnparseableOutputItem => {}
++            ResponseEvent::ToolCallInputEvent => {}
+             ResponseEvent::OutputItemDone(mut item) => {
+                 assign_missing_streamed_response_item_id(&mut item, active_item.as_ref());
+                 if analytics_tool_call_ids.len() < MAX_ANALYTICS_TOOL_CALL_IDS_PER_RESPONSE {
+diff --git a/codex-rs/core/src/turn_timing.rs b/codex-rs/core/src/turn_timing.rs
+index 87f7798..1c2266a 100644
+--- a/codex-rs/core/src/turn_timing.rs
++++ b/codex-rs/core/src/turn_timing.rs
+@@ -386,6 +386,8 @@ fn response_event_records_turn_ttft(event: &ResponseEvent) -> bool {
+         | ResponseEvent::ReasoningSummaryDone { .. }
+         | ResponseEvent::ReasoningContentDelta { .. } => true,
+         ResponseEvent::Created
++        | ResponseEvent::UnparseableOutputItem
++        | ResponseEvent::ToolCallInputEvent
+         | ResponseEvent::ServerModel(_)
+         | ResponseEvent::ModelVerifications(_)
+         | ResponseEvent::TurnModerationMetadata(_)
+diff --git a/codex-rs/core/tests/suite/client.rs b/codex-rs/core/tests/suite/client.rs
+index daaf811..ab3a859 100644
+--- a/codex-rs/core/tests/suite/client.rs
++++ b/codex-rs/core/tests/suite/client.rs
+@@ -1605,6 +1605,80 @@ async fn includes_base_instructions_override_in_request() {
+     );
+ }
+ 
++#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
++async fn no_tools_feature_fails_closed_in_session_without_followup() {
++    skip_if_no_network!();
++    let fixtures = [
++        (
++            "function_call_done",
++            ev_function_call("call-no-tools", "exec_command", "{}"),
++        ),
++        (
++            "function_arguments_delta",
++            json!({"type": "response.function_call_arguments.delta", "delta": "{}"}),
++        ),
++        (
++            "function_arguments_done",
++            json!({"type": "response.function_call_arguments.done", "item_id": "fc-no-tools"}),
++        ),
++        (
++            "custom_tool_input_done",
++            json!({"type": "response.custom_tool_call_input.done", "item_id": "ctc-no-tools"}),
++        ),
++    ];
++    for (fixture_name, tool_event) in fixtures {
++        let server = MockServer::start().await;
++        let response_mock = mount_sse_once(
++            &server,
++            sse(vec![ev_response_created("resp-no-tools"), tool_event]),
++        )
++        .await;
++        let mut builder = test_codex().with_auth(CodexAuth::from_api_key("test-key"));
++        builder = builder.with_config(|config| {
++            config
++                .features
++                .enable(Feature::NoTools)
++                .expect("no_tools feature should be configurable");
++        });
++        let codex = builder
++            .build(&server)
++            .await
++            .unwrap_or_else(|error| panic!("create {fixture_name} test codex: {error}"))
++            .codex;
++        codex
++            .start_or_steer_turn(TurnInputRequest::user_input(vec![UserInput::Text {
++                text: "hello".into(),
++                text_elements: Vec::new(),
++            }]))
++            .await
++            .expect("submit turn");
++        let event =
++            wait_for_event(&codex, |event| matches!(event, EventMsg::TurnComplete(_))).await;
++        let EventMsg::TurnComplete(completed) = event else {
++            unreachable!("wait predicate guarantees turn completion");
++        };
++        assert!(
++            completed
++                .error
++                .as_ref()
++                .is_some_and(|error| error.message.contains("no-tools policy")),
++            "{fixture_name} should terminate with policy error"
++        );
++        let request = response_mock.single_request();
++        assert_eq!(
++            response_mock.requests().len(),
++            1,
++            "{fixture_name} follow-up"
++        );
++        assert!(
++            !request
++                .body_json()
++                .to_string()
++                .contains("function_call_output")
++        );
++    }
++}
++
+ #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+ async fn chatgpt_auth_sends_correct_request() {
+     skip_if_no_network!();
+diff --git a/codex-rs/features/src/lib.rs b/codex-rs/features/src/lib.rs
+index fefc441..eca09a3 100644
+--- a/codex-rs/features/src/lib.rs
++++ b/codex-rs/features/src/lib.rs
+@@ -93,6 +93,8 @@ pub enum Feature {
+     ShellTool,
+     /// Enable the built-in local image viewer.
+     ViewImage,
++    /// Disable all model-visible tools and reject unsolicited tool output.
++    NoTools,
+     /// Enable Claude-style lifecycle hooks loaded from hooks.json files.
+     CodexHooks,
+     /// Store CLI auth in the encrypted local secrets backend when keyring storage is selected.
+@@ -837,6 +839,12 @@ pub const FEATURES: &[FeatureSpec] = &[
+         stage: Stage::Stable,
+         default_enabled: true,
+     },
++    FeatureSpec {
++        id: Feature::NoTools,
++        key: "no_tools",
++        stage: Stage::UnderDevelopment,
++        default_enabled: false,
++    },
+     FeatureSpec {
+         id: Feature::ViewImage,
+         key: "view_image",
+diff --git a/codex-rs/otel/src/events/session_telemetry.rs b/codex-rs/otel/src/events/session_telemetry.rs
+index 2ffa061..cd79c5b 100644
+--- a/codex-rs/otel/src/events/session_telemetry.rs
++++ b/codex-rs/otel/src/events/session_telemetry.rs
+@@ -1233,6 +1233,8 @@ impl SessionTelemetry {
+     fn responses_type(event: &ResponseEvent) -> String {
+         match event {
+             ResponseEvent::Created => "created".into(),
++            ResponseEvent::UnparseableOutputItem => "unparseable_output_item".into(),
++            ResponseEvent::ToolCallInputEvent => "tool_call_input_event".into(),
+             ResponseEvent::OutputItemDone(item) | ResponseEvent::OutputItemAdded(item) => {
+                 SessionTelemetry::responses_item_type(item)
+             }

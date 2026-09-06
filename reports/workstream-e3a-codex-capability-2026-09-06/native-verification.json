@@ -1,0 +1,49 @@
+{
+  "scope": "Model-free verification of the opt-in native no-tools client; not live authorization",
+  "repository_base_commit": "605a145077dbf0d3429a6cf0d3cf6fa361c93daa",
+  "scientific_specification_sha256": "8bc53d30e45dfa72b087225f89c9e5547266f05b47e4306e2b326d951888bc62",
+  "native_source_commit": "ff29a44391deccde0aba0f8390337d7f3c319ea4",
+  "native_patch_sha256": "df6a1797f51f40a784544fe499e94c8706231f52cb867ae2d1d820954638a267",
+  "native_binary_sha256": "f7942933b353186ea7cb216c47cddc321c5c4d120fde5a8df9e75122e2fc8816",
+  "helper_sha256": "cbd85c192f4ecbf092a6f8b8b16a5b764d05c86c08cf2e8e5af8be439d174e06",
+  "normalized_cargo_lock_sha256": "46febaad4d299009603ea1fc4da19545d5b28eb562b2e654bec75024e5ca0b67",
+  "build_profile": "Rust 1.95.0 GNU dev-small",
+  "builder_image_id": "sha256:e1b5606d6b1d9f1401ddb5dbc6005559842249bf4443374348e3849f4845466c",
+  "probe_image_id": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+  "checks": {
+    "native_tests": {"passed": 100, "failed": 0, "not_selected": 3715, "retries": 0, "workers": 3},
+    "native_test_log_sha256": "1122506c0b40dca02c074225d55537bae56e04ab8985f232113cbdd01e20390b",
+    "checker_tests": {"passed": 23, "failed": 0},
+    "e3a_packet": "matches",
+    "scoped_clippy": "passed; unrelated upstream unused-import autofix excluded",
+    "format": "passed",
+    "config_schema_generation": "passed",
+    "cli_build": "passed",
+    "patch_reverse_apply_check": "passed",
+    "code_review": "separate AI session; no actionable correctness or security findings"
+  },
+  "fixtures": [
+    {
+      "artifact": "native-resumed-baseline.json",
+      "sha256": "6b43a377534c995e63fcd67c94dfe4dc4b27bc2c3a22f6e2c948d2a91e5a0dff",
+      "passed": true,
+      "total_post_attempts": 1
+    },
+    {
+      "artifact": "native-resumed-tool-call.json",
+      "sha256": "f8fbd444ad9674902a662049840e77393a3679bc5db435a923bb32a08e83a327",
+      "passed": true,
+      "total_post_attempts": 1
+    }
+  ],
+  "candidate_model_calls": 0,
+  "real_provider_http_calls": 0,
+  "oauth_material_staged": false,
+  "limitations": [
+    "Synthetic loopback HTTP fixtures, not live OAuth or WebSocket/provider verification",
+    "Single-binary overlay lacks the sibling code-mode host; not packaged-client readiness",
+    "Direct SSH/Docker probes, not canonical-launcher end-to-end integration",
+    "GitHub CI covers repository/helper/trusted fixtures, not the native client build",
+    "No amendment adoption, production installation, scientific freeze, or live-run authorization"
+  ]
+}

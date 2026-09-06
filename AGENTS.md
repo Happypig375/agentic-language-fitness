@@ -12,6 +12,8 @@ The pinned image is now restored on the remote host. Standalone sandbox evidence
 
 **Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) is review-ready after separate maintainer-AI review, not adopted or activated. The user requires existing local OAuth and the canonical remote launcher; no API key or new relay. Visible-history replay and turn/time/byte limits require explicit maintainer adoption of their scientific and overshoot-risk changes. No-tools enforcement remains a prerequisite. Adoption, model-free implementation evidence, and separate live-run permission remain distinct gates; see [PLAN.md](PLAN.md#maintainer-authentication-direction-2026-09-06).
 
+**Technical hold (2026-09-06):** the [no-tools prerequisite check](docs/workstream-e3a-no-tools-check-2026-09-06.md) is now bounded model-free evidence that the customized native scaffold is ready for the next maintainer decision; it is not a global unsupported-tool guarantee. Final native tests/build/probes and separate AI review passed as documented there. Production adoption, amendment activation, and live authorization remain held. The next distinct step is explicit adoption of this customized native client plus visible replay, dispatch/byte/time controls, and overshoot-risk treatment, followed by model-free OAuth-adapter implementation/review; this is not automatic pilot authorization. No automatic toolful fallback, relay, or OAuth staging is authorized.
+
 ## Read only what applies
 
 - Current E3a decision: [review disposition](docs/workstream-e3a-review-disposition-2026-09-06.md) and [reviewed packet](protocols/workstream-e3a-v1/README.md).

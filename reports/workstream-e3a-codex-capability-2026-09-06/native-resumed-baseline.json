@@ -1,0 +1,399 @@
+{
+  "argv": [
+    "/native/codex",
+    "exec",
+    "--json",
+    "--ephemeral",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--sandbox",
+    "workspace-write",
+    "--cd",
+    "/tmp/e3a-codex-check-ge61_uht/work",
+    "--color",
+    "never",
+    "--model",
+    "gpt-5.6-luna",
+    "--config",
+    "model_provider=fixture",
+    "--config",
+    "model_providers.fixture.name=fixture",
+    "--config",
+    "model_providers.fixture.base_url=http://127.0.0.1:34877/v1",
+    "--config",
+    "model_providers.fixture.requires_openai_auth=false",
+    "--config",
+    "model_providers.fixture.request_max_retries=0",
+    "--config",
+    "model_providers.fixture.stream_max_retries=0",
+    "--config",
+    "model_providers.fixture.wire_api=responses",
+    "--config",
+    "model_reasoning_effort=high",
+    "--config",
+    "features.no_tools=true",
+    "-"
+  ],
+  "candidate_model_calls": 0,
+  "cli_event_types": [
+    "thread.started",
+    "item.completed",
+    "item.completed",
+    "turn.started",
+    "item.completed",
+    "turn.completed"
+  ],
+  "cli_events": [
+    {
+      "thread_id": "01a07731-ddf5-7592-93ff-4cff06ec5d20",
+      "type": "thread.started"
+    },
+    {
+      "item": {
+        "id": "item_0",
+        "message": "Under-development features enabled: no_tools. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /tmp/e3a-codex-check-ge61_uht/codex-home/config.toml.",
+        "type": "error"
+      },
+      "type": "item.completed"
+    },
+    {
+      "item": {
+        "id": "item_1",
+        "message": "Code Mode is unavailable because failed to spawn code-mode host /native/codex-code-mode-host: host executable was not found. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.",
+        "type": "error"
+      },
+      "type": "item.completed"
+    },
+    {
+      "type": "turn.started"
+    },
+    {
+      "item": {
+        "id": "item_2",
+        "text": "fixture capability probe.",
+        "type": "agent_message"
+      },
+      "type": "item.completed"
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 11,
+        "output_tokens": 4,
+        "reasoning_output_tokens": 0
+      }
+    }
+  ],
+  "cli_nested_item_types": [
+    "error",
+    "error",
+    "agent_message"
+  ],
+  "cli_turn_completed_usage": {
+    "cached_input_tokens": 0,
+    "input_tokens": 11,
+    "output_tokens": 4,
+    "reasoning_output_tokens": 0
+  },
+  "computed_tool_output_marker": false,
+  "elapsed_seconds": 3.05,
+  "expect_no_tools": true,
+  "fixture_error": [],
+  "fixture_final_text": "fixture capability probe.",
+  "fixture_mode": "baseline",
+  "fixture_only": true,
+  "fixture_usage": {
+    "input_tokens": 11,
+    "output_tokens": 4,
+    "total_tokens": 15
+  },
+  "gate_violations": [],
+  "native_no_tools_fixture_passed": true,
+  "no_tools_verified": false,
+  "oauth_integration_verified": false,
+  "observed_tool_events": [
+    "error",
+    "error"
+  ],
+  "probe_passed": true,
+  "real_provider_http_calls": 0,
+  "rejected_post_count": 0,
+  "request_bodies": [
+    {
+      "api_key_header_present": false,
+      "authorization_header_present": false,
+      "body_bytes": 24168,
+      "content_encoding": null,
+      "fields_present": {
+        "include": true,
+        "input": true,
+        "instructions": false,
+        "max_output_tokens": false,
+        "parallel_tool_calls": true,
+        "previous_response_id": false,
+        "reasoning": true,
+        "store": true,
+        "text": true,
+        "tool_choice": true,
+        "tools": false
+      },
+      "header_names": [
+        "accept",
+        "content-length",
+        "content-type",
+        "host",
+        "originator",
+        "session-id",
+        "thread-id",
+        "user-agent",
+        "x-client-request-id",
+        "x-codex-beta-features",
+        "x-codex-turn-metadata",
+        "x-codex-window-id",
+        "x-openai-internal-codex-responses-lite"
+      ],
+      "include": [
+        "reasoning.encrypted_content"
+      ],
+      "input_bytes": 22858,
+      "input_declaration_names": [],
+      "input_lexical_markers": {
+        "# Tools": false,
+        "## Tools": false,
+        "apply_patch": true,
+        "exec_command": true,
+        "functions.": false,
+        "namespace functions": false,
+        "shell_command": false
+      },
+      "input_messages": [
+        {
+          "content_bytes": [
+            17766
+          ],
+          "content_types": [
+            "input_text"
+          ],
+          "role": "developer"
+        },
+        {
+          "content_bytes": [
+            2853,
+            515
+          ],
+          "content_types": [
+            "input_text",
+            "input_text"
+          ],
+          "role": "developer"
+        },
+        {
+          "content_bytes": [
+            888
+          ],
+          "content_types": [
+            "input_text"
+          ],
+          "role": "user"
+        },
+        {
+          "content_bytes": [
+            64
+          ],
+          "content_types": [
+            "input_text"
+          ],
+          "role": "user"
+        }
+      ],
+      "input_sha256": "12fc9526c27325446e46ec0a3fa9ca261bda69c2c9a829a85efc6ce6ccb7904c",
+      "json": true,
+      "model": "gpt-5.6-luna",
+      "no_tools_request_valid": true,
+      "parallel_tool_calls": false,
+      "path": "/v1/responses",
+      "raw_structural_metadata": {
+        "input": {
+          "objects": [
+            {
+              "identifiers": [
+                {
+                  "key": "role",
+                  "value": "developer"
+                },
+                {
+                  "key": "type",
+                  "value": "message"
+                }
+              ],
+              "keys": [
+                "content",
+                "role",
+                "type"
+              ],
+              "path": "$[0]"
+            },
+            {
+              "identifiers": [
+                {
+                  "key": "type",
+                  "value": "input_text"
+                }
+              ],
+              "keys": [
+                "text",
+                "type"
+              ],
+              "path": "$[0].content[0]"
+            },
+            {
+              "identifiers": [
+                {
+                  "key": "role",
+                  "value": "developer"
+                },
+                {
+                  "key": "type",
+                  "value": "message"
+                }
+              ],
+              "keys": [
+                "content",
+                "id",
+                "role",
+                "type"
+              ],
+              "path": "$[1]"
+            },
+            {
+              "identifiers": [
+                {
+                  "key": "type",
+                  "value": "input_text"
+                }
+              ],
+              "keys": [
+                "text",
+                "type"
+              ],
+              "path": "$[1].content[0]"
+            },
+            {
+              "identifiers": [
+                {
+                  "key": "type",
+                  "value": "input_text"
+                }
+              ],
+              "keys": [
+                "text",
+                "type"
+              ],
+              "path": "$[1].content[1]"
+            },
+            {
+              "identifiers": [
+                {
+                  "key": "role",
+                  "value": "user"
+                },
+                {
+                  "key": "type",
+                  "value": "message"
+                }
+              ],
+              "keys": [
+                "content",
+                "id",
+                "role",
+                "type"
+              ],
+              "path": "$[2]"
+            },
+            {
+              "identifiers": [
+                {
+                  "key": "type",
+                  "value": "input_text"
+                }
+              ],
+              "keys": [
+                "text",
+                "type"
+              ],
+              "path": "$[2].content[0]"
+            },
+            {
+              "identifiers": [
+                {
+                  "key": "role",
+                  "value": "user"
+                },
+                {
+                  "key": "type",
+                  "value": "message"
+                }
+              ],
+              "keys": [
+                "content",
+                "id",
+                "role",
+                "type"
+              ],
+              "path": "$[3]"
+            },
+            {
+              "identifiers": [
+                {
+                  "key": "type",
+                  "value": "input_text"
+                }
+              ],
+              "keys": [
+                "text",
+                "type"
+              ],
+              "path": "$[3].content[0]"
+            }
+          ],
+          "truncated": false
+        },
+        "tools": {
+          "objects": [],
+          "truncated": false
+        }
+      },
+      "reasoning": {
+        "context": "all_turns",
+        "effort": "high"
+      },
+      "request_keys": [
+        "client_metadata",
+        "include",
+        "input",
+        "model",
+        "parallel_tool_calls",
+        "prompt_cache_key",
+        "reasoning",
+        "store",
+        "stream",
+        "text",
+        "tool_choice"
+      ],
+      "store": false,
+      "text": {},
+      "tool_choice": "none"
+    }
+  ],
+  "request_count": 1,
+  "returncode": 0,
+  "stderr_bytes": 0,
+  "stderr_tail": null,
+  "stdout_bytes": 984,
+  "timed_out": false,
+  "tool_output_observations": [],
+  "total_post_attempts": 1,
+  "version": "codex-cli 0.149.1"
+}

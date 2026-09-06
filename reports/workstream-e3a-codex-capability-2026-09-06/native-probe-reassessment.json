@@ -1,0 +1,29 @@
+{
+  "scope": "Reassessment of saved first-build fixtures only; not final-client or live authorization",
+  "method": "Import scripts/e3a_codex_check.py and call probe_passed on each unchanged raw report",
+  "reason": "The first checker expected the internal error without Codex's serialized Fatal error: prefix",
+  "helper_sha256": "cbd85c192f4ecbf092a6f8b8b16a5b764d05c86c08cf2e8e5af8be439d174e06",
+  "original_helper_sha256": "4cb5c3d06f5d69d5e6165102f67d03aa169d359d46cde90c117ae55d2d6b43a5",
+  "original_patch_sha256": "08b448a64baad80729555dc586013b63b8f45880aaf999ce8d3df9b2c817a806",
+  "original_binary_sha256": "df3c445227bd0a08782456a7123a6d206d8453a9f5053c3504bafc3241508684",
+  "new_fixture_requests": 0,
+  "candidate_model_calls": 0,
+  "no_tools_verified": false,
+  "raw_reports_modified": false,
+  "assessments": [
+    {
+      "artifact": "native-baseline.json",
+      "sha256": "42d7542b3deeb52e3572c8c8811c877323c12043b222bcb6fbbf06aceaea1c4e",
+      "recorded_probe_passed": true,
+      "reassessed_probe_passed": true,
+      "total_post_attempts": 1
+    },
+    {
+      "artifact": "native-tool-call.json",
+      "sha256": "22e8544362866956c396bcc1feb4baec978cdac1ed2f4f47cf6dfc7bbf38eb8e",
+      "recorded_probe_passed": false,
+      "reassessed_probe_passed": true,
+      "total_post_attempts": 1
+    }
+  ]
+}

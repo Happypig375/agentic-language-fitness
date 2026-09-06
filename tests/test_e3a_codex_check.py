@@ -2,6 +2,7 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+from urllib import error, request
 from unittest.mock import patch
 
 
@@ -31,6 +32,135 @@ class E3aCodexCheckTests(unittest.TestCase):
         self.assertEqual(raw.count(b"data:"), 6)
         self.assertIn(b"response.completed", raw)
         self.assertIn(b"fixture capability probe.", raw)
+
+    def test_tool_call_fixture_sse_has_fixed_custom_call_and_marker(self):
+        raw = module.deterministic_sse("tool-call")
+        self.assertLess(len(raw), 4096)
+        self.assertEqual(raw.count(b"data:"), 6)
+        events = [json.loads(line[6:]) for line in raw.decode().splitlines() if line.startswith("data:")]
+        done = next(event["item"] for event in events if event["type"] == "response.output_item.done")
+        self.assertEqual(done["type"], "custom_tool_call")
+        self.assertEqual(done["namespace"], "functions")
+        self.assertEqual(done["name"], "exec")
+        self.assertEqual(done["input"], module.TOOL_CALL_INPUT)
+        self.assertNotIn(module.TOOL_CALL_MARKER.encode(), raw)
+        self.assertNotIn(b"shell", raw)
+
+    def test_tool_output_marker_requires_matching_followup_output_item(self):
+        positive = json.dumps({"input": [{"type": "custom_tool_call_output",
+            "call_id": "call_fixture_1", "output": "E3A_EXECUTED_42"}]}).encode()
+        wrapped = json.dumps({"input": [{"type": "custom_tool_call_output",
+            "call_id": "call_fixture_1", "output": [{"type": "output_text", "text": "metadata\nE3A_EXECUTED_42\nmore"}]}]}).encode()
+        wrapped_text = json.dumps({"input": [{"type": "custom_tool_call_output",
+            "call_id": "call_fixture_1", "output": [{"type": "text", "text": "E3A_EXECUTED_42\n"}]}]}).encode()
+        wrong_id = json.dumps({"input": [{"type": "custom_tool_call_output",
+            "call_id": "other", "output": "E3A_EXECUTED_42"}]}).encode()
+        wrong_type = json.dumps({"input": [{"type": "message", "call_id": "call_fixture_1", "text": "E3A_EXECUTED_42"}]}).encode()
+        echoed_input = json.dumps({"input": [{"type": "custom_tool_call",
+            "call_id": "call_fixture_1", "input": "E3A_EXECUTED_42"}]}).encode()
+        agent_text = json.dumps({"input": [{"type": "message", "role": "assistant", "content": "E3A_EXECUTED_42"}]}).encode()
+        error_echo = json.dumps({"input": [{"type": "function_call_output",
+            "call_id": "call_fixture_1", "output": "error: E3A_EXECUTED_42"}]}).encode()
+        self.assertEqual(module._tool_output_observations([b"{}", positive]), [
+            {"type": "custom_tool_call_output", "call_id": "call_fixture_1", "marker_present": True}
+        ])
+        self.assertEqual(module._tool_output_observations([b"{}", wrong_id, echoed_input, error_echo]), [
+            {"type": "function_call_output", "call_id": "call_fixture_1", "marker_present": False}
+        ])
+        self.assertTrue(module._tool_output_observations([b"{}", wrapped])[0]["marker_present"])
+        self.assertTrue(module._tool_output_observations([b"{}", wrapped_text])[0]["marker_present"])
+        self.assertEqual(module._tool_output_observations([b"{}", wrong_type, agent_text]), [])
+
+    def test_tool_mode_never_passes_even_with_baseline_fields(self):
+        report = {"fixture_mode": "tool-call", "returncode": 0, "timed_out": False,
+                  "fixture_error": [], "request_bodies": [{}], "fixture_final_text": "fixture capability probe.",
+                  "cli_turn_completed_usage": {"input_tokens": 11, "output_tokens": 4}}
+        self.assertFalse(module.probe_passed(report))
+
+    def _expected_report(self, *, mode="tool-call", **changes):
+        body = {"tools": [], "input": [{"role": "user", "content": "probe"}],
+                "tool_choice": "none", "model": module.MODEL,
+                "reasoning": "high", "fields_present": {"input": True},
+                "authorization_header_present": False, "api_key_header_present": False,
+                "path": "/v1/responses", "json": True,
+                "no_tools_request_valid": True}
+        report = {"expect_no_tools": True, "fixture_mode": mode, "returncode": 2,
+                  "timed_out": False, "fixture_error": [], "request_bodies": [body],
+                  "total_post_attempts": 1, "tool_output_observations": [],
+                  "computed_tool_output_marker": False, "cli_event_types": [],
+                  "cli_events": [{"type": "turn.failed", "error": {"message": module.NO_TOOLS_CLI_ERROR}}],
+                  "fixture_final_text": None, "cli_turn_completed_usage": None}
+        if mode == "baseline":
+            report["returncode"] = 0
+            report["cli_event_types"] = ["turn.completed"]
+            report["cli_events"] = [{"type": "turn.completed"}]
+        report.update(changes)
+        return report
+
+    def test_expected_no_tools_baseline_requires_normal_completion(self):
+        report = self._expected_report(mode="baseline", returncode=0,
+            fixture_final_text="fixture capability probe.",
+            cli_turn_completed_usage={"input_tokens": 11, "output_tokens": 4})
+        self.assertTrue(module.probe_passed(report))
+        report["request_bodies"][0]["tool_choice"] = "auto"
+        self.assertFalse(module.probe_passed(report))
+
+    def test_native_fixture_requires_serialized_fatal_error(self):
+        artifact = Path(__file__).parents[1] / "reports" / "workstream-e3a-codex-capability-2026-09-06" / "native-tool-call.json"
+        report = json.loads(artifact.read_text(encoding="utf-8"))
+        report["native_no_tools_fixture_passed"] = False
+        self.assertTrue(module.probe_passed(report))
+        report["cli_events"][-2]["message"] = module.NO_TOOLS_POLICY_ERROR
+        report["cli_events"][-1]["error"]["message"] = module.NO_TOOLS_POLICY_ERROR
+        self.assertFalse(module.probe_passed(report))
+
+    def test_expected_no_tools_rejects_false_positive_text_and_success(self):
+        report = self._expected_report(cli_events=[{"type": "item.completed", "text": module.NO_TOOLS_POLICY_ERROR}])
+        self.assertFalse(module.probe_passed(report))
+        report = self._expected_report(returncode=0, fixture_final_text="fixture capability probe.")
+        self.assertFalse(module.probe_passed(report))
+
+    def test_expected_no_tools_rejects_extra_post_and_tool_output(self):
+        report = self._expected_report(total_post_attempts=2)
+        self.assertFalse(module.probe_passed(report))
+        report = self._expected_report(tool_output_observations=[{"type": "custom_tool_call_output"}])
+        self.assertFalse(module.probe_passed(report))
+
+    def test_expected_no_tools_requires_feature_config(self):
+        with self.assertRaises(ValueError):
+            module.run_probe("fake-codex", configs=(), expect_no_tools=True)
+
+    def test_no_tools_request_validation_uses_complete_decoded_input(self):
+        valid = json.dumps({"input": [], "tools": [], "tool_choice": "none"}).encode()
+        self.assertTrue(module._summarize_body(valid)["no_tools_request_valid"])
+        for value in (
+            {"input": [{"type": "AdditionalTools"}], "tools": [], "tool_choice": "none"},
+            {"input": "AdditionalTools", "tools": [], "tool_choice": "none"},
+            {"input": [], "tools": [{"type": "function"}], "tool_choice": "none"},
+            {"input": [], "tools": [], "tool_choice": "auto"},
+            {"input": [], "tools": {}, "tool_choice": "none"},
+        ):
+            with self.subTest(value=value):
+                self.assertFalse(module._summarize_body(json.dumps(value).encode())["no_tools_request_valid"])
+
+    def test_tool_call_fixture_counts_one_extra_post_as_rejected(self):
+        server, thread, base_url = module.fixture_server("tool-call")
+        try:
+            for index in range(10):
+                expected = 200 if index == 0 else 400
+                with self.subTest(expected=expected):
+                    try:
+                        response = request.urlopen(request.Request(base_url + "/responses", data=b"{}"), timeout=2)
+                        self.assertEqual(response.status, expected)
+                        response.read()
+                    except error.HTTPError as exc:
+                        self.assertEqual(exc.code, expected)
+            self.assertEqual(server.post_attempts, 10)
+            self.assertEqual(server.rejected_post_count, 9)
+            self.assertEqual(len(server.captured), 2)
+            self.assertLessEqual(len(server.errors), 8)
+        finally:
+            server.shutdown(); server.server_close(); thread.join(timeout=2)
 
     def test_environment_scrubs_credentials_and_proxy_overrides(self):
         with patch.dict(module.os.environ, {"OPENAI_API_KEY": "secret", "HTTPS_PROXY": "http://proxy", "PATH": "p"}, clear=True):
@@ -69,6 +199,47 @@ class E3aCodexCheckTests(unittest.TestCase):
         self.assertEqual(result["tool_choice"], "auto")
         self.assertFalse(result["parallel_tool_calls"])
         self.assertEqual(result["text"], {"format": {"type": "text"}})
+
+    def test_summary_inventories_nested_input_and_tool_shapes(self):
+        raw = json.dumps({
+            "input": [{"role": "developer", "content": [{
+                "type": "input_text", "text": "do not expose this body"
+            }]}],
+            "tools": [{"type": "namespace", "name": "mcp", "tools": [
+                {"type": "function", "name": "lookup", "description": "secret schema prose"}
+            ]}],
+        }).encode()
+        result = module._summarize_body(raw)["raw_structural_metadata"]
+        input_objects = result["input"]["objects"]
+        tool_objects = result["tools"]["objects"]
+        self.assertEqual(input_objects[0]["path"], "$[0]")
+        self.assertEqual(input_objects[0]["keys"], ["content", "role"])
+        self.assertEqual(tool_objects[0]["path"], "$[0]")
+        self.assertEqual(tool_objects[0]["identifiers"], [
+            {"key": "name", "value": "mcp"}, {"key": "type", "value": "namespace"}
+        ])
+        self.assertIn({"key": "name", "value": "lookup"}, tool_objects[1]["identifiers"])
+        serialized = json.dumps(result)
+        self.assertNotIn("do not expose this body", serialized)
+        self.assertNotIn("secret schema prose", serialized)
+
+    def test_metadata_inventory_is_bounded_and_marks_truncation(self):
+        value = {"tools": [{"type": "function", "name": "ok", "nested": {"role": "tool"}}]}
+        inventory = module._metadata_inventory(value, max_depth=1, max_nodes=2)
+        self.assertTrue(inventory["truncated"])
+        self.assertLessEqual(len(inventory["objects"]), 2)
+
+    def test_metadata_inventory_does_not_treat_arbitrary_names_as_identifiers(self):
+        inventory = module._metadata_inventory({
+            "name": "a secret phrase that is not an identifier",
+            "role": "user",
+            "type": "function",
+            "description": "private prompt text",
+        })
+        self.assertEqual(inventory["objects"][0]["identifiers"], [
+            {"key": "role", "value": "user"}, {"key": "type", "value": "function"}
+        ])
+        self.assertNotIn("private prompt text", json.dumps(inventory))
 
     def test_configs_are_restricted_to_non_secret_enums(self):
         for config in ("features.example=secret", "model_reasoning_effort=secret", "wire_api=chat"):

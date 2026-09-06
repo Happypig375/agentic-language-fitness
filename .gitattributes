@@ -13,3 +13,4 @@
 /tests/test_e3a_codex_check.py text eol=lf
 /reports/workstream-e3a-codex-capability-2026-09-06/** text eol=lf
 /tests/test_e3a_implementation.py text eol=lf
+/infra/codex-no-tools/*.patch text eol=lf
