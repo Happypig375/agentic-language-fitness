@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from alf.e3a_codex import CodexOAuthAdapter, DispatchGuard
 from alf.e3a_runner import Journal, run_batch
 from alf.e3a_sandbox import DockerEvaluator
+from alf.config import load_manifest
 from alf.environment_profile import environment_profile_sha256, load_environment_profile
 from alf.protocol import canonical_json_hash
 from alf.workstream_e2 import _atomic_json
@@ -238,7 +239,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("refusing to overwrite existing output")
     profile = load_environment_profile(ROOT / "infra/remote-runner/environment-profile.json",
                                        repository_root=ROOT)
-    manifest = read_json(ROOT / spec["manifest"])
+    manifest = load_manifest(ROOT, spec["manifest"])
     runtime = {"runner_git_commit": _git_head(), "runner_source_sha256": _source_identity(),
                "native_sha256": _sha(args.native_binary),
                "catalog_sha256": _sha(args.model_catalog),

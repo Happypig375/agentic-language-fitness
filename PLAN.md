@@ -2,7 +2,7 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: successful shakedown; frozen pilot next (2026-09-08)
+## Current checkpoint: zero-dispatch pilot preflight repair (2026-09-08)
 
 The [parser repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md) was
 pushed without a PR as `16737af3f67ccaa0f47671c85f07bdbab7062b7a`; its 75
@@ -23,15 +23,26 @@ remain.** The earlier failed
 remains retained, debited, unapplied and unscored; the new allowance is not a
 refund or retrospective promotion.
 
-The tracked freeze binds that successful report to the status-only frozen
-specification; policy and reviewed controller/source identities are unchanged.
-Next: validate/review the freeze and minimal existing-launcher `-Phase pilot`
-adaptation, publish directly and verify exact-commit CI, then run the already
-approved fixed **24-trajectory / at-most-72-dispatch pilot** on a fresh private
-run root through the same local-OAuth route. No extra integration call or new
-adoption decision is required. Missing Task 007 architecture judgement remains
-unknown, not a successful refactor. All immediate safety, ambiguity, accounting,
-cleanup and budget stops remain in force; retain all assigned/started slots.
+The freeze and minimal `-Phase pilot` launcher adaptation were published as
+`7575343466741caa8b51c9770959bf9cbc4f7773`; exact Linux/Windows CI
+`34245181125` passed. Pilot attempt 01 then stopped before any dispatch with
+`ValueError`: the CLI used a plain-dictionary manifest loader, lost the
+successor manifest root and failed the existing path-safety check. All 24
+assigned slots remain unstarted; no candidate outcome exists. Auth cleanup
+and scoped listener/container absence were verified. Read the
+[immutable attempt, diagnosis and repair sequence](docs/workstream-e3a-oauth-pilot-2026-09-08.md).
+
+Next: use the existing metadata-preserving manifest loader, add a real-path
+regression, complete affected checks/review and exact-commit CI. This ordinary
+apparatus fix changes the source binding, not scientific policy. Retain the
+old freeze and attempts in history, return activation to shakedown-ready and
+run a fresh two-step unrelated shakedown within the **three remaining** resumed
+dispatches. Successful matching evidence permits a renewed tracked freeze and
+the already approved fixed **24-trajectory / at-most-72-dispatch pilot**;
+no new adoption decision, sample extension or ambiguous reissue is authorized.
+Missing Task 007 architecture judgement remains unknown, not a successful
+refactor. All immediate safety, ambiguity, accounting, cleanup and budget
+stops remain in force; retain all assigned/started slots.
 
 Automatic confirmed bug fixes and direct pushing without PRs are standing
 instructions in [AGENTS.md](AGENTS.md). No new scientific version is needed.

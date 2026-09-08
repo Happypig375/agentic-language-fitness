@@ -1,0 +1,1271 @@
+{
+  "authorization_id": null,
+  "batch_stop": "ValueError",
+  "candidate_model_calls": null,
+  "committed_upper_usd": null,
+  "count_http_calls": null,
+  "dispatches": 0,
+  "generation_requests": null,
+  "live_continuation_verified": false,
+  "mode": "authorized-live",
+  "phase": "pilot",
+  "reservations": [],
+  "runner_git_commit": "7575343466741caa8b51c9770959bf9cbc4f7773",
+  "runtime": {
+    "catalog_sha256": "c18214b1ba88ab9bd164753115324a7a29c0582e8d071f7b3babf749d892f549",
+    "container_image_id": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+    "environment_profile_sha256": "5bfd79ee77bd1d2b889491be59334729d3cd764c3c42fcb472051d1eccc3f039",
+    "native_sha256": "72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741bb1959",
+    "runner_git_commit": "7575343466741caa8b51c9770959bf9cbc4f7773",
+    "runner_source_sha256": "923fef01fa5b991f91c05bc1afb165554b4b4dd45217dc6a7e1dbf3e9fcd45cf"
+  },
+  "slots": [
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 1,
+      "slot_id": "01-006-transition-validation-fsharp-r1",
+      "status": "unstarted",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 1,
+      "slot_id": "02-006-transition-validation-csharp-r1",
+      "status": "unstarted",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 1,
+      "slot_id": "03-007-query-engine-refactor-csharp-r1",
+      "status": "unstarted",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 1,
+      "slot_id": "04-007-query-engine-refactor-fsharp-r1",
+      "status": "unstarted",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 1,
+      "slot_id": "05-001-priority-fsharp-r1",
+      "status": "unstarted",
+      "task_id": "001-priority"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 1,
+      "slot_id": "06-001-priority-csharp-r1",
+      "status": "unstarted",
+      "task_id": "001-priority"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 2,
+      "slot_id": "07-006-transition-validation-csharp-r2",
+      "status": "unstarted",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 2,
+      "slot_id": "08-006-transition-validation-fsharp-r2",
+      "status": "unstarted",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 2,
+      "slot_id": "09-001-priority-fsharp-r2",
+      "status": "unstarted",
+      "task_id": "001-priority"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 2,
+      "slot_id": "10-001-priority-csharp-r2",
+      "status": "unstarted",
+      "task_id": "001-priority"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 2,
+      "slot_id": "11-007-query-engine-refactor-fsharp-r2",
+      "status": "unstarted",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 2,
+      "slot_id": "12-007-query-engine-refactor-csharp-r2",
+      "status": "unstarted",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 3,
+      "slot_id": "13-006-transition-validation-csharp-r3",
+      "status": "unstarted",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 3,
+      "slot_id": "14-006-transition-validation-fsharp-r3",
+      "status": "unstarted",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 3,
+      "slot_id": "15-007-query-engine-refactor-fsharp-r3",
+      "status": "unstarted",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 3,
+      "slot_id": "16-007-query-engine-refactor-csharp-r3",
+      "status": "unstarted",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 3,
+      "slot_id": "17-001-priority-csharp-r3",
+      "status": "unstarted",
+      "task_id": "001-priority"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 3,
+      "slot_id": "18-001-priority-fsharp-r3",
+      "status": "unstarted",
+      "task_id": "001-priority"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 4,
+      "slot_id": "19-006-transition-validation-fsharp-r4",
+      "status": "unstarted",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 4,
+      "slot_id": "20-006-transition-validation-csharp-r4",
+      "status": "unstarted",
+      "task_id": "006-transition-validation"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 4,
+      "slot_id": "21-007-query-engine-refactor-csharp-r4",
+      "status": "unstarted",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 4,
+      "slot_id": "22-007-query-engine-refactor-fsharp-r4",
+      "status": "unstarted",
+      "task_id": "007-query-engine-refactor"
+    },
+    {
+      "language": "csharp",
+      "reason": "ValueError",
+      "repetition": 4,
+      "slot_id": "23-001-priority-csharp-r4",
+      "status": "unstarted",
+      "task_id": "001-priority"
+    },
+    {
+      "language": "fsharp",
+      "reason": "ValueError",
+      "repetition": 4,
+      "slot_id": "24-001-priority-fsharp-r4",
+      "status": "unstarted",
+      "task_id": "001-priority"
+    }
+  ],
+  "specification_sha256": "d33b0f7ed317b4f1792ab22bdf82086bb25a11cebf93781aedd6ebfff5701996",
+  "summary": {
+    "assigned": 24,
+    "attempted_rounds": 0,
+    "equal_task_complete_means": {
+      "first_completion": null,
+      "first_phase_usage.input_tokens": null,
+      "first_phase_usage.output_tokens": null,
+      "repair_usage.input_tokens": null,
+      "repair_usage.output_tokens": null,
+      "total_usage.input_tokens": null,
+      "total_usage.output_tokens": null,
+      "trajectory_with_scoring_seconds": null
+    },
+    "incremental_repair_usage": {
+      "cache_write_input_tokens": null,
+      "cached_input_tokens": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "reasoning_output_tokens": null
+    },
+    "observed_usage": {
+      "cache_write_input_tokens": null,
+      "cached_input_tokens": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "reasoning_output_tokens": null
+    },
+    "paired_first_completion": [
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 1,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "001-priority"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 2,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "001-priority"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 3,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "001-priority"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 4,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "001-priority"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 1,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "006-transition-validation"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 2,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "006-transition-validation"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 3,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "006-transition-validation"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 4,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "006-transition-validation"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 1,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "007-query-engine-refactor"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 2,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "007-query-engine-refactor"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 3,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "007-query-engine-refactor"
+      },
+      {
+        "completion": {
+          "csharp": null,
+          "fsharp": null
+        },
+        "fsharp_minus_csharp": null,
+        "repetition": 4,
+        "resources": {
+          "first_phase_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "first_phase_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "repair_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.input_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "total_usage.output_tokens": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          },
+          "trajectory_with_scoring_seconds": {
+            "fsharp_minus_csharp": null,
+            "values": {
+              "csharp": null,
+              "fsharp": null
+            }
+          }
+        },
+        "task_id": "007-query-engine-refactor"
+      }
+    ],
+    "per_task": {
+      "001-priority": {
+        "first_completion": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "first_phase_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "first_phase_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "repair_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "repair_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "total_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "total_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "trajectory_with_scoring_seconds": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "006-transition-validation": {
+        "first_completion": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "first_phase_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "first_phase_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "repair_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "repair_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "total_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "total_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "trajectory_with_scoring_seconds": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "007-query-engine-refactor": {
+        "first_completion": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "first_phase_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "first_phase_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "repair_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "repair_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "total_usage.input_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "total_usage.output_tokens": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "trajectory_with_scoring_seconds": {
+          "complete_mean": null,
+          "coverage": 0,
+          "observed_max": null,
+          "observed_min": null,
+          "paired_differences": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      }
+    },
+    "started": 0,
+    "usage_coverage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

@@ -5,6 +5,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from alf.workstream_e3a import candidate_payload
+
 ROOT = Path(__file__).parents[1]
 spec = importlib.util.spec_from_file_location("e3a_run", ROOT / "scripts/e3a_run.py")
 MODULE = importlib.util.module_from_spec(spec)
@@ -293,6 +295,33 @@ class E3aRunTests(unittest.TestCase):
         with patch.object(MODULE, "read_json", return_value={"execution_authorized": True,
                 "user_live_execution_approved": True, "status": "bounded-implementation-not-frozen"}), self.assertRaises(SystemExit):
             MODULE.main(args)
+
+    def test_main_loads_successor_manifest_with_root_context_for_all_payloads(self):
+        captured = {}
+
+        def shakedown(specification, manifest, **kwargs):
+            captured["manifest"] = manifest
+            for language in ("fsharp", "csharp"):
+                for task in manifest["tasks"]:
+                    payload = candidate_payload(ROOT, manifest, language, task["id"])
+                    self.assertTrue(payload["source"])
+            return {"passed": True, "dispatches": 0, "batch_stop": None}
+
+        args = ["--phase", "shakedown", "--native-binary", "native",
+                "--native-sha256", "sha", "--model-catalog", "catalog",
+                "--auth-file", "auth", "--output", "unused.json"]
+        transport = type("Transport", (), {"wrapper": type("Wrapper", (), {
+            "E3A_NATIVE_SHA256": "sha", "E3A_MODEL_CATALOG_SHA256": "sha"})()})()
+        with tempfile.TemporaryDirectory() as d, patch.object(MODULE, "_git_head", return_value="commit"), \
+                patch.object(MODULE, "_source_identity", return_value="source"), \
+                patch.object(MODULE, "_sha", return_value="sha"), \
+                patch.object(MODULE, "load_environment_profile", return_value={"profile_id": "p"}), \
+                patch.object(MODULE, "environment_profile_sha256", return_value="profile"), \
+                patch.object(MODULE, "DockerTransport", return_value=transport), \
+                patch.object(MODULE, "run_shakedown", side_effect=shakedown):
+            self.assertEqual(MODULE.main(args[:-1] + [str(Path(d) / "unused.json")]), 0)
+        manifest = captured["manifest"]
+        self.assertEqual(manifest.manifest_parent, (ROOT / "benchmarks/successor").resolve())
 
 
 if __name__ == "__main__":
