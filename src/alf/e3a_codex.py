@@ -7,6 +7,13 @@ from typing import Any, Callable
 MAX_SUBMISSION_BYTES = 49_152
 MAX_CAPTURE_BYTES = 1_048_576
 
+_STARTUP_DIAGNOSTICS = (
+    {"type": "item.completed", "item": {"id": "item_0", "type": "error", "message":
+        "Under-development features enabled: no_tools, single_response. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /tmp/alf-codex-home/config.toml."}},
+    {"type": "item.completed", "item": {"id": "item_1", "type": "error", "message":
+        "Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`."}},
+)
+
 class CodexBoundaryError(ValueError): pass
 
 @dataclass
@@ -61,12 +68,12 @@ def parse_cli_jsonl(raw: bytes | str) -> dict[str, Any]:
     thread_index, turn_index, completed_index = (types.index(k) for k in ("thread.started", "turn.started", "turn.completed"))
     if thread_index != 0 or not (thread_index < turn_index < completed_index) or completed_index != len(types) - 1:
         return _failed("unexpected-cli-sequence", text)
-    if any(kind.startswith("item.") and not (turn_index < index < completed_index)
-           for index, kind in enumerate(types) if isinstance(kind, str)):
+    startup = events[1:turn_index]
+    if startup not in ([], list(_STARTUP_DIAGNOSTICS)):
         return _failed("unexpected-cli-sequence", text)
     if any(k not in {"thread.started", "turn.started", "item.started", "item.updated", "item.completed", "turn.completed"} for k in types): return _failed("unexpected-cli-event", text)
     messages = []
-    for event in events:
+    for event in events[turn_index + 1:completed_index]:
         if event.get("type") not in {"item.started", "item.updated", "item.completed"}: continue
         item = event.get("item")
         if not isinstance(item, dict): return _failed("invalid-cli-item", text)
@@ -77,7 +84,7 @@ def parse_cli_jsonl(raw: bytes | str) -> dict[str, Any]:
             messages.append(item["text"])
     completed = next(e for e in events if e.get("type") == "turn.completed")
     if len(messages) > 1: return _failed("multiple-final-replies", text, completed.get("usage"))
-    return {"status": "completed", "text": messages[0] if messages else "", "usage": normalize_cli_usage(completed.get("usage")), "raw": text, "response_id": completed.get("id"), "model": completed.get("model")}
+    return {"status": "completed", "text": messages[0] if messages else "", "usage": normalize_cli_usage(completed.get("usage")), "raw": text, "response_id": completed.get("id"), "model": completed.get("model"), "startup_diagnostics": copy.deepcopy(startup)}
 
 def _get(capture: Any, key: str) -> Any:
     return capture.get(key) if isinstance(capture, dict) else getattr(capture, key, None)

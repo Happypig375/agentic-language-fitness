@@ -8,8 +8,12 @@ on `unexpected-cli-sequence`. Two startup diagnostics preceded `turn.started`.
 The [incident record](docs/workstream-e3a-oauth-shakedown-2026-09-08.md#live-attempt-01--stopped)
 owns the evidence and next decision. The failed reply is unapplied/unscored;
 no retry, freeze or pilot occurred. Temporary credentials were cleaned and
-listeners/containers are absent. `execution_authorized=false` now holds live
-work pending direction on model-free repair and a fresh shakedown allowance.
+listeners/containers are absent. `execution_authorized=false` holds live work
+pending a fresh shakedown allowance. Under the user's automatic-bug-fix
+direction, the [bounded parser repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md)
+passed 75 focused model-free tests and separate AI review. Verify its exact
+implementing-commit CI before any live activation; do not ask for repair
+approval again.
 Do not request renewed scientific adoption or routine publishing permission;
 do not mistake the five-apparatus-failure rule for permission to reissue a live
 attempt or exceed the original two-dispatch integration allowance.
@@ -52,6 +56,22 @@ Current governance applies to future work. Older proposals and their checked-in 
 - Candidate code/project execution is sandboxed without model credentials, host secrets or writable scoring machinery. No fallback to executing untrusted code on the host.
 - Missing usage remains null; token subsets are not added twice. OAuth debits dispatches before launch and retains ambiguous debits; token thresholds are post-turn alarms and subscription cost stays null. Historical API protocols retain their own reservation rules.
 - No new remote/proxy layers or generic agent framework. H does not require optional F/G completion.
+
+## Automatic bug fixes
+
+Fix confirmed implementation bugs automatically within the authorized plan;
+do not stop merely to ask whether to fix them. Reproduce the defect, make the
+smallest appropriate repair, add regression coverage, and complete applicable
+validation/review. Record the cause, changes, checks and source identities so
+the repair is traceable and reproducible. Preserve failed attempts and archived
+results; ordinary runner fixes do not require a new scientific version.
+
+A live-execution hold does not itself prohibit safe model-free diagnosis or
+repair. This direction does not authorize new live dispatch allowances,
+automatic reissues/replacements, scientific treatment changes, relaxed security
+boundaries, or bypassing another explicit stop. If the fix requires one of
+those changes or the intended behavior is ambiguous, report that specific
+decision instead of treating it as an ordinary bug fix.
 
 ## Publishing
 

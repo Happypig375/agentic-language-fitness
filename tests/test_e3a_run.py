@@ -22,15 +22,19 @@ def fixture():
 
 class Transport:
     is_live = False
-    def __init__(self, replies=None, usage=None, on_launch=None):
+    def __init__(self, replies=None, usage=None, on_launch=None, startup=False):
         self.replies = list(replies or ['{"files":{"Program.cs":"class Program {}"}}'])
         self.usage = usage or {"input_tokens": 10, "output_tokens": 10}
-        self.calls = []; self.on_launch = on_launch
+        self.calls = []; self.on_launch = on_launch; self.startup = startup
     def launch(self, stdin, timeout):
         self.calls.append(bytes(stdin))
         if self.on_launch: self.on_launch(bytes(stdin))
         text = self.replies.pop(0)
-        raw = "\n".join([json.dumps({"type": "thread.started"}), json.dumps({"type": "turn.started"}),
+        prefix = [json.dumps({"type": "thread.started"})]
+        if self.startup:
+            prefix.extend(Path(ROOT / "tests/fixtures/e3a-codex-startup-envelope.jsonl").read_text().splitlines()[1:3])
+        prefix.extend([json.dumps({"type": "turn.started"})])
+        raw = "\n".join([*prefix,
             json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": text}}),
             json.dumps({"type": "turn.completed", "usage": self.usage}), ""])
         return {"stdout": raw, "stderr": "", "returncode": 0, "timed_out": False,
@@ -49,6 +53,17 @@ class Eval:
 
 
 class E3aRunTests(unittest.TestCase):
+    def test_two_step_shakedown_accepts_captured_startup_envelope(self):
+        s, m = fixture(); t = Transport([json.dumps({"files": {"Program.cs": "class Program {}"}})] * 2, startup=True)
+        ev = Eval()
+        with tempfile.TemporaryDirectory() as d:
+            report = MODULE.run_shakedown(s, m, transport=t, evaluator_factory=lambda: ev,
+                                           output=Path(d) / "run", runtime_metadata={}, root=ROOT)
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["dispatches"], 2)
+        for call in t.calls:
+            self.assertNotIn("Under-development", call.decode())
+
     def test_two_launches_replay_and_journal_order(self):
         s, m = fixture(); journal_dir = None
         def before_launch(stdin):

@@ -1,5 +1,6 @@
 import json
 import unittest
+from pathlib import Path
 
 from alf.e3a_codex import (MAX_CAPTURE_BYTES, CodexOAuthAdapter, DispatchGuard, build_replay,
                             normalize_cli_usage, parse_cli_jsonl)
@@ -18,6 +19,73 @@ class _Transport:
 
 
 class E3aCodexTests(unittest.TestCase):
+    def test_captured_startup_diagnostics_are_admitted_separately(self):
+        fixture = Path(__file__).parent / "fixtures" / "e3a-codex-startup-envelope.jsonl"
+        raw = fixture.read_bytes()
+        report = Path(__file__).parents[1] / "reports/workstream-e3a-oauth-shakedown-2026-09-08/attempt-01-report.json"
+        captured = json.loads(report.read_text(encoding="utf-8"))["attempts"][0]["response"]["raw_stdout"]
+        self.assertEqual(raw.decode().replace("\r\n", "\n"), captured.replace("\r\n", "\n"))
+        parsed = parse_cli_jsonl(raw)
+        self.assertEqual(parsed["status"], "completed")
+        self.assertEqual([event["item"]["id"] for event in parsed["startup_diagnostics"]], ["item_0", "item_1"])
+        self.assertEqual(parsed["text"], json.loads(raw.splitlines()[4])["item"]["text"])
+        self.assertEqual(parsed["usage"]["input_tokens"], 6427)
+        self.assertEqual(parsed["usage"]["output_tokens"], 79)
+        self.assertEqual(parsed["usage"]["reasoning_output_tokens"], 37)
+
+        lines = raw.decode().splitlines()
+        mutated = json.loads(lines[1]); mutated["item"]["message"] += " changed"
+        lines[1] = json.dumps(mutated, separators=(",", ":"))
+        self.assertEqual(parse_cli_jsonl("\n".join(lines))["failure"], "unexpected-cli-sequence")
+        lines = raw.decode().splitlines()
+        lines[1], lines[2] = lines[2], lines[1]
+        self.assertEqual(parse_cli_jsonl("\n".join(lines))["failure"], "unexpected-cli-sequence")
+        lines = raw.decode().splitlines()
+        lines.insert(3, lines[1])
+        self.assertEqual(parse_cli_jsonl("\n".join(lines))["failure"], "unexpected-cli-sequence")
+
+        base = raw.decode().splitlines()
+        variants = []
+        event = json.loads(base[1]); event["extra"] = True; variants.append((1, event))
+        event = json.loads(base[1]); event["item"]["extra"] = True; variants.append((1, event))
+        event = json.loads(base[1]); event["item"]["id"] = "item_9"; variants.append((1, event))
+        for index, event in variants:
+            changed = list(base); changed[index] = json.dumps(event, separators=(",", ":"))
+            self.assertNotEqual(parse_cli_jsonl("\n".join(changed))["status"], "completed")
+
+        for event in (
+            {"type": "item.completed", "item": {"type": "command_execution"}},
+            {"type": "item.completed", "item": {"type": "agent_message", "text": "x"}},
+            {"type": "error", "message": "unexpected"},
+        ):
+            changed = list(base); changed.insert(1, json.dumps(event, separators=(",", ":")))
+            self.assertNotEqual(parse_cli_jsonl("\n".join(changed))["status"], "completed")
+        for index in (4, 6):
+            changed = list(base); changed.insert(index, base[1])
+            self.assertNotEqual(parse_cli_jsonl("\n".join(changed))["status"], "completed")
+        changed = list(base); changed.insert(4, base[1])
+        self.assertNotEqual(parse_cli_jsonl("\n".join(changed))["status"], "completed")
+        changed = list(base); changed.insert(5, base[3])
+        self.assertNotEqual(parse_cli_jsonl("\n".join(changed))["status"], "completed")
+
+    def test_unknown_pre_turn_item_remains_rejected_and_no_warning_replay(self):
+        raw = b'{"type":"thread.started"}\n{"type":"item.completed","item":{"id":"x","type":"error","message":"other"}}\n{"type":"turn.started"}\n{"type":"turn.completed","usage":{"input_tokens":1,"output_tokens":0}}\n'
+        self.assertEqual(parse_cli_jsonl(raw)["failure"], "unexpected-cli-sequence")
+        fixture = Path(__file__).parent / "fixtures" / "e3a-codex-startup-envelope.jsonl"
+        spec = {"authority": {"max_replay_bytes": 131072}, "budgets": {"pilot_dispatch_ceiling": 2,
+                "request_input_tokens": 32768, "request_output_tokens_including_reasoning": 8192}}
+        transport = _Transport(fixture.read_bytes())
+        adapter = CodexOAuthAdapter(spec, transport)
+        first = adapter.generate({"instructions": "fixed"}, None, {}, None, 9999999999)
+        second = adapter.generate({"instructions": "fixed"}, first["id"], {}, {}, 9999999999)
+        transcript = json.loads(transport.calls[1][0])["transcript"]
+        self.assertEqual(first["status"], "completed")
+        self.assertEqual(second["status"], "completed")
+        self.assertEqual([entry["role"] for entry in transcript], ["user", "assistant", "user"])
+        self.assertEqual(transcript[1]["data"], first["text"])
+        self.assertNotIn("startup_diagnostics", json.dumps(transcript))
+        self.assertNotIn("Under-development", json.dumps(transcript))
+
     def test_replay_is_canonical_and_labels_final_entry_once(self):
         raw = build_replay("fixed", [{"role": "assistant", "data": "old"}], {"z": 1})
         self.assertEqual(raw[-1:], b"\n")

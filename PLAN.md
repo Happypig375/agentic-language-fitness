@@ -2,7 +2,7 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current stop: live shakedown startup envelope (2026-09-08)
+## Current checkpoint: parser repaired; live allowance held (2026-09-08)
 
 Activation `f8b428f479e2fb2d91079330268584b0b4792821` passed exact Linux/Windows
 CI [34231824002](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34231824002).
@@ -18,11 +18,19 @@ Live execution is now disabled (`shakedown-stopped-awaiting-review`,
 `execution_authorized=false`); prior policy adoption and permission records are
 not erased. This is the immediate live ambiguity/accounting stop, not exhaustion
 of the five-apparatus-failure allowance. Do not reinterpret that rule as live
-retry permission. Next requires direction on a bounded model-free parser/fixture
-repair and a fresh two-dispatch shakedown allowance: only one dispatch remains
-within the original two, insufficient for a new two-step shakedown. Do not
-promote attempt 01 retrospectively, change the scientific treatment, suppress
-arbitrary CLI errors, or begin a pilot. No new protocol version is needed.
+retry permission. The user subsequently directed automatic confirmed bug fixes
+and asked that this be recorded in agentic instructions. The
+[bounded parser/fixture repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md)
+now passes all 75 focused model-free tests, packet reproduction and a separate
+AI-session source review. No renewed repair approval is required. The standing
+rule is in [AGENTS.md](AGENTS.md#automatic-bug-fixes). Publish directly without
+a PR and verify CI on the exact implementing commit before any live activation.
+
+A fresh two-dispatch shakedown allowance still needs direction: only one
+dispatch remains within the original two, insufficient for a new two-step
+shakedown. Do not promote attempt 01 retrospectively, change the scientific
+treatment, suppress arbitrary CLI errors, or begin a pilot. No new protocol
+version is needed, and this repair does not activate live execution.
 
 ## Prior shakedown activation checkpoint (2026-09-08)
 

@@ -60,6 +60,7 @@ def make_packet() -> dict:
                  "scripts/codex-docker.py", "infra/remote-runner/run.ps1", "tests/test_workstream_e3a.py",
                  "tests/test_e3a_implementation.py", "tests/test_e3a_codex.py", "scripts/e3a_run.py",
                  "tests/test_e3a_run.py", "tests/test_codex_docker.py",
+                 "tests/fixtures/e3a-codex-startup-envelope.jsonl",
                  "infra/remote-runner/environment-profile.json"]
     optional_identity_paths = ["infra/codex-no-tools/no-tools.patch", "infra/codex-no-tools/single-response.patch"]
     for path in identity_paths + [p for p in optional_identity_paths if (ROOT / p).exists()]:
