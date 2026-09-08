@@ -2,6 +2,26 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
+## Shakedown activation checkpoint (2026-09-08)
+
+The reviewed implementation is published directly to `main`, without a PR, as
+`0a25e7a659f0a4c74bdcb4fdc5c5f7adb3134c1c`. Exact-commit CI
+[34229097802](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34229097802)
+passed on Linux and Windows. The [activation record](docs/workstream-e3a-oauth-shakedown-2026-09-08.md)
+records a separate clean remote checkout/venv, verified native/catalogue/image
+identities, 72 passing affected activation tests, and the status-only scientific
+specification change to `shakedown-ready-not-frozen` / `execution_authorized=true`.
+The scientific policy hash is unchanged. This is technical activation of the
+already approved shakedown, not a new scientific or permission decision.
+
+Next: publish this activation revision, verify its own exact Linux/Windows CI,
+then invoke the canonical foreground SSH route once for the at-most-two-dispatch
+unrelated shakedown using only an ephemeral copy of the complete local
+`auth.json` file. Retain every failure, verify cleanup, and do not reissue an
+ambiguous dispatch. No OAuth staging or live dispatch has occurred at this
+checkpoint. Pilot remains blocked until a successful matching live shakedown
+and tracked freeze; no freeze exists yet. Preserve the unrelated `uv.lock`.
+
 ## Current resumed implementation (2026-09-08)
 
 The user explicitly said `continue` in response to the five-failure-stop handoff,

@@ -2,12 +2,15 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Resumed (2026-09-08):** native tests/build/loopback/package checks passed and
-another AI session approved the repaired source. The [resumed record](docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md)
-owns exact identities, Python validation and remaining gates. The [prior stop](docs/workstream-e3a-oauth-implementation-stop-2026-09-08.md)
-remains history. Changes are not yet published or verified by exact-commit CI;
-`execution_authorized=false`. No OAuth has been staged and no live dispatch
-has occurred. Do not re-request the approved scientific policy or bounded live permission.
+**Current (2026-09-08):** implementation `0a25e7a659f0a4c74bdcb4fdc5c5f7adb3134c1c`
+passed Linux/Windows CI. The [activation record](docs/workstream-e3a-oauth-shakedown-2026-09-08.md)
+owns the next checkpoint: publish/verify the minimal shakedown activation, then
+use the already approved canonical OAuth route for at most two unrelated-task
+dispatches. Pilot still requires a successful matching live record and freeze.
+No OAuth staging/live dispatch has occurred at this checkpoint. The
+[resumed record](docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md) and
+[prior stop](docs/workstream-e3a-oauth-implementation-stop-2026-09-08.md) remain
+history. Do not re-request approved scientific policy, live or publishing permission.
 
 ## Current boundary
 
@@ -17,7 +20,7 @@ The bounded E3a no-tools controller/adapter and isolated evaluator contain R1–
 
 The pinned image is now restored on the remote host. Standalone sandbox evidence is not end-to-end Windows/API-to-remote integration. Wiring, account access, provider behavior and counting remain unverified. The dated [OAuth adoption record](docs/workstream-e3a-oauth-adoption-2026-09-08.md) permits implementation, an at-most-two-dispatch unrelated-task shakedown after prerequisites, and continuation after successful freeze to the fixed pilot; no automatic reissue/replacement is allowed. Do not switch images, scaffolds or subscription backends silently.
 
-**Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) is adopted by the user/maintainer on 2026-09-08 but not activated. Existing local OAuth and the canonical remote launcher remain required; no API key or new relay. No-tools enforcement, consistent implementation, and model-free evidence remain prerequisites. Adoption/live permission is recorded and should not be re-requested; technical execution remains held until those checks pass.
+**Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) is adopted by the user/maintainer on 2026-09-08. Its shakedown activation revision must pass its exact CI before use. Existing local OAuth and the canonical remote launcher remain required; no API key or new relay. Adoption/live permission is recorded and should not be re-requested. Activation is not a scientific freeze or evidence of working provider behavior.
 
 **Technical hold (2026-09-08):** the implementing binary is now `72cf14453…`,
 with opt-in no-tools and single-response controls. The original `f7942933…`

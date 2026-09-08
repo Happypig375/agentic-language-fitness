@@ -24,16 +24,22 @@ class E3aReviewFixtures(unittest.TestCase):
         cls.manifest = load_manifest(ROOT, cls.spec["manifest"])
         cls.before = {lang: snapshot(ROOT, cls.manifest, lang, 0) for lang in cls.spec["languages"]}
 
-    def test_schedule_is_paired_balanced_finite_and_not_authorized(self):
-        rows = schedule(self.spec)
-        self.assertEqual(rows, schedule(self.spec))
+    def test_schedule_and_budget_are_stable_across_activation_states(self):
+        active = copy.deepcopy(self.spec)
+        inactive = copy.deepcopy(self.spec)
+        active["execution_authorized"] = True
+        inactive["execution_authorized"] = False
+        rows = schedule(active)
+        self.assertEqual(rows, schedule(active))
+        self.assertEqual(rows, schedule(inactive))
         self.assertEqual(len(rows), 24)
         self.assertEqual(set(Counter((r["task_id"], r["language"]) for r in rows).values()), {4})
         for a, b in zip(rows[::2], rows[1::2]):
             self.assertEqual((a["task_id"], a["repetition"]), (b["task_id"], b["repetition"]))
             self.assertNotEqual(a["language"], b["language"])
         self.assertEqual(set(Counter((r["task_id"], r["language"]) for r in rows[::2]).values()), {2})
-        limits = budget(self.spec)
+        limits = budget(active)
+        self.assertEqual(limits, budget(inactive))
         self.assertEqual(limits["max_dispatches"], 72)
         self.assertIsNone(limits["max_requests"])
         self.assertIsNone(limits["max_input_tokens"])
@@ -43,8 +49,8 @@ class E3aReviewFixtures(unittest.TestCase):
         self.assertIsNone(self.spec["budgets"]["pilot_usd_ceiling"])
         self.assertEqual(limits["integration_dispatches"], 2)
         self.assertNotEqual(limits["integration_dispatches"], limits["max_dispatches"])
-        self.assertTrue(self.spec["user_live_execution_approved"])
-        self.assertFalse(self.spec["execution_authorized"])
+        self.assertTrue(active["user_live_execution_approved"])
+        self.assertFalse(inactive["execution_authorized"])
 
     def test_historical_api_fixture_budget_retains_hard_request_semantics(self):
         historical = read_json(ROOT / "tests/fixtures/e3a-original-api-specification.json")

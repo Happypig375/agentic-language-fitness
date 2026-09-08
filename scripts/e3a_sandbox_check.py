@@ -28,19 +28,30 @@ from alf.workstream_e3a import PACKET_DIR, development_cases, read_json, snapsho
 SDK_FIXTURE = "mcr.microsoft.com/dotnet/sdk:10.0.302@sha256:72dd743782f2ae7e5476fd64f6a460045e3998dc862218b80e6944cba79a01b0"
 
 
+def model_free_spec(spec: dict) -> dict:
+    """Return an isolated spec for non-experimental fixture probes."""
+    fixture_spec = copy.deepcopy(spec)
+    fixture_spec["execution_authorized"] = False
+    return fixture_spec
+
+
 def check(output: Path, *, ci_sdk_fixture=False) -> dict:
     spec = read_json(ROOT / PACKET_DIR / "specification.json")
+    specification_sha256 = canonical_json_hash(spec)
+    fixture_spec = model_free_spec(spec)
     manifest = load_manifest(ROOT, spec["manifest"])
     result = {"candidate_model_calls": 0, "count_http_calls": 0, "platform": sys.platform,
               "python_version": platform.python_version(), "host_platform": platform.platform(),
-              "specification_sha256": canonical_json_hash(spec),
+              "specification_sha256": specification_sha256,
+              "model_free_specification_sha256": canonical_json_hash(fixture_spec),
+              "fixture_execution_authorized": fixture_spec["execution_authorized"],
               "source_lf_sha256": {path: hashlib.sha256((ROOT / path).read_text(encoding="utf-8").encode("utf-8")).hexdigest()
                   for path in ("src/alf/e3a_sandbox.py", "src/alf/workstream_e3a.py", "scripts/e3a_sandbox_check.py")},
               "scope": "ci-sdk-fixture" if ci_sdk_fixture else "specified-image-on-current-linux-host",
               "intended_remote_environment_verified": False, "checks": {}, "evaluations": []}
     evaluators = []
     try:
-        first = DockerEvaluator(ROOT, manifest, spec, "csharp")
+        first = DockerEvaluator(ROOT, manifest, fixture_spec, "csharp")
         evaluators.append(first)
         image = None
         if ci_sdk_fixture:
@@ -48,7 +59,7 @@ def check(output: Path, *, ci_sdk_fixture=False) -> dict:
             image = first._admin(["image", "inspect", SDK_FIXTURE, "--format", "{{.Id}}"])
             first.image, first.fixture_only = image, True
         for language in spec["languages"]:
-            evaluator = first if language == "csharp" else DockerEvaluator(ROOT, manifest, spec, language, fixture_image_id=image)
+            evaluator = first if language == "csharp" else DockerEvaluator(ROOT, manifest, fixture_spec, language, fixture_image_id=image)
             if evaluator is not first:
                 evaluators.append(evaluator)
             result["evaluations"].append({"language": language, "preparation": evaluator.prepare()})
@@ -109,7 +120,7 @@ def check(output: Path, *, ci_sdk_fixture=False) -> dict:
 
         # Bounded stress at a smaller fixture-only limit protects the CI host.
         # Effective experimental 6 GiB/512-pid settings were inspected above.
-        small = copy.deepcopy(spec)
+        small = copy.deepcopy(fixture_spec)
         small["environment"]["memory_bytes"] = 134217728
         probe = DockerEvaluator(ROOT, manifest, small, "csharp", fixture_image_id=first.image)
         evaluators.append(probe)

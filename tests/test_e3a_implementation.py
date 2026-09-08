@@ -30,6 +30,9 @@ MANIFEST = load_manifest(ROOT, SPEC["manifest"])
 module_spec = importlib.util.spec_from_file_location("e3a_check_fixtures", ROOT / "scripts/e3a_check.py")
 fixtures = importlib.util.module_from_spec(module_spec)
 module_spec.loader.exec_module(fixtures)
+sandbox_check_spec = importlib.util.spec_from_file_location("e3a_sandbox_check", ROOT / "scripts/e3a_sandbox_check.py")
+sandbox_check = importlib.util.module_from_spec(sandbox_check_spec)
+sandbox_check_spec.loader.exec_module(sandbox_check)
 
 
 def rates(spec=SPEC):
@@ -415,6 +418,21 @@ class BatchTests(unittest.TestCase):
 
 
 class SandboxUnitTests(unittest.TestCase):
+    def test_fixture_spec_isolated_from_active_authorization(self):
+        active = copy.deepcopy(SPEC)
+        active["execution_authorized"] = True
+        fixture = sandbox_check.model_free_spec(active)
+        self.assertTrue(active["execution_authorized"])
+        self.assertFalse(fixture["execution_authorized"])
+        expected = {**active, "execution_authorized": False}
+        self.assertEqual(fixture, expected)
+        self.assertIsNot(fixture["environment"], active["environment"])
+        self.assertEqual(fixture["environment"], active["environment"])
+        self.assertEqual(fixture["model"], active["model"])
+        with patch("alf.e3a_sandbox.os.name", "posix"), self.assertRaisesRegex(
+                SandboxFailure, "fixture image cannot replace"):
+            DockerEvaluator(ROOT, MANIFEST, active, "csharp", fixture_image_id="fixture-image")
+
     def test_admin_failure_keeps_bounded_diagnostic(self):
         evaluator = DockerEvaluator.__new__(DockerEvaluator)
         evaluator.base, evaluator.docker = ROOT, ["docker"]
