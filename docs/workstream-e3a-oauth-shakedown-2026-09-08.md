@@ -1,4 +1,86 @@
-# E3a OAuth shakedown activation — 2026-09-08
+# E3a OAuth shakedown activation and stopped attempt — 2026-09-08
+
+## Live attempt 01 — stopped
+
+Activation commit `f8b428f479e2fb2d91079330268584b0b4792821` passed exact
+[Linux/Windows CI 34231824002](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34231824002).
+At 2026-09-08 21:35–21:36 HKT, `invoke-shakedown.ps1` ran once with that
+expected commit, remote root `/tmp/alf-e3a-shakedown-hzwkJH`, the existing local
+`C:\Users\hadri\.codex\auth.json` file, and new local output directory
+`results/e3a-oauth-shakedown-2026-09-08-attempt-01`. It used the unchanged
+canonical foreground SSH/CONNECT route and pinned inputs listed below.
+
+The shakedown **failed and stopped after one debited dispatch**, with
+`unexpected-cli-sequence`. There was no second dispatch, automatic reissue,
+freeze, pilot, applied candidate source or candidate evaluation. The underlying
+CLI returned exit code 0 and a completed response, without timeout or capture
+overflow; the controller's rejection remains the recorded failed outcome.
+
+Immutable evidence in the linked report directory:
+
+- `attempt-01-report.json`, SHA-256
+  `eb1654fe32ec4fd6d3ac19dab109fdedb5c0ed6c006d1aebc9702ce9facec52c`.
+- `attempt-01-journal.jsonl`, SHA-256
+  `55788fbab52072d782cbeeb3e52b1a5b12f38420fd604326a592b305ae7c070f`.
+- `attempt-01-invocation.log`, `attempt-01-cleanup.json`, and `activation-ci.json`.
+
+The retained event order is:
+
+```text
+thread.started
+item.completed (error: no_tools/single_response under-development warning)
+item.completed (error: code-mode host intentionally disabled)
+turn.started
+item.completed (one agent_message)
+turn.completed (usage)
+```
+
+Another AI session's read-only incident audit identified the exact mismatch:
+`parse_cli_jsonl` rejects every `item.*` outside the turn before examining item
+type/content. The native model-free capture checker extracted events more
+permissively and did not test this real startup-warning envelope against the
+strict adapter. These diagnostics are not observed tool execution. Do not
+enable the code-mode host or tools merely to silence them.
+
+Raw terminal CLI usage is **6,427 input and 79 output tokens**; **37 reasoning
+tokens are a subset of the 79**, not additional usage. Raw optional cached and
+cache-write fields are zero, not independently verified provider telemetry.
+The strict adapter's normalized usage fields remain null in the original
+report because it rejected the envelope before usage extraction. This raw-field
+audit does not overwrite those fields, refund the dispatch, or invent provider
+request counts/subscription dollars; those latter measures remain null.
+Offline canonical JSON/submission validation accepted the reply as a file
+replacement. It remains unapplied and unscored; syntax acceptance is not a build
+or behavioral result and does not turn the failed run into a successful step.
+
+The invocation verified removal of its staged temporary remote auth file and
+directory. The bounded transport reported its inner auth/container cleanup
+confirmed. A subsequent read-only check found zero local port-8888 listeners,
+zero remote `172.30.0.1:43128` listeners, and zero `alf-e3a` containers. The
+original local OAuth file was not removed. No global credential-absence claim
+is made, and no auth bytes were printed, hashed or published.
+
+Live execution is disabled again: `status=shakedown-stopped-awaiting-review`,
+`execution_authorized=false`. Held-spec canonical SHA-256 is
+`4d4457251726a2381a6a7e6a949a641c9741b02c7e3bf3160005bd2d93a6ed8b`.
+Scientific policy/source hashes remain `95b1b7db…` / `9e56068f…`; only activation
+metadata and its generated packet change. The failed attempt retains its actual
+activation spec SHA `afb6811e…` and runner commit `f8b428f…` unchanged.
+A separate validator passed all 72 affected Python tests again in this held
+state, plus packet reproduction and `git diff --check`; `held-*` logs are
+retained. These were model-free checks, not another invocation.
+
+**Next decision:** bounded model-free repair should admit only the exact pinned
+pre-turn diagnostic shapes/messages, retain them separately, continue rejecting
+arbitrary pre-turn errors/tools/items, and keep the strict single-turn envelope.
+Use this captured trace as a regression fixture, with separate tests/review and
+exact CI; do not rewrite the failed attempt or change scientific limits.
+No parser repair or further live call was made after this stop. One of the
+original two integration dispatches remains, insufficient for a fresh two-step
+shakedown. A new bounded shakedown allowance needs direction; the five-failure
+apparatus rule does not override this immediate live stop or request ceiling.
+
+## Preparation history
 
 This is continuation of already approved work, not another design/adoption
 request. The [resumed implementation](workstream-e3a-oauth-resumed-verification-2026-09-08.md)
@@ -109,7 +191,7 @@ commit mismatch, before staging, proxy launch or dispatch; `invocation.log`
 retained both the primary reason and the expected absent-output notice.
 This is a successful rejection test, not a failed live shakedown attempt.
 
-## Live boundary
+## Activation boundary (before attempt 01)
 
 At this activation checkpoint no OAuth file has been staged and no live model
 dispatch, shakedown or pilot has occurred. Publish the activation revision and

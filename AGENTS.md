@@ -2,15 +2,17 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current (2026-09-08):** implementation `0a25e7a659f0a4c74bdcb4fdc5c5f7adb3134c1c`
-passed Linux/Windows CI. The [activation record](docs/workstream-e3a-oauth-shakedown-2026-09-08.md)
-owns the next checkpoint: publish/verify the minimal shakedown activation, then
-use the already approved canonical OAuth route for at most two unrelated-task
-dispatches. Pilot still requires a successful matching live record and freeze.
-No OAuth staging/live dispatch has occurred at this checkpoint. The
-[resumed record](docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md) and
-[prior stop](docs/workstream-e3a-oauth-implementation-stop-2026-09-08.md) remain
-history. Do not re-request approved scientific policy, live or publishing permission.
+**Current stop (2026-09-08):** activation `f8b428f479e2fb2d91079330268584b0b4792821`
+passed Linux/Windows CI; its live OAuth shakedown then stopped after one dispatch
+on `unexpected-cli-sequence`. Two startup diagnostics preceded `turn.started`.
+The [incident record](docs/workstream-e3a-oauth-shakedown-2026-09-08.md#live-attempt-01--stopped)
+owns the evidence and next decision. The failed reply is unapplied/unscored;
+no retry, freeze or pilot occurred. Temporary credentials were cleaned and
+listeners/containers are absent. `execution_authorized=false` now holds live
+work pending direction on model-free repair and a fresh shakedown allowance.
+Do not request renewed scientific adoption or routine publishing permission;
+do not mistake the five-apparatus-failure rule for permission to reissue a live
+attempt or exceed the original two-dispatch integration allowance.
 
 ## Current boundary
 
@@ -20,7 +22,7 @@ The bounded E3a no-tools controller/adapter and isolated evaluator contain R1–
 
 The pinned image is now restored on the remote host. Standalone sandbox evidence is not end-to-end Windows/API-to-remote integration. Wiring, account access, provider behavior and counting remain unverified. The dated [OAuth adoption record](docs/workstream-e3a-oauth-adoption-2026-09-08.md) permits implementation, an at-most-two-dispatch unrelated-task shakedown after prerequisites, and continuation after successful freeze to the fixed pilot; no automatic reissue/replacement is allowed. Do not switch images, scaffolds or subscription backends silently.
 
-**Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) is adopted by the user/maintainer on 2026-09-08. Its shakedown activation revision must pass its exact CI before use. Existing local OAuth and the canonical remote launcher remain required; no API key or new relay. Adoption/live permission is recorded and should not be re-requested. Activation is not a scientific freeze or evidence of working provider behavior.
+**Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) remains adopted. Existing local OAuth and the canonical remote launcher remain required; no API key or new relay. The failed live shakedown is now an explicit stop, not a successful freeze or a pilot prerequisite. Earlier readiness/activation paragraphs below describe the path to that attempt, not permission to repeat it.
 
 **Technical hold (2026-09-08):** the implementing binary is now `72cf14453…`,
 with opt-in no-tools and single-response controls. The original `f7942933…`

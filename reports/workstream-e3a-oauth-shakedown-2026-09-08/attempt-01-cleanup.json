@@ -1,0 +1,11 @@
+{
+    "checked_utc":  "2026-09-08T13:41:04.6985595Z",
+    "local_proxy_listeners":  0,
+    "remote_proxy_listeners":  0,
+    "matching_e3a_containers":  [
+
+                                ],
+    "staged_auth_cleanup":  "verified by invocation finally; see invocation.log",
+    "inner_auth_and_container_cleanup":  "reported true by the bounded transport",
+    "no_global_credential_scan":  true
+}

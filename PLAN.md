@@ -2,7 +2,29 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Shakedown activation checkpoint (2026-09-08)
+## Current stop: live shakedown startup envelope (2026-09-08)
+
+Activation `f8b428f479e2fb2d91079330268584b0b4792821` passed exact Linux/Windows
+CI [34231824002](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34231824002).
+One real OAuth shakedown invocation then stopped after **one debited dispatch**
+with `unexpected-cli-sequence`. The CLI completed, but its two pinned startup
+diagnostics preceded `turn.started`; the strict adapter rejected that envelope.
+Read the [incident and immutable raw evidence](docs/workstream-e3a-oauth-shakedown-2026-09-08.md#live-attempt-01--stopped).
+The reply remains unapplied/unscored and the attempt remains failed. No reissue,
+second dispatch, freeze or pilot occurred. Temporary OAuth copies were cleaned;
+the proxy/tunnel listeners and E3a containers were checked absent.
+
+Live execution is now disabled (`shakedown-stopped-awaiting-review`,
+`execution_authorized=false`); prior policy adoption and permission records are
+not erased. This is the immediate live ambiguity/accounting stop, not exhaustion
+of the five-apparatus-failure allowance. Do not reinterpret that rule as live
+retry permission. Next requires direction on a bounded model-free parser/fixture
+repair and a fresh two-dispatch shakedown allowance: only one dispatch remains
+within the original two, insufficient for a new two-step shakedown. Do not
+promote attempt 01 retrospectively, change the scientific treatment, suppress
+arbitrary CLI errors, or begin a pilot. No new protocol version is needed.
+
+## Prior shakedown activation checkpoint (2026-09-08)
 
 The reviewed implementation is published directly to `main`, without a PR, as
 `0a25e7a659f0a4c74bdcb4fdc5c5f7adb3134c1c`. Exact-commit CI
@@ -22,7 +44,7 @@ ambiguous dispatch. No OAuth staging or live dispatch has occurred at this
 checkpoint. Pilot remains blocked until a successful matching live shakedown
 and tracked freeze; no freeze exists yet. Preserve the unrelated `uv.lock`.
 
-## Current resumed implementation (2026-09-08)
+## Prior resumed implementation (2026-09-08)
 
 The user explicitly said `continue` in response to the five-failure-stop handoff,
 authorizing a fresh bounded model-free repair cycle. The previous five failures
