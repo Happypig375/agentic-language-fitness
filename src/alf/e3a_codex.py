@@ -83,8 +83,13 @@ def parse_cli_jsonl(raw: bytes | str) -> dict[str, Any]:
             if not isinstance(item.get("text"), str): return _failed("missing-final-reply", text)
             messages.append(item["text"])
     completed = next(e for e in events if e.get("type") == "turn.completed")
-    if len(messages) > 1: return _failed("multiple-final-replies", text, completed.get("usage"))
-    return {"status": "completed", "text": messages[0] if messages else "", "usage": normalize_cli_usage(completed.get("usage")), "raw": text, "response_id": completed.get("id"), "model": completed.get("model"), "startup_diagnostics": copy.deepcopy(startup)}
+    # A single upstream turn may contain multiple completed assistant-message
+    # items (for example, a natural-language preamble followed by the patch
+    # envelope).  Preserve each item in event order and pass the exact joined
+    # text through the existing submission/byte-cap path.  The raw JSONL is
+    # retained separately, so item boundaries remain auditable.
+    assembled = "".join(messages)
+    return {"status": "completed", "text": assembled, "usage": normalize_cli_usage(completed.get("usage")), "raw": text, "response_id": completed.get("id"), "model": completed.get("model"), "startup_diagnostics": copy.deepcopy(startup)}
 
 def _get(capture: Any, key: str) -> Any:
     return capture.get(key) if isinstance(capture, dict) else getattr(capture, key, None)

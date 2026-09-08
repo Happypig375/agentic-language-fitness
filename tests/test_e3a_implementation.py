@@ -215,6 +215,55 @@ class RetiredApiProposalTests(unittest.TestCase):
 
 
 class CorrectionTests(unittest.TestCase):
+    def test_multimessage_invalid_first_reply_is_repairable_and_replayed_verbatim(self):
+        payload = candidate_payload(ROOT, MANIFEST, "csharp", "001-priority")
+        first_text = "Preamble with whitespace.\n" + json.dumps({"files": payload["source"]}, separators=(",", ":"))
+        second_text = json.dumps({"files": payload["source"]}, separators=(",", ":"))
+
+        class MultiMessage(MockTransport):
+            def launch(self, stdin, timeout):
+                self.calls.append(("codex-exec", bytes(stdin), timeout))
+                self.generation += 1
+                if self.generation == 1:
+                    messages = [first_text[:24], first_text[24:]]
+                else:
+                    messages = [second_text]
+                stdout = "\n".join([
+                    json.dumps({"type": "thread.started"}),
+                    json.dumps({"type": "turn.started"}),
+                    *[json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": part}})
+                      for part in messages],
+                    json.dumps({"type": "turn.completed", "usage": {"input_tokens": 10, "output_tokens": 6}}),
+                    "",
+                ])
+                return {"stdout": stdout, "stderr": "", "returncode": 0,
+                        "timed_out": False, "output_overflow": False, "cleanup_confirmed": True}
+
+        transport = MultiMessage()
+        adapter = CodexOAuthAdapter(SPEC, transport)
+        evaluated = []
+        trajectory = run_trajectory(
+            payload["source"], "csharp", SPEC,
+            lambda previous, source, feedback, deadline: adapter.generate(
+                payload, previous, source, feedback, deadline),
+            lambda source, index, deadline: evaluated.append(index) or {
+                "passed": True, "build_passed": True, "category": "development", "output": ""},
+            task_id="001-priority")
+
+        self.assertEqual(len(trajectory["rounds"]), 2)
+        self.assertEqual(trajectory["rounds"][0]["development"]["category"], "patch-format")
+        self.assertIsNone(trajectory["rounds"][0]["applied_source"])
+        self.assertIsNotNone(trajectory["rounds"][0]["feedback"])
+        self.assertFalse(trajectory["batch_stop"])
+        self.assertEqual(trajectory["stop"], "development-passed")
+        self.assertEqual(adapter.guard.dispatched, 2)
+        self.assertEqual(evaluated, [1])
+        replay = json.loads(transport.calls[1][1])
+        self.assertEqual(replay["transcript"][1]["role"], "assistant")
+        self.assertEqual(replay["transcript"][1]["data"], first_text)
+        self.assertEqual(sum(len(part.encode("utf-8")) for part in (first_text[:24], first_text[24:])),
+                         len(first_text.encode("utf-8")))
+
     def test_oauth_replay_overflow_is_pre_dispatch_and_no_feedback(self):
         payload = candidate_payload(ROOT, MANIFEST, "csharp", "001-priority")
         payload["instructions"] = "x" * 200

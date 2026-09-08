@@ -130,11 +130,63 @@ class E3aCodexTests(unittest.TestCase):
                                        "cached_input_tokens": False})
         self.assertIn("cached_input_tokens", invalid["invalid_fields"])
 
-    def test_jsonl_order_and_multiple_messages_fail_closed(self):
+    def test_jsonl_order_stays_strict_but_completed_messages_are_concatenated(self):
         bad_order = b'{"type":"thread.started"}\n{"type":"item.completed","item":{"type":"agent_message","text":"a"}}\n{"type":"turn.started"}\n{"type":"turn.completed","usage":{"input_tokens":1,"output_tokens":1}}\n'
         self.assertEqual(parse_cli_jsonl(bad_order)["failure"], "unexpected-cli-sequence")
-        multiple = b'{"type":"thread.started"}\n{"type":"turn.started"}\n{"type":"item.completed","item":{"type":"agent_message","text":"a"}}\n{"type":"item.completed","item":{"type":"agent_message","text":"b"}}\n{"type":"turn.completed","usage":{"input_tokens":1,"output_tokens":1}}\n'
-        self.assertEqual(parse_cli_jsonl(multiple)["failure"], "multiple-final-replies")
+        multiple = "\n".join([
+            json.dumps({"type": "thread.started"}),
+            json.dumps({"type": "turn.started"}),
+            json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": "  pre👾"}}, ensure_ascii=False),
+            json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": "\n{\"files\":{}}  "}}, ensure_ascii=False),
+            json.dumps({"type": "turn.completed", "usage": {"input_tokens": 1, "output_tokens": 1}}),
+            "",
+        ]).encode()
+        parsed = parse_cli_jsonl(multiple)
+        self.assertEqual(parsed["status"], "completed")
+        self.assertEqual(parsed["text"], "  pre👾\n{\"files\":{}}  ")
+        self.assertEqual(parsed["raw"], multiple.decode())
+
+    def test_actual_attempt02_capture_keeps_both_completed_items_and_raw_boundaries(self):
+        journal = Path(__file__).parents[1] / "reports/workstream-e3a-oauth-pilot-2026-09-08/attempt-02-journal.jsonl"
+        dispatch = next(json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines()
+                        if '"event": "dispatch-finished"' in line)
+        raw = dispatch["result"]["raw_stdout"]
+        parsed = parse_cli_jsonl(raw)
+        self.assertEqual(parsed["status"], "completed")
+        items = [json.loads(line)["item"]["text"] for line in raw.splitlines()
+                 if json.loads(line).get("type") == "item.completed"
+                 and json.loads(line).get("item", {}).get("type") == "agent_message"]
+        self.assertEqual(len(items), 2)
+        self.assertEqual(parsed["text"], "".join(items))
+        self.assertEqual(parsed["raw"], raw)
+        with self.assertRaises(json.JSONDecodeError):
+            json.loads(parsed["text"])
+
+        two_objects = "\n".join([
+            json.dumps({"type": "thread.started"}),
+            json.dumps({"type": "turn.started"}),
+            json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": "{\"a\":1}"}}),
+            json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": "{\"b\":2}"}}),
+            json.dumps({"type": "turn.completed", "usage": {"input_tokens": 1, "output_tokens": 1}}),
+            "",
+        ])
+        joined = parse_cli_jsonl(two_objects)["text"]
+        self.assertEqual(joined, '{"a":1}{"b":2}')
+        with self.assertRaises(json.JSONDecodeError):
+            json.loads(joined)
+
+    def test_submission_byte_limit_applies_to_aggregate_message_text(self):
+        parts = ("x" * 30000, "y" * 30000)
+        raw = "\n".join([json.dumps({"type":"thread.started"}), json.dumps({"type":"turn.started"}),
+            *[json.dumps({"type":"item.completed", "item":{"type":"agent_message", "text":part}}) for part in parts],
+            json.dumps({"type":"turn.completed", "usage":{"input_tokens":3,"output_tokens":4}}), ""]).encode()
+        spec = {"authority":{"max_replay_bytes":131072}, "budgets":{"pilot_dispatch_ceiling":2,
+            "request_input_tokens":32768, "request_output_tokens_including_reasoning":8192}}
+        result = CodexOAuthAdapter(spec, _Transport(raw)).generate({"instructions":"fixed"}, None, {}, None, 9999999999)
+        self.assertEqual(result["failure"], "terminal-submission-byte-budget-exhausted")
+        self.assertFalse(result["batch_stop"])
+        self.assertEqual(result["text"], "".join(parts))
+        self.assertEqual(result["raw_stdout"], raw.decode())
 
     def test_usage_alarm_keeps_completed_text_and_overflow_cannot_hide_alarm(self):
         text = "x" * 49153

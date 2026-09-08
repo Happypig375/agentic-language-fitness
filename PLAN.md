@@ -2,7 +2,27 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: repaired-source shakedown passed; pilot next (2026-09-09 HKT)
+## Current checkpoint: complete-response parser repair; live hold (2026-09-09 HKT)
+
+The renewed freeze `c79bc1c` passed exact Linux/Windows CI `34251358861`.
+Pilot attempt 02 then cleared preflight but stopped after one dispatch because
+the parser treated two assistant-message items in one completed turn as
+`multiple-final-replies`. Usage and cleanup are known; no source was applied
+or evaluated, original scores remain null and 23 slots remain unstarted.
+Read the [retained evidence and policy-correct repair assignment](docs/workstream-e3a-complete-response-fix-2026-09-09.md).
+
+The adopted malformed-output rule permits an ordinary model-free fix: assemble
+all assistant text unchanged, enforce the existing whole-reply byte/format
+rules and allow only the existing repair budget. No native, prompt or scientific
+amendment is needed; never select only the JSON or remove the preamble.
+The repair now passes 81 affected tests, separate AI source review, packet and
+old-freeze rejection checks. Finish publication and exact-commit CI, then
+return for a live continuation/allocation decision. Resumed integration is
+**4/5 used (1 remaining)**; pilot is **1/72 used (71 remaining)**. A fresh
+two-step shakedown does not fit the integration balance. Do not reissue,
+replace or automatically resume any live slot, or rewrite the failed scores.
+
+## Prior repaired-source shakedown and pilot preparation
 
 The [parser repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md) was
 pushed without a PR as `16737af3f67ccaa0f47671c85f07bdbab7062b7a`; its 75

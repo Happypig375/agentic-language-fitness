@@ -1,5 +1,12 @@
 # E3a OAuth pilot: pre-dispatch attempt 01 — 2026-09-08
 
+**Later checkpoint (2026-09-09):** pilot attempt 02 reached a model dispatch,
+then stopped on complete multi-message assistant output. Its retained evidence,
+ordinary parser repair and live-continuation boundary are in the
+[complete-response record](workstream-e3a-complete-response-fix-2026-09-09.md).
+The preparation and successful shakedown history below does not authorize
+another live invocation after that stop.
+
 ## Retained attempt
 
 The already approved fixed pilot was invoked once after exact freeze-commit
