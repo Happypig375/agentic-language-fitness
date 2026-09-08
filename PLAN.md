@@ -2,7 +2,7 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: zero-dispatch pilot preflight repair (2026-09-08)
+## Current checkpoint: repaired-source shakedown passed; pilot next (2026-09-09 HKT)
 
 The [parser repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md) was
 pushed without a PR as `16737af3f67ccaa0f47671c85f07bdbab7062b7a`; its 75
@@ -17,8 +17,8 @@ passed 65 affected tests, separate AI review and exact Linux/Windows CI
 `34242289358`. Live attempt 02 then passed both unrelated marker steps with
 two dispatches, valid usage and scoped credential/container/listener cleanup.
 Another AI session audited the raw evidence and accepted it for the existing
-freeze gate. **Two of five resumed integration dispatches are used; three
-remain.** The earlier failed
+freeze gate. At that checkpoint, **two of five resumed integration dispatches
+were used; three remained**. The earlier failed
 [attempt 01](docs/workstream-e3a-oauth-shakedown-2026-09-08.md#live-attempt-01--stopped)
 remains retained, debited, unapplied and unscored; the new allowance is not a
 refund or retrospective promotion.
@@ -32,14 +32,22 @@ assigned slots remain unstarted; no candidate outcome exists. Auth cleanup
 and scoped listener/container absence were verified. Read the
 [immutable attempt, diagnosis and repair sequence](docs/workstream-e3a-oauth-pilot-2026-09-08.md).
 
-Next: use the existing metadata-preserving manifest loader, add a real-path
-regression, complete affected checks/review and exact-commit CI. This ordinary
-apparatus fix changes the source binding, not scientific policy. Retain the
-old freeze and attempts in history, return activation to shakedown-ready and
-run a fresh two-step unrelated shakedown within the **three remaining** resumed
-dispatches. Successful matching evidence permits a renewed tracked freeze and
-the already approved fixed **24-trajectory / at-most-72-dispatch pilot**;
-no new adoption decision, sample extension or ambiguous reissue is authorized.
+The ordinary loader repair was pushed as `5a88afa` and passed 66 affected
+tests, separate AI review, all six actual remote predecessor checks and exact
+CI `34248390590`. CI attempt 1 passed all tests but failed Windows artifact
+finalization with HTTP 403; retrying only the failed job succeeded. Both CI
+attempts and the first model-free invocation's shell-framing error are retained.
+Live shakedown attempt 03 then passed both marker steps on the repaired source,
+with valid usage and scoped auth/container/listener cleanup. Another AI session
+audited the actual evidence and approved it for the existing freeze gate.
+The resumed integration allocation is now **four of five used, one remaining**.
+
+The renewed tracked freeze binds attempt 03 to the unchanged scientific policy
+and repaired source identity. Next: finish freeze checks and exact-commit CI,
+then run the already approved fixed **24-trajectory / at-most-72-dispatch pilot**
+through the same local-OAuth route on the fresh private root. No extra
+integration call, new adoption decision, sample extension or ambiguous reissue
+is authorized. No candidate outcome exists from the first pilot attempt.
 Missing Task 007 architecture judgement remains unknown, not a successful
 refactor. All immediate safety, ambiguity, accounting, cleanup and budget
 stops remain in force; retain all assigned/started slots.

@@ -1,0 +1,27 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260909002014
+Username: DESKTOP-33M8GHE\hadri
+RunAs User: DESKTOP-33M8GHE\hadri
+Configuration Name: 
+Machine: DESKTOP-33M8GHE (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File reports/workstream-e3a-oauth-shakedown-2026-09-08/invoke-shakedown.ps1 -Phase shakedown -ExpectedCommit 5a88afab5dff1595e274e4c770cfe9e40f96200e -RemoteRunRoot /tmp/alf-e3a-shakedown-1Vk2qm -LocalAuthFile C:\Users\hadri\.codex\auth.json -LocalOutputDirectory results/e3a-oauth-shakedown-2026-09-09-attempt-03
+Process ID: 29312
+PSVersion: 5.1.19041.6456
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.6456
+BuildVersion: 10.0.19041.6456
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+› Ask Codex to do anything
+› Ask Codex to do anything
+remote auth cleanup: verified
+› Ask Codex to do anything
+remote output retention: copied
+**********************
+Windows PowerShell transcript end
+End time: 20260909002102
+**********************

@@ -1,12 +1,12 @@
 {
-  "status": "shakedown-ready-not-frozen",
+  "status": "frozen",
   "execution_authorized": false,
   "user_live_execution_approved": true,
   "approved_integration_dispatches": 5,
   "approved_pilot_dispatches": 72,
-  "scientific_specification_sha256": "c24e7e8f82bcb52061f255f3cd1c6ec17342b611dafea3f5a51421f4a22c9de7",
+  "scientific_specification_sha256": "d33b0f7ed317b4f1792ab22bdf82086bb25a11cebf93781aedd6ebfff5701996",
   "text_lf_sha256": {
-    "protocols/workstream-e3a-v1/specification.json": "b4f1c9ef65f18978eaee73d58b0afef27ef990c757d7e4e6811e2bc00f49bbed",
+    "protocols/workstream-e3a-v1/specification.json": "f32586b6b79eb7e2397a58d7faee60fb3e1d4993b1f3950edfdec67cae6d4325",
     "protocols/workstream-e3a-v1/candidate-instructions.md": "c8d337cbb2d53ce0be5ab44dfc521e79039ea8c64ca699f318a7432d987389b6",
     "protocols/workstream-e3a-v1/baseline-contract.md": "242b01204047c17536c6e8d6c6d59aff0b8e191ce6bade4f03a24d953c6745cd",
     "protocols/workstream-e3a-v1/holdout-cases.json": "65c4ecb6842972f6e3cc60c553c49a34cd30ac76c9d0ea3e3c7c7c21a1c06b14",

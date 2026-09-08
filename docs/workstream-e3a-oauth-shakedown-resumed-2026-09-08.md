@@ -1,5 +1,12 @@
 # E3a resumed OAuth shakedown — 2026-09-08
 
+**Current update (2026-09-09 HKT):** the later zero-dispatch pilot exposed a
+manifest-loader bug. Its ordinary repair and successful shakedown attempt 03
+are recorded in the [pilot/repair evidence](workstream-e3a-oauth-pilot-2026-09-08.md).
+The resumed allocation is now **four of five dispatches used, one remaining**.
+The active freeze binds attempt 03 and repaired source `71e7510d…`; the
+attempt-02 identities and earlier freeze discussion below remain history.
+
 ## Explicit allowance
 
 Following parser repair `16737af3f67ccaa0f47671c85f07bdbab7062b7a` and its

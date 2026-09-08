@@ -1,0 +1,29 @@
+validate-windows	Run actions/upload-artifact@v4	﻿2026-09-08T16:09:42.7292003Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292248Z ##[group]Run actions/upload-artifact@v4
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292325Z with:
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292431Z   name: e3a-review-fixtures-windows
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292555Z   path: results/e3a-review-fixtures-windows.json
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292638Z   if-no-files-found: warn
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292710Z   compression-level: 6
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292782Z   overwrite: false
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292861Z   include-hidden-files: false
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7292923Z env:
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7293089Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7293297Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7293490Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7293652Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7293796Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7293879Z   DOTNET_ROOT: C:\Program Files\dotnet
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.7293950Z ##[endgroup]
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.9246904Z (node:7784) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.9248322Z (Use `node --trace-deprecation ...` to show where the warning was created)
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.9311042Z With the provided path, there will be 1 file uploaded
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.9318195Z Artifact name is valid!
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:42.9321598Z Root directory input is valid!
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:43.3195324Z Beginning upload of artifact content to blob storage
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:43.3481767Z (node:7784) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:43.6069310Z Uploaded bytes 3571
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:43.6797966Z Finished uploading artifact content to blob storage!
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:43.6800280Z SHA256 digest of uploaded artifact zip is 247690eadd2489505b4f421ecfa500200d3c780d54d960331e208bace1d0b659
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:43.6803257Z Finalizing artifact upload
+validate-windows	Run actions/upload-artifact@v4	2026-09-08T16:09:44.0809028Z ##[error]Failed to FinalizeArtifact: Received non-retryable error: Failed request: (403) Forbidden: Error from intermediary with HTTP status code 403 "Forbidden"

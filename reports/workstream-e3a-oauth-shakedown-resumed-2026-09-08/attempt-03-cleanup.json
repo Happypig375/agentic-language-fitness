@@ -1,0 +1,24 @@
+{
+  "attempt": "shakedown-03",
+  "remote_run_root": "/tmp/alf-e3a-shakedown-1Vk2qm",
+  "runner_git_commit": "5a88afab5dff1595e274e4c770cfe9e40f96200e",
+  "wrapper_exit_code": 0,
+  "wrapper_auth_cleanup": "verified",
+  "wrapper_output_retention": "copied",
+  "response_cleanup_confirmed": [true, true],
+  "local_check": {
+    "checked_at_utc": "2026-09-08T16:21:54.4439891Z",
+    "query_succeeded": true,
+    "proxy_port": 8888,
+    "listeners": 0,
+    "original_auth_file_exists": true
+  },
+  "remote_check": {
+    "checked_at_utc": "2026-09-08T16:21:56.784946+00:00",
+    "queries_succeeded": true,
+    "proxy_port": 43128,
+    "listeners": 0,
+    "running_e3a_containers": 0
+  },
+  "scope": "Owned staged auth file/directory, selected listener ports and running alf-e3a containers only; not a global credential-absence proof. The original local OAuth file was not edited or removed."
+}

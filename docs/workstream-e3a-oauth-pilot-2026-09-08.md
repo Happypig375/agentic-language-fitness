@@ -137,3 +137,115 @@ verification/live use, advance only this new checkout to the exact repair
 commit and verify its clean tree. Old attempt roots and outputs are retained.
 Exact repair-commit CI and actual six-predecessor verification remain required
 before the next live invocation; source tests alone do not establish them.
+
+## Exact-source remote predecessor verification
+
+The repair was pushed directly, without a PR, as
+`5a88afab5dff1595e274e4c770cfe9e40f96200e`. The fresh remote checkout was
+advanced to that exact commit and independently checked clean. On 2026-09-09
+HKT, the recorded helper passed all six predecessor build/development checks
+on the original pinned image, using manifest stages 0, 5 and 6:
+
+| Selected task | C# replay bytes | F# replay bytes | Predecessor build/development |
+|---|---:|---:|---|
+| 001 | 6,204 | 5,917 | Both pass |
+| 006 | 13,301 | 13,210 | Both pass |
+| 007 | 16,299 | 15,928 | Both pass |
+
+All payloads are below the fixed 131,072-byte allowance. These are encoded
+visible replay sizes, not full provider-context token counts or measured
+candidate outcomes. Dependency preparation and evaluator cleanup completed;
+a subsequent successful `docker ps -q --filter name=alf-e3a` query was empty.
+No model, auth or holdout interaction occurred.
+
+The first invocation piped a PowerShell here-string to `bash -s`; its BOM and
+CRLF framing broke the header and appended a carriage return to the final
+repository argument. It stopped before any sandbox evaluation. The retained
+`remote-predecessor-preflight.log` records that invocation error. The corrected
+invocation passed the Python command/root as ordinary SSH arguments (still
+launched only from PowerShell), with no code or scientific change. Its
+`remote-predecessor-preflight-attempt-02.log` retains all successful operations
+and the final exact-commit/specification report. Both are PowerShell-captured
+logs, not claimed byte-for-byte remote stdout files, and neither was overwritten.
+
+Exact repair-commit CI
+[34248390590](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34248390590)
+must finish successfully before the next OAuth staging/live dispatch.
+
+The first CI attempt passed all Linux and Windows test/validation steps, but
+the Windows artifact upload failed during `FinalizeArtifact` with an HTTP 403
+from an intermediary, after blob upload. This is retained in
+`loader-fix-ci-attempt-01.json` and `.log`. The failed Windows job was rerun
+under the same run and exact source commit using `gh run rerun 34248390590
+--failed`; Linux was not rerun. No test, workflow, scientific or security
+setting was changed, and no live call was made while this CI gate was failed.
+
+The second CI attempt succeeded: Windows in 7m43s, with the successful Linux
+5m15s result retained. `loader-fix-ci-attempt-02.json` records the exact commit
+and completed successful gate before OAuth staging. The first failed CI
+attempt remains retained, not relabeled as a successful run.
+
+## Repaired-source shakedown, attempt 03 (2026-09-09 HKT)
+
+The same canonical wrapper then ran once on clean `5a88afa` using only the
+temporary complete local OAuth file and the existing SSH/CONNECT route. Both
+unrelated marker replacements were applied, freshly built and executed
+successfully. The report has `passed=true`, no batch stop and exactly two
+dispatches. Usage was 6,427 input / 98 output for step 1 and 6,651 input / 76
+output for step 2: **13,078 input / 174 output**, with 90 reasoning tokens
+already included in output. Cache/cache-write fields, subscription cost and
+reliable provider-request counts remain null under the existing policy.
+
+This brings the resumed integration allocation to **four of five dispatches
+used, one remaining**. The original failed integration dispatch remains
+separately charged. The zero-dispatch pilot still consumes no pilot allowance.
+The two successful unrelated shakedowns are apparatus checks, not F#/C# results.
+
+New immutable evidence lives alongside the earlier resumed shakedown:
+
+- `attempt-03-report.json`, SHA-256
+  `8a3fa5dca1c3ab1809389db325a86356d10ad538d91b7cb0fc2744df15e414aa`.
+- `attempt-03-journal.jsonl`, SHA-256
+  `cbb05e2a0b52f8bf75a89e8b9b9e035096fb5a6b36282043398b3d49a419b9a3`.
+- `attempt-03-invocation.log` and `attempt-03-cleanup.json`.
+
+Both responses confirmed cleanup; the wrapper separately verified removal of
+its staged auth file/directory and copied output. Fresh successful checks at
+16:21:54–16:21:56 UTC (00:21:54–00:21:56 HKT on September 9) found no selected
+proxy listeners or running E3a containers. The original local auth file is
+untouched. A publication scan found no token-shaped fields/strings. As before,
+these are scoped cleanup checks, not proof of global credential absence.
+
+## Renewed freeze and pilot handoff
+
+Another AI session audited the actual attempt-03 report/journal hashes, CI,
+runtime identities, ordered debit/response/step lifecycle, visible replay,
+startup diagnostics, applied replacements, fresh sandbox evaluations, usage
+and cleanup evidence. It found no actionable issue and accepted this report
+for the existing freeze gate. This is offline artifact review, not independent
+live-provider or human review.
+
+The active `freeze.json` now points to attempt 03 and its raw report hash.
+Only specification status returns to `frozen`: specification SHA-256 is again
+`d33b0f7ed317b4f1792ab22bdf82086bb25a11cebf93781aedd6ebfff5701996`, policy
+remains `4c5d1345…` and repaired source remains `71e7510d…`. Historical freeze
+bindings and reports are preserved in Git and their dated records. No prompt,
+model, scoring, budget, account, sandbox or scientific version changes.
+
+The next pilot root is `/tmp/alf-e3a-shakedown-uJ169U`, freshly prepared from
+`5a88afa` with the same script, Python, dependencies and pinned inputs, without
+auth staging. Advance only this new checkout to the exact passing freeze
+commit before use. The previous failed pilot and both shakedown outputs are
+not overwritten. After renewed freeze validation and exact-commit CI, invoke
+the existing wrapper once with `-Phase pilot`, that fresh root and a new
+output directory. The fixed 24 slots / 72 dispatches and all immediate stops
+remain unchanged. Task 007 missing rubric judgement remains unknown.
+
+Fresh independent renewed-freeze validation passed **37 tests** (runner 18,
+review packet 19), packet reproduction, `git diff --check` and the existing
+`verify_pilot_prerequisite` against the actual attempt-03 report/runtime.
+Exact frozen specification, unchanged policy and repaired source identities
+matched; every command exited 0. Logs are under ignored
+`results/e3a-renewed-freeze-2026-09-09/`. No model, auth, network or Docker
+operation was part of this validation. Exact renewed-freeze commit CI remains
+required before pilot invocation.
