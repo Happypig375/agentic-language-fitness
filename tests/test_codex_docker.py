@@ -2,6 +2,7 @@ import importlib.util
 import json
 import tempfile
 import unittest
+import hashlib
 from io import StringIO
 from pathlib import Path
 from unittest.mock import patch
@@ -16,6 +17,157 @@ SPEC.loader.exec_module(module)
 
 
 class CodexDockerTests(unittest.TestCase):
+    def setUp(self):
+        self._catalog_hash = patch.object(module, "E3A_MODEL_CATALOG_SHA256", hashlib.sha256(b"catalog").hexdigest())
+        self._catalog_hash.start()
+        self.addCleanup(self._catalog_hash.stop)
+        self._native_hash = patch.object(module, "E3A_NATIVE_SHA256", hashlib.sha256(b"native").hexdigest())
+        self._native_hash.start()
+        self.addCleanup(self._native_hash.stop)
+
+    def _e3a_fixture(self, root):
+        workspace = root / "workspace"; workspace.mkdir()
+        binary = root / "codex"; binary.write_bytes(b"native")
+        auth = root / "auth.json"; auth.write_text("{}", encoding="utf-8")
+        catalog = root / "models.json"; catalog.write_bytes(b"catalog")
+        profile = module.load_environment_profile(PROFILE)
+        image = "sha256:" + "a" * 64
+        return workspace, binary, auth, catalog, profile, image
+
+    @staticmethod
+    def _admin(command, **_kwargs):
+        stdout = "" if command[1] != "ps" else ""
+        return type("Done", (), {"returncode": 0, "stdout": stdout, "stderr": ""})()
+
+    def test_e3a_wrapper_success_preserves_exact_stdin_and_confirms_cleanup(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace, binary, auth, catalog, profile, image = self._e3a_fixture(Path(directory))
+            seen = {}
+            def bounded(argv, **kwargs):
+                seen.update(argv=argv, **kwargs)
+                return {"stdout": "ok", "stderr": "", "returncode": 0, "timed_out": False,
+                        "output_limit_exceeded": False}
+            with patch.object(module, "bounded_process", side_effect=bounded), patch.object(module.subprocess, "run", side_effect=self._admin):
+                result = module.run_e3a_cli(b'{"x":"snowman \\u2603"}\n', workspace=workspace,
+                    native_binary=binary, expected_binary_sha256=hashlib.sha256(b"native").hexdigest(),
+                    image=image, expected_image_id=image, auth_source=auth, environment_profile=profile, model_catalog=catalog)
+            self.assertEqual(seen["input_text"].encode(), b'{"x":"snowman \\u2603"}\n')
+            self.assertNotIn(module.SAFETY_PROMPT, seen["input_text"])
+            self.assertTrue(result["cleanup_confirmed"])
+
+    def test_e3a_stages_only_auth_file_from_source_parent(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            workspace, binary, auth, catalog, profile, image = self._e3a_fixture(root)
+            auth_bytes = b'{"refresh_token":"exact\\x00bytes"}\x00\xff'
+            auth.write_bytes(auth_bytes)
+            (root / "config.toml").write_text("history = true", encoding="utf-8")
+            (root / "history").mkdir()
+            (root / "history" / "old.jsonl").write_text("old", encoding="utf-8")
+            (root / "plugin").mkdir()
+            (root / "plugin" / "manifest.json").write_text("plugin", encoding="utf-8")
+            staged = {}
+
+            def bounded(argv, **kwargs):
+                mount = next(value for value in argv if "dst=/tmp/alf-codex-home" in value)
+                staged["home"] = Path(mount.split(",src=", 1)[1].split(",dst=", 1)[0])
+                staged["files"] = sorted(path.relative_to(staged["home"]).as_posix()
+                                         for path in staged["home"].rglob("*"))
+                staged["bytes"] = (staged["home"] / "auth.json").read_bytes()
+                return {"stdout": "ok", "stderr": "", "returncode": 0, "timed_out": False,
+                        "output_limit_exceeded": False}
+
+            with patch.object(module, "bounded_process", side_effect=bounded), patch.object(module.subprocess, "run", side_effect=self._admin):
+                result = module.run_e3a_cli(b"{}", workspace=workspace, native_binary=binary,
+                    expected_binary_sha256=hashlib.sha256(b"native").hexdigest(), image=image,
+                    expected_image_id=image, auth_source=auth, environment_profile=profile, model_catalog=catalog)
+            self.assertEqual(staged["files"], ["auth.json"])
+            self.assertEqual(staged["bytes"], auth_bytes)
+            self.assertEqual(auth.read_bytes(), auth_bytes)
+            self.assertFalse(staged["home"].exists())
+            self.assertTrue(result["cleanup_confirmed"])
+
+    def test_e3a_wrapper_preserves_timeout_and_combined_overflow_alarms(self):
+        for capture, field in [
+            ({"stdout":"partial", "stderr":"", "returncode":-9, "timed_out":True, "output_limit_exceeded":False}, "timed_out"),
+            ({"stdout":"x", "stderr":"y", "returncode":-9, "timed_out":False, "output_limit_exceeded":True}, "output_overflow")]:
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as directory:
+                workspace, binary, auth, catalog, profile, image = self._e3a_fixture(Path(directory))
+                with patch.object(module, "bounded_process", return_value=capture), patch.object(module.subprocess, "run", side_effect=self._admin):
+                    result = module.run_e3a_cli(b"{}", workspace=workspace, native_binary=binary,
+                        expected_binary_sha256=hashlib.sha256(b"native").hexdigest(), image=image,
+                        expected_image_id=image, auth_source=auth, environment_profile=profile, model_catalog=catalog)
+                self.assertTrue(result[field]); self.assertTrue(result["cleanup_confirmed"])
+
+    def test_e3a_wrapper_popen_error_and_cleanup_failure_are_returned(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace, binary, auth, catalog, profile, image = self._e3a_fixture(Path(directory))
+            with patch.object(module, "bounded_process", side_effect=OSError("popen")), \
+                 patch.object(module.subprocess, "run", side_effect=OSError("docker")), \
+                 patch.object(module, "remove_temporary_auth_home", side_effect=RuntimeError("auth")):
+                result = module.run_e3a_cli(b"{}", workspace=workspace, native_binary=binary,
+                    expected_binary_sha256=hashlib.sha256(b"native").hexdigest(), image=image,
+                    expected_image_id=image, auth_source=auth, environment_profile=profile, model_catalog=catalog)
+            self.assertEqual(result["returncode"], 70)
+            self.assertEqual(result["stderr"], "OSError")
+            self.assertFalse(result["cleanup_confirmed"])
+
+    def test_e3a_invalid_image_profile_auth_fail_before_dispatch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); workspace, binary, auth, catalog, profile, image = self._e3a_fixture(root)
+            cases = [dict(image="tag"), dict(environment_profile={}), dict(auth_source=auth.parent)]
+            for change in cases:
+                kwargs = dict(workspace=workspace, native_binary=binary,
+                    expected_binary_sha256=hashlib.sha256(b"native").hexdigest(), image=image,
+                    expected_image_id=image, auth_source=auth, environment_profile=profile, model_catalog=catalog)
+                kwargs.update(change)
+                with self.subTest(change=change), patch.object(module, "bounded_process") as bounded, self.assertRaises(ValueError):
+                    module.run_e3a_cli(b"{}", **kwargs)
+                bounded.assert_not_called()
+
+    def test_e3a_argv_is_opt_in_and_pins_no_tools_single_response(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            workspace = root / "workspace"
+            workspace.mkdir()
+            binary = root / "codex"
+            binary.write_bytes(b"fixture")
+            argv = module.build_docker_argv(workspace, "image", model="gpt-5.6-luna",
+                                             reasoning_effort="high", memory="6g", cpus=2,
+                                             pids_limit=512, e3a_mode=True, native_binary=binary, model_catalog=root / "models.json")
+            self.assertIn("--read-only", argv)
+            self.assertIn("features.no_tools=true", argv)
+            self.assertIn("features.single_response=true", argv)
+            self.assertIn("features.code_mode_host=false", argv)
+            self.assertIn("--skip-git-repo-check", argv)
+            self.assertNotIn("--dangerously-bypass-approvals-and-sandbox", argv)
+            self.assertIn("--memory-swap", argv)
+            self.assertIn("/tmp:rw,size=256m,nosuid,nodev", argv)
+            self.assertTrue(any("dst=/opt/alf/models.json,ro" in value for value in argv))
+            self.assertIn('model_catalog_json="/opt/alf/models.json"', argv)
+
+    def test_e3a_rejects_unpinned_model_catalog_hash(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            workspace, binary, auth, catalog, profile, image = self._e3a_fixture(root)
+            catalog.write_bytes(b"wrong")
+            with patch.object(module, "bounded_process") as bounded, self.assertRaisesRegex(ValueError, "catalog hash"):
+                module.run_e3a_cli(b"{}", workspace=workspace, native_binary=binary,
+                    expected_binary_sha256=hashlib.sha256(b"native").hexdigest(), image=image,
+                    expected_image_id=image, auth_source=auth, environment_profile=profile,
+                    model_catalog=catalog)
+            bounded.assert_not_called()
+
+    def test_e3a_rejects_unreviewed_binary_before_auth_copy(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace, binary, auth, catalog, profile, image = self._e3a_fixture(Path(directory))
+            with patch.object(module, "temporary_auth_copy") as auth_copy, self.assertRaisesRegex(ValueError, "binary hash"):
+                module.run_e3a_cli(b"{}", workspace=workspace, native_binary=binary,
+                    expected_binary_sha256=hashlib.sha256(b"other").hexdigest(), image=image,
+                    expected_image_id=image, auth_source=auth, environment_profile=profile,
+                    model_catalog=catalog)
+            auth_copy.assert_not_called()
+
     def test_non_cp1252_output_does_not_block_usage_sidecar(self):
         class NarrowSink(StringIO):
             encoding = "cp1252"

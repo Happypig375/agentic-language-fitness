@@ -1,12 +1,12 @@
 # E3a review packet: shared first submission and bounded repair
 
-**Updated 2026-09-06 — bounded implementation, not a freeze or execution permission.**
+**Updated 2026-09-08 — amendment implemented model-free; not a freeze or live result.**
 The proposal at `19b1902be59324b98741ccb6c3a8396de962f5f7` received a
 [second AI-session review](../../docs/workstream-e3a-review-disposition-2026-09-06.md),
 accepting implementation with R1–R4 corrections. That is not human-expert sign-off
-or independent approval of the implementation. Implementation review in this
-session is self-review plus model-free tests. No candidate request, live
-continuation probe, or paid review agent was used.
+or independent approval of the implementation. The later [resumed source review](../../docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md)
+was another AI session, not human review. Its model-free checks do not prove
+provider behavior. No experimental candidate request or live continuation probe was made.
 
 **Subsequent maintainer direction (2026-09-06):** reuse the existing local
 OAuth-backed Codex implementation. The direct-API proposal below does not impose
@@ -14,9 +14,9 @@ an API-key prerequisite or justify a new authentication/relay layer. Its
 no-tools/counting/continuation and dollar-budget assumptions still need to be
 reconciled with the canonical Codex runner before execution; they are not proven
 equivalent by a successful OAuth login. See [the current plan](../../PLAN.md#maintainer-authentication-direction-2026-09-06).
-The specification and reviewed artifacts remain unchanged pending that resolution.
+That historical decision point is now resolved by the adopted amendment below.
 
-The narrow [OAuth/Codex amendment draft](oauth-amendment.md) proposes visible-transcript replay and CLI post-turn resource alarms for review. It is documentation only: no runtime, specification identity, execution authorization, live access, or historical artifact changes are implied.
+The narrow [OAuth/Codex amendment](oauth-amendment.md) was adopted by dated maintainer/user direction on 2026-09-08. The active unfrozen JSON and code now implement visible-transcript replay and CLI post-turn alarms. Exact implementing-commit CI and live provider checks remain separate gates. The original direct-API/counting/dollar proposal below is historical, not active OAuth policy; its original JSON is retained at `tests/fixtures/e3a-original-api-specification.json` and its identities remain recorded.
 
 The [specification](specification.json) and generated [review packet](review-packet.json)
 contain the proposed identities, exact schedule, source/payload hashes, archived
@@ -164,9 +164,11 @@ read-only root/cache, bounded writable workspace and `/tmp`, and no credentials,
 full repository, target source, or scorer mount. Locks and image/SDK must agree.
 The scoring process stays outside candidate execution; only a batch's stdin
 cases reach the program during scoring, after interaction has ended. No scoring
-results return to the model. Authentication remains local infrastructure-only;
-no remote auth cache is needed for a local API call. Any later approved credential
-staging must still be ephemeral and cleaned. Existing SSH/proxy policy is unchanged.
+results return to the model. **Historical local-API proposal (superseded on
+adoption):** its authentication was local infrastructure-only and did not need
+a remote auth cache. The active adopted OAuth staging path, only when
+prerequisites pass, is the canonical ephemeral full-auth-cache path and must be
+cleaned. Existing SSH/proxy policy is unchanged.
 
 The host fixture script runs only fixed repository-owned code and explicit small
 faults. It is **not safe for arbitrary candidate code**, does not establish the
@@ -222,7 +224,8 @@ scoring never triggers repair. Build-plus-behavior remains a separate endpoint.
 
 ## Memory, accounting, schedule, and proposed ceilings
 
-The memory treatment is `provider-response-chain`: request 0 starts a new
+**Historical API proposal only (superseded by the adopted amendment):** the
+memory treatment was `provider-response-chain`: request 0 starts a new
 response chain; repairs identify the preceding response, retain provider state,
 and supply fixed instructions/current source/feedback. No replay/fresh-context
 fallback, compaction, transport retry, or different model is permitted. Matching
@@ -346,8 +349,10 @@ absent. Linux CI additionally exercises it with `--ci-sdk-fixture` against the
 exact SDK base from `Dockerfile.codex-agent`, never the image containing the
 research repository. That result is labelled non-experimental, not remote proof.
 
-**Next decision:** verify the remaining API/controller-to-remote wiring and actual
-account/rate/count conditions, then separately authorize the proposed two-request
-integration on an unrelated task. Neither this implementation nor passing mocks
-authorizes it or the pilot. Review any scientific policy change before freeze
-and collection. E3b/F0, H and generic routing remain out of scope.
+**Next decision:** complete and review the consistent adopted implementation,
+then verify controller-to-remote wiring, provider conditions, and no-tools
+enforcement in the permitted at-most-two-dispatch unrelated-task OAuth
+shakedown. A successful shakedown is required before freezing the exact adopted
+specification and proceeding to the fixed 24-trajectory/72-dispatch pilot. No
+automatic reissue, replacement, toolful fallback, or new auth relay is
+authorized. E3b/F0, H and generic routing remain out of scope.

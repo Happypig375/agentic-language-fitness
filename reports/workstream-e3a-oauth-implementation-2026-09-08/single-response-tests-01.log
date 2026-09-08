@@ -1,0 +1,150 @@
+RUST_MIN_STACK=8388608 NEXTEST_PROFILE=local cargo nextest run --no-fail-fast "$@"
+   Compiling codex-features v0.149.1 (/build/source-lf/codex-rs/features)
+   Compiling codex-config v0.149.1 (/build/source-lf/codex-rs/config)
+   Compiling codex-exec-server v0.149.1 (/build/source-lf/codex-rs/exec-server)
+   Compiling codex-login v0.149.1 (/build/source-lf/codex-rs/login)
+   Compiling codex-feedback v0.149.1 (/build/source-lf/codex-rs/feedback)
+   Compiling codex-models-manager v0.149.1 (/build/source-lf/codex-rs/models-manager)
+   Compiling codex-model-provider v0.149.1 (/build/source-lf/codex-rs/model-provider)
+   Compiling codex-utils-plugins v0.149.1 (/build/source-lf/codex-rs/utils/plugins)
+   Compiling codex-rmcp-client v0.149.1 (/build/source-lf/codex-rs/rmcp-client)
+   Compiling codex-apply-patch v0.149.1 (/build/source-lf/codex-rs/apply-patch)
+   Compiling codex-exec-server-test-support v0.149.1 (/build/source-lf/codex-rs/exec-server/tests/support)
+   Compiling codex-plugin v0.149.1 (/build/source-lf/codex-rs/plugin)
+   Compiling codex-arg0 v0.149.1 (/build/source-lf/codex-rs/arg0)
+   Compiling codex-connectors v0.149.1 (/build/source-lf/codex-rs/connectors)
+   Compiling codex-analytics v0.149.1 (/build/source-lf/codex-rs/analytics)
+   Compiling codex-hooks v0.149.1 (/build/source-lf/codex-rs/hooks)
+   Compiling codex-test-binary-support v0.149.1 (/build/source-lf/codex-rs/test-binary-support)
+   Compiling codex-mcp v0.149.1 (/build/source-lf/codex-rs/codex-mcp)
+   Compiling codex-tools v0.149.1 (/build/source-lf/codex-rs/tools)
+   Compiling codex-extension-api v0.149.1 (/build/source-lf/codex-rs/ext/extension-api)
+   Compiling codex-core-plugins v0.149.1 (/build/source-lf/codex-rs/core-plugins)
+   Compiling codex-skills-extension v0.149.1 (/build/source-lf/codex-rs/ext/skills)
+   Compiling codex-home v0.149.1 (/build/source-lf/codex-rs/codex-home)
+   Compiling codex-core v0.149.1 (/build/source-lf/codex-rs/core)
+   Compiling codex-web-search-extension v0.149.1 (/build/source-lf/codex-rs/ext/web-search)
+   Compiling core_test_support v0.149.1 (/build/source-lf/codex-rs/core/tests/common)
+   Compiling codex-image-generation-extension v0.149.1 (/build/source-lf/codex-rs/ext/image-generation)
+warning: unused import: `wiremock::matchers::body_json`
+  --> core/tests/suite/openai_file_mcp.rs:47:5
+   |
+47 | use wiremock::matchers::body_json;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `codex-core` (test "all") generated 1 warning (run `cargo fix --test "all" -p codex-core` to apply 1 suggestion)
+    Finished `dev-small` profile [unoptimized] target(s) in 1m 23s
+────────────
+ Nextest run ID 7798d735-4839-4c56-b116-51d145074d65 with nextest profile: local
+    Starting 107 tests across 10 binaries (3715 tests skipped)
+        PASS [   0.021s] (  1/107) codex-api sse::responses::tests::content_policy_errors_without_type_are_invalid_requests
+        PASS [   0.021s] (  2/107) codex-api sse::responses::tests::context_window_error_with_newline_is_fatal
+        PASS [   0.021s] (  3/107) codex-api sse::responses::tests::context_window_error_is_fatal
+        PASS [   0.017s] (  4/107) codex-api sse::responses::tests::cyber_policy_error_is_fatal
+        PASS [   0.019s] (  5/107) codex-api sse::responses::tests::emits_completed_without_stream_end
+        PASS [   0.019s] (  6/107) codex-api sse::responses::tests::cyber_policy_error_uses_fallback_for_empty_message
+        PASS [   0.018s] (  7/107) codex-api sse::responses::tests::error_when_error_event
+        PASS [   0.017s] (  8/107) codex-api sse::responses::tests::malformed_output_items_emit_payload_free_marker
+        PASS [   0.019s] (  9/107) codex-api sse::responses::tests::error_when_missing_completed
+        PASS [   0.016s] ( 10/107) codex-api sse::responses::tests::parses_cache_write_token_usage
+        PASS [   0.019s] ( 11/107) codex-api sse::responses::tests::misalignment_policy_violation_error_is_fatal
+        PASS [   0.019s] ( 12/107) codex-api sse::responses::tests::misalignment_policy_violation_uses_fallback_for_blank_message
+        PASS [   0.017s] ( 13/107) codex-api sse::responses::tests::parses_reasoning_summary_done
+        PASS [   0.020s] ( 14/107) codex-api sse::responses::tests::parses_items_and_completed
+        PASS [   0.018s] ( 15/107) codex-api sse::responses::tests::parses_tool_call_input_deltas
+        PASS [   0.017s] ( 16/107) codex-api sse::responses::tests::parses_tool_search_call_items
+        PASS [   0.017s] ( 17/107) codex-api sse::responses::tests::process_sse_emits_model_verification_field
+        PASS [   0.017s] ( 18/107) codex-api sse::responses::tests::process_sse_emits_all_safety_buffering_notifications_without_dropping_response_events
+        PASS [   0.018s] ( 19/107) codex-api sse::responses::tests::process_sse_emits_server_model_from_response_headers_payload
+        PASS [   0.017s] ( 20/107) codex-api sse::responses::tests::process_sse_ignores_response_model_field_in_payload
+        PASS [   0.018s] ( 21/107) codex-api sse::responses::tests::process_sse_emits_turn_moderation_metadata_field
+        PASS [   0.016s] ( 22/107) codex-api sse::responses::tests::quota_exceeded_error_is_fatal
+        PASS [   0.016s] ( 23/107) codex-api sse::responses::tests::responses_stream_event_model_verification_ignores_non_array_field
+        PASS [   0.018s] ( 24/107) codex-api sse::responses::tests::recognized_tool_input_events_emit_policy_marker_when_not_consumable
+        PASS [   0.016s] ( 25/107) codex-api sse::responses::tests::responses_stream_event_model_verification_ignores_unknown_field
+        PASS [   0.015s] ( 26/107) codex-api sse::responses::tests::responses_stream_event_model_verification_reads_metadata_field
+        PASS [   0.018s] ( 27/107) codex-api sse::responses::tests::responses_stream_event_response_model_prefers_response_headers
+        PASS [   0.016s] ( 28/107) codex-api sse::responses::tests::responses_stream_event_response_model_reads_top_level_headers
+        PASS [   0.018s] ( 29/107) codex-api sse::responses::tests::safety_buffering_falls_back_to_response_metadata
+        PASS [   0.016s] ( 30/107) codex-api sse::responses::tests::safety_buffering_ignores_metadata_field_for_other_event_kinds
+        PASS [   0.018s] ( 31/107) codex-api sse::responses::tests::safety_buffering_ignores_response_metadata_without_safety_buffering_type
+        PASS [   0.016s] ( 32/107) codex-api sse::responses::tests::safety_buffering_prefers_wire_retry_model_and_only_falls_back_when_omitted
+        PASS [   0.016s] ( 33/107) codex-api sse::responses::tests::safety_buffering_top_level_presence_wins_over_response_metadata
+        PASS [   0.019s] ( 34/107) codex-api sse::responses::tests::spawn_response_stream_emits_header_events
+        PASS [   0.019s] ( 35/107) codex-api sse::responses::tests::spawn_response_stream_ignores_model_verification_header
+        PASS [   0.019s] ( 36/107) codex-api sse::responses::tests::table_driven_event_kinds
+        PASS [   0.016s] ( 37/107) codex-api sse::responses::tests::test_try_parse_retry_after_azure
+        PASS [   0.018s] ( 38/107) codex-api sse::responses::tests::test_try_parse_retry_after
+        PASS [   0.017s] ( 39/107) codex-api sse::responses::tests::test_try_parse_retry_after_no_delay
+        PASS [   0.029s] ( 40/107) codex-core client::tests::auth_request_telemetry_context_tracks_agent_identity_ids
+        PASS [   0.028s] ( 41/107) codex-core client::tests::auth_request_telemetry_context_tracks_attached_auth_and_retry_phase
+        PASS [   0.028s] ( 42/107) codex-core client::tests::bedrock_unauthorized_error_uses_provider_mapping
+        PASS [   0.026s] ( 43/107) codex-core client::tests::build_subagent_headers_sets_internal_memory_consolidation_label
+        PASS [   0.024s] ( 44/107) codex-core client::tests::build_ws_client_metadata_includes_window_lineage_and_turn_metadata
+        PASS [   0.030s] ( 45/107) codex-core client::tests::build_subagent_headers_sets_other_subagent_label
+        PASS [   0.030s] ( 46/107) codex-core client::tests::default_mapper_drops_unparseable_but_preserves_other
+        PASS [   0.048s] ( 47/107) codex-core client::tests::dropped_backpressured_response_stream_traces_cancelled_partial_output
+        PASS [   0.048s] ( 48/107) codex-core client::tests::dropped_response_stream_traces_cancelled_partial_output
+        PASS [   0.035s] ( 49/107) codex-core client::tests::no_tools_mapper_rejects_tool_input_event
+        PASS [   0.031s] ( 50/107) codex-core client::tests::no_tools_mapper_rejects_unparseable_output_item
+        PASS [   0.123s] ( 51/107) codex-core client::tests::no_tools_http_loopback_rejects_added_tool_with_one_request
+        PASS [   0.033s] ( 52/107) codex-core client::tests::no_tools_rejects_tool_item_before_dispatch
+        PASS [   0.036s] ( 53/107) codex-core client::tests::no_tools_request_omits_declarations_and_selects_none
+        PASS [   0.034s] ( 54/107) codex-core client::tests::no_tools_responses_lite_omits_additional_tools
+        PASS [   0.035s] ( 55/107) codex-core client::tests::provider_owned_auth_recovery_is_bounded_and_preserves_unauthorized_failures
+        PASS [   0.036s] ( 56/107) codex-core client::tests::non_chatgpt_codex_endpoints_omit_attestation_generation
+        PASS [   0.277s] ( 57/107) codex-core client::tests::compact_uses_bearer_after_agent_identity_session_fallback
+        PASS [   0.041s] ( 58/107) codex-core client::tests::response_stream_records_last_model_feedback_ids
+        PASS [   0.042s] ( 59/107) codex-core client::tests::single_response_disables_websocket_transport
+        PASS [   0.130s] ( 60/107) codex-core client::tests::single_response_http_failure_is_not_retried
+        PASS [   0.137s] ( 61/107) codex-core client::tests::single_response_incomplete_stream_is_not_retried
+        PASS [   0.135s] ( 62/107) codex-core client::tests::single_response_premature_stream_close_is_not_retried
+        PASS [   0.037s] ( 63/107) codex-core client::tests::summarize_memories_returns_empty_for_empty_input
+        PASS [   0.045s] ( 64/107) codex-core client::tests::ultra_reasoning_uses_max_for_requests
+        PASS [   0.136s] ( 65/107) codex-core client::tests::single_response_rate_limit_is_not_retried
+        PASS [   0.135s] ( 66/107) codex-core client::tests::single_response_unauthorized_is_not_retried
+        PASS [   0.127s] ( 67/107) codex-core client::tests::websocket_handshake_includes_attestation_for_chatgpt_codex_responses
+        PASS [   0.017s] ( 68/107) codex-features tests::apps_require_feature_flag_and_chatgpt_auth
+        PASS [   0.018s] ( 69/107) codex-features tests::canonical_image_generation_toggle_wins_over_extension_alias
+        PASS [   0.017s] ( 70/107) codex-features tests::code_mode_host_feature_config_deserializes_fallback_setting
+        PASS [   0.018s] ( 71/107) codex-features tests::code_mode_host_feature_config_preserves_boolean_toggle
+        PASS [   0.018s] ( 72/107) codex-features tests::code_mode_only_requires_code_mode
+        PASS [   0.016s] ( 73/107) codex-features tests::codex_hooks_is_legacy_alias_for_hooks
+        PASS [   0.020s] ( 74/107) codex-features tests::collab_is_legacy_alias_for_multi_agent
+        PASS [   0.017s] ( 75/107) codex-features tests::cwd_relative_turn_diffs_is_an_opt_in_map_feature
+        PASS [   0.017s] ( 76/107) codex-features tests::default_enabled_features_are_stable
+        PASS [   0.017s] ( 77/107) codex-features tests::executor_capability_discovery_is_an_opt_in_map_feature
+        PASS [   0.019s] ( 78/107) codex-features tests::from_sources_applies_base_profile_and_overrides
+        PASS [   0.019s] ( 79/107) codex-features tests::from_sources_ignores_removed_apply_patch_freeform_feature_key
+        PASS [   0.017s] ( 80/107) codex-features tests::from_sources_ignores_removed_image_detail_original_feature_key
+        PASS [   0.017s] ( 81/107) codex-features tests::from_sources_ignores_removed_item_ids_feature_key
+        PASS [   0.017s] ( 82/107) codex-features tests::from_sources_ignores_removed_js_repl_feature_keys
+        PASS [   0.017s] ( 83/107) codex-features tests::from_sources_ignores_removed_plugin_hooks_feature_key
+        PASS [   0.018s] ( 84/107) codex-features tests::from_sources_ignores_removed_resize_all_images_feature_key
+        PASS [   0.018s] ( 85/107) codex-features tests::from_sources_ignores_removed_terminal_resize_reflow_feature_key
+        PASS [   0.016s] ( 86/107) codex-features tests::from_sources_ignores_removed_tool_search_always_defer_mcp_tools_feature_key
+        PASS [   0.016s] ( 87/107) codex-features tests::from_sources_ignores_removed_undo_feature_key
+        PASS [   0.016s] ( 88/107) codex-features tests::guardian_v2_feature_config_accepts_boundary_values
+        PASS [   0.020s] ( 89/107) codex-features tests::guardian_v2_feature_config_deserializes_classifier_and_transcript_settings
+        PASS [   0.018s] ( 90/107) codex-features tests::guardian_v2_feature_config_preserves_boolean_toggle
+        PASS [   0.018s] ( 91/107) codex-features tests::guardian_v2_feature_config_rejects_invalid_settings
+        PASS [   0.019s] ( 92/107) codex-features tests::image_generation_extension_alias_is_supported
+        PASS [   0.017s] ( 93/107) codex-features tests::image_generation_toggle_controls_extension_backed_generation
+        PASS [   0.543s] ( 94/107) codex-core::all suite::client::single_response_session_skips_compaction_and_followup_after_limit
+        PASS [   0.015s] ( 95/107) codex-features tests::multi_agent_v2_feature_config_deserializes_boolean_toggle
+        PASS [   0.017s] ( 96/107) codex-features tests::multi_agent_v2_feature_config_deserializes_table
+        PASS [   0.017s] ( 97/107) codex-features tests::non_prefixed_mcp_tool_names_feature_config_deserializes_boolean_toggle
+        PASS [   0.017s] ( 98/107) codex-features tests::non_prefixed_mcp_tool_names_feature_config_deserializes_table
+        PASS [   0.016s] ( 99/107) codex-features tests::remote_control_config_is_ignored
+        PASS [   0.016s] (100/107) codex-features tests::removed_apps_mcp_path_override_shapes_are_ignored
+        PASS [   0.016s] (101/107) codex-features tests::telepathy_is_legacy_alias_for_chronicle
+        PASS [   0.017s] (102/107) codex-features tests::tool_registry_config_is_not_a_feature_toggle
+        PASS [   0.016s] (103/107) codex-features tests::under_development_features_are_disabled_by_default
+        PASS [   0.016s] (104/107) codex-features tests::unstable_warning_event_ignores_enabled_structured_stable_feature
+        PASS [   0.016s] (105/107) codex-features tests::unstable_warning_event_only_mentions_enabled_under_development_features
+        PASS [   0.017s] (106/107) codex-features tests::use_legacy_landlock_config_records_deprecation_notice
+        PASS [   2.489s] (107/107) codex-core::all suite::client::no_tools_feature_fails_closed_in_session_without_followup
+────────────
+     Summary [   3.368s] 107 tests run: 107 passed, 3715 skipped

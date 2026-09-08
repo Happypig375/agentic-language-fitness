@@ -1,6 +1,38 @@
 # Research plan
 
-**Reviewed:** 2026-09-06. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
+**Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
+
+## Current resumed implementation (2026-09-08)
+
+The user explicitly said `continue` in response to the five-failure-stop handoff,
+authorizing a fresh bounded model-free repair cycle. The previous five failures
+remain retained history; the five-failure stop still applies to the resumed
+cycle. Start by finishing native preparation and the listed adapter correctness
+repairs. No live prerequisite is considered passed by this renewed direction.
+
+The user approved the fixed authored-byte-cap/context-rejection amendment.
+Adoption, bounded OAuth staging/live integration, and the contingent pilot remain
+approved; no redundant authorization decision is needed for those policies.
+Previously, **five consecutive native preparation attempts failed**, reaching the
+project-scoped apparatus stop. See the [exact attempts, identities, outstanding
+defects, and next assignment](docs/workstream-e3a-oauth-implementation-stop-2026-09-08.md).
+
+The additive single-response client now passes 107 focused native tests, build,
+two exact-binary loopback probes, and the original-image native-mount/catalogue
+packaging check. The OAuth adapter, canonical-wrapper composition, active
+specification and tests were repaired; another AI session approved the source.
+Read the [resumed implementation record](docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md)
+for exact identities, Python validation, retained failures and reproduction.
+The earlier no-tools binary/CI do not validate these changes. No credentials
+were staged, no live dispatch occurred, no new commit was published, and
+`execution_authorized=false` remains.
+
+Next: finish/publish the reviewed implementing revision and verify its exact
+Linux/Windows CI, then use the already approved canonical OAuth route for the
+bounded unrelated shakedown. Only success permits a tracked freeze record and
+the fixed pilot. `scripts/e3a_run.py` refuses dirty source, unpinned native or
+catalogue inputs, and pilot execution without that matching successful record.
+Publication permission and technical CI are not renewed scientific/live adoption.
 
 ## Authority and current checkpoint
 
@@ -21,9 +53,9 @@ Keep controlled pre-restored/audit-off, intended online audit-reachable, and leg
 
 The user explicitly requires the existing local OpenAI OAuth-backed Codex implementation and canonical remote launcher, as in earlier model-backed runs. The API-key request was mistaken; absence of `OPENAI_API_KEY` is not a blocker for that route. Do not add a new authentication/proxy/backend relay or send the OAuth cache to the general Platform API.
 
-Local metadata checks found Codex 0.153.4 logged in using ChatGPT; `codex debug models` completed and listed Luna/high. These were not candidate generations or input-count calls. They do not establish E3a compatibility, replace the existing runner pin, or verify a live completion. OpenAI distinguishes [subscription login from API-key access](https://learn.chatgpt.com/docs/auth); API price estimates must not be reported as subscription charges.
+Historical local metadata checks found Codex 0.153.4 logged in using ChatGPT; `codex debug models` completed and listed Luna/high. These were not candidate generations or input-count calls. They do not establish E3a compatibility, replace the existing runner pin, or verify a live completion. OpenAI distinguishes [subscription login from API-key access](https://learn.chatgpt.com/docs/auth); API price estimates must not be reported as subscription charges.
 
-E3a's direct-API/no-tools/count/continuation and dollar-budget assumptions remain an unfrozen proposal requiring reconciliation with canonical Codex before calls. The existing adapter enables workspace tools and fresh ephemeral task sessions; it is not already an implementation of E3a's controlled no-tools repair turns. Reuse its authentication/transport, verify turn authority, feedback and enforceable accounting model-free, and return material mismatches for review. Broad continuation permission covers ordinary work, not invented evidence or silently relaxed scientific limits. The specification, historical results and execution flags are unchanged.
+At that historical checkpoint, E3a's direct-API/count/continuation and dollar assumptions still required reconciliation. The dated adopted amendment below now supplies that policy; active unfrozen JSON and code implement it while historical results remain unchanged. The legacy toolful runner mode is not E3a's opt-in no-tools mode. Reuse canonical authentication/transport; do not silently relax scientific limits or infer working provider behavior from mocks.
 
 ## E3a disposition — model-free remote sandbox checks passed
 
@@ -33,13 +65,57 @@ The packet at **`19b1902be59324b98741ccb6c3a8396de962f5f7`** has been read and r
 
 **Resumed implementation checkpoint:** the user explicitly authorized further model-free fixes on the reachable remote host. The original image archive was found, verified and loaded with the exact specified image ID. Trusted dependency export now copies inside the running container to a preparation-only bind mount; candidate mounts and limits are unchanged. Both language sandbox checks and isolation/limit probes passed on that host and image. The [remote fix report](docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md) preserves all four resumed attempts and final source/spec hashes. The [earlier handoff](docs/workstream-e3a-implementation-handoff-2026-09-06.md) remains the record of the two failed CI attempts and appropriate stop before renewed permission. Check Linux/Windows CI on the exact implementing commit; remote success is not a substitute for it. No scientific specification, execution authorization or historical result changed.
 
-The next boundary is reviewed reconciliation of the canonical OAuth Codex runner with E3a's candidate authority/context, session/turn accounting, enforceable request/token/time ceilings, and unknown/null subscription cost. The [capability handoff](docs/workstream-e3a-codex-capability-2026-09-06.md) records two successful model-free fixture runs; they do not establish OAuth, real-provider behavior, continuation, count endpoints, or API-rate dollars. Hold if the required controls cannot be supported. No model/count endpoint, paid integration, pilot, new routing layer or protocol family is authorized by this repair.
+**Prior repair checkpoint (historical):** the next boundary was reconciliation of the canonical OAuth Codex runner with E3a controls. The [capability handoff](docs/workstream-e3a-codex-capability-2026-09-06.md) records two model-free fixture runs; they do not establish OAuth, provider behavior, continuation, counting, or rates. Its statement that model/count endpoints, paid integration, pilot, or new routing were not authorized applies to that repair checkpoint; the dated adoption record supersedes its approval wording while retaining the technical hold.
 
-**Next decision:** a separate maintainer-AI reviewer accepted the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) as a review proposal after clarifying byte-budget exhaustion. Maintainer adoption of visible replay, dispatch/byte/time limits, and explicit token/request/cost overshoot risk is still required before model-free implementation of those changes. This is not human-expert or live-run approval; the original specification and execution flags remain unchanged.
+**Adoption (2026-09-08):** the user explicitly approved the customized native no-tools client and adopted the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md), including visible replay, dispatch/byte/time limits, and retained overshoot/null-subscription-cost limitations. The [dated record](docs/workstream-e3a-oauth-adoption-2026-09-08.md) preserves source, binary, upstream, base-repository, and original-specification identities. Adoption was not implementation validation; the later resumed record now documents consistent active JSON/code/generator changes and model-free checks, still without live activation or human-expert review.
 
-**Technical hold (2026-09-06):** the [no-tools prerequisite check](docs/workstream-e3a-no-tools-check-2026-09-06.md) now provides bounded model-free evidence that the customized native scaffold is ready for the next maintainer decision, not a universal configuration claim. Final tests, build, probes, and separate AI review passed as documented there; exact-commit CI remains a separate publication/status matter. The next user-facing step requires explicit adoption of the customized native scaffold and visible replay, dispatch/byte/time controls, and overshoot-risk treatment, then model-free OAuth-adapter implementation/review. This does not authorize an automatic pilot. No automatic toolful fallback, relay, or OAuth staging is authorized.
+**Technical hold (2026-09-08):** the [no-tools prerequisite check](docs/workstream-e3a-no-tools-check-2026-09-06.md) provides bounded model-free evidence, not a universal unsupported-tool guarantee. Final native tests, build, probes, and separate AI review passed; exact-commit CI, packaging, launcher wiring, and provider behavior remain separate checks. The explicit sequence is implementation/review, at most two dispatches on an unrelated trivial task, successful-shakedown freeze, then the fixed 24-trajectory/72-dispatch pilot. Canonical ephemeral full-auth-cache OAuth staging is permitted after prerequisites and requires cleanup; no new auth relay, toolful fallback, reissue, replacement, or slot substitution is authorized. Do not request a redundant second adoption/live-approval gate.
 
-Retain Tasks 001/006/007, one provisional Luna-high setting, four paired repetitions per task, one initial submission and at most two repairs. This gives 24 trajectories, 12 pairs, and at most 72 generation requests. The task sample is deliberately diagnostic and non-confirmatory, not representative maintenance. Accept full-source/no-tools API access as a named scientific scaffold proposal, not historical Codex M or a verified account entitlement.
+**Historical methodological hold, resolved by the approved choice below (2026-09-08):** the
+audit finds Luna context metadata of 272,000 tokens but only the fixed approximate
+byte heuristic in upstream `ff29a44391deccde0aba0f8390337d7f3c319ea4`,
+`utils/string/src/truncate.rs:4,71` (`APPROX_BYTES_PER_TOKEN=4` and
+`approx_token_count`); no authoritative full-CLI-scaffold-plus-request
+tokenizer/count is available before POST. Do not invent a byte-to-token bound or
+treat the current `f794…` binary as integration proof. The client/session/context-
+window and model-provider-info merge audit is another-AI implementation-
+feasibility review, not a test or provider proof. `e3a_check` matches with
+`candidate_model_calls=0`; the 2026-09-08 remote read-only check confirmed only
+the binary/image identities. No OAuth staging was performed as part of that
+check; remote auth locations were not inspected and absence was not proved.
+Next decision: retain strict
+pre-dispatch context fit pending authoritative count, or separately amend to a
+fixed authoring-byte cap with compaction/truncation disabled and context
+rejections retained as failed attempts without reissue. The latter is a
+material scientific revision, not a renewed adoption/live-permission gate.
+
+**Approved policy choice (2026-09-08):** the user approved fixed authored-byte
+caps with native compaction/truncation disabled; any provider context-limit
+rejection is retained as a failed attempt and stops the batch without reissue.
+The active specification now records visible-transcript replay,
+`max_replay_bytes=131072`, post-turn alarms at 32,768 input / 8,192 output
+(not hard provider caps), 72 pilot dispatches, 2 integration dispatches, and
+null OAuth USD/count-call fields. `execution_authorized=false` remains until
+consistent implementation and review. Environment, SDK, tasks, source and
+scoring identities remain unchanged; any native single-response patch is
+additive to immutable `df6a…`, not a replacement.
+
+The user permission is separately recorded as approved for a two-dispatch live
+integration and, contingent on successful checks and freeze, the 72-dispatch
+pilot. It is bounded permission, not unlimited calls or current execution
+authorization; the active JSON remains `execution_authorized=false` pending
+implementation and review.
+
+**Project-scoped apparatus rule (2026-09-08):** for one unchanged unresolved
+apparatus gate, permit up to **five** failed apparatus attempts and retain every
+attempt; a success clears that gate's failure streak. This replaces the prior
+two-failure engineering stop for this repository only. Historical reports and
+their actual two-failure counts remain unchanged. Safety or material-scientific
+choices, unknown live usage/ambiguity, budget exhaustion, and other hard gates
+still stop immediately. Candidate maximum two repairs/three submissions and
+the no-automatic-reissue rule are unchanged.
+
+Retain Tasks 001/006/007, one provisional Luna-high setting, four paired repetitions per task, one initial submission and at most two repairs. The original API proposal described 24 trajectories, 12 pairs, and at most 72 generation requests; the adopted OAuth amendment supersedes “generation requests” with at most 72 dispatches. The task sample is deliberately diagnostic and non-confirmatory, not representative maintenance.
 
 The task-001 Int32.MinValue holdout is valid under the stated integer contract even though archived F# target code fails it. Preserve the old target and result. Later selected F# predecessors already use safe priority comparison; do not invent an inherited defect or alter their source gratuitously.
 
@@ -50,7 +126,7 @@ The task-001 Int32.MinValue holdout is valid under the stated integer contract e
 3. **Feedback limit:** valid diagnostics exceeding the fixed intact-error allowance terminate that trajectory as feedback-budget exhaustion, not an excluded apparatus result or cancellation of unrelated scheduled slots. Genuine controller/security faults still stop the batch. Do not produce feedback after the last allowed submission.
 4. **Budget/counting:** reserve before dispatch using the exact retained-chain input count or a demonstrated conservative bound and the intended service tier. Account for applicable cache-write premiums, no silent retries, and ambiguous-request reservations. Resupply fixed instructions on every response-chain call. Optional unsupported telemetry remains null.
 
-At currently documented rates, using a conservative $0.25 per million input reservation and $1.20 output gives a generation envelope of **$1.2976128** for the maximum pilot, within the proposed $2 ceiling, and **$0.0360448** for two integration generations, within $0.05. These are proposals conditional on actual rates/access and successful pre-dispatch enforcement, not spending already incurred or an automatic run authorization. Model-request ceilings and ancillary HTTP/count calls are distinct; record both.
+**Historical API proposal only (superseded on adoption):** the documented dollar envelopes and pre-dispatch reservation figures are retained for provenance, not as OAuth pricing, authorization, or a spending guarantee. Subscription cost remains null unless authoritative telemetry exists.
 
 ### Bounded implementation scope (handoff above)
 
@@ -72,7 +148,7 @@ Development results alone control repair and stopping. A passing development sub
 
 Use deterministic diagnostic packets with error codes/locations, intact context, stable ordering/deduplication and a fixed limit. Preserve full raw output separately. Packet length is a policy outcome, not a reason to exclude an inconvenient language observation. No LLM summarizer is part of this initial treatment.
 
-The proposed memory policy is provider-response-chain. Verify actual counting/continuation in the later capped integration. Matching mock IDs proves plumbing only; do not silently fall back to fresh-context or transcript replay and label it equivalent. Record actual model/version information when exposed and do not switch aliases or reasoning settings silently.
+**Historical API proposal only (superseded on adoption):** the provider-response-chain memory policy and its counting/continuation assumptions are not active. The adopted amendment requires visible replay; matching mock IDs still prove plumbing only. Record actual model/version information when exposed and do not switch aliases or reasoning settings silently.
 
 ### Outcomes and inference
 
@@ -84,9 +160,9 @@ Preserve actual provider usage and distinguish total input/output from their cac
 
 ## Remaining live gates
 
-The bounded implementation is followed by a separately capped integration, not an automatic full pilot. The proposed integration is at most two generations on an unrelated trivial task and must demonstrate account/model access, exact input counting/lineage, pricing guard, actual continuation semantics, usage reconciliation and intended sandbox evidence. If it changes the scientific policy, revise before freezing or collecting pilot outcomes.
+The bounded implementation is followed by the explicitly permitted, separately capped OAuth shakedown: at most two dispatches on an unrelated trivial task. It must demonstrate account/model access, replay/lineage, dispatch and byte/time controls, usage/ambiguity handling, and intended sandbox evidence. A successful shakedown is required before freezing the adopted scientific policy against exact runner/environment/image identities.
 
-Only after that evidence and explicit approval may the fixed 24-trajectory pilot run. Repository status flags, a review message or a generated hash cannot substitute for working enforcement. No live candidate generations occurred in this review/disposition change.
+Only after that successful freeze may the fixed 24-trajectory pilot run under at most 72 dispatches. The user's explicit adoption/live permission is already recorded; repository status flags, a review message or a generated hash cannot substitute for working enforcement. No live candidate generations occurred in this documentation change.
 
 ## After E3a: choose a branch, not every workstream
 

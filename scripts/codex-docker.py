@@ -13,6 +13,8 @@ import platform
 import re
 import shutil
 import uuid
+import hashlib
+import time
 from urllib.parse import urlparse
 from pathlib import Path
 from typing import Sequence
@@ -26,8 +28,11 @@ from alf.environment_profile import (
     validate_container_route,
 )
 from alf.host_memory import evaluate_host_memory, parse_requirement
+from alf.e3a_sandbox import bounded_process
 
 IMAGE_DEFAULT = "alf-codex:0.149.1"
+E3A_MODEL_CATALOG_SHA256 = "c18214b1ba88ab9bd164753115324a7a29c0582e8d071f7b3babf749d892f549"
+E3A_NATIVE_SHA256 = "72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741bb1959"
 CONTAINER_CODEX_HOME = "/tmp/alf-codex-home"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SAFETY_PROMPT = (
@@ -108,6 +113,9 @@ def build_docker_argv(
     https_proxy: str | None = None,
     http_proxy: str | None = None,
     no_proxy: str | None = None,
+    e3a_mode: bool = False,
+    native_binary: Path | None = None,
+    model_catalog: Path | None = None,
 ) -> list[str]:
     """Build argv using Docker --mount flags (never a shell command)."""
     for path in (workspace, auth_home):
@@ -132,6 +140,14 @@ def build_docker_argv(
             "--memory", resolved_memory,
             "--cpus", str(resolved_cpus), "--user", container_user(),
             "--mount", f"type=bind,src={workspace.resolve()},dst=/workspace"]
+    if e3a_mode:
+        argv.insert(2, "--pull=never")
+        argv[argv.index("--memory") + 2:argv.index("--memory") + 2] = ["--memory-swap", resolved_memory]
+        argv.extend(["--read-only", "--tmpfs", "/tmp:rw,size=256m,nosuid,nodev"])
+        if native_binary is not None:
+            argv.extend(["--mount", f"type=bind,src={native_binary.resolve()},dst=/usr/local/bin/codex,ro"])
+        if model_catalog is not None:
+            argv.extend(["--mount", f"type=bind,src={model_catalog.resolve()},dst=/opt/alf/models.json,ro"])
     if auth_home is not None:
         argv.extend([
             "--mount",
@@ -147,14 +163,22 @@ def build_docker_argv(
     argv.extend([
         image,
         "exec", "--json", "--ephemeral", "--ignore-user-config", "--ignore-rules",
-        "--dangerously-bypass-approvals-and-sandbox", "--cd", "/workspace",
+        "--cd", "/workspace",
     ])
+    if e3a_mode:
+        argv.append("--skip-git-repo-check")
+    else:
+        argv.append("--dangerously-bypass-approvals-and-sandbox")
     if model:
         argv.extend(["--model", model])
     if reasoning_effort:
         if reasoning_effort not in {"low", "medium", "high"}:
             raise ValueError("reasoning_effort must be low, medium, or high")
         argv.extend(["--config", f"model_reasoning_effort={reasoning_effort}"])
+    if e3a_mode:
+        argv.extend(["--config", "features.no_tools=true", "--config", "features.single_response=true",
+                     "--config", "features.code_mode_host=false",
+                     "--config", 'model_catalog_json="/opt/alf/models.json"'])
     argv.append("-")
     return argv
 
@@ -276,6 +300,116 @@ def remove_temporary_auth_home(home: Path | None) -> None:
         raise RuntimeError("failed to remove temporary Codex authentication home") from exc
     if home.exists():
         raise RuntimeError("temporary Codex authentication home still exists")
+
+
+def run_e3a_cli(
+    stdin: bytes,
+    *,
+    workspace: Path,
+    native_binary: Path,
+    expected_binary_sha256: str,
+    image: str,
+    expected_image_id: str,
+    model: str = "gpt-5.6-luna",
+    reasoning_effort: str = "high",
+    auth_source: Path | None = None,
+    environment_profile: dict | None = None,
+    model_catalog: Path | None = None,
+    timeout: float = 120.0,
+    docker_executable: str = "docker",
+) -> dict:
+    """Launch one exact E3a CLI turn and return bounded capture metadata.
+
+    This is opt-in and intentionally accepts encoded replay bytes unchanged.
+    It never interprets provider output or supplies a prompt prefix.
+    """
+    started = time.monotonic()
+    if not isinstance(stdin, bytes) or timeout <= 0 or timeout > 120 or len(stdin) > 131072:
+        raise ValueError("invalid E3a stdin or lifecycle timeout")
+    try:
+        replay = stdin.decode("utf-8", errors="strict")
+    except UnicodeDecodeError as exc:
+        raise ValueError("E3a stdin must be strict UTF-8") from exc
+    if workspace.is_symlink() or not workspace.is_dir() or any(workspace.iterdir()) or "," in str(workspace):
+        raise ValueError("E3a workspace must be empty")
+    if native_binary.is_symlink() or not native_binary.is_file() or "," in str(native_binary):
+        raise ValueError("native Codex binary is unavailable")
+    digest = hashlib.sha256(native_binary.read_bytes()).hexdigest()
+    expected_digest = expected_binary_sha256.lower().removeprefix("sha256:")
+    if expected_digest != E3A_NATIVE_SHA256 or digest.lower() != E3A_NATIVE_SHA256:
+        raise ValueError("native Codex binary hash mismatch")
+    if not re.fullmatch(r"sha256:[0-9a-f]{64}", expected_image_id) or image != expected_image_id:
+        raise ValueError("pinned image identity is required")
+    if environment_profile is None:
+        raise ValueError("tracked environment profile is required")
+    tracked_profile = load_environment_profile(
+        REPOSITORY_ROOT / "infra" / "remote-runner" / "environment-profile.json"
+    )
+    if environment_profile != tracked_profile:
+        raise ValueError("tracked environment profile mismatch")
+    validate_container_route(environment_profile,
+                             docker_network=environment_profile["docker_network"]["name"],
+                             https_proxy=f"http://{environment_profile['docker_network']['bridge_gateway']}:{environment_profile['connect_proxy']['remote_port']}",
+                             http_proxy=f"http://{environment_profile['docker_network']['bridge_gateway']}:{environment_profile['connect_proxy']['remote_port']}",
+                             no_proxy=",".join(environment_profile["docker_network"]["no_proxy"]))
+    if model != "gpt-5.6-luna" or reasoning_effort != "high":
+        raise ValueError("E3a model and reasoning settings are pinned")
+    if (model_catalog is None or model_catalog.is_symlink() or not model_catalog.is_file()
+            or "," in str(model_catalog)):
+        raise ValueError("pinned model catalog file is required")
+    if hashlib.sha256(model_catalog.read_bytes()).hexdigest() != E3A_MODEL_CATALOG_SHA256:
+        raise ValueError("pinned model catalog hash mismatch")
+    if auth_source is None or auth_source.is_symlink() or not auth_source.is_file() or "," in str(auth_source):
+        raise ValueError("auth.json file is required")
+    auth = temporary_auth_copy(auth_source)
+    result = {"stdout": "", "stderr": "", "returncode": 70, "timed_out": False,
+              "output_overflow": False, "cleanup_confirmed": False}
+    name = None
+    container_gone = False
+    auth_gone = False
+    try:
+        network = environment_profile["docker_network"]
+        proxy = environment_profile["connect_proxy"]
+        kwargs = dict(docker_network=network["name"],
+                      https_proxy=f"http://{network['bridge_gateway']}:{proxy['remote_port']}",
+                      http_proxy=f"http://{network['bridge_gateway']}:{proxy['remote_port']}",
+                      no_proxy=",".join(network["no_proxy"]))
+        argv = build_docker_argv(workspace, image, auth, model, docker_executable,
+                                 reasoning_effort=reasoning_effort, memory="6g", cpus=2,
+                                 pids_limit=512, e3a_mode=True, native_binary=native_binary,
+                                 model_catalog=model_catalog, **kwargs)
+        name = argv[argv.index("--name") + 1]
+        cleanup_reserve = min(10.0, timeout / 4)
+        remaining = timeout - (time.monotonic() - started) - cleanup_reserve
+        if remaining <= 0:
+            raise TimeoutError("E3a lifecycle deadline exhausted before launch")
+        capture = bounded_process(argv, input_text=replay, timeout=remaining,
+                                  output_limit=1_048_576)
+        result = {"stdout": capture["stdout"], "stderr": capture["stderr"],
+                  "returncode": capture["returncode"], "timed_out": capture["timed_out"],
+                  "output_overflow": capture["output_limit_exceeded"], "cleanup_confirmed": False}
+    except Exception as exc:
+        result["stderr"] = type(exc).__name__
+    finally:
+        try:
+            if name:
+                admin_timeout = max(0.1, min(5.0, timeout - (time.monotonic() - started)))
+                subprocess.run([docker_executable, "rm", "-f", name], capture_output=True,
+                               check=False, timeout=admin_timeout)
+                admin_timeout = max(0.1, min(5.0, timeout - (time.monotonic() - started)))
+                gone = subprocess.run([docker_executable, "ps", "-a", "--filter", f"name=^/{name}$", "-q"],
+                                      text=True, capture_output=True, check=False, timeout=admin_timeout)
+                container_gone = gone.returncode == 0 and not gone.stdout.strip()
+        except (OSError, subprocess.SubprocessError):
+            container_gone = False
+        finally:
+            try:
+                remove_temporary_auth_home(auth)
+                auth_gone = True
+            except RuntimeError:
+                auth_gone = False
+    result["cleanup_confirmed"] = bool(container_gone and auth_gone)
+    return result
 
 
 def main(argv: Sequence[str] | None = None) -> int:

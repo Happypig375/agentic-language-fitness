@@ -15,6 +15,7 @@ from unittest.mock import patch
 
 from alf.config import load_manifest
 from alf.e3a_api import BudgetGuard, GuardFailure, HttpTransport, ResponsesAdapter
+from alf.e3a_codex import CodexOAuthAdapter, DispatchGuard, parse_cli_jsonl
 from alf.e3a_runner import run_batch
 from alf.e3a_sandbox import DockerEvaluator, SandboxFailure, bounded_process, container_arguments, tree_identity
 from alf.models import ProcessResult
@@ -24,15 +25,16 @@ from alf.workstream_e3a import (PACKET_DIR, PolicyViolation, apply_submission, c
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = read_json(ROOT / PACKET_DIR / "specification.json")
+HISTORICAL_SPEC = read_json(ROOT / "tests" / "fixtures" / "e3a-original-api-specification.json")
 MANIFEST = load_manifest(ROOT, SPEC["manifest"])
 module_spec = importlib.util.spec_from_file_location("e3a_check_fixtures", ROOT / "scripts/e3a_check.py")
 fixtures = importlib.util.module_from_spec(module_spec)
 module_spec.loader.exec_module(fixtures)
 
 
-def rates():
-    return {"model": SPEC["model"]["requested"], "service_tier": "default", "input_reservation_rate": "0.25",
-            "output_rate": "1.20", "checked_date": SPEC["budgets"]["pricing_checked_utc_date"],
+def rates(spec=SPEC):
+    return {"model": spec["model"]["requested"], "service_tier": "default", "input_reservation_rate": "0.25",
+            "output_rate": "1.20", "checked_date": spec["budgets"]["pricing_checked_utc_date"],
             "count_call_upper_usd": "0", "account_verified": False, "fixture_assumptions_only": True}
 
 
@@ -60,14 +62,30 @@ class MockTransport:
                 {"type": "output_text", "text": self.answer(body)}]}]}
         return {"http_status": 200, "body": self.change(response)}
 
+    def launch(self, stdin, timeout):
+        self.calls.append(("codex-exec", bytes(stdin), timeout))
+        if self.fail:
+            return {"stdout": b"", "stderr": b"fixture", "returncode": 1,
+                    "timed_out": False, "output_overflow": False, "cleanup_confirmed": True}
+        self.generation += 1
+        answer = self.answer(json.loads(stdin))
+        stdout = "\n".join([
+            json.dumps({"type": "thread.started", "thread_id": f"thread-{self.generation}"}),
+            json.dumps({"type": "turn.started"}),
+            json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": answer}}),
+            json.dumps({"type": "turn.completed", "usage": {"input_tokens": 10, "output_tokens": 6,
+                        "cached_input_tokens": 2, "reasoning_output_tokens": 3}}), ""])
+        return {"stdout": stdout, "stderr": "", "returncode": 0, "timed_out": False,
+                "output_overflow": False, "cleanup_confirmed": True}
 
-class ApiTests(unittest.TestCase):
+
+class RetiredApiProposalTests(unittest.TestCase):
     def setUp(self):
-        self.guard = BudgetGuard(SPEC, max_requests=72, usd_ceiling="2", rates=rates(),
-                                 checked_date=rates()["checked_date"])
+        self.guard = BudgetGuard(HISTORICAL_SPEC, max_requests=72, usd_ceiling="2", rates=rates(HISTORICAL_SPEC),
+                                 checked_date=rates(HISTORICAL_SPEC)["checked_date"])
         self.transport = MockTransport()
         self.events = []
-        self.adapter = ResponsesAdapter(SPEC, self.transport, self.guard, record=self.events.append)
+        self.adapter = ResponsesAdapter(HISTORICAL_SPEC, self.transport, self.guard, record=self.events.append)
         self.payload = candidate_payload(ROOT, MANIFEST, "csharp", "001-priority")
 
     def generate(self, previous=None, feedback=None):
@@ -129,8 +147,8 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(len(self.transport.calls), 1)
 
     def test_count_and_generation_ceilings_and_ancillary_charge(self):
-        card = {**rates(), "count_call_upper_usd": "0.001"}
-        guard = BudgetGuard(SPEC, max_requests=2, usd_ceiling="0.05", rates=card, checked_date=card["checked_date"])
+        card = {**rates(HISTORICAL_SPEC), "count_call_upper_usd": "0.001"}
+        guard = BudgetGuard(HISTORICAL_SPEC, max_requests=2, usd_ceiling="0.05", rates=card, checked_date=card["checked_date"])
         guard.before_count()
         self.assertEqual(guard.committed, Decimal("0.001"))
         guard.reserve(32768)
@@ -185,15 +203,63 @@ class ApiTests(unittest.TestCase):
                        {"checked_date": "2000-01-01"}, {"count_call_upper_usd": None},
                        {"count_call_upper_usd": "NaN"}, {"count_call_upper_usd": "oops"}]:
             with self.subTest(change=change), self.assertRaises(GuardFailure):
-                BudgetGuard(SPEC, max_requests=72, usd_ceiling="2", rates={**rates(), **change},
-                            checked_date=rates()["checked_date"])
+                BudgetGuard(HISTORICAL_SPEC, max_requests=72, usd_ceiling="2", rates={**rates(HISTORICAL_SPEC), **change},
+                            checked_date=rates(HISTORICAL_SPEC)["checked_date"])
         with self.assertRaises(GuardFailure):
             HttpTransport("fixture-not-a-key")
         with self.assertRaises(GuardFailure):
-            ResponsesAdapter(SPEC, HttpTransport("fixture-not-a-key", enabled=True), self.guard, record=lambda _: None)
+            ResponsesAdapter(HISTORICAL_SPEC, HttpTransport("fixture-not-a-key", enabled=True), self.guard, record=lambda _: None)
 
 
 class CorrectionTests(unittest.TestCase):
+    def test_oauth_replay_overflow_is_pre_dispatch_and_no_feedback(self):
+        payload = candidate_payload(ROOT, MANIFEST, "csharp", "001-priority")
+        payload["instructions"] = "x" * 200
+        spec = copy.deepcopy(SPEC)
+        spec["authority"]["max_replay_bytes"] = 32
+        transport = MockTransport()
+        adapter = CodexOAuthAdapter(spec, transport)
+        result = adapter.generate(payload, None, payload["source"], None, time.monotonic() + 30)
+        self.assertEqual(result["failure"], "trajectory-input-byte-budget-exhausted")
+        self.assertEqual(transport.calls, [])
+
+    def test_oauth_invalid_native_jsonl_sequence_fails_closed(self):
+        raw = b'{"type":"turn.completed","usage":{"input_tokens":1,"output_tokens":1}}\n'
+        parsed = parse_cli_jsonl(raw)
+        self.assertNotEqual(parsed["status"], "completed")
+
+    def test_oauth_large_completed_reply_retains_raw_and_stops_without_build(self):
+        payload = candidate_payload(ROOT, MANIFEST, "csharp", "001-priority")
+        class Large(MockTransport):
+            def __init__(self, output_tokens):
+                super().__init__(lambda body: "x" * 50000)
+                self.output_tokens = output_tokens
+            def launch(self, stdin, timeout):
+                self.calls.append(("codex-exec", bytes(stdin), timeout))
+                return {"stdout": "\n".join([
+                    json.dumps({"type": "thread.started"}), json.dumps({"type": "turn.started"}),
+                    json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": "x" * 50000}}),
+                    json.dumps({"type": "turn.completed", "usage": {"input_tokens": 10, "output_tokens": self.output_tokens}}), ""]),
+                        "stderr": "", "returncode": 0, "timed_out": False,
+                        "output_overflow": False, "cleanup_confirmed": True}
+        for output_tokens, expected_batch_stop, expected_stop in [
+            (6, False, "terminal-submission-byte-budget-exhausted"),
+            (9000, True, "reported-request-budget-exceeded"),
+        ]:
+            transport = Large(output_tokens)
+            adapter = CodexOAuthAdapter(SPEC, transport)
+            evaluated = []
+            result = run_trajectory(payload["source"], "csharp", SPEC,
+                lambda previous, source, feedback, deadline: adapter.generate(payload, previous, source, feedback, deadline),
+                lambda source, index, deadline: evaluated.append(index) or {"passed": True, "build_passed": True, "category": "development", "output": ""},
+                task_id="001-priority")
+            self.assertEqual(len(result["rounds"]), 1)
+            self.assertEqual(evaluated, [])
+            self.assertEqual(result["stop"], expected_stop)
+            self.assertEqual(result["batch_stop"], expected_batch_stop)
+            self.assertIsNone(result["terminal_submission_source"])
+            self.assertEqual(len(result["rounds"][0]["submission"]), 50000)
+
     def test_safe_compile_mistakes_are_retained_then_repaired(self):
         before = snapshot(ROOT, MANIFEST, "fsharp", 6)
         target = snapshot(ROOT, MANIFEST, "fsharp", 7)
@@ -277,7 +343,11 @@ class CorrectionTests(unittest.TestCase):
 class BatchTests(unittest.TestCase):
     def run_fixture(self, output, *, fail_first=False, ambiguous=False, card=None, held=True):
         def answer(body):
-            prompt = json.loads(body["input"][0]["content"])
+            if "transcript" in body:
+                prompt = body["transcript"][0]["data"]
+                prompt["source"] = body["transcript"][-1]["data"]["source"]
+            else:
+                prompt = json.loads(body["input"][0]["content"])
             stage = next(i + 1 for i, task in enumerate(MANIFEST["tasks"])
                          if (ROOT / task["prompt"]).read_text(encoding="utf-8") == prompt["current_task"])
             language = "fsharp" if "OrderFlow.fsproj" in prompt["source"] else "csharp"
@@ -298,9 +368,9 @@ class BatchTests(unittest.TestCase):
                         "output": "ERROR fixture: " + "x" * 9000 if failing else ""}
             def close(self):
                 pass
-        report = run_batch(ROOT, MANIFEST, SPEC, transport=transport, rates=card or rates(),
+        report = run_batch(ROOT, MANIFEST, SPEC, transport=transport,
                            evaluator_factory=lambda lang: Evaluator(), output=output,
-                           runner_git_commit="mock-only", max_requests=72, usd_ceiling="2")
+                           runner_git_commit="mock-only", phase="pilot", max_dispatches=72)
         return report, transport
 
     def test_all_slots_retained_feedback_exhaustion_does_not_stop_batch(self):
@@ -310,8 +380,9 @@ class BatchTests(unittest.TestCase):
             self.assertEqual(report["summary"]["started"], 24)
             self.assertEqual(report["slots"][0]["reason"], "feedback-budget-exhausted")
             self.assertIsNone(report["batch_stop"])
-            self.assertEqual(report["generation_requests"], 24)
-            self.assertEqual(report["count_http_calls"], 24)
+            self.assertEqual(report["dispatches"], 24)
+            self.assertIsNone(report["generation_requests"])
+            self.assertIsNone(report["count_http_calls"])
             self.assertEqual(report["candidate_model_calls"], 0)
             self.assertEqual(len(report["summary"]["paired_first_completion"]), 12)
             self.assertTrue(all(row["scores"]["first"]["task_completion"] is None for row in report["slots"]
@@ -330,18 +401,17 @@ class BatchTests(unittest.TestCase):
     def test_ambiguous_stops_without_replay_retains_unstarted_and_reservation(self):
         with tempfile.TemporaryDirectory() as tmp:
             report, transport = self.run_fixture(Path(tmp) / "run", ambiguous=True)
-            self.assertEqual(report["generation_requests"], 1)
+            self.assertEqual(report["dispatches"], 1)
             self.assertEqual(sum(row["status"] == "unstarted" for row in report["slots"]), 23)
-            self.assertEqual(report["reservations"][0]["state"], "held-unreconciled")
+            self.assertEqual(report["reservations"], [])
             self.assertIsNone(report["summary"]["observed_usage"]["input_tokens"])
 
     def test_rate_rejection_preserves_every_assignment_without_dispatch(self):
         with tempfile.TemporaryDirectory() as tmp:
-            report, transport = self.run_fixture(Path(tmp) / "run", card={**rates(), "count_call_upper_usd": None})
-            self.assertEqual(report["summary"]["started"], 0)
-            self.assertEqual(report["summary"]["assigned"], 24)
-            self.assertEqual(report["generation_requests"], 0)
-            self.assertEqual(transport.calls, [])
+            with self.assertRaises(ValueError):
+                run_batch(ROOT, MANIFEST, SPEC, transport=MockTransport(),
+                          evaluator_factory=lambda lang: None, output=Path(tmp) / "run",
+                          runner_git_commit="mock-only", phase="integration", max_dispatches=72)
 
 
 class SandboxUnitTests(unittest.TestCase):

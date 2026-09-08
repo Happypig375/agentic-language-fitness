@@ -55,9 +55,14 @@ def make_packet() -> dict:
     for name in ["specification.json", "candidate-instructions.md", "baseline-contract.md", "holdout-cases.json"]:
         path = f"{PACKET_DIR}/{name}"
         identities[path] = hashlib.sha256((ROOT / path).read_text(encoding="utf-8").encode("utf-8")).hexdigest()
-    for path in ["src/alf/workstream_e3a.py", "src/alf/e3a_api.py", "src/alf/e3a_runner.py", "src/alf/e3a_sandbox.py",
-                 "scripts/e3a_check.py", "scripts/e3a_sandbox_check.py", "tests/test_workstream_e3a.py",
-                 "tests/test_e3a_implementation.py"]:
+    identity_paths = ["src/alf/workstream_e3a.py", "src/alf/e3a_api.py", "src/alf/e3a_runner.py", "src/alf/e3a_sandbox.py",
+                 "src/alf/e3a_codex.py", "scripts/e3a_check.py", "scripts/e3a_sandbox_check.py",
+                 "scripts/codex-docker.py", "infra/remote-runner/run.ps1", "tests/test_workstream_e3a.py",
+                 "tests/test_e3a_implementation.py", "tests/test_e3a_codex.py", "scripts/e3a_run.py",
+                 "tests/test_e3a_run.py", "tests/test_codex_docker.py",
+                 "infra/remote-runner/environment-profile.json"]
+    optional_identity_paths = ["infra/codex-no-tools/no-tools.patch", "infra/codex-no-tools/single-response.patch"]
+    for path in identity_paths + [p for p in optional_identity_paths if (ROOT / p).exists()]:
         identities[path] = hashlib.sha256((ROOT / path).read_text(encoding="utf-8").encode("utf-8")).hexdigest()
     tasks = []
     for task_id in spec["tasks"]:
@@ -100,6 +105,9 @@ def make_packet() -> dict:
                       "development_sha256": canonical_json_hash(dev), "holdout_sha256": canonical_json_hash(holdout),
                       "archived_observations": observations})
     return {"status": spec["status"], "execution_authorized": False,
+            "user_live_execution_approved": spec["user_live_execution_approved"],
+            "approved_integration_dispatches": spec["approved_integration_dispatches"],
+            "approved_pilot_dispatches": spec["approved_pilot_dispatches"],
             "scientific_specification_sha256": canonical_json_hash(spec), "text_lf_sha256": identities,
             "e1_report_identity": archive["report_sha256"],
             "tokenizer_proxy": {"package": "tiktoken", "version": TOKENIZER_VERSION, "encoding": TOKENIZER_ENCODING,
@@ -107,8 +115,9 @@ def make_packet() -> dict:
             "schedule": schedule(spec), "design_review": {"type": "second-ai-session",
                 "commit": spec["reviewed_proposal_commit"], "disposition": spec["disposition"],
                 "decision": "accepted-for-bounded-implementation-with-R1-R4"},
-            "implementation_review": "self-review-and-model-free-tests-not-independent-approval",
-            "live_validation": "not-authorized"}
+            "implementation_review": "another-ai-session-source-review-not-human-or-live-validation",
+            "implementation_review_record": "docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md",
+            "live_validation": "pending-technical-gates"}
 
 
 def build_fixtures() -> dict:

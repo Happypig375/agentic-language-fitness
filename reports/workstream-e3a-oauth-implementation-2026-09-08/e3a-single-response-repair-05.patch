@@ -1,0 +1,12 @@
+diff --git a/codex-rs/core/tests/suite/client.rs b/codex-rs/core/tests/suite/client.rs
+--- a/codex-rs/core/tests/suite/client.rs
++++ b/codex-rs/core/tests/suite/client.rs
+@@ -1715,4 +1715,7 @@
+     assert_eq!(response_mock.requests().len(), 1);
+-    let requests = server.received_requests().await?;
++    let requests = server
++        .received_requests()
++        .await
++        .expect("request capture should be available");
+     assert!(
+         !requests

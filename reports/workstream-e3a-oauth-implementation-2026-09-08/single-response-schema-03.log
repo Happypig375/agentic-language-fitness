@@ -1,0 +1,23 @@
+cargo run -p codex-core --bin codex-write-config-schema
+   Compiling codex-features v0.149.1 (/build/source-lf/codex-rs/features)
+   Compiling codex-config v0.149.1 (/build/source-lf/codex-rs/config)
+   Compiling codex-exec-server v0.149.1 (/build/source-lf/codex-rs/exec-server)
+   Compiling codex-login v0.149.1 (/build/source-lf/codex-rs/login)
+   Compiling codex-models-manager v0.149.1 (/build/source-lf/codex-rs/models-manager)
+   Compiling codex-feedback v0.149.1 (/build/source-lf/codex-rs/feedback)
+   Compiling codex-model-provider v0.149.1 (/build/source-lf/codex-rs/model-provider)
+   Compiling codex-utils-plugins v0.149.1 (/build/source-lf/codex-rs/utils/plugins)
+   Compiling codex-rmcp-client v0.149.1 (/build/source-lf/codex-rs/rmcp-client)
+   Compiling codex-apply-patch v0.149.1 (/build/source-lf/codex-rs/apply-patch)
+   Compiling codex-plugin v0.149.1 (/build/source-lf/codex-rs/plugin)
+   Compiling codex-connectors v0.149.1 (/build/source-lf/codex-rs/connectors)
+   Compiling codex-analytics v0.149.1 (/build/source-lf/codex-rs/analytics)
+   Compiling codex-hooks v0.149.1 (/build/source-lf/codex-rs/hooks)
+   Compiling codex-mcp v0.149.1 (/build/source-lf/codex-rs/codex-mcp)
+   Compiling codex-tools v0.149.1 (/build/source-lf/codex-rs/tools)
+   Compiling codex-extension-api v0.149.1 (/build/source-lf/codex-rs/ext/extension-api)
+   Compiling codex-core-plugins v0.149.1 (/build/source-lf/codex-rs/core-plugins)
+   Compiling codex-skills-extension v0.149.1 (/build/source-lf/codex-rs/ext/skills)
+   Compiling codex-core v0.149.1 (/build/source-lf/codex-rs/core)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 43.74s
+     Running `/build/target/debug/codex-write-config-schema`

@@ -72,17 +72,25 @@ def budget(spec: dict) -> dict:
     calls = trajectories * (1 + spec["controller"]["max_repair_rounds"])
     input_ceiling = calls * limits["request_input_tokens"]
     output_ceiling = calls * limits["request_output_tokens_including_reasoning"]
+    input_rate = limits.get("reservation_input_usd_per_million")
+    output_rate = limits.get("output_usd_per_million")
+    reservation = None if input_rate is None or output_rate is None else str((
+        input_ceiling * Decimal(str(input_rate)) + output_ceiling * Decimal(str(output_rate))
+    ) / Decimal(1_000_000))
+    post_turn_alarm = limits.get("request_limits_semantics") == "post-turn-alarm-not-hard-cap"
     return {
         "trajectories": trajectories, "task_pairs": trajectories // 2,
-        "max_requests": calls, "max_input_tokens": input_ceiling,
-        "max_output_tokens_including_reasoning": output_ceiling,
+        "max_requests": None if post_turn_alarm else calls,
+        "max_input_tokens": None if post_turn_alarm else input_ceiling,
+        "max_output_tokens_including_reasoning": None if post_turn_alarm else output_ceiling,
         "max_request_wait_seconds": calls * limits["request_timeout_seconds"],
         "max_trajectory_seconds": trajectories * limits["trajectory_timeout_seconds"],
-        "generation_reservation_upper_usd": str((
-            input_ceiling * Decimal(str(limits["reservation_input_usd_per_million"]))
-            + output_ceiling * Decimal(str(limits["output_usd_per_million"]))
-        ) / Decimal(1_000_000)),
+        "generation_reservation_upper_usd": reservation,
+        "max_dispatches": limits.get("pilot_dispatch_ceiling", limits.get("approved_pilot_dispatches", calls)),
+        "integration_dispatches": limits.get("integration_dispatch_ceiling", limits.get("approved_integration_dispatches")),
         "authorized_requests": limits["current_authorized_requests"],
+        "post_turn_input_token_alarm": limits["request_input_tokens"] if post_turn_alarm else None,
+        "post_turn_output_token_alarm_including_reasoning": limits["request_output_tokens_including_reasoning"] if post_turn_alarm else None,
     }
 
 
@@ -322,12 +330,12 @@ def normalize_usage(raw: dict | None) -> dict:
     details_out = raw.get("output_tokens_details") or {}
     values = {
         "input_tokens": raw.get("input_tokens"),
-        "cached_input_tokens": details_in.get("cached_tokens") if isinstance(details_in, dict) else None,
-        "cache_write_input_tokens": details_in.get("cache_write_tokens") if isinstance(details_in, dict) else None,
+        "cached_input_tokens": raw.get("cached_input_tokens", details_in.get("cached_tokens") if isinstance(details_in, dict) else None),
+        "cache_write_input_tokens": raw.get("cache_write_input_tokens", details_in.get("cache_write_tokens") if isinstance(details_in, dict) else None),
         "output_tokens": raw.get("output_tokens"),
-        "reasoning_output_tokens": details_out.get("reasoning_tokens") if isinstance(details_out, dict) else None,
+        "reasoning_output_tokens": raw.get("reasoning_output_tokens", details_out.get("reasoning_tokens") if isinstance(details_out, dict) else None),
     }
-    invalid = []
+    invalid = list(raw.get("invalid_fields", [])) if isinstance(raw.get("invalid_fields", []), list) else ["invalid_fields"]
     for name, value in values.items():
         if value is not None and (type(value) is not int or value < 0):
             invalid.append(name)
@@ -348,11 +356,13 @@ def normalize_usage(raw: dict | None) -> dict:
     )):
         invalid.append("total_tokens")
     return {**values, "totals_available": values["input_tokens"] is not None and values["output_tokens"] is not None,
-            "invalid_fields": invalid, "raw": copy.deepcopy(raw)}
+            "invalid_fields": sorted(set(invalid)), "raw": copy.deepcopy(raw.get("raw", raw))}
 
 
-def usage_sum(rounds: list[dict]) -> dict:
+def usage_sum(rounds: list[dict], *, known_empty: bool = False) -> dict:
     # An absent field in ANY attempted round prevents claiming a complete total.
+    if not rounds:
+        return {key: 0 if known_empty else None for key in USAGE_FIELDS}
     return {key: (sum(row["usage"][key] for row in rounds)
                   if all(row["usage"][key] is not None for row in rounds) else None)
             for key in USAGE_FIELDS}
@@ -381,6 +391,11 @@ def run_trajectory(before: dict[str, str], language: str, spec: dict,
             break
         round_started = clock()
         response = session(previous_id, copy.deepcopy(current), copy.deepcopy(packet), deadline)
+        if not response.get("dispatch_attempted", True):
+            stop = response.get("failure", "request-not-dispatched")
+            batch_stop = bool(response.get("batch_stop", True))
+            record({"event": "dispatch-not-attempted", "response": copy.deepcopy(response)})
+            break
         row = {"round": index, "previous_response_id": previous_id,
                "response_id": response.get("id"), "status": response.get("status"),
                "submission": response.get("text"), "usage": normalize_usage(response.get("usage")),
@@ -389,7 +404,11 @@ def run_trajectory(before: dict[str, str], language: str, spec: dict,
         rounds.append(row)  # retain timeouts/ambiguous requests and partial usage
         record({"event": "submission-received", "row": copy.deepcopy(row), "response": response})
         if response.get("status") != "completed" or not response.get("id") or not isinstance(response.get("text"), str):
-            stop, batch_stop = response.get("failure", "request-incomplete-or-ambiguous"), True
+            stop = response.get("failure", "request-incomplete-or-ambiguous")
+            # A complete but oversized terminal reply consumes this dispatch
+            # and ends only the trajectory; ambiguous/incomplete captures stop
+            # the batch and are never replayed.
+            batch_stop = bool(response.get("batch_stop", stop != "terminal-submission-byte-budget-exhausted"))
             break
         previous_id = response["id"]
         try:
@@ -461,7 +480,8 @@ def run_trajectory(before: dict[str, str], language: str, spec: dict,
     return {"rounds": rounds, "stop": stop, "batch_stop": batch_stop, "last_applied_source": current,
             "first_submission_source": rounds[0]["applied_source"] if rounds else None,
             "terminal_submission_source": rounds[-1]["applied_source"] if rounds else None,
-            "first_phase_usage": usage_sum(rounds[:1]), "repair_usage": usage_sum(rounds[1:]),
+            "first_phase_usage": usage_sum(rounds[:1]),
+            "repair_usage": usage_sum(rounds[1:], known_empty=bool(rounds)),
             "total_usage": usage_sum(rounds)}
 
 

@@ -2,17 +2,31 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
+**Resumed (2026-09-08):** native tests/build/loopback/package checks passed and
+another AI session approved the repaired source. The [resumed record](docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md)
+owns exact identities, Python validation and remaining gates. The [prior stop](docs/workstream-e3a-oauth-implementation-stop-2026-09-08.md)
+remains history. Changes are not yet published or verified by exact-commit CI;
+`execution_authorized=false`. No OAuth has been staged and no live dispatch
+has occurred. Do not re-request the approved scientific policy or bounded live permission.
+
 ## Current boundary
 
 E1/E2/E2a are complete. The E3a packet at `19b1902be59324b98741ccb6c3a8396de962f5f7` passed its Linux/Windows fixture checks and has received a second AI-session review. The [disposition](docs/workstream-e3a-review-disposition-2026-09-06.md) accepts the narrow design **for bounded implementation with R1–R4 corrections**, not as a working or authorized live experiment.
 
 The bounded E3a no-tools controller/adapter and isolated evaluator contain R1–R4 corrections. After explicit permission to resume model-free fixes on the reachable remote host, dependency export was repaired and the sandbox checks passed there with the exact specified image. Read the [remote fix and evidence](docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md); the [earlier handoff](docs/workstream-e3a-implementation-handoff-2026-09-06.md) preserves the two failed CI attempts. Verify CI on the exact implementing commit, not an earlier green check.
 
-The pinned image is now restored on the remote host. Standalone sandbox evidence is not end-to-end Windows/API-to-remote integration. That wiring, account access, rates/count charges and provider continuation/counting remain unverified. No live call is authorized: the later two-generation/$0.05 integration and pilot still require separate approval. Do not switch images, scaffolds or subscription backends silently.
+The pinned image is now restored on the remote host. Standalone sandbox evidence is not end-to-end Windows/API-to-remote integration. Wiring, account access, provider behavior and counting remain unverified. The dated [OAuth adoption record](docs/workstream-e3a-oauth-adoption-2026-09-08.md) permits implementation, an at-most-two-dispatch unrelated-task shakedown after prerequisites, and continuation after successful freeze to the fixed pilot; no automatic reissue/replacement is allowed. Do not switch images, scaffolds or subscription backends silently.
 
-**Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) is review-ready after separate maintainer-AI review, not adopted or activated. The user requires existing local OAuth and the canonical remote launcher; no API key or new relay. Visible-history replay and turn/time/byte limits require explicit maintainer adoption of their scientific and overshoot-risk changes. No-tools enforcement remains a prerequisite. Adoption, model-free implementation evidence, and separate live-run permission remain distinct gates; see [PLAN.md](PLAN.md#maintainer-authentication-direction-2026-09-06).
+**Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) is adopted by the user/maintainer on 2026-09-08 but not activated. Existing local OAuth and the canonical remote launcher remain required; no API key or new relay. No-tools enforcement, consistent implementation, and model-free evidence remain prerequisites. Adoption/live permission is recorded and should not be re-requested; technical execution remains held until those checks pass.
 
-**Technical hold (2026-09-06):** the [no-tools prerequisite check](docs/workstream-e3a-no-tools-check-2026-09-06.md) is now bounded model-free evidence that the customized native scaffold is ready for the next maintainer decision; it is not a global unsupported-tool guarantee. Final native tests/build/probes and separate AI review passed as documented there. Production adoption, amendment activation, and live authorization remain held. The next distinct step is explicit adoption of this customized native client plus visible replay, dispatch/byte/time controls, and overshoot-risk treatment, followed by model-free OAuth-adapter implementation/review; this is not automatic pilot authorization. No automatic toolful fallback, relay, or OAuth staging is authorized.
+**Technical hold (2026-09-08):** the implementing binary is now `72cf14453…`,
+with opt-in no-tools and single-response controls. The original `f7942933…`
+binary is historical. Packaging and model-free tests do not establish OAuth or
+live provider behavior. After implementing-commit CI and remaining prerequisites,
+the permitted sequence is ≤2-dispatch shakedown, successful freeze, then the fixed
+24-trajectory/72-dispatch pilot. Stage only the complete `auth.json` file into a
+private temporary home, not the rest of `CODEX_HOME`; cleanup is mandatory.
+No new auth relay, toolful fallback, reissue or replacement is authorized.
 
 ## Read only what applies
 
@@ -31,12 +45,31 @@ Current governance applies to future work. Older proposals and their checked-in 
 - Valid feedback exceeding its allowance terminates that trajectory under its fixed budget; controller faults are different. Never discard failures or let a language's long diagnostic output silently cancel unrelated samples.
 - Preserve every submission and attempt. Do not manually fix candidate code or rewrite archived gold/results.
 - Candidate code/project execution is sandboxed without model credentials, host secrets or writable scoring machinery. No fallback to executing untrusted code on the host.
-- Missing usage remains null; token subsets are not added twice. Reserve request costs before dispatch and keep ambiguous attempts charged against the guard until reconciled.
+- Missing usage remains null; token subsets are not added twice. OAuth debits dispatches before launch and retains ambiguous debits; token thresholds are post-turn alarms and subscription cost stays null. Historical API protocols retain their own reservation rules.
 - No new remote/proxy layers or generic agent framework. H does not require optional F/G completion.
+
+## Publishing
+
+For completed, validated work within the authorized plan, commit and push directly
+to the current branch's configured upstream **without creating a pull request**.
+This is standing authorization for routine in-scope commits and pushes; do not
+ask for publication approval again at each checkpoint. Stage only in-scope files,
+preserve unrelated work, and verify CI on the exact pushed commit. This does not
+authorize force-pushing, rewriting history, or bypassing scientific, security,
+or live-execution gates.
 
 ## Handoff and stops
 
 Finish ordinary code, tests, documentation and applicable CI within the bounded assignment. Report exact source/spec identities, checks actually run, unresolved conditions, request/spend ceilings and next decision. Identify reviews honestly as self-review, another AI session or human review.
+
+**Project-scoped apparatus rule (2026-09-08):** for one unchanged unresolved
+apparatus gate, permit up to **five** failed apparatus attempts, retaining every
+attempt; a success clears that gate's failure streak. This replaces the prior
+two-failure engineering stop for this repository only and does not rewrite
+historical reports. Stop immediately for safety or material scientific choice,
+unknown live usage/ambiguity, budget exhaustion, or another explicit hard gate.
+Candidate maximum two repairs/three submissions and automatic live reissue
+prohibition are unchanged.
 
 Return at implementation completion, material scientific/security change, exhausted authorized resources, ambiguous requests or repeated unresolved apparatus failure. Mock success is not proof of provider behavior. A later explicitly authorized frozen batch can use automatic health checks; no redesign or sample extension after seeing which language wins.
 

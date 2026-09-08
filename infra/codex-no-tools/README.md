@@ -1,6 +1,14 @@
 # Opt-in native Codex no-tools client (design/build record)
 
-**Status: bounded no-tools prerequisite ready for maintainer decision; not a global unsupported-tool guarantee.** This is an opt-in modification of the pinned Codex source, not stock `0.149.1`. The patch leaves the existing OAuth, refresh, endpoints, proxy and canonical remote launcher unchanged. No API key, OAuth staging, relay, image replacement, or live call is authorized.
+**Resumed native verification passed (2026-09-08):** the original no-tools patch
+plus [`single-response.patch`](single-response.patch) now passes 107 focused
+native tests, build, two loopback probes, and the original-image native-mount /
+pinned-catalogue packaging check. The implementing binary is `72cf14453…`, not
+the original `f7942933…` below. See the [resumed evidence and reproduction commands](../../docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md).
+The [five-failure stop](../../docs/workstream-e3a-oauth-implementation-stop-2026-09-08.md)
+remains identifiable history. No OAuth/provider shakedown is claimed.
+
+**Status: adopted on 2026-09-08; bounded model-free implementation and packaging checks passed, exact-commit CI and live prerequisites remain.** This is an opt-in modification of the pinned Codex source, not stock `0.149.1`. The patch leaves the existing OAuth, refresh, endpoints, proxy and canonical remote launcher unchanged. The user's permission covers the bounded OAuth shakedown and subsequent pilot sequence in the [adoption record](../../docs/workstream-e3a-oauth-adoption-2026-09-08.md), but no call is made until required checks pass. No API key, relay, image replacement, or toolful fallback is authorized.
 
 ## Control
 
@@ -8,7 +16,7 @@
 
 `Fatal error: no-tools policy rejected an unsolicited tool response item`
 
-## Source/build record
+## Original no-tools-only source/build record (historical)
 
 Source is tag `rust-v0.149.1` (tag `980a6d12110b110d29ec13bdcbe14011100b3566`), peeled commit `ff29a44391deccde0aba0f8390337d7f3c319ea4`. This does not prove stock-binary reproduction. The builder is `rust:1.95.0-bookworm`, digest `sha256:6258907abe69656e41cd992e0b705cdcfabcbbe3db374f92ed2d47121282d4a1`; local format-builder image ID `e1b5606d6b1d9f1401ddb5dbc6005559842249bf4443374348e3849f4845466c` is not a published registry digest. Review uses the existing `just 1.51.0`, `nextest 0.9.143`, `dotslash 0.5.7`, and `uv 0.12.10`; the dev-small GNU review binary is not a packaged client.
 
@@ -26,4 +34,6 @@ Final verification passed: native tests `100/100`, zero failures/retries, 3,715 
 
 Both exact-final-binary probes passed their expected outcomes: baseline `native-resumed-baseline.json` (`rc=0`, SHA-256 `6b43a377534c995e63fcd67c94dfe4dc4b27bc2c3a22f6e2c948d2a91e5a0dff`) and hostile `native-resumed-tool-call.json` (`rc=1`, expected fatal, SHA-256 `f8fbd444ad9674902a662049840e77393a3679bc5db435a923bb32a08e83a327`). Each made one loopback POST with no tool output/marker/follow-up and no auth/model/provider call. Direct PowerShell SSH/Docker used the pinned image, network-none, read-only root, 256 MiB tmpfs, UID 1000, 2 CPUs, 6 GiB, and 512 PIDs. The single-binary overlay lacked the code-mode-host sibling and generated a fail-closed warning; packaged readiness and real WebSocket/OAuth/canonical `run.ps1` proof remain unestablished. No OAuth material was staged for these checks, and their containers are absent.
 
-Separate AI code review approved the source/helper after final checks, with no correctness or security findings. Remaining limits are packaging, real provider/WebSocket/OAuth integration, canonical-launcher proof, maintainer adoption, and live authorization. Existing source preserves the OAuth/transport route; no route change is claimed. Build/source cache remains at `/tmp/alf-e3a-native-build-zavnIH`.
+The resumed native verification is recorded in [`oauth-resumed-verification`](../../docs/workstream-e3a-oauth-resumed-verification-2026-09-08.md). It supersedes neither the historical stop nor this original artifact identity.
+
+Separate AI code review approved the source/helper after final checks, with no correctness or security findings. Remaining limits are packaging, real provider/WebSocket/OAuth integration, canonical-launcher proof, and consistent active-spec implementation. Existing source preserves the OAuth/transport route; no route change is claimed. Build/source cache remains at `/tmp/alf-e3a-native-build-zavnIH`.

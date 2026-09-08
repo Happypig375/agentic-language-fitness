@@ -34,12 +34,25 @@ class E3aReviewFixtures(unittest.TestCase):
             self.assertNotEqual(a["language"], b["language"])
         self.assertEqual(set(Counter((r["task_id"], r["language"]) for r in rows[::2]).values()), {2})
         limits = budget(self.spec)
+        self.assertEqual(limits["max_dispatches"], 72)
+        self.assertIsNone(limits["max_requests"])
+        self.assertIsNone(limits["max_input_tokens"])
+        self.assertIsNone(limits["max_output_tokens_including_reasoning"])
+        self.assertEqual(limits["post_turn_input_token_alarm"], 32768)
+        self.assertEqual(limits["post_turn_output_token_alarm_including_reasoning"], 8192)
+        self.assertIsNone(self.spec["budgets"]["pilot_usd_ceiling"])
+        self.assertEqual(limits["integration_dispatches"], 2)
+        self.assertNotEqual(limits["integration_dispatches"], limits["max_dispatches"])
+        self.assertTrue(self.spec["user_live_execution_approved"])
+        self.assertFalse(self.spec["execution_authorized"])
+
+    def test_historical_api_fixture_budget_retains_hard_request_semantics(self):
+        historical = read_json(ROOT / "tests/fixtures/e3a-original-api-specification.json")
+        limits = budget(historical)
         self.assertEqual(limits["max_requests"], 72)
         self.assertEqual(limits["max_input_tokens"], 2359296)
         self.assertEqual(limits["max_output_tokens_including_reasoning"], 589824)
-        self.assertEqual(limits["generation_reservation_upper_usd"], "1.2976128")
-        self.assertEqual(limits["authorized_requests"], 0)
-        self.assertFalse(self.spec["execution_authorized"])
+        self.assertIsNone(self.spec["model"]["reasoning_context"])
 
     def test_payload_is_predecessor_and_current_contract_only(self):
         for language in self.spec["languages"]:
@@ -147,6 +160,15 @@ class E3aReviewFixtures(unittest.TestCase):
             scored = {"trajectory": result, "final_holdout": withheld_score}
             self.assertEqual(scored["final_holdout"], withheld_score)
         self.assertEqual(outputs[0], outputs[1])
+
+    def test_completed_reply_is_evaluated_before_missing_usage_stops_batch(self):
+        checks = []
+        reply = self.response(0, usage={"input_tokens": 10})
+        result, _ = self.run_fixture([reply], [{"passed": True, "category": "development", "output": ""}])
+        self.assertEqual(len(result["rounds"]), 1)
+        self.assertIsNotNone(result["rounds"][0]["applied_source"])
+        self.assertTrue(result["batch_stop"])
+        self.assertEqual(result["stop"], "accounting-unavailable-or-invalid")
 
     def test_failed_first_then_pass_preserves_mock_lineage_and_first_evidence(self):
         patch = json.dumps({"files": {"Program.cs": self.before["csharp"]["Program.cs"] + "\n// fixed\n"}})

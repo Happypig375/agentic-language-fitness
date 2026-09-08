@@ -1,0 +1,6 @@
+cargo clippy --fix --tests --allow-dirty {args}
+    Checking codex-api v0.149.1 (/build/source-lf/codex-rs/codex-api)
+    Checking codex-features v0.149.1 (/build/source-lf/codex-rs/features)
+    Checking codex-core v0.149.1 (/build/source-lf/codex-rs/core)
+       Fixed core/tests/suite/openai_file_mcp.rs (1 fix)
+    Finished `dev-small` profile [unoptimized] target(s) in 1m 04s

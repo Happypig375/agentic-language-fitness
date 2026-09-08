@@ -1,0 +1,26 @@
+{
+  "scope": "model-free-original-image-native-mount-and-pinned-catalogue",
+  "attempt": 2,
+  "passed": true,
+  "exit_code": 0,
+  "native_sha256": "72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741bb1959",
+  "container_image_id": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+  "catalog_file_sha256": "c18214b1ba88ab9bd164753115324a7a29c0582e8d071f7b3babf749d892f549",
+  "catalog_stdout_sha256": "8aafe33104f3d423769bdfc1df737e126bc230cb994650e07f237f74eba0a1c4",
+  "catalog_stdout_retained_local": "results/e3a-package-probe-02-catalog.stdout",
+  "remote_output": "/tmp/alf-e3a-native-build-zavnIH/package-single-response-id90NR",
+  "version": "codex-cli 0.149.1",
+  "selected_model_metadata": {
+    "slug": "gpt-5.6-luna",
+    "supported_reasoning_efforts": ["low", "medium", "high", "xhigh", "max"],
+    "context_window": 272000,
+    "max_context_window": 872000,
+    "effective_context_window_percent": 95
+  },
+  "network": "none",
+  "auth_staged": false,
+  "candidate_model_calls": 0,
+  "real_provider_http_calls": 0,
+  "own_containers_remaining": 0,
+  "limitations": ["not an OAuth dispatch", "not canonical launcher end-to-end proof", "model metadata is not account access or an authoritative context-fit count"]
+}

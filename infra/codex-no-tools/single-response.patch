@@ -1,0 +1,489 @@
+diff --git a/codex-rs/core/config.schema.json b/codex-rs/core/config.schema.json
+index 94df726..72ed475 100644
+--- a/codex-rs/core/config.schema.json
++++ b/codex-rs/core/config.schema.json
+@@ -766,6 +766,9 @@
+             "shell_zsh_fork": {
+               "type": "boolean"
+             },
++            "single_response": {
++              "type": "boolean"
++            },
+             "skill_env_var_dependency_prompt": {
+               "type": "boolean"
+             },
+@@ -5669,6 +5672,9 @@
+         "shell_zsh_fork": {
+           "type": "boolean"
+         },
++        "single_response": {
++          "type": "boolean"
++        },
+         "skill_env_var_dependency_prompt": {
+           "type": "boolean"
+         },
+diff --git a/codex-rs/core/src/client.rs b/codex-rs/core/src/client.rs
+index 2e8c616..d759ffb 100644
+--- a/codex-rs/core/src/client.rs
++++ b/codex-rs/core/src/client.rs
+@@ -260,6 +260,7 @@ pub struct ModelClient {
+     prompt_cache_key_override: Option<String>,
+     http_client_factory: HttpClientFactory,
+     no_tools: bool,
++    single_response: bool,
+ }
+ 
+ /// A turn-scoped streaming session created from a [`ModelClient`].
+@@ -475,6 +476,7 @@ impl ModelClient {
+             prompt_cache_key_override: None,
+             http_client_factory,
+             no_tools: false,
++            single_response: false,
+         }
+     }
+ 
+@@ -491,6 +493,13 @@ impl ModelClient {
+         if enabled { self.with_no_tools() } else { self }
+     }
+ 
++    /// Enables the opt-in single-response policy. Generation errors are terminal;
++    /// non-generation authentication refresh remains available through normal setup.
++    pub(crate) fn with_single_response(mut self, enabled: bool) -> Self {
++        self.single_response = enabled;
++        self
++    }
++
+     pub(crate) fn with_prompt_cache_key_override(
+         mut self,
+         prompt_cache_key_override: Option<String>,
+@@ -981,6 +990,9 @@ impl ModelClient {
+     ///
+     /// WebSocket use is controlled by provider capability and session-scoped fallback state.
+     pub fn responses_websocket_enabled(&self) -> bool {
++        if self.single_response {
++            return false;
++        }
+         if !self.state.provider.info().supports_websockets
+             || self.state.disable_websockets.load(Ordering::Relaxed)
+         {
+@@ -1484,9 +1496,14 @@ impl ModelClientSession {
+         let mut pending_retry = PendingUnauthorizedRetry::default();
+         loop {
+             let client_setup = self.client.current_client_setup().await?;
++            let mut api_provider = client_setup.api_provider.clone();
++            if self.client.single_response {
++                // max_attempts is the retry count; zero still sends the initial request.
++                api_provider.retry.max_attempts = 0;
++            }
+             let transport = self
+                 .client
+-                .build_api_transport(&client_setup.api_provider, RESPONSES_ENDPOINT)?;
++                .build_api_transport(&api_provider, RESPONSES_ENDPOINT)?;
+             let request_auth_context = AuthRequestTelemetryContext::new(
+                 client_setup.auth.as_ref().map(CodexAuth::auth_mode),
+                 client_setup.api_auth.as_ref(),
+@@ -1532,12 +1549,8 @@ impl ModelClientSession {
+             let inference_trace_attempt = inference_trace.start_attempt();
+             inference_trace_attempt.add_request_headers(&mut options.extra_headers);
+             inference_trace_attempt.record_started(&request);
+-            let client = ApiResponsesClient::new(
+-                transport,
+-                client_setup.api_provider,
+-                client_setup.api_auth,
+-            )
+-            .with_telemetry(Some(request_telemetry), Some(sse_telemetry));
++            let client = ApiResponsesClient::new(transport, api_provider, client_setup.api_auth)
++                .with_telemetry(Some(request_telemetry), Some(sse_telemetry));
+             let stream_result = client.stream_request(request, options).await;
+ 
+             match stream_result {
+@@ -1565,6 +1578,13 @@ impl ModelClientSession {
+                         response_debug_context.request_id.as_deref(),
+                         /*output_items*/ &[],
+                     );
++                    if self.client.single_response {
++                        return Err(self
++                            .client
++                            .state
++                            .provider
++                            .map_api_error(ApiError::Transport(unauthorized_transport)));
++                    }
+                     pending_retry = PendingUnauthorizedRetry::from_recovery(
+                         handle_unauthorized(
+                             unauthorized_transport,
+@@ -1837,6 +1857,9 @@ impl ModelClientSession {
+         service_tier: Option<String>,
+         responses_metadata: &CodexResponsesMetadata,
+     ) -> Result<()> {
++        if self.client.single_response {
++            return Ok(());
++        }
+         if !self.client.responses_websocket_enabled() {
+             return Ok(());
+         }
+diff --git a/codex-rs/core/src/client_tests.rs b/codex-rs/core/src/client_tests.rs
+index 04e8970..982a735 100644
+--- a/codex-rs/core/src/client_tests.rs
++++ b/codex-rs/core/src/client_tests.rs
+@@ -119,6 +119,195 @@ fn test_model_client_with_thread_id(
+     )
+ }
+ 
++#[test]
++fn single_response_disables_websocket_transport() {
++    let client = test_model_client(SessionSource::Cli).with_single_response(true);
++    assert!(!client.responses_websocket_enabled());
++}
++
++#[tokio::test]
++async fn single_response_http_failure_is_not_retried() -> anyhow::Result<()> {
++    assert_single_response_status_no_retry(500).await
++}
++
++#[tokio::test]
++async fn single_response_rate_limit_is_not_retried() -> anyhow::Result<()> {
++    assert_single_response_status_no_retry(429).await
++}
++
++#[tokio::test]
++async fn single_response_unauthorized_is_not_retried() -> anyhow::Result<()> {
++    assert_single_response_status_no_retry(401).await
++}
++
++async fn assert_single_response_status_no_retry(status: u16) -> anyhow::Result<()> {
++    let server = MockServer::start().await;
++    let mut provider =
++        create_oss_provider_with_base_url(&format!("{}/v1", server.uri()), WireApi::Responses);
++    provider.supports_websockets = false;
++    let client = ModelClient::new(
++        None,
++        AgentIdentityAuthPolicy::JwtOnly,
++        ThreadId::new(),
++        provider,
++        SessionSource::Cli,
++        "test_originator".to_string(),
++        None,
++        false,
++        false,
++        None,
++        false,
++        None,
++        HttpClientFactory::new(OutboundProxyPolicy::ReqwestDefault),
++    )
++    .with_single_response(true);
++    Mock::given(method("POST"))
++        .and(path("/v1/responses"))
++        .respond_with(ResponseTemplate::new(status))
++        .expect(1)
++        .mount(&server)
++        .await;
++    let metadata = test_responses_metadata_for_client(
++        &client,
++        None,
++        format!("{}:0", client.state.thread_id),
++        None,
++        TestCodexResponsesRequestKind::Turn,
++    );
++    let mut session = client.new_session();
++    let result = session
++        .stream(
++            &Prompt::default(),
++            &test_model_info(),
++            &test_session_telemetry(),
++            None,
++            codex_protocol::config_types::ReasoningSummary::None,
++            None,
++            &metadata,
++            &InferenceTraceContext::disabled(),
++        )
++        .await;
++    assert!(result.is_err());
++    Ok(())
++}
++
++#[tokio::test]
++async fn single_response_incomplete_stream_is_not_retried() -> anyhow::Result<()> {
++    let server = MockServer::start().await;
++    let mut provider =
++        create_oss_provider_with_base_url(&format!("{}/v1", server.uri()), WireApi::Responses);
++    provider.supports_websockets = false;
++    provider.base_url = Some(format!("{}/v1", server.uri()));
++    let client = ModelClient::new(
++        None,
++        AgentIdentityAuthPolicy::JwtOnly,
++        ThreadId::new(),
++        provider,
++        SessionSource::Cli,
++        "test_originator".to_string(),
++        None,
++        false,
++        false,
++        None,
++        false,
++        None,
++        HttpClientFactory::new(OutboundProxyPolicy::ReqwestDefault),
++    )
++    .with_single_response(true)
++    .with_no_tools();
++    Mock::given(method("POST"))
++        .and(path("/v1/responses"))
++        .respond_with(ResponseTemplate::new(200).set_body_raw(
++            "event: response.incomplete\ndata: {\"type\":\"response.incomplete\",\"response\":{\"id\":\"r\",\"status\":\"incomplete\",\"incomplete_details\":{\"reason\":\"max_output_tokens\"}}}\n\n",
++            "text/event-stream",
++        ))
++        .expect(1)
++        .mount(&server)
++        .await;
++    let metadata = test_responses_metadata_for_client(
++        &client,
++        None,
++        format!("{}:0", client.state.thread_id),
++        None,
++        TestCodexResponsesRequestKind::Turn,
++    );
++    let mut session = client.new_session();
++    let mut stream = session
++        .stream(
++            &Prompt::default(),
++            &test_model_info(),
++            &test_session_telemetry(),
++            None,
++            codex_protocol::config_types::ReasoningSummary::None,
++            None,
++            &metadata,
++            &InferenceTraceContext::disabled(),
++        )
++        .await?;
++    while let Some(event) = stream.next().await {
++        if event.is_err() {
++            break;
++        }
++    }
++    Ok(())
++}
++
++#[tokio::test]
++async fn single_response_premature_stream_close_is_not_retried() -> anyhow::Result<()> {
++    let server = MockServer::start().await;
++    let mut provider =
++        create_oss_provider_with_base_url(&format!("{}/v1", server.uri()), WireApi::Responses);
++    provider.supports_websockets = false;
++    let client = ModelClient::new(
++        None,
++        AgentIdentityAuthPolicy::JwtOnly,
++        ThreadId::new(),
++        provider,
++        SessionSource::Cli,
++        "test_originator".to_string(),
++        None,
++        false,
++        false,
++        None,
++        false,
++        None,
++        HttpClientFactory::new(OutboundProxyPolicy::ReqwestDefault),
++    )
++    .with_single_response(true)
++    .with_no_tools();
++    Mock::given(method("POST"))
++        .and(path("/v1/responses"))
++        .respond_with(ResponseTemplate::new(200).set_body_raw(
++            "event: response.created\ndata: {\"type\":\"response.created\",\"response\":{\"id\":\"r\"}}\n\n",
++            "text/event-stream",
++        ))
++        .expect(1)
++        .mount(&server)
++        .await;
++    let metadata = test_responses_metadata_for_client(
++        &client,
++        None,
++        format!("{}:0", client.state.thread_id),
++        None,
++        TestCodexResponsesRequestKind::Turn,
++    );
++    let mut session = client.new_session();
++    let mut stream = session
++        .stream(
++            &Prompt::default(),
++            &test_model_info(),
++            &test_session_telemetry(),
++            None,
++            codex_protocol::config_types::ReasoningSummary::None,
++            None,
++            &metadata,
++            &InferenceTraceContext::disabled(),
++        )
++        .await?;
++    while stream.next().await.is_some() {}
++    Ok(())
++}
++
+ #[tokio::test]
+ async fn compact_uses_bearer_after_agent_identity_session_fallback() -> anyhow::Result<()> {
+     let server = MockServer::start().await;
+diff --git a/codex-rs/core/src/session/session.rs b/codex-rs/core/src/session/session.rs
+index 6e5265b..ef865d2 100644
+--- a/codex-rs/core/src/session/session.rs
++++ b/codex-rs/core/src/session/session.rs
+@@ -1410,6 +1410,7 @@ impl Session {
+                     config.http_client_factory(),
+                 )
+                 .with_no_tools_if(config.features.enabled(Feature::NoTools))
++                .with_single_response(config.features.enabled(Feature::SingleResponse))
+                 .with_prompt_cache_key_override(
+                     crate::guardian::prompt_cache_key_override_for_review_session(
+                         &session_configuration.session_source,
+diff --git a/codex-rs/core/src/session/turn.rs b/codex-rs/core/src/session/turn.rs
+index e8d1ecb..6d81c99 100644
+--- a/codex-rs/core/src/session/turn.rs
++++ b/codex-rs/core/src/session/turn.rs
+@@ -422,8 +422,13 @@ pub(crate) async fn run_turn(
+                 }
+                 .instrument(trace_span!("run_turn.collect_post_sampling_state"))
+                 .await;
+-                let needs_follow_up = model_needs_follow_up || has_pending_input;
+-                let token_limit_reached = token_status.token_limit_reached;
++                let single_response = turn_context
++                    .config
++                    .features
++                    .enabled(Feature::SingleResponse);
++                let needs_follow_up =
++                    !single_response && (model_needs_follow_up || has_pending_input);
++                let token_limit_reached = !single_response && token_status.token_limit_reached;
+ 
+                 trace!(
+                     turn_id = %turn_context.sub_id,
+@@ -469,7 +474,7 @@ pub(crate) async fn run_turn(
+                 .await;
+ 
+                 // as long as compaction works well in getting us way below the token limit, we shouldn't worry about being in an infinite loop.
+-                if should_roll_over {
++                if should_roll_over && !single_response {
+                     if let Err(err) = run_auto_compact(
+                         &sess,
+                         Arc::clone(&step_context),
+@@ -1017,6 +1022,13 @@ async fn run_pre_sampling_compact(
+     client_session: &mut ModelClientSession,
+     cancellation_token: &CancellationToken,
+ ) -> CodexResult<()> {
++    if turn_context
++        .config
++        .features
++        .enabled(Feature::SingleResponse)
++    {
++        return Ok(());
++    }
+     maybe_run_previous_model_inline_compact(sess, turn_context, client_session, cancellation_token)
+         .await?;
+     let token_status =
+@@ -1362,7 +1374,15 @@ async fn run_sampling_request(
+         Arc::clone(&step_context),
+         Arc::clone(&turn_diff_tracker),
+     );
+-    let max_retries = turn_context.provider.info().stream_max_retries();
++    let single_response = turn_context
++        .config
++        .features
++        .enabled(Feature::SingleResponse);
++    let max_retries = if single_response {
++        0
++    } else {
++        turn_context.provider.info().stream_max_retries()
++    };
+     let mut retry_state = ResponsesStreamRetryState::default();
+     let mut initial_input = Some(input);
+     let mut original_input = None;
+@@ -1427,6 +1447,10 @@ async fn run_sampling_request(
+             return Err(err);
+         }
+ 
++        if single_response {
++            return Err(err);
++        }
++
+         handle_retryable_response_stream_error(
+             &mut retry_state,
+             max_retries,
+diff --git a/codex-rs/core/tests/suite/client.rs b/codex-rs/core/tests/suite/client.rs
+index ab3a859..0d90716 100644
+--- a/codex-rs/core/tests/suite/client.rs
++++ b/codex-rs/core/tests/suite/client.rs
+@@ -1679,6 +1679,52 @@ async fn no_tools_feature_fails_closed_in_session_without_followup() {
+     }
+ }
+ 
++#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
++async fn single_response_session_skips_compaction_and_followup_after_limit() -> anyhow::Result<()> {
++    skip_if_no_network!(Ok(()));
++    let server = MockServer::start().await;
++    let response_mock = mount_sse_once(
++        &server,
++        sse(vec![
++            ev_response_created("resp-single-response"),
++            ev_completed_with_tokens("resp-single-response", /*total_tokens*/ 1_000),
++        ]),
++    )
++    .await;
++    let mut builder = test_codex().with_auth(CodexAuth::from_api_key("test-key"));
++    builder = builder.with_config(|config| {
++        config.model_auto_compact_token_limit = Some(1);
++        config
++            .features
++            .enable(Feature::NoTools)
++            .expect("no_tools feature should be configurable");
++        config
++            .features
++            .enable(Feature::SingleResponse)
++            .expect("single_response feature should be configurable");
++    });
++    let codex = builder.build(&server).await?.codex;
++    codex
++        .start_or_steer_turn(TurnInputRequest::user_input(vec![UserInput::Text {
++            text: "hello".into(),
++            text_elements: Vec::new(),
++        }]))
++        .await?;
++    wait_for_event(&codex, |event| matches!(event, EventMsg::TurnComplete(_))).await;
++
++    assert_eq!(response_mock.requests().len(), 1);
++    let requests = server
++        .received_requests()
++        .await
++        .expect("request capture should be available");
++    assert!(
++        !requests
++            .iter()
++            .any(|request| request.url.path().ends_with("/responses/compact"))
++    );
++    Ok(())
++}
++
+ #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+ async fn chatgpt_auth_sends_correct_request() {
+     skip_if_no_network!();
+diff --git a/codex-rs/features/src/lib.rs b/codex-rs/features/src/lib.rs
+index eca09a3..536bf12 100644
+--- a/codex-rs/features/src/lib.rs
++++ b/codex-rs/features/src/lib.rs
+@@ -95,6 +95,8 @@ pub enum Feature {
+     ViewImage,
+     /// Disable all model-visible tools and reject unsolicited tool output.
+     NoTools,
++    /// Allow exactly one model generation with no compaction or transport retry.
++    SingleResponse,
+     /// Enable Claude-style lifecycle hooks loaded from hooks.json files.
+     CodexHooks,
+     /// Store CLI auth in the encrypted local secrets backend when keyring storage is selected.
+@@ -845,6 +847,12 @@ pub const FEATURES: &[FeatureSpec] = &[
+         stage: Stage::UnderDevelopment,
+         default_enabled: false,
+     },
++    FeatureSpec {
++        id: Feature::SingleResponse,
++        key: "single_response",
++        stage: Stage::UnderDevelopment,
++        default_enabled: false,
++    },
+     FeatureSpec {
+         id: Feature::ViewImage,
+         key: "view_image",

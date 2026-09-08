@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 from typing import Callable
 
-from .e3a_api import BudgetGuard, ResponsesAdapter
+from .e3a_codex import CodexOAuthAdapter, DispatchGuard
 from .e3a_sandbox import SandboxFailure
 from .protocol import canonical_json_hash
 from .workstream_e2 import _atomic_json
@@ -78,25 +78,41 @@ def summarize(slots: list[dict], spec: dict) -> dict:
                                for k in usage_sum(attempted_rounds)}}
 
 
-def run_batch(root: Path, manifest: dict, spec: dict, *, transport, rates: dict,
+def run_batch(root: Path, manifest: dict, spec: dict, *, transport,
               evaluator_factory: Callable, output: Path, runner_git_commit: str,
-              max_requests: int, usd_ceiling: str, authorization_id: str | None = None,
-              reviews: dict | None = None, clock: Callable = time.monotonic) -> dict:
+              phase: str, max_dispatches: int, authorization_id: str | None = None,
+              reviews: dict | None = None, clock: Callable = time.monotonic,
+              runtime_metadata: dict | None = None) -> dict:
     journal = Journal(output)
     mock = not getattr(transport, "is_live", True)
-    guard = None
+    limits = spec.get("budgets", {})
+    expected = {"integration": limits.get("integration_dispatch_ceiling", 2),
+                "pilot": limits.get("pilot_dispatch_ceiling", 72)}
+    if phase not in expected or type(max_dispatches) is not int or max_dispatches != expected[phase] or not 0 < max_dispatches <= 72:
+        raise ValueError("phase/max_dispatches do not match the adopted dispatch ceiling")
     slots = [{**item, "slot_id": f"{i + 1:02d}-{item['task_id']}-{item['language']}-r{item['repetition']}",
               "status": "unstarted", "reason": "not-reached"} for i, item in enumerate(schedule(spec))]
     report = {"specification_sha256": canonical_json_hash(spec), "runner_git_commit": runner_git_commit,
-              "mode": "model-free-mock" if mock else "authorized-live", "authorization_id": authorization_id,
+              "mode": "model-free-mock" if mock else "authorized-live", "phase": phase,
+              "authorization_id": authorization_id, "runtime": copy.deepcopy(runtime_metadata),
               "slots": slots, "batch_stop": None, "live_continuation_verified": False}
     journal.record({"event": "batch-assigned", "report": copy.deepcopy(report)})
     evaluators = {}
+    if not hasattr(transport, "launch"):
+        raise TypeError("run_batch requires the canonical OAuth/Codex launch transport")
+    dispatch_guard = DispatchGuard(max_dispatches)
     try:
-        guard = BudgetGuard(spec, max_requests=max_requests, usd_ceiling=usd_ceiling, rates=rates,
-                            checked_date=spec["budgets"]["pricing_checked_utc_date"] if mock else None)
-        adapter = ResponsesAdapter(spec, transport, guard, record=journal.record, clock=clock,
-                                   authorization_id=authorization_id)
+        # Check every fixed initial slot before any candidate dispatch.  A
+        # replay that cannot fit is an apparatus/preflight failure, never a
+        # reason to drop a language or replace a slot.
+        replay_cap = spec.get("authority", {}).get("max_replay_bytes", 131072)
+        for item in schedule(spec):
+            stage = next(i for i, task in enumerate(manifest["tasks"]) if task["id"] == item["task_id"])
+            for language in (item["language"],):
+                payload = candidate_payload(root, manifest, language, item["task_id"])
+                if CodexOAuthAdapter.replay_size(payload) > replay_cap:
+                    report["batch_stop"] = "preflight-replay-byte-budget-exhausted"
+                    raise RuntimeError(report["batch_stop"])
         for slot in slots:
             slot.update(status="setup", reason=None)
             language, task_id = slot["language"], slot["task_id"]
@@ -120,8 +136,12 @@ def run_batch(root: Path, manifest: dict, spec: dict, *, transport, rates: dict,
             def develop(source, index, end):
                 return evaluator.evaluate(source, development_cases(manifest, stage + 1), end)
 
+            trajectory_adapter = CodexOAuthAdapter(
+                spec, transport, record=journal.record, clock=clock, dispatch_guard=dispatch_guard
+            )
             trajectory = run_trajectory(before, language, spec,
-                lambda previous, source, packet, end: adapter.generate(payload, previous, source, packet, end),
+                lambda previous, source, packet, end: trajectory_adapter.generate(
+                    payload, previous, source, packet, end),
                 develop, task_id=task_id, record=journal.record, clock=clock, deadline=deadline)
             slot.update(status="finished", reason=trajectory["stop"], trajectory=trajectory)
             # The controller has returned: scorer results have no route back to
@@ -145,10 +165,10 @@ def run_batch(root: Path, manifest: dict, spec: dict, *, transport, rates: dict,
                 report["batch_stop"] = trajectory["stop"]
                 break
     except BaseException as exc:
-        report["batch_stop"] = type(exc).__name__
+        report["batch_stop"] = report["batch_stop"] or type(exc).__name__
         for slot in slots:
             if slot["status"] == "setup":
-                slot.update(status="apparatus-failure", reason=type(exc).__name__)
+                slot.update(status="apparatus-failure", reason=report["batch_stop"])
         journal.record({"event": "batch-interrupted", "type": type(exc).__name__})
         if isinstance(exc, (KeyboardInterrupt, SystemExit)):
             raise
@@ -161,12 +181,11 @@ def run_batch(root: Path, manifest: dict, spec: dict, *, transport, rates: dict,
         for slot in slots:
             if slot["status"] == "unstarted":
                 slot["reason"] = report["batch_stop"] or "not-reached"
-        entries = guard.entries if guard else []
-        dispatched = sum(entry["dispatch_attempted"] for entry in entries)
-        report.update(summary=summarize(slots, spec), reservations=entries,
-                      count_http_calls=guard.count_calls if guard else 0, generation_requests=dispatched,
-                      candidate_model_calls=0 if mock else dispatched,
-                      committed_upper_usd=str(guard.committed) if guard else "0")
+        dispatched = dispatch_guard.dispatched
+        report.update(summary=summarize(slots, spec), reservations=[],
+                      count_http_calls=None, generation_requests=None,
+                      dispatches=dispatched, candidate_model_calls=0 if mock else None,
+                      committed_upper_usd=None)
         _atomic_json(output / "report.json", report)
         journal.record({"event": "batch-finished", "summary": report["summary"], "batch_stop": report["batch_stop"]})
     return report
