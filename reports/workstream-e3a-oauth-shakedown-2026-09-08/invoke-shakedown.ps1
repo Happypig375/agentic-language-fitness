@@ -3,9 +3,11 @@ param(
     [Parameter(Mandatory)] [ValidatePattern('^[0-9a-f]{40}$')] [string] $ExpectedCommit,
     [Parameter(Mandatory)] [ValidatePattern('^/tmp/alf-e3a-shakedown-[A-Za-z0-9]{6}$')] [string] $RemoteRunRoot,
     [Parameter(Mandatory)] [string] $LocalAuthFile,
-    [Parameter(Mandatory)] [string] $LocalOutputDirectory
+    [Parameter(Mandatory)] [string] $LocalOutputDirectory,
+    [ValidateSet('shakedown','pilot')] [string] $Phase = 'shakedown'
 )
 
+$Phase = $Phase.ToLowerInvariant()
 $ErrorActionPreference = 'Stop'
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $profilePath = Join-Path $repoRoot 'infra\remote-runner\environment-profile.json'
@@ -52,7 +54,8 @@ try {
     Invoke-CheckedRemote "test ! -e $RemoteRunRoot/output" | Out-Null
     $specJson = (Invoke-CheckedRemote "cat $RemoteRunRoot/repo/protocols/workstream-e3a-v1/specification.json") -join "`n"
     try { $spec = $specJson | ConvertFrom-Json } catch { throw 'remote active specification JSON was invalid' }
-    if (-not $spec -or $spec.status -cne 'shakedown-ready-not-frozen' -or $spec.execution_authorized -ne $true -or $spec.user_live_execution_approved -ne $true) {
+    $requiredSpecStatus = if ($Phase -ceq 'pilot') { 'frozen' } else { 'shakedown-ready-not-frozen' }
+    if (-not $spec -or $spec.status -cne $requiredSpecStatus -or $spec.execution_authorized -ne $true -or $spec.user_live_execution_approved -ne $true) {
         throw 'remote active specification gate failed'
     }
     Invoke-CheckedRemote "$RemoteRunRoot/venv/bin/python $RemoteRunRoot/repo/scripts/e3a_check.py" | Out-Null
@@ -71,13 +74,13 @@ try {
     Invoke-CheckedRemote "chmod 600 $remoteAuthRoot/auth.json" | Out-Null
 
     $env:PATH = (Join-Path $repoRoot '.venv\Scripts') + [IO.Path]::PathSeparator + $oldPath
-    $remoteCommand = "$RemoteRunRoot/venv/bin/python $RemoteRunRoot/repo/scripts/e3a_run.py --phase shakedown --native-binary /tmp/alf-e3a-native-build-zavnIH/codex-native-single-response --native-sha256 $nativeSha256 --model-catalog /tmp/alf-e3a-native-build-zavnIH/source-lf/codex-rs/models-manager/models.json --auth-file $remoteAuthRoot/auth.json --output $RemoteRunRoot/output"
+    $remoteCommand = "$RemoteRunRoot/venv/bin/python $RemoteRunRoot/repo/scripts/e3a_run.py --phase $Phase --native-binary /tmp/alf-e3a-native-build-zavnIH/codex-native-single-response --native-sha256 $nativeSha256 --model-catalog /tmp/alf-e3a-native-build-zavnIH/source-lf/codex-rs/models-manager/models.json --auth-file $remoteAuthRoot/auth.json --output $RemoteRunRoot/output"
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $launcherPath -EnvironmentProfilePath $profilePath -RemoteHost $remoteHost -RemoteSshPort 830 -RemoteCommand $remoteCommand
     $exitCode = $LASTEXITCODE
 }
 catch {
     $primaryError = $_; $exitCode = 1
-    Write-Error -ErrorAction Continue ("primary shakedown failure: " + $_.Exception.Message)
+    Write-Error -ErrorAction Continue ("primary $Phase failure: " + $_.Exception.Message)
 }
 finally {
     $env:PATH = $oldPath

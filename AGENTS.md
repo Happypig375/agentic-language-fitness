@@ -2,25 +2,28 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current checkpoint (2026-09-08):** parser repair `16737af` passed 75 focused
-tests, separate AI review and exact Linux/Windows CI. The user said `continue`
-and then explicitly raised the resumed integration allowance to **five
-dispatches**. The [resumed shakedown record](docs/workstream-e3a-oauth-shakedown-resumed-2026-09-08.md)
-owns this allowance and its usage. Keep its five-dispatch ceiling consistent in
-the active specification and runtime guard. The guard is per invocation, not
-persistent: before any later invocation, calculate cumulative debits and the
-remaining allowance from retained journals and honor any required stop decision.
-Starting a fresh guard does not reset or stack authorization. This is a cap,
-not a target: the shakedown still needs only two
-successful steps. The pilot remains 24 trajectories / at most 72 dispatches,
-contingent on a successful matching shakedown and freeze.
+**Current checkpoint (2026-09-08):** live shakedown attempt 02 on `5e9eac2`
+passed both steps after exact Linux/Windows CI. Separate AI artifact review
+accepted its evidence for the existing freeze gate. The
+[resumed shakedown record](docs/workstream-e3a-oauth-shakedown-resumed-2026-09-08.md)
+and tracked `protocols/workstream-e3a-v1/freeze.json` own the exact identities.
+Next, finish freeze/launcher checks and exact-commit CI, then run the already
+approved fixed pilot: **24 trajectories / at most 72 dispatches**, unchanged.
+No extra integration call is needed. Missing Task 007 rubric judgement stays
+unknown, not completed refactoring; it cannot influence continuation.
 
-Attempt 01 remains failed, debited, unapplied and unscored. This new allowance
-does not refund it, permit ambiguous reissues, or relax immediate hard stops.
-Complete checks/review and exact implementing-commit CI before invocation.
+The user's resumed integration ceiling is **five dispatches**, with **two
+used and three remaining**. The guard is per invocation, not persistent:
+before any later integration invocation, calculate cumulative debits and the
+remaining allowance from retained journals and honor required stop decisions.
+A fresh guard does not reset or stack authorization. Attempt 01 remains
+separately failed, debited, unapplied and unscored. No ambiguous reissues or
+relaxed hard stops are authorized. Temporary auth was cleaned after attempt 02;
+no proxy listeners or E3a containers remained in the scoped check.
+
 Do not ask for renewed adoption, ordinary bug-fix or direct-push permission.
 The earlier two-dispatch allowance/hold narratives below remain history and
-are superseded only by this explicitly authorized resumed allowance.
+are superseded by this explicit allowance, successful shakedown and freeze.
 
 ## Current boundary
 

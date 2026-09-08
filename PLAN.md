@@ -2,7 +2,7 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: resumed five-dispatch allowance (2026-09-08)
+## Current checkpoint: successful shakedown; frozen pilot next (2026-09-08)
 
 The [parser repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md) was
 pushed without a PR as `16737af3f67ccaa0f47671c85f07bdbab7062b7a`; its 75
@@ -12,16 +12,26 @@ passed. The user then approved continuation and explicitly increased the
 resumed shakedown allowance to **five dispatches** in agentic instructions.
 Read the [allocation, implementation and execution record](docs/workstream-e3a-oauth-shakedown-resumed-2026-09-08.md).
 
-Next: keep that allowance consistent in instructions, active JSON and the
-runtime guard; validate/review and verify its exact implementing-commit CI,
-then use the canonical local-OAuth route for the fresh unrelated shakedown.
-Its success criterion remains two steps, not five mandatory calls. Track use
-across invocations; do not reset or stack allowances. Ambiguity, unknown usage,
-cleanup failures and other hard stops remain immediate. The earlier failed
+The five-dispatch implementation `5e9eac2ea59188be63191d81240b51f714325180`
+passed 65 affected tests, separate AI review and exact Linux/Windows CI
+`34242289358`. Live attempt 02 then passed both unrelated marker steps with
+two dispatches, valid usage and scoped credential/container/listener cleanup.
+Another AI session audited the raw evidence and accepted it for the existing
+freeze gate. **Two of five resumed integration dispatches are used; three
+remain.** The earlier failed
 [attempt 01](docs/workstream-e3a-oauth-shakedown-2026-09-08.md#live-attempt-01--stopped)
 remains retained, debited, unapplied and unscored; the new allowance is not a
-refund or retrospective promotion. Only a successful matching freeze permits
-the already approved fixed 24-trajectory / 72-dispatch pilot.
+refund or retrospective promotion.
+
+The tracked freeze binds that successful report to the status-only frozen
+specification; policy and reviewed controller/source identities are unchanged.
+Next: validate/review the freeze and minimal existing-launcher `-Phase pilot`
+adaptation, publish directly and verify exact-commit CI, then run the already
+approved fixed **24-trajectory / at-most-72-dispatch pilot** on a fresh private
+run root through the same local-OAuth route. No extra integration call or new
+adoption decision is required. Missing Task 007 architecture judgement remains
+unknown, not a successful refactor. All immediate safety, ambiguity, accounting,
+cleanup and budget stops remain in force; retain all assigned/started slots.
 
 Automatic confirmed bug fixes and direct pushing without PRs are standing
 instructions in [AGENTS.md](AGENTS.md). No new scientific version is needed.

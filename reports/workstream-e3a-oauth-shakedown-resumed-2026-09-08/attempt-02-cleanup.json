@@ -1,0 +1,9 @@
+{
+    "checked_utc":  "2026-09-08T15:26:10.4300202Z",
+    "local_port_8888_listeners":  0,
+    "remote_port_43128_listeners":  0,
+    "matching_alf_e3a_containers":  0,
+    "original_local_auth_file_present":  true,
+    "remote_auth_cleanup_evidence":  "attempt-02-invocation.log: remote auth cleanup: verified",
+    "scope":  "owned-run cleanup and selected ports only; not global credential absence"
+}

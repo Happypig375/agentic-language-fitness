@@ -16,6 +16,8 @@
 /infra/codex-no-tools/*.patch text eol=lf
 /reports/workstream-e3a-oauth-implementation-2026-09-08/** text eol=lf
 /reports/workstream-e3a-oauth-shakedown-2026-09-08/** text eol=lf
+/reports/workstream-e3a-oauth-shakedown-resumed-2026-09-08/** -text
+/reports/workstream-e3a-oauth-pilot-2026-09-08/** -text
 /scripts/e3a_run.py text eol=lf
 /tests/test_e3a_codex.py text eol=lf
 /tests/test_e3a_run.py text eol=lf

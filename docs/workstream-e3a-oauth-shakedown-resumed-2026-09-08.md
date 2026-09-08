@@ -98,8 +98,98 @@ of `CODEX_HOME`. Use the existing foreground SSH/CONNECT route and remove the
 temporary OAuth file/directory in cleanup; do not print, hash or publish auth
 bytes. No API key, relay or native-client replacement is introduced.
 
-## Execution record
+## Attempt 02: successful live execution
 
-No resumed dispatch or OAuth staging has occurred at this preparation
-checkpoint. Preserve new raw report/journal, source/spec/runtime identities,
-invocation output and scoped cleanup evidence when execution occurs.
+Commit `5e9eac2ea59188be63191d81240b51f714325180` passed exact
+[Linux/Windows CI 34242289358](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34242289358),
+then the new remote checkout was verified clean at that SHA. The existing
+PowerShell invocation ran once against `/tmp/alf-e3a-shakedown-xLRAgY` using
+only a temporary copy of the complete local `C:\Users\hadri\.codex\auth.json`.
+The two distinct marker exercises both passed: valid JSON replacements were
+applied, freshly built in the pinned sandbox and executed for values 1 then 2.
+Both responses completed with the exact admitted startup diagnostics, no
+observed tool items, timeout, overflow, accounting alarm or batch stop.
+
+| Step | Input tokens | Output tokens | Reasoning subset of output |
+|---|---:|---:|---:|
+| 1 | 6,427 | 104 | 62 |
+| 2 | 6,651 | 99 | 57 |
+| Total | 13,078 | 203 | 119 |
+
+This consumes **2 of 5 resumed integration dispatches**, leaving **3**. The
+original failed attempt remains separate and debited; there has been no pilot
+dispatch at this checkpoint. Raw provider zero cache/cache-write fields remain
+normalized to null; subscription cost and reliable provider-request count are
+unknown, not zero. This unrelated shakedown is not F#/C# research evidence.
+
+Immutable evidence in the linked report directory:
+
+- `attempt-02-report.json`, SHA-256
+  `0e65abb968770adeae04c4781ee458f8a06bbf91a2ce33b96b42494f2251f07d`.
+- `attempt-02-journal.jsonl`, SHA-256
+  `00740bbbf83e9230ef9ec12101506282fc85c552c39da9e7658daba9e7ae00b1`.
+- `attempt-02-invocation.log`, `attempt-02-cleanup.json` and exact-commit
+  `activation-ci.json`.
+
+The new resumed/pilot evidence directories disable Git text conversion in
+`.gitattributes`: raw JSON/report/journal hashes must survive a Windows checkout
+unchanged. This was caught before publication; original capture bytes and
+hashes are preserved rather than normalized or retrospectively rewritten.
+
+Both bounded transport captures report `cleanup_confirmed=true`; the outer
+invocation separately verifies deletion of its staged remote auth file and
+directory. A subsequent read-only check found no local port-8888 listener,
+no remote port-43128 listener, and no `alf-e3a` containers. The original local
+OAuth file remains untouched. The report has no invented top-level cleanup
+flag; this is scoped cleanup evidence, not proof of global credential absence.
+The publication check found no bearer/token-shaped strings in these retained
+artifacts; no auth bytes were printed, hashed or copied into reports.
+
+A separate AI-session offline audit checked report/journal hashes, live commit
+and CI, source/policy/native/catalogue/image/profile identities, replay,
+submission and sandbox outcomes, usage and recorded cleanup. It found no
+actionable issue and accepted this as input to the existing freeze gate. That
+is artifact review, not a second live invocation, human review or independent
+provider/global-secret-absence proof.
+
+## Freeze and pilot transition
+
+The tracked [`freeze.json`](../protocols/workstream-e3a-v1/freeze.json) binds the
+successful report above to frozen specification SHA-256
+`d33b0f7ed317b4f1792ab22bdf82086bb25a11cebf93781aedd6ebfff5701996`.
+Only specification `status` changes from ready to `frozen`; policy SHA
+`4c5d1345…` and reviewed controller/source SHA `923fef01…` remain unchanged.
+Observed access/usage/sandbox evidence lives in the successful report; the
+specification's descriptive pre-run verification flags are not rewritten.
+
+The existing operational `invoke-shakedown.ps1` gains only a validated optional
+`-Phase shakedown|pilot` (default `shakedown`), corresponding ready/frozen status
+preflight and phase-aware CLI invocation/log label. Authentication, transport,
+pins, isolation, cleanup and output-retention behavior are unchanged. Its
+historical default invocation remains reproducible from the original commit;
+no raw archived report/journal is edited. There is no new execution service.
+
+Fresh independent freeze-transition validation passed **36 tests** (runner 17,
+review packet 19), packet reproduction, `git diff --check`, and the existing
+`verify_pilot_prerequisite` against the actual retained report and new freeze.
+The core source identity still matches `923fef01…`. PowerShell AST syntax and
+invalid-phase parameter rejection passed without a valid launcher invocation,
+SSH or auth staging. Fresh output is under ignored
+`results/e3a-pilot-freeze-2026-09-08/`. A separate AI-session source review
+approved the freeze and constrained phase/status mapping; credential and
+transport boundaries are unchanged. Phase is normalized once after validated
+binding so case-insensitive PowerShell values map to the exact CLI choices.
+
+The pilot's fresh private run root is `/tmp/alf-e3a-shakedown-XsZF3c`; its
+legacy preparation-root prefix is not the execution phase. Preparation used
+the same script, Python and pinned dependencies, initially at `5e9eac2`.
+The [pilot setup record and output](../reports/workstream-e3a-oauth-pilot-2026-09-08/)
+are retained. Before use, move only this clean checkout to the exact passing
+freeze commit; the previous successful shakedown's output/root are untouched.
+
+After exact freeze-commit CI, run the already
+approved fixed 24-trajectory / at-most-72-dispatch pilot through that same
+route with `-Phase pilot`, a fresh private run root and new output directory.
+No extra integration call is required. Task 007 build/behavior alone is not
+architecture completion; missing required rubric review remains unknown and
+cannot influence continuation or be represented as a successful refactor.

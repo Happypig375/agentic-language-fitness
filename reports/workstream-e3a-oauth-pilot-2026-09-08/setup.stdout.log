@@ -1,0 +1,49 @@
+root=/tmp/alf-e3a-shakedown-XsZF3c
+Cloning into '/tmp/alf-e3a-shakedown-XsZF3c/repo'...
+HEAD is now at 5e9eac2 feat(e3a): authorize five-dispatch shakedown allowance
+Python 3.13.5
+Obtaining file:///tmp/alf-e3a-shakedown-XsZF3c/repo
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Collecting tiktoken==0.14.0 (from agentic-language-fitness==0.1.0)
+  Using cached tiktoken-0.14.0-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (6.7 kB)
+Collecting regex (from tiktoken==0.14.0->agentic-language-fitness==0.1.0)
+  Using cached regex-2026.9.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+Collecting requests (from tiktoken==0.14.0->agentic-language-fitness==0.1.0)
+  Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting charset_normalizer<4,>=2 (from requests->tiktoken==0.14.0->agentic-language-fitness==0.1.0)
+  Using cached charset_normalizer-3.5.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (45 kB)
+Collecting idna<4,>=2.5 (from requests->tiktoken==0.14.0->agentic-language-fitness==0.1.0)
+  Using cached idna-3.19-py3-none-any.whl.metadata (9.2 kB)
+Collecting urllib3<3,>=1.26 (from requests->tiktoken==0.14.0->agentic-language-fitness==0.1.0)
+  Using cached urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+Collecting certifi>=2023.5.7 (from requests->tiktoken==0.14.0->agentic-language-fitness==0.1.0)
+  Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Using cached tiktoken-0.14.0-cp313-cp313-manylinux_2_28_x86_64.whl (1.2 MB)
+Using cached regex-2026.9.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+Using cached charset_normalizer-3.5.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (250 kB)
+Using cached idna-3.19-py3-none-any.whl (68 kB)
+Using cached urllib3-2.7.0-py3-none-any.whl (131 kB)
+Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+Building wheels for collected packages: agentic-language-fitness
+  Building editable for agentic-language-fitness (pyproject.toml): started
+  Building editable for agentic-language-fitness (pyproject.toml): finished with status 'done'
+  Created wheel for agentic-language-fitness: filename=agentic_language_fitness-0.1.0-0.editable-py3-none-any.whl size=1735 sha256=43c74fccc8d9249bd46a8be17ac7d0b527c3ba055fe81e107377e298aae4ea40
+  Stored in directory: /tmp/pip-ephem-wheel-cache-6_11kxzy/wheels/c9/24/46/b5c9314fe9ea6e320940df5b4f9ce0532358d80e16fdb11f69
+Successfully built agentic-language-fitness
+Installing collected packages: urllib3, regex, idna, charset_normalizer, certifi, requests, tiktoken, agentic-language-fitness
+
+Successfully installed agentic-language-fitness-0.1.0 certifi-2026.7.22 charset_normalizer-3.5.1 idna-3.19 regex-2026.9.3 requests-2.34.2 tiktoken-0.14.0 urllib3-2.7.0
+{
+  "packet": "matches",
+  "candidate_model_calls": 0
+}
+setup_record=/tmp/alf-e3a-shakedown-XsZF3c/setup-record.txt
+setup_status=0
