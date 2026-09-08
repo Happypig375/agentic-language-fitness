@@ -2,21 +2,25 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current stop (2026-09-08):** activation `f8b428f479e2fb2d91079330268584b0b4792821`
-passed Linux/Windows CI; its live OAuth shakedown then stopped after one dispatch
-on `unexpected-cli-sequence`. Two startup diagnostics preceded `turn.started`.
-The [incident record](docs/workstream-e3a-oauth-shakedown-2026-09-08.md#live-attempt-01--stopped)
-owns the evidence and next decision. The failed reply is unapplied/unscored;
-no retry, freeze or pilot occurred. Temporary credentials were cleaned and
-listeners/containers are absent. `execution_authorized=false` holds live work
-pending a fresh shakedown allowance. Under the user's automatic-bug-fix
-direction, the [bounded parser repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md)
-passed 75 focused model-free tests and separate AI review. Verify its exact
-implementing-commit CI before any live activation; do not ask for repair
-approval again.
-Do not request renewed scientific adoption or routine publishing permission;
-do not mistake the five-apparatus-failure rule for permission to reissue a live
-attempt or exceed the original two-dispatch integration allowance.
+**Current checkpoint (2026-09-08):** parser repair `16737af` passed 75 focused
+tests, separate AI review and exact Linux/Windows CI. The user said `continue`
+and then explicitly raised the resumed integration allowance to **five
+dispatches**. The [resumed shakedown record](docs/workstream-e3a-oauth-shakedown-resumed-2026-09-08.md)
+owns this allowance and its usage. Keep its five-dispatch ceiling consistent in
+the active specification and runtime guard. The guard is per invocation, not
+persistent: before any later invocation, calculate cumulative debits and the
+remaining allowance from retained journals and honor any required stop decision.
+Starting a fresh guard does not reset or stack authorization. This is a cap,
+not a target: the shakedown still needs only two
+successful steps. The pilot remains 24 trajectories / at most 72 dispatches,
+contingent on a successful matching shakedown and freeze.
+
+Attempt 01 remains failed, debited, unapplied and unscored. This new allowance
+does not refund it, permit ambiguous reissues, or relax immediate hard stops.
+Complete checks/review and exact implementing-commit CI before invocation.
+Do not ask for renewed adoption, ordinary bug-fix or direct-push permission.
+The earlier two-dispatch allowance/hold narratives below remain history and
+are superseded only by this explicitly authorized resumed allowance.
 
 ## Current boundary
 

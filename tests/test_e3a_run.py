@@ -61,6 +61,7 @@ class E3aRunTests(unittest.TestCase):
                                            output=Path(d) / "run", runtime_metadata={}, root=ROOT)
         self.assertTrue(report["passed"])
         self.assertEqual(report["dispatches"], 2)
+        self.assertEqual(report["dispatch_ceiling"], 5)
         for call in t.calls:
             self.assertNotIn("Under-development", call.decode())
 
@@ -97,6 +98,36 @@ class E3aRunTests(unittest.TestCase):
         self.assertEqual([c[1][0]["expected"]["value"] for c in ev.calls], [0, 1, 2])
         self.assertTrue(report["passed"] and ev.closed)
         self.assertEqual(report["runtime"], runtime)
+
+    def test_integration_ceiling_is_carried_to_guard_and_sixth_debit_is_refused(self):
+        s, _ = fixture()
+        self.assertEqual(MODULE._integration_dispatch_ceiling(s), 5)
+        guard = MODULE.DispatchGuard(MODULE._integration_dispatch_ceiling(s))
+        for _ in range(5):
+            guard.debit()
+        with self.assertRaises(ValueError):
+            guard.debit()
+
+    def test_invalid_or_mismatched_integration_ceiling_fails_before_launch(self):
+        cases = []
+        for value in (True, False, 0, 6, "5", None):
+            cases.append(("approved_integration_dispatches", value))
+            cases.append(("integration_dispatch_ceiling", value))
+        cases.append(("mismatch", 4))
+        for field, value in cases:
+            s, m = fixture()
+            if field == "mismatch":
+                s["budgets"]["integration_dispatch_ceiling"] = value
+            elif field == "integration_dispatch_ceiling":
+                s["budgets"][field] = value
+            else:
+                s[field] = value
+            with tempfile.TemporaryDirectory() as d:
+                transport = Transport()
+                with self.assertRaises(ValueError):
+                    MODULE.run_shakedown(s, m, transport=transport, evaluator_factory=Eval,
+                                          output=Path(d) / "run", runtime_metadata={}, root=ROOT)
+                self.assertEqual(transport.calls, [])
 
     def test_ambiguous_first_stops_after_one_dispatch(self):
         s, m = fixture(); ev = Eval()

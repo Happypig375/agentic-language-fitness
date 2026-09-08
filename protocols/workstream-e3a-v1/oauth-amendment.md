@@ -8,6 +8,14 @@ This dated amendment is adopted policy, but is not itself an activation or runti
 
 ## Proposed reconciliation
 
+**Operational allowance addendum (2026-09-08):** after the retained failed
+shakedown and validated parser repair, the user approved continuation and
+increased the resumed integration allowance from two to **five dispatches**.
+The [dated resumed record](../../docs/workstream-e3a-oauth-shakedown-resumed-2026-09-08.md)
+supersedes this document's earlier two-dispatch integration ceiling only.
+The unrelated shakedown still requires two successful steps; pilot size/limits,
+no-reissue rules, immediate hard stops and all candidate treatment are unchanged.
+
 The treatment should reuse the existing local, OAuth-backed Codex implementation and the canonical `scripts/codex-docker.py` / `infra/remote-runner/run.ps1` foreground SSH transport, including the full local auth cache and normal non-generation OAuth token refresh. Keep Codex `0.149.1`, image `sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116`, Luna/high, and the fixed model catalogue, context, and settings across each pair. This is a proposed reuse of authentication and transport, not evidence that the runner already enforces E3a. The whole controller/adapter may run through that existing foreground transport; no local-controller/remote-evaluator service is needed. No API key, general Platform bearer OAuth, proxy, daemon, provider relay, backend matrix, extra `CODEX_HOME` synchronizer, secret relay, or production remote RPC may be introduced.
 
 The candidate authority remains strict full-source JSON file replacement. Before execution, a supported pinned CLI configuration must demonstrate that candidate shell, file, tool, subagent, browser, and MCP dispatch are unavailable; there must be no tool results, and the candidate must not access auth, research, gold, user/system configuration files, or successor/holdout material. Frozen CLI scaffold metadata is allowed and recorded separately as Codex scaffold, not treated as raw API equivalence. A synthetic hostile tool-call fixture must be blocked before side effects and provider follow-up. If no supported no-tools configuration exists, the proposal is held; there is no toolful fallback or custom filtering proxy. The candidate remains blind to AGENTS/PLAN governance text, hypotheses and research outcomes, successors, future tasks, target gold, and holdouts; the approved current and cumulative prior contracts, predecessor, and later bounded source/reply/feedback entries are supplied only as specified below, with fixed candidate instructions.

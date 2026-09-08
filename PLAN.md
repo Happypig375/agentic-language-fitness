@@ -2,35 +2,31 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: parser repaired; live allowance held (2026-09-08)
+## Current checkpoint: resumed five-dispatch allowance (2026-09-08)
 
-Activation `f8b428f479e2fb2d91079330268584b0b4792821` passed exact Linux/Windows
-CI [34231824002](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34231824002).
-One real OAuth shakedown invocation then stopped after **one debited dispatch**
-with `unexpected-cli-sequence`. The CLI completed, but its two pinned startup
-diagnostics preceded `turn.started`; the strict adapter rejected that envelope.
-Read the [incident and immutable raw evidence](docs/workstream-e3a-oauth-shakedown-2026-09-08.md#live-attempt-01--stopped).
-The reply remains unapplied/unscored and the attempt remains failed. No reissue,
-second dispatch, freeze or pilot occurred. Temporary OAuth copies were cleaned;
-the proxy/tunnel listeners and E3a containers were checked absent.
+The [parser repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md) was
+pushed without a PR as `16737af3f67ccaa0f47671c85f07bdbab7062b7a`; its 75
+focused tests, separate AI review and exact
+[Linux/Windows CI 34239221036](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34239221036)
+passed. The user then approved continuation and explicitly increased the
+resumed shakedown allowance to **five dispatches** in agentic instructions.
+Read the [allocation, implementation and execution record](docs/workstream-e3a-oauth-shakedown-resumed-2026-09-08.md).
 
-Live execution is now disabled (`shakedown-stopped-awaiting-review`,
-`execution_authorized=false`); prior policy adoption and permission records are
-not erased. This is the immediate live ambiguity/accounting stop, not exhaustion
-of the five-apparatus-failure allowance. Do not reinterpret that rule as live
-retry permission. The user subsequently directed automatic confirmed bug fixes
-and asked that this be recorded in agentic instructions. The
-[bounded parser/fixture repair](docs/workstream-e3a-startup-parser-fix-2026-09-08.md)
-now passes all 75 focused model-free tests, packet reproduction and a separate
-AI-session source review. No renewed repair approval is required. The standing
-rule is in [AGENTS.md](AGENTS.md#automatic-bug-fixes). Publish directly without
-a PR and verify CI on the exact implementing commit before any live activation.
+Next: keep that allowance consistent in instructions, active JSON and the
+runtime guard; validate/review and verify its exact implementing-commit CI,
+then use the canonical local-OAuth route for the fresh unrelated shakedown.
+Its success criterion remains two steps, not five mandatory calls. Track use
+across invocations; do not reset or stack allowances. Ambiguity, unknown usage,
+cleanup failures and other hard stops remain immediate. The earlier failed
+[attempt 01](docs/workstream-e3a-oauth-shakedown-2026-09-08.md#live-attempt-01--stopped)
+remains retained, debited, unapplied and unscored; the new allowance is not a
+refund or retrospective promotion. Only a successful matching freeze permits
+the already approved fixed 24-trajectory / 72-dispatch pilot.
 
-A fresh two-dispatch shakedown allowance still needs direction: only one
-dispatch remains within the original two, insufficient for a new two-step
-shakedown. Do not promote attempt 01 retrospectively, change the scientific
-treatment, suppress arbitrary CLI errors, or begin a pilot. No new protocol
-version is needed, and this repair does not activate live execution.
+Automatic confirmed bug fixes and direct pushing without PRs are standing
+instructions in [AGENTS.md](AGENTS.md). No new scientific version is needed.
+Earlier two-dispatch/hold narratives below describe their dated checkpoints;
+this explicit resumed allowance supersedes those limits for future integration.
 
 ## Prior shakedown activation checkpoint (2026-09-08)
 

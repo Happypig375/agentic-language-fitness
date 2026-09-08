@@ -116,11 +116,22 @@ def _marker_case(value: int) -> list[dict]:
     return [{"name": "unrelated-marker", "input": {}, "expected": {"value": value}}]
 
 
+def _integration_dispatch_ceiling(spec: dict) -> int:
+    """Validate the active approved/declared integration allowance before launch."""
+    approved = spec.get("approved_integration_dispatches")
+    declared = spec.get("budgets", {}).get("integration_dispatch_ceiling")
+    if (type(approved) is not int or type(declared) is not int
+            or approved != declared or not 0 < approved <= 5):
+        raise ValueError("invalid or mismatched integration dispatch ceiling")
+    return approved
+
+
 def run_shakedown(spec: dict, manifest: dict, *, transport, evaluator_factory,
                   output: Path, runtime_metadata: dict, root: Path = ROOT) -> dict:
     """Two distinct toy exercises, not a measured trajectory or failure retry."""
+    dispatch_ceiling = _integration_dispatch_ceiling(spec)
     journal = Journal(output)
-    guard = DispatchGuard(2)
+    guard = DispatchGuard(dispatch_ceiling)
     mock = not getattr(transport, "is_live", True)
     report = {
         "scope": "unrelated-two-step-replay-shakedown-not-scientific-trajectories",
@@ -128,6 +139,7 @@ def run_shakedown(spec: dict, manifest: dict, *, transport, evaluator_factory,
         "policy_sha256": _policy_sha(spec),
         "runtime": copy.deepcopy(runtime_metadata), "passed": False,
         "batch_stop": None, "attempts": [], "provider_requests": None,
+        "dispatch_ceiling": dispatch_ceiling,
         "subscription_cost_usd": None, "candidate_model_calls": 0 if mock else None,
     }
     journal.record({"event": "shakedown-started", "report": copy.deepcopy(report)})

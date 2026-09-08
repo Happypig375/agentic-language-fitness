@@ -47,7 +47,7 @@ class E3aReviewFixtures(unittest.TestCase):
         self.assertEqual(limits["post_turn_input_token_alarm"], 32768)
         self.assertEqual(limits["post_turn_output_token_alarm_including_reasoning"], 8192)
         self.assertIsNone(self.spec["budgets"]["pilot_usd_ceiling"])
-        self.assertEqual(limits["integration_dispatches"], 2)
+        self.assertEqual(limits["integration_dispatches"], 5)
         self.assertNotEqual(limits["integration_dispatches"], limits["max_dispatches"])
         self.assertTrue(active["user_live_execution_approved"])
         self.assertFalse(inactive["execution_authorized"])
