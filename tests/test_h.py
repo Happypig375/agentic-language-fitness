@@ -90,6 +90,43 @@ class HTests(unittest.TestCase):
             with self.assertRaises(HBoundaryError):
                 parse_action(json.dumps({"action": "read", "paths": paths}))
 
+    def test_non_string_action_is_normal_trajectory_failure(self):
+        for action in ([], {}, None, False, 7):
+            with self.subTest(action=action):
+                transport = Offline([cli(json.dumps({"action": action}))])
+                shared = TrajectoryDispatcher(transport, ceiling=2)
+                controller = self.controller(access="H1", evaluator=lambda _source, _deadline: None)
+                result = controller.run_trajectory(
+                    dispatcher=shared)
+                self.assertEqual(result["failure"], "invalid action envelope")
+                self.assertFalse(result.get("batch_stop", False))
+                self.assertEqual((len(transport.calls), shared.guard.dispatched), (1, 1))
+                self.assertEqual(result["events"], [])
+                self.assertEqual(controller.raw_actions, [json.dumps({"action": action})])
+
+        malformed = json.dumps({"action": []})
+        transport = Offline([cli(malformed), cli('{"action":"submit","files":{}}')])
+        shared = TrajectoryDispatcher(transport, ceiling=2)
+        first = self.controller(access="H1", evaluator=lambda _source, _deadline: None).run_trajectory(
+            dispatcher=shared)
+        second = self.controller(access="H1", evaluator=lambda _source, _deadline: None).run_trajectory(
+            dispatcher=shared)
+        self.assertEqual(first["failure"], "invalid action envelope")
+        self.assertEqual(second["submission"]["action"], "submit")
+        self.assertEqual(shared.guard.dispatched, 2)
+
+    def test_json_parser_limits_are_normal_trajectory_failures(self):
+        malformed = ["{" + '"action":' + ("1" * 5000) + "}", "{" * 1100 + "}" * 1100]
+        for raw in malformed:
+            with self.subTest(raw_prefix=raw[:20]):
+                transport = Offline([cli(raw)])
+                controller = self.controller(access="H1", evaluator=lambda _source, _deadline: self.fail("evaluated"))
+                result = controller.run_trajectory(dispatcher=TrajectoryDispatcher(transport, ceiling=1))
+                self.assertEqual(result["failure"], "malformed JSON")
+                self.assertFalse(result.get("batch_stop", False))
+                self.assertEqual(len(transport.calls), 1)
+                self.assertEqual(controller.raw_actions, [raw])
+
     def test_submission_authority_project_validation_and_raw_retention(self):
         with self.assertRaisesRegex(HBoundaryError, "authority"):
             HController(SOURCE, list(SOURCE), submission_spec={})

@@ -62,9 +62,9 @@ def parse_action(raw: str | bytes) -> dict[str, Any]:
         value = json.loads(text, object_pairs_hook=_object, parse_constant=_constant)
     except HBoundaryError:
         raise
-    except (TypeError, json.JSONDecodeError) as exc:
+    except (TypeError, ValueError, RecursionError) as exc:
         raise HBoundaryError("malformed JSON") from exc
-    if not isinstance(value, dict) or value.get("action") not in {"read", "submit"}:
+    if not isinstance(value, dict) or not isinstance(value.get("action"), str) or value["action"] not in {"read", "submit"}:
         raise HBoundaryError("invalid action envelope")
     if value["action"] == "read":
         paths = value.get("paths")

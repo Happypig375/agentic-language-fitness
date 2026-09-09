@@ -15,7 +15,7 @@ The proposed five integration/64 pilot dispatch ceilings remain unallocated.
 
 The [implementation and human-review packet](docs/workstream-h1-h2-implementation-2026-09-09.md)
 now records the bounded controller, both functioning workload levels, source-bound
-paired AI review, 63 affected unit tests, trusted fixture/fault evidence, exact-image
+paired AI review, 66 affected unit tests, trusted fixture/fault evidence, exact-image
 sandbox checks and 52 exact-native loopback probes. Earlier failed apparatus
 checks remain identifiable. All eight positive workload targets pass; 26 unchanged
 fault variants and two separately replayed corrected variants provide the current

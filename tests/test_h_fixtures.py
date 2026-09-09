@@ -33,11 +33,15 @@ class HFixtureTests(unittest.TestCase):
 
     def test_fixture_is_scoped_and_semantically_compares_every_case(self):
         source = {"OrderFlow.csproj": "<Project />", "Engine.cs": "class Engine {}"}
+        original = dict(source)
         cases = [{"name": "one", "input": {"x": 1}, "expected": {"ok": True}}]
         calls = []
         def invoke(argv, **kwargs):
             calls.append((argv, kwargs))
             if argv[1:] == ["--version"]:
+                policy = json.loads((Path(kwargs["cwd"]) / "global.json").read_text(encoding="utf-8"))
+                self.assertEqual(policy, {"sdk": {"version": "10.0.302", "rollForward": "disable",
+                                                   "allowPrerelease": False}})
                 return subprocess.CompletedProcess(argv, 0, b"10.0.302\n", b"")
             if argv[1] == "build":
                 return subprocess.CompletedProcess(argv, 0, b"built", b"")
@@ -50,6 +54,19 @@ class HFixtureTests(unittest.TestCase):
         self.assertTrue(all(calls[index][1]["timeout"] <= limit for index, limit in ((0, 10), (1, 60), (2, 10))))
         self.assertFalse(any("AUTH" in key.upper() or "TOKEN" in key.upper()
                              for key in calls[2][1]["env"]))
+        self.assertEqual(source, original)
+
+    def test_sdk_mismatch_retains_bounded_version_diagnostics(self):
+        source = {"OrderFlow.csproj": "<Project />", "Engine.cs": "class Engine {}"}
+        def invoke(argv, **kwargs):
+            return subprocess.CompletedProcess(argv, 0, b"11.0.100\n", b"selected newer SDK")
+        with self.assertRaises(FixtureError) as caught:
+            evaluate_trusted(source, [], "csharp", invoke=invoke)
+        message = str(caught.exception)
+        self.assertIn('"expected": "10.0.302"', message)
+        self.assertIn('"observed_stdout": "11.0.100\\n"', message)
+        self.assertIn('"timed_out": false', message)
+        self.assertLess(len(message), 9000)
 
     def test_build_failure_is_not_semantic_fault_detection(self):
         source = {"OrderFlow.csproj": "<Project />", "Engine.cs": "class Engine {}"}

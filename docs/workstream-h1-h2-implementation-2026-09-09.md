@@ -162,18 +162,18 @@ Review identities (source-code file hashes are in the construction report):
 
 - Canonical specification: `2c2dde84e6261b2578bf21944a3a0ad932403c89ec0bd4490713f367dbd1a07e`.
 - Scientific policy: `ec2638862df05cda74bf415d86a9e1b8dbeb24f9f504ccd00767253daa38d7d9`.
-- Construction report bytes: `c4d518f27b6ac9a37209a28bcd20050f5c8680073aafbacb7cd87a0319a0fc06`.
+- Construction report bytes: `eea708fb2e79eba1e96aaf2e25593dfd769d08fb52b6fc11b575509bffd549da`.
 
 Final separate AI review closed the activation-reporting issue: the audit reports
 actual zero model-free activity separately from specification authorization, and
 the pre-execution status refuses any enabled approval/verification flag or nonzero
 allocation even when read-only activated-spec auditing is permitted.
 
-- The complete affected test manifest has **63 tests**: a separate validator
+- The complete affected test manifest has **66 tests**: a separate validator
   passed 60, followed by the 11-test fixture file and 21-test checker/runner
-  scope covering the final binding and bookkeeping regressions. Those targeted
-  rechecks cover the changed entries; no global local suite substituted for the
-  affected manifest.
+  scope covering binding/bookkeeping regressions, then the final independently
+  validated 29-test controller/fixture scope. These targeted rechecks cover the
+  changed entries; no global local suite substituted for the affected manifest.
 - Both host and exact-image full fixture attempts passed all eight positive
   predecessor/gold targets and caught 27/28 semantic faults. The sole initial
   failure was a malformed Core F# mutation, correctly rejected as a compile
@@ -207,6 +207,33 @@ image or provider/backend was introduced.
 Passing these checks cannot substitute for human scientific review or a real,
 separately approved route/model shakedown. All H execution/user/human approvals
 remain false and both H allocations remain zero.
+
+### First publication and ordinary CI/parser corrections
+
+Initial implementing commit `6d2696857b38d00513404f2059ac095a871a53ea` is retained.
+[CI 34334525905](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34334525905)
+passed unit tests and the pure construction audit, then both platforms failed
+the trusted-fixture SDK check: temporary directories outside the checkout lost
+the repository's `global.json` selection policy. The
+[failed-step log](../reports/workstream-h1-h2-preexecution-2026-09-09/evidence/ci-attempt1-failure.log)
+is preserved. Fresh trusted fixture directories now receive that same exact SDK
+pin, disabled roll-forward and no prerelease selection before any `dotnet` call.
+This neither changes the image nor relaxes the strict SDK identity check.
+
+A final parser check also found that non-string action values, deeply nested
+JSON and oversized integer literals could raise Python exceptions and be
+misclassified as batch-stopping apparatus faults. They now remain retained,
+charged, per-trajectory format failures. Memory/system exceptions are not hidden.
+Another AI session reviewed both corrections; all 29 affected controller/fixture
+tests passed. These are ordinary pre-execution code fixes, not scientific revisions.
+
+The refreshed construction report changes only code-identity bookkeeping; all
+other 18 artifact files, including every reference envelope, cap and schedule,
+remain byte-identical to the first publication. The original construction report
+SHA was `c4d518f27b6ac9a37209a28bcd20050f5c8680073aafbacb7cd87a0319a0fc06`
+and remains available in that commit. Scientific specification/policy hashes and
+all false/zero execution gates are unchanged. Approval requires the corrective
+publication's exact CI, not the failed earlier run.
 
 ## What to human-review before approving execution
 

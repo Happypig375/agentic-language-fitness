@@ -65,6 +65,12 @@ def evaluate_trusted(source: Mapping[str, str], cases: list[Mapping[str, Any]], 
         raise FixtureError("source is outside trusted H fixture scope")
     with tempfile.TemporaryDirectory(prefix="alf-h-fixture-") as temporary:
         workspace = Path(temporary)
+        # The fresh directory is intentionally outside the repository, so it
+        # cannot inherit the reviewed root global.json. Materialize the same
+        # exact SDK selection policy before any dotnet process starts.
+        (workspace / "global.json").write_text(json.dumps({"sdk": {
+            "version": sdk, "rollForward": "disable", "allowPrerelease": False}},
+            indent=2) + "\n", encoding="utf-8", newline="\n")
         for name, text in source.items():
             if Path(name).name != name or "\r" in text or "\x00" in text:
                 raise FixtureError("unsafe trusted fixture source")
@@ -72,7 +78,11 @@ def evaluate_trusted(source: Mapping[str, str], cases: list[Mapping[str, Any]], 
         env = credential_free_environment(workspace)
         version = _run(["dotnet", "--version"], cwd=workspace, env=env, timeout=10, invoke=invoke)
         if version["returncode"] != 0 or version["timed_out"] or version["overflow"] or version["stdout"].strip() != sdk:
-            raise FixtureError("SDK identity mismatch")
+            raise FixtureError("SDK identity mismatch: " + json.dumps({
+                "expected": sdk, "observed_stdout": version["stdout"][:4096],
+                "observed_stderr": version["stderr"][:4096],
+                "returncode": version["returncode"], "timed_out": version["timed_out"],
+                "overflow": version["overflow"]}, sort_keys=True))
         build = _run(["dotnet", "build", project, "--configuration", "Debug", "--nologo",
                       "-p:NuGetAudit=false"], cwd=workspace, env=env, timeout=60, invoke=invoke)
         result = {"source_sha256": {name: hashlib.sha256(text.encode()).hexdigest()

@@ -1,0 +1,53 @@
+﻿validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	﻿2026-09-09T09:27:27.1827713Z ##[group]Run python scripts/h_check.py --permit-activation --output-dir results/h1-h2-windows
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1829378Z ^[[36;1mpython scripts/h_check.py --permit-activation --output-dir results/h1-h2-windows^[[0m
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1830561Z ^[[36;1mpython scripts/h_check.py --permit-activation --build-fixtures --output-dir results/h1-h2-fixtures-windows^[[0m
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1959822Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1960469Z env:
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1960967Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1961770Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1962583Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1963322Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1964077Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1964755Z   DOTNET_ROOT: C:\Program Files\dotnet
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:27.1965343Z ##[endgroup]
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7860410Z Traceback (most recent call last):
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7870452Z   File "D:\a\agentic-language-fitness\agentic-language-fitness\scripts\h_check.py", line 10, in <module>
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7871481Z     raise SystemExit(main())
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7871973Z                      ^^^^^^
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7872859Z   File "D:\a\agentic-language-fitness\agentic-language-fitness\src\alf\h_check.py", line 300, in main
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7873886Z     report["trusted_fixtures"] = build_fixtures(root, spec_sdk(report, root, args.specification))
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7875253Z                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7877157Z   File "D:\a\agentic-language-fitness\agentic-language-fitness\src\alf\h_fixtures.py", line 222, in build_fixtures
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7879388Z     result = evaluate_trusted(source, cases, language, sdk, invoke=invoke)
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7880548Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7882275Z   File "D:\a\agentic-language-fitness\agentic-language-fitness\src\alf\h_fixtures.py", line 75, in evaluate_trusted
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7883301Z     raise FixtureError("SDK identity mismatch")
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.7883866Z alf.h_fixtures.FixtureError: SDK identity mismatch
+validate-windows	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:27:31.9482092Z ##[error]Process completed with exit code 1.
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	﻿2026-09-09T09:25:26.8601693Z ##[group]Run python scripts/h_check.py --permit-activation --output-dir results/h1-h2-linux
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8602667Z ^[[36;1mpython scripts/h_check.py --permit-activation --output-dir results/h1-h2-linux^[[0m
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8603372Z ^[[36;1mpython scripts/h_check.py --permit-activation --build-fixtures --output-dir results/h1-h2-fixtures-linux^[[0m
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8640639Z shell: /usr/bin/bash -e {0}
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8640913Z env:
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8641196Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8641645Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8642317Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8642714Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8643095Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8643475Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8644012Z   DOTNET_ROOT: /usr/share/dotnet
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:26.8644295Z ##[endgroup]
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6908482Z Traceback (most recent call last):
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6917232Z   File "/home/runner/work/agentic-language-fitness/agentic-language-fitness/scripts/h_check.py", line 10, in <module>
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6917997Z     raise SystemExit(main())
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6918255Z                      ^^^^^^
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6918821Z   File "/home/runner/work/agentic-language-fitness/agentic-language-fitness/src/alf/h_check.py", line 300, in main
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6919590Z     report["trusted_fixtures"] = build_fixtures(root, spec_sdk(report, root, args.specification))
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6920107Z                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6920778Z   File "/home/runner/work/agentic-language-fitness/agentic-language-fitness/src/alf/h_fixtures.py", line 222, in build_fixtures
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6921502Z     result = evaluate_trusted(source, cases, language, sdk, invoke=invoke)
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6922173Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6922866Z   File "/home/runner/work/agentic-language-fitness/agentic-language-fitness/src/alf/h_fixtures.py", line 75, in evaluate_trusted
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6923524Z     raise FixtureError("SDK identity mismatch")
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.6923897Z alf.h_fixtures.FixtureError: SDK identity mismatch
+validate-linux	Audit H1/H2 requests and trusted semantic faults (no model)	2026-09-09T09:25:28.7509492Z ##[error]Process completed with exit code 1.
