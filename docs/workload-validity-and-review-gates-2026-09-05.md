@@ -90,9 +90,10 @@ Review readiness, scientific approval, executable freeze, and permission to spen
 
 ## Current assignment and stops
 
-The active assignment is owned by PLAN.md. As of 2026-09-09 the user selected
-[bounded H0 model-free preparation](workstream-h0-preparation-2026-09-09.md)
-after the completed E3a pilot. Keep ordinary tests/CI repairs inside that scope;
-do not broaden into live H execution, tool-policy trials or multi-agent treatments.
+The active assignment is owned by PLAN.md. As of 2026-09-09 H0 is complete and the
+user selected [bounded H1/H2 design](workstream-h1-h2-overlap-design-2026-09-09.md).
+Keep design/review and ordinary documentation/CI fixes inside that scope; new
+workload construction requires adoption, and live H execution, tool-policy trials
+or multi-agent treatments are not authorized by the design continuation.
 
 Return for a new scientific condition, unknown material measurement semantics, unavailable required permissions, exhausted budget, data leakage, unsafe execution, or repeated unresolved apparatus failures. Stop when the packet is review-ready. A missing nonessential telemetry field should narrow a claim, not trigger an elaborate interception framework. If the missing field is essential to the intended estimand, do not run that treatment until it is resolved.

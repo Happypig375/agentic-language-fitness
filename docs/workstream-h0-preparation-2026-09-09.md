@@ -168,6 +168,15 @@ the post-push gate; both existing platform jobs now run and retain H0 artifacts.
 No candidate dispatch, model/count request, OAuth staging or remote/candidate
 execution occurred. E3a source, raw results and charges are unchanged.
 
+**Publication completion:** implementing commit
+`6e45e90a0cad34d34448b51eb3cba13e609b7337` passed exact
+[CI 34306769616](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34306769616),
+Linux 6m5s and Windows 7m49s. The conditional E2 baseline was not requested.
+A separate verifier downloaded that run's two platform artifacts; all five H0
+files per platform matched the published files byte-for-byte and by SHA-256.
+The local comparison is retained under `results/h0-ci-34306769616/`. This closes
+H0's publication gate without changing any report or implementation bytes.
+
 ### Engineering corrections before publication
 
 The initial prototype incorrectly used cumulative source exposure as resident

@@ -2,7 +2,23 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: H0 implemented and AI-reviewed (2026-09-09 HKT)
+## Current checkpoint: bounded H1/H2 design selected (2026-09-09 HKT)
+
+The user replied **"continuecontinue"** after the completed H0 handoff named
+bounded H1/H2 design as the next step. The [proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md)
+selects two OrderFlow feature-load levels, two common authored-byte caps, supplied
+source versus a finite read-only controller policy, and a proposed 32-slot
+feasibility pilot. There is no existing semantic-growth generator to reuse;
+representation renaming and successive maintenance tasks are not size levels.
+
+Current authority is design, review, documentation checks, direct publication and
+exact CI only. The next decision is adoption of its bounded model-free workload/
+controller construction. No new workload implementation or live H is authorized.
+Its proposed 64 pilot/five integration dispatch ceilings are not E3a carryover or
+permission flags. Physical provider counting stays unverified; the narrowed
+authored-byte interpretation and extra H2 turn opportunities are explicit.
+
+## Completed checkpoint: H0 (2026-09-09 HKT)
 
 The user replied **"Continue"** to the explicit proposal for H0 model-free
 source-budget preparation with no new live experiment. Read the
@@ -18,10 +34,11 @@ envelopes, 17 affected tests, download-disabled warm-cache reproduction and
 independent final AI-session review now pass. Initial insufficient validations
 and a failed repetition witness are recorded in the assignment; they are not
 candidate observations or new scientific versions. E3a remains unchanged.
-Finish direct publication and exact Linux/Windows CI, then return at the H0
-review-ready boundary. Full-request provider accounting,
-meaningful scaling, live source-access/prompt policies and H1/H2 sample/dispatch
-limits remain a separately bounded design decision, not inferred from H0 success.
+Publication `6e45e90a0cad34d34448b51eb3cba13e609b7337` passed exact CI
+`34306769616`: Linux 6m5s, Windows 7m49s. All five generated files on each platform
+match the published artifacts byte-for-byte. H0 is complete, with no candidate
+dispatches or OAuth staging. The later design selection above resolves its next
+branch, without implying physical-context accounting or live H authorization.
 
 ## Completed checkpoint: E3a analyzed (2026-09-09 HKT)
 

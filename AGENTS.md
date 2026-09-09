@@ -2,16 +2,20 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current checkpoint (2026-09-09 HKT): H0 implemented and AI-reviewed.** The user
-selected this branch by replying "Continue" to the explicit H0 proposal.
-Read the [bounded assignment](docs/workstream-h0-preparation-2026-09-09.md) and
-[definition](protocols/workstream-h0/definition.json). The paired exemplar,
-deterministic audit and synthetic byte-budget/resident checks pass 17 affected
-tests and independent final AI review; the [report](reports/workstream-h0-2026-09-09/report.json)
-and four envelopes are reproducible with tokenizer downloads disabled on a warm
-cache. Finish direct publication and exact Linux/Windows CI, then return at the
-H0 review-ready boundary. No live model/count endpoint, OAuth staging, candidate execution, new remote
-layer or broad/scaled workload construction is authorized by H0.
+**Current assignment (2026-09-09 HKT): bounded H1/H2 design.** The user replied
+"continuecontinue" after the H0 handoff named this next step. Read the
+[proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md). Finish its bounded
+design, separate AI review, documentation checks, direct publication and exact
+CI. Return for adoption of the proposed model-free construction scope. The
+proposal's dispatch ceilings are not live authorization; no workload construction,
+OAuth staging, model/count request, candidate execution or new remote layer is
+authorized by this design assignment.
+
+H0 is complete at `6e45e90a0cad34d34448b51eb3cba13e609b7337`; exact Linux/Windows
+CI `34306769616` passed. Its 17 affected tests, independent AI review and five-file
+cross-platform reproduction are recorded in the [H0 evidence](docs/workstream-h0-preparation-2026-09-09.md).
+Keep that definition, source and report identifiable; do not rerun completed H0
+preparation or promote its byte fixtures into verified provider context limits.
 
 E3a's completed report and source-bound AI architecture addendum were published
 as `6227b99`; exact Linux/Windows CI `34299713554` passed. The
@@ -28,12 +32,12 @@ before any later explicitly authorized invocation. The current run's temporary
 OAuth, selected proxy listeners and E3a containers were cleaned up. Keep the
 original local OAuth file untouched and the canonical foreground SSH route.
 
-H0 consumes none of those balances. Its byte caps are synthetic fixture units;
-offline token proxies do not establish a provider context limit. Never use future
-gold, research outcomes or copied historical solutions as source distractors.
-Return when H0 is review-ready and exact publication CI passes; any H1/H2 pilot
-still needs a bounded design and separate live authorization. Ordinary confirmed
-bug fixes and direct pushes remain authorized without redundant questions.
+H design consumes none of those balances. Offline token proxies and authored-byte
+caps do not establish a provider context limit. Never use future gold, research
+outcomes or copied historical solutions as source distractors. H1/H2 construction
+adoption, working implementation and separate live authorization remain distinct.
+Ordinary confirmed bug fixes and direct pushes remain authorized without redundant
+questions; they do not authorize a new scientific treatment or live allocation.
 
 ## Implementation history and authentication
 
@@ -55,7 +59,8 @@ toolful fallback, automatic live reissue or replacement is authorized.
 - Design/analysis: [experimental design](docs/experimental-design.md), [metrics](docs/metrics.md).
 - Workload/review scope: [validity and gates](docs/workload-validity-and-review-gates-2026-09-05.md).
 - Context-pressure work, when assigned: [H design](docs/workstream-h-context-pressure-design-2026-09-05.md).
-- Current H0 implementation: [assignment and evidence](docs/workstream-h0-preparation-2026-09-09.md).
+- Completed H0 implementation: [assignment and evidence](docs/workstream-h0-preparation-2026-09-09.md).
+- Current H1/H2 design: [bounded proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md).
 
 Current governance applies to future work. Older proposals and their checked-in review packets remain identifiable history; they do not override the current disposition. Already authorized frozen protocols govern their own experiments. Reconcile conflicts rather than silently changing a frozen treatment.
 

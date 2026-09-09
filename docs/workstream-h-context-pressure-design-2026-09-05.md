@@ -2,10 +2,12 @@
 
 **Revised:** 2026-09-05. Future design under [PLAN.md](../PLAN.md). This document does not authorize construction of a large suite or any live model run.
 
-**H0 assignment (2026-09-09):** the user has now selected the
-[bounded model-free preparation](workstream-h0-preparation-2026-09-09.md).
-Only that one-exemplar fixture/audit scope is active; the broader H1/H2/H3
-design and live-run gates below remain future work.
+**Current continuation (2026-09-09):** [H0](workstream-h0-preparation-2026-09-09.md)
+is complete. The user selected the [bounded H1/H2 design](workstream-h1-h2-overlap-design-2026-09-09.md)
+as the next step. It proposes authored-byte software limits and a map/whole-file-
+read policy, not verified physical context limits or the broader retrieval/H3
+space below. The proposal requires adoption before model-free construction and
+separate authorization before live execution.
 
 ## Questions, not assumed advantages
 
@@ -100,7 +102,7 @@ Other outcomes include total/provider input and output; declared token subsets; 
 
 ## Sequence and decision
 
-H may be proposed after a usable controller and workload gate, without completing optional F or G studies. Present authorization is the bounded H0 model-free assignment linked above, not a live H pilot. A small source-only H pilot does not require exhaustive explanation of repair behavior because its primary arm has no repair feedback.
+H may be proposed after a usable controller and workload gate, without completing optional F or G studies. Present authorization is the bounded H1/H2 design assignment linked above, not construction or a live H pilot. A small source-only H pilot does not require exhaustive explanation of repair behavior because its primary arm has no repair feedback.
 
 ```text
 reviewed workload/exemplar + H0 model-free budget checks
