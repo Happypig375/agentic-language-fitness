@@ -15,6 +15,13 @@ No new sample size, candidate treatment, model, native binary or routing layer.
 Verify the exact activation and freeze commits' CI before their live phases.
 No automatic retry, reissue, later replacement or relaxed hard stop is authorized.
 
+Activation `a724694` passed exact Linux/Windows CI `34293286434`; the renewed
+shakedown then passed both steps on source `8b549b67…`, consuming **2/5** fresh
+integration dispatches. Separate AI artifact review and scoped cleanup passed.
+The new tracked freeze binds its exact report; finish freeze checks/publication
+and exact-commit CI, then run the approved fresh pilot once (currently **0/72**).
+No further model calls are needed for shakedown while the source stays unchanged.
+
 ## Prior checkpoint: complete-response parser repair; live hold (2026-09-09 HKT)
 
 The renewed freeze `c79bc1c` passed exact Linux/Windows CI `34251358861`.

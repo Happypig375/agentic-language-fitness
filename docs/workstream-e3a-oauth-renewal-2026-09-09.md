@@ -85,3 +85,66 @@ The remote native/catalogue/image identities still match their pins; the local
 proxy port is free and no selected E3a container was running. These are preflight
 observations, not live completion evidence. Exact activation-commit CI remains
 required before staging credentials or invoking the shakedown.
+
+## Renewed shakedown 01 — successful
+
+Activation commit `a724694d66ff6566c76b207dd08496369b2067dc` passed exact
+[CI 34293286434](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34293286434)
+(Linux 6m10s; Windows 8m1s). The existing `prepare-remote.sh` created a clean
+private checkout/venv at `/tmp/alf-e3a-shakedown-xvOD44`; retained setup captures
+include the resolved Python/dependency, image and Docker-network identities.
+
+The actual local PowerShell invocation was:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass `
+  -File reports/workstream-e3a-oauth-shakedown-2026-09-08/invoke-shakedown.ps1 `
+  -Phase shakedown `
+  -ExpectedCommit a724694d66ff6566c76b207dd08496369b2067dc `
+  -RemoteRunRoot /tmp/alf-e3a-shakedown-xvOD44 `
+  -LocalAuthFile C:\Users\hadri\.codex\auth.json `
+  -LocalOutputDirectory results/e3a-oauth-renewal-2026-09-09/shakedown-01
+```
+
+It exited 0 after two completed, applied, freshly built and sandbox-tested
+marker replies (values 1 then 2), with `passed=true` and null batch stop. Both
+native turns had known usage and no tool item, timeout, overflow or accounting
+alarm. The second step used visible replay. Total usage was **13,078 input /
+188 output tokens**; 5,632 cached input and 104 reasoning output tokens are
+subsets, not additional tokens. Cache-write counts, provider-request count and
+subscription USD remain null. These are unrelated integration exercises, not
+language-comparison observations.
+
+The fresh integration allocation is now **2/5 used, 3 remaining**. All six prior
+dispatches remain separately charged. No pilot dispatch used this fresh allocation.
+Another AI session audited the actual report, raw journal/replay, identities and
+cleanup evidence and accepted the unchanged freeze gate; this is not human review
+or a global no-tools guarantee.
+
+Raw evidence is preserved under
+[`reports/workstream-e3a-oauth-renewal-2026-09-09/`](../reports/workstream-e3a-oauth-renewal-2026-09-09/):
+
+- `shakedown-01-report.json`, SHA-256
+  `516cb4a0e6492a6c7d261923a1ff2511ad6825242e8102bc5c5224928bef4439`.
+- `shakedown-01-journal.jsonl` (byte-identical to raw `attempts.jsonl`), SHA-256
+  `418f2d11f6b0604c40512490f63cba6e9354ecbe8a5081421d9c402248579384`.
+- Invocation, setup, exact-CI and cleanup records. The prior freeze's exact saved
+  bytes are `prior-freeze.json`, SHA-256
+  `a19ddc0b4c102fdc4d86dcfc3ef0362573734fef281bf04104cd51a6e98bd395`.
+
+The wrapper verified temporary staged-auth deletion and copied its output.
+Successful scoped checks at 00:13:37–00:13:41 UTC (08:13 HKT) found no selected
+proxy listener or running E3a container; the original local auth file remained.
+The publication token-pattern scan found zero matching files. These checks are
+scoped evidence, not proof about all credentials on either host.
+
+The tracked freeze now points to this report for the unchanged scientific policy
+and repaired source identity. Frozen specification SHA-256 is
+`d33b0f7ed317b4f1792ab22bdf82086bb25a11cebf93781aedd6ebfff5701996`.
+Fresh freeze validation passed the same 37 selected tests, packet and diff checks,
+plus the real offline `verify_pilot_prerequisite` against the published report.
+The source/policy and raw report hashes match. Another AI session approved the
+freeze/evidence diff; fresh logs are retained in the `freeze-validation` result
+subdirectory. Publish this freeze and verify its exact CI, then execute the already
+approved fresh fixed 24-trajectory/72-dispatch pilot once. No automatic later
+replacement, additional shakedown or old-slot resumption is authorized.

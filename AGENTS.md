@@ -4,12 +4,16 @@ Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint 
 
 **Current authorization (2026-09-09 HKT):** the user explicitly approved
 continuation and increased the proposed fresh shakedown allowance to **five
-dispatches**. This authorizes one fresh integration allocation (0/5 used) and,
+dispatches**. This authorizes one fresh integration allocation (2/5 used) and,
 after a matching successful two-step shakedown and freeze, one fresh fixed
 24-trajectory/72-dispatch pilot (0/72 used). The [renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md)
 owns the current assignment. Prior unused balances do not stack; every earlier
 attempt and debit remains retained. No automatic retry or later replacement
 is authorized. Keep local OAuth, the canonical launcher and all hard stops.
+The renewed two-step shakedown passed on exact-CI-green `a724694`; separate AI
+artifact review and scoped auth/container/listener cleanup passed. Publish and
+verify the new freeze's exact CI, then run the approved fresh pilot once. Three
+integration dispatches remain; no additional shakedown is needed for unchanged source.
 
 **Prior checkpoint (2026-09-09 HKT):** pilot attempt 02 on exact-CI-green
 `c79bc1c` stopped after one dispatch with `multiple-final-replies`: one complete

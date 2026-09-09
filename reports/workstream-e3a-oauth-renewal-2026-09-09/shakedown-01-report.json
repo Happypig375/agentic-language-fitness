@@ -1,0 +1,262 @@
+{
+  "attempts": [
+    {
+      "applied_source": {
+        "OrderFlow.csproj": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>\n",
+        "Program.cs": "using System;\nwhile (Console.ReadLine() is not null) Console.WriteLine(\"{\\\"value\\\":1}\");\n"
+      },
+      "evaluation": {
+        "binary_sha256": "2a6d6dd1a2723f1aff822919e2c1c80a6e71bdaf897dcc8d55cb9d3e2e7d5aa1",
+        "build_passed": true,
+        "category": "development",
+        "operations": [
+          {
+            "build": {
+              "duration_seconds": 3.2956119561567903,
+              "observed_output_bytes": 227,
+              "output_limit_exceeded": false,
+              "returncode": 0,
+              "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+              "stdout": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.89\n",
+              "timed_out": false
+            }
+          },
+          {
+            "program": {
+              "duration_seconds": 0.1360376887023449,
+              "observed_output_bytes": 12,
+              "output_limit_exceeded": false,
+              "returncode": 0,
+              "stderr": "",
+              "stdout": "{\"value\":1}\n",
+              "timed_out": false
+            }
+          }
+        ],
+        "output": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.89\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n\n",
+        "passed": true,
+        "submitted_sha256": "47b18638b329184e08e8f707bc9c3ddbe5029bdc4a3dc8433888b6a426afedc2"
+      },
+      "response": {
+        "batch_stop": false,
+        "cleanup_confirmed": true,
+        "dispatch_attempted": true,
+        "elapsed_seconds": 10.545607919804752,
+        "id": "local-dispatch-1",
+        "model": null,
+        "output_overflow": false,
+        "raw": "{\"type\":\"thread.started\",\"thread_id\":\"01a08381-a5b3-7311-ba61-921bc2ab8713\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: no_tools, single_response. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /tmp/alf-codex-home/config.toml.\"}}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"error\",\"message\":\"Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_2\",\"type\":\"agent_message\",\"text\":\"{\\\"files\\\":{\\\"Program.cs\\\":\\\"using System;\\\\nwhile (Console.ReadLine() is not null) Console.WriteLine(\\\\\\\"{\\\\\\\\\\\\\\\"value\\\\\\\\\\\\\\\":1}\\\\\\\");\\\\n\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":6427,\"cached_input_tokens\":2816,\"cache_write_input_tokens\":0,\"output_tokens\":106,\"reasoning_output_tokens\":64}}\n",
+        "raw_stderr": "",
+        "raw_stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a08381-a5b3-7311-ba61-921bc2ab8713\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: no_tools, single_response. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /tmp/alf-codex-home/config.toml.\"}}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"error\",\"message\":\"Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_2\",\"type\":\"agent_message\",\"text\":\"{\\\"files\\\":{\\\"Program.cs\\\":\\\"using System;\\\\nwhile (Console.ReadLine() is not null) Console.WriteLine(\\\\\\\"{\\\\\\\\\\\\\\\"value\\\\\\\\\\\\\\\":1}\\\\\\\");\\\\n\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":6427,\"cached_input_tokens\":2816,\"cache_write_input_tokens\":0,\"output_tokens\":106,\"reasoning_output_tokens\":64}}\n",
+        "response_id": null,
+        "returncode": 0,
+        "startup_diagnostics": [
+          {
+            "item": {
+              "id": "item_0",
+              "message": "Under-development features enabled: no_tools, single_response. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /tmp/alf-codex-home/config.toml.",
+              "type": "error"
+            },
+            "type": "item.completed"
+          },
+          {
+            "item": {
+              "id": "item_1",
+              "message": "Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.",
+              "type": "error"
+            },
+            "type": "item.completed"
+          }
+        ],
+        "status": "completed",
+        "stdin_bytes": 3090,
+        "stdin_sha256": "8c8ec57dfc11b452066899c559cba7bd85333cd5ae59179fa47ef01bfaca90d8",
+        "text": "{\"files\":{\"Program.cs\":\"using System;\\nwhile (Console.ReadLine() is not null) Console.WriteLine(\\\"{\\\\\\\"value\\\\\\\":1}\\\");\\n\"}}",
+        "timed_out": false,
+        "usage": {
+          "cache_write_input_tokens": null,
+          "cached_input_tokens": 2816,
+          "input_tokens": 6427,
+          "invalid_fields": [],
+          "output_tokens": 106,
+          "raw": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 2816,
+            "input_tokens": 6427,
+            "output_tokens": 106,
+            "reasoning_output_tokens": 64
+          },
+          "reasoning_output_tokens": 64,
+          "totals_available": true
+        }
+      },
+      "step": 1
+    },
+    {
+      "applied_source": {
+        "OrderFlow.csproj": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>\n",
+        "Program.cs": "using System;\nwhile (Console.ReadLine() is not null) Console.WriteLine(\"{\\\"value\\\":2}\");\n"
+      },
+      "evaluation": {
+        "binary_sha256": "20818114212294eb0d1d2ba368e5f7fc18b69db9f266aed07c95a0f7f9179a2b",
+        "build_passed": true,
+        "category": "development",
+        "operations": [
+          {
+            "build": {
+              "duration_seconds": 3.305243317037821,
+              "observed_output_bytes": 227,
+              "output_limit_exceeded": false,
+              "returncode": 0,
+              "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+              "stdout": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.88\n",
+              "timed_out": false
+            }
+          },
+          {
+            "program": {
+              "duration_seconds": 0.1865256680175662,
+              "observed_output_bytes": 12,
+              "output_limit_exceeded": false,
+              "returncode": 0,
+              "stderr": "",
+              "stdout": "{\"value\":2}\n",
+              "timed_out": false
+            }
+          }
+        ],
+        "output": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.88\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n\n",
+        "passed": true,
+        "submitted_sha256": "78972ac096f80c69e71ab008705cfd6c1d51440c0bb6f0bcfaee549e8b11800f"
+      },
+      "response": {
+        "batch_stop": false,
+        "cleanup_confirmed": true,
+        "dispatch_attempted": true,
+        "elapsed_seconds": 10.024091016501188,
+        "id": "local-dispatch-2",
+        "model": null,
+        "output_overflow": false,
+        "raw": "{\"type\":\"thread.started\",\"thread_id\":\"01a08381-deff-7861-89b6-0c3bbb10f7ef\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: no_tools, single_response. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /tmp/alf-codex-home/config.toml.\"}}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"error\",\"message\":\"Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_2\",\"type\":\"agent_message\",\"text\":\"{\\\"files\\\":{\\\"Program.cs\\\":\\\"using System;\\\\nwhile (Console.ReadLine() is not null) Console.WriteLine(\\\\\\\"{\\\\\\\\\\\\\\\"value\\\\\\\\\\\\\\\":2}\\\\\\\");\\\\n\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":6651,\"cached_input_tokens\":2816,\"cache_write_input_tokens\":0,\"output_tokens\":82,\"reasoning_output_tokens\":40}}\n",
+        "raw_stderr": "",
+        "raw_stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a08381-deff-7861-89b6-0c3bbb10f7ef\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: no_tools, single_response. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /tmp/alf-codex-home/config.toml.\"}}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"error\",\"message\":\"Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_2\",\"type\":\"agent_message\",\"text\":\"{\\\"files\\\":{\\\"Program.cs\\\":\\\"using System;\\\\nwhile (Console.ReadLine() is not null) Console.WriteLine(\\\\\\\"{\\\\\\\\\\\\\\\"value\\\\\\\\\\\\\\\":2}\\\\\\\");\\\\n\\\"}}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":6651,\"cached_input_tokens\":2816,\"cache_write_input_tokens\":0,\"output_tokens\":82,\"reasoning_output_tokens\":40}}\n",
+        "response_id": null,
+        "returncode": 0,
+        "startup_diagnostics": [
+          {
+            "item": {
+              "id": "item_0",
+              "message": "Under-development features enabled: no_tools, single_response. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /tmp/alf-codex-home/config.toml.",
+              "type": "error"
+            },
+            "type": "item.completed"
+          },
+          {
+            "item": {
+              "id": "item_1",
+              "message": "Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`.",
+              "type": "error"
+            },
+            "type": "item.completed"
+          }
+        ],
+        "status": "completed",
+        "stdin_bytes": 3919,
+        "stdin_sha256": "aff566d83c55f3d81c0720dd29760b87b10f1bb4f49c0861683918bca237da0c",
+        "text": "{\"files\":{\"Program.cs\":\"using System;\\nwhile (Console.ReadLine() is not null) Console.WriteLine(\\\"{\\\\\\\"value\\\\\\\":2}\\\");\\n\"}}",
+        "timed_out": false,
+        "usage": {
+          "cache_write_input_tokens": null,
+          "cached_input_tokens": 2816,
+          "input_tokens": 6651,
+          "invalid_fields": [],
+          "output_tokens": 82,
+          "raw": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 2816,
+            "input_tokens": 6651,
+            "output_tokens": 82,
+            "reasoning_output_tokens": 40
+          },
+          "reasoning_output_tokens": 40,
+          "totals_available": true
+        }
+      },
+      "step": 2
+    }
+  ],
+  "batch_stop": null,
+  "candidate_model_calls": null,
+  "dispatch_ceiling": 5,
+  "dispatches": 2,
+  "passed": true,
+  "policy_sha256": "4c5d1345662555563e054b6124c44195382e93412be9c1e6d8dda7bf503f493f",
+  "preflight": {
+    "binary_sha256": "aa62cb7d98d2d42c58e3d683aa8b2bf2c12ef2d74214862091ff14807564df5d",
+    "build_passed": true,
+    "category": "development",
+    "operations": [
+      {
+        "build": {
+          "duration_seconds": 2.8521590074524283,
+          "observed_output_bytes": 227,
+          "output_limit_exceeded": false,
+          "returncode": 0,
+          "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+          "stdout": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.45\n",
+          "timed_out": false
+        }
+      },
+      {
+        "program": {
+          "duration_seconds": 0.1457946179434657,
+          "observed_output_bytes": 12,
+          "output_limit_exceeded": false,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "{\"value\":0}\n",
+          "timed_out": false
+        }
+      }
+    ],
+    "output": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.45\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n\n",
+    "passed": true,
+    "submitted_sha256": "60cecec810f8ed0872481c645948571249643a26dc0e0f70a5d28bfba63aa7dd"
+  },
+  "preparation": {
+    "cache_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "export": {
+      "duration_seconds": 0.10591454152017832,
+      "observed_output_bytes": 0,
+      "output_limit_exceeded": false,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "",
+      "timed_out": false
+    },
+    "fixture_only": false,
+    "image": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+    "restore": {
+      "duration_seconds": 1.5174502599984407,
+      "observed_output_bytes": 182,
+      "output_limit_exceeded": false,
+      "returncode": 0,
+      "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+      "stdout": "  Determining projects to restore...\n  Restored /work/OrderFlow.csproj (in 147 ms).\n",
+      "timed_out": false
+    },
+    "seed_sha256": "910346d13b08e348fc41c991b6eb9d4b21b576601b0a85a5c99970a264aabe71"
+  },
+  "provider_requests": null,
+  "runtime": {
+    "catalog_sha256": "c18214b1ba88ab9bd164753115324a7a29c0582e8d071f7b3babf749d892f549",
+    "container_image_id": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+    "environment_profile_sha256": "5bfd79ee77bd1d2b889491be59334729d3cd764c3c42fcb472051d1eccc3f039",
+    "native_sha256": "72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741bb1959",
+    "runner_git_commit": "a724694d66ff6566c76b207dd08496369b2067dc",
+    "runner_source_sha256": "8b549b678337ade391ef7b95a3c484413589c6031f3e50998ebe88856ff12164"
+  },
+  "scope": "unrelated-two-step-replay-shakedown-not-scientific-trajectories",
+  "specification_sha256": "c24e7e8f82bcb52061f255f3cd1c6ec17342b611dafea3f5a51421f4a22c9de7",
+  "subscription_cost_usd": null
+}

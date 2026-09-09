@@ -1,0 +1,18 @@
+python=/tmp/alf-e3a-shakedown-xvOD44/venv/bin/python
+Python 3.13.5
+pip-freeze
+-e git+https://github.com/Happypig375/agentic-language-fitness.git@a724694d66ff6566c76b207dd08496369b2067dc#egg=agentic_language_fitness
+certifi==2026.7.22
+charset-normalizer==3.5.1
+idna==3.19
+regex==2026.9.3
+requests==2.34.2
+tiktoken==0.14.0
+urllib3==2.7.0
+head=a724694d66ff6566c76b207dd08496369b2067dc
+native_sha256=72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741bb1959
+catalog_sha256=c18214b1ba88ab9bd164753115324a7a29c0582e8d071f7b3babf749d892f549
+image_identity
+sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116 []
+network_identity
+a21f4952ad3edf2e6551abca91ecef384e81af948aa6f9832d0bbfd1179938bb 172.30.0.0/24 

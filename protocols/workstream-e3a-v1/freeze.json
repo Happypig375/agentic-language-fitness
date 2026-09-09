@@ -1,6 +1,6 @@
 {
   "specification_sha256": "d33b0f7ed317b4f1792ab22bdf82086bb25a11cebf93781aedd6ebfff5701996",
   "policy_sha256": "4c5d1345662555563e054b6124c44195382e93412be9c1e6d8dda7bf503f493f",
-  "shakedown_report": "reports/workstream-e3a-oauth-shakedown-resumed-2026-09-08/attempt-03-report.json",
-  "shakedown_report_sha256": "8a3fa5dca1c3ab1809389db325a86356d10ad538d91b7cb0fc2744df15e414aa"
+  "shakedown_report": "reports/workstream-e3a-oauth-renewal-2026-09-09/shakedown-01-report.json",
+  "shakedown_report_sha256": "516cb4a0e6492a6c7d261923a1ff2511ad6825242e8102bc5c5224928bef4439"
 }
