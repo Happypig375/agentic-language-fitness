@@ -2,7 +2,45 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: bounded H1/H2 design selected (2026-09-09 HKT)
+## Current checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
+
+The user said **"Continue until before execution, then tell what to human review
+before approving execution."** This adopts the bounded workload/controller build,
+authored-input byte limits and finite visible-state H2 policy below. Finish
+model-free implementation, trusted fixture/evaluator checks, independent AI
+review, publication without a PR and exact implementing CI. Return with concrete
+human-review artifacts, source/spec/runner identities and remaining live gates.
+Do not stage OAuth or run a model, count request or experimental candidate.
+The proposed five integration/64 pilot dispatch ceilings remain unallocated.
+
+The [implementation and human-review packet](docs/workstream-h1-h2-implementation-2026-09-09.md)
+now records the bounded controller, both functioning workload levels, source-bound
+paired AI review, 63 affected unit tests, trusted fixture/fault evidence, exact-image
+sandbox checks and 52 exact-native loopback probes. Earlier failed apparatus
+checks remain identifiable. All eight positive workload targets pass; 26 unchanged
+fault variants and two separately replayed corrected variants provide the current
+28-fault evidence. The failed pre-repair aggregate is not relabeled successful.
+
+The common authored-byte caps are **18,432/35,840**. The fixed schedule has 32
+slots/16 pairs, with 28 feasible starts; only Expanded/H1/low is excluded before
+dispatch. H2 read overflow after a start remains a policy outcome. See the
+[specification](protocols/workstream-h1-h2/specification.json),
+[source review](reports/workstream-h1-h2-preexecution-2026-09-09/source-review.md)
+and [retained evidence index](reports/workstream-h1-h2-preexecution-2026-09-09/evidence/index.json).
+Verify the exact implementing publication's Linux/Windows CI before approval.
+
+**Next decision:** human review of workload/idioms, scientific interpretation,
+caps/selection, interaction/scoring/blinding, isolation/provenance and explicit
+allocation. The current `pre-execution-human-review` specification must retain
+false execution/user/human approvals and zero H allocations. Do not stage OAuth,
+invoke a model/count endpoint or begin a pilot in response to an ordinary
+continuation. Approval may cover only the three-planned-call integration (at most
+five), or separately a fixed pilot contingent on matching successful integration
+and freeze (at most 64). No unused E3a balance carries over. This is a human-review
+checkpoint, not a new scientific design question or an authorization inferred
+from tests, hashes or CI.
+
+## Completed checkpoint: H1/H2 design (2026-09-09 HKT)
 
 The user replied **"continuecontinue"** after the completed H0 handoff named
 bounded H1/H2 design as the next step. The [proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md)
@@ -11,12 +49,12 @@ source versus a finite read-only controller policy, and a proposed 32-slot
 feasibility pilot. There is no existing semantic-growth generator to reuse;
 representation renaming and successive maintenance tasks are not size levels.
 
-Current authority is design, review, documentation checks, direct publication and
-exact CI only. The next decision is adoption of its bounded model-free workload/
-controller construction. No new workload implementation or live H is authorized.
-Its proposed 64 pilot/five integration dispatch ceilings are not E3a carryover or
-permission flags. Physical provider counting stays unverified; the narrowed
-authored-byte interpretation and extra H2 turn opportunities are explicit.
+The design was published as `8408cd55d0fea183d56c3ecceec022a7d8505c14`, with
+separate AI review, documentation checks and exact Linux/Windows CI
+`34321797392` passing. The construction adoption above resolves its next decision,
+not live permission. Its proposed 64 pilot/five integration dispatch ceilings are
+not E3a carryover or permission flags. Physical provider counting stays unverified;
+the narrowed authored-byte interpretation and extra H2 turns remain explicit.
 
 ## Completed checkpoint: H0 (2026-09-09 HKT)
 

@@ -2,14 +2,19 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current assignment (2026-09-09 HKT): bounded H1/H2 design.** The user replied
-"continuecontinue" after the H0 handoff named this next step. Read the
-[proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md). Finish its bounded
-design, separate AI review, documentation checks, direct publication and exact
-CI. Return for adoption of the proposed model-free construction scope. The
-proposal's dispatch ceilings are not live authorization; no workload construction,
-OAuth staging, model/count request, candidate execution or new remote layer is
-authorized by this design assignment.
+**Current checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
+The user said "Continue until before execution, then tell what to human review
+before approving execution." This adopts construction of the workloads and finite
+controller in the [proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md),
+including its authored-byte interpretation and H2 memory/turn policy. The bounded
+implementation, trusted workloads, semantic-fault checks, exact-image sandbox and
+52 native loopback probes now have model-free evidence and separate AI review.
+Read the [human-review packet](docs/workstream-h1-h2-implementation-2026-09-09.md).
+Verify CI on the exact implementing publication, not an earlier green check.
+Next is human review and an explicit live-allocation decision, not execution.
+No OAuth staging, live model/count request, experimental candidate execution or
+new remote layer is authorized. The proposed five integration/64 pilot dispatches
+remain unallocated; all H execution flags must stay disabled.
 
 H0 is complete at `6e45e90a0cad34d34448b51eb3cba13e609b7337`; exact Linux/Windows
 CI `34306769616` passed. Its 17 affected tests, independent AI review and five-file
@@ -125,6 +130,8 @@ python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixture
 python scripts/e3a_sandbox_check.py --output results/e3a-sandbox.json
 python scripts/alf.py doctor --strict
 python scripts/h0_check.py --output-dir results/h0-check
+python scripts/h_check.py --output-dir results/h1-h2-check
+python scripts/h_check.py --build-fixtures --output-dir results/h1-h2-fixtures
 ```
 
 e3a_check builds trusted fixtures only; it is not an arbitrary-candidate evaluator. e3a_sandbox_check requires Linux Docker and the exact image; its explicit CI SDK-fixture mode is model-free, non-experimental evidence only. Use checks appropriate to the change and report their actual scope.

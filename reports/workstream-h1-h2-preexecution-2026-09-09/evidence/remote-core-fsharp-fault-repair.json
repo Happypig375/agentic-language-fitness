@@ -1,0 +1,83 @@
+{
+  "baseline_source_sha256": {
+    "OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+    "OrderFlowEngine.fs": "a50ea0e01aedf3e095c6ac50e161823d976b516cb2a724b60a191ec07c1cd829",
+    "Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e"
+  },
+  "candidate_execution": false,
+  "fault": "subtract-overdue",
+  "file": "OrderFlowEngine.fs",
+  "gold_source_sha256": {
+    "OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+    "OrderFlowEngine.fs": "71b06ef968e66879cc33fe2948e6b6943583a73496f08d1d9a4d8553ae51eb96",
+    "Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e"
+  },
+  "model_calls": 0,
+  "mutated_source_sha256": {
+    "OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+    "OrderFlowEngine.fs": "a1bec05ff18719481fbff51c5d91e7ec1981372ec457931f595a3cc912ae1ae3",
+    "Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e"
+  },
+  "oauth_staged": false,
+  "replacement_sha256": "d48199c2fbe08ac9d202fa09990e0e959ad8c12e0fd729804d73caa9cfff7c4d",
+  "result": {
+    "binary_sha256": "63676704c81f15e900c1a9213a8685a3c687f825cbbf91789d689168e377a4f3",
+    "build_passed": true,
+    "category": "development",
+    "operations": [
+      {
+        "build": {
+          "duration_seconds": 3.8961380943655968,
+          "observed_output_bytes": 227,
+          "output_limit_exceeded": false,
+          "returncode": 0,
+          "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+          "stdout": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.47\n",
+          "timed_out": false
+        }
+      },
+      {
+        "program": {
+          "duration_seconds": 0.26778714545071125,
+          "observed_output_bytes": 2796,
+          "output_limit_exceeded": false,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "{\"ids\":[\"a\",\"b\",\"c\"]}\n{\"ids\":[]}\n{\"error\":\"Request was null\"}\n{\"ids\":[\"early\",\"a\",\"z\",\"low\"]}\n{\"ids\":[\"implicit\",\"negative\"]}\n{\"ids\":[\"older\",\"late-high\",\"late-low\"]}\n{\"ids\":[\"before\"]}\n{\"ids\":[\"start\",\"inside\"]}\n{\"ids\":[]}\n{\"ids\":[\"inside\"]}\n{\"ids\":[\"same\",\"inside\"]}\n{\"ids\":[\"high\",\"A\",\"a\",\"z\",\"missing\"]}\n{\"ids\":[]}\n{\"ids\":[\"valid\"]}\n{\"error\":\"asOf is required for atRisk\"}\n{\"error\":\"asOf is required for atRisk\"}\n{\"error\":\"Unknown operation: mystery\"}\n{\"ids\":[\"plat\",\"gold\"]}\n{\"ids\":[]}\n{\"ids\":[]}\n{\"ids\":[\"early\",\"late\"]}\n{\"ids\":[\"A\",\"a\",\"b\"]}\n{\"ids\":[\"old\",\"vip\"]}\n{\"ids\":[\"extra\"]}\n{\"ids\":[]}\n{\"ids\":[]}\n{\"ids\":[\"a\",\"b\"]}\n{\"ids\":[]}\n{\"error\":\"asOf is required for overdue\"}\n{\"error\":\"asOf is required for overdue\"}\n{\"error\":\"asOf is required for atRisk\"}\n{\"error\":\"asOf is required for atRisk\"}\n{\"ids\":[]}\n{\"ids\":[]}\n{\"ids\":[\"r\"]}\n{\"ids\":[]}\n{\"ids\":[]}\n{\"ids\":[\"r\"]}\n{\"ids\":[]}\n{\"ids\":[]}\n{\"ids\":[]}\n{\"ids\":[]}\n{\"ids\":[]}\n{\"ids\":[\"r\"]}\n{\"ids\":[\"a\",\"b\"]}\n{\"id\":\"p\",\"status\":\"processing\"}\n{\"id\":\"p\",\"status\":\"cancelled\"}\n{\"id\":\"p\",\"status\":\"completed\"}\n{\"id\":\"p\",\"status\":\"cancelled\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"id is required for transition\"}\n{\"error\":\"id is required for transition\"}\n{\"error\":\"toStatus is required for transition\"}\n{\"error\":\"toStatus is required for transition\"}\n{\"error\":\"order not found for transition\"}\n{\"error\":\"duplicate order id for transition\"}\n{\"error\":\"order not found for transition\"}\n{\"error\":\"order not found for transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"invalid transition\"}\n{\"error\":\"id is required for transition\"}\n{\"error\":\"toStatus is required for transition\"}\n{\"id\":\"p\",\"status\":\"processing\"}\n{\"id\":\"stateful\",\"status\":\"processing\"}\n{\"id\":\"stateful\",\"status\":\"processing\"}\n{\"ids\":[\"stateful\"]}\n{\"id\":\"p\",\"status\":\"processing\"}\n{\"ids\":[]}\n{\"pending\":0,\"processing\":1,\"completed\":1,\"cancelled\":1,\"overdue\":1}\n{\"pending\":0,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\n{\"pending\":0,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\n{\"pending\":0,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":1}\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\n{\"ids\":[\"p\"]}\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\n{\"ids\":[\"p\"]}\n",
+          "timed_out": false
+        }
+      }
+    ],
+    "output": "  OrderFlow -> /work/bin/Debug/net10.0/OrderFlow.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.47\nAn issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n\nERROR summary status and overdue counts: expected {\"pending\": 1, \"processing\": 1, \"completed\": 1, \"cancelled\": 1, \"overdue\": 1}; received {\"pending\": 0, \"processing\": 1, \"completed\": 1, \"cancelled\": 1, \"overdue\": 1}\nERROR summary strict boundary offsets: expected {\"pending\": 1, \"processing\": 1, \"completed\": 0, \"cancelled\": 0, \"overdue\": 1}; received {\"pending\": 1, \"processing\": 0, \"completed\": 0, \"cancelled\": 0, \"overdue\": 1}",
+    "passed": false,
+    "preparation": {
+      "cache_sha256": "6521113f868a31bf4e0458f40b8b28ab2b6518f16683b9191bd22f4705c0dc3d",
+      "export": {
+        "duration_seconds": 0.10556473210453987,
+        "observed_output_bytes": 0,
+        "output_limit_exceeded": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "",
+        "timed_out": false
+      },
+      "fixture_only": false,
+      "image": "sha256:5d3e97d195dbbe7e47e47055e46f8c6f15fb9553be0c7ef19ed0060756fc7116",
+      "restore": {
+        "duration_seconds": 2.004894256591797,
+        "observed_output_bytes": 182,
+        "output_limit_exceeded": false,
+        "returncode": 0,
+        "stderr": "An issue was encountered verifying workloads. For more information, run \"dotnet workload update\".\n",
+        "stdout": "  Determining projects to restore...\n  Restored /work/OrderFlow.fsproj (in 672 ms).\n",
+        "timed_out": false
+      },
+      "seed_sha256": "8fb509211ce33ce8ee4dc39eaa11c62305cb7be61d0c1cd4787dbe209ea60b20"
+    },
+    "submitted_sha256": "6f3c2dcd8987499aa1327b3a4ec567beb82be2f357f972329d635ff598f5a283"
+  },
+  "scope": "repaired-single-case-core-fsharp-subtract-overdue",
+  "selector_matches": 1,
+  "selector_sha256": "f644f65fcc1f3bfe10a2160f1edfe7c3248fd570718c710197714a50d5f7cf7a",
+  "semantic_caught": true
+}

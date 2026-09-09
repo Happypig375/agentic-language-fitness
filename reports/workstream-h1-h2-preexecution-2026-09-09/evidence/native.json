@@ -1,0 +1,2196 @@
+{
+  "checks": [
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 15832,
+        "sha256": "cf65dcb879d07012f6e8a5eb48ea9f9b06708d7ad33371aed93ec8829891136d"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "37f2e7a1590ea4f02197c326ec1ee23626c5d397aa9512bcae18b2306d2c4fcb"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "37f2e7a1590ea4f02197c326ec1ee23626c5d397aa9512bcae18b2306d2c4fcb"
+        },
+        {
+          "bytes": 15832,
+          "sha256": "cf65dcb879d07012f6e8a5eb48ea9f9b06708d7ad33371aed93ec8829891136d"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 15832,
+        "sha256": "cf65dcb879d07012f6e8a5eb48ea9f9b06708d7ad33371aed93ec8829891136d"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "db3d8c38911f2160a8388e2798ca53982f2e4863373155ad1e055916c82b7168"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "db3d8c38911f2160a8388e2798ca53982f2e4863373155ad1e055916c82b7168"
+        },
+        {
+          "bytes": 15832,
+          "sha256": "cf65dcb879d07012f6e8a5eb48ea9f9b06708d7ad33371aed93ec8829891136d"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 8647,
+        "sha256": "5643a31b59ad541402de4e3e8b01651aa21b500ec4621cc32e1a395ee328a134"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "b5aefc32e0c82d7871b63fa7bf7fd16259e941f02192411691280af4325ab8b4"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "b5aefc32e0c82d7871b63fa7bf7fd16259e941f02192411691280af4325ab8b4"
+        },
+        {
+          "bytes": 8647,
+          "sha256": "5643a31b59ad541402de4e3e8b01651aa21b500ec4621cc32e1a395ee328a134"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 8647,
+        "sha256": "5643a31b59ad541402de4e3e8b01651aa21b500ec4621cc32e1a395ee328a134"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "acdeaeb2ed95da43663915a941dc2805d95e830a9da8bbf7cf38c703befc55a7"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "acdeaeb2ed95da43663915a941dc2805d95e830a9da8bbf7cf38c703befc55a7"
+        },
+        {
+          "bytes": 8647,
+          "sha256": "5643a31b59ad541402de4e3e8b01651aa21b500ec4621cc32e1a395ee328a134"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16418,
+        "sha256": "c5551235ae9dff0019d62e85d41e9ee06e798fb286387af36fac37f7b149bb70"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "ffcd1f8f06f308ea2bd6d648a0549b5e9dfb4832851848da185378f233061498"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "ffcd1f8f06f308ea2bd6d648a0549b5e9dfb4832851848da185378f233061498"
+        },
+        {
+          "bytes": 16418,
+          "sha256": "c5551235ae9dff0019d62e85d41e9ee06e798fb286387af36fac37f7b149bb70"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16418,
+        "sha256": "c5551235ae9dff0019d62e85d41e9ee06e798fb286387af36fac37f7b149bb70"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "7aa1afc8072ef04653602f64da66799641154dac6e25d8507833594102787a2f"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "7aa1afc8072ef04653602f64da66799641154dac6e25d8507833594102787a2f"
+        },
+        {
+          "bytes": 16418,
+          "sha256": "c5551235ae9dff0019d62e85d41e9ee06e798fb286387af36fac37f7b149bb70"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 15832,
+        "sha256": "0b25890d6f893751d2a7ddfb205e332245794543144865f0162c267d62405532"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "3f82b8ff9716079245868b09b9914edfd22843c57fba9f1d74453bbd99fe745b"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "3f82b8ff9716079245868b09b9914edfd22843c57fba9f1d74453bbd99fe745b"
+        },
+        {
+          "bytes": 15832,
+          "sha256": "0b25890d6f893751d2a7ddfb205e332245794543144865f0162c267d62405532"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 15832,
+        "sha256": "0b25890d6f893751d2a7ddfb205e332245794543144865f0162c267d62405532"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "a822eb495d5b1c9f199941fae61ba40c14d2a022b5c63ddc66b2d43995aeb2cd"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "a822eb495d5b1c9f199941fae61ba40c14d2a022b5c63ddc66b2d43995aeb2cd"
+        },
+        {
+          "bytes": 15832,
+          "sha256": "0b25890d6f893751d2a7ddfb205e332245794543144865f0162c267d62405532"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 8647,
+        "sha256": "a09c8b48663c7f1d541fdb2bfa6598702ace05c62b174847b1427dd6c5ec0e93"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "e1d28af078bcddcfa0e8bc353692af872ba80afec4dbadf07546da6815d85653"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "e1d28af078bcddcfa0e8bc353692af872ba80afec4dbadf07546da6815d85653"
+        },
+        {
+          "bytes": 8647,
+          "sha256": "a09c8b48663c7f1d541fdb2bfa6598702ace05c62b174847b1427dd6c5ec0e93"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 8647,
+        "sha256": "a09c8b48663c7f1d541fdb2bfa6598702ace05c62b174847b1427dd6c5ec0e93"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "d4190216b7296b75d6551ab6ff2ba334c5f55b2507d2d4736dcfb9778d122624"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "d4190216b7296b75d6551ab6ff2ba334c5f55b2507d2d4736dcfb9778d122624"
+        },
+        {
+          "bytes": 8647,
+          "sha256": "a09c8b48663c7f1d541fdb2bfa6598702ace05c62b174847b1427dd6c5ec0e93"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16418,
+        "sha256": "73b08fadb4f9639bf44fcd24a0c81b12f16d7f8ad7f24de88353823dfb333df4"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "a6557b5c0e20aa4f3857bf175032a8e8aa0ae79484116a37459d057ec2f54911"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "a6557b5c0e20aa4f3857bf175032a8e8aa0ae79484116a37459d057ec2f54911"
+        },
+        {
+          "bytes": 16418,
+          "sha256": "73b08fadb4f9639bf44fcd24a0c81b12f16d7f8ad7f24de88353823dfb333df4"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16418,
+        "sha256": "73b08fadb4f9639bf44fcd24a0c81b12f16d7f8ad7f24de88353823dfb333df4"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "9d8bfdebc026987076bff495c78876fbf7147781fb5d94a1fe06175e0694db35"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "9d8bfdebc026987076bff495c78876fbf7147781fb5d94a1fe06175e0694db35"
+        },
+        {
+          "bytes": 16418,
+          "sha256": "73b08fadb4f9639bf44fcd24a0c81b12f16d7f8ad7f24de88353823dfb333df4"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 15621,
+        "sha256": "159cb1fcaaabb1efbab1a278d57564f9d5519b3d9cf49501b33f4757b50f1e29"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "5675ba173e2253649479d151b2f7586467ef6999e54ec3b040e4758eae2151ac"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "5675ba173e2253649479d151b2f7586467ef6999e54ec3b040e4758eae2151ac"
+        },
+        {
+          "bytes": 15621,
+          "sha256": "159cb1fcaaabb1efbab1a278d57564f9d5519b3d9cf49501b33f4757b50f1e29"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 15621,
+        "sha256": "159cb1fcaaabb1efbab1a278d57564f9d5519b3d9cf49501b33f4757b50f1e29"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "66796d0197ba8951fc24d3c072cfc29b4f52ae535d8bac0e4ae5c17a41d1018d"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "66796d0197ba8951fc24d3c072cfc29b4f52ae535d8bac0e4ae5c17a41d1018d"
+        },
+        {
+          "bytes": 15621,
+          "sha256": "159cb1fcaaabb1efbab1a278d57564f9d5519b3d9cf49501b33f4757b50f1e29"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 8647,
+        "sha256": "92c188bc3d3ac077f90df50cb00fda1aea7fe81ce3a8a839afb6ec95a1cd7861"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "8a2a5ddc02d809796fdb2d81ed2be747f8c50dc8cdcd386aa794f1a32f3d0fa5"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "8a2a5ddc02d809796fdb2d81ed2be747f8c50dc8cdcd386aa794f1a32f3d0fa5"
+        },
+        {
+          "bytes": 8647,
+          "sha256": "92c188bc3d3ac077f90df50cb00fda1aea7fe81ce3a8a839afb6ec95a1cd7861"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 8647,
+        "sha256": "92c188bc3d3ac077f90df50cb00fda1aea7fe81ce3a8a839afb6ec95a1cd7861"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "f9f6b3ccbd9aaf980c81f301f45b84bd9bc1e874f7e1925ce2eda21d2b73b7ef"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "f9f6b3ccbd9aaf980c81f301f45b84bd9bc1e874f7e1925ce2eda21d2b73b7ef"
+        },
+        {
+          "bytes": 8647,
+          "sha256": "92c188bc3d3ac077f90df50cb00fda1aea7fe81ce3a8a839afb6ec95a1cd7861"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16207,
+        "sha256": "05a6d438ef424f19202b342209bab74f1664b58b2dade4e7355be14c041fc80d"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "b499b80d1307af59df6fb1a87b685a9c67a4cf7ff52fda8452afac72e218ef91"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "b499b80d1307af59df6fb1a87b685a9c67a4cf7ff52fda8452afac72e218ef91"
+        },
+        {
+          "bytes": 16207,
+          "sha256": "05a6d438ef424f19202b342209bab74f1664b58b2dade4e7355be14c041fc80d"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16207,
+        "sha256": "05a6d438ef424f19202b342209bab74f1664b58b2dade4e7355be14c041fc80d"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "d764eb9d98d0a48c284a67875d9c8f70367dd7c4e0e3c6fb56d54ce630cbc775"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "d764eb9d98d0a48c284a67875d9c8f70367dd7c4e0e3c6fb56d54ce630cbc775"
+        },
+        {
+          "bytes": 16207,
+          "sha256": "05a6d438ef424f19202b342209bab74f1664b58b2dade4e7355be14c041fc80d"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 15621,
+        "sha256": "4415d0b0a73812612d3dcaa2d80006e3cc50ab5e6f522ce0702e9263c7479d5d"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "ddecf1cce6d7408320097454c9001143aff3b2cfc5cc11236b460bcea8890c88"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "ddecf1cce6d7408320097454c9001143aff3b2cfc5cc11236b460bcea8890c88"
+        },
+        {
+          "bytes": 15621,
+          "sha256": "4415d0b0a73812612d3dcaa2d80006e3cc50ab5e6f522ce0702e9263c7479d5d"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 15621,
+        "sha256": "4415d0b0a73812612d3dcaa2d80006e3cc50ab5e6f522ce0702e9263c7479d5d"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "b1b8df3574456ee6f2ee8409bb8136b1b42df9206bcffc1df8816ece351cefb0"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "b1b8df3574456ee6f2ee8409bb8136b1b42df9206bcffc1df8816ece351cefb0"
+        },
+        {
+          "bytes": 15621,
+          "sha256": "4415d0b0a73812612d3dcaa2d80006e3cc50ab5e6f522ce0702e9263c7479d5d"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 8647,
+        "sha256": "de0e38d0c8f1a87a097ada3c9384eec935a56aeafc5be103c804b6ca4792b9eb"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "72d496faf264ef073005ffe01efd4e8a50f7adbe4df5be63d7d334c19e62f49a"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "72d496faf264ef073005ffe01efd4e8a50f7adbe4df5be63d7d334c19e62f49a"
+        },
+        {
+          "bytes": 8647,
+          "sha256": "de0e38d0c8f1a87a097ada3c9384eec935a56aeafc5be103c804b6ca4792b9eb"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 8647,
+        "sha256": "de0e38d0c8f1a87a097ada3c9384eec935a56aeafc5be103c804b6ca4792b9eb"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "19b117d5967b527942cb0dae0dd1b2f8599afccaed34b38982f5228060435cf3"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "19b117d5967b527942cb0dae0dd1b2f8599afccaed34b38982f5228060435cf3"
+        },
+        {
+          "bytes": 8647,
+          "sha256": "de0e38d0c8f1a87a097ada3c9384eec935a56aeafc5be103c804b6ca4792b9eb"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16207,
+        "sha256": "e70a5df5d6403d63f2fee3d27ed537333fd6e8cca3b4d70ccb900c928fd96619"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "158fa1b063af0071ae779a4e72b0cb51c5fdc86d4d14c4a8aa7daef77ff19c19"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "158fa1b063af0071ae779a4e72b0cb51c5fdc86d4d14c4a8aa7daef77ff19c19"
+        },
+        {
+          "bytes": 16207,
+          "sha256": "e70a5df5d6403d63f2fee3d27ed537333fd6e8cca3b4d70ccb900c928fd96619"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16207,
+        "sha256": "e70a5df5d6403d63f2fee3d27ed537333fd6e8cca3b4d70ccb900c928fd96619"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "core",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "e5a9a4381d9b9511b4f12c67e40a29dbd664c4d8e2038cbe016aa498f53f0fbb"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "e5a9a4381d9b9511b4f12c67e40a29dbd664c4d8e2038cbe016aa498f53f0fbb"
+        },
+        {
+          "bytes": 16207,
+          "sha256": "e70a5df5d6403d63f2fee3d27ed537333fd6e8cca3b4d70ccb900c928fd96619"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 33116,
+        "sha256": "31bc44ab6d339a48ab29aaade3bfeabe0825fd5f797650df02c00f49bee8ccb6"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "f382d09fb5d9438cd0ca55d74efde96f0ff704be79072337da0bfc64f3f527c7"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "f382d09fb5d9438cd0ca55d74efde96f0ff704be79072337da0bfc64f3f527c7"
+        },
+        {
+          "bytes": 33116,
+          "sha256": "31bc44ab6d339a48ab29aaade3bfeabe0825fd5f797650df02c00f49bee8ccb6"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 33116,
+        "sha256": "31bc44ab6d339a48ab29aaade3bfeabe0825fd5f797650df02c00f49bee8ccb6"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "753b0ead0202ee00adfd6f19ebe1b4c56dbe13d6e1b3d6f7dabdce28e46aed46"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "753b0ead0202ee00adfd6f19ebe1b4c56dbe13d6e1b3d6f7dabdce28e46aed46"
+        },
+        {
+          "bytes": 33116,
+          "sha256": "31bc44ab6d339a48ab29aaade3bfeabe0825fd5f797650df02c00f49bee8ccb6"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16327,
+        "sha256": "e32fec2d80afc9ef824e1e01c3428ac612a43264965bef5e3e49e01ca8cdb9ea"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "8e06267251fbdba12a746cb8de0e48fa07559ce19416c798633e8ff72c5a6fd1"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "8e06267251fbdba12a746cb8de0e48fa07559ce19416c798633e8ff72c5a6fd1"
+        },
+        {
+          "bytes": 16327,
+          "sha256": "e32fec2d80afc9ef824e1e01c3428ac612a43264965bef5e3e49e01ca8cdb9ea"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16327,
+        "sha256": "e32fec2d80afc9ef824e1e01c3428ac612a43264965bef5e3e49e01ca8cdb9ea"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "09d8196de3ab2445dd00c15bb4a69c2718ce597157093799b3df9dc22fa7115d"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "09d8196de3ab2445dd00c15bb4a69c2718ce597157093799b3df9dc22fa7115d"
+        },
+        {
+          "bytes": 16327,
+          "sha256": "e32fec2d80afc9ef824e1e01c3428ac612a43264965bef5e3e49e01ca8cdb9ea"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 32938,
+        "sha256": "99171347910bd4b801c5aec7e2b3b0134d9158f8662fe2475afd93dc905dd95e"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "1c985535c973d779e72a26f23d60b1c3a48078990ad5561268b6dbe665f466f7"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "1c985535c973d779e72a26f23d60b1c3a48078990ad5561268b6dbe665f466f7"
+        },
+        {
+          "bytes": 32938,
+          "sha256": "99171347910bd4b801c5aec7e2b3b0134d9158f8662fe2475afd93dc905dd95e"
+        }
+      ],
+      "passed": true,
+      "phase": "read",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 32938,
+        "sha256": "99171347910bd4b801c5aec7e2b3b0134d9158f8662fe2475afd93dc905dd95e"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "077648dea2c7aeec568038f926f8b0936aa4826ab8bd75f57eea6d786b745773"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "077648dea2c7aeec568038f926f8b0936aa4826ab8bd75f57eea6d786b745773"
+        },
+        {
+          "bytes": 32938,
+          "sha256": "99171347910bd4b801c5aec7e2b3b0134d9158f8662fe2475afd93dc905dd95e"
+        }
+      ],
+      "passed": true,
+      "phase": "read",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 34163,
+        "sha256": "f45e46c9c017c207168f49e79db45ce9f8b2f6ecbb69ce3d77e496d806730b6f"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "11a5d1929bcaf8526c59f77f571b924519c5fa8d98cfe803c216b3262ac40486"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "11a5d1929bcaf8526c59f77f571b924519c5fa8d98cfe803c216b3262ac40486"
+        },
+        {
+          "bytes": 34163,
+          "sha256": "f45e46c9c017c207168f49e79db45ce9f8b2f6ecbb69ce3d77e496d806730b6f"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 2,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 34163,
+        "sha256": "f45e46c9c017c207168f49e79db45ce9f8b2f6ecbb69ce3d77e496d806730b6f"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "db075ed9b087c32c4d2c6f3e31c06c516b03b3184db83a8b2125841690cdb3c5"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "db075ed9b087c32c4d2c6f3e31c06c516b03b3184db83a8b2125841690cdb3c5"
+        },
+        {
+          "bytes": 34163,
+          "sha256": "f45e46c9c017c207168f49e79db45ce9f8b2f6ecbb69ce3d77e496d806730b6f"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 2,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 33116,
+        "sha256": "8a096a66522bdbf7c96ca71e0888b47af0c9c2bc29519cc07ef7dc758d4ec127"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "bf29e94dde80197f74cc7b06694d98ad64f9dac086e33e519910a953ea96ab92"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "bf29e94dde80197f74cc7b06694d98ad64f9dac086e33e519910a953ea96ab92"
+        },
+        {
+          "bytes": 33116,
+          "sha256": "8a096a66522bdbf7c96ca71e0888b47af0c9c2bc29519cc07ef7dc758d4ec127"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 33116,
+        "sha256": "8a096a66522bdbf7c96ca71e0888b47af0c9c2bc29519cc07ef7dc758d4ec127"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "c90d5eac196788ee34d01a20683fa07eb04e22bec1779b25b12758e80435294f"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "c90d5eac196788ee34d01a20683fa07eb04e22bec1779b25b12758e80435294f"
+        },
+        {
+          "bytes": 33116,
+          "sha256": "8a096a66522bdbf7c96ca71e0888b47af0c9c2bc29519cc07ef7dc758d4ec127"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16327,
+        "sha256": "4548b17b5970fb802da14d3f70a8405727b03cda829730d89a9c60e906f95782"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "d0498b9f9d11ab3212af6b9680f17ca3444c81d61fb03f6d7c1e740c2fa17bce"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "d0498b9f9d11ab3212af6b9680f17ca3444c81d61fb03f6d7c1e740c2fa17bce"
+        },
+        {
+          "bytes": 16327,
+          "sha256": "4548b17b5970fb802da14d3f70a8405727b03cda829730d89a9c60e906f95782"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16327,
+        "sha256": "4548b17b5970fb802da14d3f70a8405727b03cda829730d89a9c60e906f95782"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "adabb0150c934575e3e80f06db31affb1615ffafe2395a7307a4b967231ffbae"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "adabb0150c934575e3e80f06db31affb1615ffafe2395a7307a4b967231ffbae"
+        },
+        {
+          "bytes": 16327,
+          "sha256": "4548b17b5970fb802da14d3f70a8405727b03cda829730d89a9c60e906f95782"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 33614,
+        "sha256": "5e0dae4470a75769b832f357ceba30ca0094fdd2d5812d6f22f8ea0d658d2207"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "3a3f7b42d5f4727b2c0491dcf4fc9d7f61c63f054f5933dc8b3fa6c3b994d2a3"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "3a3f7b42d5f4727b2c0491dcf4fc9d7f61c63f054f5933dc8b3fa6c3b994d2a3"
+        },
+        {
+          "bytes": 33614,
+          "sha256": "5e0dae4470a75769b832f357ceba30ca0094fdd2d5812d6f22f8ea0d658d2207"
+        }
+      ],
+      "passed": true,
+      "phase": "read",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 33614,
+        "sha256": "5e0dae4470a75769b832f357ceba30ca0094fdd2d5812d6f22f8ea0d658d2207"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "8a5f58423bae06145b4e0a3e9d3460ade3add4beeea74b09fbf595c4624fa395"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "8a5f58423bae06145b4e0a3e9d3460ade3add4beeea74b09fbf595c4624fa395"
+        },
+        {
+          "bytes": 33614,
+          "sha256": "5e0dae4470a75769b832f357ceba30ca0094fdd2d5812d6f22f8ea0d658d2207"
+        }
+      ],
+      "passed": true,
+      "phase": "read",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 34163,
+        "sha256": "b5d19fe91263157345cc24c96c33ce6b23220406dcce7d52434e37592de0a09c"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "319f424ee56226f92579db9c6dc7df98bc16547be0dd5b94efb85796362feca6"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "319f424ee56226f92579db9c6dc7df98bc16547be0dd5b94efb85796362feca6"
+        },
+        {
+          "bytes": 34163,
+          "sha256": "b5d19fe91263157345cc24c96c33ce6b23220406dcce7d52434e37592de0a09c"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 2,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 34163,
+        "sha256": "b5d19fe91263157345cc24c96c33ce6b23220406dcce7d52434e37592de0a09c"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "csharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "0f0ff1e163ba4e2e2e34f3fe92fba62008a5e677da8b4beec06b3cfad301b13d"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "0f0ff1e163ba4e2e2e34f3fe92fba62008a5e677da8b4beec06b3cfad301b13d"
+        },
+        {
+          "bytes": 34163,
+          "sha256": "b5d19fe91263157345cc24c96c33ce6b23220406dcce7d52434e37592de0a09c"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 2,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 31630,
+        "sha256": "7402e9fa96dd3ed0f6f18442d8ecc057d588c902193668ebe9a53844cb54536a"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "6c5a2a3328d98a268f5ca94200e21f956e16fca4184b9f7077b37cccdd360fb8"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "6c5a2a3328d98a268f5ca94200e21f956e16fca4184b9f7077b37cccdd360fb8"
+        },
+        {
+          "bytes": 31630,
+          "sha256": "7402e9fa96dd3ed0f6f18442d8ecc057d588c902193668ebe9a53844cb54536a"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 31630,
+        "sha256": "7402e9fa96dd3ed0f6f18442d8ecc057d588c902193668ebe9a53844cb54536a"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "32adf8a77b23f1cc53e08f0c72a6339dd7cec8134f2ef978613e386b35ba4729"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "32adf8a77b23f1cc53e08f0c72a6339dd7cec8134f2ef978613e386b35ba4729"
+        },
+        {
+          "bytes": 31630,
+          "sha256": "7402e9fa96dd3ed0f6f18442d8ecc057d588c902193668ebe9a53844cb54536a"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16213,
+        "sha256": "3879a385fa4b986dc1fb219d5966a67c338ecaeb1ed602f79b244191ebf57454"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "40ba247816adfc39bdcc8641b9c8f436c2a5e4109a5f2873f8cca8e7d2f51245"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "40ba247816adfc39bdcc8641b9c8f436c2a5e4109a5f2873f8cca8e7d2f51245"
+        },
+        {
+          "bytes": 16213,
+          "sha256": "3879a385fa4b986dc1fb219d5966a67c338ecaeb1ed602f79b244191ebf57454"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16213,
+        "sha256": "3879a385fa4b986dc1fb219d5966a67c338ecaeb1ed602f79b244191ebf57454"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "73e799da0dd8eaefdb63d1f0dbe2fbb53a4a781dfd797732519f1a2ca8d839bf"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "73e799da0dd8eaefdb63d1f0dbe2fbb53a4a781dfd797732519f1a2ca8d839bf"
+        },
+        {
+          "bytes": 16213,
+          "sha256": "3879a385fa4b986dc1fb219d5966a67c338ecaeb1ed602f79b244191ebf57454"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 32406,
+        "sha256": "2107e779dea6a7dd9051f685ac27a5f8fd204cfb738486261bdf879f01a239ef"
+      },
+      "file_order": "forward",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "0d479c3f4d61bcbe536eeedd6abe174ce77c2fc622d0cb158b1319f21dc48fe7"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "0d479c3f4d61bcbe536eeedd6abe174ce77c2fc622d0cb158b1319f21dc48fe7"
+        },
+        {
+          "bytes": 32406,
+          "sha256": "2107e779dea6a7dd9051f685ac27a5f8fd204cfb738486261bdf879f01a239ef"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 32406,
+        "sha256": "2107e779dea6a7dd9051f685ac27a5f8fd204cfb738486261bdf879f01a239ef"
+      },
+      "file_order": "forward",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "64f41a26bd8059938c934f00cfa7e9eb907e37c197f670d7abb20802089dcc0f"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "64f41a26bd8059938c934f00cfa7e9eb907e37c197f670d7abb20802089dcc0f"
+        },
+        {
+          "bytes": 32406,
+          "sha256": "2107e779dea6a7dd9051f685ac27a5f8fd204cfb738486261bdf879f01a239ef"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 31630,
+        "sha256": "6bfa1c73452e06e8a464986e49d6ea8db4df9445102f2adbf8f2c78854904614"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "8d26629c8193db9f1eeb106948be9e597eed822e1ca49862500f28689c24330c"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "8d26629c8193db9f1eeb106948be9e597eed822e1ca49862500f28689c24330c"
+        },
+        {
+          "bytes": 31630,
+          "sha256": "6bfa1c73452e06e8a464986e49d6ea8db4df9445102f2adbf8f2c78854904614"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H1",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 31630,
+        "sha256": "6bfa1c73452e06e8a464986e49d6ea8db4df9445102f2adbf8f2c78854904614"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "951b6cd30ca3fbfbf08849e0fcb36bd79dfd9e494abb5dbd750557599dab3866"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "951b6cd30ca3fbfbf08849e0fcb36bd79dfd9e494abb5dbd750557599dab3866"
+        },
+        {
+          "bytes": 31630,
+          "sha256": "6bfa1c73452e06e8a464986e49d6ea8db4df9445102f2adbf8f2c78854904614"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16213,
+        "sha256": "ee3b709cb0dede2d21a25ed6f6901e0f2ded116f7c154c02609d222936c7c35a"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "3971ef0e45cbb3c5f458ab28d27ca91f75001f74090f23020db01477b9d31ae1"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "3971ef0e45cbb3c5f458ab28d27ca91f75001f74090f23020db01477b9d31ae1"
+        },
+        {
+          "bytes": 16213,
+          "sha256": "ee3b709cb0dede2d21a25ed6f6901e0f2ded116f7c154c02609d222936c7c35a"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 16213,
+        "sha256": "ee3b709cb0dede2d21a25ed6f6901e0f2ded116f7c154c02609d222936c7c35a"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "cc62f4793cb97fbae0816eb586f00df506514e8d79f68bd94ffde7ad3041fcba"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "cc62f4793cb97fbae0816eb586f00df506514e8d79f68bd94ffde7ad3041fcba"
+        },
+        {
+          "bytes": 16213,
+          "sha256": "ee3b709cb0dede2d21a25ed6f6901e0f2ded116f7c154c02609d222936c7c35a"
+        }
+      ],
+      "passed": true,
+      "phase": "initial",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 0,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 32406,
+        "sha256": "d7eb7f6bc58a4ceaf9c9ff835e079638a6c26857a70e87685b9e1fb3b75974ae"
+      },
+      "file_order": "reverse",
+      "fixture": "baseline",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "2a9969fee0438557e32b3759ae7119278892e4dcb2b7ca30ad84abb50acb1b33"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "2a9969fee0438557e32b3759ae7119278892e4dcb2b7ca30ad84abb50acb1b33"
+        },
+        {
+          "bytes": 32406,
+          "sha256": "d7eb7f6bc58a4ceaf9c9ff835e079638a6c26857a70e87685b9e1fb3b75974ae"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 0,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    },
+    {
+      "access": "H2",
+      "candidate_model_calls": 0,
+      "canonical_occurrences": 1,
+      "expected": {
+        "bytes": 32406,
+        "sha256": "d7eb7f6bc58a4ceaf9c9ff835e079638a6c26857a70e87685b9e1fb3b75974ae"
+      },
+      "file_order": "reverse",
+      "fixture": "tool-call",
+      "gate_violations": [],
+      "language": "fsharp",
+      "level": "expanded",
+      "native_added_user_message_count": 1,
+      "native_added_user_messages": [
+        {
+          "bytes": 888,
+          "sha256": "de4845dfe1602a8ce5e02d917e1c2f571928ffe4c1756d4c4e69eaab8fce7730"
+        }
+      ],
+      "no_tools_verified": false,
+      "observed": [
+        {
+          "bytes": 888,
+          "sha256": "de4845dfe1602a8ce5e02d917e1c2f571928ffe4c1756d4c4e69eaab8fce7730"
+        },
+        {
+          "bytes": 32406,
+          "sha256": "d7eb7f6bc58a4ceaf9c9ff835e079638a6c26857a70e87685b9e1fb3b75974ae"
+        }
+      ],
+      "passed": true,
+      "phase": "final",
+      "probe_passed": true,
+      "real_provider_http_calls": 0,
+      "request_count": 1,
+      "request_index": 1,
+      "returncode": 1,
+      "safety_error": null,
+      "text_match": true,
+      "total_post_attempts": 1
+    }
+  ],
+  "expected_native_sha256": "72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741bb1959",
+  "external_provider_requests": 0,
+  "failures": [],
+  "native_sha256": "72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741bb1959",
+  "oauth_staged": false,
+  "provider_context_limit": null,
+  "status": "passed",
+  "subscription_usd": null
+}

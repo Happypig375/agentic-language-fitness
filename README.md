@@ -10,7 +10,7 @@ ALF investigates how programming-language implementation, model configuration, a
 
 The [reproducible descriptive report](reports/workstream-e3a-oauth-renewal-2026-09-09/analysis.md) finds first completion of **6/12 F# and 11/12 C#**, with **12/12 terminal completion in each language** after permitted repairs and a source-bound AI architecture-review addendum. F# used seven repair dispatches versus one for C#. Raw missing-review scores remain unchanged; the report includes all failures and separates initial, repair and total resources.
 
-**Current work:** the [bounded H1/H2 proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md) compares supplied source with selective file reads under explicit software byte budgets. It proposes one functioning workload extension, not padding or a new agent framework; construction and live collection are not yet authorized. The completed [H0 audit](docs/workstream-h0-preparation-2026-09-09.md) has 17 passing tests and byte-identical Linux/Windows artifacts. Neither H0 nor the proposal establishes a physical context-capacity advantage for either language.
+**Current work:** [H1/H2 construction and pre-execution review](docs/workstream-h1-h2-implementation-2026-09-09.md) implements the adopted comparison of supplied source with selective file reads under software byte budgets. It adds one functioning workload extension; live collection and OAuth staging remain disabled pending human review and separate approval. The completed [H0 audit](docs/workstream-h0-preparation-2026-09-09.md) has 17 passing tests and byte-identical Linux/Windows artifacts. These byte budgets do not establish a physical context-capacity advantage for either language.
 
 The adopted [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) uses the existing **local OAuth-backed Codex** route, a pinned no-tools native client and isolated remote evaluation. The successful shakedown, exact runner/image identities, full attempt journals and temporary-credential cleanup are retained in the [execution record](docs/workstream-e3a-oauth-renewal-2026-09-09.md). Earlier failed attempts remain unchanged and separately charged. Further live batches require their own authorization; unused allowance is not permission to expand the sample.
 
@@ -51,6 +51,12 @@ python scripts/alf.py summarize results/pilot
 ```
 
 The scripted adapter copies gold snapshots to validate machinery without a model request. Its passing results are not coding-agent performance. E3a has separate mock/controller and sandbox checks; the generic commands above do not launch its explicitly gated OAuth pilot.
+
+For the H1/H2 pre-execution packet, `python scripts/h_check.py --output-dir
+results/h-review` writes the source identities, counted request examples, derived
+caps and fixed feasibility schedule. Add `--build-fixtures` to build the trusted
+predecessors, gold and named semantic faults. Use a fresh output directory each
+time. Neither command makes a model request; the live runner is disabled.
 
 ## Real agents and remote execution
 

@@ -1,0 +1,72 @@
+{
+  "caught": true,
+  "fault": "subtract-overdue",
+  "mutation": {
+    "file": "OrderFlowEngine.fs",
+    "new_sha256": "d48199c2fbe08ac9d202fa09990e0e959ad8c12e0fd729804d73caa9cfff7c4d",
+    "old_sha256": "f644f65fcc1f3bfe10a2160f1edfe7c3248fd570718c710197714a50d5f7cf7a"
+  },
+  "result": {
+    "build": {
+      "overflow": false,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "  Determining projects to restore...\r\n  Restored C:\\Users\\hadri\\AppData\\Local\\Temp\\alf-h-fixture-7v2bk21_\\OrderFlow.fsproj (in 634 ms).\r\n  OrderFlow -> C:\\Users\\hadri\\AppData\\Local\\Temp\\alf-h-fixture-7v2bk21_\\bin\\Debug\\net10.0\\OrderFlow.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:05.71\r\n",
+      "timed_out": false
+    },
+    "case_count": 90,
+    "category": "semantic",
+    "differences": [
+      {
+        "actual": {
+          "cancelled": 1,
+          "completed": 1,
+          "overdue": 1,
+          "pending": 0,
+          "processing": 1
+        },
+        "expected": {
+          "cancelled": 1,
+          "completed": 1,
+          "overdue": 1,
+          "pending": 1,
+          "processing": 1
+        },
+        "index": 79,
+        "name": "summary status and overdue counts"
+      },
+      {
+        "actual": {
+          "cancelled": 0,
+          "completed": 0,
+          "overdue": 1,
+          "pending": 1,
+          "processing": 0
+        },
+        "expected": {
+          "cancelled": 0,
+          "completed": 0,
+          "overdue": 1,
+          "pending": 1,
+          "processing": 1
+        },
+        "index": 84,
+        "name": "summary strict boundary offsets"
+      }
+    ],
+    "passed": false,
+    "runtime": {
+      "overflow": false,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"ids\":[\"a\",\"b\",\"c\"]}\r\n{\"ids\":[]}\r\n{\"error\":\"Request was null\"}\r\n{\"ids\":[\"early\",\"a\",\"z\",\"low\"]}\r\n{\"ids\":[\"implicit\",\"negative\"]}\r\n{\"ids\":[\"older\",\"late-high\",\"late-low\"]}\r\n{\"ids\":[\"before\"]}\r\n{\"ids\":[\"start\",\"inside\"]}\r\n{\"ids\":[]}\r\n{\"ids\":[\"inside\"]}\r\n{\"ids\":[\"same\",\"inside\"]}\r\n{\"ids\":[\"high\",\"A\",\"a\",\"z\",\"missing\"]}\r\n{\"ids\":[]}\r\n{\"ids\":[\"valid\"]}\r\n{\"error\":\"asOf is required for atRisk\"}\r\n{\"error\":\"asOf is required for atRisk\"}\r\n{\"error\":\"Unknown operation: mystery\"}\r\n{\"ids\":[\"plat\",\"gold\"]}\r\n{\"ids\":[]}\r\n{\"ids\":[]}\r\n{\"ids\":[\"early\",\"late\"]}\r\n{\"ids\":[\"A\",\"a\",\"b\"]}\r\n{\"ids\":[\"old\",\"vip\"]}\r\n{\"ids\":[\"extra\"]}\r\n{\"ids\":[]}\r\n{\"ids\":[]}\r\n{\"ids\":[\"a\",\"b\"]}\r\n{\"ids\":[]}\r\n{\"error\":\"asOf is required for overdue\"}\r\n{\"error\":\"asOf is required for overdue\"}\r\n{\"error\":\"asOf is required for atRisk\"}\r\n{\"error\":\"asOf is required for atRisk\"}\r\n{\"ids\":[]}\r\n{\"ids\":[]}\r\n{\"ids\":[\"r\"]}\r\n{\"ids\":[]}\r\n{\"ids\":[]}\r\n{\"ids\":[\"r\"]}\r\n{\"ids\":[]}\r\n{\"ids\":[]}\r\n{\"ids\":[]}\r\n{\"ids\":[]}\r\n{\"ids\":[]}\r\n{\"ids\":[\"r\"]}\r\n{\"ids\":[\"a\",\"b\"]}\r\n{\"id\":\"p\",\"status\":\"processing\"}\r\n{\"id\":\"p\",\"status\":\"cancelled\"}\r\n{\"id\":\"p\",\"status\":\"completed\"}\r\n{\"id\":\"p\",\"status\":\"cancelled\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"id is required for transition\"}\r\n{\"error\":\"id is required for transition\"}\r\n{\"error\":\"toStatus is required for transition\"}\r\n{\"error\":\"toStatus is required for transition\"}\r\n{\"error\":\"order not found for transition\"}\r\n{\"error\":\"duplicate order id for transition\"}\r\n{\"error\":\"order not found for transition\"}\r\n{\"error\":\"order not found for transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"invalid transition\"}\r\n{\"error\":\"id is required for transition\"}\r\n{\"error\":\"toStatus is required for transition\"}\r\n{\"id\":\"p\",\"status\":\"processing\"}\r\n{\"id\":\"stateful\",\"status\":\"processing\"}\r\n{\"id\":\"stateful\",\"status\":\"processing\"}\r\n{\"ids\":[\"stateful\"]}\r\n{\"id\":\"p\",\"status\":\"processing\"}\r\n{\"ids\":[]}\r\n{\"pending\":0,\"processing\":1,\"completed\":1,\"cancelled\":1,\"overdue\":1}\r\n{\"pending\":0,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\r\n{\"pending\":0,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\r\n{\"pending\":0,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\r\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\r\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":1}\r\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\r\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\r\n{\"ids\":[\"p\"]}\r\n{\"pending\":1,\"processing\":0,\"completed\":0,\"cancelled\":0,\"overdue\":0}\r\n{\"ids\":[\"p\"]}\r\n",
+      "timed_out": false
+    },
+    "sdk": "10.0.302",
+    "source_sha256": {
+      "OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+      "OrderFlowEngine.fs": "a1bec05ff18719481fbff51c5d91e7ec1981372ec457931f595a3cc912ae1ae3",
+      "Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e"
+    }
+  }
+}

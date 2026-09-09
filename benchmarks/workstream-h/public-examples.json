@@ -1,0 +1,100 @@
+{
+  "contract": "expanded-public-v1",
+  "examples": [
+    {
+      "name": "reconcile priority and origin",
+      "request": {
+        "operation": "reconcile",
+        "left": [
+          {"id": "A", "priority": 2, "createdAt": "2024-01-01T00:00:00Z"},
+          {"id": "b", "priority": 1, "createdAt": "2024-01-01T00:00:00Z"}
+        ],
+        "right": [
+          {"id": "A", "priority": 3, "createdAt": "2023-01-01T00:00:00Z"},
+          {"id": "C", "priority": 0, "createdAt": "2024-01-02T00:00:00+02:00"}
+        ]
+      },
+      "response": {"items": [{"id": "A", "origin": "right"}, {"id": "C", "origin": "right"}, {"id": "b", "origin": "left"}]}
+    },
+    {
+      "name": "reconcile tie chooses right",
+      "request": {"operation": "reconcile", "left": [{"id": "x", "priority": -2147483648, "createdAt": "2024-01-01T00:00:00Z"}], "right": [{"id": "x", "priority": -2147483648, "createdAt": "2024-01-01T00:00:00+00:00"}]},
+      "response": {"items": [{"id": "x", "origin": "right"}]}
+    },
+    {
+      "name": "reconcile null sides",
+      "request": {"operation": "reconcile", "left": null},
+      "response": {"items": []}
+    },
+    {
+      "name": "operation and properties are case insensitive",
+      "request": {"OpErAtIoN": "RECONCILE", "LEFT": [{"ID": "", "PRIORITY": 0, "CREATEDAT": "2024-01-01T00:00:00Z"}]},
+      "response": {"items": [{"id": "", "origin": "left"}]}
+    },
+    {
+      "name": "equivalent instants choose right after priority tie",
+      "request": {"operation": "reconcile", "left": [{"id": "x", "priority": 4, "createdAt": "2024-01-01T01:00:00+01:00"}], "right": [{"id": "x", "priority": 4, "createdAt": "2024-01-01T00:00:00Z"}]},
+      "response": {"items": [{"id": "x", "origin": "right"}]}
+    },
+    {
+      "name": "null reconcile record is invalid",
+      "request": {"operation": "reconcile", "left": [null], "right": []},
+      "response": {"error": "invalid left record"}
+    },
+    {
+      "name": "dependency deterministic ready selection",
+      "request": {"operation": "dependencyOrder", "ids": ["b", "a", "c"], "edges": [{"before": "b", "after": "c"}, {"before": "a", "after": "c"}]},
+      "response": {"ids": ["a", "b", "c"]}
+    },
+    {
+      "name": "dependency ordinal UTF16 ordering",
+      "request": {"operation": "dependencyOrder", "ids": ["\uE000", "\uD834\uDD1E", "A"], "edges": []},
+      "response": {"ids": ["A", "\uD834\uDD1E", "\uE000"]}
+    },
+    {
+      "name": "dependency empty input",
+      "request": {"operation": "dependencyOrder", "ids": null, "edges": null},
+      "response": {"ids": []}
+    },
+    {
+      "name": "duplicate ID precedence",
+      "request": {"operation": "dependencyOrder", "ids": ["x", "x"], "edges": [{"before": "missing", "after": "x"}]},
+      "response": {"error": "duplicate id"}
+    },
+    {
+      "name": "duplicate edge",
+      "request": {"operation": "dependencyOrder", "ids": ["a", "b"], "edges": [{"before": "a", "after": "b"}, {"before": "a", "after": "b"}]},
+      "response": {"error": "duplicate edge"}
+    },
+    {
+      "name": "null dependency ID element",
+      "request": {"operation": "dependencyOrder", "ids": [null], "edges": []},
+      "response": {"error": "invalid ids"}
+    },
+    {
+      "name": "empty IDs with edge reports unknown endpoint",
+      "request": {"operation": "dependencyOrder", "ids": [], "edges": [{"before": "a", "after": "b"}]},
+      "response": {"error": "unknown dependency"}
+    },
+    {
+      "name": "unknown endpoint precedes self-edge",
+      "request": {"operation": "dependencyOrder", "ids": ["a"], "edges": [{"before": "x", "after": "x"}]},
+      "response": {"error": "unknown dependency"}
+    },
+    {
+      "name": "unknown endpoint",
+      "request": {"operation": "dependencyOrder", "ids": ["x"], "edges": [{"before": "x", "after": "y"}]},
+      "response": {"error": "unknown dependency"}
+    },
+    {
+      "name": "self dependency",
+      "request": {"operation": "dependencyOrder", "ids": ["x"], "edges": [{"before": "x", "after": "x"}]},
+      "response": {"error": "self dependency"}
+    },
+    {
+      "name": "cycle",
+      "request": {"operation": "dependencyOrder", "ids": ["a", "b"], "edges": [{"before": "a", "after": "b"}, {"before": "b", "after": "a"}]},
+      "response": {"error": "dependency cycle"}
+    }
+  ]
+}

@@ -34,12 +34,20 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Check H0 model-free source fixture
         run: python scripts/h0_check.py --output-dir results/h0-linux
+      - name: Audit H1/H2 requests and trusted semantic faults (no model)
+        run: |
+          python scripts/h_check.py --permit-activation --output-dir results/h1-h2-linux
+          python scripts/h_check.py --permit-activation --build-fixtures --output-dir results/h1-h2-fixtures-linux
       - name: Check E3a review packet and trusted model-free fixtures
         run: python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures-linux.json
       - name: Check E3a sandbox on an explicitly non-experimental SDK fixture
         run: |
           docker pull mcr.microsoft.com/dotnet/sdk:10.0.302@sha256:72dd743782f2ae7e5476fd64f6a460045e3998dc862218b80e6944cba79a01b0
           python scripts/e3a_sandbox_check.py --ci-sdk-fixture --output results/e3a-sandbox-ci-fixture.json
+      - name: Check H1/H2 on the non-experimental SDK fixture (no model)
+        run: |
+          fixture_image_id="$(docker image inspect mcr.microsoft.com/dotnet/sdk:10.0.302@sha256:72dd743782f2ae7e5476fd64f6a460045e3998dc862218b80e6944cba79a01b0 --format '{{.Id}}')"
+          python scripts/h_check.py --permit-activation --sandbox --fixture-image-id "$fixture_image_id" --output-dir results/h1-h2-sandbox-linux
       - name: Environment check
         run: python scripts/alf.py doctor --strict
       - name: Validate matched benchmark snapshots
@@ -96,6 +104,10 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Check H0 model-free source fixture
         run: python scripts/h0_check.py --output-dir results/h0-windows
+      - name: Audit H1/H2 requests and trusted semantic faults (no model)
+        run: |
+          python scripts/h_check.py --permit-activation --output-dir results/h1-h2-windows
+          python scripts/h_check.py --permit-activation --build-fixtures --output-dir results/h1-h2-fixtures-windows
       - name: Check E3a review packet and trusted model-free fixtures
         run: python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures-windows.json
       - name: Environment check
@@ -128,6 +140,8 @@ jobs:
           path: |
             results/e3a-review-fixtures-windows.json
             results/h0-windows/
+            results/h1-h2-windows/
+            results/h1-h2-fixtures-windows/
           if-no-files-found: warn
 
   e2-baseline:

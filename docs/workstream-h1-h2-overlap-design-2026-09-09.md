@@ -2,6 +2,16 @@
 
 ## Status and decision
 
+**Construction adoption (2026-09-09):** following publication at
+`8408cd55d0fea183d56c3ecceec022a7d8505c14` and passing exact Linux/Windows CI
+`34321797392`, the user said "Continue until before execution, then tell what to
+human review before approving execution." This adopts the bounded model-free
+workload/controller implementation, including the authored-byte and visible-state
+policies below. It does not authorize OAuth staging or any live H request. Finish
+implementation and evidence, then present the human-review packet. The original
+proposal status below records its pre-adoption boundary; no live ceiling has been
+allocated and no historical experiment is changed.
+
 The user replied "continuecontinue" after the H0 completion handoff named bounded
 H1/H2 design as the next step. This authorizes this design/preparation packet,
 not workload construction, a new native client, OAuth staging or live collection.
