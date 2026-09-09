@@ -148,3 +148,188 @@ freeze/evidence diff; fresh logs are retained in the `freeze-validation` result
 subdirectory. Publish this freeze and verify its exact CI, then execute the already
 approved fresh fixed 24-trajectory/72-dispatch pilot once. No automatic later
 replacement, additional shakedown or old-slot resumption is authorized.
+
+## Renewed pilot 01 — fixed collection finished
+
+Freeze commit `91b43b8161347d35be03ba7fb71bb1b7d73ccf19` passed exact
+[CI 34294549110](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34294549110)
+(Linux 5m37s; Windows 8m24s). The existing setup script prepared a separate clean
+checkout at `/tmp/alf-e3a-shakedown-jnEI0G` with the same resolved dependencies,
+native client, catalogue, image and network. The directory prefix is the existing
+launcher's legacy name; this invocation used `-Phase pilot`.
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass `
+  -File reports/workstream-e3a-oauth-shakedown-2026-09-08/invoke-shakedown.ps1 `
+  -Phase pilot `
+  -ExpectedCommit 91b43b8161347d35be03ba7fb71bb1b7d73ccf19 `
+  -RemoteRunRoot /tmp/alf-e3a-shakedown-jnEI0G `
+  -LocalAuthFile C:\Users\hadri\.codex\auth.json `
+  -LocalOutputDirectory results/e3a-oauth-renewal-2026-09-09/pilot-01
+```
+
+The wrapper exited 0. All **24 unique scheduled trajectories finished** (three
+tasks, two languages, four paired repetitions), with **32 dispatches** and a
+null batch stop. Every trajectory eventually passed development checks. This
+does not imply first-submission or architectural success. An independent AI
+artifact audit reconciled 32 sequential pre-launch debits, 32 complete native
+captures, 24 preflights/slot finishes and 48 first/terminal score events. No
+tool item, timeout, overflow, invalid/missing total usage, accounting alarm or
+automatic relaunch was found. This is bounded retained evidence, not proof of
+all provider-side request activity.
+
+Aggregate observed usage is **302,266 input / 62,915 output tokens**; 21,028
+reasoning tokens are an output subset. Cached input is known on 10 rounds
+(43,520 observed subset tokens), but the aggregate cached and cache-write totals
+remain null because coverage is incomplete. Do not turn missing optional counts
+into zero or add subsets twice. Maximum observed turn totals were 15,786 input
+and 4,174 output, below the adopted post-turn alarms. Subscription USD and
+reliable provider-request counts remain null.
+
+The immutable raw endpoint counts, before architecture review, are first
+completion **10 true / 7 false / 7 unknown**, and terminal completion **16 true /
+8 unknown**. Task 007 requires the separate source-bound architecture rubric;
+neither operational success nor build-plus-behavior fills that missing judgement.
+A later blinded review is an explicitly identified addendum, not a rewrite of
+these raw scores or a reason to issue another candidate request.
+
+The evidence directory now also retains:
+
+- `pilot-01-report.json`, SHA-256
+  `d05da3205fa26c9fc41156182802435c6ab0400d149ddcaf8ed9a6375f02571a`.
+- `pilot-01-journal.jsonl` (raw `attempts.jsonl` bytes), SHA-256
+  `a14b9c0e112d2715a687b9cc61d303cb76c17eeade24a7c027878d577e642e94`.
+- `pilot-01-invocation.log`, `pilot-01-cleanup.json`, setup captures and
+  `freeze-ci.json`. The publication token-pattern scan found zero matching files.
+
+The wrapper verified staged-auth deletion and retained-output copying. Successful
+scoped checks at 01:01:49–01:01:54 UTC (09:01 HKT) found zero selected listeners
+and running E3a containers; the original local auth file remained untouched.
+The fresh allowances now stand at **2/5 integration and 32/72 pilot used**.
+Together with six separately retained earlier dispatches, the recorded lineage
+contains 40 dispatches. Unused 3/40 balances authorize neither a larger sample nor
+another batch. No further live candidate calls are needed for this pilot.
+
+## Post-run architecture addendum and reproducible analysis
+
+The [descriptive analysis](../reports/workstream-e3a-oauth-renewal-2026-09-09/analysis.md)
+and its [machine-readable companion](../reports/workstream-e3a-oauth-renewal-2026-09-09/analysis.json)
+are derived artifacts, not replacements for the immutable raw report or journal.
+The small `analyze-pilot.py` consumer reuses the frozen `score_submission` and
+`summarize` functions. It neither executes candidate source nor sends model
+requests. It rejects a specification that does not match the report's identity,
+keeps exact-file and canonical-JSON hashes distinct, and never uses an earlier
+applied source to salvage an invalid endpoint.
+
+A fresh **AI session**, `/root/review_task007_architecture`, reviewed seven
+distinct source snapshots at 01:08:55 UTC. Its input contained only language,
+source and source hash, plus the adopted rubric. Slot/repetition/endpoint mapping,
+behavioral results and resource measurements were withheld; source language was
+not blinded. The separate [review packets](../reports/workstream-e3a-oauth-renewal-2026-09-09/review-packets.json),
+[judgements](../reports/workstream-e3a-oauth-renewal-2026-09-09/architecture-reviews.json)
+and [endpoint mapping](../reports/workstream-e3a-oauth-renewal-2026-09-09/endpoint-to-source-hash.json)
+preserve that boundary and the file/function evidence. All three architectural
+obligations were judged satisfied for each supplied snapshot. The F# project
+compile order is checked separately by the existing structural rule.
+
+Review applies only to matching first/terminal source hashes. The invalid first
+Task 007 submission has no applied source and receives no inferred architecture
+credit. Repeated identical snapshots share a judgement, not an extra independent
+observation. This is source-only AI assessment, not human-expert review or a
+behavioral proof. Review findings were never returned to candidates and caused
+no repairs, reissues or sample extension. Maintainer review/analysis consumption
+is outside the candidate dispatch/token totals; its cost is not assumed zero.
+
+Reproduce the addendum from this publication revision, preserving its pinned
+specification and source files:
+
+```powershell
+python reports/workstream-e3a-oauth-renewal-2026-09-09/analyze-pilot.py `
+  --report reports/workstream-e3a-oauth-renewal-2026-09-09/pilot-01-report.json `
+  --spec protocols/workstream-e3a-v1/specification.json `
+  --reviews reports/workstream-e3a-oauth-renewal-2026-09-09/architecture-reviews.json `
+  --output-dir results/e3a-oauth-renewal-reproduction
+```
+
+The output directory is deliberately separate from published evidence. Generated
+files use deterministic LF line endings. Omitting `--reviews` produces the
+source-only review packets and the original missing-review analysis; this is
+the packet-preparation mode used before the blinded review. Supplying the saved
+judgements reproduces their application, not an independent repeat of the AI's
+subjective judgement. The implementing pilot commit remains `91b43b8`; neither
+the scientific specification nor runner source-set identity changed for this
+post-run reporting work.
+
+### Descriptive findings
+
+The addendum yields **17/24 first-submission completions and 24/24 terminal
+completions**. All 24 assigned slots remain in the denominator. Original raw
+Task 007 nulls remain visible alongside the reviewed scores.
+
+| Measure | F# | C# |
+|---|---:|---:|
+| First task completion | 6/12 | 11/12 |
+| Terminal task completion, with AI architecture addendum | 12/12 | 12/12 |
+| Initial / repair dispatches | 12 / 7 | 12 / 1 |
+| Initial input / output tokens | 101,388 / 28,297 | 101,448 / 19,780 |
+| Repair input / output tokens | 87,466 / 12,888 | 11,964 / 1,950 |
+| Total input / output tokens | 188,854 / 41,185 | 113,412 / 21,730 |
+
+Five first submissions failed strict patch format (four F#, one C#); they were
+not applied or compiled, and their holdout results stay unknown. The other two
+failed first submissions were F# behavioral failures despite successful builds.
+One F# trajectory then had a build failure on its first repair and succeeded on
+its second. No response text or candidate source was manually corrected.
+
+The report gives all four paired differences per task, coverage, means and
+ranges. Differences are **F# minus C#**, ordered by repetition. Equal-task mean
+differences are -0.4167 first-completion proportion, +6,286.83 total input tokens,
++1,621.25 total output tokens and +34.82 seconds per trajectory including scoring.
+Initial input differs by only -5 tokens on that mean; incremental repair input
+differs by +6,291.83. Those observed components reconcile arithmetically, but do
+not identify a causal contribution from any specific language feature or tool.
+No overlapping phase durations are summed or unrecorded timings imputed.
+
+This diagnostic result favors C# first completion and lower observed resources
+for these tasks, this provisional Luna-high setting and this strict no-tools,
+visible-replay treatment. Three selected tasks and four repetitions do not
+support a universal language ranking, population-significance claim, scale
+crossover, or precision-based sample extension. Successful repair is not an
+estimate of the causal benefit of feedback. No earlier stopped pilot is pooled.
+
+### Analysis validation and next decision
+
+The final affected-test manifest is only `tests/test_e3a_renewal_analysis.py`:
+**11 tests passed** in a separate validator's actual terminal log. Packet checks
+still match with zero candidate model calls; `git diff --check` passes. Another
+AI session approved the final analysis source after fixes for report/spec binding,
+raw-versus-derived rendering, exhaustive outcome counts and per-trajectory
+initial/repair partitioning. Regression tests also cover source-hash review
+binding, duplicate-key rejection, invalid-terminal non-salvage, missing rubric
+evidence, exact raw-file hashing and deterministic output line endings.
+
+Three earlier focused test invocations failed on synthetic fixture/schema and
+deduplication assertions; their ignored diagnostic directories (`analysis-validation`,
+`analysis-validation-retry-01`, `analysis-validation-final-01`) are retained.
+Several ad hoc validator inspection helpers also failed or produced inaccurate
+prose about test counts, phase counts or optional `derived_scores` fields. Those
+summaries are not analysis evidence. The final test log in
+`analysis-validation-final-02/01-test.txt` and the maintainer's successful
+`final-artifact-check.py` assertions establish 24 initial plus eight repair
+dispatches, the asymmetric language split, all effective endpoint counts, seven
+source-bound reviews, 16 architecture endpoint mappings (15 applied, one null),
+unchanged blinded packets, and unchanged raw files/scores. These are model-free
+reporting corrections, not a runner or scientific-treatment revision.
+
+Publish this evidence and analysis directly without a PR, then verify the exact
+publication commit's Linux/Windows CI. That completes the authorized E3a pilot
+assignment. Unused integration/pilot balances still do not authorize new samples.
+
+The next step is the plan's **workstream-selection decision**, not another E3a
+run or apparatus rewrite. The recommendation is **H0 model-free preparation**:
+one paired exemplar, an explicitly labelled exact/proxy serialization audit and
+synthetic source-budget/eviction checks. This addresses the original source and
+context question without requiring optional F/G studies. H0 has not been selected
+or started by this report; its exemplar/accounting choices need a bounded next
+assignment, and any H1/H2 model-backed pilot remains separately gated. Retain
+the other conditional branches in `PLAN.md` rather than launching all of them.

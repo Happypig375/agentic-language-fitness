@@ -6,10 +6,11 @@ ALF investigates how programming-language implementation, model configuration, a
 
 [PLAN.md](PLAN.md) is the canonical checkpoint and next assignment. [AGENTS.md](AGENTS.md) routes maintainer agents to it. The [plan review](docs/plan-review-2026-09-05.md) records the latest methodological corrections.
 
-**Current boundary:** E1, E2, and E2a are complete. The [E3a first-submission/repair packet](protocols/workstream-e3a-v1/README.md) received a second AI-session review and has a bounded no-tools implementation. Its [model-free sandbox checks now pass on the remote host with the exact specified image](docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md); end-to-end API/remote integration remains unverified. Archived results remain unchanged. No live candidate request or experiment is authorized; implementation, verified operation, executable freeze, and spending permission are separate states.
+**Current evidence:** E1, E2 and E2a are complete. The [E3a no-tools first-submission/repair pilot](docs/workstream-e3a-oauth-renewal-2026-09-09.md) has now run all 24 fixed trajectories using 32 dispatches, with no batch stop. It compares three selected maintenance tasks, two languages and four repetitions per pair. Operational completion is not universal task success: first and terminal correctness, failed submissions, repair usage and Task 007 architecture evidence are reported separately. This is a small diagnostic pilot, not a language ranking.
 
-The maintainer requires the existing **local OAuth-backed Codex** implementation, as in earlier model-backed runs. An API key is not a new prerequisite. The [review-only OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) proposes explicit changes to E3a's memory and resource policies; it does not activate those changes or authorize candidate calls. See [the current authentication direction](PLAN.md#maintainer-authentication-direction-2026-09-06).
-The [2026-09-06 capability handoff](docs/workstream-e3a-codex-capability-2026-09-06.md) records model-free fixture evidence and the remaining reviewed mismatch; it does not establish OAuth or authorize live calls.
+The [reproducible descriptive report](reports/workstream-e3a-oauth-renewal-2026-09-09/analysis.md) finds first completion of **6/12 F# and 11/12 C#**, with **12/12 terminal completion in each language** after permitted repairs and a source-bound AI architecture-review addendum. F# used seven repair dispatches versus one for C#. Raw missing-review scores remain unchanged; the report includes all failures and separates initial, repair and total resources.
+
+The adopted [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) uses the existing **local OAuth-backed Codex** route, a pinned no-tools native client and isolated remote evaluation. The successful shakedown, exact runner/image identities, full attempt journals and temporary-credential cleanup are retained in the [execution record](docs/workstream-e3a-oauth-renewal-2026-09-09.md). Earlier failed attempts remain unchanged and separately charged. Further live batches require their own authorization; unused allowance is not permission to expand the sample.
 
 The current rules are in [experimental design](docs/experimental-design.md), [metrics](docs/metrics.md), [workload validity and review gates](docs/workload-validity-and-review-gates-2026-09-05.md), and the future [context-pressure design](docs/workstream-h-context-pressure-design-2026-09-05.md). Dated predecessor proposals explain history; they are not competing current plans. Already frozen protocols/results retain their original identities and must not be retrospectively changed.
 
@@ -47,7 +48,7 @@ python scripts/alf.py audit PATH_TO_RUN_DIRECTORY
 python scripts/alf.py summarize results/pilot
 ```
 
-The scripted adapter copies gold snapshots to validate machinery without a model request. Its passing results are not coding-agent performance. E3a has separate mock/controller and sandbox checks; the generic commands above do not launch it, and its API transport is disabled by default.
+The scripted adapter copies gold snapshots to validate machinery without a model request. Its passing results are not coding-agent performance. E3a has separate mock/controller and sandbox checks; the generic commands above do not launch its explicitly gated OAuth pilot.
 
 ## Real agents and remote execution
 

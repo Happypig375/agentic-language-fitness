@@ -2,7 +2,31 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: fresh five-dispatch allocation (2026-09-09 HKT)
+## Current checkpoint: E3a analyzed; next-workstream decision (2026-09-09 HKT)
+
+Freeze `91b43b8161347d35be03ba7fb71bb1b7d73ccf19` passed exact Linux/Windows
+CI `34294549110`. The approved fresh pilot finished all **24 trajectories with
+32 dispatches**, no batch stop and known input/output usage for every round.
+The retained [execution record](docs/workstream-e3a-oauth-renewal-2026-09-09.md)
+owns evidence and accounting; staged OAuth, selected listeners and E3a containers
+were cleaned up. Fresh allocations used **2/5 integration and 32/72 pilot**;
+unused 3/40 balances do not authorize sample extension or another live batch.
+
+The [descriptive analysis](reports/workstream-e3a-oauth-renewal-2026-09-09/analysis.md)
+and source-bound, cost/behavior-blinded Task 007 **AI-session** review are complete.
+Derived first completion is F# 6/12 and C# 11/12; terminal completion is 12/12
+each. Original raw report bytes/null scores remain unchanged. The separate
+addendum uses the existing scorer/summary, retains every slot and failed
+submission, and makes no universal-language or population inference.
+
+Finish direct publication and verify exact Linux/Windows CI, then return at the
+plan's next-workstream decision. The recommendation is H0 model-free preparation
+of one paired exemplar and auditable source-budget checks, not an automatic
+assignment or live pilot. Do not launch E3b/F/G/H or increase the sample without
+that bounded selection. The renewal record contains reproduction, reviews,
+corrected analysis diagnostics, accounting and the next-decision rationale.
+
+## Prior checkpoint: fresh five-dispatch allocation (2026-09-09 HKT)
 
 The user replied **"continue and increase that limit to 5"** to the explicit
 proposal for a fresh shakedown followed by a fresh fixed 24-trajectory/72-dispatch

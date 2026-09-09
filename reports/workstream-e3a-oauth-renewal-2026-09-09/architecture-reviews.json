@@ -1,0 +1,72 @@
+{
+  "48dec19469ff87f2c6dd9fd8b315288ac3254b655c3d79ef45462949f2e203ea": {
+    "source_sha256": "48dec19469ff87f2c6dd9fd8b315288ac3254b655c3d79ef45462949f2e203ea",
+    "reviewer_id": "/root/review_task007_architecture",
+    "reviewer_type": "ai-session",
+    "reviewed_at_utc": "2026-09-09T01:08:55Z",
+    "domain_model_in_engine": true,
+    "live_dispatch_in_engine": true,
+    "program_io_boundary": true,
+    "evidence": "OrderFlowEngine.cs defines Customer, Order, Request, and response models; Handle dispatches transition and all query operations to live engine functions. Program.cs only reads lines, deserializes, invokes OrderFlowEngine.Handle, serializes output, and adapts exceptions."
+  },
+  "b957b3e05801d606a3f1b66861758408ac7bb991f232ca62d6dc698cb4c06f98": {
+    "source_sha256": "b957b3e05801d606a3f1b66861758408ac7bb991f232ca62d6dc698cb4c06f98",
+    "reviewer_id": "/root/review_task007_architecture",
+    "reviewer_type": "ai-session",
+    "reviewed_at_utc": "2026-09-09T01:08:55Z",
+    "domain_model_in_engine": true,
+    "live_dispatch_in_engine": true,
+    "program_io_boundary": true,
+    "evidence": "OrderFlowEngine.fs defines all domain/request/response records; handle selects transition or query, and query dispatches the live query operations. Program.fs is limited to console/JSON/error adaptation and invoking OrderFlowEngine.handle. OrderFlowEngine.fs precedes Program.fs in the project Compile list."
+  },
+  "4f6ac83ffbcf183cb87c59334927758543e45235c5feed1761130b5871e9da6a": {
+    "source_sha256": "4f6ac83ffbcf183cb87c59334927758543e45235c5feed1761130b5871e9da6a",
+    "reviewer_id": "/root/review_task007_architecture",
+    "reviewer_type": "ai-session",
+    "reviewed_at_utc": "2026-09-09T01:08:55Z",
+    "domain_model_in_engine": true,
+    "live_dispatch_in_engine": true,
+    "program_io_boundary": true,
+    "evidence": "OrderFlowEngine.fs owns the domain/request/response records and the active handle/query/transition dispatch path. Program.fs performs only console and JSON/error adaptation before invoking the imported handle function. OrderFlowEngine.fs precedes Program.fs in Compile order."
+  },
+  "2fa69aa0699b5f88c6fa02a495636059b24041210dd0d6a316230eb9754a36d6": {
+    "source_sha256": "2fa69aa0699b5f88c6fa02a495636059b24041210dd0d6a316230eb9754a36d6",
+    "reviewer_id": "/root/review_task007_architecture",
+    "reviewer_type": "ai-session",
+    "reviewed_at_utc": "2026-09-09T01:08:55Z",
+    "domain_model_in_engine": true,
+    "live_dispatch_in_engine": true,
+    "program_io_boundary": true,
+    "evidence": "OrderFlowEngine.cs contains Customer, Order, Request, Response, and TransitionResponse and implements the live Handle-to-query/Transition dispatch. Program.cs confines itself to line input, JSON conversion, engine invocation, output, and exception adaptation."
+  },
+  "7bed422fb8ae11147939973bb89bd5fc10ed26856a3aa8502123eee59f909f6f": {
+    "source_sha256": "7bed422fb8ae11147939973bb89bd5fc10ed26856a3aa8502123eee59f909f6f",
+    "reviewer_id": "/root/review_task007_architecture",
+    "reviewer_type": "ai-session",
+    "reviewed_at_utc": "2026-09-09T01:08:55Z",
+    "domain_model_in_engine": true,
+    "live_dispatch_in_engine": true,
+    "program_io_boundary": true,
+    "evidence": "OrderFlowEngine.cs owns the complete model set and active Handle dispatch, including Transition and every query branch. Program.cs only provides console input/output, JSON serialization/deserialization, error adaptation, and the Handle call."
+  },
+  "4f670e96e5f812915f005987527b7a777af557e90dcfb122360c3bf768f4605f": {
+    "source_sha256": "4f670e96e5f812915f005987527b7a777af557e90dcfb122360c3bf768f4605f",
+    "reviewer_id": "/root/review_task007_architecture",
+    "reviewer_type": "ai-session",
+    "reviewed_at_utc": "2026-09-09T01:08:55Z",
+    "domain_model_in_engine": true,
+    "live_dispatch_in_engine": true,
+    "program_io_boundary": true,
+    "evidence": "OrderFlowEngine.cs defines the domain and transport models and contains the live Handle, Transition, and query-selection implementation. Program.cs remains an I/O and JSON/error adapter that delegates the request to OrderFlowEngine.Handle."
+  },
+  "58688d49aa0f25c7689416ec106279f5966b6eece36b5934f5120e04e6e94e00": {
+    "source_sha256": "58688d49aa0f25c7689416ec106279f5966b6eece36b5934f5120e04e6e94e00",
+    "reviewer_id": "/root/review_task007_architecture",
+    "reviewer_type": "ai-session",
+    "reviewed_at_utc": "2026-09-09T01:08:55Z",
+    "domain_model_in_engine": true,
+    "live_dispatch_in_engine": true,
+    "program_io_boundary": true,
+    "evidence": "OrderFlowEngine.fs defines the domain/request/response records and its public handle drives private transition/query implementations for the live path. Program.fs only handles console/JSON/errors and calls OrderFlowEngine.handle. The engine file precedes Program.fs in Compile order."
+  }
+}

@@ -2,71 +2,47 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current authorization (2026-09-09 HKT):** the user explicitly approved
-continuation and increased the proposed fresh shakedown allowance to **five
-dispatches**. This authorizes one fresh integration allocation (2/5 used) and,
-after a matching successful two-step shakedown and freeze, one fresh fixed
-24-trajectory/72-dispatch pilot (0/72 used). The [renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md)
-owns the current assignment. Prior unused balances do not stack; every earlier
-attempt and debit remains retained. No automatic retry or later replacement
-is authorized. Keep local OAuth, the canonical launcher and all hard stops.
-The renewed two-step shakedown passed on exact-CI-green `a724694`; separate AI
-artifact review and scoped auth/container/listener cleanup passed. Publish and
-verify the new freeze's exact CI, then run the approved fresh pilot once. Three
-integration dispatches remain; no additional shakedown is needed for unchanged source.
+**Current checkpoint (2026-09-09 HKT):** the approved fixed E3a pilot finished
+all 24 trajectories on exact-CI-green `91b43b8`, using 32 dispatches without a
+batch stop. The [renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md)
+owns the completed descriptive report and blinded, source-bound Task 007
+AI-session architecture addendum. Finish direct publication and verify exact CI,
+then return for the next-workstream decision. Preserve raw report bytes and
+original scores. Missing rubric evidence stays unknown; review never triggers
+repair or new samples. Do not confuse derived addendum scores with raw results.
 
-**Prior checkpoint (2026-09-09 HKT):** pilot attempt 02 on exact-CI-green
-`c79bc1c` stopped after one dispatch with `multiple-final-replies`: one complete
-native turn contained a preamble and JSON in two assistant-message items.
-The [retained stop and policy-correct repair](docs/workstream-e3a-complete-response-fix-2026-09-09.md)
-own the next assignment. The ordinary fix now assembles all assistant text
-unchanged and uses existing format/byte/repair controls; 81 affected tests and
-separate AI review passed. Do not strip commentary or select the last JSON.
-The repair was published as `bc00062` and its exact Linux/Windows CI passed.
-The explicit renewal above resolves that checkpoint's allocation decision;
-it does not promote, resume or rescore the stopped attempt. Preserve its null scores.
-Pilot usage is **one of 72 dispatches**; 23 of 24 slots remain unstarted.
-The old freeze correctly rejects the repaired source; do not bypass it.
-Missing Task 007 rubric judgement stays unknown and cannot drive continuation.
+The user's fresh integration ceiling is **five dispatches: 2 used, 3 remaining**.
+The fixed pilot used **32/72**. Unused 3/40 balances do not authorize another
+batch, sample extension or automatic replacement. All six pre-renewal dispatches
+and their original failed/unscored attempts remain separately charged; old unused
+balances do not stack. The guard is per invocation, so reconcile retained debits
+before any later explicitly authorized invocation. The current run's temporary
+OAuth, selected proxy listeners and E3a containers were cleaned up. Keep the
+original local OAuth file untouched and the canonical foreground SSH route.
 
-The prior resumed integration ceiling was **five dispatches**, with **four
-used and one remaining**. The guard is per invocation, not persistent:
-before any later integration invocation, calculate cumulative debits and the
-remaining allowance from retained journals and honor required stop decisions.
-A fresh guard does not reset or stack authorization. Attempt 01 remains
-separately failed, debited, unapplied and unscored. No ambiguous reissues or
-relaxed hard stops are authorized. One remaining integration dispatch cannot
-fund a fresh two-step shakedown; that old remainder is not added to the new five.
-Temporary auth cleanup is verified for the
-two successful shakedowns and both pilot attempts; no proxy listeners or E3a
-containers remained in the scoped checks. Earlier cleanup records are retained.
+No further candidate calls are needed for this pilot. H0 model-free preparation
+is recommended, not yet selected; do not automatically launch another workstream.
+Return for that decision after publication and exact CI are complete. Ordinary
+confirmed bug fixes and direct pushes remain authorized without redundant questions.
+Earlier holds and repairs remain identifiable history in their linked records.
 
-Do not ask for renewed adoption, ordinary bug-fix or direct-push permission.
-The earlier two-dispatch allowance/hold narratives below remain history and
-are superseded by this explicit allowance and current repair checkpoint.
+## Implementation history and authentication
 
-## Current boundary
+E1/E2/E2a are complete. The [E3a disposition](docs/workstream-e3a-review-disposition-2026-09-06.md),
+[remote sandbox repair](docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md),
+[OAuth adoption](docs/workstream-e3a-oauth-adoption-2026-09-08.md) and dated records
+in [PLAN.md](PLAN.md) retain earlier gates and failed attempts. Their historical
+holds and two-dispatch allowances do not override the current checkpoint above.
 
-E1/E2/E2a are complete. The E3a packet at `19b1902be59324b98741ccb6c3a8396de962f5f7` passed its Linux/Windows fixture checks and has received a second AI-session review. The [disposition](docs/workstream-e3a-review-disposition-2026-09-06.md) accepts the narrow design **for bounded implementation with R1–R4 corrections**, not as a working or authorized live experiment.
-
-The bounded E3a no-tools controller/adapter and isolated evaluator contain R1–R4 corrections. After explicit permission to resume model-free fixes on the reachable remote host, dependency export was repaired and the sandbox checks passed there with the exact specified image. Read the [remote fix and evidence](docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md); the [earlier handoff](docs/workstream-e3a-implementation-handoff-2026-09-06.md) preserves the two failed CI attempts. Verify CI on the exact implementing commit, not an earlier green check.
-
-The pinned image is now restored on the remote host. Standalone sandbox evidence is not end-to-end Windows/API-to-remote integration. Wiring, account access, provider behavior and counting remain unverified. The dated [OAuth adoption record](docs/workstream-e3a-oauth-adoption-2026-09-08.md) permits implementation, an at-most-two-dispatch unrelated-task shakedown after prerequisites, and continuation after successful freeze to the fixed pilot; no automatic reissue/replacement is allowed. Do not switch images, scaffolds or subscription backends silently.
-
-**Current boundary:** the [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) remains adopted. Existing local OAuth and the canonical remote launcher remain required; no API key or new relay. The failed live shakedown is now an explicit stop, not a successful freeze or a pilot prerequisite. Earlier readiness/activation paragraphs below describe the path to that attempt, not permission to repeat it.
-
-**Technical hold (2026-09-08):** the implementing binary is now `72cf14453…`,
-with opt-in no-tools and single-response controls. The original `f7942933…`
-binary is historical. Packaging and model-free tests do not establish OAuth or
-live provider behavior. After implementing-commit CI and remaining prerequisites,
-the permitted sequence is ≤2-dispatch shakedown, successful freeze, then the fixed
-24-trajectory/72-dispatch pilot. Stage only the complete `auth.json` file into a
-private temporary home, not the rest of `CODEX_HOME`; cleanup is mandatory.
-No new auth relay, toolful fallback, reissue or replacement is authorized.
+The [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) remains
+adopted. Stage only the complete local `auth.json` into a private temporary home,
+not the rest of `CODEX_HOME`; verify owned-copy cleanup. Do not silently switch
+images, native clients or subscription backends. No new auth relay, API key,
+toolful fallback, automatic live reissue or replacement is authorized.
 
 ## Read only what applies
 
-- Current E3a decision: [review disposition](docs/workstream-e3a-review-disposition-2026-09-06.md) and [reviewed packet](protocols/workstream-e3a-v1/README.md).
+- E3a execution and analysis: [renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md) and [protocol packet](protocols/workstream-e3a-v1/README.md).
 - Design/analysis: [experimental design](docs/experimental-design.md), [metrics](docs/metrics.md).
 - Workload/review scope: [validity and gates](docs/workload-validity-and-review-gates-2026-09-05.md).
 - Context-pressure work, when assigned: [H design](docs/workstream-h-context-pressure-design-2026-09-05.md).

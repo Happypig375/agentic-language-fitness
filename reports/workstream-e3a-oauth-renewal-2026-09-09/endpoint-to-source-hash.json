@@ -1,0 +1,82 @@
+[
+  {
+    "slot_id": "03-007-query-engine-refactor-csharp-r1",
+    "endpoint": "first",
+    "source_sha256": "48dec19469ff87f2c6dd9fd8b315288ac3254b655c3d79ef45462949f2e203ea"
+  },
+  {
+    "slot_id": "03-007-query-engine-refactor-csharp-r1",
+    "endpoint": "terminal",
+    "source_sha256": "48dec19469ff87f2c6dd9fd8b315288ac3254b655c3d79ef45462949f2e203ea"
+  },
+  {
+    "slot_id": "04-007-query-engine-refactor-fsharp-r1",
+    "endpoint": "first",
+    "source_sha256": "b957b3e05801d606a3f1b66861758408ac7bb991f232ca62d6dc698cb4c06f98"
+  },
+  {
+    "slot_id": "04-007-query-engine-refactor-fsharp-r1",
+    "endpoint": "terminal",
+    "source_sha256": "b957b3e05801d606a3f1b66861758408ac7bb991f232ca62d6dc698cb4c06f98"
+  },
+  {
+    "slot_id": "11-007-query-engine-refactor-fsharp-r2",
+    "endpoint": "first",
+    "source_sha256": "4f6ac83ffbcf183cb87c59334927758543e45235c5feed1761130b5871e9da6a"
+  },
+  {
+    "slot_id": "11-007-query-engine-refactor-fsharp-r2",
+    "endpoint": "terminal",
+    "source_sha256": "4f6ac83ffbcf183cb87c59334927758543e45235c5feed1761130b5871e9da6a"
+  },
+  {
+    "slot_id": "12-007-query-engine-refactor-csharp-r2",
+    "endpoint": "first",
+    "source_sha256": "2fa69aa0699b5f88c6fa02a495636059b24041210dd0d6a316230eb9754a36d6"
+  },
+  {
+    "slot_id": "12-007-query-engine-refactor-csharp-r2",
+    "endpoint": "terminal",
+    "source_sha256": "2fa69aa0699b5f88c6fa02a495636059b24041210dd0d6a316230eb9754a36d6"
+  },
+  {
+    "slot_id": "15-007-query-engine-refactor-fsharp-r3",
+    "endpoint": "first",
+    "source_sha256": null
+  },
+  {
+    "slot_id": "15-007-query-engine-refactor-fsharp-r3",
+    "endpoint": "terminal",
+    "source_sha256": "4f6ac83ffbcf183cb87c59334927758543e45235c5feed1761130b5871e9da6a"
+  },
+  {
+    "slot_id": "16-007-query-engine-refactor-csharp-r3",
+    "endpoint": "first",
+    "source_sha256": "7bed422fb8ae11147939973bb89bd5fc10ed26856a3aa8502123eee59f909f6f"
+  },
+  {
+    "slot_id": "16-007-query-engine-refactor-csharp-r3",
+    "endpoint": "terminal",
+    "source_sha256": "7bed422fb8ae11147939973bb89bd5fc10ed26856a3aa8502123eee59f909f6f"
+  },
+  {
+    "slot_id": "21-007-query-engine-refactor-csharp-r4",
+    "endpoint": "first",
+    "source_sha256": "4f670e96e5f812915f005987527b7a777af557e90dcfb122360c3bf768f4605f"
+  },
+  {
+    "slot_id": "21-007-query-engine-refactor-csharp-r4",
+    "endpoint": "terminal",
+    "source_sha256": "4f670e96e5f812915f005987527b7a777af557e90dcfb122360c3bf768f4605f"
+  },
+  {
+    "slot_id": "22-007-query-engine-refactor-fsharp-r4",
+    "endpoint": "first",
+    "source_sha256": "58688d49aa0f25c7689416ec106279f5966b6eece36b5934f5120e04e6e94e00"
+  },
+  {
+    "slot_id": "22-007-query-engine-refactor-fsharp-r4",
+    "endpoint": "terminal",
+    "source_sha256": "58688d49aa0f25c7689416ec106279f5966b6eece36b5934f5120e04e6e94e00"
+  }
+]
