@@ -2,7 +2,20 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: complete-response parser repair; live hold (2026-09-09 HKT)
+## Current checkpoint: fresh five-dispatch allocation (2026-09-09 HKT)
+
+The user replied **"continue and increase that limit to 5"** to the explicit
+proposal for a fresh shakedown followed by a fresh fixed 24-trajectory/72-dispatch
+pilot. Read the [renewal and accounting record](docs/workstream-e3a-oauth-renewal-2026-09-09.md).
+This grants a fresh ceiling of five integration dispatches, not five mandatory
+calls; the shakedown still requires two successful steps. After matching success,
+freeze the repaired runner and execute the newly approved fixed pilot once.
+Retain earlier attempts/debits separately; old unused balances do not stack.
+No new sample size, candidate treatment, model, native binary or routing layer.
+Verify the exact activation and freeze commits' CI before their live phases.
+No automatic retry, reissue, later replacement or relaxed hard stop is authorized.
+
+## Prior checkpoint: complete-response parser repair; live hold (2026-09-09 HKT)
 
 The renewed freeze `c79bc1c` passed exact Linux/Windows CI `34251358861`.
 Pilot attempt 02 then cleared preflight but stopped after one dispatch because
@@ -16,8 +29,9 @@ all assistant text unchanged, enforce the existing whole-reply byte/format
 rules and allow only the existing repair budget. No native, prompt or scientific
 amendment is needed; never select only the JSON or remove the preamble.
 The repair now passes 81 affected tests, separate AI source review, packet and
-old-freeze rejection checks. Finish publication and exact-commit CI, then
-return for a live continuation/allocation decision. Resumed integration is
+old-freeze rejection checks. Publication as `bc00062` and exact Linux/Windows
+CI `34254599635` passed; the explicit renewal above resolves the allocation
+decision. At that prior stop, resumed integration was
 **4/5 used (1 remaining)**; pilot is **1/72 used (71 remaining)**. A fresh
 two-step shakedown does not fit the integration balance. Do not reissue,
 replace or automatically resume any live slot, or rewrite the failed scores.

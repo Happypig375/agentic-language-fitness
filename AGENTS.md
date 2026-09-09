@@ -2,28 +2,38 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current checkpoint (2026-09-09 HKT):** pilot attempt 02 on exact-CI-green
+**Current authorization (2026-09-09 HKT):** the user explicitly approved
+continuation and increased the proposed fresh shakedown allowance to **five
+dispatches**. This authorizes one fresh integration allocation (0/5 used) and,
+after a matching successful two-step shakedown and freeze, one fresh fixed
+24-trajectory/72-dispatch pilot (0/72 used). The [renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md)
+owns the current assignment. Prior unused balances do not stack; every earlier
+attempt and debit remains retained. No automatic retry or later replacement
+is authorized. Keep local OAuth, the canonical launcher and all hard stops.
+
+**Prior checkpoint (2026-09-09 HKT):** pilot attempt 02 on exact-CI-green
 `c79bc1c` stopped after one dispatch with `multiple-final-replies`: one complete
 native turn contained a preamble and JSON in two assistant-message items.
 The [retained stop and policy-correct repair](docs/workstream-e3a-complete-response-fix-2026-09-09.md)
 own the next assignment. The ordinary fix now assembles all assistant text
 unchanged and uses existing format/byte/repair controls; 81 affected tests and
 separate AI review passed. Do not strip commentary or select the last JSON.
-Finish publication and verify exact repair-commit CI, then return for a live
-continuation/allocation decision. No automatic live reissue,
-resumption or replacement is authorized. Preserve original null scores.
+The repair was published as `bc00062` and its exact Linux/Windows CI passed.
+The explicit renewal above resolves that checkpoint's allocation decision;
+it does not promote, resume or rescore the stopped attempt. Preserve its null scores.
 Pilot usage is **one of 72 dispatches**; 23 of 24 slots remain unstarted.
 The old freeze correctly rejects the repaired source; do not bypass it.
 Missing Task 007 rubric judgement stays unknown and cannot drive continuation.
 
-The user's resumed integration ceiling is **five dispatches**, with **four
+The prior resumed integration ceiling was **five dispatches**, with **four
 used and one remaining**. The guard is per invocation, not persistent:
 before any later integration invocation, calculate cumulative debits and the
 remaining allowance from retained journals and honor required stop decisions.
 A fresh guard does not reset or stack authorization. Attempt 01 remains
 separately failed, debited, unapplied and unscored. No ambiguous reissues or
 relaxed hard stops are authorized. One remaining integration dispatch cannot
-fund a fresh two-step shakedown. Temporary auth cleanup is verified for the
+fund a fresh two-step shakedown; that old remainder is not added to the new five.
+Temporary auth cleanup is verified for the
 two successful shakedowns and both pilot attempts; no proxy listeners or E3a
 containers remained in the scoped checks. Earlier cleanup records are retained.
 

@@ -1,6 +1,6 @@
 {
   "id": "workstream-e3a-v1",
-  "status": "frozen",
+  "status": "shakedown-ready-not-frozen",
   "execution_authorized": true,
   "user_live_execution_approved": true,
   "approved_integration_dispatches": 5,
