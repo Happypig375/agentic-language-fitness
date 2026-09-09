@@ -2,6 +2,11 @@
 
 **Revised:** 2026-09-05. Future design under [PLAN.md](../PLAN.md). This document does not authorize construction of a large suite or any live model run.
 
+**H0 assignment (2026-09-09):** the user has now selected the
+[bounded model-free preparation](workstream-h0-preparation-2026-09-09.md).
+Only that one-exemplar fixture/audit scope is active; the broader H1/H2/H3
+design and live-run gates below remain future work.
+
 ## Questions, not assumed advantages
 
 At the same semantic task and source-access budget, does one implementation fit more useful material, use it more reliably, or retrieve it more economically? F# brevity in lines is not evidence of fewer model tokens, and fewer tokens is not evidence of better understanding.
@@ -95,7 +100,7 @@ Other outcomes include total/provider input and output; declared token subsets; 
 
 ## Sequence and decision
 
-H may be proposed after a usable controller and workload gate, without completing optional F or G studies. Present authorization remains E3a preparation only. A small source-only H pilot does not require exhaustive explanation of repair behavior because its primary arm has no repair feedback.
+H may be proposed after a usable controller and workload gate, without completing optional F or G studies. Present authorization is the bounded H0 model-free assignment linked above, not a live H pilot. A small source-only H pilot does not require exhaustive explanation of repair behavior because its primary arm has no repair feedback.
 
 ```text
 reviewed workload/exemplar + H0 model-free budget checks

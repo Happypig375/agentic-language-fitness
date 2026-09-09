@@ -1,0 +1,39 @@
+{
+  "id": "h0-orderflow-summary",
+  "status": "model-free-preparation",
+  "live_execution_authorized": false,
+  "base_repository_commit": "6227b99312ff5fa579b5a6ae755baf04cfb76c74",
+  "manifest": "benchmarks/successor/representation-v1/descriptive.manifest.json",
+  "manifest_sha256": "3b3f04de2236522e9f4f0865aa90160d7a8058e4a7f80ca9e9954df67004abad",
+  "task_id": "008-summary-api",
+  "predecessor_task_id": "007-query-engine-refactor",
+  "contracts_sha256": "4cfeb57dd27fb5520f5e4a05c23da087ef5671cd83732bc9df90cb2a1617e1f6",
+  "source_sha256": {
+    "csharp": "7bed422fb8ae11147939973bb89bd5fc10ed26856a3aa8502123eee59f909f6f",
+    "fsharp": "53a20231120cd69ed2d540c47b9dff1d5b77a37391381445c8b8ec875ad9495b"
+  },
+  "roles": {
+    "csharp": {"project": "OrderFlow.csproj", "engine": "OrderFlowEngine.cs", "io": "Program.cs"},
+    "fsharp": {"project": "OrderFlow.fsproj", "engine": "OrderFlowEngine.fs", "io": "Program.fs"}
+  },
+  "role_orders": [["project", "engine", "io"], ["io", "engine", "project"]],
+  "reference_roles": ["project", "engine", "io"],
+  "reference_interpretation": "conservative all-files review set, not a minimal or simultaneously necessary context",
+  "source_access": "whole-file",
+  "scales": ["existing-checkpoint-only"],
+  "distractor_modules_added": 0,
+  "token_proxy": {
+    "package": "tiktoken",
+    "version": "0.14.0",
+    "encoding": "o200k_base",
+    "rank_asset_sha256": "446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d",
+    "interpretation": "offline serialization proxy, not provider or Codex context accounting"
+  },
+  "synthetic_budget": {
+    "unit": "utf8-bytes",
+    "limit_kind": "joint",
+    "request_cap": 65536,
+    "output_reserve": 4096,
+    "safety_margin": 256
+  }
+}

@@ -90,6 +90,9 @@ Review readiness, scientific approval, executable freeze, and permission to spen
 
 ## Current assignment and stops
 
-The next task is E3a review-ready preparation, as specified in PLAN.md. No live candidate run is authorized. Keep ordinary tests/CI repairs inside that assignment; do not broaden into tool-policy trials, multi-agent routing, or H execution.
+The active assignment is owned by PLAN.md. As of 2026-09-09 the user selected
+[bounded H0 model-free preparation](workstream-h0-preparation-2026-09-09.md)
+after the completed E3a pilot. Keep ordinary tests/CI repairs inside that scope;
+do not broaden into live H execution, tool-policy trials or multi-agent treatments.
 
 Return for a new scientific condition, unknown material measurement semantics, unavailable required permissions, exhausted budget, data leakage, unsafe execution, or repeated unresolved apparatus failures. Stop when the packet is review-ready. A missing nonessential telemetry field should narrow a claim, not trigger an elaborate interception framework. If the missing field is essential to the intended estimand, do not run that treatment until it is resolved.

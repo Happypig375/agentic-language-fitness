@@ -1,0 +1,1079 @@
+{
+  "candidate_model_calls": 0,
+  "controls": {
+    "boundary": {
+      "empty_overhead": 70,
+      "exact_boundary_fit": 80,
+      "one_byte_over_refused": true,
+      "unicode_utf8_bytes": 2
+    },
+    "eviction_repetition": {
+      "cumulative_exposed_bytes": 81,
+      "events": [
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        },
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "event": "evict",
+          "path": "a"
+        }
+      ],
+      "resident_bytes": 0,
+      "resident_cap_bytes": 80,
+      "unique_exposed_bytes": 1
+    },
+    "input_only_allowance": 65280,
+    "joint_allowance": 61184,
+    "lifecycle": {
+      "cumulative_exposed_bytes": 9,
+      "current_assembled_bytes": 88,
+      "events": [
+        {
+          "bytes": 2,
+          "event": "read",
+          "path": "a.cs",
+          "returned": "full"
+        },
+        {
+          "bytes": 0,
+          "event": "read",
+          "path": "a.cs",
+          "returned": "reference"
+        },
+        {
+          "event": "evict",
+          "path": "a.cs"
+        },
+        {
+          "bytes": 2,
+          "event": "read",
+          "path": "a.cs",
+          "returned": "full"
+        },
+        {
+          "event": "clear"
+        },
+        {
+          "bytes": 2,
+          "event": "read",
+          "path": "a.cs",
+          "returned": "full"
+        },
+        {
+          "event": "update",
+          "path": "a.cs",
+          "sha256": "4a99557e4033c3539de2eb65472017cad5f9557f7a0625a09f1c3f6e2ba69c4c"
+        },
+        {
+          "bytes": 0,
+          "event": "read",
+          "path": "a.cs",
+          "returned": "reference"
+        },
+        {
+          "event": "update",
+          "path": "a.cs",
+          "sha256": "11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437"
+        },
+        {
+          "bytes": 3,
+          "event": "read",
+          "path": "a.cs",
+          "returned": "full"
+        }
+      ],
+      "resident_bytes": 3,
+      "unique_exposed_bytes": 5
+    },
+    "refusal": {
+      "events": [
+        {
+          "bytes": 1,
+          "event": "read",
+          "path": "a",
+          "returned": "full"
+        },
+        {
+          "assembled_bytes": 207,
+          "event": "refused",
+          "path": "oversized"
+        }
+      ],
+      "preserved_nonempty_state": true
+    },
+    "scope": "synthetic-control-fixtures-only"
+  },
+  "definition_file_sha256": "967dfefbd87e118f22ce1fe375ae1b1296cd9a48e705b3b907805bb308f96ac6",
+  "definition_sha256": "967dfefbd87e118f22ce1fe375ae1b1296cd9a48e705b3b907805bb308f96ac6",
+  "envelopes": [
+    {
+      "bytes": 15431,
+      "eligible_source_files": 3,
+      "empty_source_envelope_bytes": 7899,
+      "full_return_source_bytes": 6850,
+      "input_allowance": {
+        "input-only": 65280,
+        "joint": 61184
+      },
+      "language": "csharp",
+      "order": [
+        "project",
+        "engine",
+        "io"
+      ],
+      "reference_source_files": 3,
+      "resident_source_bytes": 6850,
+      "sha256": "550dfe3d9d80ef4d29b1d430dcd7fd4dd0ae963cf95877dfbc43370441396ea9",
+      "source_allowance": {
+        "input-only": 57381,
+        "joint": 53285
+      },
+      "source_bytes": 6850,
+      "source_sha256": {
+        "OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+        "OrderFlowEngine.cs": "058e6fbb2d93caca0dae86709608a3eca4d833f17712828eb06ffb8332251312",
+        "Program.cs": "cbf4f0312b97b0cc60a64bdcb23f930e10c3d84949bc7c213549a1d74a5179a0"
+      },
+      "synthetic_fit": {
+        "input-only": true,
+        "joint": true
+      },
+      "token_proxy": {
+        "token_stream_sha256": "32c27f495ec5e8461571ff7eadb20defb3a4d70e2b55d7758412a24d30acab06",
+        "tokens": 3632
+      }
+    },
+    {
+      "bytes": 15431,
+      "eligible_source_files": 3,
+      "empty_source_envelope_bytes": 7899,
+      "full_return_source_bytes": 6850,
+      "input_allowance": {
+        "input-only": 65280,
+        "joint": 61184
+      },
+      "language": "csharp",
+      "order": [
+        "io",
+        "engine",
+        "project"
+      ],
+      "reference_source_files": 3,
+      "resident_source_bytes": 6850,
+      "sha256": "8bdbd23c6ace02986d04e98b1bfbdbc2a34ec844e89d5f086ae3ef9b38f8671d",
+      "source_allowance": {
+        "input-only": 57381,
+        "joint": 53285
+      },
+      "source_bytes": 6850,
+      "source_sha256": {
+        "OrderFlow.csproj": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+        "OrderFlowEngine.cs": "058e6fbb2d93caca0dae86709608a3eca4d833f17712828eb06ffb8332251312",
+        "Program.cs": "cbf4f0312b97b0cc60a64bdcb23f930e10c3d84949bc7c213549a1d74a5179a0"
+      },
+      "synthetic_fit": {
+        "input-only": true,
+        "joint": true
+      },
+      "token_proxy": {
+        "token_stream_sha256": "d9ba61475ae3c5717f7efcd6600e6bd96263ffb99cfacd43bbdff20e7ca2901e",
+        "tokens": 3632
+      }
+    },
+    {
+      "bytes": 15220,
+      "eligible_source_files": 3,
+      "empty_source_envelope_bytes": 7899,
+      "full_return_source_bytes": 6642,
+      "input_allowance": {
+        "input-only": 65280,
+        "joint": 61184
+      },
+      "language": "fsharp",
+      "order": [
+        "project",
+        "engine",
+        "io"
+      ],
+      "reference_source_files": 3,
+      "resident_source_bytes": 6642,
+      "sha256": "50bda27b65f6521b63008a9737c1b1c15c15f3ac04fc5f80146f50aa9560a293",
+      "source_allowance": {
+        "input-only": 57381,
+        "joint": 53285
+      },
+      "source_bytes": 6642,
+      "source_sha256": {
+        "OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+        "OrderFlowEngine.fs": "a50ea0e01aedf3e095c6ac50e161823d976b516cb2a724b60a191ec07c1cd829",
+        "Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e"
+      },
+      "synthetic_fit": {
+        "input-only": true,
+        "joint": true
+      },
+      "token_proxy": {
+        "token_stream_sha256": "6b2b2d4cb2101c2f2f7c7be96d59bcf3fac5f2b25e3265518f69217b1302005d",
+        "tokens": 3629
+      }
+    },
+    {
+      "bytes": 15220,
+      "eligible_source_files": 3,
+      "empty_source_envelope_bytes": 7899,
+      "full_return_source_bytes": 6642,
+      "input_allowance": {
+        "input-only": 65280,
+        "joint": 61184
+      },
+      "language": "fsharp",
+      "order": [
+        "io",
+        "engine",
+        "project"
+      ],
+      "reference_source_files": 3,
+      "resident_source_bytes": 6642,
+      "sha256": "819affdd84f459ba2bb05d5f831b7a893ba5416ce04fe8c2d65e22eface25bc6",
+      "source_allowance": {
+        "input-only": 57381,
+        "joint": 53285
+      },
+      "source_bytes": 6642,
+      "source_sha256": {
+        "OrderFlow.fsproj": "b395a4b956970b81ad5e8dfe99c8aa2b7851e7d60581f9a5f169dc7d0af6f7c7",
+        "OrderFlowEngine.fs": "a50ea0e01aedf3e095c6ac50e161823d976b516cb2a724b60a191ec07c1cd829",
+        "Program.fs": "8fea2484e362114b86cd6691be8d40ea20e0a77304fe01691fdf1ddd212dbf6e"
+      },
+      "synthetic_fit": {
+        "input-only": true,
+        "joint": true
+      },
+      "token_proxy": {
+        "token_stream_sha256": "7e1bdc476660bd4062cef7cf948ed27f3ae6ca97cc32cb9cb0f31c24fc801ce1",
+        "tokens": 3629
+      }
+    }
+  ],
+  "implementation_sha256": "966f8d63b7dae9e191b4e1f10e1573233b64cc750b95abfef0c7e253d6140530",
+  "manifest_file_sha256": "3b3f04de2236522e9f4f0865aa90160d7a8058e4a7f80ca9e9954df67004abad",
+  "physical_fit": null,
+  "provider_input": null,
+  "proxy_error_bound": null,
+  "synthetic_budget": {
+    "limit_kind": "joint",
+    "output_reserve": 4096,
+    "request_cap": 65536,
+    "safety_margin": 256,
+    "unit": "utf8-bytes"
+  },
+  "token_proxy": {
+    "encoding": "o200k_base",
+    "package": "tiktoken",
+    "rank_asset_sha256": "446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d",
+    "version": "0.14.0"
+  }
+}

@@ -2,14 +2,22 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current checkpoint (2026-09-09 HKT):** the approved fixed E3a pilot finished
-all 24 trajectories on exact-CI-green `91b43b8`, using 32 dispatches without a
-batch stop. The [renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md)
-owns the completed descriptive report and blinded, source-bound Task 007
-AI-session architecture addendum. Finish direct publication and verify exact CI,
-then return for the next-workstream decision. Preserve raw report bytes and
-original scores. Missing rubric evidence stays unknown; review never triggers
-repair or new samples. Do not confuse derived addendum scores with raw results.
+**Current checkpoint (2026-09-09 HKT): H0 implemented and AI-reviewed.** The user
+selected this branch by replying "Continue" to the explicit H0 proposal.
+Read the [bounded assignment](docs/workstream-h0-preparation-2026-09-09.md) and
+[definition](protocols/workstream-h0/definition.json). The paired exemplar,
+deterministic audit and synthetic byte-budget/resident checks pass 17 affected
+tests and independent final AI review; the [report](reports/workstream-h0-2026-09-09/report.json)
+and four envelopes are reproducible with tokenizer downloads disabled on a warm
+cache. Finish direct publication and exact Linux/Windows CI, then return at the
+H0 review-ready boundary. No live model/count endpoint, OAuth staging, candidate execution, new remote
+layer or broad/scaled workload construction is authorized by H0.
+
+E3a's completed report and source-bound AI architecture addendum were published
+as `6227b99`; exact Linux/Windows CI `34299713554` passed. The
+[renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md) owns that history.
+Preserve its frozen source/specification, raw report bytes and original scores.
+Do not confuse derived addendum scores with raw results.
 
 The user's fresh integration ceiling is **five dispatches: 2 used, 3 remaining**.
 The fixed pilot used **32/72**. Unused 3/40 balances do not authorize another
@@ -20,11 +28,12 @@ before any later explicitly authorized invocation. The current run's temporary
 OAuth, selected proxy listeners and E3a containers were cleaned up. Keep the
 original local OAuth file untouched and the canonical foreground SSH route.
 
-No further candidate calls are needed for this pilot. H0 model-free preparation
-is recommended, not yet selected; do not automatically launch another workstream.
-Return for that decision after publication and exact CI are complete. Ordinary
-confirmed bug fixes and direct pushes remain authorized without redundant questions.
-Earlier holds and repairs remain identifiable history in their linked records.
+H0 consumes none of those balances. Its byte caps are synthetic fixture units;
+offline token proxies do not establish a provider context limit. Never use future
+gold, research outcomes or copied historical solutions as source distractors.
+Return when H0 is review-ready and exact publication CI passes; any H1/H2 pilot
+still needs a bounded design and separate live authorization. Ordinary confirmed
+bug fixes and direct pushes remain authorized without redundant questions.
 
 ## Implementation history and authentication
 
@@ -46,6 +55,7 @@ toolful fallback, automatic live reissue or replacement is authorized.
 - Design/analysis: [experimental design](docs/experimental-design.md), [metrics](docs/metrics.md).
 - Workload/review scope: [validity and gates](docs/workload-validity-and-review-gates-2026-09-05.md).
 - Context-pressure work, when assigned: [H design](docs/workstream-h-context-pressure-design-2026-09-05.md).
+- Current H0 implementation: [assignment and evidence](docs/workstream-h0-preparation-2026-09-09.md).
 
 Current governance applies to future work. Older proposals and their checked-in review packets remain identifiable history; they do not override the current disposition. Already authorized frozen protocols govern their own experiments. Reconcile conflicts rather than silently changing a frozen treatment.
 
@@ -109,6 +119,7 @@ python scripts/e3a_check.py
 python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures.json
 python scripts/e3a_sandbox_check.py --output results/e3a-sandbox.json
 python scripts/alf.py doctor --strict
+python scripts/h0_check.py --output-dir results/h0-check
 ```
 
 e3a_check builds trusted fixtures only; it is not an arbitrary-candidate evaluator. e3a_sandbox_check requires Linux Docker and the exact image; its explicit CI SDK-fixture mode is model-free, non-experimental evidence only. Use checks appropriate to the change and report their actual scope.

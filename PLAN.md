@@ -2,7 +2,28 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: E3a analyzed; next-workstream decision (2026-09-09 HKT)
+## Current checkpoint: H0 implemented and AI-reviewed (2026-09-09 HKT)
+
+The user replied **"Continue"** to the explicit proposal for H0 model-free
+source-budget preparation with no new live experiment. Read the
+[bounded assignment](docs/workstream-h0-preparation-2026-09-09.md) and
+[definition](protocols/workstream-h0/definition.json). Use the existing Task 008
+summary-API contract at its approved Task 007 predecessor, one three-file source
+bundle per language, deterministic serialization/proxy audit and synthetic
+byte-budget/resident-content checks. No new scale levels, distractor modules,
+candidate generations, OAuth staging, remote/proxy work or live H1/H2 is included.
+
+The [reproducible report](reports/workstream-h0-2026-09-09/report.json), four
+envelopes, 17 affected tests, download-disabled warm-cache reproduction and
+independent final AI-session review now pass. Initial insufficient validations
+and a failed repetition witness are recorded in the assignment; they are not
+candidate observations or new scientific versions. E3a remains unchanged.
+Finish direct publication and exact Linux/Windows CI, then return at the H0
+review-ready boundary. Full-request provider accounting,
+meaningful scaling, live source-access/prompt policies and H1/H2 sample/dispatch
+limits remain a separately bounded design decision, not inferred from H0 success.
+
+## Completed checkpoint: E3a analyzed (2026-09-09 HKT)
 
 Freeze `91b43b8161347d35be03ba7fb71bb1b7d73ccf19` passed exact Linux/Windows
 CI `34294549110`. The approved fresh pilot finished all **24 trajectories with
@@ -19,12 +40,11 @@ each. Original raw report bytes/null scores remain unchanged. The separate
 addendum uses the existing scorer/summary, retains every slot and failed
 submission, and makes no universal-language or population inference.
 
-Finish direct publication and verify exact Linux/Windows CI, then return at the
-plan's next-workstream decision. The recommendation is H0 model-free preparation
-of one paired exemplar and auditable source-budget checks, not an automatic
-assignment or live pilot. Do not launch E3b/F/G/H or increase the sample without
-that bounded selection. The renewal record contains reproduction, reviews,
-corrected analysis diagnostics, accounting and the next-decision rationale.
+Direct publication `6227b99312ff5fa579b5a6ae755baf04cfb76c74` passed exact
+Linux/Windows CI `34299713554` (6m4s / 10m48s). The later explicit H0 selection
+above resolves this checkpoint's branch decision; it does not authorize E3b/F/G,
+another E3a sample or any live H run. The renewal record contains reproduction,
+reviews, corrected analysis diagnostics and accounting.
 
 ## Prior checkpoint: fresh five-dispatch allocation (2026-09-09 HKT)
 
