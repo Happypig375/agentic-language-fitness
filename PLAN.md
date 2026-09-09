@@ -13,7 +13,13 @@ human-review artifacts, source/spec/runner identities and remaining live gates.
 Do not stage OAuth or run a model, count request or experimental candidate.
 The proposed five integration/64 pilot dispatch ceilings remain unallocated.
 
-The [implementation and human-review packet](docs/workstream-h1-h2-implementation-2026-09-09.md)
+The [standalone human-review packet](docs/workstream-h1-h2-human-review-2026-09-10.md)
+now places current settings, exact source locations, validation evidence and the
+unapproved decision record together. This 2026-09-10 documentation update changes
+no treatment, execution approval or allocation. Human reviewers need not follow
+the agent context or incident history to locate the material under review.
+
+The [implementation record](docs/workstream-h1-h2-implementation-2026-09-09.md)
 now records the bounded controller, both functioning workload levels, source-bound
 paired AI review, 66 affected unit tests, trusted fixture/fault evidence, exact-image
 sandbox checks and 52 exact-native loopback probes. Earlier failed apparatus

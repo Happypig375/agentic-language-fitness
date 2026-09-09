@@ -9,7 +9,10 @@ controller in the [proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md)
 including its authored-byte interpretation and H2 memory/turn policy. The bounded
 implementation, trusted workloads, semantic-fault checks, exact-image sandbox and
 52 native loopback probes now have model-free evidence and separate AI review.
-Read the [human-review packet](docs/workstream-h1-h2-implementation-2026-09-09.md).
+Read the [standalone human-review packet](docs/workstream-h1-h2-human-review-2026-09-10.md)
+for current values, exact source locations, evidence and the unapproved decision
+record. The [implementation record](docs/workstream-h1-h2-implementation-2026-09-09.md)
+retains engineering history; it is not the human review entry point.
 Verify CI on the exact implementing publication, not an earlier green check.
 Next is human review and an explicit live-allocation decision, not execution.
 No OAuth staging, live model/count request, experimental candidate execution or

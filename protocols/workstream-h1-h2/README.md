@@ -6,8 +6,12 @@ It is not a live freeze or permission to consume model quota. The
 [specification](specification.json) keeps both execution approvals false and both
 H dispatch allocations zero. No E3a balance transfers to H.
 
-Start with the [implementation and human-review checklist](../../docs/workstream-h1-h2-implementation-2026-09-09.md)
-and the [paired source review](../../reports/workstream-h1-h2-preexecution-2026-09-09/source-review.md).
+Start with the [standalone human-review packet](../../docs/workstream-h1-h2-human-review-2026-09-10.md):
+current values, exact source locations, validation evidence and an unapproved
+decision record. The [implementation record](../../docs/workstream-h1-h2-implementation-2026-09-09.md)
+retains engineering history, and the
+[paired source review](../../reports/workstream-h1-h2-preexecution-2026-09-09/source-review.md)
+contains the source-bound AI findings.
 The source/contract/case/public-prompt identities, two byte caps and fixed schedule
 are construction measurements. Scientific-policy, runner, environment and actual
 attempt identities remain separate; failed apparatus checks do not create new

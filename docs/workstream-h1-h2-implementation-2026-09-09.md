@@ -1,5 +1,10 @@
 # H1/H2 model-free construction and pre-execution review
 
+For human sign-off, use the [standalone review packet](workstream-h1-h2-human-review-2026-09-10.md).
+It places current settings beside exact source/evidence links and an unapproved
+decision record. This document preserves implementation history; no execution
+approval is implied by either document.
+
 ## Authority and provenance
 
 The user approved construction with: "Continue until before execution, then tell
@@ -236,6 +241,9 @@ all false/zero execution gates are unchanged. Approval requires the corrective
 publication's exact CI, not the failed earlier run.
 
 ## What to human-review before approving execution
+
+The [dedicated review document](workstream-h1-h2-human-review-2026-09-10.md)
+expands these questions with the current values and precise material to inspect.
 
 Human review should address these substantive questions, not just green tests:
 
