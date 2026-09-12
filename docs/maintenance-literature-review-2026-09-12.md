@@ -7,10 +7,13 @@ F# wins
 
 ## Retrieval record
 
-Connected Scite search_literature/read_fulltext tools were used. The catalog
-plugin-management skill was unavailable; this limitation was disclosed and the
-direct exposed tools were used. Search used default relevance, limit 5, offset
-0 and no date filters:
+Connected Scite search_literature/read_fulltext tools were used. An initial
+claim that the plugin-management guide was unavailable resulted from checking
+a stale version path. The current catalog guide was subsequently read; it
+directs use of an already connected integration when suitable. This access-note
+correction does not change the retrieved evidence. No installation or permission
+change was needed. Search used default relevance, limit 5, offset 0 and no date
+filters:
 
 - Q1, "cognitive dimensions" AND (programming OR notation) — backend total
   15,371.
