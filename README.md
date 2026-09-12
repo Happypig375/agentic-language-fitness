@@ -10,7 +10,9 @@ ALF investigates how programming-language implementation, model configuration, a
 
 The [reproducible descriptive report](reports/workstream-e3a-oauth-renewal-2026-09-09/analysis.md) finds first completion of **6/12 F# and 11/12 C#**, with **12/12 terminal completion in each language** after permitted repairs and a source-bound AI architecture-review addendum. F# used seven repair dispatches versus one for C#. Raw missing-review scores remain unchanged; the report includes all failures and separates initial, repair and total resources.
 
-**Current work:** the [H1/H2 human-review packet](docs/workstream-h1-h2-human-review-2026-09-10.md) puts current settings, exact source locations and validation evidence in one place for the adopted comparison of supplied source with selective file reads under software byte budgets. It adds one functioning workload extension; live collection and OAuth staging remain disabled pending human review and separate approval. The completed [H0 audit](docs/workstream-h0-preparation-2026-09-09.md) has 17 passing tests and byte-identical Linux/Windows artifacts. These byte budgets do not establish a physical context-capacity advantage for either language.
+**Current checkpoint:** [maintenance/context construction](docs/maintenance-sim-construction-2026-09-12.md) has model-free validation for one original headless simulation in F# and modern C#, followed by eight interacting maintenance changes. The question is whether architectural coherence preserves useful context and correct decisions as obligations accumulate. The proposed episodes retain the candidate's software but reset the conversation, with no tool-error or diagnostic-repair loop filling the context. The [standalone human-review packet](docs/maintenance-sim-human-review-2026-09-12.md) lists exact sources, settings and remaining decisions. All 18 trusted checkpoints and eight semantic faults pass; these are not candidate results. F# reference inputs are larger at every episode in this pair, so the construction does not establish the hypothesized compactness advantage. This is feasibility preparation, not a large-project or language-ranking result.
+
+The earlier [H1/H2 human-review packet](docs/workstream-h1-h2-human-review-2026-09-10.md) and completed [H0 audit](docs/workstream-h0-preparation-2026-09-09.md) remain identifiable preparation. Live collection and OAuth staging remain disabled. Authored-byte budgets and offline token proxies do not establish a physical provider context-capacity advantage for either language.
 
 The adopted [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) uses the existing **local OAuth-backed Codex** route, a pinned no-tools native client and isolated remote evaluation. The successful shakedown, exact runner/image identities, full attempt journals and temporary-credential cleanup are retained in the [execution record](docs/workstream-e3a-oauth-renewal-2026-09-09.md). Earlier failed attempts remain unchanged and separately charged. Further live batches require their own authorization; unused allowance is not permission to expand the sample.
 
@@ -28,7 +30,7 @@ The short `variance-v2` pilot found substantial stochastic/order variation. The 
 
 E2a also identified a major deployment-specific amplifier: vulnerability audit was enabled while NuGet reachability was blocked and caches were fresh. Removing audit from the repair loop removed much of the restore delay and warning output, while a no-restore compilation gap remained. The legacy constrained-network audit-on condition is historical/stress evidence, not a normal developer baseline. Mechanical timing envelopes do not identify how many model tokens or seconds were causally attributable to each mechanism.
 
-Current work separates controlled first-patch/repair behavior from tool policy. Future H work tests source capacity and retrieval without assuming F# is shorter or that an entire dependency closure must fit simultaneously. H does not have to wait for optional subagent or large cost-replication studies. See [PLAN.md](PLAN.md) for the conditional branches.
+The [maintenance design](docs/maintenance-context-design-review-2026-09-12.md) separates representation size, cumulative correctness, inherited regressions and source-bound architectural diagnostics. Modern C# records and pattern matching are allowed; few lines or resemblance to the reference architecture are not success criteria. Broader language and long-term-maintenance claims need independent project families and expert review. See [PLAN.md](PLAN.md) for the current bounded assignment.
 
 ## Evaluation principles
 
@@ -51,6 +53,18 @@ python scripts/alf.py summarize results/pilot
 ```
 
 The scripted adapter copies gold snapshots to validate machinery without a model request. Its passing results are not coding-agent performance. E3a has separate mock/controller and sandbox checks; the generic commands above do not launch its explicitly gated OAuth pilot.
+
+To reproduce the trusted maintenance construction (not candidate execution):
+
+```text
+python -m unittest discover -s tests -p test_maintenance.py -v
+python scripts/maintenance_check.py --build-fixtures --audit-failures --output-dir results/maintenance-check
+```
+
+Use a fresh output directory. This audits the fixed trusted references, complete
+input envelopes, semantic faults and inherited-failure applicability. A future
+maintenance candidate controller still needs separate isolated implementation
+and review; the general host-subprocess evaluator is not that controller.
 
 For the H1/H2 pre-execution packet, `python scripts/h_check.py --output-dir
 results/h-review` writes the source identities, counted request examples, derived

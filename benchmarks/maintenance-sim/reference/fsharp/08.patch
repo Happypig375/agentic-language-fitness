@@ -1,0 +1,64 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index 1b2dc7c..6403a7f 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -102,6 +102,7 @@ let private parseImported (_name:string) (data:JsonElement) =
+                       | Some "request" | Some "cancel" -> if exact ["op";"id";"sequence"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"sequence",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some "complete" -> if exact ["op";"id";"sequence";"value"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"sequence",JsonValueKind.Number;"value",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some "fast_forward" -> if exact ["op";"count"] command && fieldsHaveKinds ["op",JsonValueKind.String;"count",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
++                      | Some "replay" -> if exact ["op";"snapshot";"events"] command && fieldsHaveKinds ["op",JsonValueKind.String;"snapshot",JsonValueKind.String;"events",JsonValueKind.Array] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some unknown when unknown<>"spawn" && unknown<>"remove" -> Error "unknown_operation"
+                       | Some _ -> Error "invalid_shape"
+                       | None -> Error "invalid_shape"
+@@ -182,6 +183,7 @@ let private parseDeferredCommand (command:JsonElement) =
+     | Some "request" | Some "cancel" -> if exact ["op";"id";"sequence"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"sequence",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+     | Some "complete" -> if exact ["op";"id";"sequence";"value"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"sequence",JsonValueKind.Number;"value",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+     | Some "fast_forward" -> if exact ["op";"count"] command && fieldsHaveKinds ["op",JsonValueKind.String;"count",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
++    | Some "replay" -> if exact ["op";"snapshot";"events"] command && fieldsHaveKinds ["op",JsonValueKind.String;"snapshot",JsonValueKind.String;"events",JsonValueKind.Array] command then Error "invalid_value" else Error "invalid_shape"
+     | Some _ -> Error "unknown_operation"
+ let private nextPendingOrder pending =
+     match pending with
+@@ -236,7 +238,7 @@ let private fastForward (count:int64) (w:World) =
+     let entities = w.Entities |> Map.map(fun _ entity -> {entity with X=int64(finalPosition entity)})
+     Ok {w with Tick=int64 nextTick;Entities=entities}
+ 
+-let private operation (op: JsonElement) (w: World) : Result<World,string> =
++let rec private operation (op: JsonElement) (w: World) : Result<World,string> =
+     if op.ValueKind <> JsonValueKind.Object || not (op.TryGetProperty("op") |> fst) then Error "invalid_shape"
+     else
+         match stringField "op" op with
+@@ -382,6 +384,34 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                     match stringField "id" op,integerField "sequence" op,integerField "value" op with
+                     | Some id,Some sequence,Some value when validId id && sequence>=0L && inRange value -> if w.Requests.TryFind id=Some sequence then Ok(addEffect (sprintf "complete:%s:%d" id value) {w with Requests=w.Requests.Remove id}) else Error "stale_completion"
+                     | _ -> Error "invalid_value"
++            | "replay" ->
++                match shape ["op";"snapshot";"events"] with
++                | Error error -> Error error
++                | Ok () when not(fieldsHaveKinds ["op",JsonValueKind.String;"snapshot",JsonValueKind.String;"events",JsonValueKind.Array] op) -> Error "invalid_shape"
++                | Ok () ->
++                    let events=op.GetProperty("events")
++                    if Seq.length(events.EnumerateArray())>256 then Error "invalid_shape" else
++                    match stringField "snapshot" op with
++                    | Some name when validId name ->
++                        match w.Snapshots.TryFind name with
++                        | None -> Error "missing_snapshot"
++                        | Some snapshot ->
++                            let mutable temporary={w with Tick=snapshot.Tick;Entities=snapshot.Entities;Pending=snapshot.Pending;NextOrder=0L;Policies=snapshot.Policies;Requests=snapshot.Requests;Issued=snapshot.Issued;Snapshots=w.Snapshots;Effects=[];Errors=[]}
++                            let mutable failure=None
++                            use mutable enumerator=events.EnumerateArray().GetEnumerator()
++                            while failure.IsNone && enumerator.MoveNext() do
++                                let event=enumerator.Current
++                                let nestedReplay = event.ValueKind=JsonValueKind.Object && exact ["op";"snapshot";"events"] event && fieldsHaveKinds ["op",JsonValueKind.String;"snapshot",JsonValueKind.String;"events",JsonValueKind.Array] event && stringField "op" event=Some "replay" && Seq.length(event.GetProperty("events").EnumerateArray())<=256
++                                if nestedReplay then failure<-Some "invalid_value"
++                                else
++                                    match operation event temporary with
++                                    | Error error -> failure<-Some error
++                                    | Ok next when not(List.isEmpty next.Errors) -> failure<-Some(List.head next.Errors)
++                                    | Ok next -> temporary<-next
++                            match failure with
++                            | Some error -> Error error
++                            | None -> Ok(addEffect ("replay:"+name) {temporary with Snapshots=w.Snapshots;Effects=w.Effects;Errors=w.Errors})
++                    | _ -> Error "invalid_value"
+             | "load" ->
+                 match shape ["op";"name"] with
+                 | Error e -> Error e

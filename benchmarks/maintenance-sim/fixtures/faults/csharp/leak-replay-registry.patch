@@ -1,0 +1,12 @@
+diff --git a/Program.cs b/Program.cs
+index cfc9f69..0ad7594 100644
+--- a/Program.cs
++++ b/Program.cs
+@@ -244,6 +244,7 @@ public static partial class Program
+         }
+         w.Tick = temporary.Tick; w.Entities = temporary.Entities; w.Pending = temporary.Pending; w.NextOrder = temporary.NextOrder;
+         w.Policies = temporary.Policies; w.Requests = temporary.Requests; w.Issued = temporary.Issued;
++        w.Snapshots = temporary.Snapshots;
+         w.Effects.Add($"replay:{name}");
+     }
+     private static string Serialize(World w)

@@ -1,0 +1,15 @@
+diff --git a/Program.cs b/Program.cs
+index abbd28e..6027c76 100644
+--- a/Program.cs
++++ b/Program.cs
+@@ -172,8 +172,8 @@ public static partial class Program
+     private static bool Exact(JsonElement o, params string[] keys) => o.ValueKind == JsonValueKind.Object && o.EnumerateObject().Count() == keys.Length && keys.All(k => o.TryGetProperty(k, out _));
+     private static void ExecuteDeferred(World w, Deferred c)
+     {
+-        if (c.Kind == "spawn") { if (w.Entities.ContainsKey(c.Id)) { w.Errors.Add("duplicate_id"); return; } w.Entities[c.Id] = new(c.Id, c.X, c.Velocity); w.Effects.Add($"spawn:{c.Id}"); }
+-        else if (!w.Entities.Remove(c.Id)) w.Errors.Add("missing_entity"); else w.Effects.Add($"remove:{c.Id}");
++        if (c.Kind == "spawn") { if (w.Entities.ContainsKey(c.Id)) { w.Errors.Add("duplicate_id"); return; } w.Entities[c.Id] = new(c.Id, c.X, c.Velocity); }
++        else if (!w.Entities.Remove(c.Id)) w.Errors.Add("missing_entity");
+     }
+     private sealed class OpError(string code) : Exception { public string Code { get; } = code; }
+     [GeneratedRegex(@"\A[a-z][a-z0-9_-]{0,31}\z")] private static partial Regex IdRegex();

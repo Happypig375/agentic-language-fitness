@@ -1,0 +1,60 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index 02c0995..1b2dc7c 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -101,6 +101,7 @@ let private parseImported (_name:string) (data:JsonElement) =
+                       | Some "assign_policy" -> if exact ["op";"id";"name"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"name",JsonValueKind.String] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some "request" | Some "cancel" -> if exact ["op";"id";"sequence"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"sequence",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some "complete" -> if exact ["op";"id";"sequence";"value"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"sequence",JsonValueKind.Number;"value",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
++                      | Some "fast_forward" -> if exact ["op";"count"] command && fieldsHaveKinds ["op",JsonValueKind.String;"count",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some unknown when unknown<>"spawn" && unknown<>"remove" -> Error "unknown_operation"
+                       | Some _ -> Error "invalid_shape"
+                       | None -> Error "invalid_shape"
+@@ -180,6 +181,7 @@ let private parseDeferredCommand (command:JsonElement) =
+     | Some "assign_policy" -> if exact ["op";"id";"name"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"name",JsonValueKind.String] command then Error "invalid_value" else Error "invalid_shape"
+     | Some "request" | Some "cancel" -> if exact ["op";"id";"sequence"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"sequence",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+     | Some "complete" -> if exact ["op";"id";"sequence";"value"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"sequence",JsonValueKind.Number;"value",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
++    | Some "fast_forward" -> if exact ["op";"count"] command && fieldsHaveKinds ["op",JsonValueKind.String;"count",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+     | Some _ -> Error "unknown_operation"
+ let private nextPendingOrder pending =
+     match pending with
+@@ -219,6 +221,21 @@ let private tickWorld count w =
+         Ok { w with Tick = tick; Entities = entities; Pending = pending; Effects = effects; Errors = errors }
+     with :? OverflowException -> Error ()
+ 
++let private fastForward (count:int64) (w:World) =
++    let quiescent =
++        List.isEmpty w.Pending
++        && Map.isEmpty w.Requests
++        && (w.Entities |> Map.forall (fun _ entity -> entity.Kind="mover" && entity.Policy.IsNone))
++    if not quiescent then Error "nonquiescent" else
++    let minimum = bigint Int64.MinValue
++    let maximum = bigint Int64.MaxValue
++    let nextTick = bigint w.Tick + bigint count
++    let finalPosition entity = bigint entity.X + bigint entity.Velocity * bigint count
++    let positionOverflow = w.Entities |> Map.exists(fun _ entity -> let position=finalPosition entity in position<minimum || position>maximum)
++    if nextTick<minimum || nextTick>maximum || positionOverflow then Error "overflow" else
++    let entities = w.Entities |> Map.map(fun _ entity -> {entity with X=int64(finalPosition entity)})
++    Ok {w with Tick=int64 nextTick;Entities=entities}
++
+ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+     if op.ValueKind <> JsonValueKind.Object || not (op.TryGetProperty("op") |> fst) then Error "invalid_shape"
+     else
+@@ -288,6 +305,17 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                             | Ok next -> Ok (addEffect ("tick:"+string n) next)
+                             | Error () -> Error "overflow"
+                         | _ -> Error "invalid_value"
++            | "fast_forward" ->
++                match shape ["op";"count"] with
++                | Error error -> Error error
++                | Ok () when not(fieldsHaveKinds ["op",JsonValueKind.String;"count",JsonValueKind.Number] op) -> Error "invalid_shape"
++                | Ok () ->
++                    match integerField "count" op with
++                    | Some count when count>=1L && count<=1000000000L ->
++                        match fastForward count w with
++                        | Ok next -> Ok(addEffect ("fast_forward:"+string count) next)
++                        | Error error -> Error error
++                    | _ -> Error "invalid_value"
+             | "save" ->
+                 match shape ["op";"name"] with
+                 | Error e -> Error e

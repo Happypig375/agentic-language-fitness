@@ -1,0 +1,13 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index bd4dd14..8d3faab 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -180,7 +180,7 @@ let private tickWorld count w =
+                 | Ok next -> current <- addEffect (commandEffect item.Command) next
+                 | Error code -> current <- addError code current
+             entities <- current.Entities
+-            let applyPolicy e next = match e.Policy with | Some policy when w.Policies.TryFind policy=Some "clamp10" -> min next 10L | _ -> next
++            let applyPolicy _ next = next
+             entities <- entities |> Map.map (fun _ e -> if e.Kind = "mover" then {e with X=applyPolicy e (Checked.(+) e.X e.Velocity)} else e)
+             let view = entities
+             entities <- entities |> Map.map (fun _ e ->

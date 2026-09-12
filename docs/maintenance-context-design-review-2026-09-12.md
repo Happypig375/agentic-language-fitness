@@ -2,11 +2,23 @@
 
 **Date:** 2026-09-12 HKT
 
-**Status:** assistant recommendation for construction review; not adopted or executable
+**Status:** bounded construction validated model-free; human review, not executable
 
 **Inspected repository:** `663d4ac97e0870d5b44d5d0e0b2d1e3db7601f70`
 
 ## Decision in one place
+
+**Disposition (2026-09-12):** The user replied “continue” to the explicit
+construction question. One idiomatic F#/C# architecture pair and eight
+inherited maintenance episodes are adopted for trusted model-free construction
+at base abdc68cc1eef24f0aca080bc151714f930ef8f27; exact Linux/Windows CI
+34675819811 passed. This does not allocate dispatches, validate a finished
+workload with human experts, or authorize candidate execution. All H flags
+remain false and dispatch allocations remain zero. The active evidence note is
+[maintenance-sim-construction-2026-09-12.md](maintenance-sim-construction-2026-09-12.md).
+The completed [standalone workload review packet](maintenance-sim-human-review-2026-09-12.md)
+now owns current measured values, exact sources and the next human decision.
+The design narrative below retains the original proposal and its limits.
 
 Recommend studying **maintenance of supplied, idiomatic existing architectures
 first**, with persistent candidate repositories and fresh conversations between
@@ -14,16 +26,15 @@ episodes. The question is whether F#/modern-C# implementations remain easier to
 understand and evolve as interacting obligations accumulate under an explicit
 information budget. This is not an initial architecture-generation contest.
 
-The next proposed construction is **one paired, headless simulation workload and
+The adopted construction is **one paired, headless simulation workload and
 eight dependent maintenance episodes**, model-free only, ending in a workload
 and measurement review. It is a feasibility case, not evidence about large
-projects or long-term maintenance in general. Do not start this construction
-merely because the present document has been published or passed CI.
+projects or long-term maintenance in general. Candidate execution remains held
+until the construction review is complete.
 
-The material choice for the maintainer is whether to adopt this maintenance-first
-construction, leaving architecture creation and a broader repository sample for
-separate design decisions. Choosing creation-first would change the estimand,
-support assumptions and workload; it is not an ordinary runner fix.
+Architecture creation and a broader repository sample remain separate design
+decisions. Choosing creation-first would change the estimand, support
+assumptions and workload; it is not an ordinary runner fix.
 
 | Item | Current prepared H value and location | Proposed maintenance-first construction |
 | --- | --- | --- |
@@ -32,12 +43,12 @@ support assumptions and workload; it is not an ordinary runner fix.
 | Source access | H1 all supplied; H2 map plus at most two reads, `controller` | Initially all eligible source/contracts/docs supplied; no retrieval or repair arm in this construction |
 | Candidate interaction | H1 one submit; H2 reads then submit; zero repairs | One no-tools submission per episode; no compiler/test feedback |
 | Cross-episode state | No eight-episode inherited maintenance chain | Retain candidate code/docs and requirement history; reset chat, not software |
-| Context measurement | Authored UTF-8 input caps 18,432/35,840; not a verified provider limit, `budgets` | Audit complete envelopes and coverage offline first; new numeric cap **not selected** |
+| Context measurement | Authored UTF-8 input caps 18,432/35,840; not a verified provider limit, `budgets` | Complete envelopes audited; proposed 86,016-byte input / 61,440-byte output caps are **not activated**; see the workload review packet |
 | Model/backend | `gpt-5.6-luna`, high effort, pinned native no-tools/local OAuth, `model` | No replacement model/backend proposed; any future use requires a new source-bound review |
 | Sample | 32 slots/16 pairs; 28 feasible starts, `schedule` | One construction pair, **zero experimental trajectories allocated**; replication count not selected |
 | Live authority | `execution_authorized=false`, `user_live_execution_approved=false`; `analysis.human_review_approved=false` | Unchanged: **no live authority** |
 | Dispatch allocations | `approved_integration_dispatches=0`, `approved_pilot_dispatches=0` | **0 integration, 0 pilot**; eight episodes are not eight allocated calls |
-| Review | Prepared [H human-review packet](workstream-h1-h2-human-review-2026-09-10.md) | This document is a design proposal; no human adoption recorded |
+| Review | Prepared [H human-review packet](workstream-h1-h2-human-review-2026-09-10.md) | This document records construction adoption; no candidate execution |
 
 Current H's construction approval applies to its existing workload/controller,
 not this replacement. Its original specification, evidence and interpretation
@@ -303,13 +314,19 @@ each apparatus bug. No code or safety boundary is changed by this proposal.
 
 ## Adoption and next handoff
 
-**Decision record:** maintenance-first construction not yet approved; new workload
-not constructed; rubric not validated; human expert review not completed; numeric
-context cap/main-study sample unset; live approval false; integration/pilot
+**Decision record:** maintenance-first construction adopted by the dated user
+disposition above; trusted workload construction validated model-free; rubric
+not human-validated; human expert review not completed; proposed numeric budgets
+measured but unactivated; main-study sample unset; live approval false; integration/pilot
 allocation zero. These are actual current states, not boxes pre-marked for review.
 
-If the maintainer adopts this recommendation, the next bounded assignment is
-model-free workload construction and contract/rubric validation for the one pair
+The construction handoff is now available in the
+[standalone review packet](maintenance-sim-human-review-2026-09-12.md), with raw
+evidence and source-bound AI reviews. Human review must precede selection of a
+future isolated maintenance adapter, which is not implemented by this work.
+
+The adopted bounded assignment is model-free workload construction and
+contract/rubric validation for the one pair
 and eight episodes above. Return with seed/task/test source identities, symmetric
 context audit and proposed numeric settings, semantic fault checks, reviewer
 findings, the exact safe runner adaptation needed, and a new self-contained
@@ -319,10 +336,11 @@ scientific freeze and live allocation from one another.
 
 Traceability: the accompanying literature ledger and
 [context record](research-direction-2026-09-12.md) explain how the recommendation
-was reached; [PLAN.md](../PLAN.md) and [AGENTS.md](../AGENTS.md) point here. This
-publication changes documentation only and preserves every frozen protocol,
-source artifact and report. Review/validation below concerns this document, not
-human scientific adoption or proof of provider behavior.
+was reached; [PLAN.md](../PLAN.md) and [AGENTS.md](../AGENTS.md) point here.
+This adoption changes construction status only; it preserves every frozen
+protocol, source artifact and report. Review/validation below concerns this
+document, not human expert validation of the workload or proof of provider
+behavior.
 
 ## Documentation review and validation
 

@@ -1,0 +1,228 @@
+diff --git a/Program.cs b/Program.cs
+index 7f43f11..4c6c2f9 100644
+--- a/Program.cs
++++ b/Program.cs
+@@ -5,7 +5,8 @@ namespace Simulation;
+ 
+ public sealed record Mover(string Id, long X, long Velocity, string Kind = "mover", string? Target = null, string? Policy = null);
+ public sealed record Deferred(long At, long Sequence, long Order, string Kind, string Id, long X, long Velocity);
+-public sealed record Saved(long Tick, Dictionary<string, Mover> Entities, List<Deferred> Pending, long NextOrder, Dictionary<string,string>? Policies = null);
++public sealed record Saved(long Tick, Dictionary<string, Mover> Entities, List<Deferred> Pending, long NextOrder,
++    Dictionary<string,string>? Policies = null, Dictionary<string,long>? Requests = null, Dictionary<string,long>? Issued = null);
+ 
+ public sealed class World
+ {
+@@ -14,6 +15,8 @@ public sealed class World
+     public List<Deferred> Pending = [];
+     public long NextOrder;
+     public Dictionary<string,string> Policies = new(StringComparer.Ordinal);
++    public Dictionary<string,long> Requests = new(StringComparer.Ordinal);
++    public Dictionary<string,long> Issued = new(StringComparer.Ordinal);
+     public Dictionary<string, Saved> Snapshots = new(StringComparer.Ordinal);
+     public List<string> Effects = [];
+     public List<string> Errors = [];
+@@ -24,10 +27,15 @@ public sealed class World
+         Entities = Entities.ToDictionary(x => x.Key, x => x.Value with { }, StringComparer.Ordinal),
+         Pending = [.. Pending], NextOrder = NextOrder,
+         Policies = Policies.ToDictionary(x=>x.Key,x=>x.Value,StringComparer.Ordinal),
++        Requests = Requests.ToDictionary(x=>x.Key,x=>x.Value,StringComparer.Ordinal),
++        Issued = Issued.ToDictionary(x=>x.Key,x=>x.Value,StringComparer.Ordinal),
+         Snapshots = Snapshots.ToDictionary(x => x.Key,
+-            x => new Saved(x.Value.Tick, x.Value.Entities.ToDictionary(y => y.Key, y => y.Value with { }, StringComparer.Ordinal), [.. x.Value.Pending], x.Value.NextOrder, x.Value.Policies is null ? new(StringComparer.Ordinal) : x.Value.Policies.ToDictionary(y=>y.Key,y=>y.Value,StringComparer.Ordinal)), StringComparer.Ordinal),
++            x => new Saved(x.Value.Tick, x.Value.Entities.ToDictionary(y => y.Key, y => y.Value with { }, StringComparer.Ordinal), [.. x.Value.Pending], x.Value.NextOrder,
++                Copy(x.Value.Policies), Copy(x.Value.Requests), Copy(x.Value.Issued)), StringComparer.Ordinal),
+         Effects = [.. Effects], Errors = [.. Errors]
+     };
++    public static Dictionary<string,T> Copy<T>(Dictionary<string,T>? source) =>
++        source is null ? new(StringComparer.Ordinal) : source.ToDictionary(x => x.Key, x => x.Value, StringComparer.Ordinal);
+ }
+ 
+ public static partial class Program
+@@ -73,7 +81,7 @@ public static partial class Program
+         if (operation.ValueKind != JsonValueKind.Object) { world.Errors.Add("invalid_shape"); return; }
+         if (!operation.TryGetProperty("op", out JsonElement op) || op.ValueKind != JsonValueKind.String) { world.Errors.Add("invalid_shape"); return; }
+         string name = op.GetString()!;
+-        if (name is not ("spawn" or "spawn_follower" or "remove" or "tick" or "save" or "load" or "enqueue" or "import_snapshot" or "register_policy" or "assign_policy")) { world.Errors.Add("unknown_operation"); return; }
++        if (name is not ("spawn" or "spawn_follower" or "remove" or "tick" or "save" or "load" or "enqueue" or "import_snapshot" or "register_policy" or "assign_policy" or "request" or "cancel" or "complete")) { world.Errors.Add("unknown_operation"); return; }
+         if (!ShapeIsValid(operation, name)) { world.Errors.Add("invalid_shape"); return; }
+         World next = world.Copy();
+         try
+@@ -90,9 +98,12 @@ public static partial class Program
+                 case "import_snapshot": ImportSnapshot(next, operation); break;
+                 case "register_policy": RegisterPolicy(next, operation); break;
+                 case "assign_policy": AssignPolicy(next, operation); break;
++                case "request": Request(next, operation); break;
++                case "cancel": Cancel(next, operation); break;
++                case "complete": Complete(next, operation); break;
+             }
+             world.Tick = next.Tick; world.Entities = next.Entities; world.Pending = next.Pending; world.NextOrder = next.NextOrder;
+-            world.Policies = next.Policies; world.Snapshots = next.Snapshots;
++            world.Policies = next.Policies; world.Requests = next.Requests; world.Issued = next.Issued; world.Snapshots = next.Snapshots;
+             world.Effects = next.Effects; world.Errors = next.Errors;
+         }
+         catch (OpError e) { world.Errors.Add(e.Code); }
+@@ -109,7 +120,7 @@ public static partial class Program
+     private static void Remove(World w, JsonElement o)
+     {
+         RequireKeys(o, "op", "id"); string id = StringField(o, "id"); if (!IdPattern.IsMatch(id)) throw new OpError("invalid_value");
+-        if (!w.Entities.Remove(id)) throw new OpError("missing_entity"); foreach (var key in w.Entities.Keys.ToList()) if (w.Entities[key].Target == id) w.Entities[key] = w.Entities[key] with { Target = null }; w.Pending.RemoveAll(x => x.Kind == "remove" && x.Id == id && x.At > w.Tick); w.Effects.Add($"remove:{id}");
++        if (!w.Entities.Remove(id)) throw new OpError("missing_entity"); foreach (var key in w.Entities.Keys.ToList()) if (w.Entities[key].Target == id) w.Entities[key] = w.Entities[key] with { Target = null }; w.Pending.RemoveAll(x => x.Kind == "remove" && x.Id == id && x.At > w.Tick); w.Requests.Remove(id); w.Effects.Add($"remove:{id}");
+     }
+     private static void Tick(World w, JsonElement o)
+     {
+@@ -122,7 +133,8 @@ public static partial class Program
+     private static void Save(World w, JsonElement o)
+     {
+         RequireKeys(o, "op", "name"); string name = NameField(o, "name");
+-        w.Snapshots[name] = new(w.Tick, w.Entities.ToDictionary(x => x.Key, x => x.Value with { }, StringComparer.Ordinal), [.. w.Pending], w.NextOrder, w.Policies.ToDictionary(x=>x.Key,x=>x.Value,StringComparer.Ordinal)); w.Effects.Add($"save:{name}");
++        w.Snapshots[name] = new(w.Tick, w.Entities.ToDictionary(x => x.Key, x => x.Value with { }, StringComparer.Ordinal), [.. w.Pending], w.NextOrder,
++            World.Copy(w.Policies), World.Copy(w.Requests), World.Copy(w.Issued)); w.Effects.Add($"save:{name}");
+     }
+     private static void Load(World w, JsonElement o)
+     {
+@@ -130,6 +142,7 @@ public static partial class Program
+         w.Tick = saved.Tick; w.Entities = saved.Entities.ToDictionary(x => x.Key, x => x.Value with { }, StringComparer.Ordinal); w.Effects.Add($"load:{name}");
+         w.Pending = [.. saved.Pending]; w.NextOrder = saved.NextOrder;
+         w.Policies = saved.Policies is null ? new(StringComparer.Ordinal) : saved.Policies.ToDictionary(x=>x.Key,x=>x.Value,StringComparer.Ordinal);
++        w.Requests = World.Copy(saved.Requests); w.Issued = World.Copy(saved.Issued);
+     }
+ 
+     private static string StringField(JsonElement o, string key) { if (!o.TryGetProperty(key, out var x) || x.ValueKind != JsonValueKind.String) throw new OpError("invalid_shape"); return x.GetString()!; }
+@@ -139,7 +152,7 @@ public static partial class Program
+     private static void RequireKeys(JsonElement o, params string[] keys) { if (o.EnumerateObject().Count() != keys.Length || keys.Any(k => !o.TryGetProperty(k, out _))) throw new OpError("invalid_shape"); }
+     private static bool ShapeIsValid(JsonElement o, string name)
+     {
+-        string[] fields = name switch { "spawn" => ["op", "id", "x", "velocity"], "spawn_follower" => ["op", "id", "target", "x"], "remove" => ["op", "id"], "tick" => ["op", "count"], "enqueue" => ["op", "at", "sequence", "command"], "import_snapshot" => ["op", "name", "data"], "register_policy" => ["op","name","kind"], "assign_policy" => ["op","id","name"], _ => ["op", "name"] };
++        string[] fields = name switch { "spawn" => ["op", "id", "x", "velocity"], "spawn_follower" => ["op", "id", "target", "x"], "remove" => ["op", "id"], "tick" => ["op", "count"], "enqueue" => ["op", "at", "sequence", "command"], "import_snapshot" => ["op", "name", "data"], "register_policy" => ["op","name","kind"], "assign_policy" => ["op","id","name"], "request" or "cancel" => ["op","id","sequence"], "complete" => ["op","id","sequence","value"], _ => ["op", "name"] };
+         if (o.EnumerateObject().Count() != fields.Length || fields.Any(field => !o.TryGetProperty(field, out _))) return false;
+         if (o.GetProperty("op").ValueKind != JsonValueKind.String) return false;
+         if (name == "spawn") return o.GetProperty("id").ValueKind == JsonValueKind.String && o.GetProperty("x").ValueKind == JsonValueKind.Number && o.GetProperty("velocity").ValueKind == JsonValueKind.Number;
+@@ -150,6 +163,8 @@ public static partial class Program
+         if (name == "import_snapshot") return o.GetProperty("name").ValueKind == JsonValueKind.String && o.GetProperty("data").ValueKind == JsonValueKind.Object;
+         if (name == "register_policy") return o.GetProperty("name").ValueKind == JsonValueKind.String && o.GetProperty("kind").ValueKind == JsonValueKind.String;
+         if (name == "assign_policy") return o.GetProperty("id").ValueKind == JsonValueKind.String && o.GetProperty("name").ValueKind == JsonValueKind.String;
++        if (name is "request" or "cancel") return o.GetProperty("id").ValueKind == JsonValueKind.String && o.GetProperty("sequence").ValueKind == JsonValueKind.Number;
++        if (name == "complete") return o.GetProperty("id").ValueKind == JsonValueKind.String && o.GetProperty("sequence").ValueKind == JsonValueKind.Number && o.GetProperty("value").ValueKind == JsonValueKind.Number;
+         return o.GetProperty("name").ValueKind == JsonValueKind.String;
+     }
+     private static void RegisterPolicy(World w, JsonElement o)
+@@ -165,6 +180,28 @@ public static partial class Program
+         if (!w.Policies.ContainsKey(name)) throw new OpError("invalid_value");
+         w.Entities[id] = w.Entities[id] with { Policy = name }; w.Effects.Add($"policy:{id}:{name}");
+     }
++    private static void Request(World w, JsonElement o)
++    {
++        string id = StringField(o, "id"); long sequence = NumberField(o, "sequence");
++        if (!IdPattern.IsMatch(id) || sequence < 0) throw new OpError("invalid_value");
++        if (!w.Entities.ContainsKey(id)) throw new OpError("missing_entity");
++        if (w.Issued.TryGetValue(id, out long issued) && sequence <= issued) throw new OpError("invalid_value");
++        w.Issued[id] = sequence; w.Requests[id] = sequence; w.Effects.Add($"request:{id}:{sequence}");
++    }
++    private static void Cancel(World w, JsonElement o)
++    {
++        string id = StringField(o, "id"); long sequence = NumberField(o, "sequence");
++        if (!IdPattern.IsMatch(id) || sequence < 0) throw new OpError("invalid_value");
++        if (!w.Requests.TryGetValue(id, out long pending) || pending != sequence) throw new OpError("invalid_value");
++        w.Requests.Remove(id); w.Effects.Add($"cancel:{id}");
++    }
++    private static void Complete(World w, JsonElement o)
++    {
++        string id = StringField(o, "id"); long sequence = NumberField(o, "sequence"), value = NumberField(o, "value");
++        if (!IdPattern.IsMatch(id) || sequence < 0 || value is < -1_000_000 or > 1_000_000) throw new OpError("invalid_value");
++        if (!w.Requests.TryGetValue(id, out long pending) || pending != sequence) throw new OpError("stale_completion");
++        w.Requests.Remove(id); w.Effects.Add($"complete:{id}:{value}");
++    }
+     private static string Serialize(World w)
+     {
+         var result = new { version = 1, state = new { tick = w.Tick, entities = w.Entities.OrderBy(x => x.Key, StringComparer.Ordinal).Select(LiveEntity) }, effects = w.Effects, errors = w.Errors,
+@@ -185,7 +222,7 @@ public static partial class Program
+         (_, null) => new { kind = "follower", id = y.Id, x = y.X, velocity = 0L, target = y.Target },
+         _ => new { kind = "follower", id = y.Id, x = y.X, velocity = 0L, target = y.Target, policy = y.Policy }
+     };
+-    private static object SnapshotData(Saved s) => new { version = 2, tick = s.Tick, entities = s.Entities.OrderBy(y => y.Key, StringComparer.Ordinal).Select(y => SnapshotEntity(y.Value)), pending = s.Pending.OrderBy(p => p.At).ThenBy(p => p.Sequence).ThenBy(p => p.Order).Select(p => p.Kind == "spawn" ? (object)new { at = p.At, sequence = p.Sequence, order = p.Order, command = new { op = "spawn", id = p.Id, x = p.X, velocity = p.Velocity } } : new { at = p.At, sequence = p.Sequence, order = p.Order, command = new { op = "remove", id = p.Id } }), policies = (s.Policies ?? new()).OrderBy(x => x.Key, StringComparer.Ordinal).Select(x => new { name = x.Key, kind = x.Value }) };
++    private static object SnapshotData(Saved s) => new { version = 2, tick = s.Tick, entities = s.Entities.OrderBy(y => y.Key, StringComparer.Ordinal).Select(y => SnapshotEntity(y.Value)), pending = s.Pending.OrderBy(p => p.At).ThenBy(p => p.Sequence).ThenBy(p => p.Order).Select(p => p.Kind == "spawn" ? (object)new { at = p.At, sequence = p.Sequence, order = p.Order, command = new { op = "spawn", id = p.Id, x = p.X, velocity = p.Velocity } } : new { at = p.At, sequence = p.Sequence, order = p.Order, command = new { op = "remove", id = p.Id } }), policies = (s.Policies ?? new()).OrderBy(x => x.Key, StringComparer.Ordinal).Select(x => new { name = x.Key, kind = x.Value }), requests = (s.Requests ?? new()).OrderBy(x => x.Key, StringComparer.Ordinal).Select(x => new { id = x.Key, sequence = x.Value }), issued = (s.Issued ?? new()).OrderBy(x => x.Key, StringComparer.Ordinal).Select(x => new { id = x.Key, sequence = x.Value }) };
+     private static void Enqueue(World w, JsonElement o)
+     {
+         long at = NumberField(o, "at"), sequence = NumberField(o, "sequence"); if (at <= w.Tick || at > 1_000_000 || sequence < 0) throw new OpError("invalid_value");
+@@ -198,7 +235,7 @@ public static partial class Program
+         var c = o.GetProperty("command"); if (!c.TryGetProperty("op", out var op) || op.ValueKind != JsonValueKind.String) throw new OpError("invalid_shape"); string kind = op.GetString()!;
+         if (kind is not ("spawn" or "remove"))
+         {
+-            if (kind is not ("tick" or "save" or "load" or "enqueue" or "spawn_follower" or "import_snapshot" or "register_policy" or "assign_policy")) throw new OpError("unknown_operation");
++            if (kind is not ("tick" or "save" or "load" or "enqueue" or "spawn_follower" or "import_snapshot" or "register_policy" or "assign_policy" or "request" or "cancel" or "complete")) throw new OpError("unknown_operation");
+             if (!NestedShapeValid(c, kind)) throw new OpError("invalid_shape");
+             throw new OpError("invalid_value");
+         }
+@@ -210,7 +247,7 @@ public static partial class Program
+     }
+     private static bool NestedShapeValid(JsonElement c, string kind)
+     {
+-        string[] fields = kind switch { "tick" => ["op","count"], "save" or "load" => ["op","name"], "enqueue" => ["op","at","sequence","command"], "spawn_follower" => ["op","id","target","x"], "import_snapshot" => ["op","name","data"], "register_policy" => ["op","name","kind"], "assign_policy" => ["op","id","name"], _ => [] };
++        string[] fields = kind switch { "tick" => ["op","count"], "save" or "load" => ["op","name"], "enqueue" => ["op","at","sequence","command"], "spawn_follower" => ["op","id","target","x"], "import_snapshot" => ["op","name","data"], "register_policy" => ["op","name","kind"], "assign_policy" => ["op","id","name"], "request" or "cancel" => ["op","id","sequence"], "complete" => ["op","id","sequence","value"], _ => [] };
+         if (!Exact(c, fields)) return false;
+         return kind switch { "tick" => c.GetProperty("count").ValueKind == JsonValueKind.Number,
+             "save" or "load" => c.GetProperty("name").ValueKind == JsonValueKind.String,
+@@ -219,6 +256,8 @@ public static partial class Program
+             "import_snapshot" => c.GetProperty("name").ValueKind == JsonValueKind.String && c.GetProperty("data").ValueKind == JsonValueKind.Object,
+             "register_policy" => c.GetProperty("name").ValueKind == JsonValueKind.String && c.GetProperty("kind").ValueKind == JsonValueKind.String,
+             "assign_policy" => c.GetProperty("id").ValueKind == JsonValueKind.String && c.GetProperty("name").ValueKind == JsonValueKind.String,
++            "request" or "cancel" => c.GetProperty("id").ValueKind == JsonValueKind.String && c.GetProperty("sequence").ValueKind == JsonValueKind.Number,
++            "complete" => c.GetProperty("id").ValueKind == JsonValueKind.String && c.GetProperty("sequence").ValueKind == JsonValueKind.Number && c.GetProperty("value").ValueKind == JsonValueKind.Number,
+             _ => false };
+     }
+     private static bool Exact(JsonElement o, params string[] keys) => o.ValueKind == JsonValueKind.Object && o.EnumerateObject().Count() == keys.Length && keys.All(k => o.TryGetProperty(k, out _));
+@@ -233,17 +272,41 @@ public static partial class Program
+     {
+         string name = NameField(o, "name"); var data = o.GetProperty("data"); if (data.ValueKind != JsonValueKind.Object) throw new OpError("invalid_shape");
+         bool v2 = data.TryGetProperty("version", out var ver); long t; var parsed = new Dictionary<string, Mover>(StringComparer.Ordinal);
+-        if (v2) { if (!Integer(ver, out long version) || version != 2) throw new OpError("snapshot_version"); if (!(Exact(data,"version","tick","entities","pending") || Exact(data,"version","tick","entities","pending","policies"))) throw new OpError("invalid_shape"); }
++        if (v2) { if (!Integer(ver, out long version) || version != 2) throw new OpError("snapshot_version"); if (!V2Shape(data)) throw new OpError("invalid_shape"); }
+         else if (!Exact(data,"tick","entities")) throw new OpError("invalid_shape");
+         if (!data.TryGetProperty("tick", out var tv) || tv.ValueKind != JsonValueKind.Number || !data.TryGetProperty("entities", out var entities) || entities.ValueKind != JsonValueKind.Array) throw new OpError("invalid_shape");
+         if (!Integer(tv, out t) || t < 0) throw new OpError("invalid_value");
+         var policies = new Dictionary<string,string>(StringComparer.Ordinal); if (v2 && data.TryGetProperty("policies", out var pa)) { if (pa.ValueKind != JsonValueKind.Array) throw new OpError("invalid_shape"); foreach (var p in pa.EnumerateArray()) { if (!Exact(p,"name","kind")) throw new OpError("invalid_shape"); string pn=StringField(p,"name"), pk=StringField(p,"kind"); if (!IdPattern.IsMatch(pn)||pk!="clamp10"||!policies.TryAdd(pn,pk)) throw new OpError("invalid_value"); } }
++        var requests = v2 ? ParseLedger(data, "requests") : new Dictionary<string,long>(StringComparer.Ordinal);
++        var issued = v2 ? ParseLedger(data, "issued") : new Dictionary<string,long>(StringComparer.Ordinal);
+         foreach (var e in entities.EnumerateArray()) { if (e.ValueKind != JsonValueKind.Object) throw new OpError("invalid_shape"); string kind = e.TryGetProperty("kind", out var kv) ? (kv.ValueKind == JsonValueKind.String ? kv.GetString()! : throw new OpError("invalid_shape")) : "mover"; if (v2 && kind is not ("mover" or "follower")) throw new OpError("invalid_value"); string[] keys = kind == "mover" && v2 ? ["kind","id","x","velocity"] : kind == "follower" ? ["kind","id","x","velocity","target"] : ["id","x","velocity"]; if (v2 && e.TryGetProperty("policy",out _)) keys=[..keys,"policy"]; if (!Exact(e, keys)) throw new OpError("invalid_shape"); string id = StringField(e,"id"); string? policy=e.TryGetProperty("policy",out var pv)?(pv.ValueKind==JsonValueKind.String?pv.GetString():throw new OpError("invalid_shape")):null; if (e.GetProperty("x").ValueKind != JsonValueKind.Number || e.GetProperty("velocity").ValueKind != JsonValueKind.Number) throw new OpError("invalid_shape"); string? target=e.TryGetProperty("target",out var tar)&&tar.ValueKind!=JsonValueKind.Null?(tar.ValueKind==JsonValueKind.String?tar.GetString():throw new OpError("invalid_shape")):null; if (!Integer(e.GetProperty("x"),out long x) || !Integer(e.GetProperty("velocity"),out long vel) || !IdPattern.IsMatch(id) || (target is not null && !IdPattern.IsMatch(target)) || !parsed.TryAdd(id,new(id,x,vel,kind,target,policy))) throw new OpError("invalid_value"); if (kind == "follower" && vel != 0) throw new OpError("invalid_value"); }
+         foreach (var e in parsed.Values) if (e.Policy is not null && !policies.ContainsKey(e.Policy)) throw new OpError("invalid_value");
+         foreach (var e in parsed.Values) if (e.Kind == "follower" && e.Target is not null && (e.Target == e.Id || !parsed.ContainsKey(e.Target))) throw new OpError(e.Target == e.Id ? "invalid_value" : "missing_entity");
++        foreach (var item in requests) if (!parsed.ContainsKey(item.Key)) throw new OpError("missing_entity");
++        foreach (var item in requests) if (!issued.TryGetValue(item.Key, out long sequence) || sequence != item.Value) throw new OpError("invalid_value");
+         if (v2 && data.GetProperty("pending").ValueKind != JsonValueKind.Array) throw new OpError("invalid_shape");
+-        var pending = new List<Deferred>(); long maxOrder = -1; if (v2) foreach (var p in data.GetProperty("pending").EnumerateArray()) { if (p.ValueKind != JsonValueKind.Object || !Exact(p,"at","sequence","order","command")) throw new OpError("invalid_shape"); long at=NumberField(p,"at"),seq=NumberField(p,"sequence"),order=NumberField(p,"order"); if (at <= t || at > 1_000_000 || seq < 0 || order < 0 || pending.Any(x=>x.Order==order)) throw new OpError("invalid_value"); var c=p.GetProperty("command"); if (c.ValueKind != JsonValueKind.Object || !c.TryGetProperty("op",out var cop) || cop.ValueKind != JsonValueKind.String) throw new OpError("invalid_shape"); string ck=cop.GetString()!; if (ck is not ("spawn" or "remove")) { if (ck is not ("tick" or "save" or "load" or "enqueue" or "spawn_follower" or "import_snapshot" or "register_policy" or "assign_policy")) throw new OpError("unknown_operation"); if (!NestedShapeValid(c,ck)) throw new OpError("invalid_shape"); throw new OpError("invalid_value"); } string[] ckys=ck=="spawn"?["op","id","x","velocity"]:["op","id"]; if(!Exact(c,ckys)) throw new OpError("invalid_shape"); string cid=StringField(c,"id"); long cx=ck=="spawn"?NumberField(c,"x"):0,cv=ck=="spawn"?NumberField(c,"velocity"):0; if(!IdPattern.IsMatch(cid)||(ck=="spawn"&&(cx is < -1_000_000 or > 1_000_000 || cv is < -1_000_000 or > 1_000_000))) throw new OpError("invalid_value"); pending.Add(new(at,seq,order,ck,cid,cx,cv)); maxOrder=Math.Max(maxOrder,order); }
+-        w.Snapshots[name] = new(t, parsed, pending, maxOrder < 0 ? 0 : maxOrder, policies); w.Effects.Add($"import:{name}");
++        var pending = new List<Deferred>(); long maxOrder = -1; if (v2) foreach (var p in data.GetProperty("pending").EnumerateArray()) { if (p.ValueKind != JsonValueKind.Object || !Exact(p,"at","sequence","order","command")) throw new OpError("invalid_shape"); long at=NumberField(p,"at"),seq=NumberField(p,"sequence"),order=NumberField(p,"order"); if (at <= t || at > 1_000_000 || seq < 0 || order < 0 || pending.Any(x=>x.Order==order)) throw new OpError("invalid_value"); var c=p.GetProperty("command"); if (c.ValueKind != JsonValueKind.Object || !c.TryGetProperty("op",out var cop) || cop.ValueKind != JsonValueKind.String) throw new OpError("invalid_shape"); string ck=cop.GetString()!; if (ck is not ("spawn" or "remove")) { if (ck is not ("tick" or "save" or "load" or "enqueue" or "spawn_follower" or "import_snapshot" or "register_policy" or "assign_policy" or "request" or "cancel" or "complete")) throw new OpError("unknown_operation"); if (!NestedShapeValid(c,ck)) throw new OpError("invalid_shape"); throw new OpError("invalid_value"); } string[] ckys=ck=="spawn"?["op","id","x","velocity"]:["op","id"]; if(!Exact(c,ckys)) throw new OpError("invalid_shape"); string cid=StringField(c,"id"); long cx=ck=="spawn"?NumberField(c,"x"):0,cv=ck=="spawn"?NumberField(c,"velocity"):0; if(!IdPattern.IsMatch(cid)||(ck=="spawn"&&(cx is < -1_000_000 or > 1_000_000 || cv is < -1_000_000 or > 1_000_000))) throw new OpError("invalid_value"); pending.Add(new(at,seq,order,ck,cid,cx,cv)); maxOrder=Math.Max(maxOrder,order); }
++        w.Snapshots[name] = new(t, parsed, pending, maxOrder < 0 ? 0 : maxOrder, policies, requests, issued); w.Effects.Add($"import:{name}");
++    }
++    private static bool V2Shape(JsonElement data)
++    {
++        string[] required = ["version", "tick", "entities", "pending"];
++        string[] allowed = [.. required, "policies", "requests", "issued"];
++        return required.All(k => data.TryGetProperty(k, out _)) &&
++            data.EnumerateObject().All(p => allowed.Contains(p.Name, StringComparer.Ordinal));
++    }
++    private static Dictionary<string,long> ParseLedger(JsonElement data, string key)
++    {
++        var result = new Dictionary<string,long>(StringComparer.Ordinal);
++        if (!data.TryGetProperty(key, out var array)) return result;
++        if (array.ValueKind != JsonValueKind.Array) throw new OpError("invalid_shape");
++        foreach (var item in array.EnumerateArray())
++        {
++            if (!Exact(item, "id", "sequence")) throw new OpError("invalid_shape");
++            string id = StringField(item, "id"); long sequence = NumberField(item, "sequence");
++            if (!IdPattern.IsMatch(id) || sequence < 0 || !result.TryAdd(id, sequence)) throw new OpError("invalid_value");
++        }
++        return result;
+     }
+     private static void ExecuteDeferred(World w, Deferred c)
+     {
+@@ -252,7 +315,8 @@ public static partial class Program
+         else
+         {
+             foreach (string id in w.Entities.Keys.ToList()) if (w.Entities[id].Target == c.Id) w.Entities[id] = w.Entities[id] with { Target = null };
+-            w.Pending.RemoveAll(x => x.Kind == "remove" && x.Id == c.Id && x.At > w.Tick); w.Effects.Add($"remove:{c.Id}");
++            w.Pending.RemoveAll(x => x.Kind == "remove" && x.Id == c.Id && x.At > w.Tick);
++            w.Requests.Remove(c.Id); w.Effects.Add($"remove:{c.Id}");
+         }
+     }
+     private sealed class OpError(string code) : Exception { public string Code { get; } = code; }

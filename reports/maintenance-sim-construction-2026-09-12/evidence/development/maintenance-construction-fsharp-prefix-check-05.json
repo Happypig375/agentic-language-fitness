@@ -1,0 +1,1270 @@
+{
+  "fixture_case_count": 68,
+  "fixture_sha256": "5a95aff8deeb4fc82b9f917a00b0a2eed48bfe9ce26d6124401d5bf67a643f8d",
+  "results": [
+    {
+      "case_count": 10,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 0,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 13,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 1,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "fd7aa945fb3c2156563deea155e384e86c24c9bafcd4253fe1431a68228c3788",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "fd7aa945fb3c2156563deea155e384e86c24c9bafcd4253fe1431a68228c3788",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 16,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "same-batch-remove-absent",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 2,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "6c2cbd9b9ebebaf5dec3a61ea7c99eb6a14f169878f7eea276eeba5e72d432d8",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "6c2cbd9b9ebebaf5dec3a61ea7c99eb6a14f169878f7eea276eeba5e72d432d8",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 20,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "follower-simultaneous",
+        "follower-target-null",
+        "follower-precondition-order",
+        "same-batch-remove-absent",
+        "follower-chain-simultaneous",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 3,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "b287ce12ed6bd94cb9c30940bd8d5a03f3a944b3d583a6a43a6faca1cbc01a96",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "b287ce12ed6bd94cb9c30940bd8d5a03f3a944b3d583a6a43a6faca1cbc01a96",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 29,
+      "case_ids": [
+        "public-roundtrip-v2",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "follower-simultaneous",
+        "follower-target-null",
+        "follower-precondition-order",
+        "import-v1-migration",
+        "import-v2-order",
+        "import-invalid-version",
+        "save-deep-copy",
+        "queue-outer-overflow-rollback",
+        "import-follower-reference-error",
+        "same-batch-remove-absent",
+        "follower-chain-simultaneous",
+        "inherited-save-load-pending",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape",
+        "import-pending-atomic-rejections",
+        "import-max-order-drain-reset"
+      ],
+      "checkpoint": 4,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "tick:2",
+                "save:s",
+                "remove:a",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 3,
+                        "x": 8
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 2,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 3,
+                    "x": 8
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "tick:2",
+                "save:s",
+                "remove:a",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 3,
+                        "x": 8
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 2,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 3,
+                    "x": 8
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 0
+          },
+          {
+            "actual": {
+              "effects": [
+                "import:old",
+                "load:old"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 2,
+                        "x": 5
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 3,
+                    "version": 2
+                  },
+                  "name": "old"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 2,
+                    "x": 5
+                  }
+                ],
+                "tick": 3
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:old",
+                "load:old"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 2,
+                        "x": 5
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 3,
+                    "version": 2
+                  },
+                  "name": "old"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 2,
+                    "x": 5
+                  }
+                ],
+                "tick": 3
+              },
+              "version": 1
+            },
+            "index": 16
+          },
+          {
+            "actual": {
+              "effects": [
+                "import:v"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 2
+                      },
+                      {
+                        "id": "z",
+                        "velocity": 1,
+                        "x": 0
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 1,
+                    "version": 2
+                  },
+                  "name": "v"
+                }
+              ],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:v"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 0,
+                        "x": 2
+                      },
+                      {
+                        "id": "z",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 0
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 1,
+                    "version": 2
+                  },
+                  "name": "v"
+                }
+              ],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 17
+          },
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "save:s",
+                "tick:1",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 1,
+                        "x": 1
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "save:s",
+                "tick:1",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 1
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 19
+          },
+          {
+            "actual": {
+              "effects": [
+                "import:staged",
+                "load:staged",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity"
+              ],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 1,
+                        "x": 9223372036854775807
+                      }
+                    ],
+                    "pending": [
+                      {
+                        "at": 1,
+                        "command": {
+                          "id": "z",
+                          "op": "remove"
+                        },
+                        "order": 0,
+                        "sequence": 0
+                      }
+                    ],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "staged"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": -9223372036854775808
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:staged",
+                "load:staged"
+              ],
+              "errors": [
+                "overflow"
+              ],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 9223372036854775807
+                      }
+                    ],
+                    "pending": [
+                      {
+                        "at": 1,
+                        "command": {
+                          "id": "z",
+                          "op": "remove"
+                        },
+                        "order": 0,
+                        "sequence": 0
+                      }
+                    ],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "staged"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 9223372036854775807
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 20
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape",
+                "invalid_value",
+                "invalid_value",
+                "invalid_value"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [],
+              "errors": [
+                "invalid_shape",
+                "invalid_value",
+                "invalid_value",
+                "unknown_operation"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 27
+          }
+        ],
+        "passed": false,
+        "source_sha256": {
+          "Simulation.fs": "9f8cae08f26e7c8fb16e70fdd856bc5f65d2407cd2fa0817873f58518aad2528",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "9f8cae08f26e7c8fb16e70fdd856bc5f65d2407cd2fa0817873f58518aad2528",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 35,
+      "case_ids": [
+        "public-roundtrip-policy-snapshot",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "follower-simultaneous",
+        "follower-target-null",
+        "follower-precondition-order",
+        "import-v1-migration-policy-snapshot",
+        "import-v2-order-policy-snapshot",
+        "import-invalid-version",
+        "save-deep-copy-policy-snapshot",
+        "policy-clamp",
+        "policy-errors",
+        "policy-follower-order",
+        "queue-outer-overflow-rollback-policy-snapshot",
+        "import-follower-reference-error",
+        "same-batch-remove-absent",
+        "follower-chain-simultaneous",
+        "policy-clamp-before-follower",
+        "inherited-save-load-pending-policy-snapshot",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape",
+        "import-pending-atomic-rejections",
+        "import-max-order-drain-reset-policy-snapshot",
+        "import-policy-load-clamp-save",
+        "import-policy-reference-errors"
+      ],
+      "checkpoint": 5,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "tick:2",
+                "save:s",
+                "remove:a",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 3,
+                        "x": 8
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [],
+                    "tick": 2,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 3,
+                    "x": 8
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "tick:2",
+                "save:s",
+                "remove:a",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 3,
+                        "x": 8
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [],
+                    "tick": 2,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 3,
+                    "x": 8
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 0
+          },
+          {
+            "actual": {
+              "effects": [
+                "import:old",
+                "load:old"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 2,
+                        "x": 5
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [],
+                    "tick": 3,
+                    "version": 2
+                  },
+                  "name": "old"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 2,
+                    "x": 5
+                  }
+                ],
+                "tick": 3
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:old",
+                "load:old"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 2,
+                        "x": 5
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [],
+                    "tick": 3,
+                    "version": 2
+                  },
+                  "name": "old"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 2,
+                    "x": 5
+                  }
+                ],
+                "tick": 3
+              },
+              "version": 1
+            },
+            "index": 16
+          },
+          {
+            "actual": {
+              "effects": [
+                "import:v"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 2
+                      },
+                      {
+                        "id": "z",
+                        "velocity": 1,
+                        "x": 0
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [],
+                    "tick": 1,
+                    "version": 2
+                  },
+                  "name": "v"
+                }
+              ],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:v"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 0,
+                        "x": 2
+                      },
+                      {
+                        "id": "z",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 0
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [],
+                    "tick": 1,
+                    "version": 2
+                  },
+                  "name": "v"
+                }
+              ],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 17
+          },
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "save:s",
+                "tick:1",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 1,
+                        "x": 1
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "save:s",
+                "tick:1",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 1
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 19
+          },
+          {
+            "actual": {
+              "effects": [
+                "import:staged",
+                "load:staged",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity"
+              ],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 1,
+                        "x": 9223372036854775807
+                      }
+                    ],
+                    "pending": [
+                      {
+                        "at": 1,
+                        "command": {
+                          "id": "z",
+                          "op": "remove"
+                        },
+                        "order": 0,
+                        "sequence": 0
+                      }
+                    ],
+                    "policies": [],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "staged"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": -9223372036854775808
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:staged",
+                "load:staged"
+              ],
+              "errors": [
+                "overflow"
+              ],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 9223372036854775807
+                      }
+                    ],
+                    "pending": [
+                      {
+                        "at": 1,
+                        "command": {
+                          "id": "z",
+                          "op": "remove"
+                        },
+                        "order": 0,
+                        "sequence": 0
+                      }
+                    ],
+                    "policies": [],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "staged"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 9223372036854775807
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 23
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape",
+                "invalid_value",
+                "invalid_value",
+                "invalid_value"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [],
+              "errors": [
+                "invalid_shape",
+                "invalid_value",
+                "invalid_value",
+                "unknown_operation"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 31
+          },
+          {
+            "actual": {
+              "effects": [
+                "import:policy",
+                "load:policy",
+                "save:restored",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "policy": "cap",
+                        "velocity": 3,
+                        "x": 9
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [
+                      {
+                        "kind": "clamp10",
+                        "name": "cap"
+                      }
+                    ],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "policy"
+                },
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "policy": "cap",
+                        "velocity": 3,
+                        "x": 9
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [
+                      {
+                        "kind": "clamp10",
+                        "name": "cap"
+                      }
+                    ],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "restored"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "policy": "cap",
+                    "velocity": 3,
+                    "x": 10
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:policy",
+                "load:policy",
+                "save:restored",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "policy": "cap",
+                        "velocity": 3,
+                        "x": 9
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [
+                      {
+                        "kind": "clamp10",
+                        "name": "cap"
+                      }
+                    ],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "policy"
+                },
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "policy": "cap",
+                        "velocity": 3,
+                        "x": 9
+                      }
+                    ],
+                    "pending": [],
+                    "policies": [
+                      {
+                        "kind": "clamp10",
+                        "name": "cap"
+                      }
+                    ],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "restored"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "policy": "cap",
+                    "velocity": 3,
+                    "x": 10
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 33
+          }
+        ],
+        "passed": false,
+        "source_sha256": {
+          "Simulation.fs": "f87622aa5692fedda2446429975360424b24becd2447248296cfc5c1a1cd6433",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "f87622aa5692fedda2446429975360424b24becd2447248296cfc5c1a1cd6433",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    }
+  ]
+}

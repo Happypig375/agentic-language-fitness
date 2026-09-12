@@ -1,0 +1,117 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index 9f03650..de5738e 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -7,10 +7,12 @@ open System.Text.RegularExpressions
+ open System.Collections.Generic
+ 
+ type Entity = { Id: string; X: int64; Velocity: int64 }
+-type Snapshot = { Tick: int64; Entities: Map<string, Entity> }
+-type World = { Tick: int64; Entities: Map<string, Entity>; Snapshots: Map<string, Snapshot>; Effects: string list; Errors: string list }
++type Command = SpawnCommand of string * int64 * int64 | RemoveCommand of string
++type Pending = { At:int64; Sequence:int64; Order:int64; Command:Command }
++type Snapshot = { Tick: int64; Entities: Map<string, Entity>; Pending: Pending list }
++type World = { Tick: int64; Entities: Map<string, Entity>; Snapshots: Map<string, Snapshot>; Pending: Pending list; NextOrder:int64; Effects: string list; Errors: string list }
+ 
+-let empty = { Tick = 0L; Entities = Map.empty; Snapshots = Map.empty; Effects = []; Errors = [] }
++let empty = { Tick = 0L; Entities = Map.empty; Snapshots = Map.empty; Pending=[]; NextOrder=0L; Effects = []; Errors = [] }
+ let idPattern = Regex("\A[a-z][a-z0-9_-]{0,31}\z", RegexOptions.CultureInvariant)
+ 
+ let private props (e: JsonElement) = e.EnumerateObject() |> Seq.map (fun p -> p.Name) |> Set.ofSeq
+@@ -33,18 +35,57 @@ let private fieldsHaveKinds (fields: (string * JsonValueKind) list) (e: JsonElem
+     fields |> List.forall (fun (name, kind) -> fieldHasKind name kind e)
+ let private sortedEntities (m: Map<string, Entity>) = m |> Map.toList |> List.sortWith (fun (a,_) (b,_) -> StringComparer.Ordinal.Compare(a,b)) |> List.map snd
+ let private sortedSnapshots (m: Map<string, Snapshot>) = m |> Map.toList |> List.sortWith (fun (a,_) (b,_) -> StringComparer.Ordinal.Compare(a,b))
++let private sortedPending p = p |> List.sortWith (fun a b -> let c=compare a.At b.At in if c<>0 then c else let c2=compare a.Sequence b.Sequence in if c2<>0 then c2 else compare a.Order b.Order)
+ 
+ let private addError code w = { w with Errors = w.Errors @ [code] }
+ let private addEffect effect w = { w with Effects = w.Effects @ [effect] }
+ 
++let private applyCommand command w =
++    match command with
++    | SpawnCommand(id,x,v) when w.Entities.ContainsKey id -> Error "duplicate_id"
++    | SpawnCommand(id,x,v) -> Ok { w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=v}) }
++    | RemoveCommand id when not (w.Entities.ContainsKey id) -> Error "missing_entity"
++    | RemoveCommand id -> Ok { w with Entities=w.Entities.Remove id }
++let private commandEffect command =
++    match command with
++    | SpawnCommand(id,_,_) -> "spawn:" + id
++    | RemoveCommand id -> "remove:" + id
++let private parseDeferredCommand (command:JsonElement) =
++    if command.ValueKind<>JsonValueKind.Object then Error "invalid_shape" else
++    match stringField "op" command with
++    | None -> Error "invalid_shape"
++    | Some "spawn" ->
++        if not(exact ["op";"id";"x";"velocity"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"x",JsonValueKind.Number;"velocity",JsonValueKind.Number] command) then Error "invalid_shape" else
++        match stringField "id" command,integerField "x" command,integerField "velocity" command with | Some id,Some x,Some velocity when validId id && inRange x && inRange velocity -> Ok(SpawnCommand(id,x,velocity)) | _ -> Error "invalid_value"
++    | Some "remove" ->
++        if not(exact ["op";"id"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String] command) then Error "invalid_shape" else
++        match stringField "id" command with | Some id when validId id -> Ok(RemoveCommand id) | _ -> Error "invalid_value"
++    | Some "tick" -> if exact ["op";"count"] command && fieldsHaveKinds ["op",JsonValueKind.String;"count",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
++    | Some "save" | Some "load" -> if exact ["op";"name"] command && fieldsHaveKinds ["op",JsonValueKind.String;"name",JsonValueKind.String] command then Error "invalid_value" else Error "invalid_shape"
++    | Some "enqueue" -> if exact ["op";"at";"sequence";"command"] command && fieldsHaveKinds ["op",JsonValueKind.String;"at",JsonValueKind.Number;"sequence",JsonValueKind.Number;"command",JsonValueKind.Object] command then Error "invalid_value" else Error "invalid_shape"
++    | Some _ -> Error "unknown_operation"
++
+ let private tickWorld count w =
+     try
+         let mutable entities = w.Entities
+         let mutable tick = w.Tick
++        let mutable pending = w.Pending
++        let mutable errors = w.Errors
++        let mutable effects = w.Effects
+         for _ in 1 .. int count do
++            let due, later = pending |> List.partition (fun p -> p.At = tick + 1L)
++            let mutable current = { w with Tick=tick; Entities=entities; Pending=later; Effects=effects; Errors=errors }
++            for item in sortedPending due do
++                match applyCommand item.Command current with
++                | Ok next -> current <- addEffect (commandEffect item.Command) next
++                | Error code -> current <- addError code current
++            entities <- current.Entities
+             entities <- entities |> Map.map (fun _ e -> { e with X = e.X + e.Velocity })
+             tick <- tick + 1L
+-        Ok { w with Tick = tick; Entities = entities }
++            pending <- later
++            errors <- current.Errors
++            effects <- current.Effects
++        Ok { w with Tick = tick; Entities = entities; Pending = pending; Effects = effects; Errors = errors }
+     with :? OverflowException -> Error ()
+ 
+ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+@@ -66,6 +107,19 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                             if w.Entities.ContainsKey id then Error "duplicate_id"
+                             else Ok (addEffect ("spawn:" + id) { w with Entities = w.Entities.Add(id,{Id=id;X=x;Velocity=velocity}) })
+                         | _ -> Error "invalid_value"
++            | "enqueue" ->
++                match shape ["op";"at";"sequence";"command"] with
++                | Error e -> Error e
++                | Ok () ->
++                    match integerField "at" op, integerField "sequence" op, op.TryGetProperty("command") with
++                    | Some at, Some sequence, (true, command) when at > w.Tick && at <= 1000000L && sequence >= 0L && command.ValueKind = JsonValueKind.Object ->
++                        match parseDeferredCommand command with
++                        | Error error -> Error error
++                        | Ok parsed ->
++                            if w.NextOrder=Int64.MaxValue then Error "overflow"
++                            else Ok(addEffect (sprintf "enqueue:%d:%d" at sequence) {w with Pending={At=at;Sequence=sequence;Order=w.NextOrder;Command=parsed}::w.Pending;NextOrder=w.NextOrder+1L})
++                    | Some _, Some _, (true, command) when command.ValueKind <> JsonValueKind.Object -> Error "invalid_shape"
++                    | _ -> Error "invalid_value"
+             | "remove" ->
+                 match shape ["op";"id"] with
+                 | Error e -> Error e
+@@ -97,7 +151,7 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                     else
+                         match stringField "name" op with
+                         | Some n when validId n ->
+-                            let snapshot = { Tick = w.Tick; Entities = w.Entities }
++                            let snapshot = { Tick = w.Tick; Entities = w.Entities; Pending = w.Pending }
+                             Ok (addEffect ("save:"+n) { w with Snapshots = w.Snapshots.Add(n, snapshot) })
+                         | _ -> Error "invalid_value"
+             | "load" ->
+@@ -109,7 +163,7 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                         match stringField "name" op with
+                         | Some n when validId n ->
+                             match w.Snapshots.TryFind n with
+-                            | Some s -> Ok (addEffect ("load:"+n) { w with Tick = s.Tick; Entities = s.Entities })
++                            | Some s -> Ok (addEffect ("load:"+n) { w with Tick = s.Tick; Entities = s.Entities; Pending = s.Pending })
+                             | None -> Error "missing_snapshot"
+                         | _ -> Error "invalid_value"
+             | _ -> Error "unknown_operation"

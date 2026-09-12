@@ -1,0 +1,108 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index f387ad1..533e069 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -6,7 +6,7 @@ open System.Text.Json
+ open System.Text.RegularExpressions
+ open System.Collections.Generic
+ 
+-type Entity = { Id: string; X: int64; Velocity: int64 }
++type Entity = { Id: string; X: int64; Velocity: int64; Kind: string; Target: string option }
+ type Command = SpawnCommand of string * int64 * int64 | RemoveCommand of string
+ type Pending = { At:int64; Sequence:int64; Order:int64; Command:Command }
+ type Snapshot = { Tick: int64; Entities: Map<string, Entity>; Pending: Pending list }
+@@ -43,11 +43,12 @@ let private addEffect effect w = { w with Effects = w.Effects @ [effect] }
+ let private applyCommand command w =
+     match command with
+     | SpawnCommand(id,x,v) when w.Entities.ContainsKey id -> Error "duplicate_id"
+-    | SpawnCommand(id,x,v) -> Ok { w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=v}) }
++    | SpawnCommand(id,x,v) -> Ok { w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=v;Kind="mover";Target=None}) }
+     | RemoveCommand id when not (w.Entities.ContainsKey id) -> Error "missing_entity"
+     | RemoveCommand id ->
+         let remaining=w.Pending |> List.filter(fun pending -> match pending.Command with | RemoveCommand removed when removed=id && pending.At>w.Tick -> false | _ -> true)
+-        Ok {w with Entities=w.Entities.Remove id;Pending=remaining}
++        let entities=w.Entities.Remove id |> Map.map(fun _ entity -> if entity.Target=Some id then {entity with Target=None} else entity)
++        Ok {w with Entities=entities;Pending=remaining}
+ let private commandEffect command =
+     match command with
+     | SpawnCommand(id,_,_) -> "spawn:" + id
+@@ -65,6 +66,7 @@ let private parseDeferredCommand (command:JsonElement) =
+     | Some "tick" -> if exact ["op";"count"] command && fieldsHaveKinds ["op",JsonValueKind.String;"count",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+     | Some "save" | Some "load" -> if exact ["op";"name"] command && fieldsHaveKinds ["op",JsonValueKind.String;"name",JsonValueKind.String] command then Error "invalid_value" else Error "invalid_shape"
+     | Some "enqueue" -> if exact ["op";"at";"sequence";"command"] command && fieldsHaveKinds ["op",JsonValueKind.String;"at",JsonValueKind.Number;"sequence",JsonValueKind.Number;"command",JsonValueKind.Object] command then Error "invalid_value" else Error "invalid_shape"
++    | Some "spawn_follower" -> if exact ["op";"id";"target";"x"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"target",JsonValueKind.String;"x",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+     | Some _ -> Error "unknown_operation"
+ 
+ let private tickWorld count w =
+@@ -82,7 +84,14 @@ let private tickWorld count w =
+                 | Ok next -> current <- addEffect (commandEffect item.Command) next
+                 | Error code -> current <- addError code current
+             entities <- current.Entities
+-            entities <- entities |> Map.map (fun _ e -> { e with X = e.X + e.Velocity })
++            entities <- entities |> Map.map (fun _ e -> if e.Kind = "mover" then { e with X = e.X + e.Velocity } else e)
++            let view = entities
++            entities <- entities |> Map.map (fun _ e ->
++                match e.Kind, e.Target with
++                | "follower", Some target when view.ContainsKey target ->
++                    let t = view.[target]
++                    if t.X > e.X then { e with X=e.X+1L } elif t.X < e.X then { e with X=e.X-1L } else e
++                | _ -> e)
+             tick <- tick + 1L
+             pending <- current.Pending
+             errors <- current.Errors
+@@ -107,7 +116,7 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                         match stringField "id" op, integerField "x" op, integerField "velocity" op with
+                         | Some id, Some x, Some velocity when validId id && inRange x && inRange velocity ->
+                             if w.Entities.ContainsKey id then Error "duplicate_id"
+-                            else Ok (addEffect ("spawn:" + id) { w with Entities = w.Entities.Add(id,{Id=id;X=x;Velocity=velocity}) })
++                            else Ok (addEffect ("spawn:" + id) { w with Entities = w.Entities.Add(id,{Id=id;X=x;Velocity=velocity;Kind="mover";Target=None}) })
+                         | _ -> Error "invalid_value"
+             | "enqueue" ->
+                 match shape ["op";"at";"sequence";"command"] with
+@@ -122,6 +131,16 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                             else Ok(addEffect (sprintf "enqueue:%d:%d" at sequence) {w with Pending={At=at;Sequence=sequence;Order=w.NextOrder;Command=parsed}::w.Pending;NextOrder=w.NextOrder+1L})
+                     | Some _, Some _, (true, command) when command.ValueKind <> JsonValueKind.Object -> Error "invalid_shape"
+                     | _ -> Error "invalid_value"
++            | "spawn_follower" ->
++                match shape ["op";"id";"target";"x"] with
++                | Error e -> Error e
++                | Ok () when not (fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"target",JsonValueKind.String;"x",JsonValueKind.Number] op) -> Error "invalid_shape"
++                | Ok () ->
++                    match stringField "id" op, stringField "target" op, integerField "x" op with
++                    | Some id,Some target,Some x when validId id && validId target && inRange x ->
++                        if w.Entities.ContainsKey id then Error "duplicate_id" elif not (w.Entities.ContainsKey target) then Error "missing_entity"
++                        else Ok (addEffect ("spawn:"+id) {w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=0L;Kind="follower";Target=Some target})})
++                    | _ -> Error "invalid_value"
+             | "remove" ->
+                 match shape ["op";"id"] with
+                 | Error e -> Error e
+@@ -131,8 +150,9 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                         match stringField "id" op with
+                         | Some id when validId id ->
+                             if w.Entities.ContainsKey id then
+-                                let remaining = w.Pending |> List.filter (fun pending -> match pending.Command with | RemoveCommand removed when removed=id && pending.At>w.Tick -> false | _ -> true)
+-                                Ok (addEffect ("remove:"+id) {w with Entities=w.Entities.Remove id;Pending=remaining})
++                                let remaining = w.Pending |> List.filter (fun p -> match p.Command with | RemoveCommand rid when rid = id && p.At > w.Tick -> false | _ -> true)
++                                let detached = w.Entities.Remove id |> Map.map (fun _ e -> if e.Target = Some id then {e with Target=None} else e)
++                                Ok (addEffect ("remove:"+id) {w with Entities=detached; Pending=remaining})
+                             else Error "missing_entity"
+                         | _ -> Error "invalid_value"
+             | "tick" ->
+@@ -173,7 +193,16 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+             | _ -> Error "unknown_operation"
+ 
+ let private writeEntity (j: Utf8JsonWriter) e =
+-    j.WriteStartObject(); j.WriteString("id",e.Id); j.WriteNumber("x",e.X); j.WriteNumber("velocity",e.Velocity); j.WriteEndObject()
++    j.WriteStartObject()
++    if e.Kind = "follower" then j.WriteString("kind", "follower")
++    j.WriteString("id", e.Id)
++    j.WriteNumber("x", e.X)
++    j.WriteNumber("velocity", e.Velocity)
++    if e.Kind = "follower" then
++        match e.Target with
++        | Some target -> j.WriteString("target", target)
++        | None -> j.WriteNull("target")
++    j.WriteEndObject()
+ let private response (w: World) =
+     use stream = new MemoryStream()
+     use j = new Utf8JsonWriter(stream)

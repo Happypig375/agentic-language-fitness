@@ -13,6 +13,11 @@
 /tests/test_e3a_codex_check.py text eol=lf
 /reports/workstream-e3a-codex-capability-2026-09-06/** text eol=lf
 /tests/test_e3a_implementation.py text eol=lf
+/benchmarks/maintenance-sim/** text eol=lf
+/src/alf/maintenance.py text eol=lf
+/scripts/maintenance_check.py text eol=lf
+/tests/test_maintenance.py text eol=lf
+/reports/maintenance-sim-construction-2026-09-12/** -text
 /infra/codex-no-tools/*.patch text eol=lf
 /reports/workstream-e3a-oauth-implementation-2026-09-08/** text eol=lf
 /reports/workstream-e3a-oauth-shakedown-2026-09-08/** text eol=lf

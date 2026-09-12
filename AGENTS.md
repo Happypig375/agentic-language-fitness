@@ -2,13 +2,23 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current assignment (2026-09-12): maintenance/context design decision.** Read the
-[standalone recommendation](docs/maintenance-context-design-review-2026-09-12.md)
-for current/proposed settings and the unapproved maintenance-first construction:
-one paired existing architecture, eight inherited episodes, clean conversations.
+**Current checkpoint (2026-09-12): maintenance construction; human review.**
+The user adopted model-free construction of one idiomatic F#/C# architecture
+pair and eight inherited maintenance episodes at base
+abdc68cc1eef24f0aca080bc151714f930ef8f27 (exact CI 34675819811 passed).
+Read the [construction disposition](docs/maintenance-context-design-review-2026-09-12.md)
+and [active evidence note](docs/maintenance-sim-construction-2026-09-12.md)
+for scope and artifacts. Construction now passes 27 focused tests, all 18
+trusted checkpoints, eight semantic faults and the inherited-failure audit.
+The [standalone review packet](docs/maintenance-sim-human-review-2026-09-12.md)
+contains exact settings, source links, byte measurements and retained evidence.
+Review the workload, idioms, continuation policy and proposed budgets before
+selecting a future model-free isolated maintenance adapter; none is implemented
+or authorized for candidate execution here. The F# reference envelopes are larger
+at every episode in this pair; do not tune the workload to reverse that finding.
 The [dated context](docs/research-direction-2026-09-12.md) and
 [literature ledger](docs/maintenance-literature-review-2026-09-12.md) retain evidence
-and limits. Construction adoption is next, not implementation or execution.
+and limits. The next review is before candidate execution.
 No protocol, sample allocation, framework, proxy or backend changes are adopted.
 
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
@@ -150,6 +160,11 @@ python scripts/alf.py doctor --strict
 python scripts/h0_check.py --output-dir results/h0-check
 python scripts/h_check.py --output-dir results/h1-h2-check
 python scripts/h_check.py --build-fixtures --output-dir results/h1-h2-fixtures
+python scripts/maintenance_check.py --build-fixtures --audit-failures --output-dir results/maintenance-check
 ```
 
 e3a_check builds trusted fixtures only; it is not an arbitrary-candidate evaluator. e3a_sandbox_check requires Linux Docker and the exact image; its explicit CI SDK-fixture mode is model-free, non-experimental evidence only. Use checks appropriate to the change and report their actual scope.
+
+maintenance_check reconstructs and executes only the fixed trusted construction
+fixtures, never arbitrary candidate code. It does not implement the future live
+maintenance controller or establish candidate sandbox isolation.

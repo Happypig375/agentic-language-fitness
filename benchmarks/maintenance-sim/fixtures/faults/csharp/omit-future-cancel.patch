@@ -1,0 +1,13 @@
+diff --git a/Program.cs b/Program.cs
+index 43f1c44..9969058 100644
+--- a/Program.cs
++++ b/Program.cs
+@@ -174,7 +174,7 @@ public static partial class Program
+     {
+         if (c.Kind == "spawn") { if (w.Entities.ContainsKey(c.Id)) { w.Errors.Add("duplicate_id"); return; } w.Entities[c.Id] = new(c.Id, c.X, c.Velocity); w.Effects.Add($"spawn:{c.Id}"); }
+         else if (!w.Entities.Remove(c.Id)) w.Errors.Add("missing_entity");
+-        else { w.Pending.RemoveAll(x => x.Kind == "remove" && x.Id == c.Id && x.At > w.Tick); w.Effects.Add($"remove:{c.Id}"); }
++        else w.Effects.Add($"remove:{c.Id}");
+     }
+     private sealed class OpError(string code) : Exception { public string Code { get; } = code; }
+     [GeneratedRegex(@"\A[a-z][a-z0-9_-]{0,31}\z")] private static partial Regex IdRegex();

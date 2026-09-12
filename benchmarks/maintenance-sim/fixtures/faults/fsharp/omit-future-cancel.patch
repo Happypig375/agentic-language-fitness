@@ -1,0 +1,15 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index c36e335..90ef4ca 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -45,9 +45,7 @@ let private applyCommand command w =
+     | SpawnCommand(id,x,v) when w.Entities.ContainsKey id -> Error "duplicate_id"
+     | SpawnCommand(id,x,v) -> Ok { w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=v}) }
+     | RemoveCommand id when not (w.Entities.ContainsKey id) -> Error "missing_entity"
+-    | RemoveCommand id ->
+-        let remaining=w.Pending |> List.filter(fun pending -> match pending.Command with | RemoveCommand removed when removed=id && pending.At>w.Tick -> false | _ -> true)
+-        Ok {w with Entities=w.Entities.Remove id;Pending=remaining}
++    | RemoveCommand id -> Ok {w with Entities=w.Entities.Remove id}
+ let private commandEffect command =
+     match command with
+     | SpawnCommand(id,_,_) -> "spawn:" + id

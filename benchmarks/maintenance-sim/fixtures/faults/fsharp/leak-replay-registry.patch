@@ -1,0 +1,13 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index 748c188..37088a6 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -410,7 +410,7 @@ let rec private operation (op: JsonElement) (w: World) : Result<World,string> =
+                                     | Ok next -> temporary<-next
+                             match failure with
+                             | Some error -> Error error
+-                            | None -> Ok(addEffect ("replay:"+name) {temporary with Snapshots=w.Snapshots;Effects=w.Effects;Errors=w.Errors})
++                            | None -> Ok(addEffect ("replay:"+name) {temporary with Effects=w.Effects;Errors=w.Errors})
+                     | _ -> Error "invalid_value"
+             | "load" ->
+                 match shape ["op";"name"] with

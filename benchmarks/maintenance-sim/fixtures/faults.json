@@ -1,0 +1,10 @@
+[
+  {"id":"csharp-drop-due-effects","language":"csharp","checkpoint":1,"patch":"faults/csharp/drop-due-effects.patch","witness_case_id":"queue-order"},
+  {"id":"csharp-omit-future-cancel","language":"csharp","checkpoint":2,"patch":"faults/csharp/omit-future-cancel.patch","witness_case_id":"future-remove-canceled-after-due-remove"},
+  {"id":"csharp-bypass-policy","language":"csharp","checkpoint":5,"patch":"faults/csharp/bypass-policy.patch","witness_case_id":"policy-clamp"},
+  {"id":"csharp-leak-replay-registry","language":"csharp","checkpoint":8,"patch":"faults/csharp/leak-replay-registry.patch","witness_case_id":"replay-registry-isolation"},
+  {"id":"fsharp-drop-due-effects","language":"fsharp","checkpoint":1,"patch":"faults/fsharp/drop-due-effects.patch","witness_case_id":"queue-order"},
+  {"id":"fsharp-omit-future-cancel","language":"fsharp","checkpoint":2,"patch":"faults/fsharp/omit-future-cancel.patch","witness_case_id":"future-remove-canceled-after-due-remove"},
+  {"id":"fsharp-bypass-policy","language":"fsharp","checkpoint":5,"patch":"faults/fsharp/bypass-policy.patch","witness_case_id":"policy-clamp"},
+  {"id":"fsharp-leak-replay-registry","language":"fsharp","checkpoint":8,"patch":"faults/fsharp/leak-replay-registry.patch","witness_case_id":"replay-registry-isolation"}
+]

@@ -1,0 +1,23 @@
+diff --git a/Program.cs b/Program.cs
+index abbd28e..43f1c44 100644
+--- a/Program.cs
++++ b/Program.cs
+@@ -102,7 +102,7 @@ public static partial class Program
+     private static void Remove(World w, JsonElement o)
+     {
+         RequireKeys(o, "op", "id"); string id = StringField(o, "id"); if (!IdPattern.IsMatch(id)) throw new OpError("invalid_value");
+-        if (!w.Entities.Remove(id)) throw new OpError("missing_entity"); w.Effects.Add($"remove:{id}");
++        if (!w.Entities.Remove(id)) throw new OpError("missing_entity"); w.Pending.RemoveAll(x => x.Kind == "remove" && x.Id == id && x.At > w.Tick); w.Effects.Add($"remove:{id}");
+     }
+     private static void Tick(World w, JsonElement o)
+     {
+@@ -173,7 +173,8 @@ public static partial class Program
+     private static void ExecuteDeferred(World w, Deferred c)
+     {
+         if (c.Kind == "spawn") { if (w.Entities.ContainsKey(c.Id)) { w.Errors.Add("duplicate_id"); return; } w.Entities[c.Id] = new(c.Id, c.X, c.Velocity); w.Effects.Add($"spawn:{c.Id}"); }
+-        else if (!w.Entities.Remove(c.Id)) w.Errors.Add("missing_entity"); else w.Effects.Add($"remove:{c.Id}");
++        else if (!w.Entities.Remove(c.Id)) w.Errors.Add("missing_entity");
++        else { w.Pending.RemoveAll(x => x.Kind == "remove" && x.Id == c.Id && x.At > w.Tick); w.Effects.Add($"remove:{c.Id}"); }
+     }
+     private sealed class OpError(string code) : Exception { public string Code { get; } = code; }
+     [GeneratedRegex(@"\A[a-z][a-z0-9_-]{0,31}\z")] private static partial Regex IdRegex();

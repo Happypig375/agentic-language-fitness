@@ -1,0 +1,353 @@
+{
+  "fixture_case_count": 58,
+  "results": [
+    {
+      "case_count": 10,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 0,
+      "language": "csharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      "source_sha256": {
+        "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      }
+    },
+    {
+      "case_count": 13,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 1,
+      "language": "csharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "dc55c4da16ba9167f189b35c8aaf0e445c9660e78f08f5705a68e6ed555c4476",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      "source_sha256": {
+        "Program.cs": "dc55c4da16ba9167f189b35c8aaf0e445c9660e78f08f5705a68e6ed555c4476",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      }
+    },
+    {
+      "case_count": 16,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "same-batch-remove-absent",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 2,
+      "language": "csharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "4b48a71a135a9892b42e4ab18d6eb15eae031e792506f9631602e6378cc148f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      "source_sha256": {
+        "Program.cs": "4b48a71a135a9892b42e4ab18d6eb15eae031e792506f9631602e6378cc148f5",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      }
+    },
+    {
+      "case_count": 20,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "follower-simultaneous",
+        "follower-target-null",
+        "follower-precondition-order",
+        "same-batch-remove-absent",
+        "follower-chain-simultaneous",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 3,
+      "language": "csharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "32b4bab979d9bdb1ae785ed9295595f36f5417027a4ba54620ad3c0309b79a5e",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      "source_sha256": {
+        "Program.cs": "32b4bab979d9bdb1ae785ed9295595f36f5417027a4ba54620ad3c0309b79a5e",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      }
+    },
+    {
+      "case_count": 27,
+      "case_ids": [
+        "public-roundtrip-v2",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "follower-simultaneous",
+        "follower-target-null",
+        "follower-precondition-order",
+        "import-v1-migration",
+        "import-v2-order",
+        "import-invalid-version",
+        "save-deep-copy",
+        "queue-outer-overflow-rollback",
+        "import-follower-reference-error",
+        "same-batch-remove-absent",
+        "follower-chain-simultaneous",
+        "inherited-save-load-pending",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 4,
+      "language": "csharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "a1c07548e4bc944f0fc05b8f05e0419273397bbe747327ac6b6d61908dfdcdc4",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      "source_sha256": {
+        "Program.cs": "a1c07548e4bc944f0fc05b8f05e0419273397bbe747327ac6b6d61908dfdcdc4",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      }
+    },
+    {
+      "case_count": 31,
+      "case_ids": [
+        "public-roundtrip-policy-snapshot",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "follower-simultaneous",
+        "follower-target-null",
+        "follower-precondition-order",
+        "import-v1-migration-policy-snapshot",
+        "import-v2-order-policy-snapshot",
+        "import-invalid-version",
+        "save-deep-copy-policy-snapshot",
+        "policy-clamp",
+        "policy-errors",
+        "policy-follower-order",
+        "queue-outer-overflow-rollback-policy-snapshot",
+        "import-follower-reference-error",
+        "same-batch-remove-absent",
+        "follower-chain-simultaneous",
+        "policy-clamp-before-follower",
+        "inherited-save-load-pending-policy-snapshot",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 5,
+      "language": "csharp",
+      "result": {
+        "category": "semantic",
+        "differences": [
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "register:cap",
+                "policy:a:cap",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "policy": "cap",
+                    "velocity": 3,
+                    "x": 12
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "register:cap",
+                "policy:a:cap",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "policy": "cap",
+                    "velocity": 3,
+                    "x": 10
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 20
+          },
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "spawn:b",
+                "register:cap",
+                "policy:a:cap",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "policy": "cap",
+                    "velocity": 5,
+                    "x": 14
+                  },
+                  {
+                    "id": "b",
+                    "kind": "follower",
+                    "target": "a",
+                    "velocity": 0,
+                    "x": 13
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "spawn:b",
+                "register:cap",
+                "policy:a:cap",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "policy": "cap",
+                    "velocity": 5,
+                    "x": 10
+                  },
+                  {
+                    "id": "b",
+                    "kind": "follower",
+                    "target": "a",
+                    "velocity": 0,
+                    "x": 11
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 27
+          }
+        ],
+        "passed": false,
+        "source_sha256": {
+          "Program.cs": "82f3ad0f983f0a5d5ab5e0e9844e11720df1e2ce2687f60bcdf221e1afed2aae",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      "source_sha256": {
+        "Program.cs": "82f3ad0f983f0a5d5ab5e0e9844e11720df1e2ce2687f60bcdf221e1afed2aae",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      }
+    }
+  ]
+}

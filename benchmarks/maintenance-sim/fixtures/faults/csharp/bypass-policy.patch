@@ -1,0 +1,14 @@
+diff --git a/Program.cs b/Program.cs
+index 7f43f11..2c26f96 100644
+--- a/Program.cs
++++ b/Program.cs
+@@ -117,8 +117,7 @@ public static partial class Program
+         for (long i = 0; i < count; i++) { w.Tick = checked(w.Tick + 1); var due = w.Pending.Where(x => x.At == w.Tick).OrderBy(x => x.Sequence).ThenBy(x => x.Order).ToList(); w.Pending.RemoveAll(x => x.At == w.Tick); foreach (var command in due) ExecuteDeferred(w, command); var moved = new Dictionary<string, Mover>(StringComparer.Ordinal); foreach (var (id, entity) in w.Entities) { long next = entity.Kind == "mover" ? checked(entity.X + entity.Velocity) : entity.X; if (PolicyKind(w, entity) == "clamp10") next = Math.Min(next, 10); moved[id] = entity with { X = next }; } var positions = moved.ToDictionary(x => x.Key, x => x.Value.X, StringComparer.Ordinal); foreach (var (id, entity) in moved.Where(x => x.Value.Kind == "follower")) { long step = entity.Target is string target && positions.TryGetValue(target, out long tx) ? (tx > entity.X ? 1 : tx < entity.X ? -1 : 0) : 0; long next = checked(entity.X + step); if (PolicyKind(w, entity) == "clamp10") next = Math.Min(next, 10); moved[id] = entity with { X = next }; } w.Entities = moved; }
+         w.Effects.Add($"tick:{count}");
+     }
+-    private static string? PolicyKind(World w, Mover entity) =>
+-        entity.Policy is string name && w.Policies.TryGetValue(name, out string? kind) ? kind : null;
++    private static string? PolicyKind(World w, Mover entity) => null;
+     private static void Save(World w, JsonElement o)
+     {
+         RequireKeys(o, "op", "name"); string name = NameField(o, "name");

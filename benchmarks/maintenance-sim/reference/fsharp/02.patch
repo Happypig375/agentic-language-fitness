@@ -1,0 +1,35 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index de5738e..f387ad1 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -45,7 +45,9 @@ let private applyCommand command w =
+     | SpawnCommand(id,x,v) when w.Entities.ContainsKey id -> Error "duplicate_id"
+     | SpawnCommand(id,x,v) -> Ok { w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=v}) }
+     | RemoveCommand id when not (w.Entities.ContainsKey id) -> Error "missing_entity"
+-    | RemoveCommand id -> Ok { w with Entities=w.Entities.Remove id }
++    | RemoveCommand id ->
++        let remaining=w.Pending |> List.filter(fun pending -> match pending.Command with | RemoveCommand removed when removed=id && pending.At>w.Tick -> false | _ -> true)
++        Ok {w with Entities=w.Entities.Remove id;Pending=remaining}
+ let private commandEffect command =
+     match command with
+     | SpawnCommand(id,_,_) -> "spawn:" + id
+@@ -82,7 +84,7 @@ let private tickWorld count w =
+             entities <- current.Entities
+             entities <- entities |> Map.map (fun _ e -> { e with X = e.X + e.Velocity })
+             tick <- tick + 1L
+-            pending <- later
++            pending <- current.Pending
+             errors <- current.Errors
+             effects <- current.Effects
+         Ok { w with Tick = tick; Entities = entities; Pending = pending; Effects = effects; Errors = errors }
+@@ -128,7 +130,9 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                     else
+                         match stringField "id" op with
+                         | Some id when validId id ->
+-                            if w.Entities.ContainsKey id then Ok (addEffect ("remove:"+id) {w with Entities=w.Entities.Remove id})
++                            if w.Entities.ContainsKey id then
++                                let remaining = w.Pending |> List.filter (fun pending -> match pending.Command with | RemoveCommand removed when removed=id && pending.At>w.Tick -> false | _ -> true)
++                                Ok (addEffect ("remove:"+id) {w with Entities=w.Entities.Remove id;Pending=remaining})
+                             else Error "missing_entity"
+                         | _ -> Error "invalid_value"
+             | "tick" ->

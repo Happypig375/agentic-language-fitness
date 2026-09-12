@@ -1,0 +1,129 @@
+diff --git a/Program.cs b/Program.cs
+index 89b525f..abbd28e 100644
+--- a/Program.cs
++++ b/Program.cs
+@@ -4,12 +4,15 @@ using System.Text.RegularExpressions;
+ namespace Simulation;
+ 
+ public sealed record Mover(string Id, long X, long Velocity);
+-public sealed record Saved(long Tick, Dictionary<string, Mover> Entities);
++public sealed record Deferred(long At, long Sequence, long Order, string Kind, string Id, long X, long Velocity);
++public sealed record Saved(long Tick, Dictionary<string, Mover> Entities, List<Deferred> Pending, long NextOrder);
+ 
+ public sealed class World
+ {
+     public long Tick;
+     public Dictionary<string, Mover> Entities = new(StringComparer.Ordinal);
++    public List<Deferred> Pending = [];
++    public long NextOrder;
+     public Dictionary<string, Saved> Snapshots = new(StringComparer.Ordinal);
+     public List<string> Effects = [];
+     public List<string> Errors = [];
+@@ -18,8 +21,9 @@ public sealed class World
+     {
+         Tick = Tick,
+         Entities = Entities.ToDictionary(x => x.Key, x => x.Value with { }, StringComparer.Ordinal),
++        Pending = [.. Pending], NextOrder = NextOrder,
+         Snapshots = Snapshots.ToDictionary(x => x.Key,
+-            x => new Saved(x.Value.Tick, x.Value.Entities.ToDictionary(y => y.Key, y => y.Value with { }, StringComparer.Ordinal)), StringComparer.Ordinal),
++            x => new Saved(x.Value.Tick, x.Value.Entities.ToDictionary(y => y.Key, y => y.Value with { }, StringComparer.Ordinal), [.. x.Value.Pending], x.Value.NextOrder), StringComparer.Ordinal),
+         Effects = [.. Effects], Errors = [.. Errors]
+     };
+ }
+@@ -67,7 +71,7 @@ public static partial class Program
+         if (operation.ValueKind != JsonValueKind.Object) { world.Errors.Add("invalid_shape"); return; }
+         if (!operation.TryGetProperty("op", out JsonElement op) || op.ValueKind != JsonValueKind.String) { world.Errors.Add("invalid_shape"); return; }
+         string name = op.GetString()!;
+-        if (name is not ("spawn" or "remove" or "tick" or "save" or "load")) { world.Errors.Add("unknown_operation"); return; }
++        if (name is not ("spawn" or "remove" or "tick" or "save" or "load" or "enqueue")) { world.Errors.Add("unknown_operation"); return; }
+         if (!ShapeIsValid(operation, name)) { world.Errors.Add("invalid_shape"); return; }
+         World next = world.Copy();
+         try
+@@ -79,8 +83,9 @@ public static partial class Program
+                 case "tick": Tick(next, operation); break;
+                 case "save": Save(next, operation); break;
+                 case "load": Load(next, operation); break;
++                case "enqueue": Enqueue(next, operation); break;
+             }
+-            world.Tick = next.Tick; world.Entities = next.Entities; world.Snapshots = next.Snapshots;
++            world.Tick = next.Tick; world.Entities = next.Entities; world.Pending = next.Pending; world.NextOrder = next.NextOrder; world.Snapshots = next.Snapshots;
+             world.Effects = next.Effects; world.Errors = next.Errors;
+         }
+         catch (OpError e) { world.Errors.Add(e.Code); }
+@@ -102,19 +107,19 @@ public static partial class Program
+     private static void Tick(World w, JsonElement o)
+     {
+         RequireKeys(o, "op", "count"); long count = NumberField(o, "count"); if (count is < 1 or > 1000) throw new OpError("invalid_value");
+-        long t = checked(w.Tick + count); var moved = new Dictionary<string, Mover>(StringComparer.Ordinal);
+-        foreach (var (id, entity) in w.Entities) moved[id] = entity with { X = checked(entity.X + checked(entity.Velocity * count)) };
+-        w.Tick = t; w.Entities = moved; w.Effects.Add($"tick:{count}");
++        for (long i = 0; i < count; i++) { w.Tick = checked(w.Tick + 1); var due = w.Pending.Where(x => x.At == w.Tick).OrderBy(x => x.At).ThenBy(x => x.Sequence).ThenBy(x => x.Order).ToList(); w.Pending.RemoveAll(x => x.At == w.Tick); foreach (var command in due) ExecuteDeferred(w, command); var moved = new Dictionary<string, Mover>(StringComparer.Ordinal); foreach (var (id, entity) in w.Entities) moved[id] = entity with { X = checked(entity.X + entity.Velocity) }; w.Entities = moved; }
++        w.Effects.Add($"tick:{count}");
+     }
+     private static void Save(World w, JsonElement o)
+     {
+         RequireKeys(o, "op", "name"); string name = NameField(o, "name");
+-        w.Snapshots[name] = new(w.Tick, w.Entities.ToDictionary(x => x.Key, x => x.Value with { }, StringComparer.Ordinal)); w.Effects.Add($"save:{name}");
++        w.Snapshots[name] = new(w.Tick, w.Entities.ToDictionary(x => x.Key, x => x.Value with { }, StringComparer.Ordinal), [.. w.Pending], w.NextOrder); w.Effects.Add($"save:{name}");
+     }
+     private static void Load(World w, JsonElement o)
+     {
+         RequireKeys(o, "op", "name"); string name = NameField(o, "name"); if (!w.Snapshots.TryGetValue(name, out var saved)) throw new OpError("missing_snapshot");
+         w.Tick = saved.Tick; w.Entities = saved.Entities.ToDictionary(x => x.Key, x => x.Value with { }, StringComparer.Ordinal); w.Effects.Add($"load:{name}");
++        w.Pending = [.. saved.Pending]; w.NextOrder = saved.NextOrder;
+     }
+ 
+     private static string StringField(JsonElement o, string key) { if (!o.TryGetProperty(key, out var x) || x.ValueKind != JsonValueKind.String) throw new OpError("invalid_shape"); return x.GetString()!; }
+@@ -124,12 +129,13 @@ public static partial class Program
+     private static void RequireKeys(JsonElement o, params string[] keys) { if (o.EnumerateObject().Count() != keys.Length || keys.Any(k => !o.TryGetProperty(k, out _))) throw new OpError("invalid_shape"); }
+     private static bool ShapeIsValid(JsonElement o, string name)
+     {
+-        string[] fields = name switch { "spawn" => ["op", "id", "x", "velocity"], "remove" => ["op", "id"], "tick" => ["op", "count"], _ => ["op", "name"] };
++        string[] fields = name switch { "spawn" => ["op", "id", "x", "velocity"], "remove" => ["op", "id"], "tick" => ["op", "count"], "enqueue" => ["op", "at", "sequence", "command"], _ => ["op", "name"] };
+         if (o.EnumerateObject().Count() != fields.Length || fields.Any(field => !o.TryGetProperty(field, out _))) return false;
+         if (o.GetProperty("op").ValueKind != JsonValueKind.String) return false;
+         if (name == "spawn") return o.GetProperty("id").ValueKind == JsonValueKind.String && o.GetProperty("x").ValueKind == JsonValueKind.Number && o.GetProperty("velocity").ValueKind == JsonValueKind.Number;
+         if (name == "remove") return o.GetProperty("id").ValueKind == JsonValueKind.String;
+         if (name == "tick") return o.GetProperty("count").ValueKind == JsonValueKind.Number;
++        if (name == "enqueue") return o.GetProperty("at").ValueKind == JsonValueKind.Number && o.GetProperty("sequence").ValueKind == JsonValueKind.Number && o.GetProperty("command").ValueKind == JsonValueKind.Object;
+         return o.GetProperty("name").ValueKind == JsonValueKind.String;
+     }
+     private static string Serialize(World w)
+@@ -138,6 +144,37 @@ public static partial class Program
+             snapshots = w.Snapshots.OrderBy(x => x.Key, StringComparer.Ordinal).Select(x => new { name = x.Key, tick = x.Value.Tick, entities = x.Value.Entities.OrderBy(y => y.Key, StringComparer.Ordinal).Select(y => new { id = y.Value.Id, x = y.Value.X, velocity = y.Value.Velocity }) }) };
+         return JsonSerializer.Serialize(result, JsonOptions);
+     }
++    private static void Enqueue(World w, JsonElement o)
++    {
++        long at = NumberField(o, "at"), sequence = NumberField(o, "sequence"); if (at <= w.Tick || at > 1_000_000 || sequence < 0) throw new OpError("invalid_value");
++        if (w.NextOrder == long.MaxValue) throw new OverflowException();
++        var c = o.GetProperty("command"); if (!c.TryGetProperty("op", out var op) || op.ValueKind != JsonValueKind.String) throw new OpError("invalid_shape"); string kind = op.GetString()!;
++        if (kind is not ("spawn" or "remove"))
++        {
++            if (kind is not ("tick" or "save" or "load" or "enqueue")) throw new OpError("unknown_operation");
++            if (!NestedShapeValid(c, kind)) throw new OpError("invalid_shape");
++            throw new OpError("invalid_value");
++        }
++        string[] keys = kind == "spawn" ? ["op", "id", "x", "velocity"] : ["op", "id"]; if (c.EnumerateObject().Count() != keys.Length || keys.Any(k => !c.TryGetProperty(k, out _))) throw new OpError("invalid_shape");
++        string id = StringField(c, "id"); long x = kind == "spawn" ? NumberField(c, "x") : 0, velocity = kind == "spawn" ? NumberField(c, "velocity") : 0;
++        if (!IdPattern.IsMatch(id) || (kind == "spawn" && (x is < -1_000_000 or > 1_000_000 || velocity is < -1_000_000 or > 1_000_000)) || (kind == "remove" && c.GetProperty("id").ValueKind != JsonValueKind.String)) throw new OpError("invalid_value");
++        w.Pending.Add(new(at, sequence, w.NextOrder++, kind, id, x, velocity)); w.Effects.Add($"enqueue:{at}:{sequence}");
++    }
++    private static bool NestedShapeValid(JsonElement c, string kind)
++    {
++        string[] fields = kind switch { "tick" => ["op","count"], "save" or "load" => ["op","name"], "enqueue" => ["op","at","sequence","command"], _ => [] };
++        if (!Exact(c, fields)) return false;
++        return kind switch { "tick" => c.GetProperty("count").ValueKind == JsonValueKind.Number,
++            "save" or "load" => c.GetProperty("name").ValueKind == JsonValueKind.String,
++            "enqueue" => c.GetProperty("at").ValueKind == JsonValueKind.Number && c.GetProperty("sequence").ValueKind == JsonValueKind.Number && c.GetProperty("command").ValueKind == JsonValueKind.Object,
++            _ => false };
++    }
++    private static bool Exact(JsonElement o, params string[] keys) => o.ValueKind == JsonValueKind.Object && o.EnumerateObject().Count() == keys.Length && keys.All(k => o.TryGetProperty(k, out _));
++    private static void ExecuteDeferred(World w, Deferred c)
++    {
++        if (c.Kind == "spawn") { if (w.Entities.ContainsKey(c.Id)) { w.Errors.Add("duplicate_id"); return; } w.Entities[c.Id] = new(c.Id, c.X, c.Velocity); w.Effects.Add($"spawn:{c.Id}"); }
++        else if (!w.Entities.Remove(c.Id)) w.Errors.Add("missing_entity"); else w.Effects.Add($"remove:{c.Id}");
++    }
+     private sealed class OpError(string code) : Exception { public string Code { get; } = code; }
+     [GeneratedRegex(@"\A[a-z][a-z0-9_-]{0,31}\z")] private static partial Regex IdRegex();
+ }

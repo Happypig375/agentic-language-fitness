@@ -1,0 +1,218 @@
+diff --git a/Simulation.fs b/Simulation.fs
+index 42765b0..3de85d3 100644
+--- a/Simulation.fs
++++ b/Simulation.fs
+@@ -6,13 +6,13 @@ open System.Text.Json
+ open System.Text.RegularExpressions
+ open System.Collections.Generic
+ 
+-type Entity = { Id: string; X: int64; Velocity: int64; Kind: string; Target: string option }
++type Entity = { Id: string; X: int64; Velocity: int64; Kind: string; Target: string option; Policy: string option }
+ type Command = SpawnCommand of string * int64 * int64 | RemoveCommand of string
+ type Pending = { At:int64; Sequence:int64; Order:int64; Command:Command }
+-type Snapshot = { Tick: int64; Entities: Map<string, Entity>; Pending: Pending list }
+-type World = { Tick: int64; Entities: Map<string, Entity>; Snapshots: Map<string, Snapshot>; Pending: Pending list; NextOrder:int64; Effects: string list; Errors: string list }
++type Snapshot = { Tick: int64; Entities: Map<string, Entity>; Pending: Pending list; Policies: Map<string,string> }
++type World = { Tick: int64; Entities: Map<string, Entity>; Snapshots: Map<string, Snapshot>; Pending: Pending list; NextOrder:int64; Policies: Map<string,string>; Effects: string list; Errors: string list }
+ 
+-let empty = { Tick = 0L; Entities = Map.empty; Snapshots = Map.empty; Pending=[]; NextOrder=0L; Effects = []; Errors = [] }
++let empty = { Tick = 0L; Entities = Map.empty; Snapshots = Map.empty; Pending=[]; NextOrder=0L; Policies=Map.empty; Effects = []; Errors = [] }
+ let idPattern = Regex("\A[a-z][a-z0-9_-]{0,31}\z", RegexOptions.CultureInvariant)
+ 
+ let private props (e: JsonElement) = e.EnumerateObject() |> Seq.map (fun p -> p.Name) |> Set.ofSeq
+@@ -39,22 +39,26 @@ let private sortedPending p = p |> List.sortWith (fun a b -> let c=compare a.At
+ let private parseEntity (e:JsonElement) =
+     if e.ValueKind <> JsonValueKind.Object then Error "invalid_shape" else
+     let target = match e.TryGetProperty("target") with | true,v when v.ValueKind=JsonValueKind.Null -> Some None | true,v when v.ValueKind=JsonValueKind.String -> Some(Some(v.GetString())) | false,_ -> Some None | _ -> None
+-    let shapeValid = match stringField "kind" e with | Some "mover" -> exact ["kind";"id";"x";"velocity"] e | Some "follower" -> exact ["kind";"id";"x";"velocity";"target"] e | Some _ -> exact ["kind";"id";"x";"velocity"] e || exact ["kind";"id";"x";"velocity";"target"] e | None -> exact ["id";"x";"velocity"] e
++    let policy = stringField "policy" e
++    let moverShape = exact ["kind";"id";"x";"velocity"] e || exact ["kind";"id";"x";"velocity";"policy"] e
++    let followerShape = exact ["kind";"id";"x";"velocity";"target"] e || exact ["kind";"id";"x";"velocity";"target";"policy"] e
++    let shapeValid = match stringField "kind" e with | Some "mover" -> moverShape | Some "follower" -> followerShape | Some _ -> moverShape || followerShape | None -> exact ["id";"x";"velocity"] e
+     if not shapeValid then Error "invalid_shape" else
+     let optionalKindValid (name:string) (kind:JsonValueKind) = match e.TryGetProperty(name) with | false,_ -> true | true,value -> value.ValueKind=kind
+     let targetKindValid = match e.TryGetProperty("target") with | false,_ -> true | true,value -> value.ValueKind=JsonValueKind.String || value.ValueKind=JsonValueKind.Null
+-    if not (fieldsHaveKinds ["id",JsonValueKind.String;"x",JsonValueKind.Number;"velocity",JsonValueKind.Number] e && optionalKindValid "kind" JsonValueKind.String && targetKindValid) then Error "invalid_shape" else
++    if not (fieldsHaveKinds ["id",JsonValueKind.String;"x",JsonValueKind.Number;"velocity",JsonValueKind.Number] e && optionalKindValid "kind" JsonValueKind.String && optionalKindValid "policy" JsonValueKind.String && targetKindValid) then Error "invalid_shape" else
+     match stringField "kind" e, stringField "id" e, target, integerField "x" e, integerField "velocity" e with
+-    | Some "mover",Some id,Some None,Some x,Some v when exact ["kind";"id";"x";"velocity"] e && validId id -> Ok {Id=id;X=x;Velocity=v;Kind="mover";Target=None}
+-    | Some "follower",Some id,Some parsedTarget,Some x,Some 0L when exact ["kind";"id";"x";"velocity";"target"] e && validId id && Option.forall validId parsedTarget -> Ok {Id=id;X=x;Velocity=0L;Kind="follower";Target=parsedTarget}
+-    | None,Some id,Some None,Some x,Some v when exact ["id";"x";"velocity"] e && validId id -> Ok {Id=id;X=x;Velocity=v;Kind="mover";Target=None}
++    | Some "mover",Some id,Some None,Some x,Some v when validId id -> Ok {Id=id;X=x;Velocity=v;Kind="mover";Target=None;Policy=policy}
++    | Some "follower",Some id,Some parsedTarget,Some x,Some 0L when validId id && Option.forall validId parsedTarget -> Ok {Id=id;X=x;Velocity=0L;Kind="follower";Target=parsedTarget;Policy=policy}
++    | None,Some id,Some None,Some x,Some v when exact ["id";"x";"velocity"] e && validId id -> Ok {Id=id;X=x;Velocity=v;Kind="mover";Target=None;Policy=None}
+     | _ -> Error "invalid_value"
+ let private parseImported (_name:string) (data:JsonElement) =
+     if data.ValueKind <> JsonValueKind.Object then Error "invalid_shape"
+     else
+       let hasVersion,_ = data.TryGetProperty("version")
+       let expected = if hasVersion then ["version";"tick";"entities";"pending"] else ["tick";"entities"]
+-      if not (exact expected data) then Error "invalid_shape"
++      if hasVersion && not (exact expected data || exact (expected @ ["policies"]) data) then Error "invalid_shape"
++      elif not hasVersion && not (exact expected data) then Error "invalid_shape"
+       elif hasVersion && (data.GetProperty("version").ValueKind <> JsonValueKind.Number || data.GetProperty("version").GetRawText() <> "2") then Error "snapshot_version"
+       else
+         let tick = integerField "tick" data
+@@ -90,17 +94,35 @@ let private parseImported (_name:string) (data:JsonElement) =
+                       | Some "enqueue" -> if exact ["op";"at";"sequence";"command"] command && fieldsHaveKinds ["op",JsonValueKind.String;"at",JsonValueKind.Number;"sequence",JsonValueKind.Number;"command",JsonValueKind.Object] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some "spawn_follower" -> if exact ["op";"id";"target";"x"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"target",JsonValueKind.String;"x",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some "import_snapshot" -> if exact ["op";"name";"data"] command && fieldsHaveKinds ["op",JsonValueKind.String;"name",JsonValueKind.String;"data",JsonValueKind.Object] command then Error "invalid_value" else Error "invalid_shape"
++                      | Some "register_policy" -> if exact ["op";"name";"kind"] command && fieldsHaveKinds ["op",JsonValueKind.String;"name",JsonValueKind.String;"kind",JsonValueKind.String] command then Error "invalid_value" else Error "invalid_shape"
++                      | Some "assign_policy" -> if exact ["op";"id";"name"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"name",JsonValueKind.String] command then Error "invalid_value" else Error "invalid_shape"
+                       | Some unknown when unknown<>"spawn" && unknown<>"remove" -> Error "unknown_operation"
+                       | Some _ -> Error "invalid_shape"
+                       | None -> Error "invalid_shape"
+                   | _ -> Error "invalid_value"
+               let pendingResults = if hasVersion then data.GetProperty("pending").EnumerateArray() |> Seq.map parsePending |> Seq.toList else []
+-              match pendingResults |> List.tryPick (function Error error -> Some error | _ -> None) with
+-              | Some error -> Error error
+-              | None ->
++              let policyResults =
++                  if hasVersion && (data.TryGetProperty("policies") |> fst) then
++                      let items = data.GetProperty("policies")
++                      if items.ValueKind <> JsonValueKind.Array then [Error "invalid_shape"]
++                      else
++                          items.EnumerateArray()
++                          |> Seq.map (fun policy ->
++                              if policy.ValueKind <> JsonValueKind.Object || not (exact ["name";"kind"] policy) || not (fieldsHaveKinds ["name",JsonValueKind.String;"kind",JsonValueKind.String] policy) then Error "invalid_shape"
++                              else
++                                  match stringField "name" policy, stringField "kind" policy with
++                                  | Some name, Some "clamp10" when validId name -> Ok (name,"clamp10")
++                                  | _ -> Error "invalid_value")
++                          |> Seq.toList
++                  else []
++              match pendingResults |> List.tryPick (function Error error -> Some error | _ -> None), policyResults |> List.tryPick (function Error error -> Some error | _ -> None) with
++              | Some error,_ | _,Some error -> Error error
++              | None,None ->
+                   let pending = pendingResults |> List.choose (function Ok item -> Some item | _ -> None)
+-                  if pending |> List.map (fun item -> item.Order) |> Set.ofList |> Set.count <> pending.Length then Error "invalid_value"
+-                  else Ok {Tick=tick.Value;Entities=es |> List.map(fun e->e.Id,e) |> Map.ofList;Pending=pending}
++                  let pairs=policyResults |> List.choose(function Ok pair->Some pair | _->None)
++                  let policies=Map.ofList pairs
++                  if pending |> List.map (fun item -> item.Order) |> Set.ofList |> Set.count <> pending.Length || policies.Count<>pairs.Length || es |> List.exists(fun e->e.Policy |> Option.exists(fun p->not(policies.ContainsKey p))) then Error "invalid_value"
++                  else Ok {Tick=tick.Value;Entities=es |> List.map(fun e->e.Id,e) |> Map.ofList;Pending=pending;Policies=policies}
+ 
+ let private addError code w = { w with Errors = w.Errors @ [code] }
+ let private addEffect effect w = { w with Effects = w.Effects @ [effect] }
+@@ -108,7 +130,7 @@ let private addEffect effect w = { w with Effects = w.Effects @ [effect] }
+ let private applyCommand command w =
+     match command with
+     | SpawnCommand(id,x,v) when w.Entities.ContainsKey id -> Error "duplicate_id"
+-    | SpawnCommand(id,x,v) -> Ok { w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=v;Kind="mover";Target=None}) }
++    | SpawnCommand(id,x,v) -> Ok { w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=v;Kind="mover";Target=None;Policy=None}) }
+     | RemoveCommand id when not (w.Entities.ContainsKey id) -> Error "missing_entity"
+     | RemoveCommand id ->
+         let remaining=w.Pending |> List.filter(fun pending -> match pending.Command with | RemoveCommand removed when removed=id && pending.At>w.Tick -> false | _ -> true)
+@@ -133,6 +155,8 @@ let private parseDeferredCommand (command:JsonElement) =
+     | Some "enqueue" -> if exact ["op";"at";"sequence";"command"] command && fieldsHaveKinds ["op",JsonValueKind.String;"at",JsonValueKind.Number;"sequence",JsonValueKind.Number;"command",JsonValueKind.Object] command then Error "invalid_value" else Error "invalid_shape"
+     | Some "spawn_follower" -> if exact ["op";"id";"target";"x"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"target",JsonValueKind.String;"x",JsonValueKind.Number] command then Error "invalid_value" else Error "invalid_shape"
+     | Some "import_snapshot" -> if exact ["op";"name";"data"] command && fieldsHaveKinds ["op",JsonValueKind.String;"name",JsonValueKind.String;"data",JsonValueKind.Object] command then Error "invalid_value" else Error "invalid_shape"
++    | Some "register_policy" -> if exact ["op";"name";"kind"] command && fieldsHaveKinds ["op",JsonValueKind.String;"name",JsonValueKind.String;"kind",JsonValueKind.String] command then Error "invalid_value" else Error "invalid_shape"
++    | Some "assign_policy" -> if exact ["op";"id";"name"] command && fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"name",JsonValueKind.String] command then Error "invalid_value" else Error "invalid_shape"
+     | Some _ -> Error "unknown_operation"
+ let private nextPendingOrder pending =
+     match pending with
+@@ -156,13 +180,14 @@ let private tickWorld count w =
+                 | Ok next -> current <- addEffect (commandEffect item.Command) next
+                 | Error code -> current <- addError code current
+             entities <- current.Entities
+-            entities <- entities |> Map.map (fun _ e -> if e.Kind = "mover" then { e with X = Checked.(+) e.X e.Velocity } else e)
++            let applyPolicy e next = match e.Policy with | Some policy when w.Policies.TryFind policy=Some "clamp10" -> min next 10L | _ -> next
++            entities <- entities |> Map.map (fun _ e -> if e.Kind = "mover" then {e with X=applyPolicy e (Checked.(+) e.X e.Velocity)} else e)
+             let view = entities
+             entities <- entities |> Map.map (fun _ e ->
+                 match e.Kind, e.Target with
+                 | "follower", Some target when view.ContainsKey target ->
+                     let t = view.[target]
+-                    if t.X > e.X then { e with X=Checked.(+) e.X 1L } elif t.X < e.X then { e with X=Checked.(-) e.X 1L } else e
++                    if t.X > e.X then {e with X=applyPolicy e (Checked.(+) e.X 1L)} elif t.X < e.X then {e with X=applyPolicy e (Checked.(-) e.X 1L)} else {e with X=applyPolicy e e.X}
+                 | _ -> e)
+             tick <- Checked.(+) tick 1L
+             pending <- current.Pending
+@@ -188,7 +213,7 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                         match stringField "id" op, integerField "x" op, integerField "velocity" op with
+                         | Some id, Some x, Some velocity when validId id && inRange x && inRange velocity ->
+                             if w.Entities.ContainsKey id then Error "duplicate_id"
+-                            else Ok (addEffect ("spawn:" + id) { w with Entities = w.Entities.Add(id,{Id=id;X=x;Velocity=velocity;Kind="mover";Target=None}) })
++                            else Ok (addEffect ("spawn:" + id) { w with Entities = w.Entities.Add(id,{Id=id;X=x;Velocity=velocity;Kind="mover";Target=None;Policy=None}) })
+                         | _ -> Error "invalid_value"
+             | "enqueue" ->
+                 match shape ["op";"at";"sequence";"command"] with
+@@ -212,7 +237,7 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                     match stringField "id" op, stringField "target" op, integerField "x" op with
+                     | Some id,Some target,Some x when validId id && validId target && inRange x ->
+                         if w.Entities.ContainsKey id then Error "duplicate_id" elif not (w.Entities.ContainsKey target) then Error "missing_entity"
+-                        else Ok (addEffect ("spawn:"+id) {w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=0L;Kind="follower";Target=Some target})})
++                        else Ok (addEffect ("spawn:"+id) {w with Entities=w.Entities.Add(id,{Id=id;X=x;Velocity=0L;Kind="follower";Target=Some target;Policy=None})})
+                     | _ -> Error "invalid_value"
+             | "remove" ->
+                 match shape ["op";"id"] with
+@@ -248,7 +273,7 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                     else
+                         match stringField "name" op with
+                         | Some n when validId n ->
+-                            let snapshot = { Tick = w.Tick; Entities = w.Entities; Pending = w.Pending }
++                            let snapshot = { Tick = w.Tick; Entities = w.Entities; Pending = w.Pending; Policies = w.Policies }
+                             Ok (addEffect ("save:"+n) { w with Snapshots = w.Snapshots.Add(n, snapshot) })
+                         | _ -> Error "invalid_value"
+             | "import_snapshot" ->
+@@ -262,6 +287,23 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                         | Ok snapshot -> Ok (addEffect ("import:"+name) {w with Snapshots=w.Snapshots.Add(name,snapshot)})
+                         | Error code -> Error code
+                     | _ -> Error "invalid_value"
++            | "register_policy" ->
++                match shape ["op";"name";"kind"] with
++                | Error e -> Error e
++                | Ok () when not (fieldsHaveKinds ["op",JsonValueKind.String;"name",JsonValueKind.String;"kind",JsonValueKind.String] op) -> Error "invalid_shape"
++                | Ok () ->
++                    match stringField "name" op,stringField "kind" op with
++                    | Some name,Some "clamp10" when validId name && not (w.Policies.ContainsKey name) -> Ok (addEffect ("register:"+name) {w with Policies=w.Policies.Add(name,"clamp10")})
++                    | _ -> Error "invalid_value"
++            | "assign_policy" ->
++                match shape ["op";"id";"name"] with
++                | Error e -> Error e
++                | Ok () when not (fieldsHaveKinds ["op",JsonValueKind.String;"id",JsonValueKind.String;"name",JsonValueKind.String] op) -> Error "invalid_shape"
++                | Ok () ->
++                    match stringField "id" op,stringField "name" op with
++                    | Some id,Some name when validId id && not (w.Entities.ContainsKey id) -> Error "missing_entity"
++                    | Some id,Some name when validId id && w.Policies.ContainsKey name -> Ok (addEffect ("policy:"+id+":"+name) {w with Entities=w.Entities.Add(id,{w.Entities.[id] with Policy=Some name})})
++                    | _ -> Error "invalid_value"
+             | "load" ->
+                 match shape ["op";"name"] with
+                 | Error e -> Error e
+@@ -272,7 +314,7 @@ let private operation (op: JsonElement) (w: World) : Result<World,string> =
+                         | Some n when validId n ->
+                             match w.Snapshots.TryFind n with
+                             | Some s ->
+-                                Ok (addEffect ("load:"+n) { w with Tick = s.Tick; Entities = s.Entities; Pending = s.Pending; NextOrder = 0L })
++                                Ok (addEffect ("load:"+n) { w with Tick = s.Tick; Entities = s.Entities; Pending = s.Pending; NextOrder = 0L; Policies = s.Policies })
+                             | None -> Error "missing_snapshot"
+                         | _ -> Error "invalid_value"
+             | _ -> Error "unknown_operation"
+@@ -287,6 +329,9 @@ let private writeEntity (j: Utf8JsonWriter) e =
+         match e.Target with
+         | Some target -> j.WriteString("target", target)
+         | None -> j.WriteNull("target")
++    match e.Policy with
++    | Some policy -> j.WriteString("policy", policy)
++    | None -> ()
+     j.WriteEndObject()
+ let private writeSnapshotEntity (j:Utf8JsonWriter) e =
+     j.WriteStartObject()
+@@ -295,6 +340,7 @@ let private writeSnapshotEntity (j:Utf8JsonWriter) e =
+     j.WriteNumber("x",e.X)
+     j.WriteNumber("velocity",e.Velocity)
+     if e.Kind="follower" then match e.Target with | Some target -> j.WriteString("target",target) | None -> j.WriteNull("target")
++    match e.Policy with | Some policy -> j.WriteString("policy",policy) | None -> ()
+     j.WriteEndObject()
+ let private writePending (j:Utf8JsonWriter) p =
+     j.WriteStartObject(); j.WriteNumber("at",p.At); j.WriteNumber("sequence",p.Sequence); j.WriteNumber("order",p.Order); j.WriteStartObject("command")
+@@ -305,7 +351,7 @@ let private response (w: World) =
+     use j = new Utf8JsonWriter(stream)
+     j.WriteStartObject(); j.WriteNumber("version",1); j.WriteStartObject("state"); j.WriteNumber("tick",w.Tick); j.WriteStartArray("entities"); sortedEntities w.Entities |> List.iter (writeEntity j); j.WriteEndArray(); j.WriteEndObject()
+     j.WriteStartArray("effects"); w.Effects |> List.iter j.WriteStringValue; j.WriteEndArray(); j.WriteStartArray("errors"); w.Errors |> List.iter j.WriteStringValue; j.WriteEndArray(); j.WriteStartArray("snapshots")
+-    sortedSnapshots w.Snapshots |> List.iter (fun (name,s) -> j.WriteStartObject(); j.WriteString("name",name); j.WriteStartObject("data"); j.WriteNumber("version",2); j.WriteNumber("tick",s.Tick); j.WriteStartArray("entities"); sortedEntities s.Entities |> List.iter (writeSnapshotEntity j); j.WriteEndArray(); j.WriteStartArray("pending"); sortedPending s.Pending |> List.iter (writePending j); j.WriteEndArray(); j.WriteEndObject(); j.WriteEndObject())
++    sortedSnapshots w.Snapshots |> List.iter (fun (name,s) -> j.WriteStartObject(); j.WriteString("name",name); j.WriteStartObject("data"); j.WriteNumber("version",2); j.WriteNumber("tick",s.Tick); j.WriteStartArray("entities"); sortedEntities s.Entities |> List.iter (writeSnapshotEntity j); j.WriteEndArray(); j.WriteStartArray("pending"); sortedPending s.Pending |> List.iter (writePending j); j.WriteEndArray(); j.WriteStartArray("policies"); s.Policies |> Map.toList |> List.sortWith (fun (a,_) (b,_) -> StringComparer.Ordinal.Compare(a,b)) |> List.iter (fun (policy,kind) -> j.WriteStartObject(); j.WriteString("name",policy); j.WriteString("kind",kind); j.WriteEndObject()); j.WriteEndArray(); j.WriteEndObject(); j.WriteEndObject())
+     j.WriteEndArray(); j.WriteEndObject(); j.Flush(); Text.Encoding.UTF8.GetString(stream.ToArray())
+ 
+ let private handle (line: string) =

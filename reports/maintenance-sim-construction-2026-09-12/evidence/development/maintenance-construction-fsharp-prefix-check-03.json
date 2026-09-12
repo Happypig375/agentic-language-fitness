@@ -1,0 +1,1710 @@
+{
+  "fixture_case_count": 58,
+  "results": [
+    {
+      "case_count": 10,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 0,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [],
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 13,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 1,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [
+          {
+            "actual": {
+              "effects": [
+                "enqueue:2:9",
+                "enqueue:1:4",
+                "enqueue:1:2",
+                "tick:2"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "b",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "z",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:2:9",
+                "enqueue:1:4",
+                "enqueue:1:2",
+                "spawn:a",
+                "spawn:b",
+                "spawn:z",
+                "tick:2"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "b",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "z",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 8
+          },
+          {
+            "actual": {
+              "effects": [
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "enqueue:1:3",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity",
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "enqueue:1:3",
+                "spawn:a",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity",
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 10
+          }
+        ],
+        "passed": false,
+        "source_sha256": {
+          "Simulation.fs": "096d78fb4687320ee75b59db460f502fc90b740e3050d2821634522389a3613b",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "096d78fb4687320ee75b59db460f502fc90b740e3050d2821634522389a3613b",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 16,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "same-batch-remove-absent",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 2,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [
+          {
+            "actual": {
+              "effects": [
+                "enqueue:2:9",
+                "enqueue:1:4",
+                "enqueue:1:2",
+                "tick:2"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "b",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "z",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:2:9",
+                "enqueue:1:4",
+                "enqueue:1:2",
+                "spawn:a",
+                "spawn:b",
+                "spawn:z",
+                "tick:2"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "b",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "z",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 8
+          },
+          {
+            "actual": {
+              "effects": [
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "enqueue:1:3",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity",
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "enqueue:1:3",
+                "spawn:a",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity",
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 10
+          },
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 2
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "remove:a",
+                "spawn:a",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 2
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 12
+          },
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "remove:a",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 13
+          }
+        ],
+        "passed": false,
+        "source_sha256": {
+          "Simulation.fs": "095fb132b43bfb5deb15ed446e377edf171a2a534a4de04177b50ea20461334b",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "095fb132b43bfb5deb15ed446e377edf171a2a534a4de04177b50ea20461334b",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 20,
+      "case_ids": [
+        "public-roundtrip",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "follower-simultaneous",
+        "follower-target-null",
+        "follower-precondition-order",
+        "same-batch-remove-absent",
+        "follower-chain-simultaneous",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 3,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "tick:2",
+                "save:s",
+                "remove:a",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 3,
+                      "x": 8
+                    }
+                  ],
+                  "name": "s",
+                  "tick": 2
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 3,
+                    "x": 8
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 0
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:b"
+              ],
+              "errors": [
+                "missing_entity",
+                "invalid_value",
+                "duplicate_id"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "b",
+                    "velocity": 1,
+                    "x": 0
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 1
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:z9",
+                "spawn:a_1",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a_1",
+                    "velocity": -1000000,
+                    "x": 0
+                  },
+                  {
+                    "id": "z9",
+                    "velocity": 1000000,
+                    "x": 0
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 3
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a"
+              ],
+              "errors": [
+                "missing_snapshot"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 6
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:2:9",
+                "enqueue:1:4",
+                "enqueue:1:2",
+                "spawn:a",
+                "spawn:b",
+                "spawn:z",
+                "tick:2"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "b",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "z",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 8
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "enqueue:1:3",
+                "spawn:a",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity",
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 10
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "remove:a",
+                "spawn:a",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 2
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 12
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "spawn:b",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  },
+                  {
+                    "id": "b",
+                    "kind": "follower",
+                    "target": "a",
+                    "velocity": 0,
+                    "x": 2
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 13
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a"
+              ],
+              "errors": [
+                "missing_entity",
+                "duplicate_id"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 15
+          },
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "remove:a",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 16
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "spawn:b",
+                "spawn:c",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  },
+                  {
+                    "id": "b",
+                    "kind": "follower",
+                    "target": "a",
+                    "velocity": 0,
+                    "x": 2
+                  },
+                  {
+                    "id": "c",
+                    "kind": "follower",
+                    "target": "b",
+                    "velocity": 0,
+                    "x": 4
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 17
+          }
+        ],
+        "passed": false,
+        "source_sha256": {
+          "Simulation.fs": "0e8b4b6f1a8b77e197bb0e124455ce1dc8d2f27b57b83e69515ac3a20dfe8424",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "0e8b4b6f1a8b77e197bb0e124455ce1dc8d2f27b57b83e69515ac3a20dfe8424",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    },
+    {
+      "case_count": 27,
+      "case_ids": [
+        "public-roundtrip-v2",
+        "public-errors",
+        "empty-seed",
+        "ordinal-sort-boundary",
+        "shape-before-value",
+        "bad-id-newline",
+        "missing-load-noop",
+        "request-shape-reset",
+        "queue-order",
+        "enqueue-shape-value",
+        "same-batch-inner-errors",
+        "future-remove-cancel",
+        "deferred-spawn-reuse",
+        "follower-simultaneous",
+        "follower-target-null",
+        "follower-precondition-order",
+        "import-v1-migration",
+        "import-v2-order",
+        "import-invalid-version",
+        "save-deep-copy",
+        "queue-outer-overflow-rollback",
+        "import-follower-reference-error",
+        "same-batch-remove-absent",
+        "follower-chain-simultaneous",
+        "inherited-save-load-pending",
+        "spawn-multiple-shape-errors",
+        "tick-boolean-shape"
+      ],
+      "checkpoint": 4,
+      "language": "fsharp",
+      "result": {
+        "category": "semantic",
+        "differences": [
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "tick:2",
+                "save:s",
+                "remove:a",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 3,
+                        "x": 8
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 2,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 3,
+                    "x": 8
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 0
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:b"
+              ],
+              "errors": [
+                "missing_entity",
+                "invalid_value",
+                "duplicate_id"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "b",
+                    "velocity": 1,
+                    "x": 0
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 1
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:z9",
+                "spawn:a_1",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a_1",
+                    "velocity": -1000000,
+                    "x": 0
+                  },
+                  {
+                    "id": "z9",
+                    "velocity": 1000000,
+                    "x": 0
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 3
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a"
+              ],
+              "errors": [
+                "missing_snapshot"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 6
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:2:9",
+                "enqueue:1:4",
+                "enqueue:1:2",
+                "spawn:a",
+                "spawn:b",
+                "spawn:z",
+                "tick:2"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "b",
+                    "velocity": 0,
+                    "x": 0
+                  },
+                  {
+                    "id": "z",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 8
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "enqueue:1:3",
+                "spawn:a",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity",
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 10
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "remove:a",
+                "spawn:a",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 2
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 12
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "spawn:b",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  },
+                  {
+                    "id": "b",
+                    "kind": "follower",
+                    "target": "a",
+                    "velocity": 0,
+                    "x": 2
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 13
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a"
+              ],
+              "errors": [
+                "missing_entity",
+                "duplicate_id"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 0
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 15
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:old",
+                "load:old"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 2,
+                        "x": 5
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 3,
+                    "version": 2
+                  },
+                  "name": "old"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 2,
+                    "x": 5
+                  }
+                ],
+                "tick": 3
+              },
+              "version": 1
+            },
+            "index": 16
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:v"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 0,
+                        "x": 2
+                      },
+                      {
+                        "id": "z",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 0
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 1,
+                    "version": 2
+                  },
+                  "name": "v"
+                }
+              ],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 17
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "save:s",
+                "tick:1",
+                "load:s"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 1
+                      }
+                    ],
+                    "pending": [],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "s"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 19
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "import:staged",
+                "load:staged"
+              ],
+              "errors": [
+                "overflow"
+              ],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "kind": "mover",
+                        "velocity": 1,
+                        "x": 9223372036854775807
+                      }
+                    ],
+                    "pending": [
+                      {
+                        "at": 1,
+                        "command": {
+                          "id": "z",
+                          "op": "remove"
+                        },
+                        "order": 0,
+                        "sequence": 0
+                      }
+                    ],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "staged"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 9223372036854775807
+                  }
+                ],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "index": 20
+          },
+          {
+            "actual": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "enqueue:1:1",
+                "enqueue:1:2",
+                "remove:a",
+                "tick:1"
+              ],
+              "errors": [
+                "missing_entity"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 22
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "spawn:a",
+                "spawn:b",
+                "spawn:c",
+                "tick:1"
+              ],
+              "errors": [],
+              "snapshots": [],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 1,
+                    "x": 1
+                  },
+                  {
+                    "id": "b",
+                    "kind": "follower",
+                    "target": "a",
+                    "velocity": 0,
+                    "x": 2
+                  },
+                  {
+                    "id": "c",
+                    "kind": "follower",
+                    "target": "b",
+                    "velocity": 0,
+                    "x": 4
+                  }
+                ],
+                "tick": 1
+              },
+              "version": 1
+            },
+            "index": 23
+          },
+          {
+            "actual": {
+              "effects": [],
+              "errors": [
+                "invalid_shape"
+              ],
+              "snapshots": [],
+              "state": {
+                "entities": [],
+                "tick": 0
+              },
+              "version": 1
+            },
+            "expected": {
+              "effects": [
+                "enqueue:2:0",
+                "save:queued",
+                "tick:1",
+                "load:queued",
+                "spawn:a",
+                "tick:2"
+              ],
+              "errors": [],
+              "snapshots": [
+                {
+                  "data": {
+                    "entities": [],
+                    "pending": [
+                      {
+                        "at": 2,
+                        "command": {
+                          "id": "a",
+                          "op": "spawn",
+                          "velocity": 0,
+                          "x": 1
+                        },
+                        "order": 0,
+                        "sequence": 0
+                      }
+                    ],
+                    "tick": 0,
+                    "version": 2
+                  },
+                  "name": "queued"
+                }
+              ],
+              "state": {
+                "entities": [
+                  {
+                    "id": "a",
+                    "velocity": 0,
+                    "x": 1
+                  }
+                ],
+                "tick": 2
+              },
+              "version": 1
+            },
+            "index": 24
+          }
+        ],
+        "passed": false,
+        "source_sha256": {
+          "Simulation.fs": "bffcae9fdc8f5d626858d9333c8a853857b302bdf92314c087979c1674c6a1bb",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      "source_sha256": {
+        "Simulation.fs": "bffcae9fdc8f5d626858d9333c8a853857b302bdf92314c087979c1674c6a1bb",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      }
+    }
+  ]
+}

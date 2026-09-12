@@ -2,20 +2,31 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current assignment: maintenance/context construction decision (2026-09-12 HKT)
+## Current checkpoint: maintenance construction; human review (2026-09-12 HKT)
+
+Disposition: the user replied “continue” to the explicit construction question.
+Bounded model-free construction of one idiomatic F#/C# architecture pair and
+eight inherited maintenance episodes is adopted at base
+abdc68cc1eef24f0aca080bc151714f930ef8f27; exact CI 34675819811 passed on
+Linux/Windows. That is baseline CI, not implementing-publication evidence.
+Construction is now validated model-free; human-expert validation remains open.
+This is not candidate execution or live allocation. H flags remain false and allocations remain
+zero. The paragraphs below are read with this disposition; the prior
+construction hold is historical.
 
 The user’s current discussion refocuses the comparison on architectural
-coherence, context usefulness and large-project long-term maintenance. It is a
-research-direction decision, not adoption of a treatment or authorization for
-execution. The [dated context record](docs/research-direction-2026-09-12.md)
-retains the accepted direction, assistant-proposed designs, read-only findings,
-literature leads and open decisions. No OAuth, model/count request, live
-allocation, new protocol version, framework, proxy or backend is authorized.
+coherence, context usefulness and large-project long-term maintenance. That
+direction now includes the adopted bounded model-free construction recorded
+above, while remaining distinct from candidate execution or live authority. The
+[dated context record](docs/research-direction-2026-09-12.md) retains evidence,
+assistant-proposed details, read-only findings, literature leads and limits. No
+OAuth, model/count request, live allocation, new protocol version, framework,
+proxy or backend is authorized.
 
 The targeted literature investigation and bounded proposal are now recorded in
 the [standalone design decision packet](docs/maintenance-context-design-review-2026-09-12.md)
 and [search/evidence ledger](docs/maintenance-literature-review-2026-09-12.md).
-The recommendation is maintenance of supplied idiomatic architectures first,
+The adopted construction is maintenance of supplied idiomatic architectures first,
 not architecture creation: one paired headless simulation workload and eight
 dependent episodes for model-free feasibility construction. Candidate software
 persists; conversations reset; the primary proposal has no tools or diagnostic
@@ -23,15 +34,29 @@ repairs. This is not a large-project result, an executable specification or an
 allocated sample. ChainSWE already separates repository and conversation state;
 neither that idea nor software-evolution benchmarking is claimed as new here.
 
-**Next decision:** adopt or change this maintenance-first construction scope.
-The packet puts current values, proposed policies, unresolved numeric settings,
-review requirements and the subsequent bounded assignment in one place.
+**Next decision:** human review of the completed maintenance-first construction.
+The [standalone review packet](docs/maintenance-sim-human-review-2026-09-12.md)
+puts current values, proposed policies and budgets, exact sources, evidence and
+the subsequent bounded adapter proposal in one place.
 Changing the initial-architecture source or failure/continuation policy is a
-scientific choice, not an automatically approved runner bug fix. If adopted,
-construct and validate the trusted workload model-free, then return before
-candidate execution with exact artifacts and proposed settings. Until adoption,
-do not implement the replacement. Keep H execution flags false and allocations
-zero. No old balance carries over and all prepared H1/H2 material stays intact.
+scientific choice, not an automatically approved runner bug fix. Do not start
+the unimplemented maintenance-specific adapter or candidate execution merely
+because construction passed. Keep H execution flags false and
+allocations zero. No old balance carries over and all prepared H1/H2 material
+stays intact.
+
+Construction evidence is retained in the
+[active record](docs/maintenance-sim-construction-2026-09-12.md) and
+[raw evidence index](reports/maintenance-sim-construction-2026-09-12/evidence/index.json).
+Independent checks passed 27 focused tests, 18 trusted checkpoints, all 608
+applicable evaluations from 80 cases, eight semantic faults, 12 inherited-failure
+scenarios and 16 downstream witnesses. Sixteen canonical envelopes are retained.
+Source-bound AI reviews and all eight earlier development reports are preserved;
+these are not human expert approval. Verify CI on the exact containing publication.
+The symmetric proposed input/output caps are 86,016/61,440 authored bytes, still
+unactivated. F# input envelopes are larger at all eight episodes in this authored
+pair, so this preparation does not demonstrate a compactness advantage or model
+decision benefit. One pair remains feasibility evidence, not a large-project study.
 
 The source inspection is bound to
 `663d4ac97e0870d5b44d5d0e0b2d1e3db7601f70`. The old general runner preserves
@@ -85,7 +110,8 @@ and freeze (at most 64). No unused E3a balance carries over. This is a human-rev
 checkpoint, not live authorization inferred from tests, hashes or CI. The newer
 2026-09-12 discussion reopens alignment of the research design with the
 maintenance question, but does not alter these materials or authorize
-implementation changes, execution or allocation.
+changes to the prepared H implementation, execution or allocation. The separate
+maintenance-workload construction adopted at the top of this plan is model-free.
 
 ## Completed checkpoint: H1/H2 design (2026-09-09 HKT)
 

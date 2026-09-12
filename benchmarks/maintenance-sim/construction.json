@@ -1,0 +1,40 @@
+{
+  "schema": "maintenance-sim-construction/v1",
+  "status": "constructed-unfrozen",
+  "construction_approved": true,
+  "live_execution_approved": false,
+  "user_live_execution_approved": false,
+  "human_expert_approved": false,
+  "integration_allocations": 0,
+  "pilot_allocations": 0,
+  "dispatches_used": 0,
+  "language_pair": ["F#", "modern C#"],
+  "sdk": "10.0.302",
+  "new_dependencies": false,
+  "seed": "benchmarks/maintenance-sim/contract.md",
+  "guidance": "benchmarks/maintenance-sim/guidance/common.md",
+  "episodes": ["01", "02", "03", "04", "05", "06", "07", "08"],
+  "episode_paths": [
+    "benchmarks/maintenance-sim/episodes/01.md",
+    "benchmarks/maintenance-sim/episodes/02.md",
+    "benchmarks/maintenance-sim/episodes/03.md",
+    "benchmarks/maintenance-sim/episodes/04.md",
+    "benchmarks/maintenance-sim/episodes/05.md",
+    "benchmarks/maintenance-sim/episodes/06.md",
+    "benchmarks/maintenance-sim/episodes/07.md",
+    "benchmarks/maintenance-sim/episodes/08.md"
+  ],
+  "review": {
+    "original_authored": true,
+    "ai_expert_review": "source-bound AI seed, reference and apparatus reviews recorded; not human expert approval",
+    "seed_review": "reports/maintenance-sim-construction-2026-09-12/seed-review.md",
+    "reference_review": "reports/maintenance-sim-construction-2026-09-12/reference-review.md",
+    "apparatus_review": "reports/maintenance-sim-construction-2026-09-12/audit-review.md",
+    "human_domain_review": "not_started",
+    "human_language_review": "not_started",
+    "provenance": "bounded model-free construction adopted 2026-09-12; no candidate or provider execution"
+  },
+  "freeze_complete": false,
+  "context_cap": null,
+  "provider_cap_claim": false
+}

@@ -40,6 +40,8 @@ jobs:
           python scripts/h_check.py --permit-activation --build-fixtures --output-dir results/h1-h2-fixtures-linux
       - name: Check E3a review packet and trusted model-free fixtures
         run: python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures-linux.json
+      - name: Check maintenance simulation trusted fixtures
+        run: python scripts/maintenance_check.py --build-fixtures --audit-failures --output-dir results/maintenance-sim-linux
       - name: Check E3a sandbox on an explicitly non-experimental SDK fixture
         run: |
           docker pull mcr.microsoft.com/dotnet/sdk:10.0.302@sha256:72dd743782f2ae7e5476fd64f6a460045e3998dc862218b80e6944cba79a01b0
@@ -110,6 +112,8 @@ jobs:
           python scripts/h_check.py --permit-activation --build-fixtures --output-dir results/h1-h2-fixtures-windows
       - name: Check E3a review packet and trusted model-free fixtures
         run: python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures-windows.json
+      - name: Check maintenance simulation trusted fixtures
+        run: python scripts/maintenance_check.py --build-fixtures --audit-failures --output-dir results/maintenance-sim-windows
       - name: Environment check
         run: python scripts/alf.py doctor --strict
       - name: Validate matched benchmark snapshots
@@ -142,6 +146,7 @@ jobs:
             results/h0-windows/
             results/h1-h2-windows/
             results/h1-h2-fixtures-windows/
+            results/maintenance-sim-windows/
           if-no-files-found: warn
 
   e2-baseline:

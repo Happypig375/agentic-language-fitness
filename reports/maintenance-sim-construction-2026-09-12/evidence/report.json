@@ -1,0 +1,5351 @@
+{
+  "actual_checks": [
+    "layout",
+    "cases",
+    "reconstruction-and-envelope",
+    "trusted-build-runtime-semantic",
+    "trusted-fault-audit",
+    "trusted-applicability-audit"
+  ],
+  "allocations": {
+    "integration": 0,
+    "pilot": 0
+  },
+  "applicability": {
+    "candidate_execution": false,
+    "downstream_witnesses": [
+      {
+        "case_sha256": "eb9d7b27780fe020217a503854af810ab1b115f011adca6f44b2c44883834fe2",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "tick:2"
+                ],
+                "errors": [
+                  "unknown_operation",
+                  "unknown_operation",
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "enqueue:2:9",
+                  "enqueue:1:4",
+                  "enqueue:1:2",
+                  "spawn:a",
+                  "spawn:b",
+                  "spawn:z",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "b",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "z",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "csharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "task_episode": 1,
+        "witness_case_id": "queue-order"
+      },
+      {
+        "case_sha256": "e96b0e7b27f611ec1cb08757fe0e9331c372af65e6d4987c76661f152d485738",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "tick:2"
+                ],
+                "errors": [
+                  "unknown_operation",
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "enqueue:1:0",
+                  "enqueue:2:0",
+                  "remove:a",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "csharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "task_episode": 2,
+        "witness_case_id": "future-remove-canceled-after-due-remove"
+      },
+      {
+        "case_sha256": "d3684ef9244a7c8d296eb1f52ced9e1363d2f35a31d8e6f9d4c26cc260a9e91a",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "tick:1"
+                ],
+                "errors": [
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 1,
+                      "x": 1
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "spawn:b",
+                  "tick:1"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 1,
+                      "x": 1
+                    },
+                    {
+                      "id": "b",
+                      "kind": "follower",
+                      "target": "a",
+                      "velocity": 0,
+                      "x": 2
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "csharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "task_episode": 3,
+        "witness_case_id": "follower-simultaneous"
+      },
+      {
+        "case_sha256": "6984ee97ad85060314e3648220e3dc9e449573b152743d5c15eec39c7bf2e47b",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [],
+                "errors": [
+                  "unknown_operation",
+                  "missing_snapshot"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "import:old",
+                  "load:old"
+                ],
+                "errors": [],
+                "snapshots": [
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 2,
+                          "x": 5
+                        }
+                      ],
+                      "pending": [],
+                      "tick": 3,
+                      "version": 2
+                    },
+                    "name": "old"
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 2,
+                      "x": 5
+                    }
+                  ],
+                  "tick": 3
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "csharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "task_episode": 4,
+        "witness_case_id": "import-v1-migration"
+      },
+      {
+        "case_sha256": "d21108c23794fdb2cafa57cf3eee2bb15b287dec15ee668518d49b50e1ea1045",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "tick:1"
+                ],
+                "errors": [
+                  "unknown_operation",
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 3,
+                      "x": 12
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "register:cap",
+                  "policy:a:cap",
+                  "tick:1"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "policy": "cap",
+                      "velocity": 3,
+                      "x": 10
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "csharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "task_episode": 5,
+        "witness_case_id": "policy-clamp"
+      },
+      {
+        "case_sha256": "55d570db9ae942877a8c53a1ea4eefbf2c3aa0d009e8d35a3d60ddecdb6a13fd",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a"
+                ],
+                "errors": [
+                  "unknown_operation",
+                  "unknown_operation",
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "request:a:1",
+                  "cancel:a"
+                ],
+                "errors": [
+                  "stale_completion"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "csharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "task_episode": 6,
+        "witness_case_id": "async-lifecycle"
+      },
+      {
+        "case_sha256": "6d68f2f0400c55c90ec3a4ad355c6ea8cf820188f1dd3c06c3ffe9549f268565",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a"
+                ],
+                "errors": [
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 3,
+                      "x": 2
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "fast_forward:1000000000"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 3,
+                      "x": 3000000002
+                    }
+                  ],
+                  "tick": 1000000000
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "csharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "task_episode": 7,
+        "witness_case_id": "fast-forward-large"
+      },
+      {
+        "case_sha256": "7163ecbe3a22cb1d529f5b2c11807ad44504b202f049658a17fcee4754ff0f47",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "save:s"
+                ],
+                "errors": [
+                  "unknown_operation"
+                ],
+                "snapshots": [
+                  {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 1,
+                        "x": 0
+                      }
+                    ],
+                    "name": "s",
+                    "tick": 0
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 1,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "save:s",
+                  "replay:s"
+                ],
+                "errors": [],
+                "snapshots": [
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 1,
+                          "x": 0
+                        }
+                      ],
+                      "issued": [],
+                      "pending": [],
+                      "policies": [],
+                      "requests": [],
+                      "tick": 0,
+                      "version": 2
+                    },
+                    "name": "s"
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 1,
+                      "x": 2
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "csharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "task_episode": 8,
+        "witness_case_id": "replay-success"
+      },
+      {
+        "case_sha256": "eb9d7b27780fe020217a503854af810ab1b115f011adca6f44b2c44883834fe2",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "tick:2"
+                ],
+                "errors": [
+                  "unknown_operation",
+                  "unknown_operation",
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "enqueue:2:9",
+                  "enqueue:1:4",
+                  "enqueue:1:2",
+                  "spawn:a",
+                  "spawn:b",
+                  "spawn:z",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "b",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "z",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "fsharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "task_episode": 1,
+        "witness_case_id": "queue-order"
+      },
+      {
+        "case_sha256": "e96b0e7b27f611ec1cb08757fe0e9331c372af65e6d4987c76661f152d485738",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "tick:2"
+                ],
+                "errors": [
+                  "unknown_operation",
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "enqueue:1:0",
+                  "enqueue:2:0",
+                  "remove:a",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "fsharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "task_episode": 2,
+        "witness_case_id": "future-remove-canceled-after-due-remove"
+      },
+      {
+        "case_sha256": "d3684ef9244a7c8d296eb1f52ced9e1363d2f35a31d8e6f9d4c26cc260a9e91a",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "tick:1"
+                ],
+                "errors": [
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 1,
+                      "x": 1
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "spawn:b",
+                  "tick:1"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 1,
+                      "x": 1
+                    },
+                    {
+                      "id": "b",
+                      "kind": "follower",
+                      "target": "a",
+                      "velocity": 0,
+                      "x": 2
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "fsharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "task_episode": 3,
+        "witness_case_id": "follower-simultaneous"
+      },
+      {
+        "case_sha256": "6984ee97ad85060314e3648220e3dc9e449573b152743d5c15eec39c7bf2e47b",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [],
+                "errors": [
+                  "unknown_operation",
+                  "missing_snapshot"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "import:old",
+                  "load:old"
+                ],
+                "errors": [],
+                "snapshots": [
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 2,
+                          "x": 5
+                        }
+                      ],
+                      "pending": [],
+                      "tick": 3,
+                      "version": 2
+                    },
+                    "name": "old"
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 2,
+                      "x": 5
+                    }
+                  ],
+                  "tick": 3
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "fsharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "task_episode": 4,
+        "witness_case_id": "import-v1-migration"
+      },
+      {
+        "case_sha256": "d21108c23794fdb2cafa57cf3eee2bb15b287dec15ee668518d49b50e1ea1045",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "tick:1"
+                ],
+                "errors": [
+                  "unknown_operation",
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 3,
+                      "x": 12
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "register:cap",
+                  "policy:a:cap",
+                  "tick:1"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "policy": "cap",
+                      "velocity": 3,
+                      "x": 10
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "fsharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "task_episode": 5,
+        "witness_case_id": "policy-clamp"
+      },
+      {
+        "case_sha256": "55d570db9ae942877a8c53a1ea4eefbf2c3aa0d009e8d35a3d60ddecdb6a13fd",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a"
+                ],
+                "errors": [
+                  "unknown_operation",
+                  "unknown_operation",
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "request:a:1",
+                  "cancel:a"
+                ],
+                "errors": [
+                  "stale_completion"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "fsharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "task_episode": 6,
+        "witness_case_id": "async-lifecycle"
+      },
+      {
+        "case_sha256": "6d68f2f0400c55c90ec3a4ad355c6ea8cf820188f1dd3c06c3ffe9549f268565",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a"
+                ],
+                "errors": [
+                  "unknown_operation"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 3,
+                      "x": 2
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "fast_forward:1000000000"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 3,
+                      "x": 3000000002
+                    }
+                  ],
+                  "tick": 1000000000
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "fsharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "task_episode": 7,
+        "witness_case_id": "fast-forward-large"
+      },
+      {
+        "case_sha256": "7163ecbe3a22cb1d529f5b2c11807ad44504b202f049658a17fcee4754ff0f47",
+        "evaluation": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "save:s"
+                ],
+                "errors": [
+                  "unknown_operation"
+                ],
+                "snapshots": [
+                  {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 1,
+                        "x": 0
+                      }
+                    ],
+                    "name": "s",
+                    "tick": 0
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 1,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "save:s",
+                  "replay:s"
+                ],
+                "errors": [],
+                "snapshots": [
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 1,
+                          "x": 0
+                        }
+                      ],
+                      "issued": [],
+                      "pending": [],
+                      "policies": [],
+                      "requests": [],
+                      "tick": 0,
+                      "version": 2
+                    },
+                    "name": "s"
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 1,
+                      "x": 2
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "evaluation_availability": true,
+        "language": "fsharp",
+        "source_checkpoint": 0,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "task_episode": 8,
+        "witness_case_id": "replay-success"
+      }
+    ],
+    "live": false,
+    "note": "fixed response fixtures demonstrate task applicability, not future candidate parser/controller handling",
+    "records": [
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": false,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 0
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 3
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [],
+            "passed": true,
+            "source_sha256": {
+              "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "no-op",
+        "language": "csharp",
+        "prerequisite_correctness": true,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": "92ebe5e73d8e6fc0d9de30370ed12f3e623cb22686919897ad7d9b84c326d61a",
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "no-op",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": false,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 0
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 3
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [],
+            "passed": true,
+            "source_sha256": {
+              "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "malformed",
+        "language": "csharp",
+        "prerequisite_correctness": true,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": "0431cee8be7d0f76f8e0b8f3994330a98ae0904261c84da5f6460b891944c432",
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "malformed",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": null,
+        "evaluation": {
+          "current": {
+            "category": "build",
+            "diagnostic": {
+              "returncode": 1,
+              "stderr": "",
+              "stderr_truncated": false,
+              "stdout": "  Determining projects to restore...\n  Restored C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj (in 96 ms).\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,1): error CS1031: Type expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(180,1): error CS1519: Invalid token '}' in a member declaration [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,6): error CS1003: Syntax error, '[' expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,6): error CS1041: Identifier expected; 'is' is a keyword [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,27): error CS1003: Syntax error, ',' expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,39): error CS1003: Syntax error, ']' expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,39): error CS1514: { expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,39): error CS1513: } expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\n\nBuild FAILED.\n\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,1): error CS1031: Type expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(180,1): error CS1519: Invalid token '}' in a member declaration [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,6): error CS1003: Syntax error, '[' expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,6): error CS1041: Identifier expected; 'is' is a keyword [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,27): error CS1003: Syntax error, ',' expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,39): error CS1003: Syntax error, ']' expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,39): error CS1514: { expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Program.cs(182,39): error CS1513: } expected [C:\\Windows\\TEMP\\alf-maintenance-build-dq19bqc3\\Simulation.csproj]\n    0 Warning(s)\n    8 Error(s)\n\nTime Elapsed 00:00:01.45\n",
+              "stdout_truncated": false,
+              "timed_out": false
+            },
+            "passed": false,
+            "returncode": 1
+          },
+          "prerequisite": {
+            "category": "build",
+            "diagnostic": {
+              "returncode": 1,
+              "stderr": "",
+              "stderr_truncated": false,
+              "stdout": "  Determining projects to restore...\n  Restored C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj (in 98 ms).\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,1): error CS1031: Type expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(180,1): error CS1519: Invalid token '}' in a member declaration [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,6): error CS1003: Syntax error, '[' expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,6): error CS1041: Identifier expected; 'is' is a keyword [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,27): error CS1003: Syntax error, ',' expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,39): error CS1003: Syntax error, ']' expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,39): error CS1514: { expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,39): error CS1513: } expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\n\nBuild FAILED.\n\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,1): error CS1031: Type expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(180,1): error CS1519: Invalid token '}' in a member declaration [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,6): error CS1003: Syntax error, '[' expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,6): error CS1041: Identifier expected; 'is' is a keyword [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,27): error CS1003: Syntax error, ',' expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,39): error CS1003: Syntax error, ']' expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,39): error CS1514: { expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\nC:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Program.cs(182,39): error CS1513: } expected [C:\\Windows\\TEMP\\alf-maintenance-build-3lijsyi_\\Simulation.csproj]\n    0 Warning(s)\n    8 Error(s)\n\nTime Elapsed 00:00:01.40\n",
+              "stdout_truncated": false,
+              "timed_out": false
+            },
+            "passed": false,
+            "returncode": 1
+          }
+        },
+        "evaluation_availability": false,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "noncompile",
+        "language": "csharp",
+        "prerequisite_correctness": null,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": null,
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Program.cs": "637cd4c004ac76a9df08fb1dde4d5273a5c80f63c3158dbb9eacbe52d4d41bc4",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "noncompile",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": false,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 0
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "remove:a",
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 2
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 1
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "remove:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 2
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 3
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:2:9",
+                    "enqueue:1:4",
+                    "enqueue:1:2",
+                    "spawn:a",
+                    "spawn:b",
+                    "spawn:z",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "b",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "z",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 8
+              },
+              {
+                "actual": {
+                  "effects": [],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 0
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:1:0"
+                  ],
+                  "errors": [
+                    "invalid_value",
+                    "invalid_value"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 0
+                  },
+                  "version": 1
+                },
+                "index": 9
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "enqueue:1:3",
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity",
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 10
+              },
+              {
+                "actual": {
+                  "effects": [],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 0
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [],
+                  "errors": [
+                    "invalid_shape",
+                    "invalid_shape",
+                    "invalid_value",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 0
+                  },
+                  "version": 1
+                },
+                "index": 13
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "missing-feature",
+        "language": "csharp",
+        "prerequisite_correctness": false,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": null,
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "missing-feature",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": false,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 0
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "tick:1"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 2
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "remove:a",
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 2
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 1
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "remove:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 2
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 3
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Program.cs": "93f96da80f37f66b27d1dca9094e5e701e8bea862029e7030946e42d94a22c42",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "enqueue:2:9",
+                    "enqueue:1:4",
+                    "enqueue:1:2",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "b",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "z",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:2:9",
+                    "enqueue:1:4",
+                    "enqueue:1:2",
+                    "spawn:a",
+                    "spawn:b",
+                    "spawn:z",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "b",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "z",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 8
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "enqueue:1:3",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity",
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "enqueue:1:3",
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity",
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 10
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Program.cs": "93f96da80f37f66b27d1dca9094e5e701e8bea862029e7030946e42d94a22c42",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": "b08b9e765e2aed35503405a84526c5d7f55ccccc2d79c35c5b18295a419f3a04",
+        "gold_reset": false,
+        "id": "wrong-behavior",
+        "language": "csharp",
+        "prerequisite_correctness": false,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": null,
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Program.cs": "93f96da80f37f66b27d1dca9094e5e701e8bea862029e7030946e42d94a22c42",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "wrong-behavior",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": true,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [],
+            "passed": true,
+            "source_sha256": {
+              "Program.cs": "2d38815b282bc78c1dfb794e114ac6a9156d1160e22a19bf5c84d7ce92a756fe",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [],
+            "passed": true,
+            "source_sha256": {
+              "Program.cs": "2d38815b282bc78c1dfb794e114ac6a9156d1160e22a19bf5c84d7ce92a756fe",
+              "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "recovery-control",
+        "language": "csharp",
+        "prerequisite_correctness": true,
+        "prior_failure": "wrong-behavior",
+        "recovery": true,
+        "response_sha256": null,
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Program.cs": "2d38815b282bc78c1dfb794e114ac6a9156d1160e22a19bf5c84d7ce92a756fe",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        },
+        "strict_chain_success": false,
+        "submission_disposition": "applicable",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": false,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 0
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 3
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [],
+            "passed": true,
+            "source_sha256": {
+              "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "no-op",
+        "language": "fsharp",
+        "prerequisite_correctness": true,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": "92ebe5e73d8e6fc0d9de30370ed12f3e623cb22686919897ad7d9b84c326d61a",
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "no-op",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": false,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 0
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 3
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [],
+            "passed": true,
+            "source_sha256": {
+              "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "malformed",
+        "language": "fsharp",
+        "prerequisite_correctness": true,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": "0431cee8be7d0f76f8e0b8f3994330a98ae0904261c84da5f6460b891944c432",
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "malformed",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": null,
+        "evaluation": {
+          "current": {
+            "category": "build",
+            "diagnostic": {
+              "returncode": 1,
+              "stderr": "",
+              "stderr_truncated": false,
+              "stdout": "  Determining projects to restore...\n  Restored C:\\Windows\\TEMP\\alf-maintenance-build-yo6tsad7\\Simulation.fsproj (in 487 ms).\nC:\\Windows\\TEMP\\alf-maintenance-build-yo6tsad7\\Simulation.fs(207,1): error FS0039: The value or constructor 'this' is not defined. [C:\\Windows\\TEMP\\alf-maintenance-build-yo6tsad7\\Simulation.fsproj]\n\nBuild FAILED.\n\nC:\\Windows\\TEMP\\alf-maintenance-build-yo6tsad7\\Simulation.fs(207,1): error FS0039: The value or constructor 'this' is not defined. [C:\\Windows\\TEMP\\alf-maintenance-build-yo6tsad7\\Simulation.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:03.34\n",
+              "stdout_truncated": false,
+              "timed_out": false
+            },
+            "passed": false,
+            "returncode": 1
+          },
+          "prerequisite": {
+            "category": "build",
+            "diagnostic": {
+              "returncode": 1,
+              "stderr": "",
+              "stderr_truncated": false,
+              "stdout": "  Determining projects to restore...\n  Restored C:\\Windows\\TEMP\\alf-maintenance-build-_m3el1za\\Simulation.fsproj (in 494 ms).\nC:\\Windows\\TEMP\\alf-maintenance-build-_m3el1za\\Simulation.fs(207,1): error FS0039: The value or constructor 'this' is not defined. [C:\\Windows\\TEMP\\alf-maintenance-build-_m3el1za\\Simulation.fsproj]\n\nBuild FAILED.\n\nC:\\Windows\\TEMP\\alf-maintenance-build-_m3el1za\\Simulation.fs(207,1): error FS0039: The value or constructor 'this' is not defined. [C:\\Windows\\TEMP\\alf-maintenance-build-_m3el1za\\Simulation.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:03.58\n",
+              "stdout_truncated": false,
+              "timed_out": false
+            },
+            "passed": false,
+            "returncode": 1
+          }
+        },
+        "evaluation_availability": false,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "noncompile",
+        "language": "fsharp",
+        "prerequisite_correctness": null,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": null,
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Simulation.fs": "de3c9e0ef812af304eaf8ad7cf9ee32dd48487cb3cc040e33c88bda08644452c",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "noncompile",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": false,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 0
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "remove:a",
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 2
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 1
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "remove:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 2
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 3
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:2:9",
+                    "enqueue:1:4",
+                    "enqueue:1:2",
+                    "spawn:a",
+                    "spawn:b",
+                    "spawn:z",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "b",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "z",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 8
+              },
+              {
+                "actual": {
+                  "effects": [],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 0
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:1:0"
+                  ],
+                  "errors": [
+                    "invalid_value",
+                    "invalid_value"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 0
+                  },
+                  "version": 1
+                },
+                "index": 9
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "enqueue:1:3",
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity",
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 10
+              },
+              {
+                "actual": {
+                  "effects": [],
+                  "errors": [
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 0
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [],
+                  "errors": [
+                    "invalid_shape",
+                    "invalid_shape",
+                    "invalid_value",
+                    "unknown_operation"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 0
+                  },
+                  "version": 1
+                },
+                "index": 13
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "missing-feature",
+        "language": "fsharp",
+        "prerequisite_correctness": false,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": null,
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "missing-feature",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": false,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:2:1",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 0
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "tick:1"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 2
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "remove:a",
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 2
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 1
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "remove:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 2
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "tick:2"
+                  ],
+                  "errors": [
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "spawn:a",
+                    "enqueue:1:0",
+                    "enqueue:2:0",
+                    "remove:a",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 3
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Simulation.fs": "23ca403eb9d7d4f2857ff734c1ca868432877c66d42fd354cc5e381abc169e28",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [
+              {
+                "actual": {
+                  "effects": [
+                    "enqueue:2:9",
+                    "enqueue:1:4",
+                    "enqueue:1:2",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "b",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "z",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:2:9",
+                    "enqueue:1:4",
+                    "enqueue:1:2",
+                    "spawn:a",
+                    "spawn:b",
+                    "spawn:z",
+                    "tick:2"
+                  ],
+                  "errors": [],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "b",
+                        "velocity": 0,
+                        "x": 0
+                      },
+                      {
+                        "id": "z",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 2
+                  },
+                  "version": 1
+                },
+                "index": 8
+              },
+              {
+                "actual": {
+                  "effects": [
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "enqueue:1:3",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity",
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "expected": {
+                  "effects": [
+                    "enqueue:1:1",
+                    "enqueue:1:2",
+                    "enqueue:1:3",
+                    "spawn:a",
+                    "tick:1"
+                  ],
+                  "errors": [
+                    "missing_entity",
+                    "missing_entity"
+                  ],
+                  "snapshots": [],
+                  "state": {
+                    "entities": [
+                      {
+                        "id": "a",
+                        "velocity": 0,
+                        "x": 0
+                      }
+                    ],
+                    "tick": 1
+                  },
+                  "version": 1
+                },
+                "index": 10
+              }
+            ],
+            "passed": false,
+            "source_sha256": {
+              "Simulation.fs": "23ca403eb9d7d4f2857ff734c1ca868432877c66d42fd354cc5e381abc169e28",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": "d5750780e1322c4455f0b64a3e3902a9cac6a42e0c9159709464f6f50f6e8e06",
+        "gold_reset": false,
+        "id": "wrong-behavior",
+        "language": "fsharp",
+        "prerequisite_correctness": false,
+        "prior_failure": null,
+        "recovery": null,
+        "response_sha256": null,
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Simulation.fs": "23ca403eb9d7d4f2857ff734c1ca868432877c66d42fd354cc5e381abc169e28",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "strict_chain_success": null,
+        "submission_disposition": "wrong-behavior",
+        "task_episode": 2
+      },
+      {
+        "actual_candidate_repair": false,
+        "attribution": null,
+        "case_ids": {
+          "current": [
+            "future-remove-cancel",
+            "deferred-spawn-reuse",
+            "same-batch-remove-absent",
+            "future-remove-canceled-after-due-remove"
+          ],
+          "prerequisite": [
+            "public-roundtrip",
+            "public-errors",
+            "empty-seed",
+            "ordinal-sort-boundary",
+            "shape-before-value",
+            "bad-id-newline",
+            "missing-load-noop",
+            "request-shape-reset",
+            "queue-order",
+            "enqueue-shape-value",
+            "same-batch-inner-errors",
+            "spawn-multiple-shape-errors",
+            "tick-boolean-shape",
+            "enqueue-recognized-shape-before-unsupported",
+            "enqueue-name-availability-before-follower"
+          ]
+        },
+        "current_correctness": true,
+        "evaluation": {
+          "current": {
+            "category": "semantic",
+            "differences": [],
+            "passed": true,
+            "source_sha256": {
+              "Simulation.fs": "2fecfdfb59716c28b16d982321209baca606a51189d3d6ae04677b80b144bd56",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          },
+          "prerequisite": {
+            "category": "semantic",
+            "differences": [],
+            "passed": true,
+            "source_sha256": {
+              "Simulation.fs": "2fecfdfb59716c28b16d982321209baca606a51189d3d6ae04677b80b144bd56",
+              "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+            }
+          }
+        },
+        "evaluation_availability": true,
+        "fault_patch_sha256": null,
+        "gold_reset": false,
+        "id": "recovery-control",
+        "language": "fsharp",
+        "prerequisite_correctness": true,
+        "prior_failure": "wrong-behavior",
+        "recovery": true,
+        "response_sha256": null,
+        "source_checkpoint": 1,
+        "source_sha256": {
+          "Simulation.fs": "2fecfdfb59716c28b16d982321209baca606a51189d3d6ae04677b80b144bd56",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        },
+        "strict_chain_success": false,
+        "submission_disposition": "applicable",
+        "task_episode": 2
+      }
+    ],
+    "status": "passed",
+    "trusted_source_only": true
+  },
+  "build": {
+    "requested": true,
+    "status": "passed",
+    "targets": [
+      {
+        "category": "semantic",
+        "checkpoint": 0,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 1,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 2,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "2d38815b282bc78c1dfb794e114ac6a9156d1160e22a19bf5c84d7ce92a756fe",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 3,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "a8be2b3bd232115df3b882541d810cfee789dc117ba307453f4d3ef544a23165",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 4,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "34c49a02e044ed5730eb9b1c707858cdc4fb97a5d70bdaa84dbdaf27b80562ea",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 5,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "54a034044e3b325fe94dcc491daa43865881038aa47c91784df9d0a948efe0bc",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 6,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "2bf76f3c0888f74a9f6b747331f56e077e52572410d1d0af2d71ad37e8f8cf94",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 7,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "41bd7988b7226ac09c5df39d5834a8f9d1d88e1bad7df6c99258f3878fdba8a6",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 8,
+        "differences": [],
+        "language": "csharp",
+        "passed": true,
+        "source_sha256": {
+          "Program.cs": "30d125aab74b286ca2efabed93e2f08a659c443c53f2cc45b3ed67a9cb7cbe28",
+          "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 0,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 1,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 2,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "2fecfdfb59716c28b16d982321209baca606a51189d3d6ae04677b80b144bd56",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 3,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "915ee1b154f475d208d560ac0e523673efe71054e79e728558ff18e84abbce77",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 4,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "d1c1d6af68e1ef94086117e1210457e9794373cc8573a80cf19c0442b33c98d4",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 5,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "ae685481ca757bfb9d538640294d4558b69d8a16ee5601ba4a921b528f785eeb",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 6,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "5436f4faa82c940257729a21971f65410bb08b78473f1d923a538fe6afe091cf",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 7,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "2dcd1c63e49a70398e20727ba41f184e46a5ab06d0cabe3bbd53b7a24867b323",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      },
+      {
+        "category": "semantic",
+        "checkpoint": 8,
+        "differences": [],
+        "language": "fsharp",
+        "passed": true,
+        "source_sha256": {
+          "Simulation.fs": "3bf006c3fa864dc9f17bd326d9f90b6a0476922db5e75f57d794cbd08ab719db",
+          "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+        }
+      }
+    ]
+  },
+  "candidate_execution": false,
+  "case_count": 80,
+  "envelopes": [
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_01": 2699,
+        "language_guidance": 484
+      },
+      "input_bytes": 19907,
+      "language": "csharp",
+      "live": false,
+      "sha256": "d60541b67858aeb4315a5829bc1f96d50e1d636d7dc248547f4cd948f6625ac3",
+      "source_bytes": 9077,
+      "source_checkpoint": 0,
+      "source_files": 2,
+      "source_sha256": {
+        "Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      },
+      "task_episode": 1,
+      "token_proxy": {
+        "token_stream_sha256": "38358b0230b4ad97c970a5969a2cfd0c7fc0e0d101e2a969975b77d453a563c3",
+        "tokens": 4859
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_02": 993,
+        "episode_01": 2699,
+        "language_guidance": 484
+      },
+      "input_bytes": 25051,
+      "language": "csharp",
+      "live": false,
+      "sha256": "e1849ef83fd0fb401c9dc26d1635530b2689e9956c8dc98456f5f732535051eb",
+      "source_bytes": 12950,
+      "source_checkpoint": 1,
+      "source_files": 2,
+      "source_sha256": {
+        "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      },
+      "task_episode": 2,
+      "token_proxy": {
+        "token_stream_sha256": "e49c0e534ddc5edc4cfcb9f8d3da3a72e56e42342d4567ee2bef29fa9666bbd3",
+        "tokens": 6262
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_03": 1512,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "language_guidance": 484
+      },
+      "input_bytes": 26844,
+      "language": "csharp",
+      "live": false,
+      "sha256": "61a40e4664df666b6fcbfcf0572ffbbc355023a18bf872143466396600b82ffb",
+      "source_bytes": 13118,
+      "source_checkpoint": 2,
+      "source_files": 2,
+      "source_sha256": {
+        "Program.cs": "2d38815b282bc78c1dfb794e114ac6a9156d1160e22a19bf5c84d7ce92a756fe",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      },
+      "task_episode": 3,
+      "token_proxy": {
+        "token_stream_sha256": "a402d405b6f9854338bc4d957086139bac951a0cab8b33ceaea2d3e2cb221025",
+        "tokens": 6720
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_04": 3700,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "language_guidance": 484
+      },
+      "input_bytes": 32928,
+      "language": "csharp",
+      "live": false,
+      "sha256": "346795429bb1116efcb3d33f3008b7f732eb9d2929efcbaf7ebe82b13c737617",
+      "source_bytes": 15257,
+      "source_checkpoint": 3,
+      "source_files": 2,
+      "source_sha256": {
+        "Program.cs": "a8be2b3bd232115df3b882541d810cfee789dc117ba307453f4d3ef544a23165",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      },
+      "task_episode": 4,
+      "token_proxy": {
+        "token_stream_sha256": "51469c145e60b4f85341649047764165ef46513bd494a8e3a6ad023e8d926065",
+        "tokens": 8236
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_05": 2082,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "episode_04": 3700,
+        "language_guidance": 484
+      },
+      "input_bytes": 40880,
+      "language": "csharp",
+      "live": false,
+      "sha256": "ab1ca6291ca6df449dcd96a792b86679a0ec762ea159276fade247714569119c",
+      "source_bytes": 20751,
+      "source_checkpoint": 4,
+      "source_files": 2,
+      "source_sha256": {
+        "Program.cs": "34c49a02e044ed5730eb9b1c707858cdc4fb97a5d70bdaa84dbdaf27b80562ea",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      },
+      "task_episode": 5,
+      "token_proxy": {
+        "token_stream_sha256": "2cb68c39b6d17c2707ad625a07fb9bdb367c97e1fd680324b31eb79f98866b00",
+        "tokens": 10358
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_06": 2433,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "episode_04": 3700,
+        "episode_05": 2082,
+        "language_guidance": 484
+      },
+      "input_bytes": 47986,
+      "language": "csharp",
+      "live": false,
+      "sha256": "4371d5f5d0ea6f3312ed0700035216818fb7c7ee9f4943d64aded5d69e34a5f4",
+      "source_bytes": 25124,
+      "source_checkpoint": 5,
+      "source_files": 2,
+      "source_sha256": {
+        "Program.cs": "54a034044e3b325fe94dcc491daa43865881038aa47c91784df9d0a948efe0bc",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      },
+      "task_episode": 6,
+      "token_proxy": {
+        "token_stream_sha256": "f0a29d92c449ba6b1a607977bb40c1b4794002f7b98fd5b915b86416a5e2051f",
+        "tokens": 12149
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_07": 1491,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "episode_04": 3700,
+        "episode_05": 2082,
+        "episode_06": 2433,
+        "language_guidance": 484
+      },
+      "input_bytes": 55017,
+      "language": "csharp",
+      "live": false,
+      "sha256": "df0ba1068ae28ff3e642b0b3262ff857f7e6c6af0065d24443599c71afebb6a9",
+      "source_bytes": 30377,
+      "source_checkpoint": 6,
+      "source_files": 2,
+      "source_sha256": {
+        "Program.cs": "2bf76f3c0888f74a9f6b747331f56e077e52572410d1d0af2d71ad37e8f8cf94",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      },
+      "task_episode": 7,
+      "token_proxy": {
+        "token_stream_sha256": "6d072fe7dc8da931095947da18ab781a5e197fd7fccf7f55808fde912f94b634",
+        "tokens": 13940
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_08": 1908,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "episode_04": 3700,
+        "episode_05": 2082,
+        "episode_06": 2433,
+        "episode_07": 1491,
+        "language_guidance": 484
+      },
+      "input_bytes": 58350,
+      "language": "csharp",
+      "live": false,
+      "sha256": "c17d31cd25dfcb318d44606dc9d436a525dc80d3c9d76e05d0c7a683beb64e95",
+      "source_bytes": 31623,
+      "source_checkpoint": 7,
+      "source_files": 2,
+      "source_sha256": {
+        "Program.cs": "41bd7988b7226ac09c5df39d5834a8f9d1d88e1bad7df6c99258f3878fdba8a6",
+        "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+      },
+      "task_episode": 8,
+      "token_proxy": {
+        "token_stream_sha256": "1c48f34baaab3f01ed5a6ba059cb4520214b583def87c120810954368c930e47",
+        "tokens": 14756
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_01": 2699,
+        "language_guidance": 491
+      },
+      "input_bytes": 20393,
+      "language": "fsharp",
+      "live": false,
+      "sha256": "822db97fae21544c2857cef020986342e32d94516397317cf2cca6397423e6ea",
+      "source_bytes": 9528,
+      "source_checkpoint": 0,
+      "source_files": 2,
+      "source_sha256": {
+        "Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      },
+      "task_episode": 1,
+      "token_proxy": {
+        "token_stream_sha256": "faefa942cfe2e9af7ffdba7f84a1dc1837563ae2f7190a389f7dbf4f42112994",
+        "tokens": 4896
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_02": 993,
+        "episode_01": 2699,
+        "language_guidance": 491
+      },
+      "input_bytes": 26225,
+      "language": "fsharp",
+      "live": false,
+      "sha256": "76e4616871b460b1babd04a4cc308682d54859f9217c69cda051d2d168fe6aff",
+      "source_bytes": 14076,
+      "source_checkpoint": 1,
+      "source_files": 2,
+      "source_sha256": {
+        "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      },
+      "task_episode": 2,
+      "token_proxy": {
+        "token_stream_sha256": "8be70d5a50206f295ecbd707f5f6404a1a0536cfe842d2ab6391453e7f09482b",
+        "tokens": 6332
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_03": 1512,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "language_guidance": 491
+      },
+      "input_bytes": 28304,
+      "language": "fsharp",
+      "live": false,
+      "sha256": "d9f3560c296c6863a39d53dbb0b2405710eba15ca3177697fed6d4bd594fd88a",
+      "source_bytes": 14531,
+      "source_checkpoint": 2,
+      "source_files": 2,
+      "source_sha256": {
+        "Simulation.fs": "2fecfdfb59716c28b16d982321209baca606a51189d3d6ae04677b80b144bd56",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      },
+      "task_episode": 3,
+      "token_proxy": {
+        "token_stream_sha256": "723cf68a76351a55073094003122884c3bfd3e46fa044fe95270ae1c66c6c0a8",
+        "tokens": 6823
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_04": 3700,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "language_guidance": 491
+      },
+      "input_bytes": 34396,
+      "language": "fsharp",
+      "live": false,
+      "sha256": "337a9b41f99f72100d96c01b2a815762a4014d3063099d06e525e65cdadd9c75",
+      "source_bytes": 16661,
+      "source_checkpoint": 3,
+      "source_files": 2,
+      "source_sha256": {
+        "Simulation.fs": "915ee1b154f475d208d560ac0e523673efe71054e79e728558ff18e84abbce77",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      },
+      "task_episode": 4,
+      "token_proxy": {
+        "token_stream_sha256": "231f181145433ec596a4bfbb6900d38200183b44e58a4982ac04ab5988a63158",
+        "tokens": 8303
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_05": 2082,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "episode_04": 3700,
+        "language_guidance": 491
+      },
+      "input_bytes": 47169,
+      "language": "fsharp",
+      "live": false,
+      "sha256": "a4f35e0990bd8f974df8ead6573957e9911dfe92f81a66e40899ebb6ff23415e",
+      "source_bytes": 26718,
+      "source_checkpoint": 4,
+      "source_files": 2,
+      "source_sha256": {
+        "Simulation.fs": "d1c1d6af68e1ef94086117e1210457e9794373cc8573a80cf19c0442b33c98d4",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      },
+      "task_episode": 5,
+      "token_proxy": {
+        "token_stream_sha256": "1c4d399e93b94f2db8289ebcc3516c9593d423f8b590d6a200fa0e8cd7333181",
+        "tokens": 11488
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_06": 2433,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "episode_04": 3700,
+        "episode_05": 2082,
+        "language_guidance": 491
+      },
+      "input_bytes": 54812,
+      "language": "fsharp",
+      "live": false,
+      "sha256": "1e3009eab0f3d480be6a77609fc7c070932edbf45059a97c389a6e87b522e777",
+      "source_bytes": 31604,
+      "source_checkpoint": 5,
+      "source_files": 2,
+      "source_sha256": {
+        "Simulation.fs": "ae685481ca757bfb9d538640294d4558b69d8a16ee5601ba4a921b528f785eeb",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      },
+      "task_episode": 6,
+      "token_proxy": {
+        "token_stream_sha256": "3e13da6ba02ec8c667995e87a75e4dd46cf5e2e3a66d9cd83efc0b497fe4d5c3",
+        "tokens": 13270
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_07": 1491,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "episode_04": 3700,
+        "episode_05": 2082,
+        "episode_06": 2433,
+        "language_guidance": 491
+      },
+      "input_bytes": 62760,
+      "language": "fsharp",
+      "live": false,
+      "sha256": "5e17dc4d2def56a7fac08c62752e0014c112d040c00d40ce5b5fa5aea104afba",
+      "source_bytes": 37726,
+      "source_checkpoint": 6,
+      "source_files": 2,
+      "source_sha256": {
+        "Simulation.fs": "5436f4faa82c940257729a21971f65410bb08b78473f1d923a538fe6afe091cf",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      },
+      "task_episode": 7,
+      "token_proxy": {
+        "token_stream_sha256": "e77200186c39dddf84a1841fb8150d7fad05f11ad5a70b4bbcf8053dc905bde6",
+        "tokens": 15182
+      }
+    },
+    {
+      "allocations": {
+        "integration": 0,
+        "pilot": 0
+      },
+      "components": {
+        "common_guidance": 2165,
+        "contract": 4447,
+        "current_episode_08": 1908,
+        "episode_01": 2699,
+        "episode_02": 993,
+        "episode_03": 1512,
+        "episode_04": 3700,
+        "episode_05": 2082,
+        "episode_06": 2433,
+        "episode_07": 1491,
+        "language_guidance": 491
+      },
+      "input_bytes": 66848,
+      "language": "fsharp",
+      "live": false,
+      "sha256": "b19c79dceb620e06fa3cf23d257d2c696b771b2a3d876cf5f523eee5def90cd6",
+      "source_bytes": 39694,
+      "source_checkpoint": 7,
+      "source_files": 2,
+      "source_sha256": {
+        "Simulation.fs": "2dcd1c63e49a70398e20727ba41f184e46a5ab06d0cabe3bbd53b7a24867b323",
+        "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+      },
+      "task_episode": 8,
+      "token_proxy": {
+        "token_stream_sha256": "b6883fe07f2e0dd6e2bfd98d247ddc6ed7054180f038eb99f9b8bc1cbc71aa84",
+        "tokens": 16153
+      }
+    }
+  ],
+  "fault_audit": {
+    "candidate_execution": false,
+    "faults": [
+      {
+        "baseline": {
+          "category": "semantic",
+          "differences": [],
+          "passed": true,
+          "source_sha256": {
+            "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "checkpoint": 1,
+        "id": "csharp-drop-due-effects",
+        "language": "csharp",
+        "mutant": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "enqueue:2:9",
+                  "enqueue:1:4",
+                  "enqueue:1:2",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "b",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "z",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "enqueue:2:9",
+                  "enqueue:1:4",
+                  "enqueue:1:2",
+                  "spawn:a",
+                  "spawn:b",
+                  "spawn:z",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "b",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "z",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "93f96da80f37f66b27d1dca9094e5e701e8bea862029e7030946e42d94a22c42",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "provenance": {
+          "case_sha256": "eb9d7b27780fe020217a503854af810ab1b115f011adca6f44b2c44883834fe2",
+          "mutant_source_sha256": {
+            "Program.cs": "93f96da80f37f66b27d1dca9094e5e701e8bea862029e7030946e42d94a22c42",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          },
+          "patch_sha256": "b08b9e765e2aed35503405a84526c5d7f55ccccc2d79c35c5b18295a419f3a04",
+          "source_sha256": {
+            "Program.cs": "f49b882a1b9ceec63e51c1ba449879492e66f50aa2937531620ada46708d60a1",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "semantic_kill": true,
+        "witness_case_id": "queue-order"
+      },
+      {
+        "baseline": {
+          "category": "semantic",
+          "differences": [],
+          "passed": true,
+          "source_sha256": {
+            "Program.cs": "2d38815b282bc78c1dfb794e114ac6a9156d1160e22a19bf5c84d7ce92a756fe",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "checkpoint": 2,
+        "id": "csharp-omit-future-cancel",
+        "language": "csharp",
+        "mutant": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "enqueue:1:0",
+                  "enqueue:2:0",
+                  "remove:a",
+                  "tick:2"
+                ],
+                "errors": [
+                  "missing_entity"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "enqueue:1:0",
+                  "enqueue:2:0",
+                  "remove:a",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "13af9f76fccf3eac62faba0103a0c469ab1ae18b6a77d574be97d712cdb94208",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "provenance": {
+          "case_sha256": "e96b0e7b27f611ec1cb08757fe0e9331c372af65e6d4987c76661f152d485738",
+          "mutant_source_sha256": {
+            "Program.cs": "13af9f76fccf3eac62faba0103a0c469ab1ae18b6a77d574be97d712cdb94208",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          },
+          "patch_sha256": "480682c7d78e5cbb232c32ca7ef5c4c10495703635c40298f7b4ffb7835ce8c1",
+          "source_sha256": {
+            "Program.cs": "2d38815b282bc78c1dfb794e114ac6a9156d1160e22a19bf5c84d7ce92a756fe",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "semantic_kill": true,
+        "witness_case_id": "future-remove-canceled-after-due-remove"
+      },
+      {
+        "baseline": {
+          "category": "semantic",
+          "differences": [],
+          "passed": true,
+          "source_sha256": {
+            "Program.cs": "54a034044e3b325fe94dcc491daa43865881038aa47c91784df9d0a948efe0bc",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "checkpoint": 5,
+        "id": "csharp-bypass-policy",
+        "language": "csharp",
+        "mutant": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "register:cap",
+                  "policy:a:cap",
+                  "tick:1"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "policy": "cap",
+                      "velocity": 3,
+                      "x": 12
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "register:cap",
+                  "policy:a:cap",
+                  "tick:1"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "policy": "cap",
+                      "velocity": 3,
+                      "x": 10
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "44bc64c4aa89536b647b22a356cc6c9c90ed7d50f8b073fb4cfba5d404c15490",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "provenance": {
+          "case_sha256": "d21108c23794fdb2cafa57cf3eee2bb15b287dec15ee668518d49b50e1ea1045",
+          "mutant_source_sha256": {
+            "Program.cs": "44bc64c4aa89536b647b22a356cc6c9c90ed7d50f8b073fb4cfba5d404c15490",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          },
+          "patch_sha256": "030948498867f6f5e41eadf3ee65a2dc169b13480bc7ae42b5c0b50fe89efd81",
+          "source_sha256": {
+            "Program.cs": "54a034044e3b325fe94dcc491daa43865881038aa47c91784df9d0a948efe0bc",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "semantic_kill": true,
+        "witness_case_id": "policy-clamp"
+      },
+      {
+        "baseline": {
+          "category": "semantic",
+          "differences": [],
+          "passed": true,
+          "source_sha256": {
+            "Program.cs": "30d125aab74b286ca2efabed93e2f08a659c443c53f2cc45b3ed67a9cb7cbe28",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "checkpoint": 8,
+        "id": "csharp-leak-replay-registry",
+        "language": "csharp",
+        "mutant": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "save:s",
+                  "replay:s",
+                  "load:inner"
+                ],
+                "errors": [],
+                "snapshots": [
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 0,
+                          "x": 0
+                        }
+                      ],
+                      "issued": [],
+                      "pending": [],
+                      "policies": [
+                        {
+                          "kind": "clamp10",
+                          "name": "cap"
+                        }
+                      ],
+                      "requests": [],
+                      "tick": 0,
+                      "version": 2
+                    },
+                    "name": "inner"
+                  },
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 0,
+                          "x": 0
+                        }
+                      ],
+                      "issued": [],
+                      "pending": [],
+                      "policies": [],
+                      "requests": [],
+                      "tick": 0,
+                      "version": 2
+                    },
+                    "name": "s"
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "save:s",
+                  "replay:s"
+                ],
+                "errors": [
+                  "missing_snapshot"
+                ],
+                "snapshots": [
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 0,
+                          "x": 0
+                        }
+                      ],
+                      "issued": [],
+                      "pending": [],
+                      "policies": [],
+                      "requests": [],
+                      "tick": 0,
+                      "version": 2
+                    },
+                    "name": "s"
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Program.cs": "1ecc08f360547d8467cdf715f9c638fea2e78c1f5c207037c0519343eec77651",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "provenance": {
+          "case_sha256": "d4bb2b409a0a563fe013d34dbc76187fd7acfb309462ed43547116cc29a21954",
+          "mutant_source_sha256": {
+            "Program.cs": "1ecc08f360547d8467cdf715f9c638fea2e78c1f5c207037c0519343eec77651",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          },
+          "patch_sha256": "6740f727adc261cfd1e58c3ea09350a749f72597fba42a6085fd7bab425d9bd8",
+          "source_sha256": {
+            "Program.cs": "30d125aab74b286ca2efabed93e2f08a659c443c53f2cc45b3ed67a9cb7cbe28",
+            "Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234"
+          }
+        },
+        "semantic_kill": true,
+        "witness_case_id": "replay-registry-isolation"
+      },
+      {
+        "baseline": {
+          "category": "semantic",
+          "differences": [],
+          "passed": true,
+          "source_sha256": {
+            "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "checkpoint": 1,
+        "id": "fsharp-drop-due-effects",
+        "language": "fsharp",
+        "mutant": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "enqueue:2:9",
+                  "enqueue:1:4",
+                  "enqueue:1:2",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "b",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "z",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "enqueue:2:9",
+                  "enqueue:1:4",
+                  "enqueue:1:2",
+                  "spawn:a",
+                  "spawn:b",
+                  "spawn:z",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "b",
+                      "velocity": 0,
+                      "x": 0
+                    },
+                    {
+                      "id": "z",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "23ca403eb9d7d4f2857ff734c1ca868432877c66d42fd354cc5e381abc169e28",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "provenance": {
+          "case_sha256": "eb9d7b27780fe020217a503854af810ab1b115f011adca6f44b2c44883834fe2",
+          "mutant_source_sha256": {
+            "Simulation.fs": "23ca403eb9d7d4f2857ff734c1ca868432877c66d42fd354cc5e381abc169e28",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          },
+          "patch_sha256": "d5750780e1322c4455f0b64a3e3902a9cac6a42e0c9159709464f6f50f6e8e06",
+          "source_sha256": {
+            "Simulation.fs": "8a78b52a093b2932ce8c2bd7e9512bda8f5dd9fb46eaf6ede1fa770b241c07cb",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "semantic_kill": true,
+        "witness_case_id": "queue-order"
+      },
+      {
+        "baseline": {
+          "category": "semantic",
+          "differences": [],
+          "passed": true,
+          "source_sha256": {
+            "Simulation.fs": "2fecfdfb59716c28b16d982321209baca606a51189d3d6ae04677b80b144bd56",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "checkpoint": 2,
+        "id": "fsharp-omit-future-cancel",
+        "language": "fsharp",
+        "mutant": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "enqueue:1:0",
+                  "enqueue:2:0",
+                  "remove:a",
+                  "tick:2"
+                ],
+                "errors": [
+                  "missing_entity"
+                ],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "enqueue:1:0",
+                  "enqueue:2:0",
+                  "remove:a",
+                  "tick:2"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [],
+                  "tick": 2
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "91afbfb7c79de346317be98cb5051238bc418972e2a574193a66d7ee8fffcbe9",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "provenance": {
+          "case_sha256": "e96b0e7b27f611ec1cb08757fe0e9331c372af65e6d4987c76661f152d485738",
+          "mutant_source_sha256": {
+            "Simulation.fs": "91afbfb7c79de346317be98cb5051238bc418972e2a574193a66d7ee8fffcbe9",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          },
+          "patch_sha256": "d17231598f3497290b692dd8259d8fd8799e0b537179caf8baa65999b2225a9d",
+          "source_sha256": {
+            "Simulation.fs": "2fecfdfb59716c28b16d982321209baca606a51189d3d6ae04677b80b144bd56",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "semantic_kill": true,
+        "witness_case_id": "future-remove-canceled-after-due-remove"
+      },
+      {
+        "baseline": {
+          "category": "semantic",
+          "differences": [],
+          "passed": true,
+          "source_sha256": {
+            "Simulation.fs": "ae685481ca757bfb9d538640294d4558b69d8a16ee5601ba4a921b528f785eeb",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "checkpoint": 5,
+        "id": "fsharp-bypass-policy",
+        "language": "fsharp",
+        "mutant": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "register:cap",
+                  "policy:a:cap",
+                  "tick:1"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "policy": "cap",
+                      "velocity": 3,
+                      "x": 12
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "register:cap",
+                  "policy:a:cap",
+                  "tick:1"
+                ],
+                "errors": [],
+                "snapshots": [],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "policy": "cap",
+                      "velocity": 3,
+                      "x": 10
+                    }
+                  ],
+                  "tick": 1
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "1c0850e368eeecac96d6c010a7768cdaeff2e7ae5636d898e647d46d8d48005e",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "provenance": {
+          "case_sha256": "d21108c23794fdb2cafa57cf3eee2bb15b287dec15ee668518d49b50e1ea1045",
+          "mutant_source_sha256": {
+            "Simulation.fs": "1c0850e368eeecac96d6c010a7768cdaeff2e7ae5636d898e647d46d8d48005e",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          },
+          "patch_sha256": "ceab48accc6abf1175427dc263fdfa8175086be7c611dcdca5c2dcc2d0ba90c6",
+          "source_sha256": {
+            "Simulation.fs": "ae685481ca757bfb9d538640294d4558b69d8a16ee5601ba4a921b528f785eeb",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "semantic_kill": true,
+        "witness_case_id": "policy-clamp"
+      },
+      {
+        "baseline": {
+          "category": "semantic",
+          "differences": [],
+          "passed": true,
+          "source_sha256": {
+            "Simulation.fs": "3bf006c3fa864dc9f17bd326d9f90b6a0476922db5e75f57d794cbd08ab719db",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "checkpoint": 8,
+        "id": "fsharp-leak-replay-registry",
+        "language": "fsharp",
+        "mutant": {
+          "category": "semantic",
+          "differences": [
+            {
+              "actual": {
+                "effects": [
+                  "spawn:a",
+                  "save:s",
+                  "replay:s",
+                  "load:inner"
+                ],
+                "errors": [],
+                "snapshots": [
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 0,
+                          "x": 0
+                        }
+                      ],
+                      "issued": [],
+                      "pending": [],
+                      "policies": [
+                        {
+                          "kind": "clamp10",
+                          "name": "cap"
+                        }
+                      ],
+                      "requests": [],
+                      "tick": 0,
+                      "version": 2
+                    },
+                    "name": "inner"
+                  },
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 0,
+                          "x": 0
+                        }
+                      ],
+                      "issued": [],
+                      "pending": [],
+                      "policies": [],
+                      "requests": [],
+                      "tick": 0,
+                      "version": 2
+                    },
+                    "name": "s"
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "expected": {
+                "effects": [
+                  "spawn:a",
+                  "save:s",
+                  "replay:s"
+                ],
+                "errors": [
+                  "missing_snapshot"
+                ],
+                "snapshots": [
+                  {
+                    "data": {
+                      "entities": [
+                        {
+                          "id": "a",
+                          "kind": "mover",
+                          "velocity": 0,
+                          "x": 0
+                        }
+                      ],
+                      "issued": [],
+                      "pending": [],
+                      "policies": [],
+                      "requests": [],
+                      "tick": 0,
+                      "version": 2
+                    },
+                    "name": "s"
+                  }
+                ],
+                "state": {
+                  "entities": [
+                    {
+                      "id": "a",
+                      "velocity": 0,
+                      "x": 0
+                    }
+                  ],
+                  "tick": 0
+                },
+                "version": 1
+              },
+              "index": 0
+            }
+          ],
+          "passed": false,
+          "source_sha256": {
+            "Simulation.fs": "8b9e946638ca3ac7962c0ceb8495a32a7daab2ecd3c5d1ff47e7049abdad2b3e",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "provenance": {
+          "case_sha256": "d4bb2b409a0a563fe013d34dbc76187fd7acfb309462ed43547116cc29a21954",
+          "mutant_source_sha256": {
+            "Simulation.fs": "8b9e946638ca3ac7962c0ceb8495a32a7daab2ecd3c5d1ff47e7049abdad2b3e",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          },
+          "patch_sha256": "621e1a0e0b0fc8eba7c9ddbfbe3d1136312e085971fea097c1d29a6967cef79b",
+          "source_sha256": {
+            "Simulation.fs": "3bf006c3fa864dc9f17bd326d9f90b6a0476922db5e75f57d794cbd08ab719db",
+            "Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e"
+          }
+        },
+        "semantic_kill": true,
+        "witness_case_id": "replay-registry-isolation"
+      }
+    ],
+    "live": false,
+    "status": "passed",
+    "trusted_source_only": true
+  },
+  "layout": {
+    "base": "C:\\Users\\hadri\\source\\repos\\agentic-language-fitness\\benchmarks\\maintenance-sim",
+    "episodes": 8,
+    "languages": {
+      "csharp": {
+        "patches": [
+          "01.patch",
+          "02.patch",
+          "03.patch",
+          "04.patch",
+          "05.patch",
+          "06.patch",
+          "07.patch",
+          "08.patch"
+        ],
+        "seed_files": [
+          "Program.cs",
+          "Simulation.csproj"
+        ],
+        "source_bytes": 9077
+      },
+      "fsharp": {
+        "patches": [
+          "01.patch",
+          "02.patch",
+          "03.patch",
+          "04.patch",
+          "05.patch",
+          "06.patch",
+          "07.patch",
+          "08.patch"
+        ],
+        "seed_files": [
+          "Simulation.fs",
+          "Simulation.fsproj"
+        ],
+        "source_bytes": 9528
+      }
+    },
+    "sdk": "10.0.302"
+  },
+  "live": false,
+  "provenance": {
+    "content_sha256": {
+      "benchmarks/maintenance-sim/construction.json": "9e06bb8df2e6f0443dda774506ef6cf001d6d7c31865dab5cc60550236e4b0a5",
+      "benchmarks/maintenance-sim/contract.md": "5f0cc0e10c61db2a6355a63c181e4c3653ba2da3fe96522342149d1850be5b79",
+      "benchmarks/maintenance-sim/episodes/01.md": "fd20f66692692c9a9183e1715198f449cf149401800edea2027ba9de0914d7e1",
+      "benchmarks/maintenance-sim/episodes/02.md": "5a8df8a523a450e928aa5901305debc6d5e6b303f3f1caf6ba526ad573a269e9",
+      "benchmarks/maintenance-sim/episodes/03.md": "59aeb20d950c9bcdac78c6ec0290917f122191c079a6725d4e72196b8ff7ca16",
+      "benchmarks/maintenance-sim/episodes/04.md": "fabe7b22ba01ac6dc56e8aadf764ca40555328b12cd00a2c155ce694412f57c7",
+      "benchmarks/maintenance-sim/episodes/05.md": "3e91ba53db6afa0523324bf4a5d9b40cecc59c3da2dd8f55ca2ccd41693d22d8",
+      "benchmarks/maintenance-sim/episodes/06.md": "1adc955e7dc79998ec9d3fb807af0efd8fc89c87a6406eaf971d1281520633e6",
+      "benchmarks/maintenance-sim/episodes/07.md": "f2ead60e0eeca09fa98c00c7db5037740deb4e90d1513266ec02d14b02c67ebd",
+      "benchmarks/maintenance-sim/episodes/08.md": "9e83da696e1f4aa47683e8e0ccd7f38c8c625f7b63d7fc144ab3d23b667cb627",
+      "benchmarks/maintenance-sim/fixtures/cases.json": "7131882aa7fac3b6f5305ea75c7080de18c5bec22dbd86be60036c4a9433f2f5",
+      "benchmarks/maintenance-sim/fixtures/faults.json": "ceefcdb7e74023ed6675c9ba18fd8ee3b1e1bd7dbdab09bcea20b45a49451185",
+      "benchmarks/maintenance-sim/guidance/common.md": "9412d3c70728ff828567dc6ce08d242a7755bcd8383651ed88c7697910ec2d11",
+      "benchmarks/maintenance-sim/guidance/csharp.md": "ab426ea9b7f7b9953204475cffad81b9f05fe166da228f127db71d92126c6e09",
+      "benchmarks/maintenance-sim/guidance/fsharp.md": "322ffccd44c52e37f68a59816d0af555545bcf54d572591ad002d2e3751e4c65",
+      "benchmarks/maintenance-sim/reference/csharp/01.patch": "569e71447035f1991f811dc359162fbbf09a53ab5856c92c047b457231b73845",
+      "benchmarks/maintenance-sim/reference/csharp/02.patch": "93f722fc0ed023e511e76d02bd717fce5cbf27a12877a0e2b9da13ad468ecc5d",
+      "benchmarks/maintenance-sim/reference/csharp/03.patch": "f72869b78673e357e66ba3a7bc2433b04eb8d7e98c190d2252f5bd0562027ebe",
+      "benchmarks/maintenance-sim/reference/csharp/04.patch": "dc950938f4b775be1ac0b0da8619da6a03ec28074d326124c756d21b11358dca",
+      "benchmarks/maintenance-sim/reference/csharp/05.patch": "b7d30be3d1ef687957611841132b2ff8bc11ed68cec12119713c5c5e1cc0530b",
+      "benchmarks/maintenance-sim/reference/csharp/06.patch": "8f2d3fafff1e15b30e08e2d485aa96d98e0243d9269c1642694c44c88079eee3",
+      "benchmarks/maintenance-sim/reference/csharp/07.patch": "87aba3671ad02100701634b553d61e805780d208050fdd73d3b777672b24fdad",
+      "benchmarks/maintenance-sim/reference/csharp/08.patch": "9996dc23381f41eac11bd0e8c306ef143541aab9e74e3d068040093434d525dc",
+      "benchmarks/maintenance-sim/reference/fsharp/01.patch": "1b8e598dcf7d5db0a801bb0180fe988e3dc13d912f12c775581bc148301b7630",
+      "benchmarks/maintenance-sim/reference/fsharp/02.patch": "434d86c65c9386eee0901bce2daad7d86433bcfd205509d90396374e6ece054c",
+      "benchmarks/maintenance-sim/reference/fsharp/03.patch": "b1cac5273e5198f708fd0681b49f6d6eaa8a6d58e0f939767cc29f217e842385",
+      "benchmarks/maintenance-sim/reference/fsharp/04.patch": "91b4af35ac02a869df65c98ddb8832ae857e7e0df6996e2dd535d2609d5c7bd7",
+      "benchmarks/maintenance-sim/reference/fsharp/05.patch": "d72c4bcfbce5642978f76b6a1a2ddebf3a2160b78d866be026b38307a985cea3",
+      "benchmarks/maintenance-sim/reference/fsharp/06.patch": "5fcf6d676bf7c95d512f9344ba5df9f77f4ffca5d8b9376abde77aa1dccd835b",
+      "benchmarks/maintenance-sim/reference/fsharp/07.patch": "6061e3f02c74b4ffa5094f89b30f5e580970696ff5ec860ddf0ac2531405855b",
+      "benchmarks/maintenance-sim/reference/fsharp/08.patch": "fa60f4a90aa7f7da2876afc2c79966ed618d003350c8555d23fc8ff460a1386e",
+      "benchmarks/maintenance-sim/seed/csharp/Program.cs": "bd815731aeb495ffcaf17d066e6ac5fe8fb35cbcfb6ca79d2bf29831ace434f5",
+      "benchmarks/maintenance-sim/seed/csharp/Simulation.csproj": "1f638de8c09974d0ca7dda36c16d766c24398e36a538dd5a5a8e1af128526234",
+      "benchmarks/maintenance-sim/seed/fsharp/Simulation.fs": "43a9669e7184f50a5067ef36db5f82cc6a567997638287504761aaec653f8916",
+      "benchmarks/maintenance-sim/seed/fsharp/Simulation.fsproj": "5cc8c353cf25358615df7f9996b8b57fdc3a8cbf469c41b5c9b08324b13f831e",
+      "scripts/maintenance_check.py": "82adbf649cf52fc3c4490d06a2eec7b0a153f5570dda529ffba6548ca25f68e5",
+      "src/alf/maintenance.py": "16c5513ef83a5e120aef33e8ee64240d47a4c9ea034977c482c00730ce421184",
+      "tests/test_maintenance.py": "7e4946b0260a430789e08be0d460a203680417e84715f6b46398ddb2d6891758"
+    },
+    "reference_submission_bytes": [
+      {
+        "bytes": 13153,
+        "changed_files": [
+          "Program.cs"
+        ],
+        "episode": 1,
+        "language": "csharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "cd33fa9a644a6ad2a4bb21d1fe1d04ebc8f05d543e0c455eddc1a258a877769b"
+      },
+      {
+        "bytes": 13326,
+        "changed_files": [
+          "Program.cs"
+        ],
+        "episode": 2,
+        "language": "csharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "2d5609a5471125f2448be838fb7ddebf8b13a917f7c166f83ed2f03bcdea2854"
+      },
+      {
+        "bytes": 15555,
+        "changed_files": [
+          "Program.cs"
+        ],
+        "episode": 3,
+        "language": "csharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "0c9f4594b80278a1ff7b40d26f0352f031a7be4c1907edce48bd919f1bf50209"
+      },
+      {
+        "bytes": 21312,
+        "changed_files": [
+          "Program.cs"
+        ],
+        "episode": 4,
+        "language": "csharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "835f5ffb076a71a914c6d4e479c336667d2e637ebfb3d27569bed7160f59c02c"
+      },
+      {
+        "bytes": 25867,
+        "changed_files": [
+          "Program.cs"
+        ],
+        "episode": 5,
+        "language": "csharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "9bdcccb7de9d6b1ab7d5640b3313b53b3d8eb645ee685728c1e7cdd37e39bc55"
+      },
+      {
+        "bytes": 31332,
+        "changed_files": [
+          "Program.cs"
+        ],
+        "episode": 6,
+        "language": "csharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "53398823e1ed25814ca42da63972559e1a680cdc09c7982734204779162a3c4b"
+      },
+      {
+        "bytes": 32625,
+        "changed_files": [
+          "Program.cs"
+        ],
+        "episode": 7,
+        "language": "csharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "45ff1975dca6a7d73e392c686830c1069296d0912f4e213ccc840e02c058b575"
+      },
+      {
+        "bytes": 34595,
+        "changed_files": [
+          "Program.cs"
+        ],
+        "episode": 8,
+        "language": "csharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "5b66b0925f7bc54fd9867e00141d01048442b7196a5c1530a8078962d29d7525"
+      },
+      {
+        "bytes": 14134,
+        "changed_files": [
+          "Simulation.fs"
+        ],
+        "episode": 1,
+        "language": "fsharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "61d364be1e1e1846983aadafa13124419c10c3f2df259ee26838d94badd3b78c"
+      },
+      {
+        "bytes": 14593,
+        "changed_files": [
+          "Simulation.fs"
+        ],
+        "episode": 2,
+        "language": "fsharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "b21ce0dd51783e3ef73b881cbc3113c3ac5ceaf77326ce975dcdca5ee34e8eb8"
+      },
+      {
+        "bytes": 16830,
+        "changed_files": [
+          "Simulation.fs"
+        ],
+        "episode": 3,
+        "language": "fsharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "5f22903f4cca0df459876fa08dcf85759bce43870dc75124da070c10d70ec6dd"
+      },
+      {
+        "bytes": 27408,
+        "changed_files": [
+          "Simulation.fs"
+        ],
+        "episode": 4,
+        "language": "fsharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "eb16738428794b300c112088631406be55d77f2b0173a15608b458a5eda62acf"
+      },
+      {
+        "bytes": 32500,
+        "changed_files": [
+          "Simulation.fs"
+        ],
+        "episode": 5,
+        "language": "fsharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "2a649d5acfe7376d0dc16e905ff2af4e4132c6bf221307bb8ed4bcf96267d932"
+      },
+      {
+        "bytes": 38882,
+        "changed_files": [
+          "Simulation.fs"
+        ],
+        "episode": 6,
+        "language": "fsharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "7cde1e3a3c8f712438827df8315acb3bb4c3dbaf5ff8f6dd3abb4c1bba3ae273"
+      },
+      {
+        "bytes": 40930,
+        "changed_files": [
+          "Simulation.fs"
+        ],
+        "episode": 7,
+        "language": "fsharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "07009b63c403936a930aeff84d5660705137d324b02ee81d8481aba80095133b"
+      },
+      {
+        "bytes": 43928,
+        "changed_files": [
+          "Simulation.fs"
+        ],
+        "episode": 8,
+        "language": "fsharp",
+        "note": "lower-bound placeholder with empty required architecture_notes; excludes actual note contents and native/model framing",
+        "removed_files": [],
+        "sha256": "b63b08c8c752d639f883704d238321cf510fae437c0649d2b2eeb08176ec5afd"
+      }
+    ],
+    "tokenizer": {
+      "encoding": "o200k_base",
+      "note": "documented proxy, not provider context accounting",
+      "package": "tiktoken",
+      "version": "0.14.0"
+    }
+  },
+  "reference_only": [
+    {
+      "language": "csharp",
+      "source_checkpoint": 8
+    },
+    {
+      "language": "fsharp",
+      "source_checkpoint": 8
+    }
+  ],
+  "status": "passed",
+  "trusted_source_only": true
+}

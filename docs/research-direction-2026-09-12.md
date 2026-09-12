@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-12 HKT
 
-**Status:** accepted research direction; literature-backed construction proposal awaiting adoption
+**Status:** bounded construction validated model-free; human review, not executable
 
 ## Purpose and scope
 
@@ -105,17 +105,24 @@ infer these decisions from H results, citations or fit checks.
 The targeted investigation and draft are now complete as documentation:
 [literature ledger](maintenance-literature-review-2026-09-12.md) and
 [standalone design decision packet](maintenance-context-design-review-2026-09-12.md).
-The recommendation is to maintain supplied, idiomatic architectures first,
+The adopted construction is to maintain supplied, idiomatic architectures first,
 using one paired headless simulation family and eight cumulative episodes for
-model-free feasibility construction. This is an assistant proposal, not adopted
-construction or an allocated experiment; the eventual main-study sample and
-numeric context settings are still unset.
+model-free feasibility construction. This is not an allocated experiment or
+large-project result; the eventual main-study sample is unset and numeric context
+settings remain unactivated. The user’s adoption is recorded in the linked packet
+at base abdc68cc1eef24f0aca080bc151714f930ef8f27 with exact CI 34675819811.
 
-Next resumable action: obtain the scientific construction decision from that
-packet, then follow its bounded assignment if adopted. Safe clarifications and
-documentation corrections remain allowed; do not start replacement construction
-or live work by treating a publication or CI pass as adoption. Preserve the
-current H checkpoint, source/specification identities and all frozen artifacts.
+The trusted workload, context, fault and applicability construction now passes
+model-free checks. Next is human review using the
+[standalone artifact/settings packet](maintenance-sim-human-review-2026-09-12.md),
+including the still-unvalidated architectural diagnostics and proposed budgets.
+F# envelopes are larger at all eight episodes in this pair; no compactness or
+model-decision advantage is established. A future isolated maintenance adapter
+remains unimplemented and requires a separate bounded assignment. Safe
+clarifications and documentation corrections remain allowed; do not treat
+construction adoption as live authority.
+Preserve the current H checkpoint, source/specification identities and all
+frozen artifacts.
 
 ## Literature and feasibility update
 
@@ -148,12 +155,12 @@ implementation. No runner code or security boundary changed.
 The accepted question concerns F#/C# architectural durability during bounded
 agent maintenance of large existing projects. F# composition/defaults and
 modern C# idioms are competing hypotheses; expertise and prior know-how matter.
-The recommended construction, metrics and sampling frame remain assistant
-proposals requiring review. Current H is not an E3a repair loop. The bounded
+The adopted construction remains bounded preparation; its detailed metrics and
+sampling frame remain reviewable proposals. Current H is not an E3a repair loop. The bounded
 Scite/primary-method review is documented, not a systematic or F#/C# efficacy
 result. No code, protocol, execution, allocation or provider claim changed.
-The next material choice is maintenance-first construction adoption; separate
-review governs subsequent treatment freezing and execution.
+The next material choice is review of the constructed artifacts; separate review
+governs subsequent treatment freezing and execution.
 
 **Changed locations:** AGENTS.md, PLAN.md, this context note, the literature
 ledger and the standalone maintenance/context design packet.
