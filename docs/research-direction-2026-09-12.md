@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-12 HKT
 
-**Status:** accepted research direction; proposals below require amendment/review
+**Status:** accepted research direction; literature-backed construction proposal awaiting adoption
 
 ## Purpose and scope
 
@@ -102,21 +102,58 @@ measurement and survival horizon. It must also decide how to measure support and
 framework burden without introducing a new framework or remote layer. Do not
 infer these decisions from H results, citations or fit checks.
 
-Next resumable action: conduct literature-backed maintenance/context design
-alignment and draft a bounded design amendment for review. Adoption of changed
-treatments, building replacements, or live execution requires a separate
-decision. Preserve the current H checkpoint, source/specification identities
-and all frozen artifacts.
+The targeted investigation and draft are now complete as documentation:
+[literature ledger](maintenance-literature-review-2026-09-12.md) and
+[standalone design decision packet](maintenance-context-design-review-2026-09-12.md).
+The recommendation is to maintain supplied, idiomatic architectures first,
+using one paired headless simulation family and eight cumulative episodes for
+model-free feasibility construction. This is an assistant proposal, not adopted
+construction or an allocated experiment; the eventual main-study sample and
+numeric context settings are still unset.
+
+Next resumable action: obtain the scientific construction decision from that
+packet, then follow its bounded assignment if adopted. Safe clarifications and
+documentation corrections remain allowed; do not start replacement construction
+or live work by treating a publication or CI pass as adoption. Preserve the
+current H checkpoint, source/specification identities and all frozen artifacts.
+
+## Literature and feasibility update
+
+The initial Scite probe above was followed by selected full-text method reading
+and primary-source revision checks, all logged in the linked ledger. ChainSWE
+already has persistent-repository/fresh-conversation and retained-conversation
+conditions. SWE-EVO evaluates release-sized changes, not the same inherited
+episode sequence. These precedents narrow the potential contribution to the
+matched language/architecture/context question; they do not show F# superiority.
+Scite's SWE-EVO index and current v6 differ in input defaults/results, so cite the
+checked primary revision and do not combine their performance figures.
+
+Cognitive Dimensions supplies task-sensitive design vocabulary, not a validated
+LLM score. The selected language-quality reanalysis motivates careful measurement
+and qualified domain review. The search was bounded and partly noisy, including
+symbol ambiguity for F#/C#; it cannot establish the absence of related work.
+
+A separate read-only feasibility audit at
+`663d4ac97e0870d5b44d5d0e0b2d1e3db7601f70` found that
+`src/alf/runner.py` inherits workspace state but stops after the first failed
+task; its evaluator uses host subprocesses, not a candidate sandbox. Earlier
+scout shorthand suggesting E3a was a cross-task chain or that this general
+evaluator was sandboxed was corrected before design adoption. Persistence ideas
+are reusable, not authority to execute untrusted code on that path. The new
+packet identifies the existing H/E3a sandbox boundary to review for any later
+implementation. No runner code or security boundary changed.
 
 ## Summary for handoff
 
 The accepted question concerns F#/C# architectural durability during bounded
 agent maintenance of large existing projects. F# composition/defaults and
 modern C# idioms are competing hypotheses; expertise and prior know-how matter.
-The longitudinal design, metrics, repair split and sampling frame remain
-assistant proposals requiring review. Current H is not an E3a repair loop, and
-Scite/Nu materials are limited evidence leads. No code, protocol, execution,
-allocation or provider claim changed. Continue bounded design investigation;
-separate review governs any treatment adoption or execution.
+The recommended construction, metrics and sampling frame remain assistant
+proposals requiring review. Current H is not an E3a repair loop. The bounded
+Scite/primary-method review is documented, not a systematic or F#/C# efficacy
+result. No code, protocol, execution, allocation or provider claim changed.
+The next material choice is maintenance-first construction adoption; separate
+review governs subsequent treatment freezing and execution.
 
-**Changed locations:** AGENTS.md, PLAN.md, and this new file.
+**Changed locations:** AGENTS.md, PLAN.md, this context note, the literature
+ledger and the standalone maintenance/context design packet.

@@ -2,7 +2,7 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current assignment: maintenance/context design alignment (2026-09-12 HKT)
+## Current assignment: maintenance/context construction decision (2026-09-12 HKT)
 
 The user’s current discussion refocuses the comparison on architectural
 coherence, context usefulness and large-project long-term maintenance. It is a
@@ -12,12 +12,34 @@ retains the accepted direction, assistant-proposed designs, read-only findings,
 literature leads and open decisions. No OAuth, model/count request, live
 allocation, new protocol version, framework, proxy or backend is authorized.
 
-The next resumable assignment is literature-backed maintenance/context design
-alignment and drafting a bounded design amendment for review. Adoption of
-changed treatments, replacements or live execution requires a separate
-decision. Keep H execution flags false and allocations at zero. The prepared
-H1/H2 materials below remain discoverable and unchanged; this note records
-context only.
+The targeted literature investigation and bounded proposal are now recorded in
+the [standalone design decision packet](docs/maintenance-context-design-review-2026-09-12.md)
+and [search/evidence ledger](docs/maintenance-literature-review-2026-09-12.md).
+The recommendation is maintenance of supplied idiomatic architectures first,
+not architecture creation: one paired headless simulation workload and eight
+dependent episodes for model-free feasibility construction. Candidate software
+persists; conversations reset; the primary proposal has no tools or diagnostic
+repairs. This is not a large-project result, an executable specification or an
+allocated sample. ChainSWE already separates repository and conversation state;
+neither that idea nor software-evolution benchmarking is claimed as new here.
+
+**Next decision:** adopt or change this maintenance-first construction scope.
+The packet puts current values, proposed policies, unresolved numeric settings,
+review requirements and the subsequent bounded assignment in one place.
+Changing the initial-architecture source or failure/continuation policy is a
+scientific choice, not an automatically approved runner bug fix. If adopted,
+construct and validate the trusted workload model-free, then return before
+candidate execution with exact artifacts and proposed settings. Until adoption,
+do not implement the replacement. Keep H execution flags false and allocations
+zero. No old balance carries over and all prepared H1/H2 material stays intact.
+
+The source inspection is bound to
+`663d4ac97e0870d5b44d5d0e0b2d1e3db7601f70`. The old general runner preserves
+workspace state but evaluates via host subprocesses; do not mistake its
+command-agent Docker route for evaluator isolation. Reuse is conceptual only
+until a specifically reviewed existing-sandbox path is integrated. Scite's
+indexed SWE-EVO text differed from the current revision; the literature ledger
+pins the primary methods and excludes mixed-version performance comparisons.
 
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 

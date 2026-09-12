@@ -2,11 +2,14 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current assignment (2026-09-12): maintenance/context design alignment.** Preserve the
-accepted F#/C# large-project maintenance research direction and its unresolved
-design choices in [the dated record](docs/research-direction-2026-09-12.md).
-This is alignment/documentation work only: it adopts no new protocol, sample,
-allocation, execution, framework, proxy or backend.
+**Current assignment (2026-09-12): maintenance/context design decision.** Read the
+[standalone recommendation](docs/maintenance-context-design-review-2026-09-12.md)
+for current/proposed settings and the unapproved maintenance-first construction:
+one paired existing architecture, eight inherited episodes, clean conversations.
+The [dated context](docs/research-direction-2026-09-12.md) and
+[literature ledger](docs/maintenance-literature-review-2026-09-12.md) retain evidence
+and limits. Construction adoption is next, not implementation or execution.
+No protocol, sample allocation, framework, proxy or backend changes are adopted.
 
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review
