@@ -2,7 +2,24 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
+## Current assignment: maintenance/context design alignment (2026-09-12 HKT)
+
+The user’s current discussion refocuses the comparison on architectural
+coherence, context usefulness and large-project long-term maintenance. It is a
+research-direction decision, not adoption of a treatment or authorization for
+execution. The [dated context record](docs/research-direction-2026-09-12.md)
+retains the accepted direction, assistant-proposed designs, read-only findings,
+literature leads and open decisions. No OAuth, model/count request, live
+allocation, new protocol version, framework, proxy or backend is authorized.
+
+The next resumable assignment is literature-backed maintenance/context design
+alignment and drafting a bounded design amendment for review. Adoption of
+changed treatments, replacements or live execution requires a separate
+decision. Keep H execution flags false and allocations at zero. The prepared
+H1/H2 materials below remain discoverable and unchanged; this note records
+context only.
+
+## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review
 before approving execution."** This adopts the bounded workload/controller build,
@@ -43,8 +60,10 @@ invoke a model/count endpoint or begin a pilot in response to an ordinary
 continuation. Approval may cover only the three-planned-call integration (at most
 five), or separately a fixed pilot contingent on matching successful integration
 and freeze (at most 64). No unused E3a balance carries over. This is a human-review
-checkpoint, not a new scientific design question or an authorization inferred
-from tests, hashes or CI.
+checkpoint, not live authorization inferred from tests, hashes or CI. The newer
+2026-09-12 discussion reopens alignment of the research design with the
+maintenance question, but does not alter these materials or authorize
+implementation changes, execution or allocation.
 
 ## Completed checkpoint: H1/H2 design (2026-09-09 HKT)
 

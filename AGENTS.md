@@ -2,7 +2,13 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
+**Current assignment (2026-09-12): maintenance/context design alignment.** Preserve the
+accepted F#/C# large-project maintenance research direction and its unresolved
+design choices in [the dated record](docs/research-direction-2026-09-12.md).
+This is alignment/documentation work only: it adopts no new protocol, sample,
+allocation, execution, framework, proxy or backend.
+
+**Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review
 before approving execution." This adopts construction of the workloads and finite
 controller in the [proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md),
@@ -71,6 +77,12 @@ toolful fallback, automatic live reissue or replacement is authorized.
 - Current H1/H2 design: [bounded proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md).
 
 Current governance applies to future work. Older proposals and their checked-in review packets remain identifiable history; they do not override the current disposition. Already authorized frozen protocols govern their own experiments. Reconcile conflicts rather than silently changing a frozen treatment.
+
+As substantive context, decisions, blockers or evidence accumulate, update
+PLAN.md and a focused linked decision/evidence note before handoff or context
+compaction. Keep user decisions, assistant proposals and validated results
+distinct; preserve prior history. Do not store secrets or private transcripts,
+and do not turn AGENTS.md into a running ledger.
 
 ## Essential invariants
 
