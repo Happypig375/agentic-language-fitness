@@ -1,6 +1,7 @@
 # Idiomatic language-comparison source ledger
 
-**Date:** 2026-09-13 HKT  
+**Date:** 2026-09-13 HKT
+
 **Scope:** bounded, targeted deep research for the F#/C# idiomatic-architecture
 comparison. This is a durable DOI/search/access ledger, not a systematic-review
 claim, PRISMA record, or statistical evidence synthesis. It records source
