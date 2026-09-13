@@ -157,6 +157,11 @@ preserve unrelated work, and verify CI on the exact pushed commit. This does not
 authorize force-pushing, rewriting history, or bypassing scientific, security,
 or live-execution gates.
 
+CI uses [change-scoped validation](docs/ci-validation-scope.md): known prose-only
+pushes use fast checks, isolated maintenance changes use the maintenance path,
+and shared/frozen/unknown changes retain the full matrix. Verify and report the
+actual exact-commit scope; skipped runtime checks are not newly passed evidence.
+
 ## Handoff and stops
 
 Finish ordinary code, tests, documentation and applicable CI within the bounded assignment. Report exact source/spec identities, checks actually run, unresolved conditions, request/spend ceilings and next decision. Identify reviews honestly as self-review, another AI session or human review.

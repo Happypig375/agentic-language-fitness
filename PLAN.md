@@ -178,6 +178,19 @@ of pending full texts are the proposed next research work, not a completed
 systematic review or a new experimental treatment. No workload, adapter, model,
 budget or execution decision changed; construction/human-review holds remain.
 
+### CI relevance and scheduling (2026-09-14)
+
+The user requested omitting irrelevant older checks or restructuring CI after
+the literature-only publication `5d9ad460738112a8dfe55f2de8eaad74bef35823`
+passed exact CI `34774846703` but took 14m37s/16m21s on Linux/Windows. The
+[CI scope policy](docs/ci-validation-scope.md) records the bounded restructuring:
+fast checks for known prose-only pushes, unit/maintenance checks for isolated
+maintenance changes, and the retained full matrix for shared, frozen, unknown
+or conservatively handled changes/events. Historical checks are conditionally
+skipped, not deleted. Verify the exact containing publication and report the
+selected scope; a fast green check is not full runtime evidence. No scientific
+protocol, construction, model roster, live allowance or human-review gate changes.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review
