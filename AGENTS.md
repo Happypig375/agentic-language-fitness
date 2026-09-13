@@ -43,6 +43,11 @@ The [search-depth audit](docs/literature-search-depth-audit-2026-09-14.md) recor
 relevant evidence missed by the five-result cap. Treat these reviews as bounded
 scoping work: retrieval is not full-paper reading, and non-discovery is not
 coverage, saturation or proof of novelty. Existing execution holds remain.
+The [frontier/gap assessment](docs/research-frontier-gap-assessment-2026-09-14.md)
+and [DOI/search ledger](docs/research-frontier-gap-sources-2026-09-14.md) add
+CodeThread's inherited-code counterfactual and newer architecture/context work.
+Do not claim that downstream maintenance is unstudied. A specified architectural
+intervention is proposed, not adopted; the current pair remains a package case.
 
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review

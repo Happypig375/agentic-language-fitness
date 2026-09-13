@@ -191,6 +191,28 @@ skipped, not deleted. Verify the exact containing publication and report the
 selected scope; a fast green check is not full runtime evidence. No scientific
 protocol, construction, model roster, live allowance or human-review gate changes.
 
+### Research frontier, gap and value (2026-09-14)
+
+The user requested an updated frontier and research-value investigation. The
+[assessment](docs/research-frontier-gap-assessment-2026-09-14.md) and
+[DOI/search/reading ledger](docs/research-frontier-gap-sources-2026-09-14.md)
+are bound to `5f919797f746ba5c87c3eea03a28e1c7109004fb`. Deeper Scite screening,
+primary-paper methods and one bounded read-only Luna Max benchmark extraction
+identify close prior art missed by narrower searches. CodeThread already tests
+human/agent inherited-code effects on subsequent issue resolution; NITR has
+supplied architectural probes; CodeHealth and typed-hole work constrain claims
+about model dependence and useful context. These are scoped readings, not a
+systematic review, human approval or proof of an unoccupied gap.
+
+The proposed strongest contribution is a specified architectural intervention
+with downstream behavioral outcomes and task/model boundary conditions. It is
+not adopted by this investigation. One authored F#/C# pair remains a bounded
+idiomatic-package case; eight dependent episodes are not independent projects.
+Keep its larger F# reference envelopes and all failed states identifiable. Next
+is the existing human claim/design review, not another runner or candidate
+batch. No workload, protocol, adapter, model roster, budget, OAuth staging or
+execution policy changed; existing holds remain in force.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review
