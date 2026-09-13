@@ -66,6 +66,29 @@ until a specifically reviewed existing-sandbox path is integrated. Scite's
 indexed SWE-EVO text differed from the current revision; the literature ledger
 pins the primary methods and excludes mixed-version performance comparisons.
 
+### Literature clarification: idioms and comparability (2026-09-13)
+
+The user requested connected-Scite literature search and deep research, with
+DOIs retained in agentic context, following the concern that F#-specific idioms,
+libraries and architectures make the paired implementations diverge. The
+[research synthesis](docs/idiomatic-language-comparison-research-2026-09-13.md)
+and [DOI/search/access ledger](docs/idiomatic-language-comparison-sources-2026-09-13.md)
+record the bounded investigation at construction source
+`72b6cf56509364ace74d16b5ef75c6be5ee30338`. Source findings, methodological
+inferences and unadopted recommendations are distinct. The ledger retains
+primary editions, abstract-only access, duplicate lineages, contrary/null
+evidence and a rejected wrong-document Scite retrieval.
+
+The synthesis distinguishes a specific feature comparison, independently
+idiomatic maintenance architectures and whole language/ecosystem packages.
+Architecture may be part of the intended mechanism; divergence changes
+attribution, not automatically fairness. Expertise and support burden remain
+visible, and a historical Rosetta Code F#/C# conciseness result is not modern
+LLM-maintenance evidence. No protocol, library, workload, budget, adapter or
+execution choice is adopted. The next decision remains human review of the
+existing construction; do not tune its larger F# envelopes to reverse the
+finding. H flags remain false, allocations zero, and the live hold unchanged.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review

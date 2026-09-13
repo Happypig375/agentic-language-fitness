@@ -21,6 +21,14 @@ The [dated context](docs/research-direction-2026-09-12.md) and
 and limits. The next review is before candidate execution.
 No protocol, sample allocation, framework, proxy or backend changes are adopted.
 
+For idiom/comparability literature, read the
+[2026-09-13 research synthesis](docs/idiomatic-language-comparison-research-2026-09-13.md)
+and [verified DOI/source ledger](docs/idiomatic-language-comparison-sources-2026-09-13.md).
+They separate feature, idiomatic-architecture and ecosystem-package claims;
+record primary editions and contrary/null evidence; and do not adopt a new
+treatment. More idioms or shorter code do not themselves establish better
+maintenance. Keep the existing construction and human-review hold unchanged.
+
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review
 before approving execution." This adopts construction of the workloads and finite
