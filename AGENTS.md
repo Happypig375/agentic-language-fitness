@@ -48,6 +48,14 @@ and [DOI/search ledger](docs/research-frontier-gap-sources-2026-09-14.md) add
 CodeThread's inherited-code counterfactual and newer architecture/context work.
 Do not claim that downstream maintenance is unstudied. A specified architectural
 intervention is proposed, not adopted; the current pair remains a package case.
+The [Nu-grounded methodology clarification](docs/nu-grounded-maintenance-methodology-2026-09-14.md)
+and [source/DOI ledger](docs/nu-grounded-maintenance-sources-2026-09-14.md) distinguish
+a feasible case study from a broader architecture experiment. Randomly sampled
+architects and prior peer-reviewed approval of Nu are not prerequisites; keep
+engine-internal versus application scope, task comparability and oracle validity
+explicit. These recommendations do not replace the current construction or hold.
+The user permits revising the analysis for a supported research gap: do not treat
+F#/C# or Nu as mandatory, or a favorable language outcome as the objective.
 
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review

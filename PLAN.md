@@ -213,6 +213,47 @@ is the existing human claim/design review, not another runner or candidate
 batch. No workload, protocol, adapter, model roster, budget, OAuth staging or
 execution policy changed; existing holds remain in force.
 
+### Feasible Nu-grounded methodology (2026-09-14)
+
+The user questioned whether independent architects and peer-reviewed F# projects
+are necessary, proposed Nu/other-engine issues and roadmaps, and requested help
+finding a practical methodology. The [clarification](docs/nu-grounded-maintenance-methodology-2026-09-14.md)
+and [DOI/search/source ledger](docs/nu-grounded-maintenance-sources-2026-09-14.md)
+are bound to `7800549dd3ed598a4a7cfda235406ed2114f9537`. They distinguish a
+purposefully selected real-project case, matched whole-system maintenance trials
+and a later narrower architectural intervention. The earlier replication advice
+concerns stronger generalization, not a mandatory randomized-architect project.
+
+Primary case-study/sampling and ALMA methods support a scoped case-and-scenario
+feasibility sheet as the proposed next research artifact. Published Aardvark
+scene-graph and MBrace examples answer the F#-system literature concern without
+certifying Nu or a maintenance advantage. Issues are scenario sources, not
+automatically matched workloads; outside LLMs cannot certify behavioral oracles.
+Source-grounded Nu extraction remains distinct from private conversation claims.
+Nu's public MMCC/ImSim templates suggest a possible same-engine/language
+application-style contrast; they are not yet equivalent maintenance baselines
+and do not test F#/C# or engine-internal architecture. This option is unadopted.
+The user then explicitly welcomed changes to the analysis for greater research
+value at a validated gap. Record this as design latitude, not adoption of a
+new experiment: prioritize a source-supported, falsifiable architecture question
+over preserving F#/C#, Nu or a preferred outcome. The feasibility sheet should
+check its intervention/outcome distinction against the closest existing work.
+The user clarified MMCC's MVU and ImSim's ImGui lineage and the Breakout
+examples' intended parity, then emphasized adapting the designs to the research
+gap rather than merely finding antecedents. The note now proposes a two-sided
+architecture-by-change-family question with behavioral downstream outcomes.
+MVU formalization is not a maintenance-effect result; the pinned Breakout pair
+has different physics implementations, so intended parity is not yet a verified
+shared-contract baseline. No implementation or allocation follows from lineage.
+The user also resolved Scite's untitled `10.1117/12.3020480`. Exact lookup
+remained incomplete; Crossref verified the SPIE title, and primary preprint
+`10.48550/arXiv.2407.07207` combines state machines, event messages and Dear ImGui.
+The source ledger records the revised inclusion and reading extent. This
+counterexample prevents treating explicit-state and immediate-mode designs as
+mutually exclusive paradigms; compare concrete responsibility placement instead.
+No engine/comparator, workload, adapter, participant recruitment, model, budget
+or execution policy is adopted. Existing construction/human-review holds remain.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review
