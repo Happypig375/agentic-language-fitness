@@ -89,6 +89,33 @@ execution choice is adopted. The next decision remains human review of the
 existing construction; do not tune its larger F# envelopes to reverse the
 finding. H flags remain false, allocations zero, and the live hold unchanged.
 
+### Continued Scite research: outcome verifiability (2026-09-13)
+
+The user requested continued literature investigation and use of updated
+subagent routing. The [research assessment](docs/maintenance-research-verifiability-2026-09-13.md)
+and [DOI/search/source ledger](docs/maintenance-research-verifiability-sources-2026-09-13.md)
+are bound to inspected source `cea02738a4c40a1a903d1f7293964c9627569c31`.
+One Luna Max worker extracted the current measurement contract read-only;
+the main agent retained literature verification and causal/design analysis.
+This was AI source extraction and self-review, not human scientific approval.
+
+SlopCodeBench v2 is close prior art for inherited model code, fresh
+conversations and externally checked iterative architecture; Scite's older
+indexed sample was not merged with current primary counts. ReCUBE supplies
+context-use evidence, while direct maintenance-effort and construct/causal
+studies limit interpreting static metrics as maintenance or language effects.
+The ledger retains exact primary editions and contrary/abstract-only evidence.
+
+The assessment recommends a bounded idiomatic-package case study as the
+smallest defensible next claim, not its automatic adoption. One authored pair
+and eight dependent episodes do not isolate language or architecture effects.
+All reference inputs fit the proposed cap; a genuine context contrast would
+be a new reviewed treatment. Candidate maintenance execution remains
+unimplemented, and the existing larger F# envelopes must not be tuned away.
+No workload source, evaluator, protocol, budget, adapter or execution policy
+was changed. Next remains human review, now including the verifiability
+assessment; no OAuth staging or benchmark model/count request is authorized.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review

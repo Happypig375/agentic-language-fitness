@@ -28,6 +28,11 @@ They separate feature, idiomatic-architecture and ecosystem-package claims;
 record primary editions and contrary/null evidence; and do not adopt a new
 treatment. More idioms or shorter code do not themselves establish better
 maintenance. Keep the existing construction and human-review hold unchanged.
+The [continued research assessment](docs/maintenance-research-verifiability-2026-09-13.md)
+and [source/DOI ledger](docs/maintenance-research-verifiability-sources-2026-09-13.md)
+add close iterative-design prior art and audit what this construction can
+identify: bounded package outcomes, not yet an architecture-mediated context
+effect. Review that claim boundary before adopting any adapter or context arm.
 
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review
