@@ -134,6 +134,26 @@ Human review and an explicit outcome/claim decision remain next. No workload,
 adapter, protocol, budget, OAuth staging or experimental execution changed;
 all existing live holds remain in force.
 
+### Language versus paradigm scope (2026-09-14)
+
+The user asked whether F#/C# restricts research value, suggested a broader
+functional/OO/procedural architectural comparison, and requested the
+vsynchronicity blog and connected Scite evidence. The
+[scope assessment and DOI/search record](docs/architecture-paradigm-scope-review-2026-09-14.md)
+is bound to `2f4cb784b17d7e94db1030750f1025259de5bf52`. It separates language,
+architecture and their interaction; retains contrary/null evidence and
+abstract-only access limits; and treats the blog as hypothesis material, not
+measured superiority or expert consensus.
+
+The recommendation broadens the theory while retaining F#/C# as the first
+bounded setting. A future within-language architecture contrast would require
+separate adoption and credible idiomatic alternatives; no additional arm or
+procedural baseline is adopted. The ML-coherence hypothesis is not erased by
+relabeling the study functional versus OO. Human review and a precise
+claim/outcome decision remain next. No construction, adapter, protocol,
+budget, OAuth staging or experimental execution changed; existing holds and
+the larger F# envelope finding remain intact.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review

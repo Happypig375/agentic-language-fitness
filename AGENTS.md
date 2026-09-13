@@ -36,6 +36,9 @@ effect. Review that claim boundary before adopting any adapter or context arm.
 The [architecture-first assessment and DOI record](docs/architecture-maintenance-slopcode-assessment-2026-09-14.md)
 adds measured maintenance-burden evidence and SlopCodeBench's existing cost
 analysis. Its recommendations are unadopted; keep the human-review hold.
+The [language/paradigm scope assessment and DOI record](docs/architecture-paradigm-scope-review-2026-09-14.md)
+separates architecture, language support and their interaction; blog opinions
+are hypotheses, not findings. No broader comparison arm is adopted.
 
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review
