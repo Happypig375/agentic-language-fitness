@@ -2,7 +2,28 @@
 
 **Reviewed:** 2026-09-08. Canonical continuation plan; historical results and frozen protocols are unchanged. Review disposition, working implementation, executable freeze and permission for live consumption are separate states.
 
-## Current checkpoint: maintenance construction; human review (2026-09-12 HKT)
+## Current assignment: research-proposal human review (2026-09-14 HKT)
+
+The user authorized continued Scite research and direct publication of a
+standalone Markdown proposal. The
+[research proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md)
+and [source/search ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md)
+are bound to base `4757a6c5cbbd0f764f9c39b596c5517cc024f48b`.
+They propose testing downstream behavioral maintenance of specified architectural
+packages, provisionally within Nu/F#, not language/paradigm superiority.
+Scite/primary-source research and public Nu history support investigating this
+bounded gap, not exhaustive novelty or an already comparable executable pair.
+
+**Next decision:** human review of that standalone proposal, specifically whether
+to authorize Phase A model-free feasibility. Its Nu case, two four-episode chains,
+12 matched blocks and future 192+5 dispatch ceiling are assistant proposals,
+not adopted construction or allocation. Model/resource settings are explicitly
+unselected; no candidate adapter, recruitment or live execution is authorized.
+All existing holds, zero new allocations and completed construction artifacts
+below remain intact. Do not resume the old adapter merely because a research
+proposal was published. No new proxy/backend/framework or protocol is adopted.
+
+## Retained construction checkpoint: human review (2026-09-12 HKT)
 
 Disposition: the user replied “continue” to the explicit construction question.
 Bounded model-free construction of one idiomatic F#/C# architecture pair and

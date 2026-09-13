@@ -2,7 +2,16 @@
 
 Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
 
-**Current checkpoint (2026-09-12): maintenance construction; human review.**
+**Research handoff (2026-09-14): standalone proposal; human review.**
+Read the [research proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md)
+and [DOI/search ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md).
+They propose a bounded architecture-package maintenance case, provisionally Nu,
+not an adopted replacement experiment. Next is review of Phase A model-free
+feasibility; no new construction, adapter, recruitment or execution is authorized.
+Future 192+5 dispatches are proposed only, allocated zero. Keep the completed
+construction, larger F# envelopes and existing execution holds below intact.
+
+**Retained construction checkpoint (2026-09-12): human review.**
 The user adopted model-free construction of one idiomatic F#/C# architecture
 pair and eight inherited maintenance episodes at base
 abdc68cc1eef24f0aca080bc151714f930ef8f27 (exact CI 34675819811 passed).
