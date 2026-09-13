@@ -154,6 +154,15 @@ claim/outcome decision remain next. No construction, adapter, protocol,
 budget, OAuth staging or experimental execution changed; existing holds and
 the larger F# envelope finding remain intact.
 
+The user's subsequent small-versus-frontier-model analogy is retained in the
+[model-capability follow-up](docs/architecture-paradigm-scope-review-2026-09-14.md#follow-up-model-capability-and-architecture-2026-09-14),
+at source `16acba12ba8ad5df4a7ea582dc92614a297d58c6` (exact CI `34770227072`
+passed). It proposes testing architecture-by-model interaction, with both
+capability-threshold and scaffolding mechanisms open. Human expertise is not
+parameter count; new LLM sources are adjacent evidence, not a verified
+maintenance crossover. No model roster, additional arm or live allocation is
+adopted, and the current construction/human-review hold is unchanged.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review

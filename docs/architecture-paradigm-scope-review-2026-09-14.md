@@ -327,3 +327,131 @@ commit's exact model-free CI must be verified after direct push, not inferred
 from its parent's successful run; it is not yet available at this pre-publication
 writing checkpoint. No code, construction fixture, scientific approval or live
 allocation changed.
+
+## Follow-up: model capability and architecture (2026-09-14)
+
+**Source for this follow-up:** `16acba12ba8ad5df4a7ea582dc92614a297d58c6`;
+its exact Linux/Windows CI `34770227072` passed. The user suggested that D4's
+human expertise-dependent result might transfer to smaller versus larger or
+frontier models. This is a plausible **architecture-by-model interaction
+hypothesis**, not adoption of another experimental arm or evidence that human
+expertise and model size are interchangeable.
+
+Two competing mechanisms should remain open:
+
+- **Capability threshold:** following distributed responsibilities, protocols
+  and indirect calls may demand compositional reasoning that a less-capable
+  model handles poorly; a stronger model may exploit the separation of concerns.
+- **Scaffolding:** explicit invariants, constrained interfaces and local change
+  boundaries may reduce the reasoning/search burden, disproportionately helping
+  the less-capable model instead.
+
+These are assistant-proposed explanations of a possible result, not findings.
+Both could operate in different architectures or change episodes. Delegated
+versus centralized OO control is not functional versus OO, nor automatically
+good versus bad architecture. Do not translate D4 into “small models need C#,
+large models need F#,” or assume more indirection means better architecture.
+
+The explanatory variable should initially be **model identity/configuration and
+independently assessed maintenance-relevant capability**, not a marketing tier
+or assumed parameter count. A size contrast, a capability contrast and an
+inference-compute contrast are different questions. Training, language/idiom
+familiarity and reasoning configuration remain possible contributors. If size
+is later the target, same-family documented checkpoints can reduce some
+variation, but do not isolate parameter count when training also differs.
+Two selected models establish at most a model-pair result, not a population
+law for small and frontier models.
+
+For a future separately reviewed pilot, use the same credible architecture
+alternatives with each selected model, initially within one language. The
+observable contrast is:
+
+```text
+architecture benefit for model m = outcome(m, architecture B) - outcome(m, architecture A)
+interaction = architecture benefit for model 2 - architecture benefit for model 1
+```
+
+Use the same prespecified behavioral outcome and scale, such as cumulative
+contract success under a fixed policy. A stronger model doing better on both
+architectures is a model main effect, not by itself evidence of an interaction.
+An interaction can change the size of an advantage without reversing the
+ranking. Conversely, pooling models could hide a genuine crossover.
+
+Define model ordering using independent, predeclared code-comprehension tasks
+and language familiarity evidence, not these maintenance outcomes. Check
+floor/ceiling risk; do not redesign tasks after seeing which language wins.
+Keep complete eligible context, the no-tools/fresh-conversation policy,
+support information and response allowances matched; pin and report reasoning
+settings rather than pretending equal byte caps establish equal compute.
+Retain failures and account for dependent episodes and project-level variation.
+This proposes an estimand and controls, not a sample-size calculation, selected
+model roster, new calibration dispatch or automatic factorial expansion.
+
+### Targeted evidence check
+
+- **D4 rechecked:** Scite returned the complete 1,816-character abstract again,
+  not full text (requested offset 0, length 3000). It supports the human analogy
+  only. [10.1109/TSE.2004.43](https://doi.org/10.1109/TSE.2004.43).
+- **D8:** Xie et al., *Rethinking Code Complexity Through the Lens of Large
+  Language Models*, [10.48550/arXiv.2602.07882](https://doi.org/10.48550/arXiv.2602.07882),
+  [primary v1, 8 February 2026](https://arxiv.org/html/2602.07882v1).
+  §§2.1, 4.1–4.2 and Table 3 were inspected. It studies repair, translation
+  and execution reasoning with DeepSeek-V3 as the task model. CodeLlama-7B
+  supplies the metric's entropy estimates; it is not a smaller task-model arm.
+  Grouped correlations and selected code rewrites motivate studying model-facing
+  structure, but do not establish a size-by-architecture maintenance interaction
+  or uniquely isolate the new metric as a cause. Preprint; its metric is not adopted.
+- **D9:** Decugis et al., *DecompRL: Solving Harder Problems by Learning Modular
+  Code Generation*, [10.48550/arXiv.2607.02390](https://doi.org/10.48550/arXiv.2607.02390),
+  [primary v1 abstract, 2 July 2026](https://arxiv.org/abs/2607.02390v1).
+  The abstract describes learned decomposition and recombination with Qwen
+  2.5 7B and Code World Model 32B on competitive-programming benchmarks. It is
+  adjacent evidence that training and decomposition policy matter, not a
+  matched-size comparison or inherited-maintenance result. Full methods were
+  not audited; no reported cost multiplier is adopted here. Preprint.
+
+The bounded search found related evidence, **not direct verification of the
+proposed crossover**. Human results are motivation, and the LLM sources above
+do not fill that gap. Preserve both possible directions until tested.
+
+### Follow-up search and source accounting
+
+Connected Scite on 2026-09-14 HKT; intent `architecture_model_capability`, limit
+5, offset 0, default relevance, no date filter. M1 queried D4 with term
+`expertise` (1/1); M2 queried `"large language models" AND ("code modularity" OR "modular code") AND ("small" OR "size" OR "scale")`
+(93/5); M3 queried `"large language models" AND ("code comprehension" OR "program comprehension") AND ("complexity" OR "architecture")`
+(406/5). All **11 returned DOI records** were screened; three are credited above.
+This follow-up's counts do not amend the earlier 48-source audit.
+
+| Discovery | DOI / source | Exclusion from substantive support in this follow-up |
+| --- | --- | --- |
+| M2 | [10.48550/arxiv.2601.13358](https://doi.org/10.48550/arxiv.2601.13358) | Reasoning-trajectory geometry across scales; title/abstract and excerpts do not establish a code-architecture maintenance intervention. |
+| M2 | [10.1101/2025.08.26.671083](https://doi.org/10.1101/2025.08.26.671083) | Bioinformatics assistant; not the selected architecture-by-capability contrast. |
+| M2 | [10.1145/3610977.3634999](https://doi.org/10.1145/3610977.3634999) | Expressive robot behavior generation, not inherited maintenance. |
+| M2 | [10.69997/pse.144219](https://doi.org/10.69997/pse.144219) | Pharmaceutical simulation orchestration, not the selected comparison. |
+| M3 | [10.48550/arxiv.2601.09035](https://doi.org/10.48550/arxiv.2601.09035) | Malware classification rather than architectural maintenance. |
+| M3 | [10.48550/arxiv.2604.08293](https://doi.org/10.48550/arxiv.2604.08293) | Architecture-documentation generation; downstream maintenance interaction not assessed here. |
+| M3 | [10.48550/arxiv.2510.12399](https://doi.org/10.48550/arxiv.2510.12399) | Broad survey, not direct primary evidence of the proposed interaction. |
+| M3 | [10.21203/rs.3.rs-5106829/v1](https://doi.org/10.21203/rs.3.rs-5106829/v1) | Graph-aligned JavaScript-model adaptation; no matched architecture-by-capability maintenance result verified. |
+| Web | [Publisher learning-curve lead](https://www.sciencedirect.com/science/article/abs/pii/S0950584908000505) | Human learning/design follow-up; search passages only and body returned 403. Not counted as new LLM evidence or an independent replication. |
+| Web | [10.1007/s44163-026-01009-5](https://doi.org/10.1007/s44163-026-01009-5) | Testing/static-analysis feedback pipeline; primary search excerpt only, not the no-tools architecture contrast. |
+
+Web follow-up used `"language models" "code modularity" model size` and
+`"Evaluating the effect of a delegated versus centralized control style" expertise`,
+then the primary pages above. Incidental uninspected search listings are not
+additional reviewed studies. Exclusion is a scope/access decision, not a claim
+of falsity or low quality. No licensed bodies or private access links were saved.
+
+The main agent performed this bounded follow-up and self-review. No new worker
+was dispatched and no human review is claimed. The follow-up Scite audit uses
+`alf-architecture-model-capability-2026-09-14` independently of the earlier audit:
+**3 cited / 10 excluded / 0 skipped**, covering 11 Scite DOIs and two web leads.
+The audit was not truncated and reported no missing reasons or unlinked retrievals.
+
+The two changed documents passed strict UTF-8 decoding and 52 relative file-link
+target checks; these are path checks, not an audit of every anchor/external URL.
+Staged whitespace is checked before publication. No code or fixture changed;
+the containing publication's exact model-free CI remains to be checked after
+direct push, not inferred from `16acba1`. No workload, adapter, selected model,
+sample allocation, context treatment or execution approval changed. Human
+review remains next.
