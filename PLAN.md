@@ -163,6 +163,21 @@ parameter count; new LLM sources are adjacent evidence, not a verified
 maintenance crossover. No model roster, additional arm or live allocation is
 adopted, and the current construction/human-review hold is unchanged.
 
+### Search-depth correction (2026-09-14)
+
+The user challenged the repeated five-result retrieval cap. The
+[search-depth audit and DOI inventory](docs/literature-search-depth-audit-2026-09-14.md)
+at source `49caefdf0b08029e2b5eeb81b958bfde3fdab331` confirms that the cap was
+not a justified stopping rule: deeper pages added relevant conceptual,
+empirical and contrary context. Seventy deeper rows contained 69 distinct DOI
+records, not 69 papers read in full. The audit distinguishes snippets, abstracts,
+selected body sections and unavailable text, and records its own remaining caps.
+Earlier bounded findings remain identifiable; non-discovery is not evidence of
+absence or novelty. A structured evidence map, broader screening and assessment
+of pending full texts are the proposed next research work, not a completed
+systematic review or a new experimental treatment. No workload, adapter, model,
+budget or execution decision changed; construction/human-review holds remain.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review

@@ -39,6 +39,10 @@ analysis. Its recommendations are unadopted; keep the human-review hold.
 The [language/paradigm scope assessment and DOI record](docs/architecture-paradigm-scope-review-2026-09-14.md)
 separates architecture, language support and their interaction; blog opinions
 are hypotheses, not findings. No broader comparison arm is adopted.
+The [search-depth audit](docs/literature-search-depth-audit-2026-09-14.md) records
+relevant evidence missed by the five-result cap. Treat these reviews as bounded
+scoping work: retrieval is not full-paper reading, and non-discovery is not
+coverage, saturation or proof of novelty. Existing execution holds remain.
 
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review
