@@ -116,6 +116,24 @@ No workload source, evaluator, protocol, budget, adapter or execution policy
 was changed. Next remains human review, now including the verifiability
 assessment; no OAuth staging or benchmark model/count request is authorized.
 
+### Architecture-first literature assessment (2026-09-14)
+
+The user asked how architecture-to-maintenance evidence and SlopCodeBench bear
+on separating architectural outcomes from context boundaries. The
+[focused assessment and DOI/search record](docs/architecture-maintenance-slopcode-assessment-2026-09-14.md)
+is bound to `b8850c6fd7b069c1f55171fe85c7776815ae64bc`.
+It recommends architecture-first research, without treating an F# advantage
+as established. It distinguishes time, churn and incidents; retains contrary
+evidence; and verifies SlopCodeBench v2's existing next-checkpoint cost analysis.
+This is research advice, not a new treatment adoption.
+
+The present one-pair construction can support a bounded idiomatic-package
+comparison after review, not isolate architecture from language, estimate
+effort-to-success under its one-submission policy, or prove a context limit.
+Human review and an explicit outcome/claim decision remain next. No workload,
+adapter, protocol, budget, OAuth staging or experimental execution changed;
+all existing live holds remain in force.
+
 ## Prepared execution checkpoint: H1/H2 implementation; human review before execution (2026-09-09 HKT)
 
 The user said **"Continue until before execution, then tell what to human review

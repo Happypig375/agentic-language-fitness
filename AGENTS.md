@@ -33,6 +33,9 @@ and [source/DOI ledger](docs/maintenance-research-verifiability-sources-2026-09-
 add close iterative-design prior art and audit what this construction can
 identify: bounded package outcomes, not yet an architecture-mediated context
 effect. Review that claim boundary before adopting any adapter or context arm.
+The [architecture-first assessment and DOI record](docs/architecture-maintenance-slopcode-assessment-2026-09-14.md)
+adds measured maintenance-burden evidence and SlopCodeBench's existing cost
+analysis. Its recommendations are unadopted; keep the human-review hold.
 
 **Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
 The user said "Continue until before execution, then tell what to human review
