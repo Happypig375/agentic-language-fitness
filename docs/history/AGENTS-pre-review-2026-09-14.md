@@ -1,0 +1,226 @@
+# Maintainer agent entry point
+
+Read [PLAN.md](PLAN.md) before substantive work. It owns the current checkpoint and next assignment.
+
+**Research handoff (2026-09-14): standalone proposal; human review.**
+Read the [research proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md)
+and [DOI/search ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md).
+They propose a bounded architecture-package maintenance case, provisionally Nu,
+not an adopted replacement experiment. Next is review of Phase A model-free
+feasibility; no new construction, adapter, recruitment or execution is authorized.
+The revised proposal defines terms before the questions and includes literature,
+dataset, analytics and explicit pair-credibility criteria. MMCC/ImSim are
+provisional concrete packages, not validated representatives of two paradigms;
+do not equate them with mathematical/operational or turn-based/real-time classes.
+Use Scite pagination (effective 20, then offset); resolve missing metadata through
+registries/primary sources and retain reading/access limits in the linked ledger.
+Future 192+5 dispatches are proposed only, allocated zero. Keep the completed
+construction, larger F# envelopes and existing execution holds below intact.
+
+**Retained construction checkpoint (2026-09-12): human review.**
+The user adopted model-free construction of one idiomatic F#/C# architecture
+pair and eight inherited maintenance episodes at base
+abdc68cc1eef24f0aca080bc151714f930ef8f27 (exact CI 34675819811 passed).
+Read the [construction disposition](docs/maintenance-context-design-review-2026-09-12.md)
+and [active evidence note](docs/maintenance-sim-construction-2026-09-12.md)
+for scope and artifacts. Construction now passes 27 focused tests, all 18
+trusted checkpoints, eight semantic faults and the inherited-failure audit.
+The [standalone review packet](docs/maintenance-sim-human-review-2026-09-12.md)
+contains exact settings, source links, byte measurements and retained evidence.
+Review the workload, idioms, continuation policy and proposed budgets before
+selecting a future model-free isolated maintenance adapter; none is implemented
+or authorized for candidate execution here. The F# reference envelopes are larger
+at every episode in this pair; do not tune the workload to reverse that finding.
+The [dated context](docs/research-direction-2026-09-12.md) and
+[literature ledger](docs/maintenance-literature-review-2026-09-12.md) retain evidence
+and limits. The next review is before candidate execution.
+No protocol, sample allocation, framework, proxy or backend changes are adopted.
+
+For idiom/comparability literature, read the
+[2026-09-13 research synthesis](docs/idiomatic-language-comparison-research-2026-09-13.md)
+and [verified DOI/source ledger](docs/idiomatic-language-comparison-sources-2026-09-13.md).
+They separate feature, idiomatic-architecture and ecosystem-package claims;
+record primary editions and contrary/null evidence; and do not adopt a new
+treatment. More idioms or shorter code do not themselves establish better
+maintenance. Keep the existing construction and human-review hold unchanged.
+The [continued research assessment](docs/maintenance-research-verifiability-2026-09-13.md)
+and [source/DOI ledger](docs/maintenance-research-verifiability-sources-2026-09-13.md)
+add close iterative-design prior art and audit what this construction can
+identify: bounded package outcomes, not yet an architecture-mediated context
+effect. Review that claim boundary before adopting any adapter or context arm.
+The [architecture-first assessment and DOI record](docs/architecture-maintenance-slopcode-assessment-2026-09-14.md)
+adds measured maintenance-burden evidence and SlopCodeBench's existing cost
+analysis. Its recommendations are unadopted; keep the human-review hold.
+The [language/paradigm scope assessment and DOI record](docs/architecture-paradigm-scope-review-2026-09-14.md)
+separates architecture, language support and their interaction; blog opinions
+are hypotheses, not findings. No broader comparison arm is adopted.
+The [search-depth audit](docs/literature-search-depth-audit-2026-09-14.md) records
+relevant evidence missed by the five-result cap. Treat these reviews as bounded
+scoping work: retrieval is not full-paper reading, and non-discovery is not
+coverage, saturation or proof of novelty. Existing execution holds remain.
+The [frontier/gap assessment](docs/research-frontier-gap-assessment-2026-09-14.md)
+and [DOI/search ledger](docs/research-frontier-gap-sources-2026-09-14.md) add
+CodeThread's inherited-code counterfactual and newer architecture/context work.
+Do not claim that downstream maintenance is unstudied. A specified architectural
+intervention is proposed, not adopted; the current pair remains a package case.
+The [Nu-grounded methodology clarification](docs/nu-grounded-maintenance-methodology-2026-09-14.md)
+and [source/DOI ledger](docs/nu-grounded-maintenance-sources-2026-09-14.md) distinguish
+a feasible case study from a broader architecture experiment. Randomly sampled
+architects and prior peer-reviewed approval of Nu are not prerequisites; keep
+engine-internal versus application scope, task comparability and oracle validity
+explicit. These recommendations do not replace the current construction or hold.
+The user permits revising the analysis for a supported research gap: do not treat
+F#/C# or Nu as mandatory, or a favorable language outcome as the objective.
+
+**Prepared execution checkpoint (2026-09-09 HKT): H1/H2 pre-execution human review.**
+The user said "Continue until before execution, then tell what to human review
+before approving execution." This adopts construction of the workloads and finite
+controller in the [proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md),
+including its authored-byte interpretation and H2 memory/turn policy. The bounded
+implementation, trusted workloads, semantic-fault checks, exact-image sandbox and
+52 native loopback probes now have model-free evidence and separate AI review.
+Read the [standalone human-review packet](docs/workstream-h1-h2-human-review-2026-09-10.md)
+for current values, exact source locations, evidence and the unapproved decision
+record. The [implementation record](docs/workstream-h1-h2-implementation-2026-09-09.md)
+retains engineering history; it is not the human review entry point.
+Verify CI on the exact implementing publication, not an earlier green check.
+Next is human review and an explicit live-allocation decision, not execution.
+No OAuth staging, live model/count request, experimental candidate execution or
+new remote layer is authorized. The proposed five integration/64 pilot dispatches
+remain unallocated; all H execution flags must stay disabled.
+
+H0 is complete at `6e45e90a0cad34d34448b51eb3cba13e609b7337`; exact Linux/Windows
+CI `34306769616` passed. Its 17 affected tests, independent AI review and five-file
+cross-platform reproduction are recorded in the [H0 evidence](docs/workstream-h0-preparation-2026-09-09.md).
+Keep that definition, source and report identifiable; do not rerun completed H0
+preparation or promote its byte fixtures into verified provider context limits.
+
+E3a's completed report and source-bound AI architecture addendum were published
+as `6227b99`; exact Linux/Windows CI `34299713554` passed. The
+[renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md) owns that history.
+Preserve its frozen source/specification, raw report bytes and original scores.
+Do not confuse derived addendum scores with raw results.
+
+The user's fresh integration ceiling is **five dispatches: 2 used, 3 remaining**.
+The fixed pilot used **32/72**. Unused 3/40 balances do not authorize another
+batch, sample extension or automatic replacement. All six pre-renewal dispatches
+and their original failed/unscored attempts remain separately charged; old unused
+balances do not stack. The guard is per invocation, so reconcile retained debits
+before any later explicitly authorized invocation. The current run's temporary
+OAuth, selected proxy listeners and E3a containers were cleaned up. Keep the
+original local OAuth file untouched and the canonical foreground SSH route.
+
+H design consumes none of those balances. Offline token proxies and authored-byte
+caps do not establish a provider context limit. Never use future gold, research
+outcomes or copied historical solutions as source distractors. H1/H2 construction
+adoption, working implementation and separate live authorization remain distinct.
+Ordinary confirmed bug fixes and direct pushes remain authorized without redundant
+questions; they do not authorize a new scientific treatment or live allocation.
+
+## Implementation history and authentication
+
+E1/E2/E2a are complete. The [E3a disposition](docs/workstream-e3a-review-disposition-2026-09-06.md),
+[remote sandbox repair](docs/workstream-e3a-remote-sandbox-fix-2026-09-06.md),
+[OAuth adoption](docs/workstream-e3a-oauth-adoption-2026-09-08.md) and dated records
+in [PLAN.md](PLAN.md) retain earlier gates and failed attempts. Their historical
+holds and two-dispatch allowances do not override the current checkpoint above.
+
+The [OAuth/Codex amendment](protocols/workstream-e3a-v1/oauth-amendment.md) remains
+adopted. Stage only the complete local `auth.json` into a private temporary home,
+not the rest of `CODEX_HOME`; verify owned-copy cleanup. Do not silently switch
+images, native clients or subscription backends. No new auth relay, API key,
+toolful fallback, automatic live reissue or replacement is authorized.
+
+## Read only what applies
+
+- E3a execution and analysis: [renewal record](docs/workstream-e3a-oauth-renewal-2026-09-09.md) and [protocol packet](protocols/workstream-e3a-v1/README.md).
+- Design/analysis: [experimental design](docs/experimental-design.md), [metrics](docs/metrics.md).
+- Workload/review scope: [validity and gates](docs/workload-validity-and-review-gates-2026-09-05.md).
+- Context-pressure work, when assigned: [H design](docs/workstream-h-context-pressure-design-2026-09-05.md).
+- Completed H0 implementation: [assignment and evidence](docs/workstream-h0-preparation-2026-09-09.md).
+- Current H1/H2 design: [bounded proposal](docs/workstream-h1-h2-overlap-design-2026-09-09.md).
+
+Current governance applies to future work. Older proposals and their checked-in review packets remain identifiable history; they do not override the current disposition. Already authorized frozen protocols govern their own experiments. Reconcile conflicts rather than silently changing a frozen treatment.
+
+As substantive context, decisions, blockers or evidence accumulate, update
+PLAN.md and a focused linked decision/evidence note before handoff or context
+compaction. Keep user decisions, assistant proposals and validated results
+distinct; preserve prior history. Do not store secrets or private transcripts,
+and do not turn AGENTS.md into a running ledger.
+
+## Essential invariants
+
+- Candidates may see the approved predecessor, never successor gold, future tasks, research outcomes or final holdout cases.
+- Holdout scores must not influence feedback, continuation or retries. Task 007 behavioral success alone is not completed refactoring; missing required rubric evidence stays unknown.
+- Distinguish unsafe project changes from safe but wrong F# Compile lists: the latter are repairable project failures, not terminal safety violations.
+- Valid feedback exceeding its allowance terminates that trajectory under its fixed budget; controller faults are different. Never discard failures or let a language's long diagnostic output silently cancel unrelated samples.
+- Preserve every submission and attempt. Do not manually fix candidate code or rewrite archived gold/results.
+- Candidate code/project execution is sandboxed without model credentials, host secrets or writable scoring machinery. No fallback to executing untrusted code on the host.
+- Missing usage remains null; token subsets are not added twice. OAuth debits dispatches before launch and retains ambiguous debits; token thresholds are post-turn alarms and subscription cost stays null. Historical API protocols retain their own reservation rules.
+- No new remote/proxy layers or generic agent framework. H does not require optional F/G completion.
+
+## Automatic bug fixes
+
+Fix confirmed implementation bugs automatically within the authorized plan;
+do not stop merely to ask whether to fix them. Reproduce the defect, make the
+smallest appropriate repair, add regression coverage, and complete applicable
+validation/review. Record the cause, changes, checks and source identities so
+the repair is traceable and reproducible. Preserve failed attempts and archived
+results; ordinary runner fixes do not require a new scientific version.
+
+A live-execution hold does not itself prohibit safe model-free diagnosis or
+repair. This direction does not authorize new live dispatch allowances,
+automatic reissues/replacements, scientific treatment changes, relaxed security
+boundaries, or bypassing another explicit stop. If the fix requires one of
+those changes or the intended behavior is ambiguous, report that specific
+decision instead of treating it as an ordinary bug fix.
+
+## Publishing
+
+For completed, validated work within the authorized plan, commit and push directly
+to the current branch's configured upstream **without creating a pull request**.
+This is standing authorization for routine in-scope commits and pushes; do not
+ask for publication approval again at each checkpoint. Stage only in-scope files,
+preserve unrelated work, and verify CI on the exact pushed commit. This does not
+authorize force-pushing, rewriting history, or bypassing scientific, security,
+or live-execution gates.
+
+CI uses [change-scoped validation](docs/ci-validation-scope.md): known prose-only
+pushes use fast checks, isolated maintenance changes use the maintenance path,
+and shared/frozen/unknown changes retain the full matrix. Verify and report the
+actual exact-commit scope; skipped runtime checks are not newly passed evidence.
+
+## Handoff and stops
+
+Finish ordinary code, tests, documentation and applicable CI within the bounded assignment. Report exact source/spec identities, checks actually run, unresolved conditions, request/spend ceilings and next decision. Identify reviews honestly as self-review, another AI session or human review.
+
+**Project-scoped apparatus rule (2026-09-08):** for one unchanged unresolved
+apparatus gate, permit up to **five** failed apparatus attempts, retaining every
+attempt; a success clears that gate's failure streak. This replaces the prior
+two-failure engineering stop for this repository only and does not rewrite
+historical reports. Stop immediately for safety or material scientific choice,
+unknown live usage/ambiguity, budget exhaustion, or another explicit hard gate.
+Candidate maximum two repairs/three submissions and automatic live reissue
+prohibition are unchanged.
+
+Return at implementation completion, material scientific/security change, exhausted authorized resources, ambiguous requests or repeated unresolved apparatus failure. Mock success is not proof of provider behavior. A later explicitly authorized frozen batch can use automatic health checks; no redesign or sample extension after seeing which language wins.
+
+## Existing model-free entry points
+
+```text
+python -m unittest discover -s tests -v
+python scripts/e3a_check.py
+python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures.json
+python scripts/e3a_sandbox_check.py --output results/e3a-sandbox.json
+python scripts/alf.py doctor --strict
+python scripts/h0_check.py --output-dir results/h0-check
+python scripts/h_check.py --output-dir results/h1-h2-check
+python scripts/h_check.py --build-fixtures --output-dir results/h1-h2-fixtures
+python scripts/maintenance_check.py --build-fixtures --audit-failures --output-dir results/maintenance-check
+```
+
+e3a_check builds trusted fixtures only; it is not an arbitrary-candidate evaluator. e3a_sandbox_check requires Linux Docker and the exact image; its explicit CI SDK-fixture mode is model-free, non-experimental evidence only. Use checks appropriate to the change and report their actual scope.
+
+maintenance_check reconstructs and executes only the fixed trusted construction
+fixtures, never arbitrary candidate code. It does not implement the future live
+maintenance controller or establish candidate sandbox isolation.
