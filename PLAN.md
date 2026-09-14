@@ -8,11 +8,35 @@ The user authorized continued Scite research and direct publication of a
 standalone Markdown proposal. The
 [research proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md)
 and [source/search ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md)
-are bound to base `4757a6c5cbbd0f764f9c39b596c5517cc024f48b`.
+were initially published at `0df55a45b5087a9420807617ea165c01c873f779`
+(exact CI `34787950951` passed documentation scope). The current proposal
+revision uses that publication as its base; the original search/audit remains
+identifiable in the ledger.
 They propose testing downstream behavioral maintenance of specified architectural
 packages, provisionally within Nu/F#, not language/paradigm superiority.
 Scite/primary-source research and public Nu history support investigating this
 bounded gap, not exhaustive novelty or an already comparable executable pair.
+
+The user requested a paper-like introduction defining terms before the gap/RQs,
+a literature review, explicit dataset and analytical methods, deeper pagination,
+metadata fallback and justification of the architecture contrast. The revision
+supplies those sections, a reference list and Phase A credibility criteria.
+Scite follow-up retrieved 218 positions / 211 distinct DOI identifiers, with
+selected primary methods beyond earlier pages; retrieval is not full-paper
+reading or field saturation. SWE-CI and StaminaBench strengthen the prior-art
+boundary. Sperber/Schlegel (`10.1145/3759163.3760429`) supplies MVC/MVU tradeoffs,
+not a verified MMCC/ImSim maintenance comparison. Registry recovery resolves
+the earlier missing `10.1002/iis2.70208` metadata without inventing full-text access.
+
+Nu's two real-time Breakout examples remain a provisional case: explicit
+model/transition organization versus local interaction/world synchronization,
+with overlapping declarative/stateful properties and different physics APIs.
+The user's mathematical/operational characterization is not a verified Nu quote
+or a formal-semantics dichotomy; Fowler's MVU itself has operational semantics.
+Do not claim turn-based versus real-time, paradigm representativeness, purity or
+credibility before source-linked capability/idiom/non-author feasibility review.
+The added outcome/analysis details are unadopted proposal clarifications, not a
+new protocol, model selection, construction scope or dispatch allocation.
 
 **Next decision:** human review of that standalone proposal, specifically whether
 to authorize Phase A model-free feasibility. Its Nu case, two four-episode chains,

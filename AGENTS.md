@@ -8,6 +8,12 @@ and [DOI/search ledger](docs/architecture-maintenance-proposal-sources-2026-09-1
 They propose a bounded architecture-package maintenance case, provisionally Nu,
 not an adopted replacement experiment. Next is review of Phase A model-free
 feasibility; no new construction, adapter, recruitment or execution is authorized.
+The revised proposal defines terms before the questions and includes literature,
+dataset, analytics and explicit pair-credibility criteria. MMCC/ImSim are
+provisional concrete packages, not validated representatives of two paradigms;
+do not equate them with mathematical/operational or turn-based/real-time classes.
+Use Scite pagination (effective 20, then offset); resolve missing metadata through
+registries/primary sources and retain reading/access limits in the linked ledger.
 Future 192+5 dispatches are proposed only, allocated zero. Keep the completed
 construction, larger F# envelopes and existing execution holds below intact.
 
