@@ -1,12 +1,13 @@
 # Research plan
 
-**Updated 2026-09-14 after the full-reading request; basis `fc4762b636421f6fc6aba2eca473cd1bf9c89ad1`.** The immediate next assignment is full-PDF evidence reconstruction, before an A0 construction decision. Existing frozen protocols, completed observations, authorization records and unused-quota restrictions remain unchanged.
+**Updated 2026-09-14 after Nu practitioner-source reading and paginated discovery; basis `ec2226e50b6a2de11e7cb2e2f2d7cd0d1d27dbd1`.** The immediate next assignment remains full-PDF evidence reconstruction, before an A0 construction decision. This preparatory source pass is not full-paper completion. Existing frozen protocols, completed observations, authorization records and unused-quota restrictions remain unchanged.
 
 ## Active question and document authority
 
 The active direction is a **prospective architecture-package maintenance case**, not a return to a universal F#/C# ranking. Ask whether source-grounded predictions about responsibility ownership and interaction boundaries anticipate which changes an agent can make reliably, and whether those predictions survive inherited code state.
 
-- [Full-paper reading handoff](docs/full-paper-reading-handoff-2026-09-14.md): **current next task**, ordered DOI/PDF queue, complete-reading requirements, reconstruction outputs and decision rules.
+- [Full-paper reading handoff](docs/full-paper-reading-handoff-2026-09-14.md): **current next task**, base P01–P11 DOI/PDF queue, complete-reading requirements, reconstruction outputs and decision rules.
+- [Nu source/mechanism addendum](docs/nu-form-factors-and-research-leads-2026-09-14.md): pre-PDF practitioner reading, selected scholarly inspection, P12/P13 queue extension and concrete questions for the later synthesis; [discovery ledger](docs/nu-form-factors-discovery-ledger-2026-09-14.md) records pagination, identities and limitations.
 - [Standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md): questions, controls, case eligibility and analysis to reassess against the full papers.
 - [Current review disposition](docs/pro-review-design-discrimination-2026-09-14.md): corrections and decisions from the previous pass.
 - [Source audit](docs/pro-review-design-discrimination-sources-2026-09-14.md): actual selected readings, scite coverage, deferred evidence and claim consequences; not full-paper completion.
@@ -14,21 +15,25 @@ The active direction is a **prospective architecture-package maintenance case**,
 - [Previous review](docs/pro-review-2026-09-14.md) and its [source audit](docs/pro-review-sources-2026-09-14.md): retained earlier findings; not new human approval.
 - [Original proposal ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md): broader earlier literature work, not discarded by this focused reconstruction.
 
-The proposal is still pending human disposition. The user's new reading-first instruction supersedes the older immediate handoff to an A0 authorization decision, without changing the proposed experiment itself. Lawful acquisition, full reading, evidence reconstruction, model-free checking of published arithmetic and evidence-driven documentation corrections are the current task. A0 construction, recruitment, adapters, calibration and candidate execution remain unauthorized. The proposed 192+5 generation envelope remains unallocated. New experiment allocation: **zero**.
+The proposal is still pending human disposition. The user's reading-first instruction supersedes the older immediate handoff to an A0 authorization decision, without changing the proposed experiment itself. Lawful acquisition, full reading, evidence reconstruction, model-free checking of published arithmetic and evidence-driven documentation corrections are the current task. A0 construction, recruitment, adapters, calibration and candidate execution remain unauthorized. The proposed 192+5 generation envelope remains unallocated. New experiment allocation: **zero**.
 
 ## Immediate assignment: reconstruct evidence from complete PDFs
 
-Read the eleven core works in the [DOI queue](docs/full-paper-reading-handoff-2026-09-14.md), not merely their abstracts, citation snippets or earlier AI summaries. Begin acquisition of the access-limited ICSA architectural-refactoring paper immediately while continuing the accessible work. The queue also contains conditional full readings, each with an explicit trigger rather than an uncontrolled expansion of scope.
+Read the original eleven core works P01–P11 in the [base DOI queue](docs/full-paper-reading-handoff-2026-09-14.md), plus the two gap-critical additions in the [Nu addendum](docs/nu-form-factors-and-research-leads-2026-09-14.md): **P12 Theory of Code Space (`10.48550/arXiv.2603.00601`, prior selected reading v4)** and **P13 CodePlan (`10.1145/3643757`, related preprint `10.48550/arXiv.2309.12499`)**. This makes thirteen core targets without renumbering or duplicating earlier work. The preprint is an edition/access lead, not an independent fourteenth study. The base handoff's eleven-paper completion statements now include this explicit two-paper extension.
+
+Do not substitute abstracts, citation snippets or earlier AI summaries. Begin acquisition of the access-limited ICSA architectural-refactoring paper immediately while continuing accessible work. Conditional full readings retain explicit triggers; the 108 DOI discovery identities are not another mandatory download list.
 
 For each acquired paper verify its identity and edition, preserve an actual PDF/attachment reference and hash, read every section and appendix, inspect figures/tables/equations, and read supplements needed to reconstruct its methods. Keep acquisition, page coverage, full reading, method reconstruction and experimental reproduction separate. A PDF parser finishing the file is not evidence that its contents were read. Missing methods remain missing even after the whole text is read.
 
 Create/update the reading index and paper notes under `docs/literature/full-reading/` only as actual reading occurs. Reconstruct the evidence-generating procedure, contrasts and confounds, sample/independent units, agent/information policies, oracle, results and denominators, uncertainty, negative evidence and limitations. Every material claim needs PDF/section/table locators. Preserve the historical editions and earlier partial-reading audit without retroactively upgrading them.
 
-After the core readings, produce the cross-paper evidence matrix and claim audit, reconstruct the relevant controls, and revise the active proposal and this plan from the findings. Choose retain, narrow, correct, replicate/adapt or redirect for each consequential claim. Name the practical decision and the smallest informative next test. Do not rescue novelty with a technology name or treat inaccessible sources as proof of absence.
+The Nu source pass adds specific reconstruction questions: distinguish suitable responsibility factoring from abstraction quantity; distinguish adjacent code from low coordination burden; identify what the runtime/compiler guarantees versus what the agent must recover; and check whether claimed tool benefits are available under the actual candidate policy. Auxiliary architectural maps, belief reports or controller-supplied dependency plans can change the information and reasoning policy. They are not automatically passive measurements. Human usability, conceptual dimensions and model outcomes remain different evidence classes. The related methods must be reconstructed before adopting such a measure or claiming novelty.
+
+After the core readings, produce the cross-paper evidence matrix and claim audit, reconstruct the relevant controls, and revise the active proposal and this plan from the findings. Add a practitioner-claim-to-evidence map within that synthesis, not a second workflow. Choose retain, narrow, correct, replicate/adapt or redirect for each consequential claim. Name the practical decision and the smallest informative next test. Do not rescue novelty with a technology name or treat inaccessible sources as proof of absence.
 
 Save progress after each paper and synthesize after each batch. Continue within the bounded assignment rather than asking for a new prompt after every paper. If a core PDF or essential supplement is unavailable, preserve its access attempts, finish the accessible core, and return an explicitly partial handoff with the exact DOI/PDF request and affected claims. If quota prevents continuation, preserve the completed DOI/version/page positions and commit while possible, then request a continuation prompt. No fabricated completion or background promises.
 
-Completion requires paper-level coverage/reconstruction records, the cross-paper evidence/implication synthesis, visible corrections to prior claims, updated proposal/PLAN/AGENTS, checked scite decision provenance, and the exact committed identity/CI scope. Return for human review before construction. Full reading does not automatically establish reproducibility, systematic-review completeness, research value or approval of A0.
+Completion requires paper-level coverage/reconstruction records including P12/P13, the cross-paper evidence/implication synthesis, visible corrections to prior claims, updated proposal/PLAN/AGENTS, checked scite decision provenance, and the exact committed identity/CI scope. Return for human review before construction. Full reading does not automatically establish reproducibility, systematic-review completeness, research value or approval of A0.
 
 ## Preserve the completed work
 
@@ -42,7 +47,7 @@ Existing source/handoff/history files remain available in Git and `docs/history/
 
 The candidate contribution is a **test of prospective architectural impact predictions against actual downstream changes**, not another ranking based on source size or a new name for sequential maintenance.
 
-Earlier selected readings positioned ALMA, code-cleanliness minimal pairs, CodeThread, SlopCodeBench and ChainSWE as close predecessors. Reconstruct their complete methods and limits before carrying those comparisons into a stronger gap statement. These are predecessors to reuse, not novelty claims. The current next assignment explicitly permits correcting this synthesis from the fully read PDFs.
+Earlier selected readings positioned ALMA, code-cleanliness minimal pairs, CodeThread, SlopCodeBench and ChainSWE as close predecessors. The Nu-guided search additionally recovered ToCS on architectural-map construction and CodePlan on dependency-aware repository editing. Reconstruct their complete methods and limits before carrying those comparisons into a stronger gap statement. These are predecessors to reuse, not novelty claims. The current next assignment explicitly permits correcting this synthesis from the fully read PDFs.
 
 Choose the intended claim before A1 freezes the workload:
 
@@ -59,9 +64,9 @@ The original language/abstraction/context motivation remains a parent hypothesis
 
 Only after the literature reconstruction and evidence-driven proposal revision should the next human decision consider **A0**, a model-free case witness. A0 may be retained, narrowed or redirected by that reading; it is not the current executable task. No repeated broad literature sweep is required merely to increase a reference count.
 
-Nu MMCC and ImSim remain provisional, pinned in the proposal. They share F# and an engine but differ in state organization, facilities and physics usage; that is a package contrast, not two pure paradigms. Nu versus Unity is not the experimental control. If useful comparable scenarios cannot be observed without a substitute engine or a helper that solves the task, redirect the case rather than expanding infrastructure.
+Nu MMCC and ImSim remain provisional, pinned in the proposal. They share F# and an engine but differ in state organization, facilities and physics usage; that is a package contrast, not two pure paradigms. Nu versus Unity is not the experimental control. If useful comparable scenarios cannot be observed without a substitute engine or a helper that solves the task, redirect the case rather than expanding infrastructure. Shared engine facilities cannot by themselves explain differences between two application styles. A source-only no-tools arm cannot establish benefits of interactive inspection, hot reload or undo that it does not expose.
 
-If separately authorized, A0 may establish both unchanged baselines, the editable/read-only boundary and common observation seam, and **at most two contrasting reference change witnesses per package**. This remains two baselines plus at most four successors. It is not permission to construct both full chains.
+If separately authorized, A0 may establish both unchanged baselines, the editable/read-only boundary and common observation seam, and **at most two contrasting reference change witnesses per package**. This remains two baselines plus at most four successors. It is not permission to construct both full chains. The additional Nu-inspired scenario questions are a selection menu, not extra mandatory tasks.
 
 A0's review packet must contain:
 
@@ -107,7 +112,7 @@ If a real routing comparison is later justified, begin with the same model and s
 
 ## Research and engineering loop
 
-Use [research-loop-and-scite.md](docs/research-loop-and-scite.md) together with the [full-reading assignment](docs/full-paper-reading-handoff-2026-09-14.md). Start with the decision and a falsifier; acquire verified PDFs; reconstruct the whole papers; check overlap and contrary evidence; turn findings into explicit design consequences. Return an honest complete/partial/access-blocked reconstruction, not another selective-read audit labelled complete. Deferred evidence is not evidence of absence. Scite snippets, citation labels and graph density do not establish validity or novelty.
+Use [research-loop-and-scite.md](docs/research-loop-and-scite.md) together with the [full-reading assignment](docs/full-paper-reading-handoff-2026-09-14.md) and its explicit [P12/P13 extension](docs/nu-form-factors-and-research-leads-2026-09-14.md). Start with the decision and a falsifier; acquire verified PDFs; reconstruct the whole papers; check overlap and contrary evidence; turn findings into explicit design consequences. Return an honest complete/partial/access-blocked reconstruction, not another selective-read audit labelled complete. Deferred evidence is not evidence of absence. Scite snippets, citation labels and graph density do not establish validity or novelty. Use 20-item literature pages and effective-size offsets for relevant continuation; exact lookups can return fewer than twenty.
 
 Keep the existing rule of **five failed attempts at one unchanged unresolved apparatus gate**; success clears that counter. This is not permission for five ambiguous/billable retries. Stop immediately for safety, uncertain requests, resource limits or an execution-policy change. Routine corrections to the evidence-based proposal inside this literature assignment do not require a fresh authorization for each edit.
 
