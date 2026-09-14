@@ -1,19 +1,34 @@
 # Research plan
 
-**Reviewed 2026-09-14; basis `d0cd99757c45d2a2322beb4c6f9069efe5667166`.** This is the canonical future-work plan, not a new experiment allocation. Existing frozen protocols, completed observations, authorization records and unused-quota restrictions remain unchanged.
+**Updated 2026-09-14 after the full-reading request; basis `fc4762b636421f6fc6aba2eca473cd1bf9c89ad1`.** The immediate next assignment is full-PDF evidence reconstruction, before an A0 construction decision. Existing frozen protocols, completed observations, authorization records and unused-quota restrictions remain unchanged.
 
 ## Active question and document authority
 
 The active direction is a **prospective architecture-package maintenance case**, not a return to a universal F#/C# ranking. Ask whether source-grounded predictions about responsibility ownership and interaction boundaries anticipate which changes an agent can make reliably, and whether those predictions survive inherited code state.
 
-- [Standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md): questions, controls, case eligibility and analysis.
-- [Current review disposition](docs/pro-review-design-discrimination-2026-09-14.md): corrections and decisions from this pass.
-- [Source audit](docs/pro-review-design-discrimination-sources-2026-09-14.md): actual readings, scite coverage, deferred evidence and claim consequences.
-- [Research loop and scite](docs/research-loop-and-scite.md): required positioning procedure.
+- [Full-paper reading handoff](docs/full-paper-reading-handoff-2026-09-14.md): **current next task**, ordered DOI/PDF queue, complete-reading requirements, reconstruction outputs and decision rules.
+- [Standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md): questions, controls, case eligibility and analysis to reassess against the full papers.
+- [Current review disposition](docs/pro-review-design-discrimination-2026-09-14.md): corrections and decisions from the previous pass.
+- [Source audit](docs/pro-review-design-discrimination-sources-2026-09-14.md): actual selected readings, scite coverage, deferred evidence and claim consequences; not full-paper completion.
+- [Research loop and scite](docs/research-loop-and-scite.md): positioning procedure, supplemented by this assignment's stricter full-PDF coverage requirements.
 - [Previous review](docs/pro-review-2026-09-14.md) and its [source audit](docs/pro-review-sources-2026-09-14.md): retained earlier findings; not new human approval.
-- [Original proposal ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md): broader earlier literature work, not discarded by this focused review.
+- [Original proposal ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md): broader earlier literature work, not discarded by this focused reconstruction.
 
-The proposal is still pending human disposition. A0 construction, recruitment, adapters, calibration and candidate execution are not authorized by this review. The proposed 192+5 generation envelope remains unallocated. New allocation: **zero**. A reviewed document, scite report or green documentation CI is not execution permission.
+The proposal is still pending human disposition. The user's new reading-first instruction supersedes the older immediate handoff to an A0 authorization decision, without changing the proposed experiment itself. Lawful acquisition, full reading, evidence reconstruction, model-free checking of published arithmetic and evidence-driven documentation corrections are the current task. A0 construction, recruitment, adapters, calibration and candidate execution remain unauthorized. The proposed 192+5 generation envelope remains unallocated. New experiment allocation: **zero**.
+
+## Immediate assignment: reconstruct evidence from complete PDFs
+
+Read the eleven core works in the [DOI queue](docs/full-paper-reading-handoff-2026-09-14.md), not merely their abstracts, citation snippets or earlier AI summaries. Begin acquisition of the access-limited ICSA architectural-refactoring paper immediately while continuing the accessible work. The queue also contains conditional full readings, each with an explicit trigger rather than an uncontrolled expansion of scope.
+
+For each acquired paper verify its identity and edition, preserve an actual PDF/attachment reference and hash, read every section and appendix, inspect figures/tables/equations, and read supplements needed to reconstruct its methods. Keep acquisition, page coverage, full reading, method reconstruction and experimental reproduction separate. A PDF parser finishing the file is not evidence that its contents were read. Missing methods remain missing even after the whole text is read.
+
+Create/update the reading index and paper notes under `docs/literature/full-reading/` only as actual reading occurs. Reconstruct the evidence-generating procedure, contrasts and confounds, sample/independent units, agent/information policies, oracle, results and denominators, uncertainty, negative evidence and limitations. Every material claim needs PDF/section/table locators. Preserve the historical editions and earlier partial-reading audit without retroactively upgrading them.
+
+After the core readings, produce the cross-paper evidence matrix and claim audit, reconstruct the relevant controls, and revise the active proposal and this plan from the findings. Choose retain, narrow, correct, replicate/adapt or redirect for each consequential claim. Name the practical decision and the smallest informative next test. Do not rescue novelty with a technology name or treat inaccessible sources as proof of absence.
+
+Save progress after each paper and synthesize after each batch. Continue within the bounded assignment rather than asking for a new prompt after every paper. If a core PDF or essential supplement is unavailable, preserve its access attempts, finish the accessible core, and return an explicitly partial handoff with the exact DOI/PDF request and affected claims. If quota prevents continuation, preserve the completed DOI/version/page positions and commit while possible, then request a continuation prompt. No fabricated completion or background promises.
+
+Completion requires paper-level coverage/reconstruction records, the cross-paper evidence/implication synthesis, visible corrections to prior claims, updated proposal/PLAN/AGENTS, checked scite decision provenance, and the exact committed identity/CI scope. Return for human review before construction. Full reading does not automatically establish reproducibility, systematic-review completeness, research value or approval of A0.
 
 ## Preserve the completed work
 
@@ -23,11 +38,11 @@ These observations motivated the new direction but do not identify training-corp
 
 Existing source/handoff/history files remain available in Git and `docs/history/`. This update does not reopen prior allocations, change OAuth/backend policy, replace the canonical runner, re-score old results, or retrospectively modify a frozen definition.
 
-## Contribution and claim levels
+## Contribution and claim levels to reassess
 
 The candidate contribution is a **test of prospective architectural impact predictions against actual downstream changes**, not another ranking based on source size or a new name for sequential maintenance.
 
-ALMA already supplies scenario-based architectural analysis; code-cleanliness minimal pairs already vary code quality; CodeThread already tests later work on controlled predecessors; SlopCodeBench already studies iterative evolution. The newly rechecked ChainSWE methods additionally cover oracle versus inherited predecessors, fresh versus persistent history, and subagent interfaces. These are predecessors to reuse, not novelty claims. See the proposal and source audit for exact editions and limits.
+Earlier selected readings positioned ALMA, code-cleanliness minimal pairs, CodeThread, SlopCodeBench and ChainSWE as close predecessors. Reconstruct their complete methods and limits before carrying those comparisons into a stronger gap statement. These are predecessors to reuse, not novelty claims. The current next assignment explicitly permits correcting this synthesis from the fully read PDFs.
 
 Choose the intended claim before A1 freezes the workload:
 
@@ -40,9 +55,9 @@ Choose the intended claim before A1 freezes the workload:
 
 The original language/abstraction/context motivation remains a parent hypothesis. The current same-language architecture case tests one component. It neither proves nor retires the other components. Do not launch a language × architecture × model × memory factorial.
 
-## Next decision: bounded A0 feasibility only
+## Downstream decision after full-paper review: bounded A0 feasibility
 
-The next human decision is whether to authorize **A0**, a model-free case witness. No new literature sweep or complete benchmark construction is needed before presenting that decision.
+Only after the literature reconstruction and evidence-driven proposal revision should the next human decision consider **A0**, a model-free case witness. A0 may be retained, narrowed or redirected by that reading; it is not the current executable task. No repeated broad literature sweep is required merely to increase a reference count.
 
 Nu MMCC and ImSim remain provisional, pinned in the proposal. They share F# and an engine but differ in state organization, facilities and physics usage; that is a package contrast, not two pure paradigms. Nu versus Unity is not the experimental control. If useful comparable scenarios cannot be observed without a substitute engine or a helper that solves the task, redirect the case rather than expanding infrastructure.
 
@@ -56,7 +71,7 @@ A0's review packet must contain:
 4. Evidence the contrast is not simply a missing engine feature, broken baseline, output-format cap or deliberately weak comparator. Match requirements and available information, not touched-file count or required coordination effort.
 5. A yes/no/redirect recommendation, unresolved expert-review limitations, bounded A1 cost and the claim/control choice above. An inconclusive or contrary result is acceptable; runtime success alone is not enough to establish a discriminating architecture case.
 
-A0 success authorizes nothing automatically. Return for disposition before A1. The most important uncertainty now is case credibility and decision value, not stochastic precision from many model repetitions.
+A0 success authorizes nothing automatically. Return for disposition before A1. Case credibility and decision value precede stochastic precision from many model repetitions.
 
 ## Subsequent bounded phases
 
@@ -72,7 +87,7 @@ The earlier arithmetic, 12 blocks × 2 packages × 2 chains × 4 episodes = 192 
 
 ## Candidate policy and outcomes
 
-The currently proposed primary policy remains **fresh episode context, source-only inheritance, notes off, one submitted edit and no repair feedback**. It is not changed to delegated repair by this review. Safe wrong or noncompiling source persists; unsafe output is contained and classified. Invalid submissions leave the previous safe state as prescribed. Contracts and documentation are supplied consistently; research predictions and future targets are not candidate hints.
+The currently proposed primary policy remains **fresh episode context, source-only inheritance, notes off, one submitted edit and no repair feedback**. It is not changed to delegated repair by this reading-queue update. Safe wrong or noncompiling source persists; unsafe output is contained and classified. Invalid submissions leave the previous safe state as prescribed. Contracts and documentation are supplied consistently; research predictions and future targets are not candidate hints.
 
 Keep observed completion, assigned-policy utility, execution status and resource coverage separate. Missing usage does not erase known correctness. A build failure makes joint completion false but blocks, rather than fabricates, runtime assertions. Unstarted slots remain `not_run`; any policy-zero convention is declared separately, and infrastructure missingness remains unknown.
 
@@ -84,16 +99,16 @@ Freeze the primary endpoint, chain weights, missingness bounds, sample, order an
 
 ## Repair and context mechanisms: later questions, not assumed fixes
 
-Separate **useful current diagnostic evidence**, **resolved historical output**, **stale source**, and **irrelevant repetition**. Type-error ablation research finds that richer active diagnostics can aid repair; context-management research gives strong simple masking baselines but also scaffold-dependent trade-offs. Therefore “remove tools,” “shorten every error,” and “add a worker” are not equivalent or guaranteed improvements.
+Separate **useful current diagnostic evidence**, **resolved historical output**, **stale source**, and **irrelevant repetition**. The full readings of Type-Error Ablation and Complexity Trap must reconstruct when their evidence supports or limits diagnostic detail and history management. Do not treat “remove tools,” “shorten every error,” and “add a worker” as equivalent or guaranteed improvements.
 
 Before building repair workers, a possible bounded diagnostic experiment is a fixed-source handoff: both conditions receive the identical repaired source, same next task and same concise resolution facts; one also receives authentic resolved repair history. This tests presentation of history, not the causal effect of having performed repair or persistent hidden state. An outcome on a small handoff does not establish large-window behavior. It remains a separate unallocated proposal, not a new A0 requirement.
 
-If a real routing comparison is later justified, begin with the same model and semantic repair authority, keep current diagnostic information available, separate planner/worker/total costs, and compare against simple deterministic history policy. Inspect ChainSWE and Complexity Trap before claiming interface novelty. No generic routing framework or recursive agents is needed for A0/A1.
+If a real routing comparison is later justified, begin with the same model and semantic repair authority, keep current diagnostic information available, separate planner/worker/total costs, and compare against simple deterministic history policy. The reading assignment reconstructs ChainSWE and Complexity Trap before any interface novelty claim; promote the conditional masking-regime paper before a new masking study. No generic routing framework or recursive agents is needed for A0/A1.
 
 ## Research and engineering loop
 
-Use [research-loop-and-scite.md](docs/research-loop-and-scite.md). Start with the decision and a falsifier; recover known close methods with exact identities; search both for overlap and contrary evidence; extract actual controls; turn each retained source into a design consequence; stop when the bounded decision is supported. Deferred evidence is not evidence of absence. Scite snippets, citation labels and graph density do not establish validity or novelty.
+Use [research-loop-and-scite.md](docs/research-loop-and-scite.md) together with the [full-reading assignment](docs/full-paper-reading-handoff-2026-09-14.md). Start with the decision and a falsifier; acquire verified PDFs; reconstruct the whole papers; check overlap and contrary evidence; turn findings into explicit design consequences. Return an honest complete/partial/access-blocked reconstruction, not another selective-read audit labelled complete. Deferred evidence is not evidence of absence. Scite snippets, citation labels and graph density do not establish validity or novelty.
 
-Keep the existing rule of **five failed attempts at one unchanged unresolved apparatus gate**; success clears that counter. This is not permission for five ambiguous/billable retries. Stop immediately for safety, uncertain requests, resource limits or a scientific change. Routine fixes inside an authorized packet need not return after every commit.
+Keep the existing rule of **five failed attempts at one unchanged unresolved apparatus gate**; success clears that counter. This is not permission for five ambiguous/billable retries. Stop immediately for safety, uncertain requests, resource limits or an execution-policy change. Routine corrections to the evidence-based proposal inside this literature assignment do not require a fresh authorization for each edit.
 
-Apply [change-scoped CI](docs/ci-validation-scope.md). Green prose-only checks do not certify Nu runtime or scientific acceptance. Direct commits are requested; preserve concurrent changes, never force-update main. The final handoff states exact head, changed scope, actual checks, source limitations and the next decision. No new experiment allocation is created by this review.
+Apply [change-scoped CI](docs/ci-validation-scope.md). Green prose-only checks do not certify Nu runtime, full-paper reading or scientific acceptance. Direct commits are requested; preserve concurrent changes, never force-update main. The final handoff states exact head, changed scope, actual coverage/checks, unresolved PDFs and the next decision. No new experiment allocation is created by this update.
