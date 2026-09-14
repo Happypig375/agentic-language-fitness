@@ -1,5 +1,7 @@
 # Zotero core reading collection
 
+**Current update (2026-09-15 HKT):** the user added CodePlan's 2024 publisher PDF. The collection now has thirteen works and **sixteen PDFs**. Earlier acquisition snapshots below remain history; complete reading is recorded separately in the [full-reading index](literature/full-reading/INDEX.md) and [synthesis](literature/full-reading/synthesis.md).
+
 **Prepared 2026-09-15 UTC; queue source `2cc51940181dd7adb885ff68de1f02b260221166`.** The user requested pulling the latest repository changes and creating a Zotero collection for adding PDFs. The checkout fast-forwarded from `73d0a23` to that source; the unrelated untracked `uv.lock` was preserved.
 
 The top-level collection in My Library is **ALF - Core Paper Reading Queue (2026-09-15)**, key `PKLXQNEE`. Its local selection URI is `zotero://select/library/collections/PKLXQNEE`.
@@ -71,3 +73,9 @@ Each asset below was checked for PDF format, readable page structure, matching f
 The local Connector `saveAttachment` endpoint returned HTTP 201 for all fifteen files. API readback checked the intended parent key, PDF content type, source URL and edition label, followed by SHA-256 and size comparison against the actual Zotero-stored file for every attachment. Final inventory confirmed thirteen parent records and fifteen PDFs, with one PDF per work except the two labelled P06/P11 edition pairs. Reusing a previously attached, byte-matching PDF did not create a second copy.
 
 The binaries are stored in Zotero, not committed here. Attachment keys in the table can be resolved through the local API or `zotero://select/library/items/<attachment-key>`. The collection is ready for reading; acquisition does not close the full-reading assignment. The next reader should reuse these assets and hashes, start the actual coverage index when reading begins, and retain the CodePlan published-edition gap. All experiment allocations and construction/execution holds remain unchanged.
+
+## User-supplied publication and completed reading update
+
+CodePlan parent `LLMGIWQM` now has publisher attachment `LS9AUVZE`: **24 pages, 1,202,157 bytes, SHA-256 `c31dec9440c699aaffb5597139e9ea8b13f8409e84f954723a881a58af671e08`**. Its first page identifies PACMSE 1/FSE article 31, July 2024, DOI `10.1145/3643757`, with CC BY 4.0. The user supplied this file; no claim is made that the earlier HTTP 403 route became accessible. Their renamed 2023 preprint attachment is preserved.
+
+The publication was read in full for [P13](literature/full-reading/P13-codeplan.md), and all thirteen chosen core editions now have reconstruction records. Sixteen PDFs represent thirteen works, including historical P06/P11 v1 and CodePlan preprint editions. [Current assets](literature/full-reading/assets.json) separate catalog authors from edition authors and retain exact hashes. No Zotero items were modified during this reading pass. Original arithmetic, bounded artifact checks and proposal revisions are in the synthesis; no allocation or construction follows automatically.

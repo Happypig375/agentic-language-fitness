@@ -1,0 +1,356 @@
+{
+  "source_url": "https://raw.githubusercontent.com/JetBrains-Research/the-complexity-trap/bf15b5fb7d279679035a007ac9a81084d6b9a89a/auxiliary-data/experiment_instance_costs_sweagent.csv",
+  "sha256": "47b550fd7a4dfafb59a269e73f50ade96a9abd9484e32b17498581b4251eff48",
+  "scope": "Released CSV rows only; no missing-row imputation or paired inference.",
+  "groups": [
+    {
+      "experiment": "gemini_2.5_flash-agent-t_0.8-baseline_N_1_M_10.0-verified-500",
+      "rows": 499,
+      "unique_ids": 499,
+      "duplicate_ids": 0,
+      "passes": 178,
+      "cost": {
+        "known_rows": 499,
+        "mean_on_known": 0.17713266533066133
+      },
+      "summary_cost": {
+        "known_rows": 499,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 499,
+        "mean_on_known": 0.17713266533066133
+      }
+    },
+    {
+      "experiment": "gemini_2.5_flash-agent-t_0.8-baseline_raw.0-verified-500",
+      "rows": 498,
+      "unique_ids": 498,
+      "duplicate_ids": 0,
+      "passes": 164,
+      "cost": {
+        "known_rows": 498,
+        "mean_on_known": 0.41488514056224896
+      },
+      "summary_cost": {
+        "known_rows": 498,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 498,
+        "mean_on_known": 0.41488514056224896
+      }
+    },
+    {
+      "experiment": "gemini_2.5_flash-agent-t_0.8-turn-summaries-t_0-N_21_M_10_openhands.0-verified-500",
+      "rows": 496,
+      "unique_ids": 496,
+      "duplicate_ids": 0,
+      "passes": 180,
+      "cost": {
+        "known_rows": 496,
+        "mean_on_known": 0.2253453629032258
+      },
+      "summary_cost": {
+        "known_rows": 496,
+        "mean_on_known": 0.015835483870967743
+      },
+      "combined_cost": {
+        "known_rows": 496,
+        "mean_on_known": 0.24118084677419355
+      }
+    },
+    {
+      "experiment": "gemini_2.5_flash_thinking-agent-t_0.8-baseline_N_1_M_10.0-verified-500",
+      "rows": 499,
+      "unique_ids": 499,
+      "duplicate_ids": 0,
+      "passes": 182,
+      "cost": {
+        "known_rows": 499,
+        "mean_on_known": 0.24219819639278556
+      },
+      "summary_cost": {
+        "known_rows": 499,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 499,
+        "mean_on_known": 0.24219819639278556
+      }
+    },
+    {
+      "experiment": "gemini_2.5_flash_thinking-agent-t_0.8-baseline_raw.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 202,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.5562
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.5562
+      }
+    },
+    {
+      "experiment": "gemini_2.5_flash_thinking-agent-t_0.8-turn-summaries-t_0-N_21_M_10_openhands.0-verified-500",
+      "rows": 497,
+      "unique_ids": 497,
+      "duplicate_ids": 0,
+      "passes": 157,
+      "cost": {
+        "known_rows": 497,
+        "mean_on_known": 0.22802233400402414
+      },
+      "summary_cost": {
+        "known_rows": 497,
+        "mean_on_known": 0.012342454728370221
+      },
+      "combined_cost": {
+        "known_rows": 497,
+        "mean_on_known": 0.24036478873239436
+      }
+    },
+    {
+      "experiment": "local-Qwen3-32B_thinking-baseline_N_1_M_10-collect_reasoning.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 123,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.46158940000000004
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.46158940000000004
+      }
+    },
+    {
+      "experiment": "local-Qwen3-32B_thinking-baseline_raw-collect_reasoning.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 115,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.5125882
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.5125882
+      }
+    },
+    {
+      "experiment": "local-Qwen3-32B_thinking-t_0.8-turn-summaries-t_0-N_21_M_10_openhands-collect_reasoning.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 124,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.5071402
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.0033445999999999997
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.5104848
+      }
+    },
+    {
+      "experiment": "local-Qwen3-Coder_480B-agent-t_0.8-turn-summaries-t_0-summary_N_21_M_10_obs_masking_M_10_combined.0-verified-50",
+      "rows": 50,
+      "unique_ids": 50,
+      "duplicate_ids": 0,
+      "passes": 27,
+      "cost": {
+        "known_rows": 50,
+        "mean_on_known": 0.668134
+      },
+      "summary_cost": {
+        "known_rows": 50,
+        "mean_on_known": 0.043840000000000004
+      },
+      "combined_cost": {
+        "known_rows": 50,
+        "mean_on_known": 0.711974
+      }
+    },
+    {
+      "experiment": "local-Qwen3-Coder_480B-agent-t_0.8-turn-summaries-t_0-summary_N_43_M_10_obs_masking_M_10_combined.0-verified-50",
+      "rows": 50,
+      "unique_ids": 50,
+      "duplicate_ids": 0,
+      "passes": 28,
+      "cost": {
+        "known_rows": 50,
+        "mean_on_known": 0.5484020000000001
+      },
+      "summary_cost": {
+        "known_rows": 50,
+        "mean_on_known": 0.023008
+      },
+      "combined_cost": {
+        "known_rows": 50,
+        "mean_on_known": 0.57141
+      }
+    },
+    {
+      "experiment": "local-Qwen3-Coder_480B_A35B_Instruct_FP8-baseline_N_1_M_10.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 274,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.6098414
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.6098414
+      }
+    },
+    {
+      "experiment": "local-Qwen3-Coder_480B_A35B_Instruct_FP8-baseline_raw.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 267,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 1.2858889999999998
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 1.2858889999999998
+      }
+    },
+    {
+      "experiment": "local-Qwen3-Coder_480B_A35B_Instruct_FP8-t_0.8-turn-summaries-t_0-N_21_M_10_openhands.0-verified-500",
+      "rows": 498,
+      "unique_ids": 498,
+      "duplicate_ids": 0,
+      "passes": 269,
+      "cost": {
+        "known_rows": 498,
+        "mean_on_known": 0.5922592369477913
+      },
+      "summary_cost": {
+        "known_rows": 498,
+        "mean_on_known": 0.043857028112449806
+      },
+      "combined_cost": {
+        "known_rows": 498,
+        "mean_on_known": 0.636116265060241
+      }
+    },
+    {
+      "experiment": "local-qwen3-32b-baseline_N_1_M_10.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 75,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.5537993999999999
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.5537993999999999
+      }
+    },
+    {
+      "experiment": "local-qwen3-32b-baseline_raw.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 85,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 1.1169866
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.0
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 1.1169866
+      }
+    },
+    {
+      "experiment": "local-qwen3-32b-t_0.8-turn-summaries-t_0-N_21_M_10_openhands.0-verified-500",
+      "rows": 500,
+      "unique_ids": 500,
+      "duplicate_ids": 0,
+      "passes": 80,
+      "cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.4852886
+      },
+      "summary_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.014344599999999999
+      },
+      "combined_cost": {
+        "known_rows": 500,
+        "mean_on_known": 0.4996332
+      }
+    }
+  ],
+  "hybrid_N43_common_id_comparisons": [
+    {
+      "baseline": "local-Qwen3-Coder_480B_A35B_Instruct_FP8-baseline_N_1_M_10.0-verified-500",
+      "common_ids": 50,
+      "hybrid_passes": 28,
+      "baseline_passes": 28,
+      "hybrid_only_passes": 3,
+      "baseline_only_passes": 3
+    },
+    {
+      "baseline": "local-Qwen3-Coder_480B_A35B_Instruct_FP8-baseline_raw.0-verified-500",
+      "common_ids": 50,
+      "hybrid_passes": 28,
+      "baseline_passes": 28,
+      "hybrid_only_passes": 2,
+      "baseline_only_passes": 2
+    },
+    {
+      "baseline": "local-Qwen3-Coder_480B_A35B_Instruct_FP8-t_0.8-turn-summaries-t_0-N_21_M_10_openhands.0-verified-500",
+      "common_ids": 50,
+      "hybrid_passes": 28,
+      "baseline_passes": 28,
+      "hybrid_only_passes": 2,
+      "baseline_only_passes": 2
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "checked": "2026-09-15 HKT",
+  "scope": "Exact arXiv edition/history pages and Crossref records; absence of returned notice fields is not a universal no-notice certificate.",
+  "records": [
+    {
+      "id": "P01",
+      "attachment_key": "ZKKCQBDZ",
+      "primary_url": "https://api.crossref.org/works/10.1109%2FICSA66085.2026.00033",
+      "edition_date": "2026-06-24 (preprint cover; publication June 2026)",
+      "history": null,
+      "notice_terms": null,
+      "crossref_updates": {
+        "update-to": null,
+        "updated-by": null,
+        "relation": {}
+      }
+    },
+    {
+      "id": "P02",
+      "attachment_key": "45CCEA6L",
+      "primary_url": "https://api.crossref.org/works/10.1016%2FS0164-1212%2803%2900080-3",
+      "edition_date": "2004-01",
+      "history": null,
+      "notice_terms": null,
+      "crossref_updates": {
+        "update-to": null,
+        "updated-by": null,
+        "relation": {}
+      }
+    },
+    {
+      "id": "P03",
+      "attachment_key": "Z7ZAEPIJ",
+      "primary_url": "https://arxiv.org/abs/2605.20049v1",
+      "edition_date": "2026/05/19",
+      "history": "Submission history From: Priyansh Trivedi [ view email ] [v1] Tue, 19 May 2026 16:06:26 UTC (1,094 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P04",
+      "attachment_key": "L7FG5XKP",
+      "primary_url": "https://arxiv.org/abs/2606.21804v1",
+      "edition_date": "2026/06/19",
+      "history": "Submission history From: Betty Li Hou [ view email ] [v1] Fri, 19 Jun 2026 23:56:14 UTC (6,647 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P05",
+      "attachment_key": "46LPN8N7",
+      "primary_url": "https://arxiv.org/abs/2603.24755v2",
+      "edition_date": "2026/05/07",
+      "history": "Submission history From: Gabriel Orlanski [ view email ] [v1] Wed, 25 Mar 2026 19:26:44 UTC (138 KB) [v2] Thu, 7 May 2026 20:39:58 UTC (219 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P06",
+      "attachment_key": "8F2EA7B6",
+      "primary_url": "https://arxiv.org/abs/2607.02606v1",
+      "edition_date": "2026/07/01",
+      "history": "Submission history From: Qirui Jin [ view email ] [v1] Wed, 1 Jul 2026 13:32:15 UTC (1,446 KB) [v2] Tue, 1 Sep 2026 01:46:25 UTC (1,447 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P06",
+      "attachment_key": "FMTJ9SHC",
+      "primary_url": "https://arxiv.org/abs/2607.02606v2",
+      "edition_date": "2026/09/01",
+      "history": "Submission history From: Qirui Jin [ view email ] [v1] Wed, 1 Jul 2026 13:32:15 UTC (1,446 KB) [v2] Tue, 1 Sep 2026 01:46:25 UTC (1,447 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P07",
+      "attachment_key": "UF73YJF4",
+      "primary_url": "https://arxiv.org/abs/2603.27745v1",
+      "edition_date": "2026/03/29",
+      "history": "Submission history From: Haichao Zhu [ view email ] [v1] Sun, 29 Mar 2026 15:56:05 UTC (3,463 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P08",
+      "attachment_key": "VKL33569",
+      "primary_url": "https://arxiv.org/abs/2606.01522v2",
+      "edition_date": "2026/06/25",
+      "history": "Submission history From: Shriram Krishnamurthi [ view email ] [v1] Mon, 1 Jun 2026 01:09:13 UTC (235 KB) [v2] Thu, 25 Jun 2026 13:24:16 UTC (462 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P09",
+      "attachment_key": "R4Z4K5CW",
+      "primary_url": "https://arxiv.org/abs/2508.21433v3",
+      "edition_date": "2025/10/27",
+      "history": "Submission history From: Tobias Lindenbauer [ view email ] [v1] Fri, 29 Aug 2025 09:02:35 UTC (934 KB) [v2] Fri, 5 Sep 2025 06:16:59 UTC (907 KB) [v3] Mon, 27 Oct 2025 15:08:54 UTC (1,153 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P10",
+      "attachment_key": "PF24JPY6",
+      "primary_url": "https://arxiv.org/abs/2603.17104v1",
+      "edition_date": "2026/03/17",
+      "history": "Submission history From: Lu Yan [ view email ] [v1] Tue, 17 Mar 2026 19:53:35 UTC (427 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P11",
+      "attachment_key": "A696WU9C",
+      "primary_url": "https://arxiv.org/abs/2607.03525v1",
+      "edition_date": "2026/07/03",
+      "history": "Submission history From: Brian La [ view email ] [v1] Fri, 3 Jul 2026 17:56:26 UTC (8,243 KB) [v2] Wed, 15 Jul 2026 03:41:26 UTC (8,114 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P11",
+      "attachment_key": "WRJ2UKZ3",
+      "primary_url": "https://arxiv.org/abs/2607.03525v2",
+      "edition_date": "2026/07/15",
+      "history": "Submission history From: Brian La [ view email ] [v1] Fri, 3 Jul 2026 17:56:26 UTC (8,243 KB) [v2] Wed, 15 Jul 2026 03:41:26 UTC (8,114 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P12",
+      "attachment_key": "RXVC7BGE",
+      "primary_url": "https://arxiv.org/abs/2603.00601v4",
+      "edition_date": "2026/03/18",
+      "history": "Submission history From: Grigory Sapunov [ view email ] [v1] Sat, 28 Feb 2026 11:40:17 UTC (469 KB) [v2] Tue, 3 Mar 2026 18:45:08 UTC (520 KB) [v3] Thu, 5 Mar 2026 22:17:58 UTC (742 KB) [v4] Wed, 18 Mar 2026 22:36:55 UTC (871 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P13",
+      "attachment_key": "5YYZ9ETS",
+      "primary_url": "https://arxiv.org/abs/2309.12499v1",
+      "edition_date": "2023/09/21",
+      "history": "Submission history From: Ramakrishna Bairi [ view email ] [v1] Thu, 21 Sep 2023 21:45:17 UTC (1,727 KB) ",
+      "notice_terms": [],
+      "crossref_updates": null
+    },
+    {
+      "id": "P13",
+      "attachment_key": "LS9AUVZE",
+      "primary_url": "https://api.crossref.org/works/10.1145%2F3643757",
+      "edition_date": "2024-07-12",
+      "history": null,
+      "notice_terms": null,
+      "crossref_updates": {
+        "update-to": null,
+        "updated-by": null,
+        "relation": {}
+      }
+    }
+  ]
+}

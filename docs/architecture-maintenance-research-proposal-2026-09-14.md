@@ -1,12 +1,12 @@
-# Prospective architecture trade-offs under agent maintenance
+# Prospective package suitability under agent maintenance
 
-**Revised 2026-09-14; proposal pending human disposition.** This is the standalone scientific proposal linked by [PLAN.md](../PLAN.md). The preceding edition is retained at Git commit `d0cd99757c45d2a2322beb4c6f9069efe5667166`. The [focused review](pro-review-design-discrimination-2026-09-14.md) and [source audit](pro-review-design-discrimination-sources-2026-09-14.md) explain this revision. No construction, model call, sample allocation or freeze is created here.
+**Revised 2026-09-15 after thirteen full-paper reconstructions; pending human disposition.** This is the standalone scientific proposal linked by [PLAN.md](../PLAN.md). The preceding edition is retained at `7259e8dc494de172da3721c890bebcf3d6a18d68`; the earlier edition at `d0cd99757c45d2a2322beb4c6f9069efe5667166` remains history. The [full-paper synthesis](literature/full-reading/synthesis.md), [coverage index](literature/full-reading/INDEX.md) and individual notes now support the active claims. The preceding [focused review](pro-review-design-discrimination-2026-09-14.md) and [source audit](pro-review-design-discrimination-sources-2026-09-14.md) retain their selected-reading status. No construction, model call, sample allocation or freeze is created here.
 
 ## 1. Question and useful contribution
 
 Can source-grounded predictions about responsibility ownership and interaction boundaries anticipate which future changes a coding agent will implement reliably, and how does inherited code state alter that suitability?
 
-The intended product is a bounded, testable account of **architecture × change demand under a stated agent policy**, not a leaderboard declaring one language, engine or paradigm best. An architectural argument should predict a concrete coordination burden and a possible failure before the candidate acts. A result contradicting that prediction is useful; a post-hoc story explaining whichever package wins is not.
+The intended product is a bounded test of **prospective package suitability for specified change demands under a stated agent policy**. Source-grounded architectural reasoning supplies predictions, not an already isolated treatment or general language/paradigm effect. An argument should predict a concrete coordination burden and a possible failure before the candidate acts. A result contradicting that prediction is useful; a post-hoc story explaining whichever package wins is not.
 
 The original motivation included language-enabled abstraction, compact representations and protection of high-level reasoning from repair history. Keep that motivation traceable without substituting one component for the entire hypothesis:
 
@@ -19,20 +19,25 @@ These are related questions, not a required factorial. The completed small-repos
 
 ## 2. Closest work and the remaining decision-value question
 
-This is a scoped synthesis, not proof that no prior study exists. Exact versions, reading extents, access limits and deferred leads are in the source audit. Earlier broader ledgers remain relevant.
+This is a bounded adaptation of established scenario, inheritance and control methods, not proof that no prior study exists. All thirteen chosen core PDFs were read; exact versions, locators, arithmetic, inaccessible artifacts and contrary evidence are in the full-paper notes. Full reading does not establish exact reproducibility. Earlier broader ledgers remain relevant at their recorded access/reading levels.
 
 | Primary predecessor | Consequence for this study |
 | --- | --- |
-| ALMA, Bengtsson et al., JSS 2004, DOI `10.1016/S0164-1212(03)00080-3`, especially sections 4.3 and 7 | Scenario-based architectural comparison is established. Distinguish likely maintenance from deliberately discriminating stress scenarios and state whose decision is served. |
-| Code-cleanliness minimal pairs, arXiv `2605.20049v1`, sections 2–3 and 6 | Controlled source-quality variation already exists and includes changes beyond formatting. Do not claim novelty merely for varying code organization before downstream tasks. |
-| CodeThread, arXiv `2606.21804v1`, section 3 | Later maintenance on alternative predecessors with observable preconditions is already studied. Passing a finite predecessor suite is not proof of complete semantic equivalence. |
-| SlopCodeBench, arXiv `2603.24755v2`, iterative protocol and construction sections | Fresh conversations with inherited code and evolving specifications are established; our added question must be prospective architectural suitability, not chaining alone. |
-| ChainSWE, arXiv `2607.02606v1`, sections 3 and 4.1–4.4 | Oracle prior fixes, fresh/persistent inherited state and subagent interfaces already coexist. Reuse their control logic; neither a clean-predecessor control nor delegation is our invention. |
-| Type-Error Ablation, arXiv `2606.01522v2`, sections 3–6 | Detailed current type feedback can help in its small, single-error Shplait setting. Do not equate all diagnostic text with harmful context or treat removal of repair as successful insulation. |
-| Complexity Trap, arXiv `2508.21433v3`, sections 3 and 5–6 | Simple observation masking is a strong baseline; its scope, tuning and hybrid/generalization results prevent a blanket rule that summaries or workers must help. |
-| Sambu et al., ICSA 2026, DOI `10.1109/ICSA66085.2026.00033` | The official abstract already describes LLM-generated architectural decompositions evaluated against reference systems. Full methods remain unreadable in this pass; do not claim architectural generation/evaluation is unstudied. |
+| [P01 architectural refactoring](literature/full-reading/P01-architectural-refactoring.md), ICSA 2026, DOI `10.1109/ICSA66085.2026.00033` | Full author preprint/supplement now available. It measures class partitions and metrics, without implementing refactoring or observing later maintenance. Architecture descriptions are established, but not behavioral validity. |
+| [P02 ALMA](literature/full-reading/P02-alma.md), JSS 2004, DOI `10.1016/S0164-1212(03)00080-3` | Reuse prospective scenarios and state whose decision is served; distinguish realistic from stress-selected demands. Its illustrative cases do not establish calibrated prediction or causal validation. |
+| [P03 code cleanliness](literature/full-reading/P03-code-cleanliness.md), arXiv `2605.20049v1` | Source variation already exists. Hidden test fractions, bundled cleanup and filtered repeated trials do not show general architectural equivalence or benefit. |
+| [P04 CodeThread](literature/full-reading/P04-codethread.md), arXiv `2606.21804v1` | Later maintenance on accepted human/agent predecessors is studied. Its prior-pass/future-fail selection must not become ALF's post-outcome history filter. |
+| [P05 SlopCodeBench](literature/full-reading/P05-slopcodebench.md), arXiv `2603.24755v2` | Inherited code, fresh conversations, regressions and cost growth are established. Source size is a stronger reported next-cost correlate than erosion; structural proxies do not identify mediation. |
+| [P06 ChainSWE](literature/full-reading/P06-chainswe.md), arXiv `2607.02606v2`, with v1 comparison | Oracle prior fixes and inherited/history controls are prior art. Source-view/edit authority changes with the subagent mode; edition/stopping/denominator ambiguities remain. |
+| [P07 NITR](literature/full-reading/P07-needle-in-repo.md), arXiv `2603.27745v1` | Shaped starters and structural conformance checks are established. They do not demonstrate future maintenance benefit; ALF must permit alternative valid implementations. |
+| [P08 Type-Error Ablation](literature/full-reading/P08-type-error-ablation.md), arXiv `2606.01522v2` | Current diagnostic detail helps some small Shplait repair settings, with task/model reversals. No-repair is not isolated repair. |
+| [P09 Complexity Trap](literature/full-reading/P09-complexity-trap.md), arXiv `2508.21433v3` | Masking is a relevant baseline, not a universal accuracy-preserving rule. Gemini thinking loses accuracy; matched released hybrid/baseline subsets each solve 28/50, correcting the unmatched +2.6-point interpretation. |
+| [P10 emergent specification](literature/full-reading/P10-slump.md), arXiv `2603.17104v1` | Full-paper-upfront and progressive requests differ in information; ProjectGuard bundles state, helper work and restarts. Preserve accepted requirements independently of conversation policy. |
+| [P11 GameEngineBench](literature/full-reading/P11-gameenginebench.md), arXiv `2607.03525v2`, with v1 comparison | Runtime tasks are useful examples, but headline pass is LLM-audited and the repository is unavailable. This does not validate Nu's oracle. |
+| [P12 ToCS](literature/full-reading/P12-tocs.md), arXiv `2603.00601v4` | Map probing is already studied and can change exploration. It is a proxy/intervention, with three synthetic cases and no demonstrated downstream Exploit result. |
+| [P13 CodePlan](literature/full-reading/P13-codeplan.md), PACMSE 2024, DOI `10.1145/3643757` | Dependency planning and same-context compiler repair are established. The publisher edition reports 5/7 versus 0/7 validity, not universal behavior; do not mix the 2023 5/6 edition. |
 
-The existing ledgers additionally cover NITR, specification-memory, functional-UI and game-engine benchmarks. They are not discarded; this pass does not upgrade their previously recorded reading/access levels.
+The synthesis records conditional deferrals and a practitioner-claim map. Functional-UI lineage, human usability transfer, formal A1 case methodology and a new history-policy experiment are not claims adopted by this revision. Their conditional full-reading triggers remain in force.
 
 The useful remaining question is whether **predeclared responsibility/interaction predictions add explanatory and practical value beyond a fixed package preference, ordinary source-size differences and initial generation reliability**, when common future obligations are implemented over inherited states. A chosen pair can test and falsify these predictions locally. Establishing a portable architectural mechanism needs independent cases or a narrower intervention later.
 
@@ -40,7 +45,7 @@ It is not enough that Nu has not appeared in a benchmark. Before scaling, the ca
 
 ## 3. Provisional case and architecture as a bundled treatment
 
-The provisional pair is Nu's F# MMCC and ImSim Breakout examples at `bryanedds/Nu@064f7ae92a8506689cd91aff5e6804a375d6ef3d`:
+The provisional pair is Nu's F# MMCC and ImSim Breakout examples at `bryanedds/Nu@064f7ae92a8506689cd91aff5e6804a375d6ef3d`. Neither Nu nor F#/C# is mandatory; a source-grounded failure of case credibility should redirect the case, not force a favorable language outcome:
 
 ```text
 Projects/Breakout Mmcc/Gameplay.fs
@@ -84,11 +89,13 @@ A0 is successful only if the selected obligations are live-testable, the claimed
 
 Reference solutions demonstrate feasibility, not unique allowed edits. Add fault/property checks for omissions, state ownership, ordering, lifecycle or error behavior relevant to the chosen contracts. Build and test success is evidence over these obligations, not equivalence for all programs or inputs.
 
+A0 must already demonstrate that its proposed observation can distinguish a correct witness from a relevant omission or ordering/lifecycle fault, and accepts a legitimate alternative implementation when one is feasible. Do not use an LLM verdict to override failed executable obligations silently, infer runtime correctness from compilation, or treat import/graph/style conformance as behavioral proof. Fix tolerance and timing from the requirement before comparative outcomes. A1 expands this into the frozen obligation/fault audit; no calibration is performed here.
+
 A1 must choose the claim level and controls in section 8, finalize a finite sample/allocation proposal, and return before live execution. More independent cases are required for population claims; repeated seeds of the same two chains are not new architecture samples.
 
 ## 6. Proposed candidate policy and information boundaries
 
-The currently proposed minimal policy is **source-only fresh episode context, one submitted edit, no execution feedback and no repair**. Each episode receives the actual safe inherited source, current and earlier requirements, and the same approved engine/documentation exposure policy. Candidate notes are off; source comments are still source. Persistent conversations or notes-on are separate future treatments.
+The currently proposed minimal policy is **source-only fresh episode context, one submitted edit, no execution feedback and no repair**. Each episode receives the actual safe inherited source, current and earlier accepted requirements with explicit supersession, and the same approved engine/documentation exposure policy. Audit source, requirements, documentation, engine defaults and edit authority separately; a fresh session cannot silently remove a commitment. Candidate notes are off; source comments are still source. Analyst predictions/maps remain outside candidate exposure. Persistent conversations, candidate probes, supplied maps or notes-on are separate future treatments.
 
 Safe submitted code persists even when noncompiling or behaviorally wrong. The controller does not replace it with gold. Invalid output preserves the previous safe state according to the frozen submission rules. Unsafe content is contained and classified; later unexecuted slots are not fabricated model outputs. A file-replacement or patch interface and its output headroom must be checked for the actual workload before freezing; no language/package should fail primarily because the chosen carrier cannot express the expected change.
 
@@ -139,11 +146,11 @@ A1 must either include this bounded control for the stronger claim or explicitly
 
 ### 8.3 Feedback/context hypothesis remains distinct
 
-Useful evidence about a current error is different from old resolved diagnostics or obsolete source. Type-Error Ablation [6] cautions against stripping necessary information; Complexity Trap [7] supplies simple history-management competitors. ChainSWE [5] already combines sequential state with memory/subagent modes. No generic claim that delegation solves long-horizon maintenance is available to this proposal.
+Useful evidence about a current error is different from old resolved diagnostics or obsolete source. P08 cautions against stripping necessary information; P09 supplies history-management competitors with model-specific accuracy losses and accounting limitations. P06's memory/subagent contrast changes source access and edit authority too. P10/P12 show that helper state and probes can change the information/reasoning policy. No generic delegation or context-insulation benefit is identified here.
 
-A later economical discriminator is an **identical-source handoff**: both fresh planner conditions see the same corrected source, same next task and same concise resolution facts; one additionally sees authentic resolved repair history. Any masking or summary content, size, placement and permissions are frozen. This isolates history presentation conditional on that source, not the value of performing repair, native persistent hidden state or the quality of a worker's different patch. It remains unallocated and is not added to A0/A1 automatically.
+**Defer the earlier identical-source repair-history experiment and repair-routing branch.** They are retained in Git history, not finalized or adopted as new experiments by this reading revision. Before proposing either again, read the conditional masking-regime paper (`10.48550/arXiv.2606.00408`), define the domain and causal contrast, audit prior-art overlap and freeze the actual source/requirements/history/authority contracts. A source-only no-repair result cannot answer them.
 
-Only a subsequent actual repair-routing comparison can estimate the system benefit of delegation. Keep the same model/authority initially, retain useful current diagnostics, compare a simple deterministic history policy, and record orchestrator, worker and total costs. A lower planner token count is not evidence of lower total cost. These follow-ups need their own novelty/control review and may be unnecessary if the architecture case already answers a useful narrower decision.
+Any future decision must account for planner, summary/helper, retry and total resource use, including caches and missing records. Equal reported pass rates are not equivalence; cumulative input is not peak context. These questions need no extra A0 task or worker and remain allocated zero.
 
 ## 9. Sampling and analysis proportional to this case
 
@@ -159,11 +166,11 @@ A result favoring either package can be useful. Evidence is stronger when the pr
 
 ## 10. Readiness, research loop and next action
 
-The positioning loop and execution loop are separate. This review supports a bounded **A0 decision**, not an approved executable study. The next packet should show case credibility, pre-witness prediction cards and a limited implementation cost; it should not reopen every historic research direction or require another large literature count.
+The positioning loop and execution loop are separate. This completed full-paper review recommends a bounded **A0-only decision**, not an approved executable study. Human review should judge the local package-choice value, the strongest API/size/predecessor-defect rival, and the explicit failure/redirect criteria before authorizing A0. The next authorized packet would show case credibility, pre-witness predictions, observable behavior and a limited A1 cost; it should not reopen every historic direction or require another large literature count.
 
 A0 returns before A1; A1 before apparatus/allocation; B0 before live integration; B1/B2 follow only explicit approvals. Use the existing runner, scopes and five-unresolved-failure rule in PLAN/AGENTS. No additional adapter, engine, proxy, subagent or sample is created by a prose revision.
 
-The latest scite audit recovered close methods and contrary evidence, but a broad discovery prefix and incomplete citation coverage cannot establish global novelty. The ICSA refactoring paper's full methods and graph-derived context-policy neighbors remain specifically deferred. Revisit them before claiming novelty in those subdomains, not before every routine engineering fix.
+The full-paper synthesis closes the ICSA/CodePlan body-access gaps for the chosen editions and records the other core reconstructions. Private/unavailable artifacts and publication/code inconsistencies still limit exact reproduction. Conditional graph/history, conceptual and formal-case readings retain their triggers. No citation audit or absence of notices establishes global novelty, replication or scientific approval.
 
 ## Primary source routes
 
@@ -175,12 +182,12 @@ The latest scite audit recovered close methods and contrary evidence, but a broa
 
 [4] SlopCodeBench: https://arxiv.org/html/2603.24755v2
 
-[5] ChainSWE: https://arxiv.org/html/2607.02606v1
+[5] ChainSWE: https://arxiv.org/abs/2607.02606v2 (v1 retained for comparison)
 
 [6] Type-Error Ablation: https://arxiv.org/html/2606.01522v2
 
 [7] Complexity Trap: https://arxiv.org/html/2508.21433v3
 
-[8] ICSA official abstract: https://conf.researchr.org/details/icsa-2026/icsa-2026-papers/27/LLMs-for-Architectural-Refactoring-An-Exploratory-study-on-Monoliths-to-Microservice
+[8] ICSA conference author preprint route: https://conf.researchr.org/details/icsa-2026/icsa-2026-papers/27/LLMs-for-Architectural-Refactoring-An-Exploratory-study-on-Monoliths-to-Microservice
 
-See the source audit for edition checks, selected sections actually read, scite access/graph coverage and excluded/deferred records. These sources motivate the controls; none establishes an ALF architecture effect before the proposed study is run.
+See the [full-reading index](literature/full-reading/INDEX.md) for all thirteen routes, edition checks, complete-PDF coverage and supplemental limits, and the [synthesis](literature/full-reading/synthesis.md) for considered/deferred source decisions. Earlier source audits retain their selected-reading scope. These sources motivate the proposed controls; none establishes an ALF architecture effect before the proposed study is run.

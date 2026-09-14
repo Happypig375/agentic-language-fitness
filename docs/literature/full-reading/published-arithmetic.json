@@ -1,0 +1,156 @@
+{
+  "scope": "Printed-cell arithmetic; no raw-trial reconstruction, p-values or causal verification.",
+  "P01_table_II_llm_minus_tool": [
+    -24.08,
+    22.72,
+    -1.77,
+    -11.03,
+    -10.7,
+    4.65
+  ],
+  "P01_hierarchical_token_ratios": [
+    3.256637168141593,
+    3.9148936170212765,
+    4.0
+  ],
+  "P02_table_1_partial_modified_LOC": 183.42500000000004,
+  "P02_table_1_partial_added_LOC": 172.50000000000003,
+  "P03_trials": 660,
+  "P03_rounded_hidden_test_fraction_delta_pp": -0.8000000000000007,
+  "P04_appendix_A1_listed_N_sum": 2560,
+  "P04_minimax_multilingual_54_and_52_of_86": [
+    62.7906976744186,
+    60.46511627906977
+  ],
+  "P04_minimax_pro_171_and_150_of_395": [
+    43.29113924050633,
+    37.9746835443038
+  ],
+  "P04_selected_causal_and_survival_percent": [
+    20.610687022900763,
+    85.87786259541984
+  ],
+  "P05_best_strict_compatible_n_of_196": [
+    29
+  ],
+  "P05_quality_level_ratios": [
+    2.3157894736842106,
+    2.0
+  ],
+  "P05_quality_slope_ratios": [
+    6.545454545454545,
+    4.981132075471698
+  ],
+  "P05_cost_start_to_final_ratio": 2.1688311688311686,
+  "P05_potential_main_checkpoints": 2940,
+  "P05_observed_quality_checkpoints": 2869,
+  "P05_human_growth_fractions": [
+    0.6772486772486772,
+    0.5255102040816326
+  ],
+  "P06_chain_tasks": 304,
+  "P06_printed_table_2_cell_means": {
+    "oracle": 58.93809523809524,
+    "seq": 36.523809523809526,
+    "memory": 36.923809523809524
+  },
+  "P06_narrative_relative_accuracy_loss": 0.38030560271646857,
+  "P06_chain_error_fraction": 0.4796380090497738,
+  "P06_selected_cell_64_percent_compatible_n_of_304": [],
+  "P06_table_2_cells_incompatible_with_single_304_denominator": {
+    "oracle": [
+      64.0,
+      66.5
+    ],
+    "seq": [
+      38.0,
+      43.0
+    ],
+    "memory": [
+      41.5,
+      40.0,
+      40.0,
+      40.0
+    ]
+  },
+  "P07_all_micro_multi_success_percent": [
+    36.231884057971016,
+    53.47826086956522,
+    20.553359683794465
+  ],
+  "P07_agent_api_success_percent": [
+    45.02164502164502,
+    28.174603174603174
+  ],
+  "P07_model_case_cells": 483,
+  "P08_success_percent_untyped_min_prox_all": [
+    33.5,
+    41.666666666666664,
+    47.833333333333336,
+    52.833333333333336
+  ],
+  "P08_all_minus_untyped_pp": 19.333333333333332,
+  "P08_selected_type_correct_semantic_success_percent": 97.93577981651376,
+  "P08_three_experiment_trials": 7200,
+  "P09_mask_raw_relative_gain_percent": 2.6217228464419478,
+  "P09_mask_raw_absolute_gain_pp": 1.4,
+  "P09_rounded_mask_cost_saving_percent": 52.713178294573645,
+  "P09_rounded_summary_mask_cost_difference_500": 15.000000000000014,
+  "P09_rounded_52_vs_44_turn_increase_percent": 18.181818181818183,
+  "P09_summary_cost_share_percent": 6.859375000000001,
+  "P09_hybrid_N43_vs_full500_raw_unmatched_pp": 2.6000000000000014,
+  "P10_requests_per_paper": 57.4,
+  "P10_committed_recoverable_percent": 96.49595687331536,
+  "P10_Claude_aggregate_MCF_gap_recovery_percent": 90.09584664536737,
+  "P10_faithful_increase_percent": 53.389830508474574,
+  "P10_severe_failure_reduction_percent": 31.944444444444443,
+  "P11_solved_counts_over_110_percent": [
+    55.45454545454545,
+    29.09090909090909,
+    23.636363636363637,
+    19.09090909090909,
+    18.181818181818183,
+    12.727272727272727,
+    10.0,
+    9.090909090909092,
+    8.181818181818182,
+    7.2727272727272725,
+    3.6363636363636362,
+    2.727272727272727,
+    2.727272727272727
+  ],
+  "P11_union_percent": 71.81818181818181,
+  "P12_edge_totals": {
+    "all": 224,
+    "typed": 224
+  },
+  "P12_passive_full_minus_active": [
+    -0.21900000000000003,
+    0.22699999999999998
+  ],
+  "P12_oracle_minus_active": [
+    0.06099999999999994,
+    0.17200000000000004
+  ],
+  "P12_active_minus_replay_table_sign": [
+    0.01100000000000001,
+    -0.09200000000000008
+  ],
+  "P12_scratchpad_minus_no_probe_dependency": [
+    0.138,
+    -0.01100000000000001
+  ],
+  "P12_scratchpad_minus_no_probe_invariant": [
+    0.16900000000000004,
+    0.243
+  ],
+  "P12_table_8_prompt_deltas": [
+    0.14099999999999996,
+    0.1120000000000001,
+    0.025000000000000022
+  ],
+  "P12_budget10_config_random_ratio": 3.1249999999999996,
+  "P13_validity_fraction": 0.7142857142857143,
+  "P13_Int1_historical_price_estimate": 31.86,
+  "P13_Ext1_displayed_token_sum_k": 117
+}

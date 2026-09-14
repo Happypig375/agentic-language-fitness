@@ -1,0 +1,31 @@
+# P07 - Needle in the Repo
+
+## Identity and coverage
+
+Haichao Zhu, Qian Zhang, Jiyuan Wang, Zhaorui Yang and Yuxin Qiu, *Needle in the Repo: A Benchmark for Maintainability in AI-Generated Repository Edits*, DOI `10.48550/arXiv.2603.27745`, v1 (March 29, 2026; PDF heading March 31). Main Codex AI reader consumed all 16 PDF pages, including references; rendered pp. 1-11 to inspect all six figures, four tables and two code listings. Zotero `UF73YJF4`; exact hash in [assets](assets.json). Full reading is complete, with the method gaps below.
+
+## Method and oracle
+
+The contribution is an authored diagnostic suite: 21 small C++ repository probes, ten single-step and eleven multi-step, each assigned one of nine primary design dimensions (pp. 3-7, tables 1-2). These cover locality, reuse, responsibilities, extension, substitution, dependencies, test seams, state ownership and side effects. Authors deliberately shape each starter to provide an intended maintainable route and a plausible shortcut. This is neither a naturalistic task sample nor a randomized architecture comparison. The suite and oracle are jointly designed; some starters are unfinished rather than behaviorally correct predecessors.
+
+The agent sees starter code and the current TASK, with SPEC and evaluators hidden. In sequential probes its own prior source persists. A Python harness overwrites files from a returned filename/content JSON dictionary, builds with CMake and evaluates the final code. Pass requires **both** functional tests and case-specific structural checks (figures 3-4, pp. 5-8). Intended, shortcut and near-miss variants are said to have been checked during construction; no independent calibration sample or false-positive/negative estimates are reported. Naming/regex checks are asserted to diagnose a repository contract, not universally valid design principles.
+
+Case 001 freezes the call site while adding support for numeric types. A generic `add` plus at most one explicit overload is the intended family; extra overloads may pass behavior but fail structure. The suggested benefit for an additional future type is illustrative, not a measured downstream intervention. Case 021 checks whether a new inline filter reuses the existing validation pipeline, using parsing functions and repeated literal patterns (listing 2). Such conformance is distinct from demonstrated lower future maintenance cost.
+
+There are 23 configurations (11 agent, 12 API), one sampled run per case: 483 configuration/case outcomes, **21 independently authored probes**, not 483 independent architectural cases. Agent mode has read-only repository inspection and is prohibited from executing commands or accessing external files/tools. API mode receives each task with relevant prior context. Exact model revisions, sampling settings, token/turn/time ceilings and repair/retry policy are not fully specified (pp. 8, 12). Agent versus API bundles interface, observation and context differences; the authors explicitly call it observational.
+
+## Results and discrepancies
+
+The main tables imply 175/483 passes (36.23%), 123/230 micro passes (53.48%) and 52/253 multi-step passes (20.55%). Best configurations pass 12/21. Agent passes total 104/231 (45.02%); API 71/252 (28.17%). Eight of nine matched families improve with the agent interface; Gemini 2.5 Pro declines by one case (tables 2-3, pp. 7-11). These differences also reflect differing task difficulty, so the micro/multi gap does not isolate inheritance. Dependency control has 2/46 passes; responsibility decomposition 7/46. Two or three probes per dimension cannot estimate a general difficulty ordering precisely. No repeated-run uncertainty is estimated.
+
+The narrative/heatmap reports 64/483 outcomes passing behavior but failing structure (13.25%; pp. 10-12). **Table 2's S row sums to only 32**, with case 001/002/020 values 13/0/11, whereas the narrative gives 17/16/15. Case 006's inventory S=4 also differs from the case study's six. These are visibly present in the PDF, not extraction errors. Retain the authors' 64 as a reported result with this unresolved inventory discrepancy; do not treat the paper as a reconciled raw result ledger. Table 4's five qualitative archetypes are representative, explicitly not an exhaustive coded annotation of all 308 failures.
+
+## Released artifact inspection
+
+Read-only inspection of [ucr-riple/NITR](https://github.com/ucr-riple/NITR/tree/f63e709b36b12cae64d995e82299e0b66e263c7c), commit `f63e709b36b12cae64d995e82299e0b66e263c7c`, covered the tree, README's protocol, license identity (Apache-2.0), case 001 `checks/check.py` and `pipeline.json`. No author code, submitted code or model call was executed. The current release already includes additional Python cases: it is not the frozen 21-case paper corpus.
+
+README clarifies that later steps receive current TASK only, continuing prior code without re-sending earlier task files. This is a consequential task-information policy, not a clean source-organization treatment. Both inspected versions of case 001's structural check bound **matching files**, rather than the number of overload definitions: the Python implementation increments once per file with any match; the pipeline uses `max_matching_files: 1`. Multiple definitions in one matching file therefore do not contribute multiple counts under this check. That static discrepancy does not establish that any published outcome changes; the historical revision and complete runtime pipeline would be needed. The generic-presence regex also does not establish that callers use the generic definition. These checks need independent positive/negative and adversarial validity witnesses before reuse.
+
+## ALF implication
+
+Remove any novelty claim for authored architecture pressures plus separate behavioral/structural oracles. Reuse the separation, but measure later task behavior/cost independently of conformance, admit multiple credible solution families, and validate negative/near-miss controls. Specify which earlier requirements remain visible, and separate source inheritance from conversational/task memory. NITR does not establish that one language, Nu form factor or conforming architecture produces better downstream maintenance.

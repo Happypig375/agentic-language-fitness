@@ -2,28 +2,19 @@
 
 Read [PLAN.md](PLAN.md) first. It owns the current question, authority and next decision. Do not reconstruct the live plan from old chronological proposals.
 
-## Current assignment: full-PDF evidence reconstruction
+## Current checkpoint: full-paper reconstruction complete; human review
 
-The user has placed **complete-paper reading and evidence reconstruction before the A0 construction decision**. Follow [the ordered PDF/DOI reading handoff](docs/full-paper-reading-handoff-2026-09-14.md) together with the [Nu practitioner/discovery addendum](docs/nu-form-factors-and-research-leads-2026-09-14.md). Preserve the original eleven core IDs P01–P11 and add **P12 Theory of Code Space (`10.48550/arXiv.2603.00601`)** and **P13 CodePlan (`10.1145/3643757`)**: thirteen core reading targets after this explicit extension. CodePlan's related preprint `10.48550/arXiv.2309.12499` is an edition/access lead, not a fourteenth study. The addendum supplies selected-version hints and method questions. Additional mechanism readings are conditional, not an instruction to acquire every discovery hit.
+Read the [full-paper synthesis and next decision](docs/literature/full-reading/synthesis.md), [coverage index](docs/literature/full-reading/INDEX.md) and [revised proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md). On 2026-09-15 the main Codex AI session completed the thirteen core readings, bounded supplement/artifact inspection, arithmetic/edition checks and evidence-driven revision. CodePlan's publisher PDF is present; Zotero collection `PKLXQNEE` has thirteen works and sixteen PDFs. Actual omissions, private/unavailable artifacts, edition differences and the clipped P04 prompt tail remain recorded. This is self-review, not human approval or experimental reproduction.
 
-The Nu addendum and its [discovery ledger](docs/nu-form-factors-discovery-ledger-2026-09-14.md) are pre-PDF source screening, not completion of any core reading. Practitioner guidance, derived archive synthesis, human usability evidence, conceptual frameworks and agent experiments must keep their different evidence status.
+The recommendation is **narrow and adapt**: a prospective package-suitability feasibility case using established scenario and inherited/reference methods. Do not claim novelty for chaining, downstream cost, architectural maps, dependency planning or memory policy. Do not infer behavior from structural proxies, graph accuracy or a judge override. P09's common fifty-ID audit finds hybrid/raw/masking/summary each at 28/50; P08/P09 effects are conditional, and P12 probes change treatment. Keep those corrections with their source limits.
 
-Acquire or reuse the actual PDFs through approved library/reference-manager or lawful primary routes; read each complete paper, including appendices, figures/tables and necessary supplements. Earlier selected-section reviews do not count as completed full readings. Reconstruct evidence, methods, results, limitations and implications with page/section locators. Do not merely collect abstracts or summarize the previous assistant response.
+Next is human disposition of **A0 only**, not automatic construction: two unchanged baselines and at most two reference witnesses per package, with pre-witness predictions, rivals, observable faults/alternative implementations and a yes/no/redirect result. Nu/F#/C# is not mandatory. The concrete repair-history follow-up is deferred; conditional readings retain their triggers in the synthesis.
 
-Save actual coverage and asset identities in `docs/literature/full-reading/INDEX.md` when work begins, with one reconstruction note per core work. Then produce the cross-paper evidence/claim audit, revise the active proposal and PLAN from those findings, and return for review. If a core PDF remains unavailable, continue accessible work, preserve the blocker and request the exact missing DOI/PDF at handoff; do not invent its contents or declare the queue complete.
+The user's request authorized the completed reading/checking/revision and direct publication. It does **not** authorize A0/A1 construction, recruitment, new adapters, calibration, model/count probes, extra workers/subagents or H execution. New experiment allocation is zero; 192+5 remains unallocated. Preserve OAuth/backend choices and all live holds; do not combine unused earlier quotas.
 
-This reading-first instruction supersedes earlier immediate-next-step wording that pointed directly to A0. It authorizes the bounded reading/synthesis/documentation task, **not A0 construction, recruitment, new adapters, candidate calibration, model/count probes, paid extra reviewers, subagents or H execution**. The proposed 192+5 experiment envelope remains unallocated; preserve current OAuth/backend choices and all live holds. Do not combine unused earlier quotas.
+The [base assignment](docs/full-paper-reading-handoff-2026-09-14.md), [Nu/P12-P13 extension](docs/nu-form-factors-and-research-leads-2026-09-14.md) and older source audits remain history. Do not upgrade their partial readings or restart the completed core without a new reason. Practitioner guidance, derived AI synthesis, human usability evidence and model experiments are different evidence classes.
 
-Read as needed:
-
-- [Full-paper assignment and base DOI queue](docs/full-paper-reading-handoff-2026-09-14.md).
-- [Nu mechanism questions and P12/P13 extension](docs/nu-form-factors-and-research-leads-2026-09-14.md), with the [exact discovery record](docs/nu-form-factors-discovery-ledger-2026-09-14.md).
-- [Standalone architecture proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md).
-- [Current review](docs/pro-review-design-discrimination-2026-09-14.md) and [current source audit](docs/pro-review-design-discrimination-sources-2026-09-14.md).
-- [Research loop and scite](docs/research-loop-and-scite.md).
-- [Earlier review](docs/pro-review-2026-09-14.md), [earlier sources](docs/pro-review-sources-2026-09-14.md) and [broader proposal ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md).
-
-E1/E2/E2a/E3a/H0 are preserved completed work. H1/H2 is prepared/unallocated. `maintenance-sim` construction is preserved, including its larger F# envelopes. Do not rewrite those observations to favor the original language hypothesis.
+E1/E2/E2a/E3a/H0 remain completed; H1/H2 remains prepared/unallocated. Preserve maintenance-sim and its larger F# envelopes. No old scores, source fixtures or frozen protocols were revised.
 
 ## Scientific invariants
 
@@ -50,9 +41,7 @@ After reconstruction, submit the actual considered source decision set once near
 
 ## Checkpoint and handoff
 
-Save each completed paper's reconstruction and exact next unread page/section. Reconcile after each reading batch; do not stop for a new prompt after every paper when the bounded assignment can continue. Finish the accessible core, including P12/P13, synthesize contradictions, update the active documents and commit directly. Return with actual complete/partial/access-blocked status, precise missing PDFs, evidence-driven corrections and one next decision. A0 execution is not automatic.
-
-If tool/context quota interrupts work, checkpoint and commit while possible, then report the saved commit, DOI/version/page position and continuation needed. Request a continuation prompt when more tool quota is required; never claim unfinished reading is complete or promise background work.
+The full-reading assignment is complete, with source decisions and validation linked from the synthesis. Next is human disposition above. Keep complete reading distinct from method reproducibility and systematic coverage. If later work uncovers a material source correction, update the focused note, synthesis and PLAN before handoff; preserve old evidence and explicit unknowns.
 
 For engineering inside an authorized packet, five failures at one unchanged unresolved apparatus gate trigger return; success clears the counter. Unsafe actions, ambiguous potentially billable requests, resource exhaustion and scientific execution changes trigger immediate stop, not retries.
 

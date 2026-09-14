@@ -1,0 +1,39 @@
+# P10 - SLUMP and ProjectGuard
+
+## Identity and coverage
+
+Lu Yan, Xuan Chen and Xiangyu Zhang, *When the Specification Emerges: Benchmarking Faithfulness Loss in Long-Horizon Coding Agents*, DOI `10.48550/arXiv.2603.17104`, v1, March 17, 2026. Main Codex AI reader consumed all 19 PDF pages, including appendices A-E and references. Rendered pp. 4-7, 13-17 and 19 cover figures 1-5, tables 1-6, equations and prompt panels. Zotero `PF24JPY6`; exact bytes in [assets](assets.json).
+
+## Design reconstructed
+
+Twenty ML papers (ten ICML 2025, ten NeurIPS 2025) are reported randomly selected; the sampling frame/seed is not supplied. Claude Sonnet 4.5-20250929 converts each paper into atomic components and a synthetic sequence of 10-20 latent versions, then 48-61 user requests. There are 371 components and 1,148 requests (57.4 per paper). Hyperparameters are excluded unless essential to a component's identity. Five papers were manually audited, prompts revised once and then frozen. Appendix C's reverse-engineered research journey is authored fiction, not observed development history.
+
+The primary comparison uses Claude Code and Codex, each once per paper in two conditions (80 runs). The single-shot condition receives the **full paper upfront**; the emergent condition receives the constructed requests progressively and never receives the canonical paper. Its code and conversation persist across requests, subject to platform context handling. Thus the comparison bundles information timing, description form, ambiguity, trajectory and context policy. It is neither a same-information memory ablation nor an architectural intervention. Construction-model identity does not identify solver revisions. Solver snapshots, CLI versions, exact time/token ceilings and failure/retry treatment are insufficiently specified for an exact rerun.
+
+The final code is scored against canonical components. MCF averages ordinal scores: absent (0), wrong (1), simplified (2), functionally equivalent variation (3), faithful form (4). A bounded LLM judge searches for each component independently, then scores absence if not found within eight requested tool calls. DIR measures imported symbols from other generated modules, not demonstrated runtime use. IF50 equally weights MCF/4 and DIR; this weighting is a chosen composite, not validated utility. Agent-written test-pass rates in figure 3 are a separate, weakly related signal, not an independent hidden behavioral oracle.
+
+Human calibration covers 120 stratified component-run cases with two annotators blind to judge/each other. Reported weighted kappas are .927/.882 against the judge and .930 between humans; exact agreements 91.7%/86.7%/88.3%, within-one 97.5%/96.7%/99.2%. Four false-absence cases occur for each comparison, three shared. This is useful local calibration, not proof that all code is functionally correct or all architectural forms equivalent.
+
+The exposure audit distinguishes recoverability from explicit specification: macro RCR .994, ESR .666; 358/371 components are both committed and recoverable (96.50%). A weakly inferable component qualifies for recovery. These measures do not establish identical available information across conditions, and the remaining thirteen components retain ambiguity/commitment limits.
+
+## Results, controls and arithmetic
+
+Table 1: Claude Code emergent MCF/DIR/IF50 = 2.718/.149/.414 versus 3.031/.303/.530 upfront; IF gap .116, Wilcoxon p=.0003, upfront better on 16/20 papers. Codex = 3.242/.148/.479 versus 3.245/.289/.550; IF gap .071, p=.012, upfront better 14/20. Codex's .003 MCF gap does **not** support a universal semantic-fidelity collapse. Paper, not each correlated component or request, is the matched unit for the twenty-case comparisons. There is no repeated-seed estimate.
+
+ProjectGuard adds a semantic decision/resource graph, structural Git-diff tracking, a helper that selects relevant prior commitments and forecasts compatibility needs, and proactive context restarts. It therefore bundles external state, extra reasoning and context policy; it does not isolate compaction as the cause. Auxiliary model identity, operating thresholds and complete token/cost accounting remain unclear. The illustrative 31% remaining context panel is not a specified universal restart threshold. User proposals are supposed to become state only when committed, a distinction worth preserving.
+
+For Claude Code, MCF rises to 3.000: (3.000-2.718)/(3.031-2.718)=90.10% aggregate gap recovery. Fully faithful components rise 118 to 181 (+53.39%); severe scores at most one fall 72 to 49 (-31.94%). Table 6's mean per-paper MCF recovery (+51%) is a different estimand from the aggregate 90%. Near-zero denominators produce DIR recoveries above 900%/1,100%; negative or already favorable baselines need separate treatment. The stated positive-gap formula and some table interpretations are insufficiently reconciled.
+
+Codex's MCF improvement is only .05, with nine wins and nine losses; DIR improves on 15/19 eligible papers. These mixed results do not establish a universal intervention benefit. State files average roughly 390 KB/286 KB; bytes on disk are not prompt-token use. Claude Code's median compaction count changes by -1; Codex's mean increases by 23 because restarts are proactive. No complete cost comparison establishes efficiency. Appendix B's attribution to compaction is stronger than this bundled design can identify. Table 4's DualEqui commitment turn 97 and table 5's 60 requests may use different turn units, but that mapping is not specified.
+
+## Read-only artifact checks
+
+The released [lunaryan/drift-benchmark](https://github.com/lunaryan/drift-benchmark/tree/6f91436bc9578ff28b7334bb0c94fda2e2c4b6f7) was pinned at `6f91436bc9578ff28b7334bb0c94fda2e2c4b6f7`. Its tree had no root README or LICENSE; a README request returned 404. Complete `evaluation/dir_metric.py`, `faithfulness_scorer.py` and `cc_utils.py` were read, never executed.
+
+DIR classifies an integration file as importing at least three distinct local base modules, falling back to two only if none qualifies. It excludes tests/examples and selected filename prefixes, gathers top-level exports, and intersects **unqualified symbol-name sets** with imported names. Import presence does not demonstrate a call, private classes can enter the export set, and name collisions/module aliases can affect matching. A different file decomposition can change the metric mechanically. This is an import proxy, not a validated measure of whether intended behavior is integrated.
+
+The current scorer names `claude-sonnet-4-6`, asks for eight calls but launches a twenty-turn CLI allowance, retries unparseable verdicts up to three times, and can skip components after errors. Its summary averages the successfully scored subset and separately counts ERR. An exact reproduction must pin actual judge identity, enforce the intended search budget, report missing verdicts and freeze the denominator. The release's model alias is evidence about this commit, not proof of the publication run's dated judge. The CLI helper permits unrestricted tools; none were launched in this inspection. No solver/helper implementation or raw-run reproduction was established by this bounded source inspection.
+
+## ALF implication
+
+Retain an explicit ledger of accepted requirements, file state and unresolved obligations. Treat end-state specification recovery, source inheritance and conversation policy as separate variables. Do not claim novelty for persistent decision memory or attribute the upfront/emergent gap solely to context loss. A future same-predecessor comparison would need equal commitments, independently checked behavior, a pinned memory policy and full auxiliary/retry accounting before it could test a causal context hypothesis.

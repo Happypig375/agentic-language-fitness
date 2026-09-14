@@ -1,0 +1,372 @@
+{
+  "review_id": "alf-full-paper-reconstruction-2026-09-15",
+  "checked": "2026-09-15 HKT",
+  "scope": "13 core works plus edition/artifact/practitioner provenance. Conditional exclusions mean deferred, not scientific rejection. No systematic review certificate.",
+  "decisions": [
+    {
+      "source_ref": "10.48550/arxiv.2603.27745",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P07: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2603.00601",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P12: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2603.17104",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P10: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2603.24755",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P05: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2606.01522",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P08: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2606.21804",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P04: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2607.02606",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P06: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2605.20049",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P03: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.1109/icsa66085.2026.00033",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P01: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2508.21433",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P09: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.1016/s0164-1212(03)00080-3",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P02: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.1145/3643757",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P13: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arxiv.2607.03525",
+      "decision": "cited",
+      "source": "user_supplied",
+      "source_detail": "Existing Zotero PDFs; Scite and primary metadata checked",
+      "reason_code": "relevant",
+      "reason": "P11: full chosen PDF read; methods, contrary evidence and replication limits documented. Editions are not separate studies.",
+      "stage": "full_text"
+    },
+    {
+      "source_ref": "10.48550/arXiv.2309.12499",
+      "decision": "cited",
+      "source": "user_supplied",
+      "reason_code": "relevant",
+      "reason": "CodePlan 2023 preprint retained for lineage; not a full reading or an independent study; 2024 publication supplies active results."
+    },
+    {
+      "source_ref": "10.5281/zenodo.18622108",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P01 checksum-verified released archive; selected prompts, metric documentation, CSV membership and code inspected read-only."
+    },
+    {
+      "source_ref": "10.5281/zenodo.20847171",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P08 versioned supplement (concept 20481462); checksum-verified archive, README, prompt, oracle and run script inspected read-only."
+    },
+    {
+      "source_ref": "https://github.com/shaswatpatel123/CodeThread/tree/158f6abaadcf717f3175a8f402be7da4e8d48c76",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P04 released pipeline/config inspection; discrepancies retained, no execution."
+    },
+    {
+      "source_ref": "https://github.com/SprocketLab/slop-code-bench/tree/06b5c0687d4c05ee502e9696a4d0c22fc1eec5e0",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P05 current artifact/docs inspected; publication-time evaluator equivalence not established."
+    },
+    {
+      "source_ref": "https://github.com/ucr-riple/NITR/tree/f63e709b36b12cae64d995e82299e0b66e263c7c",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P07 current README and case 001 structural checker inspected; inventory drift and static weakness retained."
+    },
+    {
+      "source_ref": "https://github.com/JetBrains-Research/the-complexity-trap/tree/bf15b5fb7d279679035a007ac9a81084d6b9a89a",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P09 policy/pricing code and CSV read; original same-ID arithmetic, no author code executed."
+    },
+    {
+      "source_ref": "https://github.com/lunaryan/drift-benchmark/tree/6f91436bc9578ff28b7334bb0c94fda2e2c4b6f7",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P10 released DIR and faithfulness scorer inspected; proxy, budget and missing-denominator limits."
+    },
+    {
+      "source_ref": "https://github.com/che-shr-cat/tocs/tree/e617928f612c839c4b40debb875249472ab4d765",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P12 prompts, scoring and passive modes inspected; semantics/sign/replay limitations retained."
+    },
+    {
+      "source_ref": "https://github.com/microsoft/CodePlan/tree/e83f560a1e67c67f621fac9918f02f7016a49cbe",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P13 public artifact inspection; private cases and planner implementation missing."
+    },
+    {
+      "source_ref": "https://github.com/C-lister/ChainSWE",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P06 access check returned 404; credited only to document unavailable artifact, not scientific exclusion."
+    },
+    {
+      "source_ref": "https://github.com/Nitrode-Research/GameEngineBench",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P11 API and browser returned 404; credited only for the access limit, not scientific exclusion."
+    },
+    {
+      "source_ref": "10.5281/zenodo.18405900",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P05 earlier paper-edition metadata checked; not a separate full reading or raw-run supplement."
+    },
+    {
+      "source_ref": "10.5281/zenodo.19257129",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Primary public artifact or deposit, read-only",
+      "reason_code": "relevant",
+      "reason": "P05 earlier paper-edition metadata checked; not a separate full reading or raw-run supplement."
+    },
+    {
+      "source_ref": "https://github.com/bryanedds/Nu/wiki/Frequently-Asked-Questions",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Prior source record in supplied repository Nu addendum; not freshly re-read primary page",
+      "reason_code": "relevant",
+      "reason": "Nu FAQ revision recorded March 23, 2026: source-inspired ownership hypotheses only."
+    },
+    {
+      "source_ref": "https://github.com/bryanedds/Nu/wiki/Choosing-Between-ImSim-and-MMCC-For-Your-Game",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Prior source record in supplied repository Nu addendum; not freshly re-read primary page",
+      "reason_code": "relevant",
+      "reason": "Guide revision recorded January 14, 2026: proximity/order hypotheses only."
+    },
+    {
+      "source_ref": "https://vsynchronicity.wordpress.com/2024/11/18/immediate-mode-all-the-things-with-nu-game-engine/",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Prior source record in supplied repository Nu addendum; not freshly re-read primary page",
+      "reason_code": "relevant",
+      "reason": "Article/update dates recorded in prior addendum: lifecycle/identity hypotheses only."
+    },
+    {
+      "source_ref": "https://github.com/Happypig375/nu-chat-analysis/blob/59f2bdee94575a087eda6b5278dcafdd68084a46/analysis/derived/bryanedds-nu-synthesis/report.md",
+      "decision": "cited",
+      "source": "other",
+      "source_detail": "Prior source record in supplied repository Nu addendum; not freshly re-read primary page",
+      "reason_code": "relevant",
+      "reason": "Derived AI report, not independent empirical support or fresh primary-source reading."
+    },
+    {
+      "source_ref": "10.1145/3759163.3760429",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Functional-UI lineage/trade-off explanation. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.1007/s10664-008-9102-8",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Formal A1 comparative-case/generalization protocol. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.1016/j.infsof.2022.106908",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Systematic hybrid-search design. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.48550/arXiv.2606.00408",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: New masking/history experiment. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.22152/programming-journal.org/2023/7/13",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Operationalized programming-systems dimension framework. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.1006/jvlc.1996.0009",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Cognitive Dimensions task/notation measurement. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.1109/TSE.2017.2655524",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Transfer of human reactive-programming comprehension effects. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.1002/spe.3435",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Transfer of reactive-API usability effects. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.1109/ICSE48619.2023.00058",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Abstraction by debugging-tool interaction. This revision defers that claim/design."
+    },
+    {
+      "source_ref": "10.48550/arXiv.2110.15246",
+      "decision": "excluded",
+      "source": "other",
+      "source_detail": "Conditional source considered from supplied repository reading queue",
+      "reason_code": "out_of_scope",
+      "reason": "Deferred, not scientifically rejected or fully read. Promote if adopting: Metric-based reactive superiority or claimed refutation. This revision defers that claim/design."
+    }
+  ],
+  "report": {
+    "summary": {
+      "retrieved": null,
+      "screened": 41,
+      "included": 31,
+      "excluded": 10
+    },
+    "checks": {
+      "excluded_without_reason": 0,
+      "included_without_reason": 0,
+      "retrieval_unlinked": false
+    },
+    "truncated": false,
+    "by_source": {
+      "user_supplied": 14,
+      "other": 27
+    },
+    "by_stage": {
+      "full_text": 13,
+      "unstaged": 28
+    },
+    "excluded_by_reason": {
+      "out_of_scope": 10
+    }
+  }
+}

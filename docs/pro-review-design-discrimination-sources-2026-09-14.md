@@ -1,5 +1,7 @@
 # Source audit: architecture, predecessor controls and repair history
 
+**Later correction, 2026-09-15:** this remains the original selected-reading audit. The [completed full-paper synthesis](literature/full-reading/synthesis.md) now owns active method/claim corrections, including P01/CodePlan access, predecessor selection, P09 matched denominators, judge/proxy limits and P06/P11 editions. Do not retroactively treat this audit's snippets or partial readings as full-paper coverage.
+
 **Date:** 2026-09-14. **Repository basis:** `d0cd99757c45d2a2322beb4c6f9069efe5667166`.
 Companion: [review disposition](pro-review-design-discrimination-2026-09-14.md), [proposal](architecture-maintenance-research-proposal-2026-09-14.md), [research loop](research-loop-and-scite.md).
 

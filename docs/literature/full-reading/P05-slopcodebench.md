@@ -1,0 +1,43 @@
+# P05 - SlopCodeBench
+
+## Identity and coverage
+
+Gabriel Orlanski and colleagues, *SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks*, arXiv `2603.24755v2`, May 7, 2026, DOI `10.48550/arXiv.2603.24755`; Zotero `46LPN8N7`, hash in [assets](assets.json). Main Codex AI reader consumed all 26 PDF/printed pages, including references and appendices A-E. Rendered pp. 2, 4-9 and 19-25 inspected: figures 1-5, tables 1-8, equations 1-4, code examples and prompt listings. Specifications for the first three code-search checkpoints are included and were read. Full paper read; treatment reconstructed with exact historical metric/configuration gaps below. No experimental reproduction.
+
+The primary [benchmark site](https://www.scbench.ai/) leads to [SprocketLab/slop-code-bench](https://github.com/SprocketLab/slop-code-bench/tree/06b5c0687d4c05ee502e9696a4d0c22fc1eec5e0), inspected read-only at `06b5c0687d4c05ee502e9696a4d0c22fc1eec5e0`: recursive tree and complete `docs/metrics/interpreting-results.md` / `configuration.md`. Current docs delegate composite scores to a pinned `scb-check` release; the live site includes more models and different verbosity values. Neither is silently substituted for the v2 tables or the paper's 137-rule definition. The exact publication-time evaluator and all raw-run inclusion choices have not been reproduced.
+
+## Construction, inheritance and information
+
+Thirty-six author-written problems span 196 checkpoints, 3-8 per problem (pp. 3-4, tables 4-5). Initial code is empty; each checkpoint receives its new specification and the agent's previous workspace. Conversation, shell/session state and installed packages reset in a fresh non-root Docker container; working files persist. Dependencies must be recorded for reinstallation. There is no replacement by reference code after a failed functional checkpoint. Mid-problem crash/failure leaves later checkpoints scored zero for correctness; missing workspaces are omitted from structural metrics (pp. 4-6, 20-24).
+
+Contracts expose CLI/API behavior and examples, not internal function/module boundaries. Hidden tests and their scores never become feedback; candidates can run their own tests and tools. Authors reject proposals insufficiently stressing design or already solvable in one shot, then use agent attempts to refine ambiguity and have another author review each problem (p. 4). This purposeful stress-test selection and author testing are not an independent human reference implementation for every requirement. Public interfaces can still constrain external data shapes, and examples can add ordering obligations.
+
+Main comparisons use each model's best just-solve configuration, selected primarily by isolated success, among 15 models/provider-native or compatible harnesses (tables 1, 7-8). Two-hour wall-clock limit, no turn/cost ceiling; high reasoning where configured. Models and harness versions vary together. Table 8 supplies versions missing from table 7, including GPT-5.5/Codex 0.124.0 and Opus-4.7/Claude Code 2.1.111. Model ranking is therefore an agent-configuration outcome, not a controlled model-only effect.
+
+## Oracles and structural measures
+
+Strict success requires all current and inherited tests; ISO requires all current non-regression tests; CORE only the explicitly exemplified/core group. A partly solved problem has at least one strictly solved checkpoint. All success rates use a fixed 196 denominator even for missing checkpoints, while resource/quality summaries use executed checkpoints (pp. 5-6). These three success definitions cannot be interchanged or inferred from test-fraction accuracy.
+
+Structural erosion is the share of mass in functions with **CC > 10**, where mass is `CC * sqrt(SLOC)` (equations 2-3, p. 4). It is not simply total complexity or the number of long functions. Verbosity is the union of lines flagged by 137 AST-grep rules and structural-clone lines divided by LOC, with overlap deduplicated (equation 4, p. 5). These normative Python proxies include stylistic/abstraction assumptions and do not establish future behavioral difficulty on their own. Examples illustrate mechanisms but cannot isolate their causal contribution.
+
+## Results and counterevidence
+
+No evaluated configuration solves a whole problem; the best main strict rate is GPT-5.5's 14.8%, consistent with 29/196 checkpoints, versus 28.1% ISO (table 1). Mean per-checkpoint cost grows about 2.2 times from start to final (figure 2, $0.77 to $1.67). This already studies maintenance cost over inherited trajectories; ALF cannot claim that outcome is absent. Cumulative 13.18 billion recorded tokens are not peak context or a context-window threshold (p. 7).
+
+Erosion rises in 77% and verbosity in 75.5% of reported trajectories; the exact denominator behind those percentages needs raw inclusion data. Checkpoints are nested in problems and configurations. The main panel has 2,869 observed agent checkpoints, not the 2,940 potential cells from 15×196 (table 2). Five progress bins normalize different chain lengths; phase trends also bundle increasing task scope, repository size and inherited state.
+
+The 473-repository Python comparison uses up to 30 randomly sampled source-changing commits per repository, 13,667 retained commits; empty trees/failed metric computations are dropped (pp. 7-8, 25). Agent verbosity .44 versus repository HEAD .19 gives 2.32×; erosion .68/.34 gives 2×. Slope ratios .0144/.0022=6.55 and .0264/.0053=4.98 compare benchmark checkpoints with sampled historical commits, whose size, time and work content differ. This is calibration, not matched human-versus-agent maintenance labor. Pre/post-2024 shifts do not identify AI assistance causally.
+
+**Critical rival:** appendix B/table 6 gives next-checkpoint cost correlation .167 for erosion versus .502 for LOC and .356 for maximum CC; erosion's pass correlation is -.018. The sweep varies threshold and size weighting, without establishing causal or size-adjusted mediation. ALF must compare architectural predictions against source size and task scope, not promote erosion into a validated maintenance surrogate.
+
+Prompt interventions on three OpenAI models lower structural scores but generally reduce strict correctness and increase cost (table 3). Anti-slop leaves GPT-5.3 strict success tied at 11.2 and improves GPT-5.4 ISO by 2 points; plan-first improves CORE for all three. GPT-5.4 anti-slop is the stated trajectory-quality exception. Plan-first also contains quality/style instructions and a refactoring step, so it is not a pure planning intervention (listings 9-10). Metric improvement alone is not overall success.
+
+Published reporting limits include the p. 6 attribution of the best 67.3% core rate to Opus 4.5, while table 1 assigns it to Opus 4.6; p. 26 calls FastAPI verbosity .273 above the .44 agent mean, which is arithmetically false. Human first-to-last comparisons use 378 repositories for verbosity and 196 for erosion without fully explaining that denominator difference. Table 3's rounded strict prompt losses average about 2.4 and 3.5 points, while prose elsewhere says 2.3 or 3.6; retain rounding/inclusion uncertainty rather than inventing raw trials. Figures show 95% intervals for the human comparison, but no reported paired causal estimate isolates structural erosion from growing requirements.
+
+The final metadata check also inspected Zenodo records [18405900](https://zenodo.org/records/18405900) and [19257129](https://zenodo.org/records/19257129), linked from arXiv. They contain earlier paper PDFs (December 18, 2025 and March 26, 2026) and refer to repository tag v0.2, not a supplemental raw-run archive establishing the May 7 arXiv v2 evaluator. They were checked as edition leads, not counted as new studies or full readings. The publication-time aggregation gap therefore remains.
+
+## Consequences for ALF
+
+Retain inherited workspaces, fresh-session controls, hidden behavioral scoring and separated current/regression outcomes as explicit reuse of prior methods. The unoccupied claim cannot be merely long-horizon maintenance, quality erosion, black-box tasks, native harnesses or cost growth. A narrower prospective dependency prediction must beat task/size baselines and survive failures without future-test filtering.
+
+Keep proxy quality, functional obligation success and resources separate; report missing workspaces and all attempted trajectories. Cross-language transfer of the Python metric is unvalidated. Deliberately lowering a smell score or adding more helpers is not evidence for an architectural treatment, and a model-family/harness contrast must not be relabeled a language effect.

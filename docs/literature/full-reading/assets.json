@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "P01",
+    "parent_key": "S76KXR3C",
+    "attachment_key": "ZKKCQBDZ",
+    "doi": "10.1109/ICSA66085.2026.00033",
+    "title": "LLMs for Architectural Refactoring: An Exploratory Study on Monoliths to Microservices",
+    "edition_label": "Full Text - Conference author preprint (ICSA 2026)",
+    "source_url": "https://conf.researchr.org/details/icsa-2026/icsa-2026-papers/27/LLMs-for-Architectural-Refactoring-An-Exploratory-study-on-Monoliths-to-Microservice",
+    "pages": 13,
+    "bytes": 13636777,
+    "sha256": "04e1da57c02bbe164bba8a3e35391265645f4e555a5a8dcb51a875c252040be2",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Aneesh",
+        "lastName": "Sambu",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Roberta",
+        "lastName": "Capuano",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Eoan",
+        "lastName": "O’Dea",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Karthik",
+        "lastName": "Vaidhyanathan",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Henry",
+        "lastName": "Muccini",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Aneesh Sambu",
+      "Roberta Capuano",
+      "Eoan O’Dea",
+      "Karthik Vaidhyanathan",
+      "Henry Muccini"
+    ],
+    "edition_title": "LLMs for Architectural Refactoring: An Exploratory Study on Monoliths to Microservices",
+    "metadata_source": "https://api.crossref.org/works/10.1109%2FICSA66085.2026.00033",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026-06-24 (preprint cover; publication June 2026)",
+    "landing_url": "https://doi.org/10.1109/ICSA66085.2026.00033"
+  },
+  {
+    "id": "P02",
+    "parent_key": "F9W52X95",
+    "attachment_key": "45CCEA6L",
+    "doi": "10.1016/S0164-1212(03)00080-3",
+    "title": "Architecture-level modifiability analysis (ALMA)",
+    "edition_label": "Full Text - Published article (author-hosted copy)",
+    "source_url": "https://www.cs.vu.nl/~hans/publications/y2004/alma.pdf",
+    "pages": 19,
+    "bytes": 488665,
+    "sha256": "35d116f1311a826abaa4eddc3808849aa9dd75863d13020d91c96050e5c61a2a",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "PerOlof",
+        "lastName": "Bengtsson",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Nico",
+        "lastName": "Lassing",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Jan",
+        "lastName": "Bosch",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Hans",
+        "lastName": "van Vliet",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "PerOlof Bengtsson",
+      "Nico Lassing",
+      "Jan Bosch",
+      "Hans van Vliet"
+    ],
+    "edition_title": "Architecture-level modifiability analysis (ALMA)",
+    "metadata_source": "https://api.crossref.org/works/10.1016%2FS0164-1212%2803%2900080-3",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2004-01",
+    "landing_url": "https://doi.org/10.1016/S0164-1212(03)00080-3"
+  },
+  {
+    "id": "P03",
+    "parent_key": "DMRG56CT",
+    "attachment_key": "Z7ZAEPIJ",
+    "doi": "10.48550/arXiv.2605.20049",
+    "title": "Does Code Cleanliness Affect Coding Agents? A Controlled Minimal-Pair Study",
+    "edition_label": "Full Text - arXiv v1",
+    "source_url": "https://arxiv.org/pdf/2605.20049v1",
+    "pages": 14,
+    "bytes": 1252778,
+    "sha256": "ff5d78e7ccbf58ca32a4b06e3a8792e40d2872a373c334b84dadc288a6b0b24a",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Priyansh",
+        "lastName": "Trivedi",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Olivier",
+        "lastName": "Schmitt",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Trivedi, Priyansh",
+      "Schmitt, Olivier"
+    ],
+    "edition_title": "Does Code Cleanliness Affect Coding Agents? A Controlled Minimal-Pair Study",
+    "metadata_source": "https://arxiv.org/abs/2605.20049v1",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/05/19",
+    "landing_url": "https://arxiv.org/abs/2605.20049v1"
+  },
+  {
+    "id": "P04",
+    "parent_key": "FJMUKCZT",
+    "attachment_key": "L7FG5XKP",
+    "doi": "10.48550/arXiv.2606.21804",
+    "title": "Is Agent Code Less Maintainable Than Human Code?",
+    "edition_label": "Full Text - arXiv v1",
+    "source_url": "https://arxiv.org/pdf/2606.21804v1",
+    "pages": 21,
+    "bytes": 5353746,
+    "sha256": "b73b5c6a583d06a484f90420566ade6964f73a331e15ec2cde1bbaf628b3ab26",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Shaswat",
+        "lastName": "Patel",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Betty Li",
+        "lastName": "Hou",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Arun",
+        "lastName": "Purohit",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Kai",
+        "lastName": "Xu",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Jane",
+        "lastName": "Pan",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "He",
+        "lastName": "He",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Valerie",
+        "lastName": "Chen",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Patel, Shaswat",
+      "Hou, Betty Li",
+      "Purohit, Arun",
+      "Xu, Kai",
+      "Pan, Jane",
+      "He, He",
+      "Chen, Valerie"
+    ],
+    "edition_title": "Is Agent Code Less Maintainable Than Human Code?",
+    "metadata_source": "https://arxiv.org/abs/2606.21804v1",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/06/19",
+    "landing_url": "https://arxiv.org/abs/2606.21804v1"
+  },
+  {
+    "id": "P05",
+    "parent_key": "WG2ALA8Q",
+    "attachment_key": "46LPN8N7",
+    "doi": "10.48550/arXiv.2603.24755",
+    "title": "SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks",
+    "edition_label": "Full Text - arXiv v2",
+    "source_url": "https://arxiv.org/pdf/2603.24755v2",
+    "pages": 26,
+    "bytes": 753356,
+    "sha256": "e40b72e59a07c36f46c493fa444309fdb2be15943f5f375d3695b7620e01a218",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Gabriel",
+        "lastName": "Orlanski",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Devjeet",
+        "lastName": "Roy",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Alexander",
+        "lastName": "Yun",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Changho",
+        "lastName": "Shin",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Alex",
+        "lastName": "Gu",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Albert",
+        "lastName": "Ge",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Dyah",
+        "lastName": "Adila",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Nicholas",
+        "lastName": "Roberts",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Frederic",
+        "lastName": "Sala",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Aws",
+        "lastName": "Albarghouthi",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Orlanski, Gabriel",
+      "Roy, Devjeet",
+      "Yun, Alexander",
+      "Shin, Changho",
+      "Gu, Alex",
+      "Ge, Albert",
+      "Adila, Dyah",
+      "Roberts, Nicholas",
+      "Sala, Frederic",
+      "Albarghouthi, Aws"
+    ],
+    "edition_title": "SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks",
+    "metadata_source": "https://arxiv.org/abs/2603.24755v2",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/05/07",
+    "landing_url": "https://arxiv.org/abs/2603.24755v2"
+  },
+  {
+    "id": "P06",
+    "parent_key": "KDR3Z9UV",
+    "attachment_key": "8F2EA7B6",
+    "doi": "10.48550/arXiv.2607.02606",
+    "title": "ChainSWE: Benchmarking Coding Agents on Multi-Bug Software Maintenance",
+    "edition_label": "Full Text - arXiv v1 (prior-review edition)",
+    "source_url": "https://arxiv.org/pdf/2607.02606v1",
+    "pages": 18,
+    "bytes": 1965871,
+    "sha256": "7581c20f348dc6f6733a7eb28e7a8fc5480dc15a694a18ce6d963bae5cd8d456",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Qirui",
+        "lastName": "Jin",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Lingching",
+        "lastName": "Tung",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Kenan",
+        "lastName": "Li",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Qiyang",
+        "lastName": "Shi",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Yushi",
+        "lastName": "She",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Huanzhong",
+        "lastName": "Jia",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Harrison",
+        "lastName": "Zhao",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Kejing",
+        "lastName": "Xia",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zhenbang",
+        "lastName": "Du",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Jiaxin",
+        "lastName": "Pei",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zhenyu",
+        "lastName": "Zhang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zhen",
+        "lastName": "Qi",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Yuyan",
+        "lastName": "Duan",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Wenke",
+        "lastName": "Lee",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zijian",
+        "lastName": "Jin",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Jin, Qirui",
+      "Tung, Lingching",
+      "Li, Kenan",
+      "Shi, Qiyang",
+      "She, Yushi",
+      "Jia, Huanzhong",
+      "Zhao, Harrison",
+      "Xia, Kejing",
+      "Du, Zhenbang",
+      "Zhang, Yikai",
+      "Pei, Jiaxin",
+      "Zhang, Zhenyu",
+      "Qi, Zhen",
+      "Duan, Yuyan",
+      "Lee, Wenke",
+      "Jin, Zijian"
+    ],
+    "edition_title": "ChainSWE: Benchmarking Coding Agents on Multi-Bug Software Maintenance",
+    "metadata_source": "https://arxiv.org/abs/2607.02606v1",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/07/01",
+    "landing_url": "https://arxiv.org/abs/2607.02606v1"
+  },
+  {
+    "id": "P06",
+    "parent_key": "KDR3Z9UV",
+    "attachment_key": "FMTJ9SHC",
+    "doi": "10.48550/arXiv.2607.02606",
+    "title": "ChainSWE: Benchmarking Coding Agents on Multi-Bug Software Maintenance",
+    "edition_label": "Full Text - arXiv v2 (newer edition)",
+    "source_url": "https://arxiv.org/pdf/2607.02606v2",
+    "pages": 19,
+    "bytes": 1888489,
+    "sha256": "be24179287e58e3aaede86804adead7f88a47fdc7be52359590bb35c7d4421bc",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Qirui",
+        "lastName": "Jin",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Lingching",
+        "lastName": "Tung",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Kenan",
+        "lastName": "Li",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Qiyang",
+        "lastName": "Shi",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Yushi",
+        "lastName": "She",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Huanzhong",
+        "lastName": "Jia",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Harrison",
+        "lastName": "Zhao",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Kejing",
+        "lastName": "Xia",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zhenbang",
+        "lastName": "Du",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Jiaxin",
+        "lastName": "Pei",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zhenyu",
+        "lastName": "Zhang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zhen",
+        "lastName": "Qi",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Yuyan",
+        "lastName": "Duan",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Wenke",
+        "lastName": "Lee",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zijian",
+        "lastName": "Jin",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Jin, Qirui",
+      "Tung, Lingching",
+      "Li, Kenan",
+      "Shi, Qiyang",
+      "She, Yushi",
+      "Jia, Huanzhong",
+      "Zhao, Harrison",
+      "Xia, Kejing",
+      "Du, Zhenbang",
+      "Pei, Jiaxin",
+      "Zhang, Zhenyu",
+      "Qi, Zhen",
+      "Duan, Yuyan",
+      "Lee, Wenke",
+      "Jin, Zijian"
+    ],
+    "edition_title": "ChainSWE: Benchmarking Coding Agents on Multi-Bug Software Maintenance",
+    "metadata_source": "https://arxiv.org/abs/2607.02606v2",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/09/01",
+    "landing_url": "https://arxiv.org/abs/2607.02606v2"
+  },
+  {
+    "id": "P07",
+    "parent_key": "PZJFA3SG",
+    "attachment_key": "UF73YJF4",
+    "doi": "10.48550/arXiv.2603.27745",
+    "title": "Needle in the Repo: A Benchmark for Maintainability in AI-Generated Repository Edits",
+    "edition_label": "Full Text - arXiv v1",
+    "source_url": "https://arxiv.org/pdf/2603.27745v1",
+    "pages": 16,
+    "bytes": 4051067,
+    "sha256": "2b183e5a43b82bd36d03fba4fd820c8a8cbd71e1bf8e7daf3b6ecfdc64d85c3a",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Haichao",
+        "lastName": "Zhu",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Qian",
+        "lastName": "Zhang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Jiyuan",
+        "lastName": "Wang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Zhaorui",
+        "lastName": "Yang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Yuxin",
+        "lastName": "Qiu",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Zhu, Haichao",
+      "Zhang, Qian",
+      "Wang, Jiyuan",
+      "Yang, Zhaorui",
+      "Qiu, Yuxin"
+    ],
+    "edition_title": "Needle in the Repo: A Benchmark for Maintainability in AI-Generated Repository Edits",
+    "metadata_source": "https://arxiv.org/abs/2603.27745v1",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/03/29",
+    "landing_url": "https://arxiv.org/abs/2603.27745v1"
+  },
+  {
+    "id": "P08",
+    "parent_key": "TUJJ7JU4",
+    "attachment_key": "VKL33569",
+    "doi": "10.48550/arXiv.2606.01522",
+    "title": "Type-Error Ablation and AI Coding Agents",
+    "edition_label": "Full Text - arXiv v2",
+    "source_url": "https://arxiv.org/pdf/2606.01522v2",
+    "pages": 26,
+    "bytes": 1048955,
+    "sha256": "50a0cacd987b67bb27034664502ad2db6b237eaff8556fe4a64ead28b3737d55",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Shriram",
+        "lastName": "Krishnamurthi",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Matthew",
+        "lastName": "Flatt",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Krishnamurthi, Shriram",
+      "Flatt, Matthew"
+    ],
+    "edition_title": "Type-Error Ablation and AI Coding Agents",
+    "metadata_source": "https://arxiv.org/abs/2606.01522v2",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/06/25",
+    "landing_url": "https://arxiv.org/abs/2606.01522v2"
+  },
+  {
+    "id": "P09",
+    "parent_key": "NXQAZ5K8",
+    "attachment_key": "R4Z4K5CW",
+    "doi": "10.48550/arXiv.2508.21433",
+    "title": "The Complexity Trap: Simple Observation Masking Is as Efficient as LLM Summarization for Agent Context Management",
+    "edition_label": "Full Text - arXiv v3",
+    "source_url": "https://arxiv.org/pdf/2508.21433v3",
+    "pages": 31,
+    "bytes": 1380836,
+    "sha256": "e40b2fe085fe0a0867b43d845ec3778305d27a8f4d94af409d0d387b69e2866a",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Tobias",
+        "lastName": "Lindenbauer",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Igor",
+        "lastName": "Slinko",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Ludwig",
+        "lastName": "Felder",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Egor",
+        "lastName": "Bogomolov",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Yaroslav",
+        "lastName": "Zharov",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Lindenbauer, Tobias",
+      "Slinko, Igor",
+      "Felder, Ludwig",
+      "Bogomolov, Egor",
+      "Zharov, Yaroslav"
+    ],
+    "edition_title": "The Complexity Trap: Simple Observation Masking Is as Efficient as LLM Summarization for Agent Context Management",
+    "metadata_source": "https://arxiv.org/abs/2508.21433v3",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2025/10/27",
+    "landing_url": "https://arxiv.org/abs/2508.21433v3"
+  },
+  {
+    "id": "P10",
+    "parent_key": "ZB685P9D",
+    "attachment_key": "PF24JPY6",
+    "doi": "10.48550/arXiv.2603.17104",
+    "title": "When the Specification Emerges: Benchmarking Faithfulness Loss in Long-Horizon Coding Agents",
+    "edition_label": "Full Text - arXiv v1",
+    "source_url": "https://arxiv.org/pdf/2603.17104v1",
+    "pages": 19,
+    "bytes": 805083,
+    "sha256": "72dd6eb6798bf42972d8dc107d8ba012f255ac647a0dda12f8ceee88755d5262",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Lu",
+        "lastName": "Yan",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Xuan",
+        "lastName": "Chen",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Xiangyu",
+        "lastName": "Zhang",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Yan, Lu",
+      "Chen, Xuan",
+      "Zhang, Xiangyu"
+    ],
+    "edition_title": "When the Specification Emerges: Benchmarking Faithfulness Loss in Long-Horizon Coding Agents",
+    "metadata_source": "https://arxiv.org/abs/2603.17104v1",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/03/17",
+    "landing_url": "https://arxiv.org/abs/2603.17104v1"
+  },
+  {
+    "id": "P11",
+    "parent_key": "RJ9GV3AP",
+    "attachment_key": "A696WU9C",
+    "doi": "10.48550/arXiv.2607.03525",
+    "title": "GameEngineBench: Evaluating Coding Agents on Real C++ Runtime Environments",
+    "edition_label": "Full Text - arXiv v1 (prior-review edition)",
+    "source_url": "https://arxiv.org/pdf/2607.03525v1",
+    "pages": 17,
+    "bytes": 9039204,
+    "sha256": "7130bde23c356a89762ed47823f60c979173e4d2e5f4252bf940a8f9a0c12d61",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Brian",
+        "lastName": "La",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Sejoon",
+        "lastName": "Chang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Ben",
+        "lastName": "Kim",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Junyoung",
+        "lastName": "Bae",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Aamish Ahmad",
+        "lastName": "Beg",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Sei",
+        "lastName": "Chang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Gonzalo",
+        "lastName": "Gonzalez-Pumariega",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Kanav",
+        "lastName": "Goyal",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "La, Brian",
+      "Chang, Sejoon",
+      "Kim, Ben",
+      "Bae, Junyoung",
+      "Beg, Aamish Ahmad",
+      "Chang, Sei",
+      "Gonzalez-Pumariega, Gonzalo"
+    ],
+    "edition_title": "GameEngineBench: Evaluating Coding Agents on Real C++ Runtime Environments",
+    "metadata_source": "https://arxiv.org/abs/2607.03525v1",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/07/03",
+    "landing_url": "https://arxiv.org/abs/2607.03525v1"
+  },
+  {
+    "id": "P11",
+    "parent_key": "RJ9GV3AP",
+    "attachment_key": "WRJ2UKZ3",
+    "doi": "10.48550/arXiv.2607.03525",
+    "title": "GameEngineBench: Evaluating Coding Agents on Real C++ Runtime Environments",
+    "edition_label": "Full Text - arXiv v2 (newer edition)",
+    "source_url": "https://arxiv.org/pdf/2607.03525v2",
+    "pages": 17,
+    "bytes": 8677848,
+    "sha256": "320b4d2722fef3647ae0896d9bcce43dc42e6531cca3391e3b11e62c0eea7edb",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Brian",
+        "lastName": "La",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Sejoon",
+        "lastName": "Chang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Ben",
+        "lastName": "Kim",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Junyoung",
+        "lastName": "Bae",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Aamish Ahmad",
+        "lastName": "Beg",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Sei",
+        "lastName": "Chang",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Gonzalo",
+        "lastName": "Gonzalez-Pumariega",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Kanav",
+        "lastName": "Goyal",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "La, Brian",
+      "Chang, Sejoon",
+      "Kim, Ben",
+      "Bae, Junyoung",
+      "Beg, Aamish Ahmad",
+      "Chang, Sei",
+      "Gonzalez-Pumariega, Gonzalo",
+      "Goyal, Kanav"
+    ],
+    "edition_title": "GameEngineBench: Evaluating Coding Agents on Real C++ Runtime Environments",
+    "metadata_source": "https://arxiv.org/abs/2607.03525v2",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/07/15",
+    "landing_url": "https://arxiv.org/abs/2607.03525v2"
+  },
+  {
+    "id": "P12",
+    "parent_key": "R833TUNQ",
+    "attachment_key": "RXVC7BGE",
+    "doi": "10.48550/arXiv.2603.00601",
+    "title": "Theory of Code Space: Do Code Agents Understand Software Architecture?",
+    "edition_label": "Full Text - arXiv v4",
+    "source_url": "https://arxiv.org/pdf/2603.00601v4",
+    "pages": 14,
+    "bytes": 1044961,
+    "sha256": "4f14a77f038a1647f41ff1fb95e90e7d88f922aa158eef243da5e9ff00ce13d6",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Grigory",
+        "lastName": "Sapunov",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Sapunov, Grigory"
+    ],
+    "edition_title": "Theory of Code Space: Do Code Agents Understand Software Architecture?",
+    "metadata_source": "https://arxiv.org/abs/2603.00601v4",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2026/03/18",
+    "landing_url": "https://arxiv.org/abs/2603.00601v4"
+  },
+  {
+    "id": "P13",
+    "parent_key": "LLMGIWQM",
+    "attachment_key": "5YYZ9ETS",
+    "doi": "10.1145/3643757",
+    "title": "CodePlan: Repository-Level Coding using LLMs and Planning",
+    "edition_label": "2023 preprint",
+    "source_url": "https://arxiv.org/pdf/2309.12499v1",
+    "pages": 34,
+    "bytes": 2177115,
+    "sha256": "1c66e59351ba27e22fb2c6aeaa3bf4f35681f198a9c3c106f910e4290505315e",
+    "retrieval": "Existing Zotero attachment verified 2026-09-15 HKT; acquisition history in ../../zotero-reading-collection-2026-09-15.md",
+    "catalog_authors": [
+      {
+        "firstName": "Ramakrishna",
+        "lastName": "Bairi",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Atharv",
+        "lastName": "Sonwane",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Aditya",
+        "lastName": "Kanade",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Vageesh D.",
+        "lastName": "C.",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Arun",
+        "lastName": "Iyer",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Suresh",
+        "lastName": "Parthasarathy",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Sriram",
+        "lastName": "Rajamani",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "B.",
+        "lastName": "Ashok",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Shashank",
+        "lastName": "Shet",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Bairi, Ramakrishna",
+      "Sonwane, Atharv",
+      "Kanade, Aditya",
+      "C, Vageesh D",
+      "Iyer, Arun",
+      "Parthasarathy, Suresh",
+      "Rajamani, Sriram",
+      "Ashok, B.",
+      "Shet, Shashank"
+    ],
+    "edition_title": "CodePlan: Repository-level Coding using LLMs and Planning",
+    "metadata_source": "https://arxiv.org/abs/2309.12499v1",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2023/09/21",
+    "landing_url": "https://arxiv.org/abs/2309.12499v1"
+  },
+  {
+    "id": "P13",
+    "parent_key": "LLMGIWQM",
+    "attachment_key": "LS9AUVZE",
+    "doi": "10.1145/3643757",
+    "title": "CodePlan: Repository-Level Coding using LLMs and Planning",
+    "edition_label": "2024 publication",
+    "source_url": null,
+    "pages": 24,
+    "bytes": 1202157,
+    "sha256": "c31dec9440c699aaffb5597139e9ea8b13f8409e84f954723a881a58af671e08",
+    "retrieval": "User-supplied publisher PDF in Zotero, verified 2026-09-15 HKT",
+    "catalog_authors": [
+      {
+        "firstName": "Ramakrishna",
+        "lastName": "Bairi",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Atharv",
+        "lastName": "Sonwane",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Aditya",
+        "lastName": "Kanade",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Vageesh D.",
+        "lastName": "C.",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Arun",
+        "lastName": "Iyer",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Suresh",
+        "lastName": "Parthasarathy",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Sriram",
+        "lastName": "Rajamani",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "B.",
+        "lastName": "Ashok",
+        "creatorType": "author"
+      },
+      {
+        "firstName": "Shashank",
+        "lastName": "Shet",
+        "creatorType": "author"
+      }
+    ],
+    "edition_authors": [
+      "Ramakrishna Bairi",
+      "Atharv Sonwane",
+      "Aditya Kanade",
+      "Vageesh D. C.",
+      "Arun Iyer",
+      "Suresh Parthasarathy",
+      "Sriram Rajamani",
+      "B. Ashok",
+      "Shashank Shet"
+    ],
+    "edition_title": "CodePlan: Repository-Level Coding using LLMs and Planning",
+    "metadata_source": "https://api.crossref.org/works/10.1145%2F3643757",
+    "metadata_verified": "2026-09-15 HKT",
+    "edition_date": "2024-07-12",
+    "landing_url": "https://doi.org/10.1145/3643757"
+  }
+]
