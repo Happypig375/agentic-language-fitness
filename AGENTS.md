@@ -1,50 +1,40 @@
-# Maintainer agent entry point
+# Maintainer entry point
 
-Read [PLAN.md](PLAN.md). It owns the active decision, retained evidence and authorization boundary. Do not turn this file into another chronological ledger.
+Read [PLAN.md](PLAN.md) first. It owns the current question, authority and next decision. Do not reconstruct the live plan from old chronological proposals.
 
-## Current handoff
+## Current boundary
 
-The architecture-package proposal has had a 2026-09-14 AI review. Read:
+The architecture-package proposal has a second focused methods/source review. **Next decision is human disposition of bounded, model-free A0 feasibility.** No A0 construction, recruitment, new adapter, candidate calibration, model execution or H allocation is created by the review. The proposed 192+5 envelope remains unallocated; do not combine unused earlier quotas. Preserve current OAuth/backend choices and all live holds.
 
-- [Reviewed standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md).
-- [Review, corrections and verification limits](docs/pro-review-2026-09-14.md).
-- [Research loop and correct scite use](docs/research-loop-and-scite.md).
-- [This pass's source audit](docs/pro-review-sources-2026-09-14.md), alongside the [existing literature ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md).
+Read as needed:
 
-Next is **human disposition of a bounded model-free A0 feasibility witness**, not construction or execution automatically. Nu MMCC/ImSim is provisional, same-language and same-engine, not evidence of a functional/imperative paradigm difference. F#/C# and Nu are not mandatory research targets.
+- [Standalone architecture proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md).
+- [Current review](docs/pro-review-design-discrimination-2026-09-14.md) and [current source audit](docs/pro-review-design-discrimination-sources-2026-09-14.md).
+- [Research loop and scite](docs/research-loop-and-scite.md).
+- [Earlier review](docs/pro-review-2026-09-14.md), [earlier sources](docs/pro-review-sources-2026-09-14.md) and [broader proposal ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md).
 
-The new 192+5 dispatch envelope remains proposed and allocated zero. Preserve all existing live holds. No model/count calls, OAuth staging, candidate adapter, new construction, recruitment, subagents or proxy layers are authorized by a research review.
-
-## Retained work
-
-E1/E2/E2a, completed E3a and H0 stay completed. H1/H2 remains prepared but unallocated. The previously authorized `maintenance-sim` F#/C# construction is preserved, including larger F# envelopes at every episode; do not tune it to reverse the finding. Their source identities, tests, debits and precise holds remain in the [plan](PLAN.md), linked dispositions and [pre-review history snapshots](docs/history/README.md).
-
-Historical unused E3a balances are not new allocations and do not stack with H or a new study. Preserve the adopted OAuth/backend protocol in its own scope; do not silently substitute an API account, model, image or toolful scaffold. Keep local originals and secrets untouched.
-
-## Research work
-
-The main reviewer owns synthesis and the decision. Retrieval or extraction is not a literature review by itself; do not spawn new paid workers without an explicit allowance. State whether review is self-review, another AI session or actual human review.
-
-Use the loop: decision/question → nearest methods and competing explanations → bounded search/read audit → concrete design consequence → smallest informative feasibility test → stop/review. Update the canonical plan and a focused evidence note before handoff or compaction, not a new competing plan at every turn.
-
-Scite rules: page by returned/effective size (often 20), retain offsets and unexamined ranges, deduplicate work/version identities, read critical methods, check fulltext identity/source/extent, use primary fallback for missing text, and interpret citation labels/coverage cautiously. Record unresolved material as deferred, not excluded on merit. Close the source decision set with `report_citations` and check `citation_report`; a citation count or tool report does not certify novelty or PRISMA compliance.
+E1/E2/E2a/E3a/H0 are preserved completed work. H1/H2 is prepared/unallocated. `maintenance-sim` construction is preserved, including its larger F# envelopes. Do not rewrite those observations to favor the original language hypothesis.
 
 ## Scientific invariants
 
-- Match required behavior, information and authority, not equal line count or necessary change effort. Record arbitrary API/runtime/authoring asymmetries and prospective contrary predictions.
-- Candidates see only approved predecessor/current source and current/earlier requirements. No successor gold, future tasks, literature/hypothesis labels, holdout cases or final outcomes.
-- Missing usage does not erase safely measurable correctness. Stop future dispatch when debits cannot be bounded; keep costs incomplete and preserve scored submissions.
-- Build failure, runtime failure, unrun slots and missing apparatus evidence are distinct. Track newly failed obligations separately from persistent old failures and recovery.
-- The no-reset arm measures policy robustness; latent maintainability/mediation needs a control, not success-only filtering. Source-only, notes-on and persistent conversational memory are different policies.
-- Holdout scoring never drives feedback, retries, continuation or task selection. Safe candidate changes persist under the frozen policy even when wrong. Drift is an outcome, not grounds for selecting favorable runs.
-- Candidate code and project execution stays sandboxed without credentials, writable scorer, target code or host secrets. No host fallback. Keep observed input/output, their subsets, source estimates, resource limits and subscription cost distinct.
+- The active study is a prospective architecture-package case, not a language leaderboard. Nu MMCC/ImSim is provisional; shared F#/engine does not remove API, physics, authoring or pattern-familiarity differences.
+- A0, if authorized, is both baselines plus at most two contrasting change witnesses per package. Record responsibility/coordination predictions and rival explanations before implementing witnesses. Do not build full chains or a substitute engine to rescue a weak contrast.
+- No-repair inheritance measures restrictive-policy robustness. A stronger inherited-state claim requires predeclared reference-predecessor controls or a narrower title/conclusion; no success-only filtering.
+- No repair is not isolated repair. Useful active diagnostics, resolved history and stale/irrelevant output have different roles. Do not claim a worker is needed or beneficial before the corresponding intervention.
+- Architecture assignment is intention-to-treat. Record drift; do not enforce stylistic fidelity or exclude correct reorganizations after seeing outcomes.
+- Separate new-obligation failure, newly introduced regression, persistent inherited failure, recovery and supersession. Missing usage does not erase known correctness; blocked runtime tests and unrun slots are not invented failures.
+- Candidates see approved current source/contracts, not research predictions, future targets, final holdout cases or comparative outcomes. No holdout-derived feedback, stopping, sample extension or manual candidate repair.
+- Source-only fresh context, notes-on and persistent conversation are separate policies. Cumulative input, authored bytes, token proxies, active context and physical window limits are different measurements.
+- Candidate code remains sandboxed. Reuse the existing runner and accounting; no new proxies, recursive agents or general frameworks. Changes to authority, data or environment need explicit review.
 
-## Engineering and handoff
+## Use literature to decide
 
-Within an authorized assignment, fix confirmed ordinary bugs automatically: reproduce, apply a focused repair, add regression coverage and complete relevant validation. This does not authorize scientific changes or live allocations.
+Follow the linked research-loop procedure. Exact metadata/title/edition checks precede method claims. Record effective pagination and unexamined ranges; read full-text return metadata and distinguish source text from an abstract. Follow a primary route when scite lacks the body. Citation-graph `s` is citing and `t` is cited; low coverage/truncation prohibit novelty inferences. Read contexts, not just labels.
 
-Permit up to **five failed attempts at one unchanged unresolved apparatus gate**; a success clears that gate's streak. Stop immediately for safety, ambiguous model requests/usage, exhausted allocations, or material scientific choices. Never automatically reissue a potentially billed request.
+Prioritize sources that could invalidate the proposed control or contribution, then stop at the bounded decision. Keep rejected and deferred decisions distinct even when `report_citations` maps both to `excluded`; submit the full considered decision set once near completion and inspect `citation_report`. Do not turn an audit count into a systematic-review or independent-expert certificate.
 
-Commit validated in-scope work directly to the configured upstream without a PR; preserve concurrent work and do not force-push. Use [change-scoped CI](docs/ci-validation-scope.md) and report exact-head scope and conclusion. Skipped runtime tests are not newly passed evidence.
+## Handoff and engineering
 
-Return at the agreed bounded handoff, not after every small edit. Report exact source/specification identities, actual checks, unresolved issues, remaining allocation and the next decision. Design acceptance, executable freeze, successful integration and permission to consume quota remain separate states.
+Finish ordinary fixes/checks inside the authorized packet, then return at the planned decision boundary. Five failures at one unchanged unresolved apparatus gate trigger return; success clears the counter. Unsafe actions, ambiguous potentially billable requests, resource exhaustion and scientific changes trigger immediate stop, not retries.
+
+Use [change-scoped CI](docs/ci-validation-scope.md); report skips and actual scope. A docs-only green run is not runtime revalidation. Commit directly as requested, preserve concurrent changes, and never force main. State exact head, evidence actually obtained, unresolved issues and allocation status. Self-review or a separate AI session is not human sign-off.

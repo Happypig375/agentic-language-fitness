@@ -1,220 +1,186 @@
-# Architectural organization as an input to agent maintenance
+# Prospective architecture trade-offs under agent maintenance
 
-## A comparative-case proposal with prospective change scenarios
+**Revised 2026-09-14; proposal pending human disposition.** This is the standalone scientific proposal linked by [PLAN.md](../PLAN.md). The preceding edition is retained at Git commit `d0cd99757c45d2a2322beb4c6f9069efe5667166`. The [focused review](pro-review-design-discrimination-2026-09-14.md) and [source audit](pro-review-design-discrimination-sources-2026-09-14.md) explain this revision. No construction, model call, sample allocation or freeze is created here.
 
-**Status, 2026-09-14:** reviewed and revised research proposal; not an adopted replacement experiment. New construction, recruitment, adapters and live allocations remain unauthorized. The immediate proposed decision is Phase A0 feasibility, not the full model study. This revision incorporates the [AI review](pro-review-2026-09-14.md). The [pre-review manuscript](history/architecture-maintenance-proposal-pre-review-2026-09-14.md) preserves the earlier full background and methods verbatim; its source ledger remains available [here](architecture-maintenance-proposal-sources-2026-09-14.md).
+## 1. Question and useful contribution
 
-## Abstract
+Can source-grounded predictions about responsibility ownership and interaction boundaries anticipate which future changes a coding agent will implement reliably, and how does inherited code state alter that suitability?
 
-Coding-agent studies already show that inherited code, source quality, structural constraints and interaction history can affect subsequent work. A worthwhile next question is not whether maintainability matters, or which language is universally best. It is whether **specific alternative organizations of responsibilities, state and effects produce predictable differences in behavioral maintenance under specified future changes**. We propose a bounded comparative case in which two credible implementations start from a common observable contract, receive the same ordered changes, and pass their edited source to fresh candidate contexts. Before candidate execution, the study records both favorable and unfavorable change scenarios for each package and the source-level reasons for those predictions. Outcomes distinguish new-feature implementation, retained behavior, newly introduced regressions, inherited failures and recovery. A same-language Nu MMCC/ImSim pair is provisional; its different physics and interaction APIs are explicit package components, not controls that disappear merely because both programs use F#. A model-free feasibility gate must establish runtime execution, pair credibility and an oracle before construction of full chains. The eventual fixed-policy experiment would support a local package comparison. Stronger claims about latent maintainability or causal mediation require a prespecified clean-predecessor control or another intervention; they cannot be inferred from cumulative failure counts alone.
+The intended product is a bounded, testable account of **architecture × change demand under a stated agent policy**, not a leaderboard declaring one language, engine or paradigm best. An architectural argument should predict a concrete coordination burden and a possible failure before the candidate acts. A result contradicting that prediction is useful; a post-hoc story explaining whichever package wins is not.
 
-## 1. Problem and intended value
+The original motivation included language-enabled abstraction, compact representations and protection of high-level reasoning from repair history. Keep that motivation traceable without substituting one component for the entire hypothesis:
 
-Maintenance changes a functioning system while preserving obligations that remain valid. Architectural organization determines which responsibilities, state owners and interaction paths a maintainer must understand or coordinate. This makes an architecture valuable relative to a set of likely changes, not by an unconditional complexity or brevity score. Architecture-level modifiability analysis, ALMA, explicitly distinguishes predicting ordinary maintenance effort, identifying risks and comparing alternatives through discriminating change scenarios [1].
+- This proposed same-language case studies organization/package suitability.
+- Fixed reference-predecessor comparisons study sensitivity to the inherited starting state.
+- A future assigned feedback/history intervention can study repair insulation.
+- A future source-budget/scale intervention can study fit and retrieval.
 
-For coding agents there are two separable practical questions. First, does the assigned implementation make the next required change easier to complete correctly? Second, does the state an agent leaves behind make later changes more fragile? An initial generation error, a missing dependency, an awkward submission format and architectural coupling can all increase later cost, but they are not the same mechanism. Existing ALF E1/E2/E2a/E3a results must not be relabelled as a clean estimate of architecture or training familiarity.
+These are related questions, not a required factorial. The completed small-repository work and this proposal do not establish a physical-window limit or a causal training-frequency explanation.
 
-The revised project should produce an actionable conditional result: under a declared maintenance policy and set of changes, which responsibilities are easier to preserve in each package, where do failures first appear, and what later obligations recover or deteriorate? It need not produce a winner. An opposing pattern across scenario chains, a null pattern, or a finding that API/runtime differences dominate can all change an engineering decision.
+## 2. Closest work and the remaining decision-value question
 
-The contribution is therefore **prospective architectural predictions checked against inherited behavioral outcomes**, not the mere novelty of the names MMCC and ImSim. It is initially a comparative case, not a population estimate of functional programming, F#, UI architecture or game engines. Neither Nu nor the earlier F#/C# pair is mandatory if a more credible case is needed.
+This is a scoped synthesis, not proof that no prior study exists. Exact versions, reading extents, access limits and deferred leads are in the source audit. Earlier broader ledgers remain relevant.
 
-## 2. What the closest literature already establishes
+| Primary predecessor | Consequence for this study |
+| --- | --- |
+| ALMA, Bengtsson et al., JSS 2004, DOI `10.1016/S0164-1212(03)00080-3`, especially sections 4.3 and 7 | Scenario-based architectural comparison is established. Distinguish likely maintenance from deliberately discriminating stress scenarios and state whose decision is served. |
+| Code-cleanliness minimal pairs, arXiv `2605.20049v1`, sections 2–3 and 6 | Controlled source-quality variation already exists and includes changes beyond formatting. Do not claim novelty merely for varying code organization before downstream tasks. |
+| CodeThread, arXiv `2606.21804v1`, section 3 | Later maintenance on alternative predecessors with observable preconditions is already studied. Passing a finite predecessor suite is not proof of complete semantic equivalence. |
+| SlopCodeBench, arXiv `2603.24755v2`, iterative protocol and construction sections | Fresh conversations with inherited code and evolving specifications are established; our added question must be prospective architectural suitability, not chaining alone. |
+| ChainSWE, arXiv `2607.02606v1`, sections 3 and 4.1–4.4 | Oracle prior fixes, fresh/persistent inherited state and subagent interfaces already coexist. Reuse their control logic; neither a clean-predecessor control nor delegation is our invention. |
+| Type-Error Ablation, arXiv `2606.01522v2`, sections 3–6 | Detailed current type feedback can help in its small, single-error Shplait setting. Do not equate all diagnostic text with harmful context or treat removal of repair as successful insulation. |
+| Complexity Trap, arXiv `2508.21433v3`, sections 3 and 5–6 | Simple observation masking is a strong baseline; its scope, tuning and hybrid/generalization results prevent a blanket rule that summaries or workers must help. |
+| Sambu et al., ICSA 2026, DOI `10.1109/ICSA66085.2026.00033` | The official abstract already describes LLM-generated architectural decompositions evaluated against reference systems. Full methods remain unreadable in this pass; do not claim architectural generation/evaluation is unstudied. |
 
-The earlier literature work remains useful. This review updates the overlap at the level of treatments, starting states, feedback and outcomes rather than counting keywords or citations. Version identifiers below matter; current preprint text must not be combined with statistics from a different indexed edition.
+The existing ledgers additionally cover NITR, specification-memory, functional-UI and game-engine benchmarks. They are not discarded; this pass does not upgrade their previously recorded reading/access levels.
 
-| Work and inspected edition | Established method relevant here | Consequence for this proposal |
-| --- | --- | --- |
-| **Does Code Cleanliness Affect Coding Agents?**, v1 [2] | Behaviorally matched, same-language repository variants; source quality is manipulated before independent tasks. Methods include hotspot and multi-module tasks, plus insensitive controls. Reported token/navigation differences did not imply a measured general improvement in task success. | Controlled code-representation effects are already studied. Its transformations include factoring and local structural changes, so do not claim that all architectural structure was absent. The proposed distinction is credible alternative responsibility/state packages, prospective trade-offs and inherited changes, not “we vary code.” |
-| **SlopCodeBench**, v2 [3] | Agents repeatedly extend their own code under evolving requirements and fresh conversations. Behavioral, regression, structural and cost outcomes already coexist; the paper distinguishes stricter cumulative and more isolated task views. | Neither sequential maintenance, fresh agents nor cumulative cost is new. Add explicit obligation histories and scenario predictions rather than another undifferentiated success total. |
-| **CodeThread / Is Agent Code Less Maintainable Than Human Code?**, v1 [4] | A later task is evaluated from human or agent predecessor implementations. Predecessors meet the paper's observable test preconditions before comparison. | Downstream effects of inherited code are already studied. Our no-reset policy also carries obviously broken code, so its result is not automatically the same latent-maintainability estimand. |
-| **Needle in the Repo**, v1 [5] | Authored multi-file and multi-step probes combine functional and structural oracles for specific maintainability pressures. | Architectural constraint preservation is already evaluated. Package fidelity is not a valid substitute for behavioral downstream evidence in our comparison. |
-| **When the Specification Emerges**, v1 [6] | Progressive versus upfront requirements and external project-state support are explicit interventions; structural faithfulness is a declared scored dimension. | Persistent specification tracking and notes are not incidental controls. Keep our primary source-inheritance policy separate from notes or persistent conversations. |
-| **GameEngineBench**, v1 [7] | Real engine projects, scoped source changes, runtime tests and post-solve judge auditing. Its published setup includes an LLM judge and differing wrappers. | Game-runtime evaluation is not new. It supports demanding a real runtime witness, not borrowing a judge verdict as a certified Nu oracle or comparing wrapper-confounded model scores. |
-| **ALMA** [1] | Change-scenario elicitation and analysis depend on whether the aim is maintenance prediction, risk or alternative comparison. | Predeclare credible countervailing scenarios; do not force equal edit effort, since that can remove the architectural difference of interest. |
-| **Evolution of Functional UI Paradigms** [8] | Conceptual/example-based analysis of update consistency, modularity and state/view organization, including limitations of pure MVU. | Useful mechanism hypotheses, not an experiment proving MMCC superiority over ImSim or equating either Nu package with MVC/MVU. |
+The useful remaining question is whether **predeclared responsibility/interaction predictions add explanatory and practical value beyond a fixed package preference, ordinary source-size differences and initial generation reliability**, when common future obligations are implemented over inherited states. A chosen pair can test and falsify these predictions locally. Establishing a portable architectural mechanism needs independent cases or a narrower intervention later.
 
-SWE-CI, StaminaBench, repository modernization, refactoring and smell studies remain in the [existing evidence ledger](architecture-maintenance-proposal-sources-2026-09-14.md) with their recorded versions and reading limits. They are not erased from prior art merely because the table emphasizes the nearest design decisions. Human maintenance and technical-debt studies retained in the earlier manuscript provide context, not transferable agent effect sizes or a prior that cleaner-looking code must win.
+It is not enough that Nu has not appeared in a benchmark. Before scaling, the case must supply a decision that a maintainer could make differently depending on the outcome, a credible alternative explanation, and an observable result that could contradict the architectural prediction.
 
-The scoped gap is: **a prospective, source-grounded comparison of credible alternative packages under common inherited changes, judged by behavioral obligations and interpreted against task-specific predictions and competing failure pathways**. We did not establish that no such study exists anywhere. The search audit records incomplete graph coverage, unexamined search ranges and access-limited leads. A proposal cannot earn significance merely by choosing a combination of conditions no one has named before.
+## 3. Provisional case and architecture as a bundled treatment
 
-## 3. Research questions and claim hierarchy
+The provisional pair is Nu's F# MMCC and ImSim Breakout examples at `bryanedds/Nu@064f7ae92a8506689cd91aff5e6804a375d6ef3d`:
 
-**RQ1 — Assigned-policy outcome.** Under the same finite candidate policy, do the two starting packages differ in how often successive submissions satisfy all applicable behavioral obligations?
+```text
+Projects/Breakout Mmcc/Gameplay.fs
+Projects/Breakout ImSim/Gameplay.fs
+```
 
-**RQ2 — Prospective trade-offs.** Do differences follow the predeclared responsibility/state-interaction predictions for the selected change scenarios? A coordinated-state chain and a local-interaction chain are provisional examples, not validated categories or representative distributions.
+The preceding source review identifies explicit gameplay-model/manual motion responsibilities in MMCC and screen/entity-property plus dynamic-physics responsibilities in ImSim. Both use effectful engine facilities. These are concrete packages, not pure functional versus imperative programming. Sharing language and engine reduces some differences but does not equalize APIs, physics, documentation, authoring quality or the model's familiarity with each idiom.
 
-**RQ3 — Failure pathways and resources.** Where do output/application, compilation, new-behavior, retained-obligation and runtime/environment failures occur, and what resources accompany them? These are observed pathways, not access to hidden reasoning or proof of training-corpus causation.
+A0 must re-establish the editable application boundary, read-only engine facilities and live observations on the actual pinned runtime. Nu versus Unity is not the control. Do not substitute a toy physics engine, manufacture an intentionally weak comparator or erase the organizational difference just to make assertions easy.
 
-Three claim levels must remain separate:
+Common obligations need not require identical floating-point trajectories. They do require meaningful equivalence of the chosen gameplay behavior, with nondeterminism, input timing and tolerance rules decided before inspecting comparative candidate outcomes. The observation seam should expose state/events, not implement the feature or provide the candidate a hidden reference algorithm.
 
-1. **Feasibility:** the packages and oracle can be compared under a reproducible runtime.
-2. **Bounded package outcome:** assigned baselines differ under the tested task/policy sequence, with credible common requirements and measured uncertainty. This bundles organization, APIs, idioms, documentation and model familiarity.
-3. **Specific mechanism:** an architectural property causes later maintenance differences. This needs a corresponding intervention/control and cannot be obtained simply by naming the packages or correlating source size with results.
+Baseline information must be audited: source, project metadata, comparable documentation, engine API facilities, generated code and defaults. Additional help for an unfamiliar API is a treatment, not a free repair of fairness after results. Match requirements and evidence, not necessary edit effort, file count or state representation.
 
-The first two are attainable goals for the minimal case. The third is a conditional later claim, not an automatic interpretation of a positive result. Architectural drift is an outcome; enforcing the initial style by rejecting otherwise valid submissions would change the treatment into a style-conformance experiment.
+## 4. Prediction records and manipulation checks
 
-## 4. Candidate case and the limits of matching
-
-### 4.1 Provisional Nu case
-
-The source anchor remains `bryanedds/Nu@064f7ae92a8506689cd91aff5e6804a375d6ef3d`, particularly `Projects/Breakout Mmcc/Gameplay.fs` and `Projects/Breakout ImSim/Gameplay.fs` [9]. The review rechecked their initial gameplay/state and update sections. MMCC stores explicit gameplay records and advances ball motion in its update logic; ImSim uses screen properties, a processing loop and dynamic engine bodies. Both contain real-time behavior and effectful engine interactions. Their use of different motion/physics facilities is material.
-
-Thus the comparison is an **application organization plus API/runtime package**, not an isolated functional/imperative contrast. Operational semantics is itself mathematical; no mathematical-versus-operational dichotomy is claimed. A source-level state-owner map must precede any hypothesis that a particular change is naturally local or cross-cutting.
-
-The earlier public change-lead inventory remains a provenance starting point, not eight ready-made tasks. An engine-level fix requiring a later engine revision cannot be transplanted into a pinned application-only task without a separately reviewed scope change. Private Nu chat and personal analysis may suggest leads, but cannot become unlicensed published task material or independent experimental evidence.
-
-### 4.2 Match required behavior, not implementation effort
-
-Both packages must meet the same baseline obligations and receive the same new requirement, relevant earlier contracts and comparable engine documentation. Do not equalize line counts, helper counts, internal state types, reference-patch size or the number of responsibilities that must change. Those can be outcomes or mechanisms.
-
-Conversely, an arbitrary API omission, a broken baseline, different public functionality, unequal documentation or privileged helper code is not an architectural advantage. Record every material asymmetry and whether it is an intended package component or a construction defect. If only collision-backend familiarity explains the planned contrast, narrow the claim or select different scenarios; do not label it a pure organization effect.
-
-A neutral observation seam may expose existing inputs and events to tests. It must not implement the requested feature or replace the engine with a toy interpreter. Exact floating-point trajectories need not be equal when not part of the behavioral contract. Common tolerances, deterministic input traces and lifecycle observations must be justified before outcomes, not loosened for whichever package fails.
-
-## 5. Phase A: construction only after approval
-
-### A0 — Small feasibility witness before full-chain investment
-
-The proposed first authorization covers only:
-
-- both unmodified baselines running in the intended isolated environment, with native dependencies, assets and licenses identified;
-- editable application files versus immutable engine/framework and scoring assets;
-- a source-grounded map of state ownership, lifetime, effect paths and documentation;
-- a symmetric observation interface and baseline contract/fault checks;
-- at most two contrasting change witnesses per package, derived from documented requirements and designed to expose different coordination obligations;
-- an explicit verdict on whether a credible package comparison survives the necessary test seams.
-
-This is at most the two baselines plus four successor witnesses, not the entire proposed eighteen-checkpoint construction. A mock runtime, compilation alone or a source string assertion is not a real execution witness. Check repeated deterministic replays and retained lifecycle state; distinguish runtime nondeterminism from implementation faults. Test flakiness must be characterized under a fixed policy before candidates are involved.
-
-A0 stops for review. If the case needs an alternative engine, broad new shim, private knowledge or a large new infrastructure layer to look comparable, reject or reframe the case rather than continue apparatus construction. Existing E/H components may be reused only where their assumptions actually fit this runtime.
-
-### A1 — Two independent scenario chains, conditional on A0 acceptance
-
-The full design still proposes two four-episode chains, each starting from its own copy of each accepted baseline. Later episodes depend on earlier source, but one chain must not inherit the other. Author the requirements and oracle before reference implementations; keep future requirements absent from candidate input.
-
-For each scenario record:
+Before implementing each A0 witness, record:
 
 | Field | Required content |
 | --- | --- |
-| Provenance | Public source change or explicitly authored requirement; what was known before the fix; license and transplantation limits. |
-| Common obligation | Observable behavior, lifecycle/ordering and error rules, plus explicit API/nonfunctional constraints. |
-| Prospective prediction | Which package responsibilities must coordinate, expected failure opportunity and a competing explanation. No guaranteed winner. |
-| Opposing case | A plausible change that stresses the other package or a reason neither has an expected advantage. |
-| Reference witness | At least one valid implementation for each package; no canonical internal spelling requirement. |
-| Oracle adequacy | Baseline cannot already satisfy the new requirement; valid alternatives pass; semantic faults fail; retained obligations and explicit supersessions are identified. |
-| Exposure audit | All scored requirements are inferable from current/earlier candidate-visible contracts and approved API information. |
+| Requirement | Observable change and retained obligations, with provenance and whether expected or stress-selected. |
+| Source mechanism | Current owner of the relevant state/invariant, interaction/effect boundary, and plausible coordination path. |
+| Prediction | Package A advantage, package B advantage, tie or genuine uncertainty; expected obligations or failure classes, not a guaranteed ranking. |
+| Rival | An alternative such as missing API, source size, baseline defect, format burden, guidance or unfamiliar convention. |
+| Disconfirmation | What actual source/behavior would contradict the predicted mechanism or show the witness cannot distinguish it from the rival. |
+| Evidence timing | Source revision, analyst identity/type, prediction time and any later revision. |
 
-Separate anticipated ordinary changes from deliberately discriminating stress scenarios. An enriched set can be valuable, but it estimates neither real-world frequency nor a general scenario-family interaction. One chain of each kind cannot identify a population effect of “coordinated” versus “local” work. Repetition does not solve that sampling limitation.
+Choose contrasting pressures and identify an adverse or no-differential expectation. This does not require adding a third chain or forcing one win for each package. Where a cheap source-size ranking and the architectural prediction disagree, the disagreement is informative; source size is an explanatory rival, not a correctness criterion. Do not fit a large prediction model to two chains.
 
-An independent challenge should cover domain validity, both package idioms, the behavioral contract and oracle. Prefer actual competent nonauthor review where available, and record reviewer identity/type and scope. Two people are not a statistical guarantee; one person must not be counted twice under different roles. Missing relevant expertise limits acceptance and claims and must be dispositioned, not replaced by invented human approval. A0 can expose feasibility limits without recruiting reviewers automatically; no recruitment is authorized now.
+A0 witnesses are feasibility evidence, not independent candidate confirmation. If the same authors refine scenarios while building witnesses, retain the original prediction and label the refinement. A1 freezes the final requirements, interpretations and predictions before candidate outcomes; seek a separate challenge reviewer when available and record actual independence. Never invent expert sign-off.
 
-## 6. Proposed candidate policy
+Document the organization actually present at baseline and after edits. Candidate reorganization is an outcome: initial package assignment remains the primary treatment. Do not discard runs that adopt another pattern or reward preservation of a preferred style when behavior is wrong. Unannounced architectural taste cannot enter the hidden oracle. Declared API/structural requirements must be public and allow alternative valid implementations.
 
-The later protocol must select one exposed model/effort, backend, resource policy and exact source identities. Historical model names or unused quotas do not establish current availability or authorization. Proposed policy:
+## 5. A0 and A1: smallest useful construction
 
-- One fresh candidate context and one submitted edit per episode, without compiler/test feedback, repairs, source tools or successor access.
-- Supply the complete permitted current source, earlier/current contracts and the approved engine information bundle. No research predictions or architecture labels beyond unavoidable source content.
-- Persist safe submitted source even when it does not compile or satisfy the task. Preserve an invalid submission as a failed submission; the prior safe source remains the next predecessor. Unsafe changes terminate according to the declared policy.
-- Do not reset to reference gold, remove inconvenient histories or transform drifted code back into its initial package. Initial package is the assigned treatment; later drift is an observation.
-- **Proposed primary memory is source-only:** no separate candidate-authored notes are carried across episodes. Source comments naturally remain source. A 4,096-byte notes channel, proposed earlier, would be a distinct memory intervention; adopting it requires an explicit change and matching interpretation.
-- Require a demonstrated edit/submission interface with enough output headroom for both reference implementations. Complete-file replacement, structured edit operations and unified diffs impose different generation burdens; freeze the chosen policy and retain format/truncation failures separately. No post-hoc change to make one package's outputs pass.
+**A0, only after explicit approval:** run both unchanged baselines; produce a responsibility/state/effect map and safe common observation; implement at most two contrasting reference changes per package. This is two baselines and at most four successors, not all future episodes. Return a bounded yes/no/redirect conclusion.
 
-This controls execution feedback rather than representing normal tool-using development. It cannot establish benefits from a repair subagent or persistent orchestrator. A later ecological policy may answer that question, but it must not be pooled with this arm.
+A0 is successful only if the selected obligations are live-testable, the claimed organizational contrast remains real, and at least one consequential prediction is distinguishable from a trivial implementation/API mismatch. Runtime executability alone is insufficient. If a substantial replacement engine, new runner family or task-solving seam is required, stop and redirect rather than growing apparatus.
 
-Reference envelopes and fault fixtures should be used to check that caps permit intended valid work, not to make a reference multiplier such as 1.25 an allegedly scientific threshold. Declare input/output/elapsed/build/runtime limits and the treatment of safe source growth. Report cap hits as policy outcomes. If ordinary valid construction approaches a cap, revise it before outcomes rather than impose unequal truncation or repeatedly expand it during collection.
+**A1, separately approved:** propose two four-episode scenario chains, each starting from its own copy of the baseline. Author source-bound requirements before reference successors; record realistic versus stress-selected scenarios. Requirements may introduce new behavior, revise an earlier obligation or impose a future interaction. Use stable IDs and explicit supersession. Do not author all tasks merely to make one architecture's known convenience dominate.
 
-## 7. Outcome model: what happened, what remained, and what was observed
+Reference solutions demonstrate feasibility, not unique allowed edits. Add fault/property checks for omissions, state ownership, ordering, lifecycle or error behavior relevant to the chosen contracts. Build and test success is evidence over these obligations, not equivalence for all programs or inputs.
 
-Every scheduled slot needs separate fields for dispatch, response completeness, safe application, submitted-source identity, build, current-task obligations, retained obligations, termination, and accounting coverage. A single `success` flag is insufficient.
+A1 must choose the claim level and controls in section 8, finalize a finite sample/allocation proposal, and return before live execution. More independent cases are required for population claims; repeated seeds of the same two chains are not new architecture samples.
 
-**Observed submission completion** is true only when the valid submitted artifact builds and meets all active declared behavioral/API obligations. A known failing requirement establishes failure even when another component is unknown. Missing evaluation because of an apparatus fault is unknown. If compilation fails, joint completion is false, but individual runtime assertions are `blocked_by_build`, not fabricated assertion failures.
+## 6. Proposed candidate policy and information boundaries
 
-**Missing usage never automatically un-scores correctness.** A complete safely evaluable submission can be scored when token accounting is unavailable. Its cost remains incomplete. Pause new dispatch if remaining allocation cannot be bounded; do not manufacture zero cost or erase a valid outcome. Retain known usage and coverage separately from totals.
+The currently proposed minimal policy is **source-only fresh episode context, one submitted edit, no execution feedback and no repair**. Each episode receives the actual safe inherited source, current and earlier requirements, and the same approved engine/documentation exposure policy. Candidate notes are off; source comments are still source. Persistent conversations or notes-on are separate future treatments.
 
-**Unrun is not failed code.** After a candidate-induced policy stop, later scheduled slots have no observed submission. A preregistered assigned-policy utility may assign those slots zero to represent inability to complete the planned chain; retain `not_run` in observed fields and state the scoring convention. Infrastructure-unobserved slots remain unknown and contribute to bounds rather than automatic losses for one package.
+Safe submitted code persists even when noncompiling or behaviorally wrong. The controller does not replace it with gold. Invalid output preserves the previous safe state according to the frozen submission rules. Unsafe content is contained and classified; later unexecuted slots are not fabricated model outputs. A file-replacement or patch interface and its output headroom must be checked for the actual workload before freezing; no language/package should fail primarily because the chosen carrier cannot express the expected change.
 
-### Versioned behavioral obligations
+Candidates do not receive the architectural predictions, research hypotheses, comparative results, target solutions, future tasks or scoring details that would reveal hidden expected changes. The evaluator observes after submission and never supplies holdout scores, retry decisions or hints. Baselines, code, project files and test programs run under the existing reviewed safety model; credentials/scorer data remain outside candidate control.
 
-Give each obligation a stable identity, introduction episode, supersession/retirement rule, severity rationale and oracle cases. Per obligation distinguish:
+One-shot/no-repair is an intentionally restrictive maintenance policy. It does not simulate a developer with isolated compiler repair. A wrong earlier patch may dominate later behavior. This restriction is acceptable only with an explicit policy claim, not as evidence that syntax/tool feedback has been controlled away while its benefits remain.
 
-| Transition | Interpretation |
-| --- | --- |
-| Newly introduced and not met | Failure to implement the new requirement, not a regression. |
-| Previously observed passing, still required, now failing | A newly lost retained obligation. |
-| Already failing and still failing | Persistent inherited failure, counted as persistence rather than another distinct regression. |
-| Failing to passing | Recovery. |
-| Superseded or no longer applicable | Not a regression; preserve the explicit contract revision. |
-| Build/runtime apparatus prevents observation | Unknown/blocked, not an inferred behavioral transition. |
+## 7. Outcome state, obligations and costs
 
-Report stricter cumulative completion and new-obligation performance side by side. Partial case counts diagnose behavior; they do not turn many correlated assertions into independent tasks. Final scoring occurs outside candidate interaction and never changes feedback, retries, order or the decision to add episodes.
+Observed submission completion requires a valid artifact, successful build and all applicable declared obligations. Known failure makes joint completion false; absence of a required observation with no known failure makes it unknown. Compiler failure blocks runtime assertions rather than proving each executed and failed. Distinguish program-caused runtime failure from apparatus inability to observe it.
 
-Architecture annotations may explain responsibility movement, abstraction bypass and drift, but style fidelity does not decide the primary behavioral score. Declared public API or architecture obligations must be visible in the task; an unannounced preferred implementation is not an oracle.
+Keep observed outcome, execution status and assigned-policy utility separate. A predeclared policy utility can give candidate-induced unrun slots zero, but their observation stays `not_run`. Infrastructure missingness remains unknown and enters bounds. Missing tokens never erase a known behavioral score; incomplete usage retains coverage and may pause dispatch when remaining resources cannot be bounded.
 
-## 8. Inherited defects versus latent maintainability
+For each versioned obligation report:
 
-A no-reset chain answers a practical question: how robust is the assigned package under this sequence of fallible edits? Its cumulative outcome includes obvious build failures, missed features and format limits. If an early broken submission makes every later checkpoint fail, that is real policy evidence but not by itself proof that a once-correct architecture was harder to modify.
+- new required behavior not implemented;
+- a previously passing retained obligation newly lost;
+- persistent inherited failure, not counted repeatedly as a new regression;
+- recovery;
+- explicit supersession/retirement;
+- blocked or unavailable observation.
 
-CodeThread's observable predecessor checks [4] and SlopCodeBench's distinct cumulative/isolated views [3] make this distinction important. Do not “fix” it by analyzing only successful histories; that selects different populations after treatment.
+Report joint completion, new-obligation completion, retained obligations and these transitions by episode. Test assertion counts are not independent task samples or weights of requirement importance. Reference/source drift annotations explain possible mechanisms; they cannot by themselves establish the cause of a failure.
 
-Before the live protocol is frozen, choose one of two honest scopes:
+Retain first/terminal source identities, safe-state transitions, all assigned slots, actual submissions, provider status/usage and timing. Separate authored source, visible envelope, active context when observable, output, direct controller execution and total cost. Preserve partial/ambiguous attempts; no blind retries or retrospective exclusions. There are no workers in the minimal policy, and no claim that generation-only measurements include all human/maintainer costs.
 
-1. **Keep the minimum inherited case and narrow the claim** to fixed-policy behavioral robustness, with the obligation-transition diagnostics above; or
-2. **Predeclare a small clean-predecessor sentinel control:** at specified later episode(s), independently run the same task, package, model and policy from that package's validated reference predecessor. Compare against the assigned inherited-state arm with uncertainty and full cost. Reference targets and final outcomes remain hidden. Choose sentinels before new outcomes, not only where one package fails.
+## 8. Choose the inference level before collecting outcomes
 
-This control distinguishes a starting-state intervention from the intrinsic difficulty of the later requirement, but still does not isolate a single architectural primitive or training familiarity. It must have a finite explicitly approved allocation, preferably by revising the proposed sample within its envelope, not silently adding calls. It is not required to call the minimal work a comparative case; it is required to make claims its absent counterfactual cannot support.
+### 8.1 Minimal inherited case
 
-## 9. Sampling, analysis and resource decisions
+Without another starting-state condition, estimate **architecture-package robustness under the assigned no-repair policy**. Do not claim that latent architectural degradation caused later failures, or that repair-context insulation improved maintenance. Obligations and failure classes diagnose the pattern but do not supply an absent counterfactual.
 
-The earlier arithmetic remains a planning option: 12 blocks × 2 packages × 2 chains × 4 episodes = 192 candidate generations, 48 trajectories. Up to five unrelated integration generations would be separate. **Allocated now: zero.** The number 12 is not a power calculation. Final task choices, sentinel decision, caps, model availability and sample are settled only after A0/A1.
+### 8.2 Recommended control for the stronger inherited-state claim
 
-Each block contains the four package/chain trajectories. Freeze an order schedule balancing package and chain over time and across chronological positions; preserve whole blocks for paired summaries. A balanced four-sequence order repeated three times is one model-free planning option, not proof of randomized model seeds or elimination of backend drift. Task order within each chain stays fixed. Record date, load, configuration and any backend changes; do not replace failed cells based on the package difference.
+Predeclare a small set of later sentinel tasks and, for each package and paired block, run the identical requirement from that package's validated canonical reference predecessor as well as its naturally inherited state. Specify sentinel positions before outcomes, include both packages and all assigned histories, and never select only failed or successful candidate predecessors. The inherited arm is not reset or repaired by this scoring control.
 
-For a complete block `b`, package `a`, chain `c`, episode `e`, let `Y[b,a,c,e]` be the **declared assigned-policy completion score**. Observed outcomes and policy-imputed zeros remain separate in the data. Then:
+At a fixed sentinel, describe both package contrasts:
 
 ```text
-A[b,a,c] = mean over the four episode scores
-D[b,c]   = A[b,MMCC,c] - A[b,ImSim,c]
-Delta[c] = mean over blocks of D[b,c]
-Delta    = mean of the two chain-specific Delta values
+D_inherited = outcome(A, inherited) - outcome(B, inherited)
+D_reference = outcome(A, reference) - outcome(B, reference)
+history_sensitivity = D_inherited - D_reference
 ```
 
-These define equal weighting of the selected chains, not their real-world prevalence. Publish each episode, chain and block value. The contrast between the two chain differences is exploratory and describes only those chains. It is not an identified architecture × scenario-family population effect.
+These compare assigned starting-state policies. They do not identify a pure architectural-damage variable, correct for all behavior differences or measure the causal fraction attributable to architecture. A missing feature in the inherited predecessor can explain a gap; report that, rather than relabel it as hidden maintainability. Reference implementations themselves are choices requiring the same contract review.
 
-If any completion scores are unknown, calculate lower and upper bounds by allowing the unknown values in [0,1] with their actual signed weights. Do not discard incomplete blocks and announce a complete-case winner. Score known behavior despite missing cost. Cost differences require matching coverage; report partial known sums and coverage without labelling them complete totals.
+A1 must either include this bounded control for the stronger claim or explicitly choose the narrower case title/conclusion. It may not collect the minimalist design and later promote its interpretation because the result is attractive. Sentinel generations must be included in the revised allocation, preferably by rebalancing sample size; they are not free additions to 192.
 
-A block bootstrap may describe within-case stochastic uncertainty under its assumptions; it cannot estimate variation across new architectures, independent applications or unobserved requirements. With twelve identical block differences, a percentile bootstrap collapses to a point. That is an empirical resampling limitation, not certainty or practical equivalence. Show the raw counts and exact degeneracy, avoid a confirmatory confidence claim, and use model-free operating-characteristic checks before registering any confirmatory test or adaptive stopping rule.
+### 8.3 Feedback/context hypothesis remains distinct
 
-If a future confirmatory study is proposed, select a meaningful effect/precision target, independent unit, sample ceiling and valid analysis before collecting it. Repeating this one pair until a p-value crosses a threshold is not a route to general research value. No post-hoc favorable scenario replacement, effect-driven extension or pooling with historical E/H outcomes is permitted.
+Useful evidence about a current error is different from old resolved diagnostics or obsolete source. Type-Error Ablation [6] cautions against stripping necessary information; Complexity Trap [7] supplies simple history-management competitors. ChainSWE [5] already combines sequential state with memory/subagent modes. No generic claim that delegation solves long-horizon maintenance is available to this proposal.
 
-Resource reports separate model input/output and their subsets, direct tool time, preparation, human/AI review effort, and end-to-end elapsed time. A lower cost from an early stop is not cheaper successful maintenance. Neither source bytes nor tokens equal human effort, physical model memory or currency. All candidate, integration, judge, worker and summary generation requests require explicit allocation and retained debits; there is no free reviewer hidden in the design.
+A later economical discriminator is an **identical-source handoff**: both fresh planner conditions see the same corrected source, same next task and same concise resolution facts; one additionally sees authentic resolved repair history. Any masking or summary content, size, placement and permissions are frozen. This isolates history presentation conditional on that source, not the value of performing repair, native persistent hidden state or the quality of a worker's different patch. It remains unallocated and is not added to A0/A1 automatically.
 
-## 10. Research loop, go/no-go decisions and limitations
+Only a subsequent actual repair-routing comparison can estimate the system benefit of delegation. Keep the same model/authority initially, retain useful current diagnostics, compare a simple deterministic history policy, and record orchestrator, worker and total costs. A lower planner token count is not evidence of lower total cost. These follow-ups need their own novelty/control review and may be unnecessary if the architecture case already answers a useful narrower decision.
 
-The [research-loop procedure](research-loop-and-scite.md) governs future literature passes. The present pass paged targeted Scite searches, challenged closest methods, checked graph coverage, and used primary text when Scite returned no readable content. It is a bounded critical review, not a new systematic review of the entire field. Search totals, generated citation reports and an absence of graph edges cannot certify novelty.
+## 9. Sampling and analysis proportional to this case
 
-Before construction, the literature-to-method record must answer: what comparable intervention already exists, what this design changes, which observation would challenge its interpretation, and what decision follows? New papers that merely repeat a known general claim need not spawn another workstream. High-priority unresolved predecessors remain explicit; do not silently exclude them to preserve a gap.
+The earlier planning arithmetic is 12 blocks × 2 packages × 2 chains × 4 episodes = 192 generations, plus up to five unrelated integration generations. It is unallocated, not a power result or a promise to execute that many. A0/A1 determine the actual useful contrast, controls and worst-case cost before approval. A narrower sample is legitimate when the decision is feasibility; do not call it confirmation.
 
-**Proceed to request A0 approval** because the revised question is concrete enough to test feasibility, not because its effect or publishability is established. Do not execute A0 during this documentation review.
+Each complete block contains all package/chain trajectories. Counterbalance their chronological order; keep the declared episode order within each chain. Keep resource/model/policy identity fixed, record temporal/provider changes, and pause for a material identity change rather than replacing an inconvenient run. A schedule seed does not seed model randomness.
 
-**Proceed from A0 only if** both packages run under a common observable contract, different responsibilities can be described without paradigm caricatures, the observation seam preserves the intended difference, and contrasting change witnesses are plausible. Reviewable null predictions are acceptable.
+The default descriptive summaries retain every episode and block. For a declared assigned-policy score Y, the chain score is the mean of its episode scores, the within-block package difference is paired, and any overall summary uses explicit equal-chain weights. These are selected-scenario weights, not estimates of deployment prevalence. Report chain-specific contrasts even if averaging cancels them. For partial blocks provide missing-outcome bounds and coverage rather than complete-case-only rankings.
 
-**Reframe or reject the case if** equivalence requires erasing the package contrast, physics/API differences overwhelm the intended interpretation, realistic tasks cannot be scored, or the construction cost is disproportionate. A different domain or package pair is allowed. Do not force Nu or the previous language hypothesis to survive.
+Prospective prediction agreement is described at the scenario level with contradictions and alternative explanations. Twelve repeated trajectories do not provide twelve independent tests of an architectural theory. With only two chosen chains, do not fit a large architecture × domain × model interaction, claim calibrated predictions or transport a p-value to all software. Degenerate resampling is not certainty; non-significance is not equivalence. No effect-driven extensions.
 
-**Proceed to live data only if** the frozen protocol identifies its claim level, actual environment/model, memory and feedback policy, safe inheritance, obligation tracking, finite allocation, uncertainty treatment and operational stop rules. Any pilot result remains local unless independent package/task/model replication supports transfer.
+A result favoring either package can be useful. Evidence is stronger when the predicted responsibility/obligation pattern appears, not merely when a favored name has a larger average score. If only baseline API differences, format failures or a uniform initial-generation advantage explain the result, report the package-policy finding and redirect mechanism claims. A null result is not a reason to search for favorable workloads indefinitely.
 
-The earlier F#/C# construction and its larger F# envelopes stay preserved. The current same-language study does not test language-token compression or a context-window crossover. A later context or repair-routing intervention is conditional and separate; it is not a prerequisite to every architecture case and must not be smuggled into the current comparison.
+## 10. Readiness, research loop and next action
 
-## References used for the revised argument
+The positioning loop and execution loop are separate. This review supports a bounded **A0 decision**, not an approved executable study. The next packet should show case credibility, pre-witness prediction cards and a limited implementation cost; it should not reopen every historic research direction or require another large literature count.
 
-These are primary-source anchors with specific reading extents recorded in the [review source audit](pro-review-sources-2026-09-14.md). Further background and earlier study versions remain in the existing ledger and archived manuscript; they are not counted as newly read studies.
+A0 returns before A1; A1 before apparatus/allocation; B0 before live integration; B1/B2 follow only explicit approvals. Use the existing runner, scopes and five-unresolved-failure rule in PLAN/AGENTS. No additional adapter, engine, proxy, subagent or sample is created by a prose revision.
 
-1. Bengtsson et al. **Architecture-level modifiability analysis (ALMA)**. DOI [10.1016/S0164-1212(03)00080-3](https://doi.org/10.1016/S0164-1212(03)00080-3). [Author-hosted paper](https://www.cs.vu.nl/~hans/publications/y2004/alma.pdf), especially scenario elicitation and alternative-comparison sections.
-2. Trivedi and Schmitt. **Does Code Cleanliness Affect Coding Agents? A Controlled Minimal-Pair Study**, arXiv v1. [10.48550/arXiv.2605.20049](https://arxiv.org/html/2605.20049v1), §§2–3 and §6.
-3. Orlanski et al. **SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks**, arXiv v2. [10.48550/arXiv.2603.24755](https://arxiv.org/html/2603.24755v2), evaluation and inherited-state methods. Do not import older counts from search snippets.
-4. **Is Agent Code Less Maintainable Than Human Code?** (CodeThread), arXiv v1. [10.48550/arXiv.2606.21804](https://arxiv.org/html/2606.21804v1), predecessor construction/filtering and downstream comparison.
-5. Zhu et al. **Needle in the Repo: A Benchmark for Maintainability in AI-Generated Repository Edits**, arXiv v1. [10.48550/arXiv.2603.27745](https://arxiv.org/pdf/2603.27745v1), diagnostic-probe and oracle construction.
-6. **When the Specification Emerges: Benchmarking Faithfulness Loss in Long-Horizon Coding Agents**, arXiv v1. [10.48550/arXiv.2603.17104](https://arxiv.org/html/2603.17104v1), §§2–3. Emergent-specification and project-memory evidence, not an assigned code-architecture experiment.
-7. La et al. **GameEngineBench: Evaluating Coding Agents on Real C++ Runtime Environments**, arXiv v1. [10.48550/arXiv.2607.03525](https://arxiv.org/html/2607.03525v1), §5 and limitations.
-8. Sperber and Schlegel. **Evolution of Functional UI Paradigms**. DOI [10.1145/3759163.3760429](https://doi.org/10.1145/3759163.3760429). [Author PDF](https://www.deinprogramm.de/sperber/papers/funarch-ui.pdf), architecture/MVC, MVU and conclusion sections; conceptual trade-offs, not a coding-agent trial.
-9. Nu pinned application artifacts: [MMCC Gameplay](https://github.com/bryanedds/Nu/blob/064f7ae92a8506689cd91aff5e6804a375d6ef3d/Projects/Breakout%20Mmcc/Gameplay.fs) and [ImSim Gameplay](https://github.com/bryanedds/Nu/blob/064f7ae92a8506689cd91aff5e6804a375d6ef3d/Projects/Breakout%20ImSim/Gameplay.fs). Repository evidence, not a peer-reviewed paradigm comparison.
-10. Wohlin et al. **Successful combination of database search and snowballing for identification of primary studies in systematic literature studies**. [10.1016/j.infsof.2022.106908](https://doi.org/10.1016/j.infsof.2022.106908), introduction and search-strategy definitions. This review uses a bounded combination, not a claim to have completed their systematic procedure.
+The latest scite audit recovered close methods and contrary evidence, but a broad discovery prefix and incomplete citation coverage cannot establish global novelty. The ICSA refactoring paper's full methods and graph-derived context-policy neighbors remain specifically deferred. Revisit them before claiming novelty in those subdomains, not before every routine engineering fix.
+
+## Primary source routes
+
+[1] ALMA: https://www.cs.vu.nl/~hans/publications/y2004/alma.pdf
+
+[2] Code cleanliness: https://arxiv.org/html/2605.20049v1
+
+[3] CodeThread: https://arxiv.org/html/2606.21804v1
+
+[4] SlopCodeBench: https://arxiv.org/html/2603.24755v2
+
+[5] ChainSWE: https://arxiv.org/html/2607.02606v1
+
+[6] Type-Error Ablation: https://arxiv.org/html/2606.01522v2
+
+[7] Complexity Trap: https://arxiv.org/html/2508.21433v3
+
+[8] ICSA official abstract: https://conf.researchr.org/details/icsa-2026/icsa-2026-papers/27/LLMs-for-Architectural-Refactoring-An-Exploratory-study-on-Monoliths-to-Microservice
+
+See the source audit for edition checks, selected sections actually read, scite access/graph coverage and excluded/deferred records. These sources motivate the controls; none establishes an ALF architecture effect before the proposed study is run.
