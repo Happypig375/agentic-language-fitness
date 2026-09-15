@@ -2,7 +2,7 @@
 
 **Reading scope revised 2026-09-15 from `7a3c9c9136a57979c7fc6d1d89526aafd16bda90`.** This is a DOI acquisition/reconstruction handoff, not a new full-reading record or experimental allocation. [PLAN.md](../../PLAN.md) owns authority. The [preceding review](../selection-evidence-closure-2026-09-15.md) and [source audit](../selection-evidence-closure-sources-2026-09-15.md) retain the evidence that motivated the initial entries.
 
-**Acquisition update, 2026-09-16 HKT:** the [collection checkpoint](../zotero-selection-acquisition-2026-09-15.md) records verified Zotero imports for S01–S18 and sixteen attached PDFs for fifteen works, including S05's publisher/preprint pair. Collection `PKLXQNEE` now contains 34 works and 35 PDFs. S02/S04/S07 still lack PDFs; S07 is open access with a blocked download. Prior partial-reading states below remain unchanged; acquisition does not promote them to full readings or impose a reading-count limit.
+**Current reading/acquisition update, 2026-09-16 HKT:** the [current reading decision](selection-reading-next-2026-09-16.md) records complete S02/S04/S07/S20/S22/S23/S26/S27 readings, including S23's supplement. The program has 24 complete works; Zotero `PKLXQNEE` has 43 works and 48 verified PDFs. Next accessible priorities are S01, then S05/S08/S03 and consequential scenario/selection/practitioner methods. The user has now supplied S19/S21/S24/S25; read these newly accessible close sources alongside the other priorities. The initial discovery descriptions below are historical starting states; the index and current decision control actual reading status. No paper-count limit is imposed.
 
 ## Scope: as necessary, not five papers
 
@@ -41,6 +41,8 @@ Start with unresolved direct overlap and methodological foundations. Acquisition
 The alternative-edition DOIs for S01/S05 are `10.48550/arXiv.1506.02465` and `10.48550/arXiv.2503.13310`. Import/resolve by work and edition, not as extra independent experiments.
 
 ## 2. Known lead pool to assess and promote — not another closed list
+
+**Later additions S19–S27:** exact titles, DOI/edition, Zotero keys, acquisition status and claim-specific consequences are maintained in the [current reading decision](selection-reading-next-2026-09-16.md). S20/S22/S23/S26/S27 are fully read; S19/S21/S24/S25 are newly supplied, identity-checked and pending full reading. This linked extension preserves one live work program and stable identifiers.
 
 These identities and discovery-level topics come from the committed [selection audit](../selection-evidence-closure-sources-2026-09-15.md), [three-criteria audit](../three-criteria-iteration-sources-2026-09-15.md), [design-discrimination audit](../pro-review-design-discrimination-sources-2026-09-14.md) and [Nu discovery ledger](../nu-form-factors-discovery-ledger-2026-09-14.md). They are listed so a local reader is not confined to the first priorities. This edit does **not** upgrade their reading status or validate their findings. Check live identity/edition and existing local holdings before use.
 

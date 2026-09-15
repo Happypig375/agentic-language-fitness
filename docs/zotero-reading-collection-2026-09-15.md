@@ -1,5 +1,7 @@
 # Zotero core reading collection
 
+**Current collection checkpoint, 2026-09-16 HKT:** **43 works and 48 PDFs**, all stored hashes verified. The supplied S02/S04/S07 PDFs, nine additional S19–S27 records, six automatic PDF attachments including S23's supplement, and reading status are recorded in the [current reading/acquisition decision](literature/selection-reading-next-2026-09-16.md). The user subsequently supplied S19/S21/S24/S25, closing their PDF access gaps; identities are checked and reading remains pending. All older totals and missing-PDF statements below describe their named historical checkpoints. Complete reading is separate in the [index](literature/full-reading/INDEX.md).
+
 **Current update (2026-09-15 HKT):** the user added CodePlan's 2024 publisher PDF. The collection now has thirteen works and **sixteen PDFs**. Earlier acquisition snapshots below remain history; complete reading is recorded separately in the [full-reading index](literature/full-reading/INDEX.md) and [synthesis](literature/full-reading/synthesis.md).
 
 **Prepared 2026-09-15 UTC; queue source `2cc51940181dd7adb885ff68de1f02b260221166`.** The user requested pulling the latest repository changes and creating a Zotero collection for adding PDFs. The checkout fast-forwarded from `73d0a23` to that source; the unrelated untracked `uv.lock` was preserved.

@@ -1,10 +1,35 @@
 # Full-paper reconstruction and pre-construction review
 
-**Proposal review entry point:** the [2026-09-15 standalone proposal](../../architecture-maintenance-research-proposal-2026-09-15.md) now presents the introduction, related research and gap, questions and methodology. This synthesis remains its detailed evidence and decision audit; its source findings and reading limits are unchanged.
+**Current synthesis, 2026-09-16 HKT:** the [standalone proposal](../../architecture-maintenance-research-proposal-2026-09-15.md) presents the introduction, gap, questions and methodology. The eight complete S readings below extend the earlier P/A evidence to **24 fully read works**, at the [index's exact coverage](INDEX.md). The local reading assignment continues; the earlier completed thirteen-core checkpoint is preserved below as history, not a stop instruction for the expanded program.
+
+## Current selection evidence and disposition
+
+| Question / strongest evidence | Disposition and consequence | Remaining discriminating work |
+| --- | --- | --- |
+| **Uniqueness — Scite and full methods**: S20 and S27 already execute recommended models; S23 compares automated recommendations with ordinary novice judgment; S02/S04/S07 cover patterns, retrieval and accepted alternatives | **Unconfirmed; narrow.** No novelty for executable recommendations, formal diagrams, alternative solutions, conditional choice or prospective architecture analysis. The residual contribution is an empirical test of the information added by responsibility/coordination analysis for coding-agent maintenance choices | Fully reconstruct S01 and close architecture/code leads S05/S08/S03; follow consequential primary sources. S19/S21/S24/S25 have just been supplied; full reading is pending. Scite discovery and notice checks cannot certify global absence |
+| **Value**: S22 distinguishes offline metrics from practical utility; S23 leaves assisted-user benefit untested; S27 does not isolate diagrams from the encoded heuristic | **Retain as a testable conditional benefit.** Compare useful behavioral outcomes and analysis effort against credible defaults and an ordinary review with matched information/budget. A negative result may identify when the cheaper policy suffices | Establish a real adoption choice, meaningful effect, independent profiles and beneficiary-compatible executor policy; no ROI or adoption benefit is observed |
+| **Methodological rigor**: S23's validation cases inform component selection; S20/S27 expose metric/search-policy limits; S22/S26 require correct units, assumptions and estimands | **Strengthen design; no validation claim.** Freeze all development before new profiles, preserve paired outcomes and valid alternatives, separate confidence/rank significance from correctness/utility, and distinguish independent profiles from executor repeats | Actual Nu/alternative-case equivalence, faults/oracle sensitivity, selector policy, uncertainty procedure and apparatus remain unvalidated; A0 is unallocated |
+
+| Complete source | Evidence-to-design consequence |
+| --- | --- |
+| [S02](S02-pattern-suggestions.md) | Pattern suggestions are established; preserve multi-label ambiguity and training/artifact discrepancies rather than reusing 70% as a behavioral effect |
+| [S04](S04-microrec.md) | Retrieval rankings use different question/document relevance units in the released scorer; require a common decision outcome and denominator |
+| [S07](S07-ml-product-development.md) | Valid alternatives already count; identity rates condition on fulfilment, and selectively triggered prompts are not a randomized prompt comparison |
+| [S20](S20-gpt-model-selection.md) | Executable recommendation/heuristic comparison is prior art; freeze first choice, fallback/search and primary utility, retaining metric-dependent reversals |
+| [S22](S22-recommender-evaluation.md) | Offline predictive accuracy, user benefit and costs differ; inspected manuscript formulas have errors and cannot be copied into an ALF protocol |
+| [S23](S23-intelligent-user-assistance.md) | All 60 cases, full questionnaire and robustness supplement are read; development-selected results and unaided novice scores do not establish independent assistant-use benefits |
+| [S26](S26-statistical-comparisons.md) | Data sets/profiles are independent units, not rows/folds/repeats; mean effects, ranks and win counts differ; nonsignificance is not equivalence |
+| [S27](S27-variability-aware-selection.md) | Formalization of existing advice does not establish incremental decision value; one executed case and quoted cross-study results do not validate a transferable selector |
+
+The [reading decision and acquisition record](../selection-reading-next-2026-09-16.md) records **43 Zotero works and 48 PDFs**, all stored hashes verified, including S23's newly attached 26-page supplement. The user supplied S19/S21/S24/S25 after the earlier download failures. Their identities are checked; full reading follows, alongside ASlib, close architectural/code evidence and relevant scenario/noisy-choice/practitioner methods. Priorities do not impose a stopping count. No newly available source is treated as fully read merely because its PDF is attached.
+
+The smallest later experimental decision remains human disposition of A0, after the consequential reading distinctions are resolved or explicitly narrowed. No construction, recruitment, model/worker dispatch or extra allocation was performed. Reading, arithmetic and static artifact inspection are not experimental reproduction or human sign-off.
+
+## Historical thirteen-core checkpoint
 
 **2026-09-15 HKT; evidence basis `7259e8dc494de172da3721c890bebcf3d6a18d68`.** Reader and reviewer: the main Codex AI session, with self-review. This completes the thirteen-paper reading/reconstruction assignment and its documentation revision. It is not human approval, a systematic review or experimental reproduction. [INDEX](INDEX.md) owns per-edition coverage; [assets](assets.json) locates the sixteen Zotero PDFs. CodePlan's publisher PDF is present. P04's source image clips the tail of one prompt; unavailable/private artifacts and unreported methods remain explicit in the notes.
 
-## Decision for human review
+## Core checkpoint's decision for human review
 
 **Narrow the proposal and reuse established methods.** Retain a prospective, task-specific **package suitability** question, subject to A0 feasibility. Do not position chaining, inherited/reference controls, architectural maps, dependency planning, structured memory or history masking as new. The closest studies already implement them. The useful remaining decision is whether a maintainer could choose a package for a specified family of changes using predictions about responsibility and coordination that add value beyond initial correctness, source size and API availability.
 
@@ -127,4 +152,4 @@ Earlier 108-DOI discovery and sixty-source audits retain their original scope. N
 - [Printed arithmetic code](published_arithmetic.py) and [saved output](published-arithmetic.json) cover all thirteen papers. [CSV audit code](artifact_csv_check.py) and [output](artifact-csv-check.json) preserve P09 source SHA-256, group membership, separate summary costs and matched hybrid counts. Its fifty common IDs give 28/50 for hybrid, raw, masking and summary; discordant outcomes remain, so equality of counts is not equivalence or a statistical reproduction.
 - Missing raw inclusion/aggregation rules, private fixtures, judge calibration and edition/code discrepancies limit exact replication. They do not leave the reading assignment open or authorize guessing parameters. Human review must judge whether the proposed local decision remains useful despite them. [Validation](validation.md) records local checks and required CI scope; the final handoff identifies the exact publication/CI result. CI does not certify the papers or approve A0.
 
-The requested deliverable is this evidence-driven revision. The next scientific action requires the human A0 disposition above; no experimental resources were spent by this reading assignment.
+That original core deliverable was the evidence-driven revision above. The later expanded literature assignment continues under the current section and PLAN; A0 still requires human disposition. No experimental resources were spent by either reading assignment.

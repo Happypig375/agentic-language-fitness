@@ -1,5 +1,7 @@
 # Zotero selection-literature acquisition checkpoint
 
+**Current collection checkpoint, 2026-09-16 HKT:** **43 works and 48 PDFs**, all stored hashes verified. The supplied S02/S04/S07 PDFs, nine additional S19–S27 records, six automatic PDF attachments including S23's supplement, and reading status are recorded in the [current reading/acquisition decision](literature/selection-reading-next-2026-09-16.md). The user subsequently supplied S19/S21/S24/S25, closing their PDF access gaps; identities are checked and reading remains pending. All older totals and missing-PDF statements below describe their named historical checkpoints. Complete reading is separate in the [index](literature/full-reading/INDEX.md).
+
 **2026-09-15; queue source `033bb2c`.** The user requested `git pull`, collection of the additional literature, automatic attachment of open-access PDFs, and manual handling of unavailable publisher sources. The checkout fast-forwarded from `78c2eea` to `033bb2c`; the unrelated untracked `uv.lock` was preserved.
 
 **Import completed and verified 2026-09-16 HKT (2026-09-15 UTC).** Eighteen S01–S18 papers and sixteen PDFs for fifteen works were added to the existing collection. It now contains **34 parent works and 35 PDFs**. Independent local API and stored-file readback verified the new records and attachments; the original sixteen parent records and nineteen PDF hashes are unchanged. Three works still need PDFs, as listed below.
