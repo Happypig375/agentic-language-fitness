@@ -35,6 +35,8 @@ E1/E2/E2a/E3a/H0 remain completed; H1/H2 remains prepared/unallocated. Preserve 
 
 ## Use literature to decide
 
+Every proposal review and research handoff must explicitly assess uniqueness using Scite, research-gap value and useful implications, and scientific validity of the methodology. Follow the [required review criteria](PLAN.md#required-proposal-review-criteria); give evidence and unresolved conditions for each rather than implying that completed reading confirms all three.
+
 Follow the linked research-loop procedure and the stronger full-PDF coverage requirements of this assignment. Exact metadata/title/edition checks precede method claims. Keep downloaded, partially read, fully read, method-reconstructed and experimentally reproduced distinct. Preserve PDF hashes, page coverage, figure/table checks and supplement gaps. Do not commit copyrighted PDF bodies or extract dumps into this repository by default.
 
 Use scite for exact identities, acquisition leads, citation contexts and targeted snowballing. Request 20 items per literature page and use offsets based on the effective returned page size to go beyond the first page where relevant; exact lookups may naturally return fewer. Verify body source/identity, and use primary PDFs rather than snippet mosaics. Citation-graph `s` is citing and `t` is cited; low coverage/truncation prohibit novelty inferences. Inspect what a contrasting citation actually measures before treating it as a replication or refutation. A cited full-text passage does not prove an entire paper was read.

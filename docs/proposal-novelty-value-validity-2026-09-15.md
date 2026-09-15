@@ -91,3 +91,7 @@ Observed local checks for this eight-file prose revision:
 - Working-tree whitespace checks passed; staged and exact committed-range checks precede publication. The expected CI route is documentation-only, and the final handoff reports the actual exact-commit result and skipped runtime work.
 
 Current authority remains proposal preparation, Zotero additions and direct publication. **A0/A1 construction and candidate execution remain on hold; new allocation is zero.** The old 192+5 arithmetic remains unallocated and incomplete for RQ3. The next decision is the user's review of the revised proposal and A0 disposition.
+
+## Standing review requirement
+
+After publication `44f691e16996d69209607d08af23483dea80abdd`, the user reaffirmed all three criteria as an ongoing requirement: uniqueness checked with Scite, value from a supported gap and useful implications, and scientific validity through methodological rigor. [PLAN's review criteria](../PLAN.md#required-proposal-review-criteria) now require an explicit supported/not-supported/unresolved verdict, evidence and next check for each at every proposal review or research handoff. This clarification does not change the verdicts above or claim a new search, reading or scientific validation. Existing construction and execution holds remain unchanged.

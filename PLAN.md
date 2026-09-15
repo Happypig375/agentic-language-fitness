@@ -18,6 +18,18 @@ The proposed direction is a **prospective architecture-package suitability case*
 
 The user requested the completed pre-review reading/checks and then a new proposal to review from introduction to gap/questions to methodology, with commit and push. This authorizes proposal preparation and publication, **not A0/A1 construction, recruitment, adapters, calibration, model/count probes, candidate execution or extra workers**. New experiment allocation: **zero**. The earlier 192+5 envelope remains unallocated planning arithmetic; controls require a revised finite proposal, not extra free calls.
 
+## Required proposal review criteria
+
+The user reaffirmed that every proposal review and research handoff must explicitly assess all three criteria below. Report an evidence-based verdict for each: supported within a stated scope, not supported, or unresolved. Give the decisive evidence, limitations and next necessary check. A polished proposal or completed reading list does not itself confirm these criteria.
+
+| Criterion | Required confirmation |
+| --- | --- |
+| **Unique (Scite)** | Compare the exact proposed contribution with the closest prior work using Scite and primary-paper methods. State what is inherited, what differs, and the search/access limits. Non-discovery alone cannot establish uniqueness. |
+| **Valuable** | Identify the supported research gap, beneficiary, decision or knowledge gained, and useful implications of positive, negative or mixed findings. Explain the added value over existing methods and simpler alternatives. |
+| **Scientifically valid** | Check whether the questions, constructs, comparison, controls, observations, sampling and analysis support the intended claims. Address rival explanations, missingness, reproducibility and validity limits; distinguish proposed rigor from demonstrated feasibility. |
+
+The [current assessment](docs/proposal-novelty-value-validity-2026-09-15.md) retains the actual verdicts. If evidence fails to support a criterion, revise or narrow the proposal within the authorized scope and report what remains unresolved. This standing requirement does not approve construction or experimental execution.
+
 ## Core research reading list and completion
 
 All thirteen chosen PDFs were consumed, including appendices and visual tables/figures/equations, with the intrinsic clipped P04 prompt tail recorded. Missing methods, private data and unavailable repositories remain replication limits. No author program or experimental reproduction ran. Reader/self-review: the main Codex AI session; no independent or human review is claimed.
