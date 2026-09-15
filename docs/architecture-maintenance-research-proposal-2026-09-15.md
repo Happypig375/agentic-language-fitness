@@ -12,11 +12,17 @@ Here, an **architecture package** means the concrete source organization togethe
 
 The intended contribution is a bounded, prospective test of package-choice reasoning. It would show where predictions about responsibility and coordination succeed, fail or cannot be distinguished from simpler explanations. It would also produce explicit change contracts and evidence that another researcher can inspect. A favorable result would support a decision about the selected packages and scenarios; broader architectural, language or programming-paradigm claims would require further cases and stronger controls.
 
+The intended user is a maintainer choosing a starting implementation for a declared change profile. The actionable output is a conditional recommendation: choose package A, choose package B, or withhold a recommendation, with the behavioral risks that justify it. The value test is whether that recommendation earns a better subsequent behavioral outcome than predeclared choices based on initial source size and API fit. An architectural description that never improves or distinguishes a decision would not establish that added value. This study tests the recommendation's outcome; it does not measure human adoption, analysis labor savings or return on investment.
+
 ## 2. Related research and the research gap
 
 ### 2.1 From architectural descriptions to change predictions
 
 Architecture-level modifiability analysis (ALMA) supplies a close methodological foundation: identify the decision, describe the architecture, elicit change scenarios and assess their impact. This proposal adopts that prospective scenario logic. ALMA's illustrative applications do not, by themselves, establish that an analyst's predictions are calibrated for coding agents. The proposed study therefore records predictions and their possible disconfirmation before implementation. [Bengtsson et al., 2004][p02].
+
+Prospective validation also has direct prior art. Lassing, Rijsenbrij and van Vliet reviewed 117 later change requests for a business information system, excluded 61 implementation-bug requests, and analyzed the remaining 56 against earlier scenarios and architectural risk categories. They also compared the categories with one experienced developer's complexity judgments. Their full paper explicitly includes architecture comparison as an ALMA goal. The present question therefore concerns the incremental behavioral value of conditional package recommendations under a coding-agent policy, not invention of prospective evaluation, architectural comparison or prediction of future demand. [Lassing et al., 2003][a01].
+
+That study also exposes a useful rival: a change confined to one component can remain difficult because of its domain or technical complexity. Low cross-component coordination is therefore insufficient as a prediction. This proposal retains implementation bugs in the assigned trajectories and examines local complexity alongside coordination, API fit and source size; developer complexity labels do not substitute for its behavioral endpoint. [Lassing et al., 2003][a01].
 
 Architectural descriptions and planning are also established in agent research. Sambu et al. evaluate LLM-produced decompositions of monoliths into service partitions; their evaluated outcome is a proposed partition rather than an executed refactoring followed by maintenance. Theory of Code Space evaluates architectural-map construction, and CodePlan combines dependency analysis, impact propagation and repository-level edit planning. These studies motivate examining responsibilities and dependencies, while leaving their different outcomes distinct: a partition score, a graph score and successful application behavior are different forms of evidence. The present proposal uses analyst-only source maps to formulate predictions; it does not introduce a map or planning assistant as a new agent treatment. [Sambu et al., 2026][p01]; [Sapunov, 2026][p12]; [Bairi et al., 2024][p13].
 
@@ -25,6 +31,8 @@ Architectural descriptions and planning are also established in agent research. 
 The code-cleanliness minimal-pair study compares source variants under matched task behavior. CodeThread studies downstream changes to accepted human and agent predecessors. SlopCodeBench measures correctness, regressions, structural proxies and cost across inherited code, while ChainSWE includes canonical prior fixes and naturally accumulated fixes. Together, these are direct predecessors for source comparisons, maintenance chains and reference-predecessor controls. Their designs and selection rules differ: for example, CodeThread's predecessor acceptance uses both earlier and future tests, while ChainSWE's modes can change source access as well as memory. Those choices cannot be treated as interchangeable controls. [Trivedi and Schmitt, 2026][p03]; [Patel et al., 2026][p04]; [Orlanski et al., 2026][p05]; [Jin et al., 2026][p06].
 
 They also leave several rival explanations relevant to this proposal. A downstream failure may be an ordinary defect in the preceding patch, rather than difficulty extending a correct design. A larger request or a missing API may explain cost or failure without invoking organization. Structural conformance alone is insufficient: Needle in the Repo scores required design structure, but does not establish its future maintenance benefit. Accordingly, this study scores declared behavior and retains valid alternative implementations, including edits that depart from the initial style. [Zhu et al., 2026][p07].
+
+The position paper *Benchmarking the Residual* further distinguishes ordinary error compounding, harder local work and history-dependent difficulty. It argues for declared checkpoint comparisons and cautions that a protocol contrast does not identify a mechanism. That is relevant methodological reasoning, not a newly executed validation study. This proposal retains direct reference-predecessor comparisons; it does not adopt the paper's residual estimator or multiply checkpoint rates into an assumed chain-success baseline. [Peng et al., 2026][a03].
 
 ### 2.3 Feedback, information and measurement
 
@@ -38,16 +46,16 @@ The reviewed work establishes methods for architectural analysis, dependency pla
 
 The proposed study connects three elements: predictions recorded before implementation, equivalent observable change requirements across two credible packages, and subsequent behavioral outcomes under controlled information exposure. Its added value depends on whether those predictions discriminate between packages in a way that could change a maintainer's decision. If both architectural predictions and a simple size or API explanation always make the same prediction, the case cannot establish their separate value.
 
-This gap assessment draws on thirteen fully read core papers and bounded artifact checks. It is a focused synthesis, not a systematic coverage or novelty claim. The individual reconstructions retain edition differences, private or unavailable artifacts and unresolved methods. No claim of an independently reproduced literature result is required for the proposed local feasibility decision.
+This gap assessment draws on thirteen fully read core papers, three additional full readings and bounded artifact checks. The [novelty, value and rigor assessment](proposal-novelty-value-validity-2026-09-15.md) compares the closest evidence and the [follow-up ledger](proposal-novelty-value-validity-sources-2026-09-15.md) retains the new Scite searches, access limits and deferred leads. A potentially distinct empirical application remains; uniqueness is not established. No systematic coverage, calibrated prediction method or independently reproduced literature result is claimed.
 
 ## 3. Research questions and propositions
 
-The principal question is: **Can prospective analysis of responsibility and coordination help choose between two architecture packages for specified maintenance changes performed by a coding agent?** Three questions make that objective observable.
+The principal question is: **Does prospective responsibility-and-coordination analysis yield better package choices than predeclared source-size and API-fit heuristics for specified maintenance changes performed by a coding agent?** Three questions make that objective observable.
 
 | Question | Evidence needed | Interpretation |
 | --- | --- | --- |
 | **RQ1 — Case feasibility:** Can the packages satisfy common behavioral contracts while presenting a credible, consequential difference in coordination demands? | Working baselines, contrasting reference changes, recorded predictions and validated observations | Determines whether the case is worth studying; does not establish an agent effect |
-| **RQ2 — Prospective suitability:** Under a fixed agent policy, where do predeclared package-suitability predictions agree or disagree with new-behavior completion and preservation of earlier obligations? | Frozen scenario predictions and all assigned candidate trajectories, including failures and architectural drift | Tests predictions locally and examines rivals; does not isolate architecture from the entire package |
+| **RQ2 — Decision value:** Under a fixed agent policy, do the packages selected by prospective analysis achieve better declared behavioral outcomes than the packages selected by simple heuristics, and which predicted obligation patterns survive? | Frozen package choices, comparator rules, scenario predictions and all assigned candidate trajectories, including failures and architectural drift | Tests local decision value and prediction patterns; does not isolate architecture from the entire package |
 | **RQ3 — Starting-state sensitivity:** At specified later tasks, how do package outcomes differ when starting from naturally inherited code versus a validated reference predecessor? | Predeclared reference-predecessor comparisons for both packages, without selecting histories by success | Measures sensitivity to the starting-state policy; does not identify a pure architectural-degradation mechanism |
 
 The working proposition is conditional: an organization that reduces the coordination needed for a particular change may improve that change's reliability, provided it does not introduce offsetting ordering, lifecycle or API obligations. Directional predictions will be made for actual scenarios after source inspection. No package is designated the expected overall winner.
@@ -61,6 +69,8 @@ RQ1 is the immediate feasibility study. RQ2 requires separately reviewed constru
 ### 4.1 Study design and provisional case
 
 The design is a staged comparison of two concrete packages within one application domain. A model-free feasibility phase, **A0**, tests whether the contrast is meaningful and measurable. After separate review, **A1** would construct and freeze the maintenance scenarios, controls and analysis plan. Controller verification and any model-backed study follow later approval.
+
+The later fixed candidate comparison is a bounded comparative experiment situated in a real software case. Use of an existing repository alone does not make it a naturalistic case study. Runeson and Höst's methods guidance informs case boundaries, protocol traceability, rival explanations and validity reporting; reading the guidance does not validate this still-unexecuted design. No human-participant study is proposed. [Runeson and Höst, 2009][a02].
 
 The provisional case is the MMCC and ImSim Breakout examples in Nu, pinned to [064f7ae92a8506689cd91aff5e6804a375d6ef3d](https://github.com/bryanedds/Nu/tree/064f7ae92a8506689cd91aff5e6804a375d6ef3d). The relevant application files are:
 
@@ -94,13 +104,16 @@ Each selected scenario receives a versioned prediction card. Original cards are 
 | Field | Recorded content |
 | --- | --- |
 | Change and provenance | Required new behavior, retained obligations, reason for selecting it, and whether it represents expected demand or a deliberate stress case |
-| Source explanation | State owner, affected responsibilities, ordering/effect boundaries, information to recover, and work already supplied by the runtime |
+| Source explanation | State owner, affected responsibilities, ordering/effect boundaries, component-local domain/technical complexity, information to recover, and work already supplied by the runtime |
 | Prediction | Package advantage, tie or uncertainty; the expected obligation or failure pattern and why |
 | Simple comparators | What source size, baseline correctness and API availability would predict, including disagreements with the architectural prediction |
+| Decision and adjudication | Package choice or abstention for the declared change profile; comparator choices under their frozen rules; the behavioral observation that could distinguish their recommendations |
 | Rival and disconfirmation | An alternative explanation and observations that would contradict or fail to distinguish the proposed explanation |
 | Provenance and revision | Exact source, analyst identity, timing and all subsequent changes to the prediction |
 
 This is a source-grounded argument, not a new numerical architecture score. Nearby statements do not automatically imply low coordination, and counts of files, abstractions or graph edges do not define the expected outcome. Analyst maps and prediction cards remain outside candidate prompts. Requesting a candidate's own map would change its reasoning and information policy and would require a separate intervention.
+
+Before the first A0 witness, record the intended choice and the rules for the simple comparisons. The size rule prefers the smaller initial permitted source bundle under a stated byte definition; the API rule specifies which required facilities count as available and how mixed advantages produce a tie or abstention. Both rules use only the initial source and declared demands, not resulting patch size or agent performance. A0 seeks a credible disagreement or additional actionable prediction; it cannot show that following the recommendation improves agent outcomes. A case selected because the predictions disagree is a diagnostic case, not a representative estimate of how often disagreement occurs.
 
 ### 4.4 A1: construct the maintenance workload
 
@@ -108,7 +121,7 @@ If A0 supports proceeding, the proposed workload is **two four-episode chains fo
 
 Requirements are written before their reference successors and matched between packages at the behavioral level. Necessary effort, patch size and touched-file count are outcomes, not matching criteria. Scenarios must probe the declared demands, including plausible adverse cases, rather than repeatedly reward one package's known convenience. Expected-use scenarios and stress-selected scenarios remain identifiable; no deployment frequency is inferred from their equal inclusion.
 
-A1 would expand the obligation, semantic-fault and alternative-implementation audit, then freeze the tasks, prediction cards, reference predecessors, accepted information, submission interface, scoring and analysis. A separate challenge review should be sought when available; its actual independence and expertise must be stated. Reference implementation and self-review are not human validation. The formal comparative-case protocol and its conditional methods reading remain A1 prerequisites, rather than completed work in this proposal.
+A1 would expand the obligation, semantic-fault and alternative-implementation audit, then freeze the tasks, prediction cards, reference predecessors, accepted information, submission interface, scoring and analysis. A separate challenge review should be sought when available; its actual independence and expertise must be stated. Reference implementation and self-review are not human validation. The case-methods reading is now complete; the formal comparative protocol remains an A1 prerequisite. Construction-informed revisions must be distinguished from original predictions. Later agent outcomes can test the frozen, construction-informed predictions on these chosen scenarios, but do not turn those scenarios into an independent test set for general predictive performance.
 
 ### 4.5 Candidate policy and information exposure
 
@@ -161,7 +174,11 @@ A complete repeated block contains both packages and both chains under the same 
 
 Analysis first presents all obligation and episode outcomes, then chain-specific paired package differences within each block. An overall assigned-policy summary, if adopted, uses declared equal-chain weights and retains the separate chain results. Partial blocks retain coverage and missing-outcome bounds. Assertion counts are not independent tasks, and repeated trajectories are not additional architectures or scenario families.
 
-RQ2 compares the frozen predictions with the observed obligation patterns, contradictions and competing explanations. A uniformly stronger package is less informative about change-specific reasoning than a justified distinction between demands, but no crossover is required for a result to be retained. When the architectural and simple-comparator predictions agree everywhere, their separate predictive value remains unresolved. With two chosen chains, the study will not fit a large prediction model or claim calibrated architectural forecasts.
+For RQ2, the proposed decision endpoint is **joint completion at the final episode of each chain**, with every earlier obligation transition still reported. This answers whether the chosen starting package delivers the applicable behavior at the end of the declared change profile. It permits recovery before the final episode; uninterrupted success is a separate descriptive outcome. The recommendation for each chain is frozen before candidate outcomes. Within each paired block, compare final joint completion of the package recommended by the architectural analysis with final joint completion of the package recommended by each simple comparator. Both packages are already assigned, so this analysis adds no candidate dispatches. Any overall summary uses the previously declared equal-chain weights; those weights do not represent deployment demand.
+
+Report each comparison's paired difference, uncertainty and recommendation coverage. Same-package recommendations have identical observed choice outcomes and cannot establish an incremental advantage. An abstaining heuristic supplies no observed package-choice comparison; extra recommendation coverage alone is not demonstrated superiority to an unspecified default. Unknown outcomes retain coverage and bounds, and an observed zero difference is not proof of equivalence. A1 must freeze the meaningful difference, interval procedure, missingness treatment and finite sample justification before any candidate outcomes. This endpoint is a sharpened proposal for review, not an adopted experimental protocol.
+
+Separately compare the frozen scenario predictions with obligation patterns, contradictions and rivals. An outcome advantage for a recommendation does not prove that the analyst's architectural explanation caused it. A uniformly stronger package is less informative about change-specific reasoning than a justified distinction between demands, but no crossover is required for a result to be retained. With two chosen chains, the study will not fit a large prediction model or claim calibrated forecasts, a learned selection rule or population-wide decision improvement.
 
 RQ3 reports the sentinel contrasts alongside predecessor defects and missing obligations. Resource comparisons retain correctness outcomes and usage coverage so that early failures or missing records do not create an unexplained claim of efficiency. Any inferential procedure, endpoint, missingness convention and sample count must be fixed in A1 before outcomes; non-significance is not equivalence, and identical repetitions are not population certainty. No favorable-result-driven extension is permitted.
 
@@ -170,6 +187,7 @@ RQ3 reports the sentinel contrasts alongside predecessor defects and missing obl
 | Threat | Planned response and residual limit |
 | --- | --- |
 | API, physics or source size explains the result | Audit these differences and predeclare simple rivals; redirect an uninformative A0 case. The remaining treatment is still a package. |
+| Local complexity is mistaken for coordination burden | Inspect the affected component's domain and technical demands; locality alone does not predict ease or justify further decomposition. |
 | Analyst chooses changes to confirm a preference | Record scenario provenance and predictions before witnesses; retain adverse cases and all revisions. A0 remains constructive feasibility work. |
 | Inherited defects dominate later tasks | Separate obligation transitions and use predeclared reference sentinels for RQ3. The reference contrast still includes concrete implementation differences. |
 | Tests reward one implementation | Validate meaningful faults and legitimate alternatives; make required structural contracts public. Finite tests do not establish universal equivalence. |
@@ -204,6 +222,8 @@ Current authorization covers proposal preparation and publication. A0/A1 constru
 ## 6. Expected contribution
 
 The study would contribute a transparent test of prospective package-choice reasoning: source-bound predictions, observable maintenance contracts, contrary cases and outcomes under a precisely stated agent policy. An informative result may favor either package, reveal that the expected advantage depends on the change, or show that simpler API, size or predecessor explanations suffice. An A0 decision to reject the proposed case is also useful if it prevents an uninformative model study.
+
+The useful implications are conditional and concrete. Supported recommendations would inform the initial package choice for the studied change profile. Contradicted recommendations would identify where the proposed coordination reasoning misleads and what behavior requires stronger checks. If simple heuristics suffice, the study would provide no evidence that extra architectural analysis improves that choice. If the advantage changes under reference predecessors, it would show that the recommendation depends on the inheritance policy. None of these outcomes requires declaring a universal winning language, architecture or engine.
 
 The contribution is local evidence and a reusable comparison procedure. General language superiority, internal architectural understanding, benefits of repair isolation and physical context-window advantages remain separate questions.
 
@@ -241,8 +261,22 @@ The P-identifiers match the repository's reading records and Zotero queue. Linke
 [p12]: https://arxiv.org/abs/2603.00601v4
 [p13]: https://doi.org/10.1145/3643757
 
+Additional sources from the novelty/value/methods assessment use A-identifiers. All three are fully read and in the existing Zotero collection, including the A01 publisher PDF supplied by the user during this audit. Their [coverage and source record](proposal-novelty-value-validity-sources-2026-09-15.md) preserves edition identities, methods and acquisition history.
+
+| ID | Reference | Evidence used |
+| --- | --- | --- |
+| A01 | Lassing, Rijsenbrij and van Vliet (2003). [How well can we predict changes at architecture design time?][a01]. Journal of Systems and Software, 65(2), 141–153. | Complete user-supplied publisher PDF, 13 pages; exact identity and methods reconstructed |
+| A02 | Runeson and Höst (2009; online 2008). [Guidelines for conducting and reporting case study research in software engineering][a02]. Empirical Software Engineering, 14(2), 131–164. | Complete Lund institutional PDF, including appendices |
+| A03 | Peng, Lyu, Dong, Dong and Lin (2026). [Benchmarking the Residual: What Long-Horizon Evaluations Add Beyond Matched Short-Task Performance][a03]. arXiv `2607.27283v1`. | Complete position paper; no residual estimator adopted |
+
+[a01]: https://doi.org/10.1016/S0164-1212(02)00056-0
+[a02]: https://doi.org/10.1007/s10664-008-9102-8
+[a03]: https://arxiv.org/abs/2607.27283v1
+
 ## Supporting evidence and proposal provenance
 
 This standalone proposal reorganizes the completed reading and scientific position at repository commit `9d3f797ea48c83f283e488f23aa0fe6ffa308f46` for introduction-to-methodology human review. The [full-paper synthesis](literature/full-reading/synthesis.md), [coverage index](literature/full-reading/INDEX.md), [source decisions](literature/full-reading/source-decisions.md) and [arithmetic/artifact validation](literature/full-reading/validation.md) remain the supporting audit. Their reading and reproduction limits are unchanged. The [2026-09-14 proposal](architecture-maintenance-research-proposal-2026-09-14.md) is retained as the preceding formulation.
 
 The proposal and its check are main-session AI work; human scientific review is pending. The [preparation record](research-proposal-review-preparation-2026-09-15.md) identifies this revision's scope and validation. [PLAN.md](../PLAN.md) owns execution authority and subsequent decisions.
+
+The subsequent [assessment and sharpening record](proposal-novelty-value-validity-2026-09-15.md), based on `8f80b7f45441724c429b563283f433f815ef6ec8`, corrects the prospective-evaluation prior art and specifies a proposed decision-value comparison. This is a research-proposal revision at the user's request; no construction, new treatment execution or allocation followed from it.

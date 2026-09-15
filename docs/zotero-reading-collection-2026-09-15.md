@@ -79,3 +79,15 @@ The binaries are stored in Zotero, not committed here. Attachment keys in the ta
 CodePlan parent `LLMGIWQM` now has publisher attachment `LS9AUVZE`: **24 pages, 1,202,157 bytes, SHA-256 `c31dec9440c699aaffb5597139e9ea8b13f8409e84f954723a881a58af671e08`**. Its first page identifies PACMSE 1/FSE article 31, July 2024, DOI `10.1145/3643757`, with CC BY 4.0. The user supplied this file; no claim is made that the earlier HTTP 403 route became accessible. Their renamed 2023 preprint attachment is preserved.
 
 The publication was read in full for [P13](literature/full-reading/P13-codeplan.md), and all thirteen chosen core editions now have reconstruction records. Sixteen PDFs represent thirteen works, including historical P06/P11 v1 and CodePlan preprint editions. [Current assets](literature/full-reading/assets.json) separate catalog authors from edition authors and retain exact hashes. No Zotero items were modified during this reading pass. Original arithmetic, bounded artifact checks and proposal revisions are in the synthesis; no allocation or construction follows automatically.
+
+## Novelty, value and rigor follow-up
+
+The user requested adding every new full-reading candidate to this same collection. Three records were added after library-wide DOI/title duplicate checks; the two available open-access PDFs were attached automatically. The user then attached the Lassing publisher PDF. All three papers are now fully read for the [proposal assessment](proposal-novelty-value-validity-2026-09-15.md).
+
+| ID | Added paper | Parent key | PDF attachment | Completion note |
+| --- | --- | --- | --- | --- |
+| A01 | Lassing et al. (2003), How well can we predict changes at architecture design time? | `DH37JS6Z` | `PDAAF9CS`, user-supplied publisher PDF | `MZ2ZESZ9` |
+| A02 | Runeson and Höst (2009), Guidelines for conducting and reporting case study research in software engineering | `VP6XD6XW` | `V37TJNUP`, Lund institutional PDF | `ALQ75MK4` |
+| A03 | Peng et al. (2026), Benchmarking the Residual | `PU4ASENH` | `WFVP6YXC`, arXiv v1 | `4BC8QJ4H` |
+
+Current collection totals are **16 parent works and 19 PDFs**. Connector/local API readback verified destination, exact supplied metadata, attachment parents and stored PDF hashes. The [follow-up ledger](proposal-novelty-value-validity-sources-2026-09-15.md) records byte identities, complete text/visual coverage and methods. Verified completion notes supersede A01's import-time access limit in Extra. The original core assets and historical edition snapshots above remain identifiable. No copyrighted paper bodies were committed and no experimental allocation followed.

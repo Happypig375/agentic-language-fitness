@@ -103,12 +103,12 @@ Source density, responsibility locality and tool support therefore stay separate
 
 ## Conditional reading disposition
 
-No conditional paper was promoted: this revision narrows a feasibility question and defers the mechanisms that would trigger them. The following are **deferred, not scientifically rejected or fully read**. A future proposal must promote the relevant row before making its detailed claim.
+At the original thirteen-core-paper checkpoint no conditional paper was promoted. The subsequent [novelty/value/rigor assessment](../../proposal-novelty-value-validity-2026-09-15.md) fully read Runeson and Höst as A02; its row is updated below. The other nine papers remain **deferred, not scientifically rejected or fully read**. A future proposal must promote the relevant row before making its detailed claim.
 
-| DOI | Deferred trigger |
+| DOI | Current status / trigger |
 | --- | --- |
 | `10.1145/3759163.3760429` | Functional-UI lineage/trade-off explanation. The active proposal uses pinned source obligations, not that lineage as evidence. |
-| `10.1007/s10664-008-9102-8` | Final formal comparative-case/triangulation/generalization protocol. A1 is not finalized here. |
+| `10.1007/s10664-008-9102-8` | Fully read in the [follow-up ledger](../../proposal-novelty-value-validity-sources-2026-09-15.md), A02. Case boundaries and traceability inform the proposal; formal A1 design remains unfinished. |
 | `10.1016/j.infsof.2022.106908` | A systematic database-plus-snowballing review; no coverage/novelty certificate is claimed here. |
 | `10.48550/arXiv.2606.00408` | New masking/history experiment; the earlier concrete history follow-up is explicitly deferred. |
 | `10.22152/programming-journal.org/2023/7/13` | Operationalizing a programming-systems dimension framework; the present source map is descriptive. |

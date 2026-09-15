@@ -1,5 +1,7 @@
 # Core full-paper reading index
 
+The subsequent [novelty/value/rigor assessment](../../proposal-novelty-value-validity-2026-09-15.md) adds three complete readings: Lassing et al. (2003), Runeson and Höst (2009), and Peng et al. (2026). Their [follow-up ledger](../../proposal-novelty-value-validity-sources-2026-09-15.md) records full coverage, methods and Zotero identities. The thirteen core records below retain their original scope; the current total is sixteen fully read works, with nineteen PDF editions in the collection.
+
 Completed the thirteen-paper reading and evidence-driven revision on 2026-09-15 HKT, starting at `7259e8dc494de172da3721c890bebcf3d6a18d68`. This is the coverage record for the core targets in [PLAN](../../../PLAN.md), not a record of experimental reproduction or human approval. Reader: the main Codex AI session. Start human review with the [standalone proposal](../../architecture-maintenance-research-proposal-2026-09-15.md); use the [synthesis and next decision](synthesis.md) for its evidence audit. Missing methods/artifacts and the clipped P04 prompt tail remain explicit; they are not silently completed.
 
 The Zotero collection is `PKLXQNEE` (ALF - Core Paper Reading Queue, 2026-09-15). [assets.json](assets.json) records actual attachment identities, PDF hashes, page counts and edition labels. Local file paths and copyrighted extracted text remain outside Git. Resolve an attachment via Zotero's local API or `zotero://select/library/items/<key>`.
