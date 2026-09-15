@@ -1,19 +1,21 @@
 # Research plan
 
-**Updated 2026-09-15 after complete reading of the thirteen core papers; basis `7259e8dc494de172da3721c890bebcf3d6a18d68`.** The requested reading, artifact/arithmetic checks and evidence-driven revision are complete. Next is **human disposition of the narrowed A0 feasibility proposal**, before construction. Frozen protocols, completed observations and unused-quota restrictions remain unchanged.
+**Updated 2026-09-15 for standalone research-proposal review; basis `9d3f797ea48c83f283e488f23aa0fe6ffa308f46`.** The thirteen-paper reading and artifact/arithmetic checks are complete. The user requested a new proposal to review from introduction through research gap/questions to methodology. The [standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md) now supplies that review sequence. Next is **human review of the proposed study and disposition of A0 feasibility**, before construction. Frozen protocols, completed observations and unused-quota restrictions remain unchanged.
 
 ## Active question and document authority
 
 The proposed direction is a **prospective architecture-package suitability case**: can source-grounded predictions about responsibility and coordination help select a package for specified future changes, beyond initial correctness, source size and API availability? This is bounded reuse/adaptation of established methods, not a universal language ranking or a demonstrated architectural/context effect.
 
-- [Full-paper synthesis and human-review decision](docs/literature/full-reading/synthesis.md): **current review entry point**; evidence matrices, claim corrections, control reconstruction, practitioner transfer and conditional deferrals.
+- [Standalone research proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md): **current human-review entry point**; introduction, related research and bounded gap, research questions, methodology, validity, work plan and references. It is proposed, not adopted.
+- [Full-paper synthesis](docs/literature/full-reading/synthesis.md): supporting evidence matrices, claim corrections, control reconstruction, practitioner transfer and conditional deferrals.
 - [Reading index](docs/literature/full-reading/INDEX.md): actual coverage, historical comparisons and method/access limits; [asset identities](docs/literature/full-reading/assets.json) locate the Zotero PDFs.
-- [Revised standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md): narrowed question, case credibility, outcomes and phases; still unadopted.
+- [Preceding proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md): retained formulation after the full-paper reading; superseded as the review entry point, not retroactively adopted.
+- [Proposal preparation record](docs/research-proposal-review-preparation-2026-09-15.md): this revision's authorization, continuity with the completed evidence and checks.
 - [Source-decision record](docs/literature/full-reading/source-decisions.md): this pass's checked Scite provenance, distinct from prior discovery counts.
 - [Base reading handoff](docs/full-paper-reading-handoff-2026-09-14.md) and [Nu/P12-P13 addendum](docs/nu-form-factors-and-research-leads-2026-09-14.md): completed assignment and retained practitioner questions, not construction authority.
 - [Previous review](docs/pro-review-design-discrimination-2026-09-14.md), [selected-reading audit](docs/pro-review-design-discrimination-sources-2026-09-14.md), [broader ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md) and [research loop](docs/research-loop-and-scite.md): identifiable earlier evidence/procedure; partial readings are not retroactively upgraded.
 
-The user requested work through the point before human review and publication when done. This authorizes these checks and corrections, **not A0/A1 construction, recruitment, adapters, calibration, model/count probes, candidate execution or extra workers**. New experiment allocation: **zero**. The earlier 192+5 envelope remains unallocated planning arithmetic; controls require a revised finite proposal, not extra free calls.
+The user requested the completed pre-review reading/checks and then a new proposal to review from introduction to gap/questions to methodology, with commit and push. This authorizes proposal preparation and publication, **not A0/A1 construction, recruitment, adapters, calibration, model/count probes, candidate execution or extra workers**. New experiment allocation: **zero**. The earlier 192+5 envelope remains unallocated planning arithmetic; controls require a revised finite proposal, not extra free calls.
 
 ## Core research reading list and completion
 
@@ -42,6 +44,8 @@ Completed checks include edition/title/author identities, attachment bytes, boun
 Ten conditional papers remain explicitly deferred with their triggers in the synthesis. This revision does not adopt functional-UI lineage, a formal A1 generalization protocol, human-usability transfer or a new history experiment. Do not restart the completed core without a new reason; promote conditional evidence for the corresponding new decision.
 
 ## Human disposition and proposal changes
+
+Read the [2026-09-15 proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md) as a complete research argument. Its RQ1 concerns case feasibility, RQ2 concerns prospective suitability under the fixed policy, and RQ3 requires the predeclared reference-predecessor condition. This presentation makes the established design and its unresolved choices explicit; it adds no treatment, task, paper-reading claim or live allocation. The detailed synthesis remains supporting evidence rather than the proposal's opening section.
 
 The recommendation is **narrow and adapt**: retain prospective package-choice value, reuse ALMA-style scenarios and inherited/reference controls, and remove novelty for sequential maintenance, architectural maps, dependency plans or memory policies. Structural conformance, graph accuracy and compiler success are not interchangeable with behavior. Current diagnostics, old observations, accepted requirements and inherited source are distinct. A candidate-visible map/probe/helper is an intervention.
 

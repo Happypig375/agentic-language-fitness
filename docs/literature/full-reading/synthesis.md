@@ -1,5 +1,7 @@
 # Full-paper reconstruction and pre-construction review
 
+**Proposal review entry point:** the [2026-09-15 standalone proposal](../../architecture-maintenance-research-proposal-2026-09-15.md) now presents the introduction, related research and gap, questions and methodology. This synthesis remains its detailed evidence and decision audit; its source findings and reading limits are unchanged.
+
 **2026-09-15 HKT; evidence basis `7259e8dc494de172da3721c890bebcf3d6a18d68`.** Reader and reviewer: the main Codex AI session, with self-review. This completes the thirteen-paper reading/reconstruction assignment and its documentation revision. It is not human approval, a systematic review or experimental reproduction. [INDEX](INDEX.md) owns per-edition coverage; [assets](assets.json) locates the sixteen Zotero PDFs. CodePlan's publisher PDF is present. P04's source image clips the tail of one prompt; unavailable/private artifacts and unreported methods remain explicit in the notes.
 
 ## Decision for human review

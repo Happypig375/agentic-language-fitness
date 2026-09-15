@@ -1,6 +1,8 @@
 # Prospective package suitability under agent maintenance
 
-**Revised 2026-09-15 after thirteen full-paper reconstructions; pending human disposition.** This is the standalone scientific proposal linked by [PLAN.md](../PLAN.md). The preceding edition is retained at `7259e8dc494de172da3721c890bebcf3d6a18d68`; the earlier edition at `d0cd99757c45d2a2322beb4c6f9069efe5667166` remains history. The [full-paper synthesis](literature/full-reading/synthesis.md), [coverage index](literature/full-reading/INDEX.md) and individual notes now support the active claims. The preceding [focused review](pro-review-design-discrimination-2026-09-14.md) and [source audit](pro-review-design-discrimination-sources-2026-09-14.md) retain their selected-reading status. No construction, model call, sample allocation or freeze is created here.
+**Preceding formulation.** For the current human review, read the [2026-09-15 standalone research proposal](architecture-maintenance-research-proposal-2026-09-15.md), organized from introduction through research gap/questions to methodology. This document retains the formulation after the full-paper reconstruction; it does not confer construction or execution authority.
+
+**Revised 2026-09-15 after thirteen full-paper reconstructions; pending human disposition.** The preceding edition is retained at `7259e8dc494de172da3721c890bebcf3d6a18d68`; the earlier edition at `d0cd99757c45d2a2322beb4c6f9069efe5667166` remains history. The [full-paper synthesis](literature/full-reading/synthesis.md), [coverage index](literature/full-reading/INDEX.md) and individual notes now support the active claims. The preceding [focused review](pro-review-design-discrimination-2026-09-14.md) and [source audit](pro-review-design-discrimination-sources-2026-09-14.md) retain their selected-reading status. No construction, model call, sample allocation or freeze is created here.
 
 ## 1. Question and useful contribution
 
