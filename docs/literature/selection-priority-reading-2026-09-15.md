@@ -2,6 +2,8 @@
 
 **Reading scope revised 2026-09-15 from `7a3c9c9136a57979c7fc6d1d89526aafd16bda90`.** This is a DOI acquisition/reconstruction handoff, not a new full-reading record or experimental allocation. [PLAN.md](../../PLAN.md) owns authority. The [preceding review](../selection-evidence-closure-2026-09-15.md) and [source audit](../selection-evidence-closure-sources-2026-09-15.md) retain the evidence that motivated the initial entries.
 
+**Later acquisition preparation:** the [collection checkpoint](../zotero-selection-acquisition-2026-09-15.md) records verified metadata for S01–S18 and sixteen downloaded PDFs for fifteen works, including S05's publisher/preprint pair. Import is pending coordination over the shared Zotero JavaScript window. S02/S04/S07 still lack local PDFs. Prior partial-reading states below remain unchanged; collection preparation does not promote them to full readings or impose a reading-count limit.
+
 ## Scope: as necessary, not five papers
 
 **There is no fixed total, no substitute seven- or twenty-paper cap, and no requirement to stop after the initially named sources.** Read the papers necessary to assess the active proposal's uniqueness, useful implications and scientific validity. The numbered entries are a seed queue and stable references, not a complete bibliography or an assertion that this many readings will suffice.

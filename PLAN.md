@@ -2,6 +2,8 @@
 
 **Evidence-closure iteration: 2026-09-15; reviewed input `f1bea15451d14b1027c356e0b2830acd85a86aa6`. Reading scope corrected from `7a3c9c9136a57979c7fc6d1d89526aafd16bda90` on 2026-09-15.** This is the current prospective plan, not a frozen protocol or execution allocation. Historical results and authorization records remain unchanged.
 
+**Acquisition checkpoint after pulling `033bb2c`:** the [Zotero preparation record](docs/zotero-selection-acquisition-2026-09-15.md) identifies eighteen additional S01–S18 records and sixteen verified PDF assets for fifteen works. Import into existing collection `PKLXQNEE` is pending coordination over the shared Run JavaScript window; no new Zotero parent or attachment was created by this session. S02/S04 still need publisher copies; S07 is open access but its download routes were blocked. This is acquisition preparation, not completed reading or an updated scientific assessment.
+
 ## Active question and authority
 
 **When does a predeclared responsibility-and-coordination analysis improve choosing an existing implementation for coding-agent maintenance, using information genuinely available at adoption time, beyond credible defaults and simpler reviews?** The proposed contribution is local empirical knowledge about this information-to-outcome relationship, not invention of recommendation or algorithm selection.
