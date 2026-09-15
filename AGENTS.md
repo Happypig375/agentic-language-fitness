@@ -1,36 +1,40 @@
 # Maintainer entry point
 
-Read [PLAN.md](PLAN.md) first, then the [current proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md). The [three-criteria iteration](docs/three-criteria-iteration-2026-09-15.md) and [source audit](docs/three-criteria-iteration-sources-2026-09-15.md) explain the latest corrections. Do not reconstruct live instructions from historical proposals.
+Read [PLAN.md](PLAN.md) first. It owns the current question and authority. Do not reconstruct the live direction from chronological proposals.
 
-## Current boundary
+## Current checkpoint
 
-The task is proposal/evidence refinement. **A0/A1 construction, new review workers, OAuth staging, model probes and candidate execution remain on hold.** New allocation is zero. The old 192+5 arithmetic is unallocated and does not include newly proposed control costs. Do not pool unused earlier allowances or change the established backend/runner.
+The 2026-09-15 evidence-closure pass sharpens the package-choice study using direct recommendation sources and established algorithm-selection methodology. Read the [standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md), [current review](docs/selection-evidence-closure-2026-09-15.md), [source audit](docs/selection-evidence-closure-sources-2026-09-15.md) and [priority DOI/full-reading queue](docs/literature/selection-priority-reading-2026-09-15.md).
 
-Thirteen core readings and A01/A02/A03 are already documented in the [full-reading synthesis](docs/literature/full-reading/synthesis.md) and [follow-up ledger](docs/proposal-novelty-value-validity-sources-2026-09-15.md), including their limitations. Reuse rather than re-read blindly. The evidence map is not complete. The next targeted methods leads and DOI/edition/access status are in the new source audit; do not label this pass full-PDF reading or invent Zotero imports. Check existing collection `PKLXQNEE` by DOI before any authorized addition.
+The next knowledge work is bounded method reconstruction from that queue, not another broad keyword sweep or restart of completed readings. MicroRec's retrieved target is ranking; the linked pattern artifact evaluates pattern suggestions. Their full-paper methods are not certified. ASlib/meta-selection supplies prior art for conditional choice, defaults/oracles and information cost. The new failure-aware enhancement study is a relevant advisory-method neighbor, not a verified runtime experiment.
 
-The next construction decision, if requested, is A0 only: two pinned baselines and at most two contrasting reference witnesses per package, followed by review. These are development cases, not an untouched evaluation set. No full chains, candidate adapters, repair workers or context-window suite are implied.
+No A0/A1 construction, recruitment, new workers/adapters, OAuth staging, live count/model probes, candidate execution or H allocation is authorized. New experimental allocation remains zero; 192+5 is unallocated planning arithmetic. Preserve all prior holds and transport/backend choices.
 
-## Three criteria at every scientific handoff
+The thirteen core readings and A01/A02/A03 remain recorded earlier Codex work with their own coverage/limits, not new full readings by this pass. E1/E2/E2a/E3a/H0 remain completed; H1/H2 remains prepared/unallocated; maintenance-sim's larger F# envelopes are preserved. No past scores, source fixtures or frozen protocols are rewritten.
 
-- **Unique:** state the exact residual distinction and the closest overlapping method. Architecture prediction/selection, source pairs, chained maintenance, maps, planning and predecessor controls are established. No first-study claim from incomplete search.
-- **Valuable:** name beneficiary, real action, known information, credible defaults, useful outcome and decision threshold. A win over a weak size rule is insufficient if always choosing the same package does just as well. Added explanation and added choice value are different.
-- **Scientifically valid:** name the assigned treatment, development/evaluation boundary, inference unit, candidate/holdout policy, missingness, finite budget and remaining validation. A proposal or prose-only green CI is not experimental readiness.
+## Scientific invariants
 
-Use supported/unsupported/unresolved verdicts, not three unqualified checkmarks. Keep the original abstraction/context hypothesis traceable without converting a same-language no-repair case into proof about F# density or insulated repair.
+- Assess **unique, valuable and scientifically valid** separately at every handoff. The local empirical question may be useful without inventing architecture recommendation or algorithm selection. Priority remains unresolved; document overlap instead of changing technologies to rescue firstness.
+- Freeze decision-time information and distinguish a known coarse profile from unavailable future details. Compare expected success conditional on that information, not the best realized outcome in a paired replicate. Do not use observed complementarity to filter evaluation cases.
+- Preserve credible fixed/default, size/API and ordinary-review comparisons from PLAN. Source-based analysis is not free; record its costs and reuse assumptions. Choice-quality evidence alone is not net budget superiority.
+- A0 is development; evaluation profiles and final behavioral tests have different holdout roles. Case authors, selector, implementation agent and scorer have explicit information boundaries. Do not invent independent human/AI sign-off.
+- One frozen recommendation with many executor repeats measures those recommendations, not selector reliability. Additional selector sessions require pre-outcome sampling and allocation, not post hoc majority voting.
+- Initial source/API facts may be prospective rivals. Actual edit footprint, build errors, repair count and context traffic are post-assignment outcomes; do not condition on them or success to claim a pure architecture effect.
+- No repair is not isolated repair. Useful current diagnostics, old observations and stale source differ. Any policy intervention requires separate evidence, boundaries and allocation; no automatic subagents.
+- Source-package assignment is intention-to-treat. Correct reorganization is allowed. Behavioral obligations, new regressions, persistent failures, recovery, supersession, blocked observations and unrun slots remain distinct.
+- Both package trajectories can score several fixed selectors, but independent runs are not shared random counterfactuals. Same-package choice differences cancel exactly; missingness must preserve shared-outcome dependence. Do not import ASlib timeout imputation or outcome exclusions without a justified ALF rule.
+- Candidate source executes in the existing sandbox; no secrets, target patches, research predictions or final tests are candidate-visible. Keep final scoring out of feedback/stopping. No new runner/proxy layer or generic selection framework is justified by this review.
 
-## Design invariants
+## Reading and research loop
 
-- Freeze an auditable selector: decision inputs, steps, analyst/model identity, allowed tools, cost cap and fallback. One analyst's hand-tuned advice is a local advice case unless transfer is actually tested.
-- Include always-A/always-B plus frozen source-size/API choices. A best constant picked on evaluation outcomes is descriptive/oracle, not a prospective comparator. To claim benefit from the structured procedure rather than extra review effort, specify an equal-information/budget ordinary-review control or narrow the claim.
-- Keep A0/tuning profiles separate from new evaluation profiles for a general selection claim. Behavioral holdout separation is an additional requirement, not a replacement. Freeze the rule before applying it to new public profile inputs; hide target solutions and comparative outcomes.
-- Advice stays outside candidate prompts in a choice-only comparison. Candidate maps or support messages are another intervention. Source maps and fewer touched files are explanatory evidence, not hidden success criteria.
-- No-repair measures a restrictive diagnostic policy. Do not infer production or repair-insulation benefits. Any bounded development-feedback policy must be reviewed and budgeted before use; no silent policy change.
-- Score all valid assigned attempts, preserve unrun/blocked/unknown states, retain known correctness when usage is missing, and never filter predecessor histories by success. Shared outcomes cancel in same-choice policy differences; do not duplicate them as independent unknowns.
-- Inheritance, current specification, source comments, notes and conversation are separate state channels. Version obligations and report new failure versus regression, persistence, recovery and supersession. Initial package assignment remains the treatment after valid reorganization.
-- Keep sandbox/scorer/credentials isolated, raw attempts immutable and all frozen evidence intact. Reuse the runner; no generic new proxy, memory or multi-agent framework.
+Follow [research-loop-and-scite.md](docs/research-loop-and-scite.md). Search with limit 20 and use offsets based on effective returns; exact lookups can be smaller. Verify DOI/title/edition rather than guessing. Graph `s` cites `t`; full graphs in one index are not full-field coverage, and citation labels are not validity votes.
 
-## Research loop, handoff and checks
+For full-reading targets check existing Zotero identifiers before additions. Record lawful PDF/supplement reference/hash, actual page/figure coverage, extraction/rendering limits, reconstruction and reproduction separately. Preserve earlier P/A IDs; use this queue's identifiers for additions until reconciled. Do not mark selected HTML, metadata or a parsed PDF fragment fully read. Do not commit publisher PDFs or text dumps by default.
 
-Follow [research-loop-and-scite.md](docs/research-loop-and-scite.md). Request 20 search records, paginate explicitly, resolve editions, inspect actual primary methods and citation contexts, and record deferred/access-limited evidence without converting it into negative findings. Report the considered source decisions once and inspect citation_report. Exact query exhaustion is not field saturation. Use only demonstrated tool capabilities; a requested app not resolved by discovery was not executed.
+Record the full considered source decisions once near handoff with `report_citations`, inspect `citation_report`, and retain deferred/access-limited states in the repository. A credited partial source is not a full reading. This pass's PDF render failures and metadata corrections remain in the audit.
 
-Complete ordinary documentation/tests within the authorized packet and commit directly. Return at its decision boundary with exact commit, scope, real checks, unresolved evidence, next decision and zero/new allocation status. Preserve concurrent changes; no force update. Five failures at one unchanged apparatus gate trigger return; ambiguous potentially billable requests, safety and resource limits stop immediately. Use [change-scoped CI](docs/ci-validation-scope.md) and identify skipped runtime checks. Self-review and another AI session are not human sign-off.
+## Stop and handoff
+
+Complete the authorized evidence/documentation packet, save progress and return with actual DOI/version coverage, design consequences, unresolved claims, exact head and CI scope. A0 still requires its own human disposition and retains its two-baseline/four-successor cap.
+
+Inside later authorized engineering, five failures at the same unresolved gate trigger return; success clears the counter. Safety, ambiguous billable requests, resource limits or scientific changes trigger immediate stop. Apply [change-scoped CI](docs/ci-validation-scope.md), commit directly without PR as requested, preserve concurrent work and never force main. Documentation CI does not certify runtime or scientific acceptance.
