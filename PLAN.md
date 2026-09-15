@@ -2,7 +2,7 @@
 
 **Evidence-closure iteration: 2026-09-15; reviewed input `f1bea15451d14b1027c356e0b2830acd85a86aa6`. Reading scope corrected from `7a3c9c9136a57979c7fc6d1d89526aafd16bda90` on 2026-09-15.** This is the current prospective plan, not a frozen protocol or execution allocation. Historical results and authorization records remain unchanged.
 
-**Acquisition checkpoint after pulling `033bb2c`:** the [Zotero preparation record](docs/zotero-selection-acquisition-2026-09-15.md) identifies eighteen additional S01–S18 records and sixteen verified PDF assets for fifteen works. Import into existing collection `PKLXQNEE` is pending coordination over the shared Run JavaScript window; no new Zotero parent or attachment was created by this session. S02/S04 still need publisher copies; S07 is open access but its download routes were blocked. This is acquisition preparation, not completed reading or an updated scientific assessment.
+**Zotero acquisition verified 2026-09-16 HKT after pulling `033bb2c`:** the [collection record](docs/zotero-selection-acquisition-2026-09-15.md) now identifies eighteen imported S01–S18 papers and sixteen attached PDFs for fifteen works. Existing collection `PKLXQNEE` contains **34 works and 35 PDFs**; the original sixteen parent records and nineteen PDF hashes are unchanged. S02/S04 still need copies; S07 is open access but its public download also returned HTTP 403 through Zotero. This completes the prepared import, not the full-reading assignment or a new scientific assessment.
 
 ## Active question and authority
 

@@ -2,7 +2,7 @@
 
 **Reading scope revised 2026-09-15 from `7a3c9c9136a57979c7fc6d1d89526aafd16bda90`.** This is a DOI acquisition/reconstruction handoff, not a new full-reading record or experimental allocation. [PLAN.md](../../PLAN.md) owns authority. The [preceding review](../selection-evidence-closure-2026-09-15.md) and [source audit](../selection-evidence-closure-sources-2026-09-15.md) retain the evidence that motivated the initial entries.
 
-**Later acquisition preparation:** the [collection checkpoint](../zotero-selection-acquisition-2026-09-15.md) records verified metadata for S01–S18 and sixteen downloaded PDFs for fifteen works, including S05's publisher/preprint pair. Import is pending coordination over the shared Zotero JavaScript window. S02/S04/S07 still lack local PDFs. Prior partial-reading states below remain unchanged; collection preparation does not promote them to full readings or impose a reading-count limit.
+**Acquisition update, 2026-09-16 HKT:** the [collection checkpoint](../zotero-selection-acquisition-2026-09-15.md) records verified Zotero imports for S01–S18 and sixteen attached PDFs for fifteen works, including S05's publisher/preprint pair. Collection `PKLXQNEE` now contains 34 works and 35 PDFs. S02/S04/S07 still lack PDFs; S07 is open access with a blocked download. Prior partial-reading states below remain unchanged; acquisition does not promote them to full readings or impose a reading-count limit.
 
 ## Scope: as necessary, not five papers
 
