@@ -1,146 +1,87 @@
 # Research plan
 
-**Updated 2026-09-15 after novelty/value/rigor assessment; basis `8f80b7f45441724c429b563283f433f815ef6ec8`.** The user requested confirmation of the research contribution and sharper value. The [assessment](docs/proposal-novelty-value-validity-2026-09-15.md) supports a bounded decision-value question, not verified uniqueness or a completed experimental protocol. Three additional papers are fully read, including the user-attached Lassing (2003) publisher PDF. The [standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md) now compares frozen package recommendations with size/API choices using a proposed final-episode behavioral endpoint. Next is **human review of the proposed study and disposition of A0 feasibility**, before construction. Frozen protocols, completed observations and unused-quota restrictions remain unchanged.
+**Iteration: 2026-09-15; reviewed input `78c2eea477b04ae890f64b500db628c9dc89750a`.** This is the current prospective plan. No frozen protocol, historical result, allocation or execution authority is changed.
 
-## Active question and document authority
+## Active question and authority
 
-The proposed direction is a **prospective architecture-package suitability case**: can source-grounded predictions about responsibility and coordination help select a package for specified future changes, beyond initial correctness, source size and API availability? This is bounded reuse/adaptation of established methods, not a universal language ranking or a demonstrated architectural/context effect.
+**When does a predeclared responsibility-and-coordination analysis improve the choice of an existing software package for coding-agent maintenance, beyond credible defaults and simpler selection rules?** The practical action is a starting-package choice under a declared change profile and agent policy, not a universal language ranking or a forecast of which changes will arrive.
 
-- [Standalone research proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md): **current human-review entry point**; introduction, related research and bounded gap, research questions, methodology, validity, work plan and references. It is proposed, not adopted.
-- [Novelty, value and rigor assessment](docs/proposal-novelty-value-validity-2026-09-15.md) and [follow-up source ledger](docs/proposal-novelty-value-validity-sources-2026-09-15.md): current source correction, proposed decision-value endpoint, three additional readings, Scite coverage and remaining method decisions.
-- [Full-paper synthesis](docs/literature/full-reading/synthesis.md): supporting evidence matrices, claim corrections, control reconstruction, practitioner transfer and conditional deferrals.
-- [Reading index](docs/literature/full-reading/INDEX.md): actual coverage, historical comparisons and method/access limits; [asset identities](docs/literature/full-reading/assets.json) locate the Zotero PDFs.
-- [Preceding proposal](docs/architecture-maintenance-research-proposal-2026-09-14.md): retained formulation after the full-paper reading; superseded as the review entry point, not retroactively adopted.
-- [Proposal preparation record](docs/research-proposal-review-preparation-2026-09-15.md): this revision's authorization, continuity with the completed evidence and checks.
-- [Source-decision record](docs/literature/full-reading/source-decisions.md): this pass's checked Scite provenance, distinct from prior discovery counts.
-- [Base reading handoff](docs/full-paper-reading-handoff-2026-09-14.md) and [Nu/P12-P13 addendum](docs/nu-form-factors-and-research-leads-2026-09-14.md): completed assignment and retained practitioner questions, not construction authority.
-- [Previous review](docs/pro-review-design-discrimination-2026-09-14.md), [selected-reading audit](docs/pro-review-design-discrimination-sources-2026-09-14.md), [broader ledger](docs/architecture-maintenance-proposal-sources-2026-09-14.md) and [research loop](docs/research-loop-and-scite.md): identifiable earlier evidence/procedure; partial readings are not retroactively upgraded.
+The [standalone proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md) specifies the revised distinction, decision contract, development/evaluation split, comparators and analysis. The [three-criteria review](docs/three-criteria-iteration-2026-09-15.md) and [source record](docs/three-criteria-iteration-sources-2026-09-15.md) explain this iteration. The earlier [assessment](docs/proposal-novelty-value-validity-2026-09-15.md), [full-reading synthesis](docs/literature/full-reading/synthesis.md) and source ledgers remain evidence, not competing live instructions.
 
-The user requested the completed pre-review reading/checks and then a new proposal to review from introduction to gap/questions to methodology, with commit and push. This authorizes proposal preparation and publication, **not A0/A1 construction, recruitment, adapters, calibration, model/count probes, candidate execution or extra workers**. New experiment allocation: **zero**. The earlier 192+5 envelope remains unallocated planning arithmetic; controls require a revised finite proposal, not extra free calls.
+The present assignment permits literature/methods review and documentation corrections. **A0/A1 construction, recruitment, new model workers, OAuth staging, live probes and candidate execution remain on hold. New experimental allocation: zero.** The historical 192+5 proposal is neither a powered sample nor available spending authority, and omits any newly required control cost.
 
 ## Required proposal review criteria
 
-The user reaffirmed that every proposal review and research handoff must explicitly assess all three criteria below. Report an evidence-based verdict for each: supported within a stated scope, not supported, or unresolved. Give the decisive evidence, limitations and next necessary check. A polished proposal or completed reading list does not itself confirm these criteria.
+Every proposal review must report supported, unsupported or unresolved aspects of all three criteria, with the evidence and next discriminating check. A conjunction of known methods is not automatically unique or valuable; documentation consistency is not experimental validity.
 
-| Criterion | Required confirmation |
-| --- | --- |
-| **Unique (Scite)** | Compare the exact proposed contribution with the closest prior work using Scite and primary-paper methods. State what is inherited, what differs, and the search/access limits. Non-discovery alone cannot establish uniqueness. |
-| **Valuable** | Identify the supported research gap, beneficiary, decision or knowledge gained, and useful implications of positive, negative or mixed findings. Explain the added value over existing methods and simpler alternatives. |
-| **Scientifically valid** | Check whether the questions, constructs, comparison, controls, observations, sampling and analysis support the intended claims. Address rival explanations, missingness, reproducibility and validity limits; distinguish proposed rigor from demonstrated feasibility. |
-
-The [current assessment](docs/proposal-novelty-value-validity-2026-09-15.md) retains the actual verdicts. If evidence fails to support a criterion, revise or narrow the proposal within the authorized scope and report what remains unresolved. This standing requirement does not approve construction or experimental execution.
-
-## Core research reading list and completion
-
-All thirteen chosen PDFs were consumed, including appendices and visual tables/figures/equations, with the intrinsic clipped P04 prompt tail recorded. Missing methods, private data and unavailable repositories remain replication limits. No author program or experimental reproduction ran. Reader/self-review: the main Codex AI session; no independent or human review is claimed.
-
-| ID | Paper / reconstruction | DOI |
+| Criterion | Current judgement | Next evidence that matters |
 | --- | --- | --- |
-| P01 | [LLMs for Architectural Refactoring: An Exploratory Study on Monoliths to Microservices](docs/literature/full-reading/P01-architectural-refactoring.md) | `10.1109/ICSA66085.2026.00033` |
-| P02 | [Architecture-level modifiability analysis (ALMA)](docs/literature/full-reading/P02-alma.md) | `10.1016/S0164-1212(03)00080-3` |
-| P03 | [Does Code Cleanliness Affect Coding Agents? A Controlled Minimal-Pair Study](docs/literature/full-reading/P03-code-cleanliness.md) | `10.48550/arXiv.2605.20049` |
-| P04 | [Is Agent Code Less Maintainable Than Human Code?](docs/literature/full-reading/P04-codethread.md) | `10.48550/arXiv.2606.21804` |
-| P05 | [SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks](docs/literature/full-reading/P05-slopcodebench.md) | `10.48550/arXiv.2603.24755` |
-| P06 | [ChainSWE: Benchmarking Coding Agents on Multi-Bug Software Maintenance](docs/literature/full-reading/P06-chainswe.md) | `10.48550/arXiv.2607.02606` |
-| P07 | [Needle in the Repo: A Benchmark for Maintainability in AI-Generated Repository Edits](docs/literature/full-reading/P07-needle-in-repo.md) | `10.48550/arXiv.2603.27745` |
-| P08 | [Type-Error Ablation and AI Coding Agents](docs/literature/full-reading/P08-type-error-ablation.md) | `10.48550/arXiv.2606.01522` |
-| P09 | [The Complexity Trap: Simple Observation Masking Is as Efficient as LLM Summarization for Agent Context Management](docs/literature/full-reading/P09-complexity-trap.md) | `10.48550/arXiv.2508.21433` |
-| P10 | [When the Specification Emerges: Benchmarking Faithfulness Loss in Long-Horizon Coding Agents](docs/literature/full-reading/P10-slump.md) | `10.48550/arXiv.2603.17104` |
-| P11 | [GameEngineBench: Evaluating Coding Agents on Real C++ Runtime Environments](docs/literature/full-reading/P11-gameenginebench.md) | `10.48550/arXiv.2607.03525` |
-| P12 | [Theory of Code Space: Do Code Agents Understand Software Architecture?](docs/literature/full-reading/P12-tocs.md) | `10.48550/arXiv.2603.00601` |
-| P13 | [CodePlan: Repository-Level Coding using LLMs and Planning](docs/literature/full-reading/P13-codeplan.md) | `10.1145/3643757` |
+| **Unique** | A bounded distinction is plausible: out-of-development *behavioral value of a fixed package-selection procedure*. Prospective architecture analysis/validation, recommendation, chaining, maps and predecessor controls are prior art. Priority is unresolved. | Resolve the decision-critical recommendation methods in the new source record; compare their actual decisions, comparators and outcomes. Withdraw any overlapping novelty claim rather than rescue it with the Nu name. |
+| **Valuable** | A concrete adoption decision and falsifier exist. Added value is not established merely by beating a size heuristic or by one package always winning. | Show a credible choice a maintainer would make differently, compare always-A/always-B and frozen size/API rules, and record analysis burden. Useful effect and net economic value remain unmeasured. |
+| **Scientifically valid** | The revised design distinguishes construction, evaluation, selection and causal interpretation. No Nu pair or executable protocol has yet been validated for this question. | A bounded A0 must establish semantics and discriminatory feasibility; A1 must settle the selector, information boundary, evaluation profiles, policy, endpoint, uncertainty and budget before new outcomes. |
 
-**Zotero:** collection **ALF - Core Paper Reading Queue (2026-09-15)**, `PKLXQNEE`, has **sixteen records and nineteen PDFs** after three follow-up additions and the user's Lassing publisher attachment. A01/A02/A03 are fully read and listed in the follow-up ledger. The original core reading checkpoint had thirteen records and sixteen PDFs. User-supplied CodePlan publisher attachment `LS9AUVZE` (24 pages) closes its former access gap. Its 2023 preprint and P06/P11 historical v1 files remain identifiable; editions are not extra studies. The [collection record](docs/zotero-reading-collection-2026-09-15.md) preserves the initial metadata/15-PDF snapshots and new publisher addition. PDFs and extracted bodies stay outside Git.
+## Completed evidence: reuse without upgrading or rewriting it
 
-Completed checks include edition/title/author identities, attachment bytes, bounded notices, checksum-verified P01/P08 supplements, read-only released-method inspection and original arithmetic with saved code/output. The P09 common-ID audit corrects the hybrid comparison: hybrid/raw/masking/summary each solve 28/50 on that subset. Other discrepancies and missing parameters remain in the notes; they do not justify declaring a study invalid or filling missing values.
+The repository contains thirteen core full-paper reconstructions plus A01/A02/A03, with edition, supplement, access and artifact limitations in the [reading index](docs/literature/full-reading/INDEX.md), [synthesis](docs/literature/full-reading/synthesis.md) and [follow-up ledger](docs/proposal-novelty-value-validity-sources-2026-09-15.md). Their completion is recorded by the earlier main Codex session, not independently re-certified by this review. The evidence map is still incomplete; a full reading of selected works is not full coverage of a field.
 
-Nine conditional papers remain explicitly deferred with their triggers in the synthesis. Runeson and Höst is now fully read as A02; the formal A1 protocol remains unfinished. This revision does not adopt functional-UI lineage, a formal A1 generalization protocol, human-usability transfer or a new history experiment. Do not restart the completed core without a new reason; promote conditional evidence for the corresponding new decision.
+A01, Lassing et al. (2003), already validates architecture-time expectations against later requests and discusses comparative choice. P03/P04/P05/P06 already study source contrasts or downstream/inherited work. P12/P13 already study architectural maps and dependency-aware planning. A03 is a position paper, not new experimental evidence. Retain the corrections to hidden-test filtering, bundled memory policies, structural proxies and mismatched denominators documented in those notes.
 
-## Human disposition and proposal changes
+E1/E2/E2a/E3a and H0 remain completed under their historical protocols. H1/H2 is prepared/unallocated. The model-free maintenance-sim construction is preserved, including larger F# authored inputs. Those observations do not identify training-frequency effects, intrinsic language superiority or a physical context boundary. Aggregate input, source size and active context are distinct.
 
-Read the [2026-09-15 proposal](docs/architecture-maintenance-research-proposal-2026-09-15.md) as a complete research argument. Its RQ1 concerns case feasibility, RQ2 now tests the local decision value of frozen recommendations against simple choices, and RQ3 requires the predeclared reference-predecessor condition. Final-episode joint completion is a proposed decision endpoint; meaningful difference, uncertainty, abstention rules and complete allocation remain A1 decisions. This sharpening is a proposal revision, not an adopted protocol or construction authorization. The detailed synthesis remains supporting evidence rather than the proposal's opening section.
+## The methodological corrections that control future work
 
-The recommendation is **narrow and adapt**: retain prospective package-choice value, reuse ALMA-style scenarios and inherited/reference controls, and remove novelty for sequential maintenance, architectural maps, dependency plans or memory policies. Structural conformance, graph accuracy and compiler success are not interchangeable with behavior. Current diagnostics, old observations, accepted requirements and inherited source are distinct. A candidate-visible map/probe/helper is an intervention.
+1. **A procedure, not just two opinions.** Define who/what makes the recommendation, permissible source/profile information, analysis steps, tie/abstention policy, time/model budget and a reproducible output record. One analyst's tailored advice on one pair is a local advice case, not a validated transferable selection method.
+2. **Credible baselines.** Report always-A, always-B, initial-source-size and API-fit policies. A development-chosen constant is a deployable default; the best constant selected after evaluation is an optimistic descriptive benchmark, never a prospective baseline. An additional equal-information, equal-budget ordinary review is required to attribute benefit to the structured analysis procedure rather than extra attention; without it, narrow the claim to the tested advice versus the named rules.
+3. **Two different holdouts.** A0 witnesses develop the method and case. They are not independent evaluation profiles. A stronger selection-method claim requires a frozen procedure applied to fresh profiles not used to tune it, with reference implementations/results withheld from the selector. Separately, final behavioral tests remain isolated from candidate feedback and stopping. Passing either holdout discipline does not replace the other.
+4. **Choice value is not mechanism proof.** A selected package can perform better because of APIs, implementation quality, familiarity or syntax. Source predictions and obligation transitions can challenge explanations, but do not statistically remove those bundled differences. Advice, candidate-visible maps and actual architectural changes are different interventions.
+5. **Policy relevance first.** The existing one-shot/no-repair proposal remains a diagnostic policy, not interactive development or protected repair. Before allocating a general maintenance-choice study, decide whether that policy serves the beneficiary; otherwise separately specify a bounded hygienic development-feedback policy. Do not silently add repairs, workers or change historical runs.
+6. **Analysis without favorable filtering.** Policies and fallbacks are frozen before outcomes. Evaluate choices from both package trajectories, keep all assigned histories, pair by block, and retain missingness. Same-package choices have exactly zero difference, even when their shared outcome is unknown. Do not choose the best observed result per run or treat repeated trajectories as new profiles.
 
-Human review should decide whether this local decision is useful enough to authorize **A0 only**, within two baselines plus at most two reference changes per package. Require pre-witness predictions/rivals/falsifiers, observable common obligations, relevant semantic faults and acceptable alternatives, and an explicit redirect if API/physics/size explains the whole contrast. Nu MMCC/ImSim remains provisional; F#/C# or a favorable language result is not mandatory. The no-repair policy remains restrictive, and any inherited-state claim needs predeclared sentinels without selecting favorable histories. The earlier concrete repair-history follow-up is deferred pending its own reading/design decision.
+## Next bounded decision: evidence closure and A0 disposition
 
-## Preserve the completed work
+The requested planning iteration is complete when the revised three-criterion judgement and specific remaining evidence are committed. The next literature action is **targeted method reconstruction**, not another undirected search or automatic restart of the thirteen completed readings.
 
-E1/E2/E2a/E3a and H0 are completed evidence under their recorded protocols. The E3a architecture addendum is source-bound AI review, not human-expert validation. H1/H2 is prepared but unallocated; preparation is not a physical-context-window result. The authorized `maintenance-sim` construction and inherited-failure audit remain preserved. Its F# authored envelopes were larger at every episode; do not select replacement examples merely to obtain F# compression.
+Priority leads are architecture-pattern recommendation (`10.1007/978-3-031-66336-9_19`), MicroRec (`10.1145/3643991.3644916`) and the architecture-review evidence map (`10.1016/j.jss.2025.112607`; related preprint `10.48550/arXiv.2503.13310`). Their actual evaluation targets must be resolved before claiming selection novelty. These are focused acquisition/read targets, not newly certified full readings or newly imported Zotero items. Check the existing Zotero collection by DOI before requesting additions; preserve the user's established collection and do not invent successful attachment writes.
 
-These observations motivated the new direction but do not identify training-corpus effects, intrinsic language superiority, or a near-window crossover. In particular, aggregate input is not peak context, and removal of all compiler feedback is not the same intervention as repairing code while insulating the planner.
+The current synthesis can still justify discussing **A0 only**, without requiring global novelty to be proven before a cheap feasibility witness. Resolve a close source immediately if it could make even that witness redundant; otherwise keep the narrower exploratory/replication claim. The two new recommendation leads and the bounded discovery limits are recorded in the source audit.
 
-Existing source/handoff/history files remain available in Git and `docs/history/`. This update does not reopen prior allocations, change OAuth/backend policy, replace the canonical runner, re-score old results, or retrospectively modify a frozen definition.
+If authorized, A0 retains its cap: two unchanged baselines and at most two contrasting reference-change witnesses per package. Nu MMCC/ImSim at the proposal's pinned engine commit is provisional. A0 must return:
 
-## Contribution and claim levels to reassess
+- a real beneficiary/choice/profile and a source-bound responsibility, state/effect and API map;
+- development prediction cards, fixed/simple comparators and rivals recorded before reference implementation, with construction-driven revisions visible;
+- live common obligations, meaningful faults and alternative-correct-solution checks, without a helper that implements the task;
+- whether the advice differs meaningfully from defaults and whether an independent evaluation-profile set is feasible;
+- a proceed/narrow/redirect recommendation, actual review limits and a finite A1 budget proposal.
 
-The candidate contribution is a **test of whether prospective package recommendations improve behavioral outcomes over frozen size/API choices for selected coding-agent maintenance profiles**. Lassing (2003) already validates architecture predictions against later changes and explicitly discusses architecture comparison. Uniqueness is unconfirmed; useful local decision value remains a testable question, with component-local complexity as an explicit rival.
+A case intentionally selected for disagreement is diagnostic; it cannot estimate deployment prevalence or guarantee a later effect. Do not force a win for each architecture, discard a valid equal-size example, demand equal patch/module effort, or add an engine/proxy framework to rescue Nu.
 
-Earlier selected readings positioned ALMA, code-cleanliness minimal pairs, CodeThread, SlopCodeBench and ChainSWE as close predecessors. The Nu-guided search additionally recovered ToCS on architectural-map construction and CodePlan on dependency-aware repository editing. Their complete-paper reconstructions now support the narrowed synthesis, with private/artifact and proxy limits retained. They are predecessors to reuse; a stronger novelty claim remains unestablished.
+## Later stages and stop boundaries
 
-Choose the intended claim before A1 freezes the workload:
-
-| Claim | Minimum evidence | Limit |
+| Stage | Work after its own authorization | Required return |
 | --- | --- | --- |
-| Package robustness under a restrictive no-repair policy | Matched scenarios, credible implementations, prospective predictions, obligation-level inherited outcomes | Includes ordinary first-patch mistakes and accumulated broken code; not latent maintainability. |
-| Sensitivity to inherited predecessor state | The above plus predeclared clean-reference predecessor sentinels for selected later tasks, run for both packages without success filtering | A starting-state contrast, not pure architecture damage or a causal percentage explained. |
-| Benefit of insulating repair/context | A separately assigned feedback/history policy with auditable source and information exposure | No-repair results cannot establish it; isolation need not reduce total system cost. |
-| Representation/large-context advantage | Measured source bundles, relevant information/access budgets and verified request composition at multiple scales | Neither byte caps nor repeated total input prove pressure at the physical model window. |
+| A0 | Bounded model-free development witnesses and case credibility | Before full chains or candidate work. |
+| A1 | Freeze the advice procedure and rivals; label development versus new evaluation profiles; finalize contracts, faults, state controls, policy relevance, inference unit and resource ceiling | Before live apparatus/integration. Two four-episode chains remain an option, not sufficient population evidence by arithmetic. |
+| B0 | Minimal existing-runner integration, safe materialization/evaluation, isolated holdout, input/usage accounting and model-free checks | Before any live probe. |
+| B1 | Only expressly allocated, unrelated integration/calibration probes | Before formal collection or material redesign. |
+| B2 | An explicitly authorized fixed batch and preregistered audit/report | Before extension, selector change, new profile or model substitution. |
+| C | A justified independent case, mechanism, repair-history or scale study | Separate evidence and allocation; no automatic factorial. |
 
-The original language/abstraction/context motivation remains a parent hypothesis. The current same-language architecture case tests one component. It neither proves nor retires the other components. Do not launch a language × architecture × model × memory factorial.
+The primary proposed decision endpoint is **terminal joint build and all active behavioral/API obligations**, with first/each-episode completion, requirement retention, regressions, recovery and cost reported separately. The terminal endpoint does not measure uninterrupted reliability; a real continuous-operation beneficiary may require a different frozen primary utility. Choose once before outcomes.
 
-## Downstream decision after full-paper review: bounded A0 feasibility
+For inherited-state claims, predeclare canonical-predecessor sentinels on both packages and every assigned history; do not choose them after failure. They estimate starting-state sensitivity, not pure architectural damage. Keep safe bad code versus invalid/unsafe submissions, unrun slots, blocked assertions and infrastructure missingness separately defined. Missing usage never erases known correctness. Initial package assignment survives architectural drift; stylistic fidelity is not hidden correctness.
 
-Only after the literature reconstruction and evidence-driven proposal revision should the next human decision consider **A0**, a model-free case witness. A0 may be retained, narrowed or redirected by that reading; it is not the current executable task. No repeated broad literature sweep is required merely to increase a reference count.
+## Value, precision and generalization
 
-Nu MMCC and ImSim remain provisional, pinned in the proposal. They share F# and an engine but differ in state organization, facilities and physics usage; that is a package contrast, not two pure paradigms. Nu versus Unity is not the experimental control. If useful comparable scenarios cannot be observed without a substitute engine or a helper that solves the task, redirect the case rather than expanding infrastructure. Shared engine facilities cannot by themselves explain differences between two application styles. A source-only no-tools arm cannot establish benefits of interactive inspection, hot reload or undo that it does not expose.
+No arbitrary token/second/defect mixture is the primary score. Report analysis effort and candidate/controller resources separately. A later break-even argument can state the assumed value of a successful outcome and the number of reuse decisions, but cannot claim measured human labor savings or ROI without those data.
 
-If separately authorized, A0 may establish both unchanged baselines, the editable/read-only boundary and common observation seam, and **at most two contrasting reference change witnesses per package**. This remains two baselines plus at most four successors. It is not permission to construct both full chains. The additional Nu-inspired scenario questions are a selection menu, not extra mandatory tasks.
+More temporal blocks improve precision on the chosen profiles. New profiles test the rule's ability to use change demands; independent package families test portability. Descendants of one generator or several edits within one chain do not supply those independent units. A fixed package always winning is a useful package result but not evidence that profile analysis is necessary.
 
-A0's review packet must contain:
+A1 must set a decision-relevant minimum effect, uncertainty procedure, comparator hierarchy/multiplicity rule, missing-outcome bounds and sample ceiling. No adaptive extension based on which architecture wins. An interval too wide to settle the useful difference is inconclusive, not equivalence. Preserve the existing five-failures-at-one-unchanged-apparatus-gate return rule; safety, ambiguous billable requests and resource limits stop immediately.
 
-1. A source-bound map of state ownership, effect/dispatch boundaries and coordination obligations. Separate API/physics differences from organization; record authoring and familiarity uncertainties.
-2. A short prediction card for each witness: change requirement, expected affected responsibilities, expected advantage/tie/uncertainty, adverse case, observable disconfirmation, and a rival explanation such as API availability or plain source size. Record the card before the witness implementation. Later refinements are labelled, not presented as original successful predictions.
-3. A runtime witness that both packages satisfy the same selected obligations. Fix nondeterminism/tolerance policy from semantic requirements, not from which package otherwise fails. The observation seam cannot implement the application change.
-4. Evidence the contrast is not simply a missing engine feature, broken baseline, output-format cap or deliberately weak comparator. Match requirements and available information, not touched-file count or required coordination effort.
-5. A yes/no/redirect recommendation, unresolved expert-review limitations, bounded A1 cost and the claim/control choice above. An inconclusive or contrary result is acceptable; runtime success alone is not enough to establish a discriminating architecture case.
+## Research loop and publication
 
-A0 success authorizes nothing automatically. Return for disposition before A1. Case credibility and decision value precede stochastic precision from many model repetitions.
+Use [research-loop-and-scite.md](docs/research-loop-and-scite.md). Searches request 20 items and paginate by returned count. Record narrow-query exhaustion separately from field coverage; read decision-critical primary methods; keep new partial access distinct from earlier full readings; inspect citation contexts and graph truncation; and report the considered decisions once before verifying citation_report. Deferred sources are not scientific rejections.
 
-## Subsequent bounded phases
+The requested Deep Research app did not resolve in connector discovery in this pass. Direct primary-source browsing and Scite were used; no separate Deep Research job or report is claimed. No service was installed or substitute autonomous agent launched.
 
-| Phase | Deliverable after separate authorization | Stop boundary |
-| --- | --- | --- |
-| A1 | Two proposed four-episode scenario chains, independent starts, obligation/fault records, reference witnesses and frozen prospective predictions; explicit claim level and any sentinel schedule | Before live apparatus/candidate use; revise proposed count rather than silently add controls. |
-| B0 | Minimum controller/reporting for accepted policy, source-only inheritance, safety and usage guards, immutable identities, model-free checks | Before integration calls. |
-| B1 | Only the allocated unrelated integration probes; verify actual model/configuration, identity, limits and environment | Stop on an unresolved scientific/security change; no automatic B2 authorization. |
-| B2 | The expressly allocated fixed comparative batch and predeclared report | Before unregistered extension, model replacement or redesign. |
-| C, conditional | A precise unresolved mechanism, independent replication, memory policy or context-scale contrast | Each requires its own decision, evidence and allocation. |
-
-The earlier arithmetic, 12 blocks × 2 packages × 2 chains × 4 episodes = 192 generations, is a planning ceiling proposal, not a powered design or obligation to spend it. Five integration generations are separately proposed. Required controls must be budgeted before freezing, preferably by reallocating within a justified smaller design. Repetitions estimate variability on these chosen cases, not the number of independent architectures or real-world scenario families.
-
-## Candidate policy and outcomes
-
-The currently proposed primary policy remains **fresh episode context, source-only inheritance, notes off, one submitted edit and no repair feedback**. It is not changed to delegated repair by this completed reading revision. Safe wrong or noncompiling source persists; unsafe output is contained and classified. Invalid submissions leave the previous safe state as prescribed. Contracts and documentation are supplied consistently; research predictions and future targets are not candidate hints.
-
-Keep observed completion, assigned-policy utility, execution status and resource coverage separate. Missing usage does not erase known correctness. A build failure makes joint completion false but blocks, rather than fabricates, runtime assertions. Unstarted slots remain `not_run`; any policy-zero convention is declared separately, and infrastructure missingness remains unknown.
-
-Track stable, versioned obligations: new behavior, newly lost retained behavior, persistent inherited failure, recovery and supersession. More tests do not create more independent obligations. Publish individual episode and block results as well as any cumulative summary. Behavioral correctness is primary; conformity to a preferred style is not hidden correctness.
-
-The initial architecture assignment remains the treatment even if agents reorganize it. Record drift and valid alternative solutions; do not exclude histories that abandon the favored style or reclassify successful crossover as failure. A matched source-change annotation explains outcomes but is not a substitute for observing the predicted obligation effects.
-
-Freeze the primary endpoint, chain weights, missingness bounds, sample, order and report before outcomes. Package-by-chain contrasts concern the selected chains. A degenerate bootstrap or identical repeated outcomes is not population certainty; no favorable-result-driven extension.
-
-## Repair and context mechanisms: later questions, not assumed fixes
-
-Separate **useful current diagnostic evidence**, **resolved historical output**, **stale source**, and **irrelevant repetition**. Completed P08/P09 readings show conditional benefits and losses. P06 changes source/edit authority as well as memory; P10/P12 add state and reasoning interventions. No-repair is not isolated repair, and lower planner usage need not mean lower total cost.
-
-The earlier fixed-source history and repair-routing proposals are **deferred**, not experiments finalized here. Before reviving either, promote the conditional masking-regime paper, define the domain/estimand, check close methods and freeze source, accepted requirements, authority, model and full accounting. These are not extra A0 requirements or allocated calls.
-
-## Research and engineering loop
-
-Use [research-loop-and-scite.md](docs/research-loop-and-scite.md) together with the [full-reading assignment](docs/full-paper-reading-handoff-2026-09-14.md) and its explicit [P12/P13 extension](docs/nu-form-factors-and-research-leads-2026-09-14.md). Start with the decision and a falsifier; acquire verified PDFs; reconstruct the whole papers; check overlap and contrary evidence; turn findings into explicit design consequences. Return an honest complete/partial/access-blocked reconstruction, not another selective-read audit labelled complete. Deferred evidence is not evidence of absence. Scite snippets, citation labels and graph density do not establish validity or novelty. Use 20-item literature pages and effective-size offsets for relevant continuation; exact lookups can return fewer than twenty.
-
-Keep the existing rule of **five failed attempts at one unchanged unresolved apparatus gate**; success clears that counter. This is not permission for five ambiguous/billable retries. Stop immediately for safety, uncertain requests, resource limits or an execution-policy change. Routine corrections to the evidence-based proposal inside this literature assignment do not require a fresh authorization for each edit.
-
-Apply [change-scoped CI](docs/ci-validation-scope.md). Green prose-only checks do not certify Nu runtime, full-paper reading or scientific acceptance. Direct commits are requested; preserve concurrent changes, never force-update main. The final handoff states exact head, changed scope, actual coverage/checks, unresolved PDFs and the next decision. No new experiment allocation is created by this update.
+Commit directly, preserve concurrent main changes and all frozen evidence, and report exact CI scope. Documentation checks do not certify the runtime or scientific approval. This review is by the current assistant, not independent human or second-agent sign-off.
