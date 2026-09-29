@@ -1,0 +1,31 @@
+# S64 — live game tooling beyond academic indexes
+
+**Full author-preprint reading completed 2026-09-29.** Tom Beckmann, Christian Flach, Eva Krebs, Stefan Ramson, Patrick Rein and Robert Hirschfeld, *An Exploratory Literature Study on Live-Tooling in the Game Industry*, LIVE 2019. Zotero `8RJSNJML`, attachment `MFW4K8XI`; [author PDF](https://hpi.uni-potsdam.de/hirschfeld/publications/media/BeckmannFlachKrebsRamsonReinHirschfeld_2019_AnExploratoryLiteratureStudyOnLiveToolingInTheGameIndustry_AuthorsVersion.pdf): six pages, 4,158,551 bytes, SHA-256 `e92a100db89f03d18d10f7e37e7c3192bf7e5191939f33c4f32cdc0b299cabf8`. All pages, sections 1–5, four figures and 26 references were read. Pages 3–5 were rendered and inspected. No underlying GDC video, original studio tool, crawl or experiment was reproduced.
+
+The [official LIVE program](https://liveprog.org/all-programs.html) identifies the 2019 talk and all six authors. The PDF contains an inconsistent LIVE'18 reference-format label and placeholder DOI/ISBN; neither placeholder was imported. No DOI has been verified, and the Scite exact-title request returned zero despite requesting twenty records. This is a complete reading of the identified author preprint, not a claim of a verified ACM version of record.
+
+## Search and inference scope
+
+This exploratory study uses SALSA to organize practitioner material from Gamasutra and the freely available main-conference GDC Vault. The crawler found 10,147 articles across 13,709 pages. A filter for the word “tool” left 2,716 pages; title selection left 98 articles. These are different reported units and not a quantified estimate of tool prevalence.
+
+The GDC search covered 716 freely available talks from 1996–2019. The keyword filter left 120; removing 72 left 48, categorized as seven high-, nine medium- and 32 low-detail videos. Only the seven high-detail videos were examined in detail for liveness. Synthesis thus used 98 articles and seven detailed videos, not every identified talk. Paid material and sub-conferences such as VRDC/GDC Europe were outside the search.
+
+Each item was coded by one author. The authors explicitly acknowledge title/keyword and brief-video screening, no game-industry confirmation of their chosen sources, and the fact that studios do not publish complete tool inventories. They intentionally omit many profiling tools from their reported survey. The paper supports a range of observed information needs and examples; it does not establish industry-wide frequencies, saturation, independent coding agreement or causal productivity gains.
+
+## What changes the Nu claim map
+
+The ten clusters cover replay/editing of past behavior, problem reporting, seeing future behavior, editing data, level creation/debugging, revealing hidden information, hiding distracting visible information, AI/behavior debugging, hardware/network emulation, and connecting artistic assets with game behavior. Two concern history, one concerns future behavior, and the others mainly concern the present. These are useful task distinctions, not interchangeable maintenance outcomes.
+
+Examples include character-decision timelines, editable dialog previews, data-driven parameter changes, destruction previews, graph-based procedural geometry and runtime level editing. Their existence in the surveyed reports makes a generic claim that live inspection or editing is absent from game development untenable. The paper itself is secondary evidence for each particular studio system. Its screenshots and descriptions do not verify complete replay fidelity, snapshot restoration, arbitrary source-change migration or reduced regression risk.
+
+The authors classify examples using liveness levels 2–6, sometimes classifying an asset editor and sometimes the running game. They expressly recognize this comparability problem. A level is not a measured benefit scale. Their natural-language scene-generation example is based on a work-in-progress tool report and interpreted as high-level liveness; it is not an evaluation of coding-agent maintenance. Similarly, restarting a preview, editing data during simulation, replacing compiled code and reconstructing state after an edit have different state/effect boundaries.
+
+The study highlights specialized audiences: programmers, artists and designers need different interfaces and feedback. Reported data-driven designs move parameters or expressions outside compiled code to shorten iteration. That provides a plausible rival explanation to a language-paradigm effect: tooling, content representation, build time and workflow may produce the advantage. A future comparison must specify the actual artifact changed, the tool opportunity and the complete behavioral obligation.
+
+## Three criteria and follow-up
+
+**Unique:** live game editing, visual state inspection, history and specialized previews have substantial practitioner predecessors beyond a narrow academic search. Generic mechanism novelty is not supported. **Valuable:** the information needs are concrete, but their prevalence, costs and net maintenance value remain unmeasured by this study. **Scientifically valid:** distinguish actor, artifact, temporal direction, rebuild/replay semantics and tool availability; do not turn a selected example or liveness category into an effectiveness estimate. No experimental work follows.
+
+The individual GDC talks, archived studio articles, Tanimoto taxonomy and broader liveness review remain conditional for any exact mechanism, prevalence or taxonomy claim that relies on them. Their inclusion in S64 does not mark their bodies or videos read. The completed S46–S55 temporal/tool studies retain their own primary evidence rather than being replaced by this exploratory map.
+
+A newly surfaced direct follow-up, *Shortening Feedback Loops in a Live Game Development Environment* (2021), [DOI 10.1109/VL/HCC51201.2021.9576454](https://doi.org/10.1109/VL/HCC51201.2021.9576454), is promoted for the live-game feedback claim. Its twenty-record exact-title query also returned a Zenodo concept/version pair (`10.5281/zenodo.5082420`, `10.5281/zenodo.5082421`). These are identified paper/supplement leads, not three studies or completed readings. S63 Timelapse remains acquired and queued for its user-study reconstruction; the broader Nu review is still in progress.
