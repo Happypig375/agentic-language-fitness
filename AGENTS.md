@@ -51,3 +51,5 @@ If one PDF is blocked, record the DOI, lawful acquisition attempts and affected 
 The current discovery handoff has reached a defer-start decision. For any later authorized literature segment, provide the updated three-criterion judgement, remaining claim-specific gaps, next decision, exact commit and actual CI scope. A0 still requires its own human disposition and retains its two-baseline/four-successor cap; removing the literature-count cap does not remove experimental limits.
 
 Inside later authorized engineering, five failures at the same unresolved gate trigger return; success clears the counter. Safety, ambiguous billable requests, resource limits or scientific changes trigger immediate stop. Apply [change-scoped CI](docs/ci-validation-scope.md), preserve concurrent work and never force main. Documentation CI does not certify runtime or scientific acceptance.
+
+When the authorized work is done, commit the completed changes and push the current branch to its configured remote after the applicable checks pass. Preserve unrelated concurrent changes and never force-push.
