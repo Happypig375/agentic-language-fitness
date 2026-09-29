@@ -17,6 +17,20 @@ The earlier 117 decisions below retain their original state. A later completed s
 | [S41, arXiv v1](https://doi.org/10.48550/arXiv.2110.15246) | All 11 pages and displayed figures/tables/equation. A selected 42-method refactor compares static metrics; it supplies no human or agent criterion for the snippets. Earlier Scite identity and fetched Consensus record reused. |
 | [Author-linked Zenodo 4277872](https://zenodo.org/records/4277872) | Public API, two checksum-verified archives, paired 42-row score CSVs and two `Server.sendToTCP` bodies inspected. Table IV aggregates recalculated; metric tools, tests and remaining source were not fully evaluated. Exact Scite DOI lookup requested 20 at offset 0 and returned zero; provenance is the author's link and Zenodo, not indexed Scite evidence. |
 
+## Subsequent reactive-debugging and live-tuning segment
+
+For `alf-nu-literature-2026-09-29-debugging`, Scite accepted seven new/changed logical-source decisions: five credited, one conditional and one duplicate; zero skipped. The inspected audit returned seven screened, five included and two excluded, `retrieved=null`, four full-text-stage and three title/abstract-stage decisions, no missing reasons or retrieval-linkage warning, and `truncated=false`. Source provenance was two Scite, four web and one other. Exact report/audit identifiers matched. Earlier unchanged decisions were not resubmitted; full-text-stage artifact/page inspections are not additional full-paper counts.
+
+| Considered identity | Decision and actual extent |
+| --- | --- |
+| [S43](https://doi.org/10.1145/2884781.2884815) | C, changed from deferred after all 12 pages and 19 figures. Eighteen-student debugger comparison distinct from the 89-person requirements survey; published arithmetic checked, experiment not rerun. |
+| [Reactive Inspector author page](https://guidosalva.github.io/reactive-inspector/) | C, main prose and successor link; video unexamined. |
+| [Pinned repository](https://github.com/guidosalva/reactive-inspector/tree/769a17b6c04682bdffebfee2482889d6f2ec0d81) | C, README and complete master/gh-pages inventories only. No identifiable timing dataset in inspected trees; no global absence or implementation-validation claim. |
+| [S56 author paper](https://www.rescala-lang.com/assets/pdf/2018%20Debugging%20towards%20Tuning.pdf) | C, all six pages and three figures. Design/early-experience evidence on inspection, modification and restoration; no controlled tuning evaluation. Duplicate author-hosted PDF and search routes consolidated as this work. |
+| [LIVE program](https://liveprog.org/all-programs.html) | C, selected six-author LIVE 2018 identity entry only; not full workshop screening. |
+| [Fault-tolerant Distributed Reactive Programming](https://doi.org/10.4230/LIPIcs.ECOOP.2018.1) | D, S56 reference 17, exact Scite identity/OA route only. Promote full methods if snapshot cost or consistency becomes a specific proposed distinction. |
+| [Related SPLASH poster listing](https://2018.splashcon.org/details/splash-2018-Posters/66/From-Debugging-Towards-Live-Tuning-of-Reactive-Applications) | N, duplicate route for live-tuning work; not an independent experiment. |
+
 ## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
