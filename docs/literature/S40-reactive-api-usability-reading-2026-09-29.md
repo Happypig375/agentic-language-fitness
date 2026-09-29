@@ -4,6 +4,8 @@
 
 ## Coverage and acquisition
 
+**Later same-day acquisition:** publisher PDF `JIHCCZLN` appeared under the existing Zotero parent and was verified at its first page: 33 pages, 1,814,420 bytes, SHA-256 `5966d8c7e8fd1904f5a2497ef311283540d06f19d63502c855e9d98dd8b043bc`. This closes file access, not the remaining publication-figure/edition checks. It was not downloaded by this session; the earlier failed routes below remain accurate historical attempts. Full-reading promotion is pending those checks.
+
 All **161,620 characters** of Scite's indexed body were read in 21 contiguous chunks, offsets 0–160,000, ending with 1,620 characters and `hasMore=false`. The body runs through sections 1–9, acknowledgments and declarations. It duplicates some paragraphs and omits table cells, several inline mathematical values, the appendices and reference list. Its UTF-8 extraction hash is `4897ea4b69d2bfdd82f16077680a5ae17897f449ea8bf331696ddc6d5e1974fa`; this is **not a PDF hash**.
 
 The [publisher HTML](https://onlinelibrary.wiley.com/doi/10.1002/spe.3435) supplied the abstract, all nine main tables, Appendix A's five tasks, Appendix B's demographics and 24-item questionnaire, Appendix C's nine interview prompts, 42 endnotes and all 89 reference entries. Six author-repository PNGs corresponding to figures 1–5, including both figure 5 panels, were visually inspected. They are attributed to the artifact, not certified as identical to the publisher images. The publisher figure images and a complete PDF have not been inspected, so this remains a partial publication reading.

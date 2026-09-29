@@ -1,0 +1,29 @@
+# S57–S58 — dependency-ordered game updates
+
+**Later same-day update:** S57's publisher PDF subsequently appeared in Zotero and was fully read, including its figures and original algorithm typography. The [completed S57 note](full-reading/S57-reactive-game-ordering.md) supersedes its partial status below. S58 remains partial. The initial access attempts and partial-reading decisions below are retained as their actual earlier state.
+
+**2026-09-29; partial publication readings.** These are successive works by João Paulo Oliveira Marum, J. Adam Jones and H. Conrad Cunningham: [*Towards a Reactive Game Engine* (2019)](https://doi.org/10.1109/SoutheastCon42311.2019.9020527), S57, and [*Dependency Graph-based Reactivity for Virtual Environments* (2020)](https://doi.org/10.1109/VRW50115.2020.00052), S58. The latter explicitly extends the former; they are not independent replications.
+
+## Coverage and access
+
+The web-extracted text of both eight-page author PDFs was consumed from title through bibliography: S57 sections I–VII, two algorithm listings and 36 references; S58 sections 1–6, two algorithms, both result tables and 28 references. The [2019 PDF](https://john.cs.olemiss.edu/~hcc/papers/Marum_2019_IEEE_SouthEastCon.pdf) has three figures; the [2020 PDF](https://john.cs.olemiss.edu/~hcc/papers/Marum_2020_SEARIS_Dependency_Graph.pdf) has two. Figures and original algorithm/table typography have **not** been visually verified. Parsed pseudocode is not certified executable code. These readings do not increase the 43 complete-work count.
+
+Local HTTPS retrieval from the author server failed certificate-expiry checks, including its two alternate hostnames; HTTP reset. The 2019 author-upload ResearchGate PDF returned 403 after resolving a malformed relative link. The 2020 IEEE stamp route returned 418. Web PDF screenshot attempts returned cache misses. No PDF attachment or file hash is fabricated. Author publication listings and Crossref confirm titles, authors, venues and edition identities; the listings were inspected only for these entries. No implementation, benchmark data or experiment was executed.
+
+## Source-located evidence
+
+S57's implementation (pp. 3–5) builds component-reference dependencies, excludes cycles and routes selected scripts through `IUpdatable.FakeUpdate`. Unity/.NET internals and other scripts remain outside this mechanism. Its tests use expression trees and a small shooting example against default Unity3D and UniRx. Results (p. 6) report miscalculation rates of 20%/80% for UniRx before/after structural changes, 90%/95% for default Unity, and 15% for the proposed framework. A complete trial denominator, uncertainty and quantitative timing distribution are not supplied. The reported residual failures constrain the introductory guarantee language.
+
+S58's implementation (pp. 3–5) requires modified components/values to be exposed as fields or properties; cyclic dependencies are omitted and execute non-reactively. `ReactiveUpdate` replaces the earlier callback name. Identity matching adds type/name/parent-property assumptions. Its expression-tree evaluation (pp. 5–7) uses two 100-user-cycle scenarios. Parsed tables report framework error totals 15/20, one-cycle latency and zero visible errors for **every** comparator. Table 2 gives Unity 100 errors while the prose says 95%. Startup averages 198 ms; graph reconstruction takes up to 100 ms. More rigorous timing remains future work. “User cycles,” update cycles, error totals and conditional errors-per-cycle are not interchangeable denominators. The earlier study's percentages must not be silently replaced with these later values.
+
+## Consequences and remaining decisions
+
+**Unique:** unconfirmed for a precise Nu mechanism; generic reactive game coordination and dynamic update ordering already have direct predecessors. A C# dependency scheduler is a credible rival explanation for improvements attributed broadly to functional architecture.
+
+**Valuable:** internal consistency is a concrete concern, but these readings establish neither user-perceived improvement nor developer/agent maintenance savings. Equal visible-error entries cannot support a measured perceptual advantage. The latency and rebuilding costs warrant separate observation in any later study.
+
+**Scientifically valid:** a proposed comparison needs explicit behavior at structural-change boundaries, cycle handling, complete dependency capture and external-engine interactions. Use credible configured alternatives and common obligations; do not import default-baseline rates as a causal estimate for Nu. Source equivalence, independent oracles, realistic task diversity and accounting remain unvalidated. Allocation remains zero.
+
+S57's incoming Scite graph requested a 20-edge cap and returned four edges/five nodes, untruncated but flagged low coverage. S40 is already reconstructed. Exact DOI checks for the three other nodes requested **20 papers** at offset zero and returned three; no further exact-identity page was indicated. S58 was promoted and read at the extent above. **S59**, *Following the Writer’s Path to the Dynamically Coalescing Reactive Chains Design Pattern* (`10.3390/a17020056`), is promoted to examine the generalized coordination pattern, its assumptions and evidence lineage. Its full methods remain pending at this checkpoint. *UAX* (`10.5753/sbes.2024.3658`) stays conditional on adopting S40's metric implementation. Scite's mistaken third-author name for S59 was corrected against Crossref and the primary PDF before import.
+
+Earlier VR/FRP, GUI and robotics references establish a broader lineage but are not all new full-reading requirements. Their promotion depends on adopting their exact guarantees or measurements. S59's generalization and the already open temporal/debugging frontier remain consequential; no global novelty conclusion follows from a small citation graph.

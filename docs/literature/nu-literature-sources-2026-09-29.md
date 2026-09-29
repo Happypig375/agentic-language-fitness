@@ -94,6 +94,20 @@ The [S40 note](S40-reactive-api-usability-reading-2026-09-29.md) supersedes its 
 | [Towards a Reactive Game Engine](https://doi.org/10.1109/SoutheastCon42311.2019.9020527) | D, promoted architecture predecessor; identity/abstract and author-PDF lead only. Dependency-ordered game updates could change the distinctive-coordination claim. Full methods pending. |
 | [Game-engine API usability](https://doi.org/10.1002/spe.2985) | D, conditional metric/prevalence rival; identity/abstract only. Promote if adopting its metrics or claiming poor engine API usability is prevalent; no human-effect estimate inferred from a secondary description. |
 
+## Dynamic game-ordering update
+
+The [S57/S58 reconstruction](S57-S58-reactive-game-ordering-reading-2026-09-29.md) first recorded both works as partial. For `alf-nu-literature-2026-09-29-game-ordering`, Scite accepted five decisions: three credited and two deferred, zero skipped. The inspected audit returned five screened, three included and two excluded; two full-text-stage and three title/abstract-stage; four Scite and one web source; `retrieved=null`, no missing reasons/linkage warning and `truncated=false`. Full-text stage then meant extracted-body reconstruction, not complete publication coverage.
+
+| Source | Decision and actual extent |
+| --- | --- |
+| [S57](https://doi.org/10.1109/SoutheastCon42311.2019.9020527) | C, primary author-PDF body/algorithms/references read, with figures/typography initially unavailable; direct dynamic-ordering predecessor, residual failures and incomplete evaluation denominator. |
+| [S58](https://doi.org/10.1109/VRW50115.2020.00052) | C, primary extracted body, algorithms, two tables and bibliography; still partial. S57 extension, cycle/identity assumptions and timing/denominator limits, not independent replication. |
+| [S59](https://doi.org/10.3390/a17020056) | D, promoted for generalization/evidence-lineage scrutiny; 39-page publisher PDF acquired, first page and metadata only. The primary PDF/Crossref corrected Scite's third-author name before import. |
+| [UAX](https://doi.org/10.5753/sbes.2024.3658) | D, conditional on adopting the metric implementation; metadata/abstract only. |
+| [Author publication list](https://john.cs.olemiss.edu/~hcc/papers.html) | C, selected 2019/2020 entries verify identity and lawful PDF leads; not a complete bibliography or methods reading. |
+
+S57's publisher PDF subsequently appeared in Zotero; all eight pages and the three figures/two algorithms were then read, closing its visual gaps. The [completed reading](full-reading/S57-reactive-game-ordering.md) is separately audited as `alf-nu-literature-2026-09-29-game-ordering-pdf`: one cited DOI, other provenance (Zotero publisher PDF), full-text stage, zero skipped. The inspected report returned one screened/included, zero excluded, `retrieved=null`, no missing reasons/linkage warning and `truncated=false`. Only S57's changed decision was resubmitted. The newly present PDFs for other papers are acquisition corrections, not additional full readings or new screening decisions.
+
 ## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
