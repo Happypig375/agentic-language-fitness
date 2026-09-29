@@ -63,7 +63,7 @@ Stable IDs S68–S71 were assigned after checking existing Zotero DOI/title iden
 | S72 author PDF | 853,504 | `f047c0a15757eb982e72f49308246de8246f059bb513dd8cd4c101624e0c59ba` |
 | S73 author PDF | 1,401,364 | `c164aa76ab4ac142338435bc85c22335aad52edff645653be87ca8fdf766a4e3` |
 
-The live complete-reading count is **65 = thirteen P + three A + forty-nine S**. The preceding 62-work assessment remains a dated decision-specific snapshot. S68 and S72/S73 are not silently counted. No publisher PDFs, extracted bodies or private transcripts are committed. The next work is primary reading and consequential search/citation follow-up across the open survey themes, with experimental allocation still zero.
+The live complete-reading count is **67 = thirteen P + three A + fifty-one S**. The preceding 62-work assessment remains a dated decision-specific snapshot. S68 and S72/S73 are not silently counted. No publisher PDFs, extracted bodies or private transcripts are committed. The next work is primary reading and consequential search/citation follow-up across the open survey themes, with experimental allocation still zero.
 
 ## Cross-index connector errors
 
@@ -111,3 +111,38 @@ New lawful attachment hashes (S72/S73 already appear above):
 | S74 | 545,296 / 9 | `6ac5437e4b5de50255eeee198a1e9d813f80e850769695395dd706143333bfbc` |
 | S75 | 745,655 / 36 | `84473800d3b298824bb8bae3323762a079cda65fb8b01543cb0f916fe575fdeb` |
 | S77 | 1,111,564 / 46 | `69d7676c5b43a9d4fe75084f3349d3a896e166f85b8b1c3fa57530c078bc4305` |
+
+
+## S74 completion and further foundation records
+
+[S74's complete reading](full-reading/S74-typed-design-patterns.md) covers all nine author-PDF pages, seventeen listings, the single figure and all 24 bibliography entries. Pages 2–8 were visually inspected. Prior typed mechanisms and complexity tradeoffs are established; the public-empty-witness and nested-vector/downcast inconsistencies are printed-example deductions, not executed failures. No comparative maintenance effect is measured. Zotero note `KC8JKIPU` now carries the full reading, and parent `5N995MVS` is tagged complete. This supersedes its acquired-only state in the earlier import table.
+
+SC07 queried the two exact maintainability-myth titles with `limit=20`, offset 0, returning **one** APSEC record (`10.1109/apsec.1999.809644`). SC08 queried S74's six exact bibliography DOIs listed in its note with `limit=20`, offset 0, returning **six** records. All returned metadata, supplied short/missing abstracts and available citation snippets were inspected. Exact-identity matches do not exhaust either mechanism family.
+
+W03 used `"Maintainability Myth" filetype:pdf Bosch` and `"System structure and software maintenance performance" Gibson Senn filetype:pdf`, followed by `site:janbosch.com "Maintainability Myth"` and `"Maintainability Myth" "Software Engineering and Applications" 1999`. The primary [ARTES project publication list](https://www.artes.uu.se/project/publications/list.shtml) separately lists SEA October 1999 and APSEC December 1999 papers. Consequently S79's seven-page [indexed author paper](https://www.janbosch.com/Articles/SEA99haggander.pdf) does **not** receive the four-page APSEC DOI. A full primary comparison is still required before interpreting their study overlap. The direct author URL redirects to a 404, despite the web index exposing PDF text; CiteSeer redirects to a Wayback 404. These are acquisition failures, not absence of a readable indexed body. S78's ACM PDF returns 403. S76's encoded-URL and university-host PDF alternatives also return 403. No global access impossibility is inferred.
+
+S78–S80 are recorded in Zotero after identity checks, adding **three parents and no PDFs**: current holdings **99 parents = 96 literature + three public records, 103 PDFs**. None of these three has full-reading credit. The newly selected records make the intended readings and acquisition gaps visible without waiting for another prompt.
+
+| ID | Zotero parent / note | Identity and live reason |
+| --- | --- | --- |
+| S78 | `GJ5629H8` / `5IHCL3BY` | Gibson/Senn, *System structure and software maintenance performance*, `10.1145/62065.62073`. B01/B10/B12: maintenance-task outcomes, ripple errors and metric/subjective validity. Full methods pending; publisher PDF 403. |
+| S79 | `PY6UWAWB` / `YEVT9TDP` | Häggander/Bengtsson/Bosch/Lundberg, *Maintainability Myth Causes Performance Problems in Parallel Applications*, SEA October 1999. B01/B05/B06/B10: component granularity, allocation and maintenance-benefit measurement. No DOI asserted; seven-page indexed author body, direct PDF 404. |
+| S80 | `X8GU8ZH3` / `B28K8MDC` | *Maintainability myth causes performance problems in SMP application*, APSEC December 1999, `10.1109/apsec.1999.809644`, pp. 516–519. Publication-lineage comparison with S79; metadata only, PDF not yet acquired. |
+
+S74 and its direct bibliography/documentation follow-up were reported once as `nu_background_s74_20260930`: **ten identities, four credited, six deferred/not credited, zero skipped**. Credited identities comprise the full paper and selected passages in three official Rust documentation pages; documentation was not read in full. Six bibliography leads remain pending primary examination. The inspected report has no missing reasons, retrieval-link warning or truncation, and a null answer-scoped retrieved count. This does not re-report unchanged historical screening or certify whole-background completion.
+
+Engineering checkpoint: `0b784a88ad6e406b16dbcbee1eed5fdb5b475950` committed and pushed the two Casanova readings, six first records, ledger and rename CI confirmation. [Run 36621128341](https://github.com/Happypig375/interactive-software-evolution/actions/runs/36621128341) passed the documentation scope checks; Linux/Windows runtime, maintenance and optional E2 jobs were skipped. Local verification passed eleven CI-routing tests, changed-Markdown UTF-8/local links and Git whitespace. The earlier rename commit's full matrix result is distinct. Scientific acceptance and experimental allocation are unchanged.
+
+
+**S79 access correction, confirmed by the user:** the author URL is file not found, not an available PDF. A further exact-title search excluding ResearchGate/JanBosch/CiteSeer, a filename search, and `"Software Design Conflicts" "Bengtsson" thesis PDF` found two primary thesis reproductions: [Häggander's thesis, Paper III](https://bth.diva-portal.org/smash/get/diva2%3A837734/FULLTEXT01.pdf) and [Bengtsson's thesis, Paper IV](https://www.diva-portal.org/smash/get/diva2%3A837619/FULLTEXT01.pdf). Both direct downloads returned 403 here. Indexed front matter corroborates SEA 1999 pp. 288–294; it is not a full reading of either thesis or a successful attachment. S79's Zotero note records the live 404 and both attempted alternatives. Accessible independent readings continue.
+
+
+## S72 completed primary reading
+
+[S72](full-reading/S72-functional-programmer-authoring.md) is now fully read: thirty pages, eight figures, four tables, all tasks/hypotheses and bibliography. Renders of pp. 4, 6, 8 and 16–21 cover every figure/table. Printed counts and nine Wilson intervals were reconstructed; participant videos, coding and experiments were not repeated. The fixed-commit livestream repository contains only a README with fifteen identities, five labeled expired, rather than quantitative raw data. Earlier CHI data are explicitly identified by the main paper as part of the same grounded-theory lineage; exact participant overlap remains unverified.
+
+This source directly motivates the wildcard/evolution tradeoff and deliberate compiler feedback use. Its one-task Haskell contrast is pattern matching/recursion versus predefined combinators, six participants each: median time 3.7/10.3 minutes (reported p=.004), weighted NASA-TLX 34.8/60.2 (p=.083, not significant at .05). Conditional refactoring compilation (6/8 among those who compiled), pooled-name signal counts and author-observed correctness must not become population prevalence, independent outcomes or behavioral-oracle validation. It does not establish an exhaustive-versus-fallback agent effect.
+
+Zotero note `34LVWIX9` now contains the full reconstruction and parent `ABZCXW4C` is tagged complete. This supersedes the earlier acquisition-only table entry. Complete coverage is **67 = thirteen P + three A + fifty-one S**, with **96 literature records, three public records and 103 PDFs**. No other newly recorded paper gains full-reading credit from this update.
+
+Citation audit `nu_background_s72_20260930` recorded **three credited identities, zero excluded, zero skipped**: the full paper, its bounded fixed-commit repository and selected author publication-list entries. The inspected report has no missing reasons, retrieval-link warning or truncation; retrieved count is null. Previously screened CHI metadata and unchanged earlier decisions were not resubmitted. The main paper's new explicit lineage statement supplies the correction; unexamined bibliography and later refactoring methods remain leads.
