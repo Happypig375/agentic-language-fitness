@@ -1,5 +1,7 @@
 # S40 — reactive API usability: body and artifact reconstruction
 
+**Later same-day completion:** the [full-reading note](full-reading/S40-reactive-api-usability.md) records inspection of all five publisher figures and the remaining edition checks. That closes the publication-coverage gaps below. Supplement equivalence, complete raw timing/allocation data and experimental reproduction remain unresolved. Earlier partial-reading and acquisition statements below retain their historical scope.
+
 **2026-09-29; partial publication coverage, not a new full-reading count.** Carlos Zimmerle and Kiev Gama, *On the Usability of Reactive Programming APIs: A Mixed Evaluation*, Software: Practice and Experience 55(9), 1506–1538, first published 24 May 2025, [DOI 10.1002/spe.3435](https://doi.org/10.1002/spe.3435). Zotero parent `KVBEN636` already existed and was reused. This read tests the claim that functional/reactive abstractions automatically make an API easier to learn, maintain or use correctly.
 
 ## Coverage and acquisition
