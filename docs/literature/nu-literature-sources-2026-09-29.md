@@ -267,3 +267,23 @@ For `alf-nu-literature-2026-09-29-usage`, Scite accepted eleven new/changed deci
 | [Earlier cloud-cost preprint](https://doi.org/10.48550/arXiv.2304.07531) | N, same work/edition relationship, not an independent study. |
 
 S45's incoming graph returned nine edges/ten nodes with `max_edges:20`, no truncation and no low-coverage flag. Four neighbors already had recorded decisions (S40, blocking-call debugging, RxSwift perspectives and UAX); they were reconciled, not reported as fresh screens. Five other graph identities were checked by exact DOI; S60/S61 were checked by exact title. Both searches used `limit:20, offset:0` and exhausted their exact-identity result sets (five and two). General LDA/mining methods remain conditional on adopting that design. Graph coverage does not establish field completeness.
+
+## Subsequent S60 professional-debugging segment
+
+For `alf-nu-literature-2026-09-29-professional-debugging`, Scite accepted eleven new/changed decisions: three credited, eight conditional/not-credited, zero skipped. The inspected report returned eleven screened, three included, eight excluded, `retrieved=null`, no missing reasons or retrieval-linkage warning and `truncated=false`. Three full-text-stage entries are one paper and two bounded materials; eight are title/abstract-stage decisions, with selected primary excerpts where stated. Provenance is three other, seven Scite and one web source. Unchanged S45/S54/blocking-call decisions were not resubmitted.
+
+| Source | New decision and actual extent |
+| --- | --- |
+| [S60](https://doi.org/10.1145/3427763.3428313) | C, all ten pages; five interviews/five war stories and four observed developers, one/eight completed attempts and no causal integration comparison. |
+| [Experiment release](https://github.com/swissmanu/mse-pa1-experiment/tree/740717e03c78d5a9fb7c5dea6034c15dbe3e5fb7) | C, v1.0.2, untruncated 31-entry tree, README/package, two entry points and selected test headings. No execution or complete oracle/participant-trace audit. |
+| [Pinned survey](https://github.com/swissmanu/mse-pa1-experiment/blob/f70102885be86fb2323b9516005e1d6dfeb9795b/after-action-survey-questions.md) | C, all four questions; no direct tool-avoidance reason or integration-cost measure. |
+| [Poker](https://doi.org/10.1145/3486605.3486785) | D, primary conference abstract and selected preprint/camera-ready excerpts; conditional programmable-probe/overhead comparator. |
+| [Java-library performance/cost](https://doi.org/10.1145/3486605.3486788) | D, primary author abstract; conditional runtime/workload comparison, no human maintenance result credited. |
+| [Cooperative cancellation](https://doi.org/10.1145/3486608.3486911) | D, title/metadata; conditional JavaScript cancellation semantics. |
+| [RxJS semantics](https://doi.org/10.1145/3563837.3568340) | D, title/metadata; conditional if RxJS operators become an intervention or oracle. |
+| [Debugging Revisited](https://doi.org/10.1109/ESEM.2013.43) | D, identity and institutional abstract; conditional general-practitioner/process comparison. |
+| [Record/replay deployability](https://doi.org/10.48550/arXiv.1705.05937) | D, exact title and indexed excerpts; conditional native runtime/overhead rival, not fully read. |
+| [Omniscient debugging](https://doi.org/10.1109/MS.2009.169) | D, exact-title identity; conditional historical mechanism source. |
+| [Information-foraging account](https://research.ibm.com/publications/how-programmers-debug-revisited-an-information-foraging-theory-perspective) | D, primary abstract; retain its contrary navigation/process framing if a cognitive model becomes central. |
+
+The incoming graph requested at most twenty edges and returned seven edges/eight nodes, untruncated with no low-coverage flag. Four new graph identities were looked up with `limit:20`. A DOI-filtered foundation lookup returned only its one DOI target; a separate title-only search requested twenty and returned the other two identities. Exact identity sets were exhausted. Conditional triggers do not amount to full methodological reading or evidence of field completeness.
