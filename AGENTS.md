@@ -42,6 +42,8 @@ Scite literature searches request **20 records per page**, with further pages at
 
 For full-reading targets check existing Zotero identifiers before additions. Record lawful PDF/supplement reference/hash, actual page/figure coverage, extraction/rendering limits, reconstruction and reproduction separately. Preserve earlier P/A/S IDs; assign new stable queue IDs without renumbering prior work. Do not mark selected HTML, metadata or a parsed PDF fragment fully read. Do not commit publisher PDFs or text dumps by default.
 
+Use Zotero 10's native local HTTP API for authorized library writes and PDF uploads. The current installation supports it; do not use the JavaScript window or computer use for routine Zotero writes. Reuse the granted local authorization, keep credentials outside Git, and check the server identity and current object versions before updates.
+
 After each paper, save its actual reading state, evidence reconstruction, design implications and newly discovered leads. Update the existing reading index/assets, queue and synthesis as appropriate. Commit coherent progress directly; a checkpoint is not an automatic handoff. Record the considered source decisions for each completed review segment with `report_citations`, inspect `citation_report`, and retain access-limited/deferred states without fabricating completion. Do not repeatedly report unchanged historical decisions as new screening.
 
 ## Stop and handoff

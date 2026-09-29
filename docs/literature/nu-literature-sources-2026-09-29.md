@@ -83,6 +83,17 @@ For `alf-nu-literature-2026-09-29-quickstrom`, Scite accepted seven decisions: t
 
 The four-DOI lookup used `limit=20, offset=0` and returned four records. The exact lookup is exhausted, not the broader methods field. Existing S46/S47/S53 states were reused without resubmission. Generic artifact-search results and conference program containers were discovery routes, not separate evidence for effectiveness or independent artifact acceptance.
 
+## Reactive-API usability reconstruction update
+
+The [S40 note](S40-reactive-api-usability-reading-2026-09-29.md) supersedes its initial abstract-only disposition at the bounded extent recorded here; the historical screening table below is not rewritten as if full methods were available then. For `alf-nu-literature-2026-09-29-usability`, Scite accepted four decisions: two credited and two deferred, zero skipped. The inspected audit returned four screened, two included and two excluded; two full-text-stage and two title/abstract-stage; three Scite and one other source; `retrieved=null`, no missing reasons/linkage warning and `truncated=false`. Full-text stage here denotes partial publication or bounded artifact inspection, not an additional complete-paper count.
+
+| Source | Changed decision and actual coverage |
+| --- | --- |
+| [S40](https://doi.org/10.1002/spe.3435) | C, all indexed body, publisher tables/appendices/references and selected corresponding repository images. Publisher figures/PDF remain unseen. Retention denominators, timing aggregates, scale interpretation and bundled API effects constrain reuse. |
+| [Pinned S40 artifact](https://github.com/carloszimm/reactiveusability24/tree/30ff3b98d54a75fa9925737f903952eb24edb4ac) | C, complete README, three workbooks and six figure PNGs. Independent arithmetic checked retained task labels, 288 score mappings and 48 API item means. No participant-code, metric-tool or experimental execution; publisher-supplement equivalence unverified. |
+| [Towards a Reactive Game Engine](https://doi.org/10.1109/SoutheastCon42311.2019.9020527) | D, promoted architecture predecessor; identity/abstract and author-PDF lead only. Dependency-ordered game updates could change the distinctive-coordination claim. Full methods pending. |
+| [Game-engine API usability](https://doi.org/10.1002/spe.2985) | D, conditional metric/prevalence rival; identity/abstract only. Promote if adopting its metrics or claiming poor engine API usability is prevalent; no human-effect estimate inferred from a secondary description. |
+
 ## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
