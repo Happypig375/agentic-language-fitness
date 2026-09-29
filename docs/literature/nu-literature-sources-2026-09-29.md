@@ -67,6 +67,22 @@ For `alf-nu-literature-2026-09-29-frp-body`, Scite accepted one credited and two
 
 The incoming S47 graph (depth 1, cap 80) returned five edges/six nodes, untruncated. S53, modal FRP (`10.1017/S0956796822000132`) and fault-tolerant FRP (`10.1017/S0956796820000118`) were already screened and retain their prior states, not new decisions. An exact lookup of the two new DOIs requested 20 records at offset 0 and returned two; that identity query is exhausted, not the citation field. Cambridge's abstract page confirms the 2020 identity but does not serve the body; attempted PDF/local HTML and Nottingham file routes returned 403.
 
+## Subsequent Quickstrom segment
+
+For `alf-nu-literature-2026-09-29-quickstrom`, Scite accepted seven decisions: three credited and four deferred, zero skipped. The inspected audit returned seven screened, three included and four excluded; three full-text-stage and four title/abstract-stage; five Scite, one web and one other source; `retrieved=null`, no missing reasons/linkage warning and `truncated=false`. Accepted identities match the entries below. The three credited sources represent one complete preprint reading and two bounded edition/artifact checks, not three papers.
+
+| Source | Decision and actual extent |
+| --- | --- |
+| [S50](https://doi.org/10.1145/3519939.3523728) | C, all thirteen arXiv v1 pages, thirteen figures/two tables and forty references. Temporal symbols checked in renders; one-family evaluation, oracle ambiguity and result-table limits retained. |
+| [Edinburgh manuscript](https://www.pure.ed.ac.uk/ws/portalfiles/portal/282105145/Quickstrom_OCONNOR_DOA25022022_AFV.pdf) | C, acquired/attached; cover and table pages checked. Peer-reviewed manuscript label, same discrepancies; not a second full reading or verified whole final edition. |
+| [Pinned artifact](https://github.com/quickstrom/quickstrom/tree/5eafc223c54a5c1752b510ad63b6eb1055e502f2) | C, complete 191-entry tree and selected files. Released 2,579-row aggregates recalculated; expected labels, missing repeat, errors and current-driver/specification differences explicit. No author code, browser or experiment executed. |
+| [RV-LTL](https://doi.org/10.1093/logcom/exn075) | D, exact identity/abstract only; conditional on adopting these semantics, no new full reading. |
+| [LTL and TLTL runtime verification](https://doi.org/10.1145/2000799.2000800) | D, exact identity/abstract only; conditional foundation, no primary method claim. |
+| [Reactive Temporal Logic](https://doi.org/10.4204/EPTCS.322.6) | D, exact identity/abstract only; environmental-progress semantics remain conditional. |
+| [ALEX TodoMVC study](https://doi.org/10.1007/978-3-319-68270-9_7) | D, exact title/identity only; conditional tester-superiority rival, no comparative outcome credited. |
+
+The four-DOI lookup used `limit=20, offset=0` and returned four records. The exact lookup is exhausted, not the broader methods field. Existing S46/S47/S53 states were reused without resubmission. Generic artifact-search results and conference program containers were discovery routes, not separate evidence for effectiveness or independent artifact acceptance.
+
 ## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
