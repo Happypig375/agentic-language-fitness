@@ -10,6 +10,8 @@ of the vsynchronicity blog and a connected-Scite DOI record. This extends the
 The [standalone construction review](maintenance-sim-human-review-2026-09-12.md)
 still owns actual settings and open approvals.
 
+**2026-09-30 primary-reading addendum:** D4/P9 below is now fully read as [S81](literature/full-reading/S81-control-style-experience.md). The earlier abstract-level account needs qualification: the planned five-category experience interaction has p = .133; the significant two-group interaction (p = .028) uses a data-chosen exploratory grouping. Centralized control has higher complete-chain correctness across assigned participants, while delegated-control speed among correct submissions conditions on a post-assignment outcome. Retain the earlier reading state as history; no confirmed expertise threshold or coding-agent transfer follows. The fully read [S88 replication](literature/full-reading/S88-control-style-replication.md) targets the 2001 predecessor and reports a contrary RD-favoring correctness score at alpha .10, with different source variants and unexplained effort exclusions. Its score is not S81's complete-success rate.
+
 ## Recommendation
 
 Restricting the initial study to F#/C# limits **generalization**, not necessarily
