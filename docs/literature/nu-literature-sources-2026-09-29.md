@@ -247,3 +247,23 @@ Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, 
 | [It's the State Machines, Stupid!](https://vsynchronicity.wordpress.com/2026/03/14/its-the-state-machines-stupid/) | C; Full extent specified in reason; web_search | Public essay main prose read; state-machine/lifecycle motivation, not a comparative study. Embedded media unexamined. Routes: Nu claim inputs. |
 | [Simplicity-Aware Programming](https://vsynchronicity.wordpress.com/2026/09/07/simplicity-aware-programming/) | C; Full extent specified in reason; web_search | Public essay main prose read; practitioner motivation about coordination, not controlled evidence. Embedded media unexamined. Routes: Nu claim inputs. |
 | Sibling derived technical synthesis — Nu Chat Analysis: derived technical synthesis, section 4 | C; Full extent specified in reason; user_supplied | Local derived technical section read for Nu hypotheses; distinct from public code and controlled literature. No private transcript uploaded or credited as comparative evidence. Routes: Nu claim inputs. |
+
+## Subsequent S45 usage and professional-practice follow-up
+
+For `alf-nu-literature-2026-09-29-usage`, Scite accepted eleven new/changed decisions: four credited, seven excluded/not-yet-credited and zero skipped. The inspected report returned eleven screened, four included, seven excluded, `retrieved=null`, no missing reasons, no retrieval-linkage warning and `truncated=false`. Four full-text-stage entries are the paper and three bounded artifacts, not four full readings. Seven title/abstract-stage decisions include partial primary text where specified. Provenance is four other sources and seven Scite discoveries. Earlier unchanged decisions were not resubmitted.
+
+| Source | New decision and extent |
+| --- | --- |
+| [S45](https://doi.org/10.1145/3524842.3527966) | C, all twelve pages and seven figures/six tables/36 references; selected-project and question/answer denominators, popularity/difficulty proxies and bounded artifact reconstruction. |
+| [Scraping artifact](https://github.com/carloszimm/rx-scraping-msr22/tree/44ecc6284b54d928d1abedb18573d7d6863e1d90) | C, untruncated tree and selected inventories; no scrape rerun. |
+| [GitHub artifact](https://github.com/carloszimm/gh-mining-msr22/tree/ac60e666b472fe523c5e5806cb2d320a3ace5952) | C, untruncated tree, selected source and frequency maps; 295/310 merged used names and duplicated RxJS `partition`. No remine or hit-level validation. |
+| [SO artifact](https://github.com/carloszimm/so-mining-msr22/tree/124763ee7a319800c09b035ae111a6d0ac668515) | C, untruncated tree, topic/difficulty aggregates and result-processing code; answer-creation delay and question-only difficulty distinguished from topic post counts. No corpus/LDA rerun. |
+| [S60 professional debugging](https://doi.org/10.1145/3427763.3428313) | D, promoted after primary abstract/introductory text; author PDF acquired in Zotero, full methods pending. |
+| [S61 REScala experience](https://doi.org/10.1145/3191697.3214337) | D, first author-PDF page; acquired as conditional architecture/idiom context. |
+| [Swift Combine topics](https://doi.org/10.1145/3613372.3613381) | D, exact metadata and selected institutional-PDF excerpts; conditional on a Combine-specific prevalence claim, not fully read. |
+| [Reactive education](https://doi.org/10.1109/SAMI63904.2025.10883129) | D, title/metadata; IEEE route failed. No teaching or maintenance outcome credited. |
+| [Cross-platform open-source survey](https://doi.org/10.1016/j.infsof.2025.107704) | N, title/metadata scope mismatch with active state/temporal claims. |
+| [Cloud cost-awareness mining](https://doi.org/10.2139/ssrn.4681763) | N, infrastructure-cost topic outside active claims. |
+| [Earlier cloud-cost preprint](https://doi.org/10.48550/arXiv.2304.07531) | N, same work/edition relationship, not an independent study. |
+
+S45's incoming graph returned nine edges/ten nodes with `max_edges:20`, no truncation and no low-coverage flag. Four neighbors already had recorded decisions (S40, blocking-call debugging, RxSwift perspectives and UAX); they were reconciled, not reported as fresh screens. Five other graph identities were checked by exact DOI; S60/S61 were checked by exact title. Both searches used `limit:20, offset:0` and exhausted their exact-identity result sets (five and two). General LDA/mining methods remain conditional on adopting that design. Graph coverage does not establish field completeness.
