@@ -1,6 +1,6 @@
 # Nu literature source-decision audit, 2026-09-29
 
-This audits the completed acquisition/organization segment and the two new full readings in the [continuation ledger](nu-literature-coverage-2026-09-29.md). The broader literature objective remains open. No unchanged historical 320-source decision set was resubmitted.
+This ledger preserves successive source decisions from the initial acquisition/organization segment through S67. The [2026-09-30 assessment](nu-literature-assessment-2026-09-30.md) reconciles the completed literature preparation and its remaining limits; the [coverage ledger](nu-literature-coverage-2026-09-29.md) records actual reading and library states. Historical decisions are not rewritten or resubmitted as new screening.
 
 `C` credits the bounded claim described in the reason. `D` means deferred, access-limited or unresolved at the stated reading extent; it is not a scientific rejection. `N` identifies an actual scope mismatch or a proceedings container. Edition relationships do not create independent studies. Most entries below are discovery leads, not newly acquired Zotero records or full readings; the coverage ledger supplies the exact 18 newly added literature records, three public records and nine new PDFs.
 
@@ -837,3 +837,7 @@ Both Scite literature requests used twenty, returning two incoming identities an
 | [https://github.com/hpi-swa-lab/godot-pronto](https://github.com/hpi-swa-lab/godot-pronto) | C: Primary repository identity and selected current README before dated check; no game executed. |
 | [https://github.com/hpi-swa-lab/godot-pronto/tree/d2afe885f6ecd98cfcb10b188454c390309d379f](https://github.com/hpi-swa-lab/godot-pronto/tree/d2afe885f6ecd98cfcb10b188454c390309d379f) | C: 205-entry untruncated dated tree; bounded path search found no study-data candidates. Other branches and exact study-build equivalence not established. |
 | [https://github.com/hpi-swa-lab/godot-pronto/blob/d2afe885f6ecd98cfcb10b188454c390309d379f/README.md](https://github.com/hpi-swa-lab/godot-pronto/blob/d2afe885f6ecd98cfcb10b188454c390309d379f/README.md) | C: Complete dated README read/hash stored; documents prototype scope, behaviors, reparenting/instance and reload limits. Embedded media and executable sources not audited. |
+
+## Reconciliation, 2026-09-30
+
+The final assessment reuses the source-located readings and their inspected audits above; it adds no newly screened paper or full-reading count. The sibling derived technical synthesis was revisited only at section 4 for claim boundaries, without sharing private transcripts. No unchanged historical decision set was reported again. The actual broad-query tails, missing pagination support, low-coverage graphs and artifact/access limits remain visible. The assessment withdraws unsupported prevalence, universal productivity and global-priority claims rather than treating these coverage limits as proof of absence.
