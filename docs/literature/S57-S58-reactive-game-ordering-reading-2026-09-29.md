@@ -1,6 +1,6 @@
 # S57–S58 — dependency-ordered game updates
 
-**Later same-day update:** S57's publisher PDF subsequently appeared in Zotero and was fully read, including its figures and original algorithm typography. The [completed S57 note](full-reading/S57-reactive-game-ordering.md) supersedes its partial status below. S58 remains partial. The initial access attempts and partial-reading decisions below are retained as their actual earlier state.
+**Later same-day update:** both publisher PDFs subsequently appeared in Zotero and their remaining figures, algorithms and typography were inspected. The [completed S57 note](full-reading/S57-reactive-game-ordering.md) and [completed S58 note](full-reading/S58-dependency-graph-reactivity.md) supersede the partial states below. Initial access attempts and partial-reading decisions are retained as their actual earlier state.
 
 **2026-09-29; partial publication readings.** These are successive works by João Paulo Oliveira Marum, J. Adam Jones and H. Conrad Cunningham: [*Towards a Reactive Game Engine* (2019)](https://doi.org/10.1109/SoutheastCon42311.2019.9020527), S57, and [*Dependency Graph-based Reactivity for Virtual Environments* (2020)](https://doi.org/10.1109/VRW50115.2020.00052), S58. The latter explicitly extends the former; they are not independent replications.
 

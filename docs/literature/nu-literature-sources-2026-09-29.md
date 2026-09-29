@@ -108,13 +108,19 @@ The [S57/S58 reconstruction](S57-S58-reactive-game-ordering-reading-2026-09-29.m
 
 S57's publisher PDF subsequently appeared in Zotero; all eight pages and the three figures/two algorithms were then read, closing its visual gaps. The [completed reading](full-reading/S57-reactive-game-ordering.md) is separately audited as `alf-nu-literature-2026-09-29-game-ordering-pdf`: one cited DOI, other provenance (Zotero publisher PDF), full-text stage, zero skipped. The inspected report returned one screened/included, zero excluded, `retrieved=null`, no missing reasons/linkage warning and `truncated=false`. Only S57's changed decision was resubmitted. The newly present PDFs for other papers are acquisition corrections, not additional full readings or new screening decisions.
 
-## Retrieval coverage
-
-### Publisher completion and GALE follow-up
+## Publisher completion and GALE follow-up
 
 [S40's remaining publisher figures and edition checks](full-reading/S40-reactive-api-usability.md) are now complete. Audit `alf-nu-literature-2026-09-29-usability-pdf` records only this changed disposition: one credited DOI, full-text stage, other provenance (Zotero publisher PDF complementing earlier body/HTML/artifact reads), zero excluded/skipped. The inspected report has one screened/included, `retrieved=null`, no missing reasons/linkage warning and `truncated=false`. Supplement equivalence, raw timing/allocation and reproduction limits remain explicit.
 
 [S52 GALE](full-reading/S52-gale.md) is fully read. Its incoming graph requested a 20-edge cap and returned two edges/three nodes, untruncated but low coverage. An exact lookup requested 20 records at offset zero and returned both already recorded neighbors, mobile Haskell games and reactive synthesis. They retain their conditional dispositions; no further exact-identity page was indicated, and they were not reported again as newly screened. GALE's references to S46/S48 reinforce those existing primary-method priorities. Audit `alf-nu-literature-2026-09-29-gale` records the changed S52 disposition alone: one credited, full-text/other provenance, zero excluded/skipped. Its inspected report has one screened/included, `retrieved=null`, no missing reasons/linkage warning and `truncated=false`.
+
+## Time-travel and ordering-extension completion
+
+[S48](full-reading/S48-time-travel.md) is fully read. Its incoming graph requested a 20-edge cap and returned twelve edges/thirteen nodes, untruncated and without a low-coverage flag. Every neighbor was already screened; their conditional/excluded states are retained, including the proceedings container and edition aliases. No new identity lookup was needed. Audit `alf-nu-literature-2026-09-29-time-travel` records S48 alone: one credited, full-text/other provenance, zero excluded/skipped. Its inspected report has one screened/included, `retrieved=null`, no missing reasons/linkage warning and `truncated=false`.
+
+[S58's publisher PDF](full-reading/S58-dependency-graph-reactivity.md) later appeared in Zotero and closes the earlier figure/typography gaps. Audit `alf-nu-literature-2026-09-29-game-ordering-extension-pdf` records two credited sources: the completed paper (other provenance) and selected [Unity 2019.3 manual text](https://docs.unity3d.com/2019.3/Documentation/Manual/class-MonoManager.html) verifying class-level order settings (web provenance). Both are full-text-stage decisions, with the manual's selected-page/screenshot limit explicit; this is not two full papers. The inspected report has two screened/included, zero excluded/skipped, `retrieved=null`, no missing reasons/linkage warning and `truncated=false`. Existing S59 and other bibliography decisions were not resubmitted. The native Zotero completion note includes the primary documentation link.
+
+## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
 
