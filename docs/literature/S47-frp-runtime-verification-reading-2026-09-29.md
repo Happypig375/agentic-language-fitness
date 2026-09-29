@@ -1,5 +1,7 @@
 # S47 — FRP runtime verification: indexed body read, visual/mathematical gaps open
 
+**Subsequent completion, 2026-09-29:** all 55 publisher pages, seven figures, definitions/code and bibliography have now been read. The [full reading](full-reading/S47-frp-runtime-verification.md) supersedes the partial status below and records printed-definition discrepancies and a bounded dated-source check. The remaining text preserves the earlier acquisition/reading history.
+
 **2026-09-29; partial reading, not added to the full-reading count.** Ivan Perez and Henrik Nilsson, *Runtime verification and validation of functional reactive systems*, Journal of Functional Programming 30, e28 (2020), DOI [10.1017/S0956796820000210](https://doi.org/10.1017/S0956796820000210), Zotero `6M9JGVSY`. This directly tests the novelty and validity of claims that functional organization makes game replay, temporal testing and debugging easier. It explicitly extends S46 (2017); overlapping examples are not independent replications.
 
 ## Access and reading extent
