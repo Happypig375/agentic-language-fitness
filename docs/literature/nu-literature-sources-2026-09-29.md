@@ -55,6 +55,18 @@ For `alf-nu-literature-2026-09-29-game-map`, Scite accepted five decisions: two 
 
 The three-title Scite query used `limit=20, offset=0`, returning the two DOI-bearing identities above; no additional indexed results remained for that exact query. This is identity coverage, not an exhaustive literature search. Search-engine dates were not treated as paper publication dates.
 
+## Subsequent S47 indexed-body segment
+
+For `alf-nu-literature-2026-09-29-frp-body`, Scite accepted one credited and two deferred decisions, zero skipped. The inspected audit returned three screened, one included and two excluded; all three Scite provenance; one full-text-stage and two title/abstract-stage; `retrieved=null`, no missing reasons/linkage warning and `truncated=false`. Accepted identities match the entries below. Full-text-stage here denotes bounded body inspection, **not a complete paper reading**.
+
+| Source | Actual evidence and disposition |
+| --- | --- |
+| [S47](https://doi.org/10.1017/S0956796820000210) | C, all 112,133 indexed-body characters read in 15 contiguous chunks. Missing/displaced formulas and code, unseen figures and absent bibliography remain explicit. Prose supports limits on finite-trace testing, sampling, replay, external resets and costs. No PDF acquired or full-reading count added. |
+| [Requirements to runtime monitors](https://doi.org/10.1007/978-3-030-99524-9_21) | D, new incoming graph lead; exact metadata/abstract only. Conditional on proposing automatic requirement translation, which the current Nu question does not do. |
+| [FACT continuous-time DSL](https://doi.org/10.1109/WSC60868.2023.10408703) | D, new incoming graph lead; exact title/identity only, no returned abstract. Conditional on proposing new continuous-time semantics; no method or outcome credited. |
+
+The incoming S47 graph (depth 1, cap 80) returned five edges/six nodes, untruncated. S53, modal FRP (`10.1017/S0956796822000132`) and fault-tolerant FRP (`10.1017/S0956796820000118`) were already screened and retain their prior states, not new decisions. An exact lookup of the two new DOIs requested 20 records at offset 0 and returned two; that identity query is exhausted, not the citation field. Cambridge's abstract page confirms the 2020 identity but does not serve the body; attempted PDF/local HTML and Nottingham file routes returned 403.
+
 ## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
