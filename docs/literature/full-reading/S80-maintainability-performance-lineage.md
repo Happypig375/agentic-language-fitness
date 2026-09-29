@@ -1,0 +1,17 @@
+# S80 — APSEC publication of the parser maintainability case
+
+**Complete publication reading, 2026-09-30.** Daniel Häggander, PerOlof Bengtsson, Jan Bosch and Lars Lundberg, *Maintainability Myth Causes Performance Problems in SMP Application*, APSEC 1999, pp. 516–519, [DOI 10.1109/APSEC.1999.809644](https://doi.org/10.1109/APSEC.1999.809644). Zotero parent `X8GU8ZH3`, attachment `VYQIATZ9`, note `B28K8MDC`.
+
+The four-page publisher PDF was found newly attached in the user's library. It is 393,298 bytes, SHA-256 `2b3c58b781a14f604d00e6fad88c845e5bd8709132b827af0335b72edc6a45a5`. All four pages were read in text and rendered images, including four numbered figures (two are tabular displays), eleven references and the printed pagination. The scan's extraction damages names, table ordering and punctuation; rendered pages resolved those features. The acquisition route is not inferred from the user's separate statement that S79 came from ResearchGate. No source or benchmark was executed.
+
+## Same case, shorter presentation
+
+This paper reports the same Ericsson FCC parser comparison as [S79](S79-maintainability-performance-case.md). Direct comparison confirms the same four interview roles and yes/no responses, original State-pattern parser, generated Lex/Yacc alternative, thread/process difference, 3,889/433 source lines, 350-hour/two-day initial-development figures, allocation expressions and complete plotted throughput series. These coincidences and matching methods identify one empirical case; the later publication supplies no new participant sample or independent performance replication.
+
+The shorter APSEC treatment omits S79's detailed fourteen-scenario construction and its separate discussion section. Its eleven references replace the longer version's sixteen-entry bibliography. Figure numbering also differs: APSEC figures 2 and 3 are the interview and measurement tables; figure 4 is the throughput plot. A prose reference to figure 5 on printed p. 518 is stale—this version contains only four figures.
+
+The same inference boundaries apply. Runtime was measured for the alternative implementations on the stated SUN/Solaris platform. Maintenance was predicted from code volume and imported productivity assumptions, without executing later maintenance tasks. The new prototype had limited verification and no design documentation, and also replaced multithreading with processes. The abstract's stronger wording does not turn these predictions into observed maintenance benefit or isolate a pattern effect.
+
+The plot's throughput scale remains a factor of 100 below the tabulated event/s endpoints without an explicit multiplier. The allocation table uses `event` while prose describes event files. These are present in the actual publisher scan, not solely extraction errors. The S79 note reconstructs the ratios and remaining workload, replication and unit limits.
+
+**Unique:** this is another publication of established component-replacement and scenario-analysis ideas, not another independent empirical precedent. **Valuable:** it documents a concrete reason to scrutinize intuitive architecture recommendations, without a Nu-specific benefit estimate. **Scientifically valid:** preserve the shared-case relationship, measurement/proxy distinction and unmatched implementation readiness. Full publication coverage does not validate the stronger maintainability claim. All experimental holds remain.
