@@ -1,0 +1,34 @@
+# S55 — debugging across FRP and native I/O
+
+**Full preprint reading completed 2026-09-29.** Otani, Moriguchi and Watanabe, *Multi-Mode Debugging for FRP-Based Embedded Systems*, [arXiv 2608.04264v1](https://arxiv.org/abs/2608.04264v1), [DOI 10.48550/arXiv.2608.04264](https://doi.org/10.48550/arXiv.2608.04264). Zotero `LZ2BP3XM`, attachment `7UBZZRFE`: ten pages, 399,718 bytes, SHA-256 `1bc8be5cbe16f5ae281bb8a2e173d8d0af3a640970822337d3f9ec7433d8524c`. All ten pages, seven sections, three figures, two listings and nine references were read; renders of pages 3, 4, 6 and 8 cover the figures and listings. No debugger, compiler or author experiment was executed.
+
+The PDF is the August 4 preprint of the June 29 DEBT 2026 presentation. The [author laboratory post](https://www.psg.c.titech.ac.jp/posts/2026-06-29-DEBT2026.html), [official program](https://2026.ecoop.org/program/program-debt-2026/) and arXiv comments corroborate that relationship. The inspected records still describe the ACM publication as forthcoming. No final ACM edition or DOI is inferred from that status.
+
+## Mechanism and demonstrated case
+
+Emfrp compiles functional reactive nodes to C and connects them to C/C++ I/O. Emdb maps source expressions, values, types and dependencies to the resulting executable, with a VS Code front end and Python bridge to GDB/MI or LLDB. It supports several stepping granularities, dependency inspection and trace replay. This addresses an abstraction gap, not a guarantee that the mixed executable is pure.
+
+The actual evidence is one DoubleClick application on an ESP32 DevKitC. A third press can incorrectly trigger an LED because an earlier click time remains relevant after a double click. The authors record button values and time, replay the input on a host, locate the missing cooldown condition and check the repair with replay and on the target. Their qualitative comparison explains additional name/location interpretation required with a conventional debugger. There is no participant cohort, assigned comparator, timing/error dataset, overhead table or statistical comparison. Improved efficiency and low overhead therefore remain design claims supported by a demonstration, not measured effects.
+
+That distinction changes the Nu review: source-level dependency views and replay are established techniques, while the practical advantage of providing them in Nu still needs an appropriate comparison. The example concerns an FRP-logic fault. It does not establish replay of arbitrary failures inside native I/O code or the physical environment.
+
+## Boundaries consequential for Nu
+
+| Boundary | Source-located observation and consequence |
+| --- | --- |
+| Restricted language | Sections 2–3 exclude recursive functions/data and target statically allocated small-controller programs. These restrictions differ from a general game engine; their memory properties cannot be transferred to Nu by calling both systems functional. |
+| Update semantics | Nodes update in topological order on each iteration. Previous-iteration `@last` references permit temporal cycles without a same-iteration cycle. A current value, a retained previous value and a debugger's historical observation have different meanings. |
+| Native effects | The framework assumes I/O does not introduce long blocking calls or interfering asynchronous shared-state mutation. Halting a controller changes its relation to physical time. Explicit effect and timing boundaries are necessary before claiming reliable replay. |
+| Recorded time | The example records both the button and `nowMs`. Equal button events alone do not define an equivalent timed execution. An input trace does not demonstrate restoration of external devices, arbitrary native state or already performed effects. |
+| Checkpoints | The paper's checkpoints are mapped C source locations used to implement stepping, with at most one per source line. They are not saved state snapshots. Reusing that term without this distinction would incorrectly support a Nu restoration claim. |
+| Mapping fidelity | Listing 1 includes a cooldown guard in `clicked`; the purported generated function in Listing 2 omits that guard and the corresponding parameter. Both rendered listings confirm the mismatch. It is an illustrative edition discrepancy, not a demonstrated compiler defect: the compiler and example build were not executed or compared. A future mapping/equivalence claim needs an actual pinned build. |
+
+The ten design requirements include cooperation with existing native debuggers, source positions/names/types, dependencies, stack/expression inspection, multiple stepping/watch modes and input tracing. Satisfying a feature checklist and demonstrating a repair answer different questions from measuring developer cost. The paper itself leaves systematic quantitative comparison for future work. Its compiler/OpenOCD links do not supply a named, frozen Emdb experiment archive in the inspected edition; this is an artifact-identification limit, not a claim that no artifact exists elsewhere.
+
+## Three criteria and follow-up disposition
+
+**Unique:** mixed-language reactive debugging and trace replay have a concrete predecessor. S43 and S46 remain fully read prior work rather than new independent observations in this paper. Priority for a narrower Nu maintenance contrast is still unconfirmed. **Valuable:** reducing repeated mapping between source abstractions and native execution is a plausible benefit, but this case supplies no transferable effort or reliability estimate. **Scientifically valid:** distinguish source mapping, internal state, recorded inputs/time and external effects; preserve valid update semantics and measure the complete debugging task with credible ordinary tools. Allocation remains zero.
+
+The incoming Scite graph requested twenty edges and returned zero with a low-coverage warning. An exact DOI query requested twenty records and returned S55 alone. A four-DOI backward lookup also requested twenty and returned all four identities: language-agnostic microcontroller debugging (`10.1145/3759426.3760979`), model-based embedded debugging (`10.1007/978-1-4614-2266-2_5`), Emfrp (`10.1145/2892664.2892670`) and WARDuino (`10.1145/3357390.3361029`). They remain conditional on adopting their mapping, overhead, language-guarantee or portability claims; title/returned-abstract checks are not full readings. The model-based paper's overhead claim is not credited secondhand.
+
+The exact-title and author/tool web searches established publication identity, with duplicate catalogs/profiles and unrelated uses of the ambiguous acronym excluded. They do not establish field saturation or artifact absence. The unresolved instrumentation, coordination and game-practice/replay frontier remains in the [coverage ledger](../nu-literature-coverage-2026-09-29.md).
