@@ -41,6 +41,20 @@ For `alf-nu-literature-2026-09-29-rxfiddle`, Scite accepted three credited sourc
 | [TU Delft copy](https://pure.tudelft.nl/ws/files/38856517/paper.pdf) | Acquired/attached; cover and corresponding figure pages checked. Same blank panels; not a second study or full reading. ACM PDF attempt returned 403. |
 | [Zenodo 814981](https://doi.org/10.5281/zenodo.814981) | Author-linked 2017 thesis/release archive, checksum verified. Selected evaluation/results prose, scripts, tables, plots and allocation/checker/timeout code inspected. External raw dataset absent; no experimental rerun, full thesis reading or verified deployed-version equivalence. |
 
+## Subsequent game-debugging mapping segment
+
+For `alf-nu-literature-2026-09-29-game-map`, Scite accepted five decisions: two credited and three deferred, zero skipped. The inspected audit returned five screened, two included, three excluded; one full-text-stage and four title/abstract-stage decisions; three Scite and two web sources; `retrieved=null`, no missing reasons or linkage warning, and `truncated=false`. The accepted identifiers match the five entries below. This adds one full reading; the other credited work is an identity/date check only. Unchanged historical decisions were not resubmitted.
+
+| Source | New decision and actual extent |
+| --- | --- |
+| [S51](https://doi.org/10.1145/3605155.3605865) | C, full HAL v1 reading of all ten PDF pages including cover. Three plots, 21-row table, methods and references checked; practice and search limits retained. |
+| [iIDE](https://doi.org/10.1609/aiide.v4i1.18699) | C, author-hosted first-page and AAAI-volume identity establish AIIDE 2008, contradicting S51's 1993 table entry and 2021 reference. Full methods not read; duplicate date/metadata routes consolidated. |
+| [Timelapse](https://doi.org/10.1145/2501988.2502050) | D, promoted for original replay evaluation and the map's null-result interpretation; exact Scite identity only, no primary outcome credited. |
+| [Cowboys](https://doi.org/10.1145/2568225.2568226) | D, conditional primary practitioner-method follow-up before workflow/prevalence claims; exact identity only. |
+| [LIVE 2019 industry-tooling preprint](https://hpi.uni-potsdam.de/hirschfeld/publications/media/BeckmannFlachKrebsRamsonReinHirschfeld_2019_AnExploratoryLiteratureStudyOnLiveToolingInTheGameIndustry_AuthorsVersion.pdf) | D, author first-page/abstract and workshop listing only; promoted to test industry-tool coverage, no DOI verified or full reading yet. |
+
+The three-title Scite query used `limit=20, offset=0`, returning the two DOI-bearing identities above; no additional indexed results remained for that exact query. This is identity coverage, not an exhaustive literature search. Search-engine dates were not treated as paper publication dates.
+
 ## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
