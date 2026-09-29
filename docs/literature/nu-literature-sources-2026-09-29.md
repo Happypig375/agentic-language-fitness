@@ -31,6 +31,16 @@ For `alf-nu-literature-2026-09-29-debugging`, Scite accepted seven new/changed l
 | [Fault-tolerant Distributed Reactive Programming](https://doi.org/10.4230/LIPIcs.ECOOP.2018.1) | D, S56 reference 17, exact Scite identity/OA route only. Promote full methods if snapshot cost or consistency becomes a specific proposed distinction. |
 | [Related SPLASH poster listing](https://2018.splashcon.org/details/splash-2018-Posters/66/From-Debugging-Towards-Live-Tuning-of-Reactive-Applications) | N, duplicate route for live-tuning work; not an independent experiment. |
 
+## Subsequent RxFiddle segment
+
+For `alf-nu-literature-2026-09-29-rxfiddle`, Scite accepted three credited source decisions, zero exclusions and zero skipped items. The inspected audit returned three screened/included, no missing reasons or retrieval-linkage warning, `retrieved=null` and `truncated=false`; all three decisions were full-text-stage, with one Scite, one web and one other source. This is one newly completed paper reading, not three. Earlier unchanged decisions were not resubmitted.
+
+| Source | Actual new evidence and limit |
+| --- | --- |
+| [S49](https://doi.org/10.1145/3180155.3180156) | Changed from deferred after all 12 author pages and rendered text/available figures. Correct-answer timing uses changing denominators, with a significant T3 result only. Blank panels 1c/4b/4d remain explicit. Duplicate metadata/search routes consolidated. |
+| [TU Delft copy](https://pure.tudelft.nl/ws/files/38856517/paper.pdf) | Acquired/attached; cover and corresponding figure pages checked. Same blank panels; not a second study or full reading. ACM PDF attempt returned 403. |
+| [Zenodo 814981](https://doi.org/10.5281/zenodo.814981) | Author-linked 2017 thesis/release archive, checksum verified. Selected evaluation/results prose, scripts, tables, plots and allocation/checker/timeout code inspected. External raw dataset absent; no experimental rerun, full thesis reading or verified deployed-version equivalence. |
+
 ## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
