@@ -301,3 +301,36 @@ For `alf-nu-literature-2026-09-29-runtime-verification`, Scite accepted ten deci
 The credited sources are the full publisher S47 rendition and two bounded author-repository snapshots: Yampa `0cc879a6a2d653648e205a3f9475f4741bc3adf7` and Dunai `99091c3391c0ba15e9075579e0b73c5660e994c2`. Their two temporal modules and package file were each read completely, with hashes and selection limits in the [full note](full-reading/S47-frp-runtime-verification.md). These are the last default-branch commits returned before publication, not certified experiment builds. Static discrepancies are not execution results or claims about current releases.
 
 Two Hackage catalogues were discovery routes superseded by the pinned source checks. Requests for `yampa-test-0.1.1`, `yampa-test-0.2`, `dunai-test-0.7.0` and `dunai-test-0.8.0` failed; an official Arduino `Serial.parseInt` documentation request yielded no usable body. Those five routes were recorded access-limited and supply no verified semantics or edition equivalence. Existing five-edge graph dispositions are reused without resubmitting unchanged sources. S53 remains promoted; clock, fault-model and specification-generation extensions remain conditional on the corresponding claims.
+
+## Subsequent S53 asynchronous temporal-testing segment
+
+For `alf-nu-literature-2026-09-29-asynchronous-testing`, Scite accepted 26 decisions: three credited, 23 excluded and zero skipped. The inspected report returned `retrieved=null`, three full-text and 23 title/abstract decisions, provenance other 2/web 2/Scite 22, no missing reasons or retrieval-linkage warning and `truncated=false`. The credited sources are the complete publisher chapter, the versioned PropRatt 0.2.0.0 source archive and the primary 7GUIs timer specification. The source archive was inspected, not executed; fourteen files and exact hashes are recorded in the [full note](full-reading/S53-asynchronous-frp-testing.md). Its catalogue was a duplicate discovery route.
+
+The incoming graph requested twenty edges and returned zero, explicitly flagged low coverage. The exact `"PropRatt"` search requested `limit:20, offset:0` and returned zero. The mixed phrase/testing query requested the same page size and returned twenty with a nominal total of 16,800,000: S53, the already recorded Rhine edition and eighteen unrelated records. It was reformulated rather than treating that noisy retrieval count as a relevant frontier. `"asynchronous functional reactive programming" AND "testing"` returned exactly one result, S53, at `limit:20, offset:0`; that service query is exhausted, not the field. Rhine's unchanged disposition was not resubmitted as a new decision. A four-DOI backward lookup requested twenty and returned all four exact identities, retained conditionally below; Scite year labels are not used to infer conference or first-publication chronology.
+
+The eighteen unrelated title/returned-abstract records were excluded for topic mismatch, not scientific quality. The following table preserves the newly recorded identifiers and dispositions; D means conditional, not rejected.
+
+| Source | Decision and scope |
+| --- | --- |
+| [10.15585/mmwr.mm6842a3](https://doi.org/10.15585/mmwr.mm6842a3) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/j.2333-8504.1977.tb01141.x](https://doi.org/10.1002/j.2333-8504.1977.tb01141.x) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/ets2.12377](https://doi.org/10.1002/ets2.12377) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/j.2330-8516.1988.tb00272.x](https://doi.org/10.1002/j.2330-8516.1988.tb00272.x) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/j.2333-8504.2003.tb01903.x](https://doi.org/10.1002/j.2333-8504.2003.tb01903.x) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1111/j.1745-3984.1998.tb00534.x](https://doi.org/10.1111/j.1745-3984.1998.tb00534.x) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/ets2.12001](https://doi.org/10.1002/ets2.12001) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/ets2.12033](https://doi.org/10.1002/ets2.12033) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/j.2333-8504.2002.tb01873.x](https://doi.org/10.1002/j.2333-8504.2002.tb01873.x) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/j.2330-8516.1986.tb00160.x](https://doi.org/10.1002/j.2330-8516.1986.tb00160.x) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/ets2.12063](https://doi.org/10.1002/ets2.12063) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/ets2.12374](https://doi.org/10.1002/ets2.12374) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.18653/v1/2020.bea-1.2](https://doi.org/10.18653/v1/2020.bea-1.2) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/j.2333-8504.1993.tb01513.x](https://doi.org/10.1002/j.2333-8504.1993.tb01513.x) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/ets2.12146](https://doi.org/10.1002/ets2.12146) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1002/ets2.12023](https://doi.org/10.1002/ets2.12023) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1088/1742-6596/3220/1/012012](https://doi.org/10.1088/1742-6596/3220/1/012012) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.31234/osf.io/3pwm7](https://doi.org/10.31234/osf.io/3pwm7) | Excluded; unrelated educational, medical, assessment or materials topic at title/returned-abstract screen. |
+| [10.1007/978-3-642-54792-8_15](https://doi.org/10.1007/978-3-642-54792-8_15) | D; exact identity/returned abstract; reopen only for the corresponding modal-typing, GUI, temporal-relation or hyperproperty claim. |
+| [10.1007/978-3-031-99751-8_5](https://doi.org/10.1007/978-3-031-99751-8_5) | D; exact identity/returned abstract; reopen only for the corresponding modal-typing, GUI, temporal-relation or hyperproperty claim. |
+| [10.1145/1808266.1808281](https://doi.org/10.1145/1808266.1808281) | D; exact identity/returned abstract; reopen only for the corresponding modal-typing, GUI, temporal-relation or hyperproperty claim. |
+| [10.1007/978-3-031-52038-9_2](https://doi.org/10.1007/978-3-031-52038-9_2) | D; exact identity/returned abstract; reopen only for the corresponding modal-typing, GUI, temporal-relation or hyperproperty claim. |
