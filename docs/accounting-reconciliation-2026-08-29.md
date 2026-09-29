@@ -19,7 +19,7 @@ one usage record. The exact full-run aggregate copied into the fixture is:
 The redacted `agent.stdout` and `events.jsonl` preserve event order, event/item
 types, completion counts, and the usage record. Prompts, paths, free text, IDs,
 commands, and outputs are replaced with `[REDACTED]`. `usage.json`, the embedded
-task result, and run aggregate all agree; `python -m alf audit tests/fixtures/a3-redacted-run`
+task result, and run aggregate all agree; `python -m ise audit tests/fixtures/a3-redacted-run`
 therefore succeeds.
 
 Task `001-priority` took 186.280462 seconds; task `002-overdue` started at

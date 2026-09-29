@@ -6,7 +6,7 @@ The user replied **"Continue"** to the explicit proposal to start H0's model-fre
 source-budget preparation with no new live experiment. This selects that bounded
 branch after E3a, not H1/H2 execution or a new E3a allowance. E3a publication
 `6227b99312ff5fa579b5a6ae755baf04cfb76c74` passed exact Linux/Windows
-[CI 34299713554](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34299713554).
+[CI 34299713554](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34299713554).
 Its frozen specification, runner, raw results, architecture addendum and charges
 remain unchanged: 2/5 integration and 32/72 pilot dispatches used, with six
 earlier dispatches separately retained. Unused balances do not fund H.
@@ -116,7 +116,7 @@ language-service advantage, large corpus or compatibility matrix is introduced.
 
 ## Implementation and evidence
 
-The [checker](../scripts/h0_check.py), [fixture module](../src/alf/h0.py) and
+The [checker](../scripts/h0_check.py), [fixture module](../src/ise/h0.py) and
 [regression tests](../tests/test_h0.py) now implement this bounded assignment.
 The [published report](../reports/workstream-h0-2026-09-09/report.json) and its
 four sibling envelope files are unchanged copies of validation 04's output.
@@ -144,7 +144,7 @@ small, nearly equal examples.
 Reproducibility identities:
 
 - canonical definition: `967dfefbd87e118f22ce1fe375ae1b1296cd9a48e705b3b907805bb308f96ac6`;
-- LF-normalized `src/alf/h0.py` (report field `implementation_sha256`):
+- LF-normalized `src/ise/h0.py` (report field `implementation_sha256`):
   `966f8d63b7dae9e191b4e1f10e1573233b64cc750b95abfef0c7e253d6140530`;
 - published report bytes:
   `824f4b3f1697f328fe2728ad94175a7d4da0e1a85c8587ad7d35027db5ea4c22`.
@@ -170,7 +170,7 @@ execution occurred. E3a source, raw results and charges are unchanged.
 
 **Publication completion:** implementing commit
 `6e45e90a0cad34d34448b51eb3cba13e609b7337` passed exact
-[CI 34306769616](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34306769616),
+[CI 34306769616](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34306769616),
 Linux 6m5s and Windows 7m49s. The conditional E2 baseline was not requested.
 A separate verifier downloaded that run's two platform artifacts; all five H0
 files per platform matched the published files byte-for-byte and by SHA-256.

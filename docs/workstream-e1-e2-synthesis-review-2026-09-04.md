@@ -154,7 +154,7 @@ E2a matched the v3 remote host/profile and pinned image/resource/storage setup.
 Host Python 3.10.12 passed full E1 plus raw audit; the pinned
 `alf-codex:0.149.1` Python 3.12.3 network-none/read-only audit passed with the
 same report hash. Analyzer exact-commit Linux and Windows CI succeeded in
-[Actions run 33890449685](https://github.com/Happypig375/agentic-language-fitness/actions/runs/33890449685); E2 was intentionally skipped.
+[Actions run 33890449685](https://github.com/Happypig375/interactive-software-evolution/actions/runs/33890449685); E2 was intentionally skipped.
 Finite derived summary floats use a 1e-12 tolerance only; measurements,
 identities, raw evidence, structure, and self-hashes are exact.
 

@@ -104,8 +104,8 @@ def init_workspace(root: Path, manifest: dict[str, Any], language: str, workspac
     exclude = workspace / ".git" / "info" / "exclude"
     exclude.write_text(".alf/\nbin/\nobj/\n", encoding="utf-8")
     for argv in (
-        ["git", "config", "user.name", "ALF Harness"],
-        ["git", "config", "user.email", "alf@example.invalid"],
+        ["git", "config", "user.name", "ISE Harness"],
+        ["git", "config", "user.email", "ise@example.invalid"],
         ["git", "add", "."],
         ["git", "commit", "-q", "-m", "baseline"],
     ):
@@ -1045,7 +1045,7 @@ def validate_benchmark(root: Path, manifest: dict[str, Any], timeout: float = 30
     report: dict[str, Any] = {"ok": True, "languages": {}}
     for language, cfg in manifest["languages"].items():
         language_report: dict[str, Any] = {"baseline": None, "tasks": []}
-        with tempfile.TemporaryDirectory(prefix=f"alf-validate-{language}-") as temp:
+        with tempfile.TemporaryDirectory(prefix=f"ise-validate-{language}-") as temp:
             workspace = Path(temp) / "workspace"
             init_workspace(root, manifest, language, workspace)
             planned = [artifact_plan(root, manifest, language, task, workspace) for task in manifest["tasks"]]

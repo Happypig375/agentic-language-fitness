@@ -10,17 +10,17 @@ import unittest
 from unittest import mock
 from pathlib import Path
 
-from alf.cli import build_parser
-from alf.config import load_manifest
-from alf.protocol import canonical_json_hash
-from alf.workstream_e import (
+from ise.cli import build_parser
+from ise.config import load_manifest
+from ise.protocol import canonical_json_hash
+from ise.workstream_e import (
     EXPECTED_TASK_IDS,
     FAMILY_ID,
     OUTPUT_REPORT_TYPE,
     classify_command,
 )
-from alf.workstream_e2 import _materialize
-from alf.workstream_e2a import (
+from ise.workstream_e2 import _materialize
+from ise.workstream_e2a import (
     ATTEMPT_SCHEMA,
     DEFINITION_SCHEMA,
     ENVIRONMENT_SCHEMA,
@@ -52,7 +52,7 @@ from alf.workstream_e2a import (
     validate_report,
     validate_environment,
 )
-import alf.workstream_e2a as e2a_module
+import ise.workstream_e2a as e2a_module
 
 
 ROOT = Path(__file__).resolve().parents[1]

@@ -1,6 +1,6 @@
 # Research proposal: source and search ledger
 
-Date: **2026-09-14 HKT**. ALF base:
+Date: **2026-09-14 HKT**. ISE base:
 `4757a6c5cbbd0f764f9c39b596c5517cc024f48b`.
 Companion: [standalone research proposal](architecture-maintenance-research-proposal-2026-09-14.md).
 This is bounded scoping research, not a systematic review, saturation claim,

@@ -5,8 +5,8 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.models import AgentResult, ProcessResult, Usage
-from alf.runner import (
+from ise.models import AgentResult, ProcessResult, Usage
+from ise.runner import (
     _derive_protocol_disposition,
     _prepare_protocol_run,
     _reserve_protocol_run_directory,
@@ -105,8 +105,8 @@ class RunnerProtocolTests(unittest.TestCase):
         }
         arguments.update(overrides)
         with (
-            patch("alf.runner.load_frozen_manifest", return_value=self.protocol),
-            patch("alf.runner.run_process", return_value=self._image_result()),
+            patch("ise.runner.load_frozen_manifest", return_value=self.protocol),
+            patch("ise.runner.run_process", return_value=self._image_result()),
         ):
             return _prepare_protocol_run(**arguments)
 
@@ -217,8 +217,8 @@ class RunnerProtocolTests(unittest.TestCase):
         }
         output = self.root / "results" / "difficulty-v1"
         with (
-            patch("alf.runner.load_frozen_manifest", return_value=protocol),
-            patch("alf.runner.run_process", return_value=self._image_result()),
+            patch("ise.runner.load_frozen_manifest", return_value=protocol),
+            patch("ise.runner.run_process", return_value=self._image_result()),
         ):
             prepared, command, attempt_number = _prepare_protocol_run(
                 root=self.root,
@@ -406,22 +406,22 @@ class RunnerProtocolTests(unittest.TestCase):
             workspace.mkdir(parents=True)
 
         with (
-            patch("alf.runner._prepare_protocol_run", return_value=(protocol, "agent", 1)),
-            patch("alf.runner.init_workspace", side_effect=initialize),
-            patch("alf.runner.artifact_plan", return_value={}),
+            patch("ise.runner._prepare_protocol_run", return_value=(protocol, "agent", 1)),
+            patch("ise.runner.init_workspace", side_effect=initialize),
+            patch("ise.runner.artifact_plan", return_value={}),
             patch(
-                "alf.runner.merge_workspace_checks",
+                "ise.runner.merge_workspace_checks",
                 return_value={"file_exists": [], "text_contains": [], "text_not_contains": []},
             ),
-            patch("alf.runner.make_agent", return_value=FakeAgent()),
-            patch("alf.runner.evaluate_project", return_value=evaluation),
-            patch("alf.runner.snapshot_repository", return_value={}),
-            patch("alf.runner.git_head", return_value="a" * 40),
-            patch("alf.runner.git_diff_metrics", return_value={}),
-            patch("alf.runner.environment_snapshot", return_value={}),
-            patch("alf.runner.run_process", return_value=ProcessResult(["git"], 0, "", "", 0.01)),
+            patch("ise.runner.make_agent", return_value=FakeAgent()),
+            patch("ise.runner.evaluate_project", return_value=evaluation),
+            patch("ise.runner.snapshot_repository", return_value={}),
+            patch("ise.runner.git_head", return_value="a" * 40),
+            patch("ise.runner.git_diff_metrics", return_value={}),
+            patch("ise.runner.environment_snapshot", return_value={}),
+            patch("ise.runner.run_process", return_value=ProcessResult(["git"], 0, "", "", 0.01)),
             patch(
-                "alf.runner.audit_representation_checkpoint",
+                "ise.runner.audit_representation_checkpoint",
                 side_effect=[good_audit, drift_audit, good_audit],
             ),
         ):
@@ -460,7 +460,7 @@ class RunnerProtocolTests(unittest.TestCase):
 
     def test_manifest_loader_errors_propagate_before_writes(self):
         with patch(
-            "alf.runner.load_frozen_manifest",
+            "ise.runner.load_frozen_manifest",
             side_effect=ValueError("protocol manifest hash mismatch"),
         ):
             with self.assertRaisesRegex(ValueError, "hash mismatch"):
@@ -515,9 +515,9 @@ class RunnerProtocolTests(unittest.TestCase):
             self._prepare(benchmark_manifest={"languages": self.benchmark["languages"]})
 
         with (
-            patch("alf.runner.load_frozen_manifest", return_value=self.protocol),
+            patch("ise.runner.load_frozen_manifest", return_value=self.protocol),
             patch(
-                "alf.runner.run_process",
+                "ise.runner.run_process",
                 return_value=self._image_result("sha256:" + "0" * 64),
             ),
         ):

@@ -130,7 +130,7 @@ class DockerEvaluator:
         self.docker = ["docker", "--host", "unix:///var/run/docker.sock"]
         self.baseline = snapshot(root, manifest, language, 0)
         self.project = "OrderFlow.fsproj" if language == "fsharp" else "OrderFlow.csproj"
-        self._temporary = tempfile.TemporaryDirectory(prefix="alf-e3a-sandbox-")
+        self._temporary = tempfile.TemporaryDirectory(prefix="ise-e3a-sandbox-")
         self.base = Path(self._temporary.name).resolve()
         self.cache, self.seed = self.base / "packages", self.base / "seed"
         self.cache.mkdir(mode=0o777)
@@ -150,7 +150,7 @@ class DockerEvaluator:
         return result.stdout.strip() if result.ok else ""
 
     def _create(self, mounts: list[tuple[Path, str, bool]]) -> str:
-        name = "alf-e3a-" + uuid.uuid4().hex
+        name = "ise-e3a-" + uuid.uuid4().hex
         self.active.add(name)  # covers ambiguous create/start as well
         self._admin(container_arguments(name, self.image, self.spec["environment"], mounts))
         self._admin(["start", name])

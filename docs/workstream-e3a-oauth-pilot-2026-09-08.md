@@ -10,7 +10,7 @@ another live invocation after that stop.
 ## Retained attempt
 
 The already approved fixed pilot was invoked once after exact freeze-commit
-[Linux/Windows CI 34245181125](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34245181125)
+[Linux/Windows CI 34245181125](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34245181125)
 passed on `7575343466741caa8b51c9770959bf9cbc4f7773`. It used the canonical
 PowerShell launcher with `-Phase pilot`, the clean remote checkout at
 `/tmp/alf-e3a-shakedown-XsZF3c`, and an ephemeral copy of the complete original
@@ -176,7 +176,7 @@ and the final exact-commit/specification report. Both are PowerShell-captured
 logs, not claimed byte-for-byte remote stdout files, and neither was overwritten.
 
 Exact repair-commit CI
-[34248390590](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34248390590)
+[34248390590](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34248390590)
 must finish successfully before the next OAuth staging/live dispatch.
 
 The first CI attempt passed all Linux and Windows test/validation steps, but

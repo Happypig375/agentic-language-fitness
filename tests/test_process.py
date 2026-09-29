@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from alf.process import run_process
+from ise.process import run_process
 
 
 class RunProcessTests(unittest.TestCase):

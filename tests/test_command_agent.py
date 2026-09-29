@@ -4,8 +4,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.agents.command import CommandAgent
-from alf.models import ProcessResult, Usage
+from ise.agents.command import CommandAgent
+from ise.models import ProcessResult, Usage
 
 
 class CommandAgentTests(unittest.TestCase):
@@ -74,13 +74,13 @@ class CommandAgentTests(unittest.TestCase):
         agent = CommandAgent(
             "tool", require_usage=True, expected_protocol=expected_protocol
         )
-        with patch("alf.agents.command.run_process", side_effect=invoke):
+        with patch("ise.agents.command.run_process", side_effect=invoke):
             got = agent.run(root=root, workspace=workspace, language="csharp", language_config={}, task={"id": "t"}, prompt="p", timeout=1)
         return directory, got
 
     def test_optional_missing_usage_is_unavailable(self):
         directory = tempfile.TemporaryDirectory(); root = Path(directory.name); workspace = root / "w"; workspace.mkdir()
-        with patch("alf.agents.command.run_process", return_value=ProcessResult(["ok"], 0, "", "", 0)):
+        with patch("ise.agents.command.run_process", return_value=ProcessResult(["ok"], 0, "", "", 0)):
             got = CommandAgent("tool").run(root=root, workspace=workspace, language="csharp", language_config={}, task={"id": "t"}, prompt="p", timeout=1)
         self.assertTrue(got.accounting_valid); self.assertFalse(got.usage_available); directory.cleanup()
 
@@ -111,7 +111,7 @@ class CommandAgentTests(unittest.TestCase):
                 (workspace / ".alf").mkdir(exist_ok=True)
                 (workspace / ".alf" / "usage.json").write_text(json.dumps(usage), encoding="utf-8")
                 return ProcessResult(["ok"], 0, stdout, "", 0)
-            with patch("alf.agents.command.run_process", side_effect=invoke):
+            with patch("ise.agents.command.run_process", side_effect=invoke):
                 got = CommandAgent("tool", require_usage=True, expected_protocol=expected).run(root=root, workspace=workspace, language="csharp", language_config={}, task={"id": "t"}, prompt="p", timeout=1)
             self.assertFalse(got.accounting_valid, field)
             self.assertFalse(got.ok, field)
@@ -139,7 +139,7 @@ class CommandAgentTests(unittest.TestCase):
                 )
                 return ProcessResult(["tool"], 124, "", "", 1.0)
 
-            with patch("alf.agents.command.run_process", side_effect=invoke):
+            with patch("ise.agents.command.run_process", side_effect=invoke):
                 got = CommandAgent(
                     "tool", require_usage=True, expected_protocol=expected
                 ).run(
@@ -245,7 +245,7 @@ class CommandAgentTests(unittest.TestCase):
             (workspace / ".alf").mkdir(exist_ok=True)
             (workspace / ".alf" / "usage.json").write_text(json.dumps(sidecar), encoding="utf-8")
             return ProcessResult(["tool"], 124, "", "", 1.0)
-        with patch("alf.agents.command.run_process", side_effect=invoke):
+        with patch("ise.agents.command.run_process", side_effect=invoke):
             got = CommandAgent("tool", require_usage=True, expected_protocol=expected).run(
                 root=root, workspace=workspace, language="fsharp", language_config={},
                 task={"id": "t"}, prompt="p", timeout=1,
@@ -352,8 +352,8 @@ class CommandAgentTests(unittest.TestCase):
             )
             result = ProcessResult(["ok"], 0, "", "", 0)
             with (
-                patch("alf.agents.command.os.name", "nt"),
-                patch("alf.agents.command.run_process", return_value=result) as run,
+                patch("ise.agents.command.os.name", "nt"),
+                patch("ise.agents.command.run_process", return_value=result) as run,
             ):
                 agent = CommandAgent(
                     'tool "{root}\\nested path\\agent.exe" --workspace "{workspace}"'

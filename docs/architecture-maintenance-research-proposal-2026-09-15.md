@@ -41,7 +41,7 @@ Reuse the [core full-reading synthesis](literature/full-reading/synthesis.md) an
 
 The strongest remaining question is whether responsibility/coordination evidence adds **usable information at decision time**, rather than merely labeling an eventual winner or identifying a universally stronger package. New selected evidence makes this question more precise; global priority remains unresolved. Full reads are prioritized by which missing method could change that conclusion, not by reference count.
 
-A01 excluded implementation bugs from its functional-change analysis; ALF keeps them when they occur under the assigned policy. P08–P10 show that feedback, retained requirements and memory are distinct interventions. A03 is methodological argument, not a new trial. Preserve those limits and the existing corrections to denominators and structural/judge-based scores.
+A01 excluded implementation bugs from its functional-change analysis; ISE keeps them when they occur under the assigned policy. P08–P10 show that feedback, retained requirements and memory are distinct interventions. A03 is methodological argument, not a new trial. Preserve those limits and the existing corrections to denominators and structural/judge-based scores.
 
 ## 3. Research questions and levels of inference
 
@@ -89,7 +89,7 @@ V_const = max_a E_X[p_a(X)]
 H_X = V*_X - V_const
 ```
 
-Y is the prespecified bounded behavioral utility, not a scalar combination of arbitrary costs. H_X describes the maximum gross opportunity for profile-sensitive choice under that information boundary. This is an adaptation of established selection reasoning, not a new theorem or measured ALF result. Source/profile distributions and utilities must be stated; no real deployment distribution is inferred from two selected chains.
+Y is the prespecified bounded behavioral utility, not a scalar combination of arbitrary costs. H_X describes the maximum gross opportunity for profile-sensitive choice under that information boundary. This is an adaptation of established selection reasoning, not a new theorem or measured ISE result. Source/profile distributions and utilities must be stated; no real deployment distribution is inferred from two selected chains.
 
 A large advantage available to an oracle that sees Z or omega may be unavailable to a maintainer who sees only X. If the same package is best in conditional expectation for every X, profile-sensitive choice cannot beat that best constant in gross expected outcome. It might still help identify an unknown default; that is a different value claim.
 
@@ -160,7 +160,7 @@ Both packages are actually evaluated under the allocated fixed policy. This is f
 
 If policies choose the same package their difference cancels exactly, even if the shared outcome is unknown. Individual values may remain unknown. Missingness bounds reuse the same Y with its algebraic coefficient; never assign independent unknowns to the same submission. For differing choices, preserve pairs and coverage. No best-realized-package-per-run rule is a prospective selector.
 
-A1 freezes one primary comparator, secondary hierarchy, effect margin, sample and uncertainty procedure. An evaluation-selected best constant or oracle is descriptive/optimistic, not a freshly discovered baseline for an ordinary p-value. Multiple claims require suitable joint uncertainty. S26's rank/win-count tests answer different questions from a mean difference in the common behavioral utility; no automatic Wilcoxon/Friedman replacement or nonsignificance-as-equivalence rule is adopted. Correct pairing, ties, multiplicity and small-sample assumptions must be checked for the chosen procedure. Do not copy published timeout penalties, exclusion of unsolved cases or preprocessing from an algorithm benchmark without a valid ALF estimand.
+A1 freezes one primary comparator, secondary hierarchy, effect margin, sample and uncertainty procedure. An evaluation-selected best constant or oracle is descriptive/optimistic, not a freshly discovered baseline for an ordinary p-value. Multiple claims require suitable joint uncertainty. S26's rank/win-count tests answer different questions from a mean difference in the common behavioral utility; no automatic Wilcoxon/Friedman replacement or nonsignificance-as-equivalence rule is adopted. Correct pairing, ties, multiplicity and small-sample assumptions must be checked for the chosen procedure. Do not copy published timeout penalties, exclusion of unsolved cases or preprocessing from an algorithm benchmark without a valid ISE estimand.
 
 Equal weights describe the selected profiles, not a deployment-demand estimate. Report each profile and reasonable prespecified weight sensitivity. Repetitions estimate executor variability conditional on the selected workloads; selector repetitions, new profiles and new package families answer different generalization questions. Use inference appropriate to the number of independent units, not a large mixed-effects model or degenerate-bootstrap certainty on two chains. No favorable-result-driven extension or success-only analysis.
 
@@ -192,4 +192,4 @@ Evidence remains incomplete. Full reads can correct the method comparison, chang
 - [Algorithm selection on a meta level](https://doi.org/10.1007/s10994-022-06161-4), sections 2 and 6.1: selected primary HTML, expectation/default/cost/evaluation definitions.
 - [Failure-aware enhancements v1](https://arxiv.org/html/2602.02896v1), sections III, V and VI: selected methods, policy changes and manual evaluation.
 
-The [current audit](selection-evidence-closure-sources-2026-09-15.md) records identity corrections, exact reading extent, denied access, search pagination, graph limits and deferred follow-ups. Mathematical opportunity/noise examples above are proposed analysis reasoning, not effects reported by these papers or measurements of ALF.
+The [current audit](selection-evidence-closure-sources-2026-09-15.md) records identity corrections, exact reading extent, denied access, search pagination, graph limits and deferred follow-ups. Mathematical opportunity/noise examples above are proposed analysis reasoning, not effects reported by these papers or measurements of ISE.

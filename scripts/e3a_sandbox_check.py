@@ -17,11 +17,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from alf.config import load_manifest  # noqa: E402
-from alf.e3a_sandbox import DockerEvaluator, SandboxFailure  # noqa: E402
-from alf.protocol import canonical_json_hash  # noqa: E402
-from alf.workstream_e2 import _atomic_json  # noqa: E402
-from alf.workstream_e3a import PACKET_DIR, development_cases, read_json, snapshot  # noqa: E402
+from ise.config import load_manifest  # noqa: E402
+from ise.e3a_sandbox import DockerEvaluator, SandboxFailure  # noqa: E402
+from ise.protocol import canonical_json_hash  # noqa: E402
+from ise.workstream_e2 import _atomic_json  # noqa: E402
+from ise.workstream_e3a import PACKET_DIR, development_cases, read_json, snapshot  # noqa: E402
 
 # Exactly the SDK base of Dockerfile.codex-agent; not the research image, which
 # contains gold/scorers. This fixture override never changes the specification.
@@ -46,7 +46,7 @@ def check(output: Path, *, ci_sdk_fixture=False) -> dict:
               "model_free_specification_sha256": canonical_json_hash(fixture_spec),
               "fixture_execution_authorized": fixture_spec["execution_authorized"],
               "source_lf_sha256": {path: hashlib.sha256((ROOT / path).read_text(encoding="utf-8").encode("utf-8")).hexdigest()
-                  for path in ("src/alf/e3a_sandbox.py", "src/alf/workstream_e3a.py", "scripts/e3a_sandbox_check.py")},
+                  for path in ("src/ise/e3a_sandbox.py", "src/ise/workstream_e3a.py", "scripts/e3a_sandbox_check.py")},
               "scope": "ci-sdk-fixture" if ci_sdk_fixture else "specified-image-on-current-linux-host",
               "intended_remote_environment_verified": False, "checks": {}, "evaluations": []}
     evaluators = []
@@ -96,6 +96,7 @@ def check(output: Path, *, ci_sdk_fixture=False) -> dict:
                 "credentials_scorer_socket_absent": 'test -z "${OPENAI_API_KEY+x}${CODEX_HOME+x}${HTTPS_PROXY+x}" && '
                     'test ! -e /root/.codex/auth.json && test ! -e /home/codex/.codex/auth.json && '
                     'test ! -e /tmp/auth.json && test ! -e /var/run/docker.sock && '
+                    'test ! -e /app/src/ise && test ! -e /workspace/src/ise && '
                     'test ! -e /app/src/alf && test ! -e /workspace/src/alf && test ! -e /workspace/benchmarks && '
                     'test ! -e /workspace/AGENTS.md && test ! -e /input/AGENTS.md && test ! -e /input/holdout-cases.json',
                 "network_route_blocked": "! /bin/bash -c 'exec 3<>/dev/tcp/1.1.1.1/443'",

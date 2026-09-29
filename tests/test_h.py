@@ -3,8 +3,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from alf.h import HBoundaryError, HController, TrajectoryDispatcher, parse_action
-from alf.e3a_runner import Journal
+from ise.h import HBoundaryError, HController, TrajectoryDispatcher, parse_action
+from ise.e3a_runner import Journal
 
 SPEC = {"authority": {"max_submission_bytes": 49_152, "max_source_files": 8,
                        "max_total_files": 8,

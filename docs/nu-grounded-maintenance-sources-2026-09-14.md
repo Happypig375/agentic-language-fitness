@@ -1,7 +1,7 @@
 # Nu-grounded methodology: sources and search record
 
 Companion to the [methodological clarification](nu-grounded-maintenance-methodology-2026-09-14.md).
-Date: **2026-09-14 HKT**. ALF source:
+Date: **2026-09-14 HKT**. ISE source:
 `7800549dd3ed598a4a7cfda235406ed2114f9537`.
 
 This is bounded methodology/example research, not a systematic review, a

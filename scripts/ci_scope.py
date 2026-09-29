@@ -11,7 +11,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 PROSE_FILES = frozenset({"README.md", "AGENTS.md", "PLAN.md", "references.md"})
 MAINTENANCE_FILES = frozenset({
-    "src/alf/maintenance.py",
+    "src/ise/maintenance.py",
     "scripts/maintenance_check.py",
     "tests/test_maintenance.py",
     "benchmarks/maintenance-sim/construction.json",

@@ -261,18 +261,18 @@ language implementation code. Raw case-file SHA-256:
 
 A read-only source scout identified the small adaptation surface:
 
-- [h_sandbox.py](../src/alf/h_sandbox.py) currently materializes an OrderFlow
+- [h_sandbox.py](../src/ise/h_sandbox.py) currently materializes an OrderFlow
   baseline. Simulation needs a separately reviewed baseline/project descriptor,
   including `Simulation.fs` rather than assuming `Program.fs`; do not silently
   mutate the prepared H definition or call its existing checks proof of the new
   source family.
-- Reuse the isolation boundary in [e3a_sandbox.py](../src/alf/e3a_sandbox.py):
+- Reuse the isolation boundary in [e3a_sandbox.py](../src/ise/e3a_sandbox.py):
   exact image, credential-free candidate execution, network disabled, read-only
   protected mounts and bounded scratch space. The trusted host constructor is
   not that boundary.
 - Reuse the guarded full-file submission validation in
-  [workstream_e3a.py](../src/alf/workstream_e3a.py) and accounting/no-tools adapter
-  in [e3a_codex.py](../src/alf/e3a_codex.py), after reviewing their task-specific
+  [workstream_e3a.py](../src/ise/workstream_e3a.py) and accounting/no-tools adapter
+  in [e3a_codex.py](../src/ise/e3a_codex.py), after reviewing their task-specific
   assumptions. Durable notes must be charged ordinary candidate state.
 - A maintenance-specific finite controller must retain safe wrong/noncompiling
   code across eight fresh one-submission conversations, record malformed

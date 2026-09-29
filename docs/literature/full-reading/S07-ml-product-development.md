@@ -48,9 +48,9 @@ Inspected [IPE-PEP/ICED25](https://github.com/IPE-PEP/ICED25/tree/a2c24b3c730257
 
 The repository also lists phase-specific bibliographies; these were not exhaustively reconstructed. No per-model responses, alternative-adjudication logs or outcome tables are present in the inspected tree. Full-input extraction does not certify that every source abstract was independently revalidated.
 
-## Consequence for ALF and next reading
+## Consequence for ISE and next reading
 
-**Correct/narrow:** suitability evaluation already admits valid alternatives. ALF's distinction cannot be “we accept alternatives”; it must concern observed maintenance consequences of advice under the allowed information and workflow. Recommendation performance is prior work, and reported task fulfilment is not deployment ROI.
+**Correct/narrow:** suitability evaluation already admits valid alternatives. ISE's distinction cannot be “we accept alternatives”; it must concern observed maintenance consequences of advice under the allowed information and workflow. Recommendation performance is prior work, and reported task fulfilment is not deployment ROI.
 
 **Retain and sharpen:** define behavioral acceptance before evaluating advice; preserve failed/abstained profiles; specify who judges alternatives and what the judge can see; account for all clarification/analysis work. Extra prompts alter the procedure and need a declared policy, not post-result rescue.
 

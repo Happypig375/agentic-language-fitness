@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.protocol import (
+from ise.protocol import (
     EXPECTED_IMAGE_ID,
     canonical_json_hash,
     classify_failure,
@@ -342,7 +342,7 @@ class ProtocolTests(unittest.TestCase):
             return valid_probe()
 
         try:
-            with patch("alf.protocol._git", return_value=" M changed"):
+            with patch("ise.protocol._git", return_value=" M changed"):
                 with self.assertRaisesRegex(ValueError, "dirty"):
                     freeze_cell(repo.root, repo.definition_path, _probe=probe)
         finally:
@@ -354,13 +354,13 @@ class ProtocolTests(unittest.TestCase):
         try:
             unavailable = valid_probe()
             unavailable["cpu"] = "unavailable"
-            with patch("alf.protocol._git", side_effect=["", "a" * 40]):
+            with patch("ise.protocol._git", side_effect=["", "a" * 40]):
                 with self.assertRaisesRegex(ValueError, "environment probe unavailable"):
                     freeze_cell(repo.root, repo.definition_path, _probe=lambda *_: unavailable)
 
             mismatch = valid_probe()
             mismatch["image_id"] = "sha256:" + "0" * 64
-            with patch("alf.protocol._git", side_effect=["", "a" * 40]):
+            with patch("ise.protocol._git", side_effect=["", "a" * 40]):
                 with self.assertRaisesRegex(ValueError, "image ID mismatch"):
                     freeze_cell(repo.root, repo.definition_path, _probe=lambda *_: mismatch)
         finally:
@@ -385,7 +385,7 @@ class ProtocolTests(unittest.TestCase):
         repo = CellRepository()
         target = repo.root / "results" / "variance-v1" / "resolved-manifest.json"
         try:
-            with patch("alf.protocol._git", side_effect=["", "", "a" * 40]):
+            with patch("ise.protocol._git", side_effect=["", "", "a" * 40]):
                 written = write_frozen_manifest(
                     repo.root,
                     repo.definition_path,
@@ -398,7 +398,7 @@ class ProtocolTests(unittest.TestCase):
             self.assertEqual(claimed, canonical_json_hash(value))
             self.assertEqual(value["image_id"], EXPECTED_IMAGE_ID)
             self.assertEqual(value["git_head"], "a" * 40)
-            with patch("alf.protocol._git", return_value=""):
+            with patch("ise.protocol._git", return_value=""):
                 with self.assertRaises(FileExistsError):
                     write_frozen_manifest(
                         repo.root,
@@ -413,7 +413,7 @@ class ProtocolTests(unittest.TestCase):
     def test_write_manifest_rejects_unignored_and_outside_targets(self):
         repo = CellRepository()
         try:
-            with patch("alf.protocol._git", side_effect=ValueError("not ignored")):
+            with patch("ise.protocol._git", side_effect=ValueError("not ignored")):
                 with self.assertRaisesRegex(ValueError, "not ignored"):
                     write_frozen_manifest(
                         repo.root,
@@ -422,7 +422,7 @@ class ProtocolTests(unittest.TestCase):
                         _probe=lambda *_: valid_probe(),
                         _archive_verifier=lambda *_: valid_archive_verification(),
                     )
-            with patch("alf.protocol._git", return_value=""):
+            with patch("ise.protocol._git", return_value=""):
                 with self.assertRaisesRegex(ValueError, "raw_root"):
                     write_frozen_manifest(
                         repo.root,
@@ -438,7 +438,7 @@ class ProtocolTests(unittest.TestCase):
         repo = CellRepository()
         target = repo.root / "results" / "variance-v1" / "resolved-manifest.json"
         try:
-            with patch("alf.protocol._git", side_effect=["", "", "a" * 40]):
+            with patch("ise.protocol._git", side_effect=["", "", "a" * 40]):
                 write_frozen_manifest(
                     repo.root,
                     repo.definition_path,
@@ -469,7 +469,7 @@ class ProtocolTests(unittest.TestCase):
         repo = CellRepository()
         target = repo.root / "results" / "variance-v1" / "resolved-manifest.json"
         try:
-            with patch("alf.protocol._git", side_effect=["", "", "a" * 40]):
+            with patch("ise.protocol._git", side_effect=["", "", "a" * 40]):
                 write_frozen_manifest(
                     repo.root,
                     repo.definition_path,
@@ -477,10 +477,10 @@ class ProtocolTests(unittest.TestCase):
                     _probe=lambda *_: valid_probe(),
                     _archive_verifier=lambda *_: valid_archive_verification(),
                 )
-            with patch("alf.protocol._git", side_effect=["", "", "b" * 40]):
+            with patch("ise.protocol._git", side_effect=["", "", "b" * 40]):
                 with self.assertRaisesRegex(ValueError, "HEAD"):
                     load_frozen_manifest(repo.root, target)
-            with patch("alf.protocol._git", side_effect=["", " M dirty"]):
+            with patch("ise.protocol._git", side_effect=["", " M dirty"]):
                 with self.assertRaisesRegex(ValueError, "dirty"):
                     load_frozen_manifest(repo.root, target)
 

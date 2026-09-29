@@ -24,11 +24,11 @@ It is nevertheless a **single selected application**, not independent validation
 
 ## Material limits
 
-- **A heuristic representation is not an improved heuristic.** The authors explicitly say in the threats section (p. 11) that they do not evaluate the heuristics' correctness. A comparator using the same heuristic without the feature diagrams would be needed to isolate added value from the representation. ALF similarly needs an information/budget-matched ordinary review if it claims value for a responsibility-analysis method.
+- **A heuristic representation is not an improved heuristic.** The authors explicitly say in the threats section (p. 11) that they do not evaluate the heuristics' correctness. A comparator using the same heuristic without the feature diagrams would be needed to isolate added value from the representation. ISE similarly needs an information/budget-matched ordinary review if it claims value for a responsibility-analysis method.
 - **The boundary between advice and search matters.** The recommendation queue uses a performance-dependent stopping rule. A future benchmark must say whether those evaluations are part of selection and charge their cost. It cannot compare a pre-execution choice with a search procedure that receives uncharged outcome feedback.
 - **Printed constraints need reconciliation.** The switch prose says move on when an algorithm is not working, but several rules contain `¬notWorking` (pp. 8–10). `Category ⇔ ¬(Quantity ∧ Structure)` also does not itself express mutually exclusive prediction types. These visible inconsistencies prevent treating the displayed logic as a verified executable selector.
 - **The illustrations are not validated changes.** Figure 7 shows a new sample size of 1,200 where the prose describes exceeding 100,000 before switching to SGD. Figures 7–8 show 12 features, while the case prose describes 13 plus an additional target. The regression illustration retains an F1 label. These are edition-specific diagram/text discrepancies, not additional executed cases.
-- **Do not import the performance advantage.** Table I's specificity is lower than one cited comparator, and test-set/class-polarity comparability is not resolved. The ALF inference needs no numerical superiority claim from this clinical illustration, so the clinical baselines are deferred unless that claim becomes necessary.
+- **Do not import the performance advantage.** Table I's specificity is lower than one cited comparator, and test-set/class-polarity comparability is not resolved. The ISE inference needs no numerical superiority claim from this clinical illustration, so the clinical baselines are deferred unless that claim becomes necessary.
 
 ## Decision consequences
 

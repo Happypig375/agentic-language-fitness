@@ -1,9 +1,9 @@
 # H1/H2 human review before execution
 
-Status: **UNAPPROVED — pre-execution review only**  
-Implementation revision under review: source snapshot [`c87df747c783c0649cb66d5c1bbaf9ee11adf9d5`](https://github.com/Happypig375/agentic-language-fitness/tree/c87df747c783c0649cb66d5c1bbaf9ee11adf9d5) (the docs-only publication may be later)  
-Specification: [`protocols/workstream-h1-h2/specification.json`](../protocols/workstream-h1-h2/specification.json), SHA-256 `e05213330c400ee2e2e857a43f2730c640d3231669807fa5a1a92804ee079c8c`  
-Exact implementing CI: [run 34335495891](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34335495891) (Linux 8m10s; Windows 8m52s)
+Status: **UNAPPROVED — pre-execution review only**
+Implementation revision under review: source snapshot [`c87df747c783c0649cb66d5c1bbaf9ee11adf9d5`](https://github.com/Happypig375/interactive-software-evolution/tree/c87df747c783c0649cb66d5c1bbaf9ee11adf9d5) (the docs-only publication may be later)
+Specification: [`protocols/workstream-h1-h2/specification.json`](../protocols/workstream-h1-h2/specification.json), SHA-256 `e05213330c400ee2e2e857a43f2730c640d3231669807fa5a1a92804ee079c8c`
+Exact implementing CI: [run 34335495891](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34335495891) (Linux 8m10s; Windows 8m52s)
 
 This document answers what a human must inspect before approving any live H1/H2
 integration or pilot. Construction is approved, but no **live H execution**,
@@ -53,7 +53,7 @@ cases are evaluator-only and must never enter a candidate request.
 | Pair | Predecessor | Gold / target implementation | Canonical pair identities |
 | --- | --- | --- | --- |
 | Core C# | [`benchmarks/successor/representation-v1/transformed/descriptive/csharp/gold/007-query-engine-refactor/`](../benchmarks/successor/representation-v1/transformed/descriptive/csharp/gold/007-query-engine-refactor/) (engine+Program overlay; inherited project is [`.../baseline/OrderFlow.csproj`](../benchmarks/successor/representation-v1/transformed/descriptive/csharp/baseline/OrderFlow.csproj)) | [`benchmarks/successor/representation-v1/transformed/descriptive/csharp/gold/008-summary-api/`](../benchmarks/successor/representation-v1/transformed/descriptive/csharp/gold/008-summary-api/) (stage-8 engine+Program overlay; composed by `workstream_e3a.snapshot`) | predecessor `7bed422fb8ae11147939973bb89bd5fc10ed26856a3aa8502123eee59f909f6f`; gold `5f378f63f9891753736993eaee2b4f7091df7ff4bebedec964ada00c59e4c7aa` |
-| Core F# | [`benchmarks/successor/representation-v1/transformed/descriptive/fsharp/gold/007-query-engine-refactor/`](../benchmarks/successor/representation-v1/transformed/descriptive/fsharp/gold/007-query-engine-refactor/) (stage-7 source; selected by [`h0.source_for`](../src/alf/h0.py)) | [`benchmarks/successor/representation-v1/transformed/descriptive/fsharp/gold/008-summary-api/`](../benchmarks/successor/representation-v1/transformed/descriptive/fsharp/gold/008-summary-api/) (all three files; selected by [`h_workload.source_for`](../src/alf/h_workload.py)) | predecessor `53a20231120cd69ed2d540c47b9dff1d5b77a37391381445c8b8ec875ad9495b`; gold `6b8a3de461fd2cd21ff77d8d1341baacf6f504208fc99bc9ac59ca17bc544ede` |
+| Core F# | [`benchmarks/successor/representation-v1/transformed/descriptive/fsharp/gold/007-query-engine-refactor/`](../benchmarks/successor/representation-v1/transformed/descriptive/fsharp/gold/007-query-engine-refactor/) (stage-7 source; selected by [`h0.source_for`](../src/ise/h0.py)) | [`benchmarks/successor/representation-v1/transformed/descriptive/fsharp/gold/008-summary-api/`](../benchmarks/successor/representation-v1/transformed/descriptive/fsharp/gold/008-summary-api/) (all three files; selected by [`h_workload.source_for`](../src/ise/h_workload.py)) | predecessor `53a20231120cd69ed2d540c47b9dff1d5b77a37391381445c8b8ec875ad9495b`; gold `6b8a3de461fd2cd21ff77d8d1341baacf6f504208fc99bc9ac59ca17bc544ede` |
 | Expanded C# | [`benchmarks/workstream-h/repos/csharp/expanded/`](../benchmarks/workstream-h/repos/csharp/expanded/) | [`benchmarks/workstream-h/gold/csharp/summary/`](../benchmarks/workstream-h/gold/csharp/summary/) | predecessor `fcf44bbc5f05e525ccd3bb59603ad3d526d897ecd0832d42a261bc033cba5f9d`; gold `35436e5475838723d1d6f8bcd050f16b6bcb3c300ca70294cf4c021bbc6803a3` |
 | Expanded F# | [`benchmarks/workstream-h/repos/fsharp/expanded/`](../benchmarks/workstream-h/repos/fsharp/expanded/) | [`benchmarks/workstream-h/gold/fsharp/summary/`](../benchmarks/workstream-h/gold/fsharp/summary/) | predecessor `9ab51cdbca67a5c52f48eb411034d859857361c18d24fb09d9b825bc5bbbd159`; gold `4d04fe0e41497da2167ec19b202a627673a299471e2ed935038219b24de87f65` |
 
@@ -63,8 +63,8 @@ These are canonical filename-to-LF-source mapping hashes from the [source review
 
 | Identity | Value | Meaning / exact location |
 | --- | --- | --- |
-| Specification canonical JSON | `2c2dde84e6261b2578bf21944a3a0ad932403c89ec0bd4490713f367dbd1a07e` | `canonical_json_hash(spec)` in [`src/alf/protocol.py`](../src/alf/protocol.py) applied to the specification; not a report-byte hash |
-| Scientific policy | `ec2638862df05cda74bf415d86a9e1b8dbeb24f9f504ccd00767253daa38d7d9` | `policy_sha` calculation in [`src/alf/h_run.py`](../src/alf/h_run.py); approval/bookkeeping fields excluded |
+| Specification canonical JSON | `2c2dde84e6261b2578bf21944a3a0ad932403c89ec0bd4490713f367dbd1a07e` | `canonical_json_hash(spec)` in [`src/ise/protocol.py`](../src/ise/protocol.py) applied to the specification; not a report-byte hash |
+| Scientific policy | `ec2638862df05cda74bf415d86a9e1b8dbeb24f9f504ccd00767253daa38d7d9` | `policy_sha` calculation in [`src/ise/h_run.py`](../src/ise/h_run.py); approval/bookkeeping fields excluded |
 | Construction report bytes | `eea708fb2e79eba1e96aaf2e25593dfd769d08fb52b6fc11b575509bffd549da` | Raw report-byte hash for [`construction/report.json`](../reports/workstream-h1-h2-preexecution-2026-09-09/construction/report.json) |
 | Specification LF source-file bytes | `e05213330c400ee2e2e857a43f2730c640d3231669807fa5a1a92804ee079c8c` | Current LF-normalized specification file bytes; not the canonical JSON hash |
 | Workload source canonical hash | `8766bf2da799a351c002a90b23a6443ceff94a8df6b9a15b46a93bce3b04febc` | `workload.source_sha256` in [`specification.json`](../protocols/workstream-h1-h2/specification.json), filename-to-LF mapping |
@@ -73,7 +73,7 @@ These are canonical filename-to-LF-source mapping hashes from the [source review
 | --- | --- | --- |
 | Task and public contract | [`benchmarks/successor/tasks/008-summary-api/task.md`](../benchmarks/successor/tasks/008-summary-api/task.md), [`benchmarks/workstream-h/public-examples.json`](../benchmarks/workstream-h/public-examples.json) | Task 008 behavior, input/output shapes, no accidental successor leakage |
 | Expanded operation contract | [`benchmarks/workstream-h/contract.md`](../benchmarks/workstream-h/contract.md) | `reconcile` and `dependencyOrder` behavior and validation precedence |
-| Sealed behavioral cases | [`h_workload.cases_for`](../src/alf/h_workload.py) assembles [`benchmarks/successor/manifest.json`](../benchmarks/successor/manifest.json) baseline/Tasks 001–008 plus Expanded additions; `workload.cases_sha256=6bb0c80d42b5a365e788a0164f33a2cf6d6612988426db0d16edf9c782a10e5e` in [`specification.json`](../protocols/workstream-h1-h2/specification.json) | [`h_check.py`](../src/alf/h_check.py) assembles/hashes; trusted evaluation is [`h_fixtures.evaluate_trusted`](../src/alf/h_fixtures.py) / `evaluate_with_sandbox`, with live evaluation routed by [`h_run.py`](../src/alf/h_run.py). [`h_workload.oracle_additions`](../src/alf/h_workload.py) is the independent Expanded oracle. Case material is evaluator-only |
+| Sealed behavioral cases | [`h_workload.cases_for`](../src/ise/h_workload.py) assembles [`benchmarks/successor/manifest.json`](../benchmarks/successor/manifest.json) baseline/Tasks 001–008 plus Expanded additions; `workload.cases_sha256=6bb0c80d42b5a365e788a0164f33a2cf6d6612988426db0d16edf9c782a10e5e` in [`specification.json`](../protocols/workstream-h1-h2/specification.json) | [`h_check.py`](../src/ise/h_check.py) assembles/hashes; trusted evaluation is [`h_fixtures.evaluate_trusted`](../src/ise/h_fixtures.py) / `evaluate_with_sandbox`, with live evaluation routed by [`h_run.py`](../src/ise/h_run.py). [`h_workload.oracle_additions`](../src/ise/h_workload.py) is the independent Expanded oracle. Case material is evaluator-only |
 | Architecture rubric | [source-review.md](../reports/workstream-h1-h2-preexecution-2026-09-09/source-review.md), “Evaluator-only rubric and relevance map” | Human final-source review remains separate from AI source review |
 
 ## 3. Caps and authored-byte interpretation
@@ -168,9 +168,9 @@ return, `feedback=false`, `repairs=0`, and zero automatic retries or replacement
 | Time | request 120s; trajectory 600s; controller build 60s; development and holdout execution 10s | `budgets.request_timeout_seconds` through `holdout_execution_timeout_seconds` |
 | Token alarms | 32,768 input and 8,192 output+reasoning are post-turn alarms, not provider hard caps | `budgets.request_input_tokens`, `request_output_tokens_including_reasoning`, `request_limits_semantics` |
 | Controller output | 1,048,576 bytes | `budgets.controller_output_bytes` |
-| Byte alarms | Complete authored-input UTF-8 bytes; valid over-allowance terminates that fixed trajectory | `budgets.unit`; `controller.read_overflow`; implementation [`src/alf/h.py`](../src/alf/h.py) |
+| Byte alarms | Complete authored-input UTF-8 bytes; valid over-allowance terminates that fixed trajectory | `budgets.unit`; `controller.read_overflow`; implementation [`src/ise/h.py`](../src/ise/h.py) |
 | Feedback/repair | no feedback, one final submission, no repair, retry, or replacement | `controller.feedback`, `repairs`, `automatic_retries`, `automatic_replacements` |
-| Scoring | one fresh isolated evaluation after interaction; no score returned to candidate | `controller.scoring`; [`src/alf/h_sandbox.py`](../src/alf/h_sandbox.py) |
+| Scoring | one fresh isolated evaluation after interaction; no score returned to candidate | `controller.scoring`; [`src/ise/h_sandbox.py`](../src/ise/h_sandbox.py) |
 | Null/usage | missing usage remains null; token subsets are not added twice; subscription USD is null | `context_accounting` and `budgets.subscription_usd` in construction report/spec |
 | Blinding | reviewers must not see per-slot outcome/cost; unknown required judgment remains unknown | [`source-review.md`](../reports/workstream-h1-h2-preexecution-2026-09-09/source-review.md), rubric section |
 | Hard stops | security; unknown/invalid usage; ambiguous dispatch; unexpected native tools/compaction; context rejection; cleanup unconfirmed | `controller.hard_stops` in [`specification.json`](../protocols/workstream-h1-h2/specification.json) |
@@ -178,7 +178,7 @@ return, `feedback=false`, `repairs=0`, and zero automatic retries or replacement
 Holdout scores cannot influence feedback, continuation, retry, or replacement.
 For current task completion, missing required architecture rubric evidence remains
 null/unknown; known format, build, or behavioral failure makes completion false
-([`h_run.py`](../src/alf/h_run.py), completion decision around lines 132–138).
+([`h_run.py`](../src/ise/h_run.py), completion decision around lines 132–138).
 The four required rubric names are `domain_model_in_engine`,
 `live_dispatch_in_engine`, `program_io_boundary`, and `summary_in_engine`. All
 submissions and attempts must be retained.
@@ -201,14 +201,14 @@ Candidate execution must have no model credentials, host secrets, or writable
 scoring machinery. The evaluator cannot fall back to host execution. OAuth must
 not be staged until separately approved; the original local login remains
 untouched. Authentication and route implementation is in
-[`src/alf/e3a_runner.py`](../src/alf/e3a_runner.py), [`scripts/e3a_run.py`](../scripts/e3a_run.py),
+[`src/ise/e3a_runner.py`](../src/ise/e3a_runner.py), [`scripts/e3a_run.py`](../scripts/e3a_run.py),
 and [`infra/remote-runner/`](../infra/remote-runner/); H's live account, route
 behavior, and provider identity remain unverified. CI's read-only activation and
 disabled SDK-fixture copy are model-free checks and never grant live permission.
 
 ## 8. Validation evidence and limitations
 
-Exact CI [34335495891](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34335495891) passed on the implementing publication. All **19 deterministic artifacts** matched published bytes on both Linux and Windows. The current host/Linux SDK sandbox matrices pass **8/8 positive workload targets and 28/28 fault checks**. The historical exact experimental-image matrix remains **27/28 initially caught**, plus **two independent repaired variants** and **26 unchanged identities**; it must not be relabeled as a historical 28/28 aggregate. See [`evidence/index.json`](../reports/workstream-h1-h2-preexecution-2026-09-09/evidence/index.json), [`fault-identity-comparison.json`](../reports/workstream-h1-h2-preexecution-2026-09-09/evidence/fault-identity-comparison.json), and the [implementation packet](workstream-h1-h2-implementation-2026-09-09.md).
+Exact CI [34335495891](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34335495891) passed on the implementing publication. All **19 deterministic artifacts** matched published bytes on both Linux and Windows. The current host/Linux SDK sandbox matrices pass **8/8 positive workload targets and 28/28 fault checks**. The historical exact experimental-image matrix remains **27/28 initially caught**, plus **two independent repaired variants** and **26 unchanged identities**; it must not be relabeled as a historical 28/28 aggregate. See [`evidence/index.json`](../reports/workstream-h1-h2-preexecution-2026-09-09/evidence/index.json), [`fault-identity-comparison.json`](../reports/workstream-h1-h2-preexecution-2026-09-09/evidence/fault-identity-comparison.json), and the [implementation packet](workstream-h1-h2-implementation-2026-09-09.md).
 
 The pinned native loopback fixture has **52/52 bounded probes** over 26 reference
 requests. It used zero external provider calls and zero OAuth staging. This is
@@ -258,9 +258,9 @@ Record evidence, not only “looks good,” for each domain:
 
 ## 10. UNAPPROVED human decision form
 
-Reviewer: ____________________________________  Date: ____________________  
-Reviewed revision: `c87df747c783c0649cb66d5c1bbaf9ee11adf9d5`  
-Exact CI checked: [34335495891](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34335495891)  
+Reviewer: ____________________________________  Date: ____________________
+Reviewed revision: `c87df747c783c0649cb66d5c1bbaf9ee11adf9d5`
+Exact CI checked: [34335495891](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34335495891)
 
 | Domain | Findings / required corrections | Accept? |
 | --- | --- | --- |
@@ -271,21 +271,21 @@ Exact CI checked: [34335495891](https://github.com/Happypig375/agentic-language-
 | Isolation, provenance, route, security |  | ☐ |
 | CI/evidence and remaining live unknowns |  | ☐ |
 
-Integration allocation (choose one):  
-☐ No allocation  
-☐ Contingent integration only: **3 planned dispatches**, hard maximum **5**  
+Integration allocation (choose one):
+☐ No allocation
+☐ Contingent integration only: **3 planned dispatches**, hard maximum **5**
 ☐ Other: ____________________ (must not exceed 5)
 
-Pilot allocation (separate decision; not implied by integration):  
-☐ No pilot allocation  
+Pilot allocation (separate decision; not implied by integration):
+☐ No pilot allocation
 ☐ Contingent fixed pilot, only after matching successful integration/freeze,
-hard maximum **64 dispatches** across the fixed 32-slot schedule  
+hard maximum **64 dispatches** across the fixed 32-slot schedule
 ☐ Other: ____________________ (must not exceed 64)
 
 No retries, sample extensions, replacements, automatic reissues, or relaxed hard
-stops: ☐ acknowledged. Subscription USD: **unknown**.  
+stops: ☐ acknowledged. Subscription USD: **unknown**.
 
-Human decision: ☐ remain unapproved  ☐ approve only the checked contingent scope above  
+Human decision: ☐ remain unapproved  ☐ approve only the checked contingent scope above
 Signature / record: ______________________________________________
 
 This form records a future human choice; completing it does not alter the

@@ -39,7 +39,7 @@ def read_json(path: Path) -> Any:
 def snapshot(root: Path, manifest: dict, language: str, stage: int) -> dict[str, str]:
     """Reuse the accepted gold materializer; return source only, never build output."""
     import tempfile
-    with tempfile.TemporaryDirectory(prefix="alf-e3a-source-") as tmp:
+    with tempfile.TemporaryDirectory(prefix="ise-e3a-source-") as tmp:
         work = Path(tmp)
         _materialize(root, manifest, language, stage, work)
         return {

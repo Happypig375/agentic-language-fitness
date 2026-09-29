@@ -52,7 +52,7 @@ This envelope is a mechanical timing counterfactual. It is not subtracted from a
 
 ## Host, CI, and numerical evidence
 
-The benchmark used the v3 remote host/profile, pinned image/toolchain, and reviewed resource/storage configuration. Separately, host Python 3.10.12 completed the full E1 plus raw audit, and the pinned `alf-codex:0.149.1` image (Python 3.12.3) passed a network-none/read-only audit with the same report hash. Exact-commit analyzer CI is [Actions run 33890449685](https://github.com/Happypig375/agentic-language-fitness/actions/runs/33890449685): Linux and Windows succeeded; the E2 job was intentionally skipped. A `1e-12` tolerance applies both relatively and absolutely, and only to finite derived summary floats. Measurements, identities, raw evidence, structure, and each report self-hash are exact.
+The benchmark used the v3 remote host/profile, pinned image/toolchain, and reviewed resource/storage configuration. Separately, host Python 3.10.12 completed the full E1 plus raw audit, and the pinned `alf-codex:0.149.1` image (Python 3.12.3) passed a network-none/read-only audit with the same report hash. Exact-commit analyzer CI is [Actions run 33890449685](https://github.com/Happypig375/interactive-software-evolution/actions/runs/33890449685): Linux and Windows succeeded; the E2 job was intentionally skipped. A `1e-12` tolerance applies both relatively and absolutely, and only to finite derived summary floats. Measurements, identities, raw evidence, structure, and each report self-hash are exact.
 
 ## Bounds and disposition
 

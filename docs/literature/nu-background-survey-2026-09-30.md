@@ -1,0 +1,52 @@
+# Wider Nu research background survey
+
+**Status: in progress, 2026-09-30 HKT.** The user reopened the literature assignment: continue resolving gaps through literature searching, using the native Consensus MCP's capacity for 100 records per call, until the whole background is surveyed. The [preceding assessment](nu-literature-assessment-2026-09-30.md) completed an earlier decision-specific task. It does not establish completion here. Reuse its 62 full readings, source distinctions and controls, while seeking missing foundations, alternatives and adverse evidence across the full background.
+
+## Question and scope
+
+The starting point is characterizing **Nu's claimed innovations** against prior work. Interactive Software Evolution is an internal codename, not a replacement research claim. The background question is how domain and state representation, ownership, coordination and tools affect the cost and correctness of evolving interactive software, particularly Nu/F# games and maintenance by humans or coding agents. The survey includes foundational mechanisms, engineering alternatives, empirical benefits and costs, practice/adoption, and methods needed to distinguish those effects. D1's exhaustive-match candidate is one part of this background. D2's selector apparatus remains deferred; evidence about architecture evaluation and adoption can still be relevant to the broader survey without authorizing D2 construction.
+
+The strongest rival is that apparent benefits come from tool access, experience, training exposure, task selection, API/implementation differences, hidden mutable or external state, or shifted runtime and coordination costs. Evidence can change which mechanism is plausible, which claim is unsupported, which comparison is necessary, or whether a research question should be redirected. Include empirical null/adverse findings and nonfunctional alternatives. Separate theory, practitioner accounts, demonstrations, measurements and independent comparisons. Public Nu source, Vsynchronicity hypotheses and derived sibling technical analysis retain their separate evidence classes; no private transcripts enter searches or Git.
+
+## Coverage map
+
+These themes organize the whole background; they are neither a fixed paper list nor independent completion quotas. Add missing themes when searching exposes them. A status of open means the broader coverage and consequential follow-up have not yet been verified.
+
+| Theme | Understanding to establish | Reusable evidence / opening frontier | Status |
+| --- | --- | --- | --- |
+| B01 Design foundations and comprehension | Information hiding, locality, coupling/cohesion, interaction complexity and the distinction between static metrics and measured understanding | S38/S39/S41/S44; foundational modularity and change-locality literature needs an explicit survey | Open |
+| B02 Domain modeling, types and evolution | State machines, algebraic types, exhaustive matches, valid defaults, expression-problem tradeoffs, type errors versus behavioral obligations | P08/S35/S37; native Consensus C02 opens extensibility, schema evolution and coverage checking | Open |
+| B03 Reactive coordination and lifecycle | Dynamic dependencies, glitches, subscriptions, ownership, entity identity, asynchronous timing and effect ordering | S39–S47/S53–S62 provide substantial primary evidence; broader semantic alternatives and failure classes still need coverage | Open |
+| B04 Persistent state, effects and history | Structural sharing, encapsulated mutation, snapshots, replay fidelity, state migration and irreversible effects | S46–S50/S52/S63/S65/S66; C01 opens persistent structures, state threads and type-directed live migration | Open |
+| B05 Game architecture alternatives | Functional worlds, MVU/MMCC/ImSim, ECS, object/actor models and declarative game languages; shared versus distinguishing mechanisms | Existing Nu source and S44/S52/S57/S58/S65; C01 surfaces Casanova and other game DSLs | Open |
+| B06 Runtime and resource costs | Allocation/GC, data locality, frame latency, memory retention, concurrency, external/native boundaries and workload-sensitive performance | Existing papers provide bounded costs; persistent structures, .NET/game DSL optimization and ECS comparisons require further survey | Open |
+| B07 Specification, testing and oracles | Temporal properties, property/model-based testing, finite observations, nondeterminism, invalid/vacuous specifications and fault sensitivity | S46/S47/S50/S53 already read; broader oracle and state-model methods remain to survey | Open |
+| B08 Debugging and live development | Program comprehension, diagnosis versus repair, state validity after edits, feedback/tool integration and learning costs | S43/S48–S56/S60/S63–S67; C01/C02 add schema and live-state evolution leads | Open |
+| B09 Coding agents and language effects | Training/exposure, typed context, compiler feedback, representation, repository evolution, multi-step regression and language-specific limitations | P01/P03–P13/S34–S37; new broader searches and edition checks remain | Open |
+| B10 Maintenance and adoption in practice | Actual change distributions, developer expertise, migration/learning costs, industrial game practices and external validity | S40/S45/S60/S64/S67; functional-quality and game-maintenance studies newly surfaced | Open |
+| B11 Architecture choice and assessment | Change scenarios, maintainability measures, credible alternatives, information/cost tradeoffs and recommendation scope | P02/A01/S01–S33 provide reusable methods; broader assessment evidence may be relevant independently of deferred D2 | Open |
+| B12 Empirical and synthesis methods | Causal contrasts, dependent tasks/participants, missing/censored outcomes, construct validity, uncertainty, search recall and version/dataset lineage | A02/S22/S26 and existing audits; triangulate methods across the expanded evidence rather than infer rigor from counts | Open |
+
+## Progress and evidence rules
+
+The [search ledger](nu-background-searches-2026-09-30.md) records query ranges and screening states. Seven native Consensus calls requesting 100 records per page have returned **697 occurrences**. All titles were inspected; selected supplied abstracts/index text were consumed as enumerated in the ledger. These are retrieved occurrences, not full readings or independent studies. The old twenty-result app interface and the new native interface have different pagination affordances. No year, citation, venue-quality or publication-type filters were applied to the native searches.
+
+Maintain stable P/A/S reading identities. New broad-search occurrences have query/position identities until editions and existing Zotero holdings are verified. A result receives no methods/effect credit from a title or abstract alone. Preserve full primary PDFs outside Git and attach relevant records through the existing native Zotero API authorization. Organizing a record never automatically marks it read.
+
+Completion requires an inspected source-to-theme map across this full background, accounted search/citation paths, primary examination of consequential leads, credible opposing mechanisms, and explicit residual empirical/access uncertainty. Missing coverage is not completion. A broad search prefix, citation count, the existing 62 readings, or narrowing a proposal cannot alone certify that the background has been surveyed. Global proof that no further paper exists is not available from these services.
+
+## New primary claim coverage
+
+| Claim / theme | Evidence read | Disposition and unresolved comparison |
+| --- | --- | --- |
+| B04/B08: explicit functional state enables live program replacement | [S71](full-reading/S71-live-state-migration.md), all main/appendix pages | Prior type-directed live-state migration is established; Nu-specific distinctions require actual correspondence, defaults, control-state and external-effect boundaries. |
+| B02/B07: types or retained state ensure valid behavior after an edit | S71 main §7 and control-flow examples; appendix restrictions | The general inference fails: migration preserves required types, not invariants absent from them. Independent old/new obligations remain necessary. |
+| B06/B10: live migration yields net maintenance/runtime benefit | S71 demonstrations, limitations and proposed testing | No comparative effort, runtime or retention estimate is supplied. Value and cost remain unmeasured. |
+
+S71 raises complete coverage to **63 works**. S68's game-language survey is partial; S69's Casanova text is consumed with visual/edition checks pending; the newly supplied S70 networking PDF is queued. S72 type-authoring and S73 schema evolution have been acquired locally after no-match Zotero checks, with bodies still incomplete. Neither retrieval counts nor these acquisitions close any whole-background theme.
+
+## Three-criterion status and next work
+
+**Unique:** unconfirmed; newly surfaced predecessors require examination. **Valuable:** plausible beneficiary decisions remain concrete, but effect, prevalence and net cost are unmeasured. **Scientifically valid:** the existing candidate designs retain unvalidated equivalence, oracle, task-diversity and accounting assumptions; this expanded review is not an experiment or validation.
+
+Next, screen the retrieved background records, verify primary editions and existing holdings, follow missing type/evolution and game-state/performance lineages, and expand the remaining thematic searches. All experimental holds in PLAN remain. This is an active continuation, not a completed handoff or a request for new permission.

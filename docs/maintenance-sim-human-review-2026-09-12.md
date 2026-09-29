@@ -13,14 +13,14 @@ experimental sample. No candidate has been dispatched or evaluated here.
 | --- | --- | --- |
 | Workload | One original-authored headless simulation pair, eight episodes | [Construction metadata](../benchmarks/maintenance-sim/construction.json) |
 | Starting architecture | Supplied separately authored seeds, not model-generated greenfield code | [F# seed](../benchmarks/maintenance-sim/seed/fsharp/Simulation.fs), [C# seed](../benchmarks/maintenance-sim/seed/csharp/Program.cs) |
-| Toolchain | .NET SDK **10.0.302**, no added dependencies | [F# project](../benchmarks/maintenance-sim/seed/fsharp/Simulation.fsproj), [C# project](../benchmarks/maintenance-sim/seed/csharp/Simulation.csproj), [constructor](../src/alf/maintenance.py) |
+| Toolchain | .NET SDK **10.0.302**, no added dependencies | [F# project](../benchmarks/maintenance-sim/seed/fsharp/Simulation.fsproj), [C# project](../benchmarks/maintenance-sim/seed/csharp/Simulation.csproj), [constructor](../src/ise/maintenance.py) |
 | Shared observable interface | Independent JSONL requests; deterministic state, effects, errors and named snapshots | [Seed contract](../benchmarks/maintenance-sim/contract.md) |
 | Maintenance policy | Fresh conversation, no tools, one submission per episode, no diagnostic repair feedback | [Shared candidate guidance](../benchmarks/maintenance-sim/guidance/common.md), [adopted design](maintenance-context-design-review-2026-09-12.md#clean-episodes-inherited-software) |
 | Inherited state | Safe wrong/noncompiling code persists; malformed submission applies nothing; no gold reset | [Adopted lifecycle and classification policy](maintenance-context-design-review-2026-09-12.md#clean-episodes-inherited-software) |
 | Durable notes | Markdown explicitly submitted in `files` persists and is charged; `architecture_notes` is an archived impact explanation, not automatic memory | [Shared guidance](../benchmarks/maintenance-sim/guidance/common.md) |
-| Input | Complete eligible source, guidance, seed/current/past public requirements and serialization; no future tasks or reference solutions | [Envelope serializer](../src/alf/maintenance.py) |
-| Input/output limits | **Unset** for a candidate protocol; constructor safety bounds are not scientific caps | [Construction metadata](../benchmarks/maintenance-sim/construction.json), [audit limits](../src/alf/maintenance.py) |
-| Offline proxy | `tiktoken==0.14.0`, `o200k_base`; **not** provider context accounting | [Measurement implementation](../src/alf/maintenance.py) |
+| Input | Complete eligible source, guidance, seed/current/past public requirements and serialization; no future tasks or reference solutions | [Envelope serializer](../src/ise/maintenance.py) |
+| Input/output limits | **Unset** for a candidate protocol; constructor safety bounds are not scientific caps | [Construction metadata](../benchmarks/maintenance-sim/construction.json), [audit limits](../src/ise/maintenance.py) |
+| Offline proxy | `tiktoken==0.14.0`, `o200k_base`; **not** provider context accounting | [Measurement implementation](../src/ise/maintenance.py) |
 | Architecture diagnostics | Exploratory, separate fields; no weighted elegance/F# preference score | [Review dimensions](maintenance-context-design-review-2026-09-12.md#what-consistent-design-would-mean-operationally) |
 | Human expert approval | **false**; domain/language review not started | [Construction metadata](../benchmarks/maintenance-sim/construction.json) |
 | Scientific freeze | **false** | [Construction metadata](../benchmarks/maintenance-sim/construction.json) |

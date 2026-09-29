@@ -7,8 +7,8 @@ import unittest
 from collections import Counter
 from pathlib import Path
 
-from alf.config import load_manifest
-from alf.workstream_e3a import (
+from ise.config import load_manifest
+from ise.workstream_e3a import (
     PACKET_DIR, PolicyViolation, SubmissionError, apply_submission, budget,
     candidate_payload, development_cases, feedback_packet, holdout_cases,
     normalize_usage, project_development, read_json, schedule, run_trajectory, snapshot, structural_development, usage_sum,

@@ -45,7 +45,7 @@ Primary versions, not mirrored AI summaries, support the revised methods. Discov
 
 **G2:** outgoing from ALMA and the 2022 hybrid-search journal work; depth 1, maximum 30 edges, intent/snippets enabled. Scite automatically added linked arXiv `2307.02612`. Returned **30 edges / 33 nodes, truncated true**. ALMA and the linked preprint had zero seed coverage; the journal had 30. The graph is not an exhaustive literature screen. The linked preprint is not a new replication.
 
-The G2 snippets mostly locate methods/background references; supporting labels about hybrid search are not evidence for ALF's architectural hypothesis. The journal's actual introduction was read before using its method distinction. The other targets below remain metadata/context leads, not 30 read studies. The Wohlin 2014 author PDF was opened as a method lead but was not used for an additional detailed methods claim.
+The G2 snippets mostly locate methods/background references; supporting labels about hybrid search are not evidence for ISE's architectural hypothesis. The journal's actual introduction was read before using its method distinction. The other targets below remain metadata/context leads, not 30 read studies. The Wohlin 2014 author PDF was opened as a method lead but was not used for an additional detailed methods claim.
 
 ## Source decisions
 
@@ -163,7 +163,7 @@ These graph targets are retained for reproducibility, not credited as additional
 
 At Nu commit `064f7ae92a8506689cd91aff5e6804a375d6ef3d`, the GitHub connector supplied `Projects/Breakout Mmcc/Gameplay.fs` lines 1–150 and `Projects/Breakout ImSim/Gameplay.fs` lines 1–180. These show explicit gameplay-model/manual update logic versus screen/entity properties and dynamic-body interactions. MMCC also calls world effects; do not call it a strictly pure functional core. This is source inspection, not runtime parity, headless feasibility or a published paradigm comparison.
 
-The ALF proposal, plan, agent instructions, source ledger, search-depth audit and CI policy were read at the review head. Historical literature evidence is reused only with its existing declared limits. No private chat material is promoted to independent corroboration of its own synthesis.
+The ISE proposal, plan, agent instructions, source ledger, search-depth audit and CI policy were read at the review head. Historical literature evidence is reused only with its existing declared limits. No private chat material is promoted to independent corroboration of its own synthesis.
 
 ## How the reading changed the plan
 

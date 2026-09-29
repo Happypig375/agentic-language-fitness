@@ -38,7 +38,7 @@ The paper itself asks whether constructing the simulation input already supplies
 
 **Uniqueness:** practitioner-facing architectural tradeoff explanation and qualitative evaluation already exist. Do not claim their absence. This paper does not test the incremental value of responsibility/coordination information for LLM coding-agent maintenance.
 
-**Value:** the interviews support an industrial need for understanding tradeoffs and report perceived usefulness in this case. They do not validate ALF's adoption benefit, savings or F#/Codex-specific beneficiary fit. A method-specific claim must compare equally informed alternatives and account for modeling/analysis effort.
+**Value:** the interviews support an industrial need for understanding tradeoffs and report perceived usefulness in this case. They do not validate ISE's adoption benefit, savings or F#/Codex-specific beneficiary fit. A method-specific claim must compare equally informed alternatives and account for modeling/analysis effort.
 
 **Rigor:** distinguish model construction, information acquisition, visualization and human discussion. A fixed-executor behavioral comparison can test coding-agent outcomes; it cannot by itself establish an assisted-human decision benefit. Preserve all-profile outcomes rather than selecting only favorable Pareto cases after observing performance.
 

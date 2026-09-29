@@ -8,7 +8,7 @@
 
 At publication `9be45f6`, this batch was staged but not imported because another session was using the Run JavaScript window. The user clarified that it was working on a different collection and had finished. The prepared import then ran as one collection-specific JavaScript call through native window controls, without shared mouse, keyboard or clipboard input. The script cleared its own marked editor content after completion.
 
-Destination remains **ALF - Core Paper Reading Queue (2026-09-15)**, collection `PKLXQNEE`, user library 1. [Living reading program](literature/selection-priority-reading-2026-09-15.md) owns reading priorities; this is an acquisition record, not a new full-reading or evidence-closure claim.
+Destination remains **ISE - Core Paper Reading Queue (2026-09-15)**, collection `PKLXQNEE`, user library 1. [Living reading program](literature/selection-priority-reading-2026-09-15.md) owns reading priorities; this is an acquisition record, not a new full-reading or evidence-closure claim.
 
 ## Imported records and assets
 
@@ -76,7 +76,7 @@ One exact Scite lookup requested 20 records at offset 0 and returned all 20 requ
 
 Library-wide DOI, normalized-title and known alternate-DOI checks found no existing S01–S18 parents before import; the JavaScript rechecked identities inside a Zotero transaction. It created eighteen parent records, copied the sixteen verified local PDFs through Zotero's native attachment API, checked attachment hashes before reuse, and wrote a completion receipt. The batch ran from 16:20:19 to 16:21:04 UTC on 2026-09-15 (00:20–00:21 HKT on 2026-09-16).
 
-Independent readback verified all eighteen parent keys, collection membership, exact titles, DOI identities, full author lists, types, dates, Extra fields and queue tags. All sixteen stored PDFs matched their expected SHA-256 and byte size, parent, edition label and source URL. A second library-wide identity check found exactly one parent per queued work. The original sixteen parents' API records and nineteen stored-PDF hashes matched their earlier records. The final collection has 34 parent works and 35 PDFs; S05 has two labelled editions, while S02/S04/S07 have none. These three records carry the `ALF PDF needed` tag.
+Independent readback verified all eighteen parent keys, collection membership, exact titles, DOI identities, full author lists, types, dates, Extra fields and queue tags. All sixteen stored PDFs matched their expected SHA-256 and byte size, parent, edition label and source URL. A second library-wide identity check found exactly one parent per queued work. The original sixteen parents' API records and nineteen stored-PDF hashes matched their earlier records. The final collection has 34 parent works and 35 PDFs; S05 has two labelled editions, while S02/S04/S07 have none. These three records carry the `ISE PDF needed` tag.
 
 Local staging is outside Git in the task-specific `alf-selection-collection-20260915` temporary directory. It contains the manifest, source PDFs, acquisition records, first-page renders, completed import receipt and independent verification record. Durable parent/attachment keys and hashes are recorded above. No copyrighted PDF bodies or extraction dumps are committed.
 

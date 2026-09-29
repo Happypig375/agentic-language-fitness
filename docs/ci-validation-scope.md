@@ -7,7 +7,7 @@ protocols, frozen results or execution authority.
 ## Why restructure
 
 The literature-only publication `5d9ad460738112a8dfe55f2de8eaad74bef35823`
-passed [CI 34774846703](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34774846703),
+passed [CI 34774846703](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34774846703),
 attempt 1: Linux took 14m37s and Windows 16m21s. Both repeated .NET construction,
 historical workstream checks and, on Linux, sandbox/container checks despite
 only AGENTS.md, PLAN.md and a research note changing.
@@ -24,7 +24,7 @@ action, service, dependency graph engine or new package is required.
 
 | Change/event | Selected validation |
 | --- | --- |
-| Ordinary known-range branch push changing only root README.md, AGENTS.md, PLAN.md, references.md or Markdown under docs/ | Fast routing regressions, changed-Markdown UTF-8 and Git whitespace checks; no ALF install, .NET or Docker. |
+| Ordinary known-range branch push changing only root README.md, AGENTS.md, PLAN.md, references.md or Markdown under docs/ | Fast routing regressions, changed-Markdown UTF-8 and Git whitespace checks; no ISE install, .NET or Docker. |
 | Same kind of push confined to the maintenance allowlist, optionally plus the prose above | Fast checks, then all unit tests and the trusted maintenance fixture/fault/inherited-failure audit on Linux and Windows. |
 | Shared implementation, CI/configuration, other benchmark/protocol/report inputs, or any unrecognized path | Fast checks plus the unchanged full Linux/Windows validation matrix. |
 | Pull request, workflow_dispatch, tag, new-branch or forced push, malformed/missing event data, unavailable base/diff | Full matrix; uncertainty never chooses a skip. |

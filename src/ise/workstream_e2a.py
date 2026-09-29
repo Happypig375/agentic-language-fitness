@@ -1408,7 +1408,7 @@ def _runtime_self_observation(work_root: Path, observed: dict[str, Any]) -> dict
              "runtime_mount_not_writable")
     _require(work_fs in {"ext2", "ext3", "ext4"}, "runtime_work_filesystem_mismatch")
     try:
-        descriptor, temporary = tempfile.mkstemp(prefix="alf-e2a-writable-", dir="/tmp")
+        descriptor, temporary = tempfile.mkstemp(prefix="ise-e2a-writable-", dir="/tmp")
         os.close(descriptor)
         Path(temporary).unlink()
     except OSError:

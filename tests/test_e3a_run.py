@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.workstream_e3a import candidate_payload
+from ise.workstream_e3a import candidate_payload
 
 ROOT = Path(__file__).parents[1]
 spec = importlib.util.spec_from_file_location("e3a_run", ROOT / "scripts/e3a_run.py")

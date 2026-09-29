@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from alf.metrics import snapshot_repository
+from ise.metrics import snapshot_repository
 
 
 class MetricsTests(unittest.TestCase):

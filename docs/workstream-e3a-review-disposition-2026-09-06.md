@@ -97,7 +97,7 @@ A completed E3a pilot, when separately approved, remains 3 tasks × 4 pairs × 2
 
 ## Review evidence and limitations
 
-Read through PLAN/AGENTS, the full packet and specification, candidate instructions, `src/alf/workstream_e3a.py`, `scripts/e3a_check.py`, and the relevant F# stage-005 predecessor. Verified reviewed-commit CI jobs, including trusted fixture validation, through GitHub. Locally reproduced the empty-engine filename acceptance and terminal missing-Compile classification using extracted decision-function probes and checked the budget arithmetic. Those probes were not a full local repository test run and did not execute candidate code.
+Read through PLAN/AGENTS, the full packet and specification, candidate instructions, `src/ise/workstream_e3a.py`, `scripts/e3a_check.py`, and the relevant F# stage-005 predecessor. Verified reviewed-commit CI jobs, including trusted fixture validation, through GitHub. Locally reproduced the empty-engine filename acceptance and terminal missing-Compile classification using extracted decision-function probes and checked the budget arithmetic. Those probes were not a full local repository test run and did not execute candidate code.
 
 This change records disposition and advances the canonical handoff. **R1–R4 are required implementation changes, not claims that the current pure helpers have already been corrected.** No new language-result inference, live model observation, or human review is claimed.
 

@@ -49,10 +49,10 @@ Thus the released QRD comparison changes the relevance unit between question and
 
 The authors' public Drive folder was reachable and lists `data.zip`, `models.zip`, `Evaluate Cross-Encoder.zip` and a labeled-output archive. A bounded `data.zip` acquisition returned HTML rather than ZIP; no data archive or model weights were inspected or executed. Do not describe the entire artifact as private or unavailable. Current data membership, the 13-post discrepancy and exact saved-table provenance remain unresolved.
 
-## Consequence for ALF and next reading
+## Consequence for ISE and next reading
 
 **Retain:** recommendation and code/document retrieval are established adjacent work. This full paper's experimental target differs from prospective source-maintenance choice.
 
-**Strengthen:** use the same decision and outcome units across every selector; preserve multiple valid alternatives and common denominators; freeze data/profile membership; distinguish ranking, analyst agreement and measured behavioral utility. Report adverse operating points, synthetic-corpus assumptions and analysis costs. Do not borrow MicroRec's percentage gains for ALF effects, power or ROI.
+**Strengthen:** use the same decision and outcome units across every selector; preserve multiple valid alternatives and common denominators; freeze data/profile membership; distinguish ranking, analyst agreement and measured behavioral utility. Report adverse operating points, synthetic-corpus assumptions and analysis costs. Do not borrow MicroRec's percentage gains for ISE effects, power or ROI.
 
 Promote **S22, Evaluating Recommendation Systems**, for evaluation design and metric/utility alignment, and **S24, A Machine Learning Approach to Service Discovery for Microservice Architectures**, for prior selection work explicitly targeting runtime QoS. S24 could challenge any broad statement that service recommendation lacks behavioral outcomes; its different decision object must be reconstructed before use. Existing **S01/S06/S16** remain the foundations for defaults, conditional value and information cost. The [next-reading record](../selection-reading-next-2026-09-16.md) states the unresolved conditions.

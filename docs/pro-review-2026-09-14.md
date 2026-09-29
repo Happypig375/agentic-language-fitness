@@ -14,7 +14,7 @@ The strongest contribution is not “architecture matters” or “no one compar
 
 ### R1 — Recover a close predecessor in the current synthesis
 
-The code-cleanliness minimal-pair study already manipulates code before controlled downstream tasks; it is not merely evidence about formatting. Its primary methods include refactoring/degradation, hotspot and multi-module tasks, and insensitive controls. It was discussed in older ALF work but absent from the latest proposal's central comparison. The revised literature table restores it and explicitly avoids claiming novelty for controlled source-representation effects.
+The code-cleanliness minimal-pair study already manipulates code before controlled downstream tasks; it is not merely evidence about formatting. Its primary methods include refactoring/degradation, hotspot and multi-module tasks, and insensitive controls. It was discussed in older ISE work but absent from the latest proposal's central comparison. The revised literature table restores it and explicitly avoids claiming novelty for controlled source-representation effects.
 
 CodeThread already compares later tasks on human/agent predecessors meeting observable test preconditions; SlopCodeBench already evaluates repeated evolution and regression/cost outcomes; NITR already tests maintainability-related structural obligations. Specification-memory and game-runtime papers add further boundaries. The revised proposal gives each a method-level consequence rather than a list of titles. Actual editions and reading extents are in the [source audit](pro-review-sources-2026-09-14.md).
 
@@ -98,4 +98,4 @@ A0 should return a concrete yes/no/redirect recommendation. If package differenc
 
 ## Validation of this documentation pass
 
-The local review checks validate UTF-8, Git blob identities, relative-link targets where the repository tree is available, whitespace, balanced schedule arithmetic and small outcome-state examples. They are not ALF runtime tests, a power study, Nu execution or human scientific approval. Exact pushed-commit CI scope/status is reported at handoff; the expected route is prose-only fast checks, with runtime suites deliberately not revalidated.
+The local review checks validate UTF-8, Git blob identities, relative-link targets where the repository tree is available, whitespace, balanced schedule arithmetic and small outcome-state examples. They are not ISE runtime tests, a power study, Nu execution or human scientific approval. Exact pushed-commit CI scope/status is reported at handoff; the expected route is prose-only fast checks, with runtime suites deliberately not revalidated.

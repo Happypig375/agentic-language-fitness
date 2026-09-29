@@ -116,7 +116,7 @@ class HttpTransport:
     def post(self, path: str, body: dict, timeout: float) -> dict:
         if path not in {"/v1/responses", "/v1/responses/input_tokens"} or timeout <= 0:
             raise ValueError("invalid request path/deadline")
-        process = subprocess.Popen([sys.executable, "-m", "alf.e3a_api", "--http-worker"],
+        process = subprocess.Popen([sys.executable, "-m", "ise.e3a_api", "--http-worker"],
                                    stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         try:
             out, _ = process.communicate(json.dumps({"key": self._key, "path": path, "body": body,

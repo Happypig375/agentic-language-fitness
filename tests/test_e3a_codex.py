@@ -2,7 +2,7 @@ import json
 import unittest
 from pathlib import Path
 
-from alf.e3a_codex import (MAX_CAPTURE_BYTES, CodexOAuthAdapter, DispatchGuard, build_replay,
+from ise.e3a_codex import (MAX_CAPTURE_BYTES, CodexOAuthAdapter, DispatchGuard, build_replay,
                             normalize_cli_usage, parse_cli_jsonl)
 
 

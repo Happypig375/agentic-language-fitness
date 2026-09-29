@@ -36,6 +36,6 @@ The code's APG decision sign is replay-minus-active, confirming disagreement wit
 
 Passive-oracle ranks files by edge participation, not a proven maximum-information subset. Nonprobe observations still trigger model responses, so equal file counts do not imply equal inference. Passive-full is one call; replay preserves every logged observation and generates fresh responses. Probe-only removes JSON exchanges and substitutes acknowledgments. These details make the control implementable in principle but do not remove its bundled differences.
 
-## ALF implication
+## ISE implication
 
 Architectural map evaluation and persistent maps already have direct prior art. Use a source-grounded architecture description and observable change obligations; do not equate the ability to print a graph with maintainability. Keep research probes outside candidate context by default. Any later probe/scaffold intervention needs a separate adopted treatment, matched observation provenance, a no-probe control, robust semantic acceptance rules and full auxiliary accounting. This pilot does not validate Nu's form factors or the existing F#/C# pair.

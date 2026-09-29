@@ -1,6 +1,6 @@
 # Nu form factors: practitioner claims, research mechanisms and reading leads
 
-**Date:** 2026-09-14. **ALF basis:** `ec2226e50b6a2de11e7cb2e2f2d7cd0d1d27dbd1`. Requested before a later agent retrieves the PDFs. Read with [PLAN.md](../PLAN.md), the [full-paper handoff](full-paper-reading-handoff-2026-09-14.md) and this pass's [discovery ledger](nu-form-factors-discovery-ledger-2026-09-14.md).
+**Date:** 2026-09-14. **ISE basis:** `ec2226e50b6a2de11e7cb2e2f2d7cd0d1d27dbd1`. Requested before a later agent retrieves the PDFs. Read with [PLAN.md](../PLAN.md), the [full-paper handoff](full-paper-reading-handoff-2026-09-14.md) and this pass's [discovery ledger](nu-form-factors-discovery-ledger-2026-09-14.md).
 
 **Status:** practitioner-source reading, paginated literature discovery and selected HTML/body inspection. Not completion of the full-PDF assignment, human review, a new systematic review, or authorization for A0, candidate calls, PDF redistribution or a new harness. No paper below is marked fully read in this pass. Existing results and the eleven core paper IDs remain unchanged.
 
@@ -65,13 +65,13 @@ The [readability-metrics case](https://arxiv.org/abs/2110.15246), `10.48550/arXi
 
 `10.48550/arXiv.2603.00601`, [v4 HTML](https://arxiv.org/html/2603.00601v4), studies architectural-map construction under partial observability. Selected sections 3, 6.5 and 7 were read. Its evaluated scope is Construct; later revision/use are described separately. It explicitly identifies map-reporting and prompt effects. Therefore graph-report accuracy is not transparent access to internal understanding, and asking for repeated maps can change the treatment.
 
-**Reading consequence:** this work must be assessed before broad architecture-understanding, map-measurement or active/passive novelty claims. In ALF, behavioral change outcomes should remain distinct from auxiliary self-reports. A belief probe that spends tokens, supplies a scratchpad or changes attention is not neutral just because it is exempt from an action counter. Do not copy neutral filenames, planted constraints or a one-action-per-file budget without checking their workload implications. The paper's small synthetic scope also must not be generalized into a result about real inherited maintenance.
+**Reading consequence:** this work must be assessed before broad architecture-understanding, map-measurement or active/passive novelty claims. In ISE, behavioral change outcomes should remain distinct from auxiliary self-reports. A belief probe that spends tokens, supplies a scratchpad or changes attention is not neutral just because it is exempt from an action counter. Do not copy neutral filenames, planted constraints or a one-action-per-file budget without checking their workload implications. The paper's small synthetic scope also must not be generalized into a result about real inherited maintenance.
 
 ### D. A close planning/control predecessor: CodePlan
 
 `10.1145/3643757` is the 2024 publication; `10.48550/arXiv.2309.12499` is a related preprint, not another independent study. The [2024 author page](https://www.microsoft.com/en-us/research/publication/codeplan-repository-level-coding-using-llms-and-planning-2/) describes incremental dependencies, may-impact analysis and planned multi-location edits. The earlier [2023 page](https://www.microsoft.com/en-us/research/publication/codeplan-repository-level-coding-using-llms-and-planning/) reports a different evaluation count. Use the chosen edition, not mixed results. Only author abstracts/metadata were checked here.
 
-**Reading consequence:** supplying and maintaining a dependency plan is established prior art. The remaining ALF question is whether a credible application's organization reduces the recovery/coordination burden under declared support, not whether a dependency-aware controller can ever help. A future controller-provided map is an information intervention and its cost/quality must be recorded.
+**Reading consequence:** supplying and maintaining a dependency plan is established prior art. The remaining ISE question is whether a credible application's organization reduces the recovery/coordination burden under declared support, not whether a dependency-aware controller can ever help. A future controller-provided map is an information intervention and its cost/quality must be recorded.
 
 ### E. The tool-by-abstraction interaction has an empirical predecessor
 
@@ -99,7 +99,7 @@ Read the metric counterpoint `10.48550/arXiv.2110.15246` before relying on metri
 
 ## 6. What the PDF reconstruction should now deliver
 
-Add a small practitioner-claim table to the existing synthesis, not a second parallel workflow. For each claim record: exact source/version; mechanism; scope and rival; closest empirical or conceptual evidence; what the full paper identifies; and what ALF would have to observe to test the transfer.
+Add a small practitioner-claim table to the existing synthesis, not a second parallel workflow. For each claim record: exact source/version; mechanism; scope and rival; closest empirical or conceptual evidence; what the full paper identifies; and what ISE would have to observe to test the transfer.
 
 The full reader must specifically decide:
 

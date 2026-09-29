@@ -63,7 +63,7 @@ def evaluate_trusted(source: Mapping[str, str], cases: list[Mapping[str, Any]], 
     project = "OrderFlow.csproj" if language == "csharp" else "OrderFlow.fsproj"
     if project not in source or len(source) > 8 or sum(len(text.encode()) for text in source.values()) > 65_536:
         raise FixtureError("source is outside trusted H fixture scope")
-    with tempfile.TemporaryDirectory(prefix="alf-h-fixture-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="ise-h-fixture-") as temporary:
         workspace = Path(temporary)
         # The fresh directory is intentionally outside the repository, so it
         # cannot inherit the reviewed root global.json. Materialize the same

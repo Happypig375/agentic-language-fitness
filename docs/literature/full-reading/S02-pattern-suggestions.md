@@ -41,7 +41,7 @@ Artifact fingerprints: `Results.md` SHA-256 `279efff84aaf178cf8a7730554234db79fb
 
 The chapter's conceptual method is reconstructable. Exact training membership, published-run configuration, test input and multi-label adjudication remain unresolved. No fine-tuning, model inference or retrospective rule adjustment was performed.
 
-## Consequence for ALF and next reading
+## Consequence for ISE and next reading
 
 **Retain with a narrower source claim:** architecture recommendation is prior art, and this chapter evaluates named-pattern advice. **Do not** import its 70% headline as a maintenance effect or characterize it as experimentally refuted by a moving repository.
 

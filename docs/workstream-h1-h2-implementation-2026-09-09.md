@@ -216,7 +216,7 @@ remain false and both H allocations remain zero.
 ### First publication and ordinary CI/parser corrections
 
 Initial implementing commit `6d2696857b38d00513404f2059ac095a871a53ea` is retained.
-[CI 34334525905](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34334525905)
+[CI 34334525905](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34334525905)
 passed unit tests and the pure construction audit, then both platforms failed
 the trusted-fixture SDK check: temporary directories outside the checkout lost
 the repository's `global.json` selection policy. The

@@ -5,8 +5,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import alf.h0 as h0
-from alf.h0 import SourceFixture, default_renderer, input_allowance, source_allowance, tokenize
+import ise.h0 as h0
+from ise.h0 import SourceFixture, default_renderer, input_allowance, source_allowance, tokenize
 
 
 class FakeEncoding:

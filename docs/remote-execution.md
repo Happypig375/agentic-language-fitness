@@ -43,7 +43,7 @@ NO_PROXY=127.0.0.1,localhost
 
 `scripts/codex-docker.py` passes those values into both the authentication
 preflight and candidate container. The launcher accepts only a fixed command
-with simple arguments, so put environment setup and the reviewed ALF command
+with simple arguments, so put environment setup and the reviewed ISE command
 in a remote wrapper such as `/opt/alf/run.sh` rather than composing a shell
 program on the PowerShell command line:
 

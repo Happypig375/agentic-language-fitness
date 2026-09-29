@@ -34,6 +34,6 @@ The final [portable audit](artifact_csv_check.py) and [saved output](artifact-cs
 
 Gemini costs are reported from Vertex usage; self-hosted Qwen costs are post-hoc Alibaba price estimates, not paid GPU cost. Qwen-32B uses identical cached/uncached input prices; Qwen-Coder uses context tiers. The inspected script prices summary records using the `cost_tier` left from the trajectory loop rather than recalculating each summary's context tier. Its impact depends on actual records and is unquantified. Table 2's $.0439 reported 7.20% share matches $.61, while division by the $.64 summary total is 6.86%. Price, cache, missingness and retry assumptions must remain explicit; historical prices are not current forecasts.
 
-## ALF implication
+## ISE implication
 
 Remove novelty for masking versus summarization/hybrid controls. Distinguish current diagnostic content, aged observations, reasoning/action history, task commitments and source state. Any future policy comparison must hold the same predecessor and visible commitments fixed, predefine cache/summary cost and paired denominators, retain failures, and test sensitivity without tuning on final outcomes. These results support a useful baseline to evaluate; they do not authorize deleting active feedback, building a new memory layer, or attributing package cost differences to architecture.

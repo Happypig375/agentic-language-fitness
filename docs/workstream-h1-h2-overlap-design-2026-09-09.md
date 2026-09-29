@@ -25,7 +25,7 @@ only**. This is not human language-expert review, maintainer adoption, validatio
 of the not-yet-built Expanded pair or authorization to run a candidate.
 
 H0 was published at `6e45e90a0cad34d34448b51eb3cba13e609b7337` and passed exact
-[CI 34306769616](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34306769616):
+[CI 34306769616](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34306769616):
 Linux 6m5s, Windows 7m49s. Each platform's four envelopes and report matched the
 [published H0 files](../reports/workstream-h0-2026-09-09/report.json) byte-for-byte.
 The [H0 record](workstream-h0-preparation-2026-09-09.md) retains its definition,

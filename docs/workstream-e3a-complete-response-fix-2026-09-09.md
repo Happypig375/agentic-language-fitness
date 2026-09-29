@@ -3,7 +3,7 @@
 ## Pilot attempt 02: retained hard stop
 
 The renewed freeze commit `c79bc1c36593a4658da56d0b00656c31dc438248`
-passed exact [CI 34251358861](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34251358861)
+passed exact [CI 34251358861](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34251358861)
 (Linux 6m13s, Windows 7m53s). The canonical local-OAuth wrapper then invoked
 the fixed pilot once on the fresh `/tmp/alf-e3a-shakedown-uJ169U` checkout.
 The transcript starts at 00:38:29 HKT. The first predecessor preflight passed;

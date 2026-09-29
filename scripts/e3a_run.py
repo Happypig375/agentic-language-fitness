@@ -15,19 +15,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from alf.e3a_codex import CodexOAuthAdapter, DispatchGuard
-from alf.e3a_runner import Journal, run_batch
-from alf.e3a_sandbox import DockerEvaluator
-from alf.config import load_manifest
-from alf.environment_profile import environment_profile_sha256, load_environment_profile
-from alf.protocol import canonical_json_hash
-from alf.workstream_e2 import _atomic_json
-from alf.workstream_e3a import PACKET_DIR, SubmissionError, apply_submission, read_json
+from ise.e3a_codex import CodexOAuthAdapter, DispatchGuard
+from ise.e3a_runner import Journal, run_batch
+from ise.e3a_sandbox import DockerEvaluator
+from ise.config import load_manifest
+from ise.environment_profile import environment_profile_sha256, load_environment_profile
+from ise.protocol import canonical_json_hash
+from ise.workstream_e2 import _atomic_json
+from ise.workstream_e3a import PACKET_DIR, SubmissionError, apply_submission, read_json
 
 
 def _wrapper():
     path = ROOT / "scripts" / "codex-docker.py"
-    spec = importlib.util.spec_from_file_location("alf_codex_docker", path)
+    spec = importlib.util.spec_from_file_location("ise_codex_docker", path)
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -43,7 +43,7 @@ class DockerTransport:
         self.wrapper = _wrapper()
 
     def launch(self, stdin: bytes, timeout: float):
-        with tempfile.TemporaryDirectory(prefix="alf-e3a-turn-") as directory:
+        with tempfile.TemporaryDirectory(prefix="ise-e3a-turn-") as directory:
             return self.wrapper.run_e3a_cli(
                 stdin, workspace=Path(directory), native_binary=self.args.native_binary,
                 expected_binary_sha256=self.args.native_sha256,

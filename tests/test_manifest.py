@@ -5,8 +5,8 @@ from io import StringIO
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.cli import cmd_doctor
-from alf.config import REQUIRED_DOTNET_SDK, REQUIRED_DOTNET_TARGET_FRAMEWORK, load_manifest
+from ise.cli import cmd_doctor
+from ise.config import REQUIRED_DOTNET_SDK, REQUIRED_DOTNET_TARGET_FRAMEWORK, load_manifest
 
 
 class ManifestTests(unittest.TestCase):
@@ -160,7 +160,7 @@ class ManifestTests(unittest.TestCase):
     def test_doctor_requires_exact_sdk_without_local_sdk(self):
         args = type("Args", (), {"root": str(self.root), "require_agent": None, "strict": True})()
         for detected, expected_ok in ((REQUIRED_DOTNET_SDK, True), ("10.0.301", False)):
-            with patch("alf.cli.environment_snapshot", return_value={"dotnet": detected}), patch("alf.cli.shutil.which", return_value="tool"), redirect_stdout(StringIO()):
+            with patch("ise.cli.environment_snapshot", return_value={"dotnet": detected}), patch("ise.cli.shutil.which", return_value="tool"), redirect_stdout(StringIO()):
                 self.assertEqual(cmd_doctor(args), 0 if expected_ok else 1)
 
 

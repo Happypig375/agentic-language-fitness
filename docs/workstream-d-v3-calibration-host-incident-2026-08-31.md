@@ -28,7 +28,7 @@ inventories matched.
 | `cal-h-primary-fsharp-01` | Task 001 host probe failed before Docker, authentication, or a candidate process | `c4b09920506954b8c7a8acdaf4ff27acecc741b691b11e6a2a1bb19f9647b0a5` | `20eb168b43cb462bd50d3e8bf21b2e76491463422e2bf1afdfae85f0ca61e898` | 79 files / 3,394,168 bytes |
 | `cal-h-primary-fsharp-02` | Task 001 passed with valid usage and evaluation; Task 002 host probe failed, excluding the whole partial chain | `e72cbab66bd64bfae7774004cdde14784e1a49628795fd58738ec69913b09075` | `cb17fc0b0f15a5e392ade4e068d9ef64f05c3f8f2d2eba2a3df0a1580b084c2a` | 122 files / 6,519,765 bytes |
 
-`alf audit` was run on both directories. It failed closed on the task whose
+`ise audit` was run on both directories. It failed closed on the task whose
 accounting was deliberately unavailable after the explicit host refusal:
 Task 001 in `-01` and Task 002 in `-02`. The raw usage sidecars record return
 code 75, `host_memory_gate=failed`, zero events and tokens, and the exact failed

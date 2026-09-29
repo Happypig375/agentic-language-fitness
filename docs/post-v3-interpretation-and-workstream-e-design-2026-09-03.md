@@ -122,7 +122,7 @@ Before classification, require exactly the ten attempt IDs in the closed
 calibration report. Recompute and match the report self-hash, every raw
 `result.json` hash, every raw-inventory tree hash, the artifact/source-tree
 identities, all 80 task envelopes and event/usage sidecars, and the existing
-`alf audit` result. Record the calibration-report hash, input inventory hashes,
+`ise audit` result. Record the calibration-report hash, input inventory hashes,
 analyzer Git SHA, and analyzer schema version in the derived report. An absent,
 extra, changed, or unauditable input fails E1 as a whole; do not publish a
 partial mechanism aggregate.

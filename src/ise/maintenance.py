@@ -115,7 +115,7 @@ def reconstruct(root: Path, language: str, checkpoint: int) -> dict[str, str]:
         if not p.is_file(): raise MaintenanceFixtureError(f"missing stage fixture: {p}")
     seed = base / "seed" / language
     if not seed.is_dir(): raise MaintenanceFixtureError(f"missing seed fixture tree for {language}")
-    with tempfile.TemporaryDirectory(prefix="alf-maintenance-") as td:
+    with tempfile.TemporaryDirectory(prefix="ise-maintenance-") as td:
         workspace = Path(td)
         entries = list(seed.iterdir())
         if any(p.is_dir() or p.is_symlink() for p in entries): raise MaintenanceFixtureError("seed must be flat and symlink-free")
@@ -251,7 +251,7 @@ def _fault_source(root: Path, fault: Mapping[str, Any]) -> tuple[dict[str, str],
         raise MaintenanceFixtureError(f"missing fault patch: {patch}")
     patch_text = _read_lf(patch)
     source = reconstruct(root, fault["language"], fault["checkpoint"])
-    with tempfile.TemporaryDirectory(prefix="alf-maintenance-fault-") as td:
+    with tempfile.TemporaryDirectory(prefix="ise-maintenance-fault-") as td:
         workspace = Path(td)
         for name, value in source.items():
             (workspace / name).write_text(value, encoding="utf-8", newline="\n")
@@ -333,7 +333,7 @@ def _build_source(source: Mapping[str, str], language: str, cases: list[Mapping[
     """Build and run an already-owned trusted source tree."""
     if not cases: raise MaintenanceFixtureError("trusted build requires at least one case")
     project = "Simulation.csproj" if language == "csharp" else "Simulation.fsproj"
-    with tempfile.TemporaryDirectory(prefix="alf-maintenance-build-") as td:
+    with tempfile.TemporaryDirectory(prefix="ise-maintenance-build-") as td:
         workspace = Path(td)
         (workspace / "global.json").write_text(json.dumps({"sdk": {"version": sdk, "rollForward": "disable",
                                                                "allowPrerelease": False}}) + "\n", encoding="utf-8")

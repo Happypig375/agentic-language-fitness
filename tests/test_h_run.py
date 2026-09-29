@@ -2,9 +2,9 @@ import importlib.util, json, tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.h import HBoundaryError
-from alf.h_run import policy_sha, require_live_authority, run_integration, run_pilot, verify_pilot_freeze
-from alf.protocol import canonical_json_hash
+from ise.h import HBoundaryError
+from ise.h_run import policy_sha, require_live_authority, run_integration, run_pilot, verify_pilot_freeze
+from ise.protocol import canonical_json_hash
 from tests.test_h import Offline, SOURCE, SPEC as SUBMISSION_SPEC, cli
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -87,10 +87,10 @@ class HRunTests(unittest.TestCase):
             def prepare(self): return {"passed": True}
             def evaluate(self, _source, _cases, _deadline): return {"passed": False}
             def close(self): pass
-        patches = (patch("alf.h_run.source_for", return_value=source),
-                   patch("alf.h_run.ordered_filenames", return_value=list(source)),
-                   patch("alf.h_run.public_payload", return_value={}),
-                   patch("alf.h_run.cases_for", return_value=[]))
+        patches = (patch("ise.h_run.source_for", return_value=source),
+                   patch("ise.h_run.ordered_filenames", return_value=list(source)),
+                   patch("ise.h_run.public_payload", return_value={}),
+                   patch("ise.h_run.cases_for", return_value=[]))
         for item in patches: item.start()
         self.addCleanup(lambda: [item.stop() for item in reversed(patches)])
         submit = cli('{"action":"submit","files":{}}')

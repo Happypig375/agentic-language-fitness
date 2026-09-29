@@ -8,17 +8,17 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, call, patch
 
-import alf.benchmark_artifacts as artifacts
-from alf.benchmark_artifacts import (
+import ise.benchmark_artifacts as artifacts
+from ise.benchmark_artifacts import (
     artifact_plan,
     check_workspace,
     checks_for_language,
     copy_artifacts,
     merge_workspace_checks,
 )
-from alf.config import Manifest, load_manifest
-from alf.evaluator import evaluate_project
-from alf.models import ProcessResult
+from ise.config import Manifest, load_manifest
+from ise.evaluator import evaluate_project
+from ise.models import ProcessResult
 
 
 CHECK_KEYS = ("file_exists", "text_contains", "text_not_contains")
@@ -451,9 +451,9 @@ class BenchmarkArtifactTests(unittest.TestCase):
         checks = empty_checks()
         checks["file_exists"] = ["missing.cs"]
         with (
-            patch("alf.benchmark_artifacts._is_windows", return_value=True),
+            patch("ise.benchmark_artifacts._is_windows", return_value=True),
             patch(
-                "alf.benchmark_artifacts._get_windows_api",
+                "ise.benchmark_artifacts._get_windows_api",
                 side_effect=ValueError("Win32 unavailable"),
             ),
         ):
@@ -476,8 +476,8 @@ class BenchmarkArtifactTests(unittest.TestCase):
             raise ValueError(f"{field} contains a reparse point")
 
         with (
-            patch("alf.benchmark_artifacts._get_windows_api", return_value=api),
-            patch("alf.benchmark_artifacts._win_verify_directory", side_effect=verify),
+            patch("ise.benchmark_artifacts._get_windows_api", return_value=api),
+            patch("ise.benchmark_artifacts._win_verify_directory", side_effect=verify),
         ):
             for _ in range(25):
                 with self.assertRaises(ValueError):
@@ -505,10 +505,10 @@ class BenchmarkArtifactTests(unittest.TestCase):
 
         close = Mock()
         with (
-            patch("alf.benchmark_artifacts._require_posix_primitives", return_value=(0x1000, 0x2000)),
-            patch("alf.benchmark_artifacts.os.open", side_effect=open_fd),
-            patch("alf.benchmark_artifacts.os.fstat", side_effect=fstat_fd),
-            patch("alf.benchmark_artifacts.os.close", close),
+            patch("ise.benchmark_artifacts._require_posix_primitives", return_value=(0x1000, 0x2000)),
+            patch("ise.benchmark_artifacts.os.open", side_effect=open_fd),
+            patch("ise.benchmark_artifacts.os.fstat", side_effect=fstat_fd),
+            patch("ise.benchmark_artifacts.os.close", close),
         ):
             for _ in range(25):
                 with self.assertRaisesRegex(OSError, "leaf fstat rejection"):
@@ -528,18 +528,18 @@ class BenchmarkArtifactTests(unittest.TestCase):
     def test_mocked_posix_target_verification_failure_closes_leaf_and_parent(self):
         close = Mock()
         with (
-            patch("alf.benchmark_artifacts._require_posix_primitives", return_value=(0x1000, 0x2000)),
-            patch("alf.benchmark_artifacts._posix_parent_chain", return_value=([3000], 3000)),
-            patch("alf.benchmark_artifacts.os.open", return_value=3001),
+            patch("ise.benchmark_artifacts._require_posix_primitives", return_value=(0x1000, 0x2000)),
+            patch("ise.benchmark_artifacts._posix_parent_chain", return_value=([3000], 3000)),
+            patch("ise.benchmark_artifacts.os.open", return_value=3001),
             patch(
-                "alf.benchmark_artifacts.os.fstat",
+                "ise.benchmark_artifacts.os.fstat",
                 return_value=SimpleNamespace(st_mode=stat.S_IFREG, st_nlink=1),
             ),
             patch(
-                "alf.benchmark_artifacts.os.ftruncate",
+                "ise.benchmark_artifacts.os.ftruncate",
                 side_effect=OSError("deterministic truncate rejection"),
             ),
-            patch("alf.benchmark_artifacts.os.close", close),
+            patch("ise.benchmark_artifacts.os.close", close),
         ):
             with self.assertRaisesRegex(OSError, "truncate rejection"):
                 artifacts._posix_open_target(
@@ -724,7 +724,7 @@ class EvaluatorWorkspaceCheckTests(unittest.TestCase):
     def test_build_failure_still_serializes_failed_workspace_checks(self):
         with tempfile.TemporaryDirectory() as temp:
             workspace = Path(temp)
-            with patch("alf.evaluator.run_process", return_value=self.process(1)):
+            with patch("ise.evaluator.run_process", return_value=self.process(1)):
                 result = evaluate_project(
                     workspace,
                     {"project_file": "OrderFlow.csproj"},
@@ -740,7 +740,7 @@ class EvaluatorWorkspaceCheckTests(unittest.TestCase):
             workspace = Path(temp)
             (workspace / "OrderFlowEngine.cs").write_text("engine", encoding="utf-8")
             with patch(
-                "alf.evaluator.run_process",
+                "ise.evaluator.run_process",
                 side_effect=[self.process(0), self.process(1)],
             ):
                 result = evaluate_project(

@@ -4,10 +4,10 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.h_fixtures import (FixtureError, build_sandbox_fixtures, credential_free_environment, evaluate_fault,
+from ise.h_fixtures import (FixtureError, build_sandbox_fixtures, credential_free_environment, evaluate_fault,
                             evaluate_trusted, evaluate_with_sandbox, fault_mutations,
                             mutate_once, _semantic_caught)
-from alf.h_workload import source_for
+from ise.h_workload import source_for
 
 
 class HFixtureTests(unittest.TestCase):
@@ -163,9 +163,9 @@ class HFixtureTests(unittest.TestCase):
             def evaluate(self, source, cases, deadline): return {"passed": True}
             def close(self): pass
         source = {"OrderFlow.csproj": "<Project />", "Program.cs": "class P{}"}
-        with patch("alf.h_fixtures.source_for", return_value=source), \
-             patch("alf.h_fixtures.cases_for", return_value=[]), \
-             patch("alf.h_fixtures.fault_matrix", return_value=[]):
+        with patch("ise.h_fixtures.source_for", return_value=source), \
+             patch("ise.h_fixtures.cases_for", return_value=[]), \
+             patch("ise.h_fixtures.fault_matrix", return_value=[]):
             report = build_sandbox_fixtures(self.root, original, "sha256:" + "0" * 64,
                                             evaluator_type=Fake)
         self.assertTrue(report["fixture_only"] and report["non_experimental"])

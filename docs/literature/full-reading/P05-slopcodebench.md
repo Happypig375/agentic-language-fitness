@@ -22,13 +22,13 @@ Structural erosion is the share of mass in functions with **CC > 10**, where mas
 
 ## Results and counterevidence
 
-No evaluated configuration solves a whole problem; the best main strict rate is GPT-5.5's 14.8%, consistent with 29/196 checkpoints, versus 28.1% ISO (table 1). Mean per-checkpoint cost grows about 2.2 times from start to final (figure 2, $0.77 to $1.67). This already studies maintenance cost over inherited trajectories; ALF cannot claim that outcome is absent. Cumulative 13.18 billion recorded tokens are not peak context or a context-window threshold (p. 7).
+No evaluated configuration solves a whole problem; the best main strict rate is GPT-5.5's 14.8%, consistent with 29/196 checkpoints, versus 28.1% ISO (table 1). Mean per-checkpoint cost grows about 2.2 times from start to final (figure 2, $0.77 to $1.67). This already studies maintenance cost over inherited trajectories; ISE cannot claim that outcome is absent. Cumulative 13.18 billion recorded tokens are not peak context or a context-window threshold (p. 7).
 
 Erosion rises in 77% and verbosity in 75.5% of reported trajectories; the exact denominator behind those percentages needs raw inclusion data. Checkpoints are nested in problems and configurations. The main panel has 2,869 observed agent checkpoints, not the 2,940 potential cells from 15×196 (table 2). Five progress bins normalize different chain lengths; phase trends also bundle increasing task scope, repository size and inherited state.
 
 The 473-repository Python comparison uses up to 30 randomly sampled source-changing commits per repository, 13,667 retained commits; empty trees/failed metric computations are dropped (pp. 7-8, 25). Agent verbosity .44 versus repository HEAD .19 gives 2.32×; erosion .68/.34 gives 2×. Slope ratios .0144/.0022=6.55 and .0264/.0053=4.98 compare benchmark checkpoints with sampled historical commits, whose size, time and work content differ. This is calibration, not matched human-versus-agent maintenance labor. Pre/post-2024 shifts do not identify AI assistance causally.
 
-**Critical rival:** appendix B/table 6 gives next-checkpoint cost correlation .167 for erosion versus .502 for LOC and .356 for maximum CC; erosion's pass correlation is -.018. The sweep varies threshold and size weighting, without establishing causal or size-adjusted mediation. ALF must compare architectural predictions against source size and task scope, not promote erosion into a validated maintenance surrogate.
+**Critical rival:** appendix B/table 6 gives next-checkpoint cost correlation .167 for erosion versus .502 for LOC and .356 for maximum CC; erosion's pass correlation is -.018. The sweep varies threshold and size weighting, without establishing causal or size-adjusted mediation. ISE must compare architectural predictions against source size and task scope, not promote erosion into a validated maintenance surrogate.
 
 Prompt interventions on three OpenAI models lower structural scores but generally reduce strict correctness and increase cost (table 3). Anti-slop leaves GPT-5.3 strict success tied at 11.2 and improves GPT-5.4 ISO by 2 points; plan-first improves CORE for all three. GPT-5.4 anti-slop is the stated trajectory-quality exception. Plan-first also contains quality/style instructions and a refactoring step, so it is not a pure planning intervention (listings 9-10). Metric improvement alone is not overall success.
 
@@ -36,7 +36,7 @@ Published reporting limits include the p. 6 attribution of the best 67.3% core r
 
 The final metadata check also inspected Zenodo records [18405900](https://zenodo.org/records/18405900) and [19257129](https://zenodo.org/records/19257129), linked from arXiv. They contain earlier paper PDFs (December 18, 2025 and March 26, 2026) and refer to repository tag v0.2, not a supplemental raw-run archive establishing the May 7 arXiv v2 evaluator. They were checked as edition leads, not counted as new studies or full readings. The publication-time aggregation gap therefore remains.
 
-## Consequences for ALF
+## Consequences for ISE
 
 Retain inherited workspaces, fresh-session controls, hidden behavioral scoring and separated current/regression outcomes as explicit reuse of prior methods. The unoccupied claim cannot be merely long-horizon maintenance, quality erosion, black-box tasks, native harnesses or cost growth. A narrower prospective dependency prediction must beat task/size baselines and survive failures without future-test filtering.
 

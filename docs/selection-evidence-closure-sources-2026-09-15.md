@@ -50,7 +50,7 @@ Web discovery used exact-title/DOI queries for MicroRec, architecture-pattern su
 | Product-development recommendation `10.1017/pds.2025.10100` | [Primary Cambridge HTML](https://doi.org/10.1017/pds.2025.10100), selected sections 2.2–2.4 and 4.3 | Distinguishes judged applicability from exact algorithm matches and records untested source validity/output variability. No new complete PDF, numerical table/figure verification or executable recommendation trial by this reviewer. |
 | Rice `10.1016/S0065-2458(08)60520-3`; Kotthoff `10.1609/aimag.v35i3.2460` | Exact metadata; Rice's [Purdue earlier report record](https://docs.lib.purdue.edu/cstech/99/) and later primary selection citations | Original chapter/survey not read. The 1975 report is not automatically the same as the 1976 chapter; history leads only. |
 
-The PDF skill was consulted before ASlib inspection. Render failures are not counted as visual coverage. The theoretical/noise examples in the new proposal were checked by local enumeration and arithmetic; they are original reasoning under explicit assumptions, not empirical results from ASlib or ALF.
+The PDF skill was consulted before ASlib inspection. Render failures are not counted as visual coverage. The theoretical/noise examples in the new proposal were checked by local enumeration and arithmetic; they are original reasoning under explicit assumptions, not empirical results from ASlib or ISE.
 
 A raw public-repository byte download into the working container failed DNS resolution. GitHub connector reads/writes remained available. No full checkout test, author experiment, provider request or runtime baseline is claimed.
 

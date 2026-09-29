@@ -35,7 +35,7 @@ Sections VII-VIII show that the refactor lowers counted control-flow complexity 
 
 The authors argue that the readability models are unsuitable for reactive code, partly using their own judgment and S39's different human study. Their dataset alone cannot determine whether the refactored methods are easier for humans: it supplies no human criterion for these exact snippets. Conversely, a lower model score does not refute S39's human result. Do not adopt the preferred metric as ground truth merely because its direction agrees with the hypothesis.
 
-Figures 1-5 display standard deviations across selected methods, not confidence intervals across independent projects. The paper uses the word significant, but reports descriptive aggregates without an inferential comparison establishing a population effect. Its local illustration, selection policy and single-project dependence prevent using 42 methods as 42 independent game-engine trials. The printed CYC definition is not adopted as an ALF measurement specification; any later metric implementation needs its own precise definition and version.
+Figures 1-5 display standard deviations across selected methods, not confidence intervals across independent projects. The paper uses the word significant, but reports descriptive aggregates without an inferential comparison establishing a population effect. Its local illustration, selection policy and single-project dependence prevent using 42 methods as 42 independent game-engine trials. The printed CYC definition is not adopted as an ISE measurement specification; any later metric implementation needs its own precise definition and version.
 
 ## Design consequence and follow-up
 

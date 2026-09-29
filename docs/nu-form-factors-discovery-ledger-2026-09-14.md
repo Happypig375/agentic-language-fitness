@@ -1,6 +1,6 @@
 # Discovery ledger: Nu form factors and research mechanisms
 
-**Date:** 2026-09-14. **ALF starting head:** `ec2226e50b6a2de11e7cb2e2f2d7cd0d1d27dbd1`.
+**Date:** 2026-09-14. **ISE starting head:** `ec2226e50b6a2de11e7cb2e2f2d7cd0d1d27dbd1`.
 Companion: [claims, implications and reading additions](nu-form-factors-and-research-leads-2026-09-14.md).
 
 ## Scope and evidence level

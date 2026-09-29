@@ -20,23 +20,23 @@ Keep the question, adapt known methods and avoid a new broad pivot. The stronges
 
 The official MSR abstract describes natural-language microservice discovery using registry information and ranking metrics (MRR, MAP and precision@k). This resolves the earlier title ambiguity. It is relevant recommendation prior art, but the inspected description is not an experiment observing an adopted package through future code maintenance. The ACM body was unavailable, so the statement is limited to the reported target; no claim about every uninspected analysis is made.
 
-Its reported large improvement concerns its own relevance task. It must not be copied as a maintenance-benefit effect or used to calibrate an ALF sample. The full paper remains useful to reconstruct candidate sets, relevance judgments, baselines, splits and whether any additional downstream evidence exists.
+Its reported large improvement concerns its own relevance task. It must not be copied as a maintenance-benefit effect or used to calibrate an ISE sample. The full paper remains useful to reconstruct candidate sets, relevance judgments, baselines, splits and whether any additional downstream evidence exists.
 
 ### Architecture-pattern suggestions: inspect outputs, not just a headline
 
 The publisher abstract reports named-pattern prediction. Its linked author `Results.md` contains ten expected/actual pattern-and-explanation examples. In the inspected artifact, Test 2 has multiple returned labels, and Test 3's input already contains a pattern/explanation different from the separately listed expectation. These facts warrant checking input generation and adjudication; they do not establish what the unpublished details or full paper say, nor justify calling the study invalid.
 
-The key distinction is that agreement with a selected label does not establish which of several valid implementations will survive later changes. ALF should retain executable obligations and accept valid alternatives, not build its own single-label architectural ground truth. The artifact is evidence about those examples, not a substitute for the paper or a reproduced 70% calculation.
+The key distinction is that agreement with a selected label does not establish which of several valid implementations will survive later changes. ISE should retain executable obligations and accept valid alternatives, not build its own single-label architectural ground truth. The artifact is evidence about those examples, not a substitute for the paper or a reproduced 70% calculation.
 
 ### Another advisory framework already derives rules from coding outcomes
 
 The newly screened Failure-Aware Enhancements paper constructs a failure-type-to-enhancement decision table. Its selected v1 methods use six selected incomplete projects, different model/information pipelines, and manual code inspection without execution testing. The advice is derived from those observations; that design is not a prospective evaluation of a frozen package selector on new profiles.
 
-This is relevant overlap, not a duplicate or a refutation. It makes 'conditional guidance for LLM development' an inadequate novelty claim. It also reinforces the need to keep outcome definition, selection history and policy bundles explicit. Its numeric claims are not imported into ALF; complete reading and artifact reconstruction remain pending.
+This is relevant overlap, not a duplicate or a refutation. It makes 'conditional guidance for LLM development' an inadequate novelty claim. It also reinforces the need to keep outcome definition, selection history and policy bundles explicit. Its numeric claims are not imported into ISE; complete reading and artifact reconstruction remain pending.
 
 ## 2. A missing foundational comparison: algorithm selection
 
-ASlib and later algorithm-selection work already frame per-instance choices using observed performance, compare them with fixed and oracle choices, and account for information/feature costs. Selected ASlib sections also distinguish tuning/evaluation and acknowledge that many collected scenarios already favored selection. These are methodological predecessors, not new ALF contributions.
+ASlib and later algorithm-selection work already frame per-instance choices using observed performance, compare them with fixed and oracle choices, and account for information/feature costs. Selected ASlib sections also distinguish tuning/evaluation and acknowledge that many collected scenarios already favored selection. These are methodological predecessors, not new ISE contributions.
 
 The next full methods reading should extract what transfers and what does not. In particular, code-maintenance trajectories contain stochastic generation, partially specified future requirements and inherited state. Do not mechanically import a timeout penalty, impute all missing performance as failure, exclude unsolved cases, or treat one realized run as the package's expected performance. The proposed state of the application is not a SAT instance, but its adoption decision can reuse established selection logic.
 
@@ -55,7 +55,7 @@ V_const = max_a E_X[p_a(X)]
 H_X = V*_X - V_const
 ```
 
-This is gross selection opportunity for the stated bounded utility and information, not a newly discovered result or an ALF estimate. If one package is conditionally best for all permitted X, a profile selector has no gross advantage over that best constant. A procedure may still cheaply discover the default, but that is not profile-sensitive value.
+This is gross selection opportunity for the stated bounded utility and information, not a newly discovered result or an ISE estimate. If one package is conditionally best for all permitted X, a profile selector has no gross advantage over that best constant. A procedure may still cheaply discover the default, but that is not profile-sensitive value.
 
 **Algebra-only example 1:** two packages each independently succeed with probability 0.5. A legitimate fixed choice succeeds with probability 0.5. Selecting whichever succeeded after seeing both results succeeds with probability 0.75. The apparent 0.25 gain is hindsight exploiting random outcomes, not available advice. This independence assumption is solely for the example, not imposed on observed model runs.
 
@@ -91,7 +91,7 @@ No special causal model is adopted. The rule is to label what is a baseline fact
 
 ### S3 — Preserve the full evaluation population
 
-Some selection benchmarks legitimately define specialized solvable subsets or runtime penalties. ALF's main adoption utility cannot silently inherit those conventions. Keep all assigned profiles and known outcomes, including ties, both-package failures, timeouts and unrun/blocked states under the frozen rules. Report unknowns and coverage; final tests and recommendation holdouts remain separate.
+Some selection benchmarks legitimately define specialized solvable subsets or runtime penalties. ISE's main adoption utility cannot silently inherit those conventions. Keep all assigned profiles and known outcomes, including ties, both-package failures, timeouts and unrun/blocked states under the frozen rules. Report unknowns and coverage; final tests and recommendation holdouts remain separate.
 
 ### S4 — Outcome review must not reward the prediction
 
@@ -101,7 +101,7 @@ Keep the frozen behavioral oracle independent of the analyst's preferred mechani
 
 The committed queue has five priority/carry-forward full reads and two conditional method follow-ups. New high-priority material is ASlib and the failure-aware advisory study; meta-selection is the conditional source for oracle/uncertainty conventions. Direct recommendation and mapping papers remain focused acquisitions. Rice and the broader survey are provenance/discovery leads, not mandatory new detours.
 
-For each read, reconstruct decision input, evaluated object, oracle, development/validation partition, estimator, information costs, exclusions, actual independent units, and what implication changes ALF. Stop the source pass when those defined decisions are resolved or explicitly access-blocked. More citations are not the objective. Do not restart the sixteen completed readings or expand into a generic portfolio/agent-routing system.
+For each read, reconstruct decision input, evaluated object, oracle, development/validation partition, estimator, information costs, exclusions, actual independent units, and what implication changes ISE. Stop the source pass when those defined decisions are resolved or explicitly access-blocked. More citations are not the objective. Do not restart the sixteen completed readings or expand into a generic portfolio/agent-routing system.
 
 A0 still needs separate human disposition. Its two-baseline/four-successor cap can establish a credible source-level choice and oracle, not prove headroom or method benefit. A1 determines the actual held-out profiles, policies, primary comparison, allocation and uncertainty. No new experiment is authorized by this review.
 

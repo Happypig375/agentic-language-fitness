@@ -5,10 +5,10 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.host_memory import evaluate_host_memory
-from alf.models import ProcessResult
-from alf.agents.command import CommandAgent
-from alf.runner import _derive_protocol_disposition
+from ise.host_memory import evaluate_host_memory
+from ise.models import ProcessResult
+from ise.agents.command import CommandAgent
+from ise.runner import _derive_protocol_disposition
 
 SCRIPT = Path(__file__).parents[1] / "scripts" / "codex-docker.py"
 SPEC = importlib.util.spec_from_file_location("codex_docker_memory", SCRIPT)
@@ -19,7 +19,7 @@ SPEC.loader.exec_module(docker_module)
 
 class HostMemoryTests(unittest.TestCase):
     def test_threshold_evaluation(self):
-        with patch("alf.host_memory.probe_host_memory", return_value={
+        with patch("ise.host_memory.probe_host_memory", return_value={
             "platform": "Linux", "total_physical_bytes": 10,
             "available_physical_bytes": 8, "total_commit_bytes": 20,
             "available_commit_bytes": 12,
@@ -32,7 +32,7 @@ class HostMemoryTests(unittest.TestCase):
         self.assertEqual(result["thresholds"]["minimum_available_commit_bytes"], 12)
 
     def test_probe_failure_is_not_inferred_from_zeroes(self):
-        with patch("alf.host_memory.probe_host_memory", side_effect=OSError("unavailable")):
+        with patch("ise.host_memory.probe_host_memory", side_effect=OSError("unavailable")):
             result = evaluate_host_memory({
                 "minimum_available_physical_bytes": 1,
                 "minimum_available_commit_bytes": 1,
@@ -78,7 +78,7 @@ class HostMemoryTests(unittest.TestCase):
             def refuse(*_args, **_kwargs):
                 (workspace / ".alf" / "usage.json").write_text(json.dumps(sidecar_value))
                 return ProcessResult(["echo"], 75, "", "", 0.1)
-            with patch("alf.agents.command.run_process", side_effect=refuse):
+            with patch("ise.agents.command.run_process", side_effect=refuse):
                 result = agent.run(root=workspace, workspace=workspace, language="csharp", language_config={}, task={"id": "t"}, prompt="x", timeout=1, host_memory=req)
             self.assertFalse(result.accounting_valid)
             self.assertFalse(result.usage_available)
@@ -99,7 +99,7 @@ class HostMemoryTests(unittest.TestCase):
             def forged(*_args, **_kwargs):
                 (workspace / ".alf" / "usage.json").write_text(json.dumps(value))
                 return ProcessResult(["echo"], 75, "", "", 0.1)
-            with patch("alf.agents.command.run_process", side_effect=forged):
+            with patch("ise.agents.command.run_process", side_effect=forged):
                 result = agent.run(root=workspace, workspace=workspace, language="csharp", language_config={}, task={"id": "t"}, prompt="x", timeout=1, host_memory=req)
             self.assertFalse(result.accounting_valid)
             self.assertTrue(result.accounting_errors)
@@ -110,7 +110,7 @@ class HostMemoryTests(unittest.TestCase):
                 "evaluation": {"ok": True, "build": {}}}], "success": False,
                 "aggregate_accounting_valid": False, "aggregate_usage_available": False,
                 "provenance": {"cell_id": "v3"}}
-            with patch("alf.runner.run_process", return_value=ProcessResult([], 0, "sha", "", 0)):
+            with patch("ise.runner.run_process", return_value=ProcessResult([], 0, "sha", "", 0)):
                 disposition = _derive_protocol_disposition(run)
             self.assertEqual(disposition["failure_category"], "protocol")
 
@@ -122,7 +122,7 @@ class HostMemoryTests(unittest.TestCase):
                        "accounting_errors": []}, "evaluation": evaluation}],
             "success": False, "aggregate_accounting_valid": True,
             "aggregate_usage_available": False, "provenance": {"cell_id": "v3"}}
-        with patch("alf.runner.run_process", return_value=ProcessResult([], 0, "sha", "", 0)):
+        with patch("ise.runner.run_process", return_value=ProcessResult([], 0, "sha", "", 0)):
             disposition = _derive_protocol_disposition(run)
         self.assertEqual(disposition["failure_category"], "host")
         self.assertTrue(disposition["retryable"])

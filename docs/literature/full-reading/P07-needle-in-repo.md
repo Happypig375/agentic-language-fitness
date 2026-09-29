@@ -26,6 +26,6 @@ Read-only inspection of [ucr-riple/NITR](https://github.com/ucr-riple/NITR/tree/
 
 README clarifies that later steps receive current TASK only, continuing prior code without re-sending earlier task files. This is a consequential task-information policy, not a clean source-organization treatment. Both inspected versions of case 001's structural check bound **matching files**, rather than the number of overload definitions: the Python implementation increments once per file with any match; the pipeline uses `max_matching_files: 1`. Multiple definitions in one matching file therefore do not contribute multiple counts under this check. That static discrepancy does not establish that any published outcome changes; the historical revision and complete runtime pipeline would be needed. The generic-presence regex also does not establish that callers use the generic definition. These checks need independent positive/negative and adversarial validity witnesses before reuse.
 
-## ALF implication
+## ISE implication
 
 Remove any novelty claim for authored architecture pressures plus separate behavioral/structural oracles. Reuse the separation, but measure later task behavior/cost independently of conformance, admit multiple credible solution families, and validate negative/near-miss controls. Specify which earlier requirements remain visible, and separate source inheritance from conversational/task memory. NITR does not establish that one language, Nu form factor or conforming architecture produces better downstream maintenance.

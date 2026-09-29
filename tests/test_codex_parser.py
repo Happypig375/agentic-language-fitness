@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from alf.agents.codex import parse_codex_jsonl
+from ise.agents.codex import parse_codex_jsonl
 
 
 class CodexParserTests(unittest.TestCase):

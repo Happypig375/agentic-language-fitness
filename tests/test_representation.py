@@ -10,9 +10,9 @@ import uuid
 from pathlib import Path
 from unittest import mock
 
-from alf.benchmark_artifacts import artifact_plan
-from alf.config import load_manifest
-from alf.representation import (
+from ise.benchmark_artifacts import artifact_plan
+from ise.config import load_manifest
+from ise.representation import (
     ROLE_SPECS,
     SOURCE_COMMIT,
     RepresentationError,
@@ -27,7 +27,7 @@ from alf.representation import (
     check_representation,
     scan_identifiers,
 )
-from alf.audit import audit_representation_checkpoint
+from ise.audit import audit_representation_checkpoint
 
 
 def sha256(data: bytes) -> str:

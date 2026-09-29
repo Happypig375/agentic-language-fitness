@@ -13,7 +13,7 @@ The verified read-only image archive has SHA-256
 `55ee85f0656cef429d1cd40edced79782d54abb7b2180c9770c14bea06828ddf`.
 
 Raw v2 data are archived outside Git at
-`X:\backup20260827\Archives\SourceRepos\agentic-language-fitness-raw-runs\variance-v2`,
+`X:\backup20260827\Archives\SourceRepos\interactive-software-evolution-raw-runs\variance-v2`,
 with its checksum manifest at the sibling path
 `variance-v2.sha256-manifest.json`:
 2,482 files and 81,421,371 bytes, tree SHA-256

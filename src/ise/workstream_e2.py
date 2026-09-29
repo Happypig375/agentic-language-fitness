@@ -409,7 +409,7 @@ def _state(
     previous_snapshot: dict[str, Any] | None,
     previous_texts: dict[str, str] | None,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, str]]:
-    with tempfile.TemporaryDirectory(prefix="alf-e2-state-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="ise-e2-state-") as temporary:
         workspace = Path(temporary)
         _materialize(root, manifest, language, stage, workspace)
         checks = _cumulative_checks(manifest, language, stage)

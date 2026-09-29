@@ -35,8 +35,8 @@ class ScopeTests(unittest.TestCase):
 
     def test_shared_frozen_and_unknown_paths_require_full(self):
         for path in [
-            "src/alf/h_fixtures.py", "src/alf/h0.py", "src/alf/workstream_e2.py",
-            "src/alf/cli.py", "scripts/ci_scope.py", "tests/test_ci_scope.py",
+            "src/ise/h_fixtures.py", "src/ise/h0.py", "src/ise/workstream_e2.py",
+            "src/ise/cli.py", "scripts/ci_scope.py", "tests/test_ci_scope.py",
             "protocols/workstream-e3a-v1/candidate-instructions.md",
             "protocols/workstream-e3a-v1/baseline-contract.md",
             "protocols/workstream-e3a-v1/specification.json",
@@ -109,7 +109,7 @@ class ScopeTests(unittest.TestCase):
                 self.assertEqual(output.read_text(encoding="utf-8"), "scope=docs\n")
 
     def test_detection_does_not_truncate_after_a_page(self):
-        names = [f"docs/note-{i}.md" for i in range(3500)] + ["src/alf/h0.py"]
+        names = [f"docs/note-{i}.md" for i in range(3500)] + ["src/ise/h0.py"]
         result = subprocess.CompletedProcess([], 0, "\0".join(names).encode() + b"\0")
         with patch.object(ci_scope.subprocess, "run", return_value=result):
             paths = ci_scope.changed_paths(Path.cwd(), "a" * 40, "b" * 40)

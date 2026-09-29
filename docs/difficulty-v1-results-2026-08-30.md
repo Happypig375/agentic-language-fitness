@@ -32,7 +32,7 @@ The model identifier records the requested configuration but does not by
 itself establish an immutable provider backend.
 
 Raw data are retained outside Git at
-`X:\backup20260827\Archives\SourceRepos\agentic-language-fitness-raw-runs\difficulty-v1`.
+`X:\backup20260827\Archives\SourceRepos\interactive-software-evolution-raw-runs\difficulty-v1`.
 The read-only sibling checksum manifest is
 `difficulty-v1.sha256-manifest.json`: 960 files, 27,269,126 bytes, tree
 SHA-256

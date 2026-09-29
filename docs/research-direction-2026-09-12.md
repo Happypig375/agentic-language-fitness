@@ -62,7 +62,7 @@ These are design proposals, not user-adopted treatments or live permission.
 
 Current H does not reach the legacy E3a repair loop. The pinned base source is
 b256f0eadd95ebd18e104dcae3bb1515712867d0. The path is [scripts/h_run.py](../scripts/h_run.py)
--> [src/alf/h_run.py](../src/alf/h_run.py) -> [src/alf/h.py](../src/alf/h.py)
+-> [src/ise/h_run.py](../src/ise/h_run.py) -> [src/ise/h.py](../src/ise/h.py)
 -> dispatcher;
 post-submit evaluation occurs and invalid actions terminate. H2 accepted reads
 add turns but do not create diagnostic repairs. The main mismatch is a summary
@@ -142,7 +142,7 @@ symbol ambiguity for F#/C#; it cannot establish the absence of related work.
 
 A separate read-only feasibility audit at
 `663d4ac97e0870d5b44d5d0e0b2d1e3db7601f70` found that
-`src/alf/runner.py` inherits workspace state but stops after the first failed
+`src/ise/runner.py` inherits workspace state but stops after the first failed
 task; its evaluator uses host subprocesses, not a candidate sandbox. Earlier
 scout shorthand suggesting E3a was a cross-task chain or that this general
 evaluator was sandboxed was corrected before design adoption. Persistence ideas

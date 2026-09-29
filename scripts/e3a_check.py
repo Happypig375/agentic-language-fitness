@@ -16,11 +16,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from alf.config import load_manifest  # noqa: E402
-from alf.process import run_process  # noqa: E402
-from alf.protocol import canonical_json_hash  # noqa: E402
-from alf.workstream_e2 import _get_encoding, TOKENIZER_ENCODING, TOKENIZER_VERSION  # noqa: E402
-from alf.workstream_e3a import (  # noqa: E402
+from ise.config import load_manifest  # noqa: E402
+from ise.process import run_process  # noqa: E402
+from ise.protocol import canonical_json_hash  # noqa: E402
+from ise.workstream_e2 import _get_encoding, TOKENIZER_ENCODING, TOKENIZER_VERSION  # noqa: E402
+from ise.workstream_e3a import (  # noqa: E402
     PACKET_DIR, apply_submission, budget, candidate_payload, development_cases,
     holdout_cases, read_json, schedule, score_submission, snapshot, structural_development,
 )
@@ -55,8 +55,8 @@ def make_packet() -> dict:
     for name in ["specification.json", "candidate-instructions.md", "baseline-contract.md", "holdout-cases.json"]:
         path = f"{PACKET_DIR}/{name}"
         identities[path] = hashlib.sha256((ROOT / path).read_text(encoding="utf-8").encode("utf-8")).hexdigest()
-    identity_paths = ["src/alf/workstream_e3a.py", "src/alf/e3a_api.py", "src/alf/e3a_runner.py", "src/alf/e3a_sandbox.py",
-                 "src/alf/e3a_codex.py", "scripts/e3a_check.py", "scripts/e3a_sandbox_check.py",
+    identity_paths = ["src/ise/workstream_e3a.py", "src/ise/e3a_api.py", "src/ise/e3a_runner.py", "src/ise/e3a_sandbox.py",
+                 "src/ise/e3a_codex.py", "scripts/e3a_check.py", "scripts/e3a_sandbox_check.py",
                  "scripts/codex-docker.py", "infra/remote-runner/run.ps1", "tests/test_workstream_e3a.py",
                  "tests/test_e3a_implementation.py", "tests/test_e3a_codex.py", "scripts/e3a_run.py",
                  "tests/test_e3a_run.py", "tests/test_codex_docker.py",
@@ -128,7 +128,7 @@ def build_fixtures() -> dict:
     if not sdk.ok or sdk.stdout.strip() != spec["environment"]["sdk"]:
         raise RuntimeError("fixture SDK differs from proposal")
     evidence = []
-    with tempfile.TemporaryDirectory(prefix="alf-e3a-trusted-") as tmp:
+    with tempfile.TemporaryDirectory(prefix="ise-e3a-trusted-") as tmp:
         base = Path(tmp).resolve()
         for task_id in spec["tasks"]:
             stage = next(i + 1 for i, task in enumerate(manifest["tasks"]) if task["id"] == task_id)

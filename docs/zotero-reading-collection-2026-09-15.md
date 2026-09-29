@@ -6,11 +6,11 @@
 
 **Prepared 2026-09-15 UTC; queue source `2cc51940181dd7adb885ff68de1f02b260221166`.** The user requested pulling the latest repository changes and creating a Zotero collection for adding PDFs. The checkout fast-forwarded from `73d0a23` to that source; the unrelated untracked `uv.lock` was preserved.
 
-The top-level collection in My Library is **ALF - Core Paper Reading Queue (2026-09-15)**, key `PKLXQNEE`. Its local selection URI is `zotero://select/library/collections/PKLXQNEE`.
+The top-level collection in My Library is **ISE - Core Paper Reading Queue (2026-09-15)**, key `PKLXQNEE`. Its local selection URI is `zotero://select/library/collections/PKLXQNEE`.
 
 ## Records and scope
 
-The collection contains exactly the thirteen core works specified by the [base handoff](full-paper-reading-handoff-2026-09-14.md) and [P12/P13 extension](nu-form-factors-and-research-leads-2026-09-14.md). Each record has its original P01–P13 tag, the shared `ALF core reading` tag, full title, authors, DOI, publication date, source URL and edition/acquisition hints in Extra. Conditional readings and other discovery hits were not promoted.
+The collection contains exactly the thirteen core works specified by the [base handoff](full-paper-reading-handoff-2026-09-14.md) and [P12/P13 extension](nu-form-factors-and-research-leads-2026-09-14.md). Each record has its original P01–P13 tag, the shared `ISE core reading` tag, full title, authors, DOI, publication date, source URL and edition/acquisition hints in Extra. Conditional readings and other discovery hits were not promoted.
 
 | ID | Paper | DOI | Zotero item key |
 | --- | --- | --- | --- |
@@ -42,7 +42,7 @@ The collection was created through Zotero Desktop 9.0.6 and populated through it
 
 At the initial metadata-import checkpoint, PDF identities, hashes, page coverage and reconstruction were pending; no full-reading index or paper completion record was created. The authorized attachment follow-up below updates acquisition status. The experiment allocation remains zero and all construction/execution holds remain unchanged.
 
-The initial publication changed this note and the linked PLAN paragraph. Self-review, all eleven existing CI-routing tests, strict UTF-8 decoding and Git whitespace checks passed locally. Exact publication `eb8e1ccd6c3c3349c972b251978ec6a693bb2400` passed [CI 34878897925](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34878897925) with documentation scope; runtime jobs were skipped.
+The initial publication changed this note and the linked PLAN paragraph. Self-review, all eleven existing CI-routing tests, strict UTF-8 decoding and Git whitespace checks passed locally. Exact publication `eb8e1ccd6c3c3349c972b251978ec6a693bb2400` passed [CI 34878897925](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34878897925) with documentation scope; runtime jobs were skipped.
 
 ## Open-access attachment follow-up (2026-09-15 UTC)
 

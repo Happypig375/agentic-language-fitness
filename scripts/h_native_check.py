@@ -16,7 +16,7 @@ from typing import Any, Iterable
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from alf import h_check, h_workload  # noqa: E402
+from ise import h_check, h_workload  # noqa: E402
 
 NATIVE_SHA256 = "72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741bb1959"
 NO_TOOLS_CONFIG = ("features.no_tools=true", "features.single_response=true",

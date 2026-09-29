@@ -3,7 +3,7 @@
 ## Live attempt 01 — stopped
 
 Activation commit `f8b428f479e2fb2d91079330268584b0b4792821` passed exact
-[Linux/Windows CI 34231824002](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34231824002).
+[Linux/Windows CI 34231824002](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34231824002).
 At 2026-09-08 21:35–21:36 HKT, `invoke-shakedown.ps1` ran once with that
 expected commit, remote root `/tmp/alf-e3a-shakedown-hzwkJH`, the existing local
 `C:\Users\hadri\.codex\auth.json` file, and new local output directory
@@ -86,7 +86,7 @@ This is continuation of already approved work, not another design/adoption
 request. The [resumed implementation](workstream-e3a-oauth-resumed-verification-2026-09-08.md)
 was committed and pushed directly to `main` as
 `0a25e7a659f0a4c74bdcb4fdc5c5f7adb3134c1c`. Its exact
-[CI run 34229097802](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34229097802)
+[CI run 34229097802](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34229097802)
 passed on Linux and Windows. No PR, force push or history rewrite occurred.
 The initial Git HTTPS fetch/push failed certificate validation; per-command
 `git -c http.sslBackend=schannel` succeeded using the Windows trust store.

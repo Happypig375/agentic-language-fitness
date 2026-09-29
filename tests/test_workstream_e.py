@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 import tiktoken
 
-from alf.workstream_e import (
+from ise.workstream_e import (
     COVERED_COMMAND_EQUIVALENCE_CLASSES,
     COVERED_EVENT_SHAPES,
     EXPECTED_ATTEMPTS,
@@ -30,7 +30,7 @@ from alf.workstream_e import (
     validate_public_report,
     write_report,
 )
-from alf.variance import _artifact_hashes, _hash, _source_tree
+from ise.variance import _artifact_hashes, _hash, _source_tree
 
 
 def command_item(command, *, item_id="cmd", exit_code=0, output="", event_type="item.completed"):
@@ -610,26 +610,26 @@ class WorkstreamEVerifierTests(unittest.TestCase):
             extra_attempt.rmdir()
 
     def test_result_inventory_artifact_and_source_identity_fail_closed(self):
-        from alf.workstream_e import _read_object
+        from ise.workstream_e import _read_object
         real_read = _read_object
 
         def wrong_result_hash(path, *codes):
             value, identity = real_read(path, *codes)
             return value, "0" * 64 if path.name == "result.json" else identity
 
-        with patch("alf.workstream_e._read_object", side_effect=wrong_result_hash):
+        with patch("ise.workstream_e._read_object", side_effect=wrong_result_hash):
             with self.assertRaisesRegex(ValueError, "result_sha256_mismatch"):
                 analyze_archive(self.report, self.archive, "0" * 40)
-        with patch("alf.workstream_e._canonical_raw_inventory",
+        with patch("ise.workstream_e._canonical_raw_inventory",
                    return_value={"files": [], "file_count": 0, "bytes": 0, "tree_sha256": "0" * 64}):
             with self.assertRaisesRegex(ValueError, "raw_inventory_mismatch"):
                 analyze_archive(self.report, self.archive, "0" * 40)
         real_inventory = _canonical_raw_inventory
-        with patch("alf.workstream_e._canonical_raw_inventory", side_effect=real_inventory), \
-             patch("alf.workstream_e._artifact_hashes", return_value={"files": [], "set_sha256": "0" * 64}):
+        with patch("ise.workstream_e._canonical_raw_inventory", side_effect=real_inventory), \
+             patch("ise.workstream_e._artifact_hashes", return_value={"files": [], "set_sha256": "0" * 64}):
             with self.assertRaisesRegex(ValueError, "artifact_identity_mismatch"):
                 analyze_archive(self.report, self.archive, "0" * 40)
-        with patch("alf.workstream_e._source_tree", return_value={"files": [], "file_count": 0,
+        with patch("ise.workstream_e._source_tree", return_value={"files": [], "file_count": 0,
                                                                    "tree_sha256": "0" * 64}):
             with self.assertRaisesRegex(ValueError, "source_tree_identity_mismatch"):
                 analyze_archive(self.report, self.archive, "0" * 40)
@@ -637,13 +637,13 @@ class WorkstreamEVerifierTests(unittest.TestCase):
     def test_task_event_usage_envelope_and_audit_failures_have_codes(self):
         attempt = sorted(EXPECTED_ATTEMPTS["h"])[0]
         result = json.loads((self.archive / "h" / attempt / "result.json").read_text(encoding="utf-8"))
-        with patch("alf.workstream_e._read_events", side_effect=ValueError("events_invalid_json")):
+        with patch("ise.workstream_e._read_events", side_effect=ValueError("events_invalid_json")):
             with self.assertRaisesRegex(ValueError, "events_invalid_json"):
                 analyze_archive(self.report, self.archive, "0" * 40)
         altered = json.loads(json.dumps(result))
         altered["tasks"][0]["agent"]["usage"]["input_tokens"] += 1
         with self.assertRaisesRegex(ValueError, "task_envelope_mismatch"):
-            from alf.workstream_e import _verify_task_envelopes
+            from ise.workstream_e import _verify_task_envelopes
             _verify_task_envelopes(self.archive / "h" / attempt, altered)
         task_root = self.archive / "h" / attempt / "tasks"
         missing = task_root / EXPECTED_TASK_IDS[-1]
@@ -664,7 +664,7 @@ class WorkstreamEVerifierTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             invalid_events = Path(directory) / "events.jsonl"
             invalid_events.write_text("not-json\n", encoding="utf-8")
-            from alf.workstream_e import _read_events
+            from ise.workstream_e import _read_events
             with self.assertRaisesRegex(ValueError, "events_invalid_json"):
                 _read_events(invalid_events)
         usage_path = task_root / EXPECTED_TASK_IDS[0] / "usage.json"
@@ -675,7 +675,7 @@ class WorkstreamEVerifierTests(unittest.TestCase):
                 _verify_task_envelopes(self.archive / "h" / attempt, result)
         finally:
             hidden_usage.rename(usage_path)
-        with patch("alf.workstream_e.audit_run", return_value={"ok": False, "errors": ["redacted"]}):
+        with patch("ise.workstream_e.audit_run", return_value={"ok": False, "errors": ["redacted"]}):
             with self.assertRaisesRegex(ValueError, "audit_failed"):
                 analyze_archive(self.report, self.archive, "0" * 40)
 
@@ -686,7 +686,7 @@ class WorkstreamEVerifierTests(unittest.TestCase):
         events = [json.loads(line) for line in
                   (run / "tasks" / EXPECTED_TASK_IDS[0] / "events.jsonl").read_text(encoding="utf-8").splitlines()]
         analyses = [analyze_event_stream(events, result["tasks"][0])] * 8
-        from alf.workstream_e import _verify_boundaries
+        from ise.workstream_e import _verify_boundaries
         bad_diff = json.loads(json.dumps(result["tasks"]))
         bad_diff[0]["diff"]["added_lines"] += 1
         with self.assertRaisesRegex(ValueError, "boundary_diff_metrics_mismatch"):

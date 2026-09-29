@@ -10,9 +10,9 @@ from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from alf.cli import main
-from alf.runner import _derive_protocol_disposition
-from alf.variance import (_decision, _known_sd_power, _minimum_known_sd_n, _power, _schedule,
+from ise.cli import main
+from ise.runner import _derive_protocol_disposition
+from ise.variance import (_decision, _known_sd_power, _minimum_known_sd_n, _power, _schedule,
                           calibration_fixture, markdown_report, variance_report)
 
 

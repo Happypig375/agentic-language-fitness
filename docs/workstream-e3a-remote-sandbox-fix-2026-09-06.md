@@ -37,7 +37,7 @@ environments unchanged. No model authentication material was staged or read.
 
 The earlier archive search was incomplete. The original
 `alf-codex-0.149.1-sha256-0320a60c5b2628ce.tar` was found under the existing
-`X:/backup20260827/Archives/SourceRepos/agentic-language-fitness-images/` backup.
+`X:/backup20260827/Archives/SourceRepos/interactive-software-evolution-images/` backup.
 Its 630,053,888 bytes hashed identically before and after transfer:
 `55ee85f0656cef429d1cd40edced79782d54abb7b2180c9770c14bea06828ddf`.
 Loading and inspecting it produced the exact specified image ID:

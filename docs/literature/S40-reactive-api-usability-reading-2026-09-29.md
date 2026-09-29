@@ -51,7 +51,7 @@ The narrative attributes difficulty to undocumented behavior, similar operator n
 
 **Valuable:** motivated but unmeasured for Nu. Retain operator discovery, learning cost, documentation quality, error recovery and state handling as credible costs and rivals alongside the earlier positive comprehension evidence. A small API or pure core alone does not establish easier maintenance. The authors' reported limitations support testing an explicit mechanism, not importing their library ranking or task times as an expected Nu effect.
 
-**Scientifically valid:** the source reinforces explicit assignment/retention denominators, experience and task-family dependence, ordinary documentation/tool access, objective behavioral obligations and separate subjective ratings. Preserve all attempts in any later ALF study. If correctness includes a source convention, state it prospectively; otherwise allow behaviorally correct reorganizations. This audit validates none of ALF's source equivalence, oracle, apparatus or resource assumptions. Experimental allocation remains zero.
+**Scientifically valid:** the source reinforces explicit assignment/retention denominators, experience and task-family dependence, ordinary documentation/tool access, objective behavioral obligations and separate subjective ratings. Preserve all attempts in any later ISE study. If correctness includes a source convention, state it prospectively; otherwise allow behaviorally correct reorganizations. This audit validates none of ISE's source equivalence, oracle, apparatus or resource assumptions. Experimental allocation remains zero.
 
 ## Follow-up decisions
 

@@ -75,35 +75,35 @@ jobs:
           fixture_image_id="$(docker image inspect mcr.microsoft.com/dotnet/sdk:10.0.302@sha256:72dd743782f2ae7e5476fd64f6a460045e3998dc862218b80e6944cba79a01b0 --format '{{.Id}}')"
           python scripts/h_check.py --permit-activation --sandbox --fixture-image-id "$fixture_image_id" --output-dir results/h1-h2-sandbox-linux
       - name: Environment check
-        run: python scripts/alf.py doctor --strict
+        run: python scripts/ise.py doctor --strict
       - name: Validate matched benchmark snapshots
-        run: python scripts/alf.py validate
+        run: python scripts/ise.py validate
       - name: Check C3 representation artifacts
-        run: python scripts/alf.py representation check
+        run: python scripts/ise.py representation check
       - name: Check frozen Workstream E2 definition
-        run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2 check --definition protocols/workstream-e2-toolchain-v1/definition.json
+        run: python scripts/ise.py --manifest benchmarks/successor/manifest.json e2 check --definition protocols/workstream-e2-toolchain-v1/definition.json
       - name: Check frozen Workstream E2a definition
-        run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2a check --definition protocols/workstream-e2a-host-aligned-v1/definition.json --inventory protocols/workstream-e2a-host-aligned-v1/inventory.json --e2-definition protocols/workstream-e2-toolchain-v1/definition.json
+        run: python scripts/ise.py --manifest benchmarks/successor/manifest.json e2a check --definition protocols/workstream-e2a-host-aligned-v1/definition.json --inventory protocols/workstream-e2a-host-aligned-v1/inventory.json --e2-definition protocols/workstream-e2-toolchain-v1/definition.json
       - name: Validate difficulty-v1 protocol definition
-        run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
+        run: python scripts/ise.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate Workstream D family and child definitions
         run: |
-          python scripts/alf.py protocol family-validate --definition protocols/workstream-d-language-v2/definition.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/h.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/m.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/l.json
+          python scripts/ise.py protocol family-validate --definition protocols/workstream-d-language-v2/definition.json
+          python scripts/ise.py protocol validate --definition protocols/workstream-d-language-v2/h.json
+          python scripts/ise.py protocol validate --definition protocols/workstream-d-language-v2/m.json
+          python scripts/ise.py protocol validate --definition protocols/workstream-d-language-v2/l.json
       - name: Validate C3 descriptive treatment
-        run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
+        run: python scripts/ise.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
       - name: Validate C3 deterministic treatment
-        run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json validate
+        run: python scripts/ise.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json validate
       - name: Run scripted chain matrix
-        run: python scripts/alf.py matrix --agent scripted --output results/ci
+        run: python scripts/ise.py matrix --agent scripted --output results/ci
       - name: Summarize
-        run: python scripts/alf.py summarize results/ci --json > results/ci-summary.json
+        run: python scripts/ise.py summarize results/ci --json > results/ci-summary.json
       - name: Build container
-        run: docker build --tag agentic-language-fitness:ci .
+        run: docker build --tag interactive-software-evolution:ci .
       - name: Validate through container entrypoint
-        run: docker run --rm agentic-language-fitness:ci validate
+        run: docker run --rm interactive-software-evolution:ci validate
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -144,27 +144,27 @@ jobs:
       - name: Check maintenance simulation trusted fixtures
         run: python scripts/maintenance_check.py --build-fixtures --audit-failures --output-dir results/maintenance-sim-windows
       - name: Environment check
-        run: python scripts/alf.py doctor --strict
+        run: python scripts/ise.py doctor --strict
       - name: Validate matched benchmark snapshots
-        run: python scripts/alf.py validate
+        run: python scripts/ise.py validate
       - name: Check C3 representation artifacts
-        run: python scripts/alf.py representation check
+        run: python scripts/ise.py representation check
       - name: Check frozen Workstream E2 definition
-        run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2 check --definition protocols/workstream-e2-toolchain-v1/definition.json
+        run: python scripts/ise.py --manifest benchmarks/successor/manifest.json e2 check --definition protocols/workstream-e2-toolchain-v1/definition.json
       - name: Check frozen Workstream E2a definition
-        run: python scripts/alf.py --manifest benchmarks/successor/manifest.json e2a check --definition protocols/workstream-e2a-host-aligned-v1/definition.json --inventory protocols/workstream-e2a-host-aligned-v1/inventory.json --e2-definition protocols/workstream-e2-toolchain-v1/definition.json
+        run: python scripts/ise.py --manifest benchmarks/successor/manifest.json e2a check --definition protocols/workstream-e2a-host-aligned-v1/definition.json --inventory protocols/workstream-e2a-host-aligned-v1/inventory.json --e2-definition protocols/workstream-e2-toolchain-v1/definition.json
       - name: Validate difficulty-v1 protocol definition
-        run: python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
+        run: python scripts/ise.py protocol validate --definition protocols/difficulty-v1/definition.json
       - name: Validate Workstream D family and child definitions
         run: |
-          python scripts/alf.py protocol family-validate --definition protocols/workstream-d-language-v2/definition.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/h.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/m.json
-          python scripts/alf.py protocol validate --definition protocols/workstream-d-language-v2/l.json
+          python scripts/ise.py protocol family-validate --definition protocols/workstream-d-language-v2/definition.json
+          python scripts/ise.py protocol validate --definition protocols/workstream-d-language-v2/h.json
+          python scripts/ise.py protocol validate --definition protocols/workstream-d-language-v2/m.json
+          python scripts/ise.py protocol validate --definition protocols/workstream-d-language-v2/l.json
       - name: Validate C3 descriptive treatment
-        run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
+        run: python scripts/ise.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json validate
       - name: Validate C3 deterministic treatment
-        run: python scripts/alf.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json validate
+        run: python scripts/ise.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json validate
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -225,7 +225,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/e2/cache" "$RUNNER_TEMP/e2/raw" "$RUNNER_TEMP/e2/report" "$RUNNER_TEMP/e2/work"
           docker build \
             --iidfile "$RUNNER_TEMP/e2/image-id.txt" \
-            --tag "agentic-language-fitness:e2-${GITHUB_SHA}" \
+            --tag "interactive-software-evolution:e2-${GITHUB_SHA}" \
             .
       - name: Preseed the fixed NuGet package cache
         shell: bash
@@ -236,7 +236,7 @@ jobs:
             --env DOTNET_NOLOGO=1 \
             --env NUGET_PACKAGES=/e2/cache \
             --volume "$RUNNER_TEMP/e2/cache:/e2/cache" \
-            "agentic-language-fitness:e2-${GITHUB_SHA}" \
+            "interactive-software-evolution:e2-${GITHUB_SHA}" \
             -c 'dotnet restore benchmarks/successor/repos/fsharp/v0/OrderFlow.fsproj --nologo && dotnet restore benchmarks/successor/repos/csharp/v0/OrderFlow.csproj --nologo'
       - name: Run frozen E2 baseline without external networking
         shell: bash
@@ -258,7 +258,7 @@ jobs:
             --volume "$RUNNER_TEMP/e2/raw:/e2/raw" \
             --volume "$RUNNER_TEMP/e2/report:/e2/report" \
             --volume "$RUNNER_TEMP/e2/work:/e2/work" \
-            "agentic-language-fitness:e2-${GITHUB_SHA}" \
+            "interactive-software-evolution:e2-${GITHUB_SHA}" \
             --manifest benchmarks/successor/manifest.json \
             e2 run \
             --definition protocols/workstream-e2-toolchain-v1/definition.json \
@@ -282,7 +282,7 @@ jobs:
             --volume "$RUNNER_TEMP/e2/raw:/e2/raw:ro" \
             --volume "$RUNNER_TEMP/e2/report:/e2/report:ro" \
             --volume "$RUNNER_TEMP/e2/work:/e2/work" \
-            "agentic-language-fitness:e2-${GITHUB_SHA}" \
+            "interactive-software-evolution:e2-${GITHUB_SHA}" \
             --manifest benchmarks/successor/manifest.json \
             e2 audit \
             --definition protocols/workstream-e2-toolchain-v1/definition.json \

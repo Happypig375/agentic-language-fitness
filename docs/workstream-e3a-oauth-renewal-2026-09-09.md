@@ -29,7 +29,7 @@ a comparative-effect-driven sample extension; no paired language result exists.
 
 The minimal complete-response parser repair is commit
 `bc0006261ea20e0e47ba333ff6c793147dcfe1a0`, with 81 affected tests and another-AI
-source review passed. Exact [CI 34254599635](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34254599635)
+source review passed. Exact [CI 34254599635](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34254599635)
 passed on Linux (5m57s) and Windows (8m51s). The new activation changes only
 the active specification status from `frozen` to `shakedown-ready-not-frozen`
 and regenerates its packet. Existing numeric ceilings already equal 5 and 72;
@@ -89,7 +89,7 @@ required before staging credentials or invoking the shakedown.
 ## Renewed shakedown 01 — successful
 
 Activation commit `a724694d66ff6566c76b207dd08496369b2067dc` passed exact
-[CI 34293286434](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34293286434)
+[CI 34293286434](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34293286434)
 (Linux 6m10s; Windows 8m1s). The existing `prepare-remote.sh` created a clean
 private checkout/venv at `/tmp/alf-e3a-shakedown-xvOD44`; retained setup captures
 include the resolved Python/dependency, image and Docker-network identities.
@@ -152,7 +152,7 @@ replacement, additional shakedown or old-slot resumption is authorized.
 ## Renewed pilot 01 — fixed collection finished
 
 Freeze commit `91b43b8161347d35be03ba7fb71bb1b7d73ccf19` passed exact
-[CI 34294549110](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34294549110)
+[CI 34294549110](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34294549110)
 (Linux 5m37s; Windows 8m24s). The existing setup script prepared a separate clean
 checkout at `/tmp/alf-e3a-shakedown-jnEI0G` with the same resolved dependencies,
 native client, catalogue, image and network. The directory prefix is the existing

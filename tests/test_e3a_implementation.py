@@ -13,14 +13,14 @@ from decimal import Decimal
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.config import load_manifest
-from alf.e3a_api import BudgetGuard, GuardFailure, HttpTransport, ResponsesAdapter
-from alf.e3a_codex import CodexOAuthAdapter, DispatchGuard, parse_cli_jsonl
-from alf.e3a_runner import run_batch
-from alf.e3a_sandbox import DockerEvaluator, SandboxFailure, bounded_process, container_arguments, tree_identity
-from alf.models import ProcessResult
-from alf.protocol import canonical_json_hash
-from alf.workstream_e3a import (PACKET_DIR, PolicyViolation, apply_submission, candidate_payload,
+from ise.config import load_manifest
+from ise.e3a_api import BudgetGuard, GuardFailure, HttpTransport, ResponsesAdapter
+from ise.e3a_codex import CodexOAuthAdapter, DispatchGuard, parse_cli_jsonl
+from ise.e3a_runner import run_batch
+from ise.e3a_sandbox import DockerEvaluator, SandboxFailure, bounded_process, container_arguments, tree_identity
+from ise.models import ProcessResult
+from ise.protocol import canonical_json_hash
+from ise.workstream_e3a import (PACKET_DIR, PolicyViolation, apply_submission, candidate_payload,
     feedback_packet, project_development, read_json, run_trajectory, score_submission, snapshot)
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -379,7 +379,7 @@ class CorrectionTests(unittest.TestCase):
         early = self.trajectory([huge])
         self.assertEqual(early["stop"], "feedback-budget-exhausted")
         self.assertFalse(early["batch_stop"])
-        with patch("alf.workstream_e3a.feedback_packet", wraps=feedback_packet) as feedback:
+        with patch("ise.workstream_e3a.feedback_packet", wraps=feedback_packet) as feedback:
             final = self.trajectory(["error E: failed", "error E: failed", huge])
             self.assertEqual(feedback.call_count, 2)
         self.assertEqual(final["stop"], "repair-budget")
@@ -478,7 +478,7 @@ class SandboxUnitTests(unittest.TestCase):
         self.assertIsNot(fixture["environment"], active["environment"])
         self.assertEqual(fixture["environment"], active["environment"])
         self.assertEqual(fixture["model"], active["model"])
-        with patch("alf.e3a_sandbox.os.name", "posix"), self.assertRaisesRegex(
+        with patch("ise.e3a_sandbox.os.name", "posix"), self.assertRaisesRegex(
                 SandboxFailure, "fixture image cannot replace"):
             DockerEvaluator(ROOT, MANIFEST, active, "csharp", fixture_image_id="fixture-image")
 
@@ -486,7 +486,7 @@ class SandboxUnitTests(unittest.TestCase):
         evaluator = DockerEvaluator.__new__(DockerEvaluator)
         evaluator.base, evaluator.docker = ROOT, ["docker"]
         failure = ProcessResult(["docker", "inspect"], 1, "", "missing tmpfs source: " + "x" * 5000, 0)
-        with patch("alf.e3a_sandbox.run_process", return_value=failure), self.assertRaises(SandboxFailure) as raised:
+        with patch("ise.e3a_sandbox.run_process", return_value=failure), self.assertRaises(SandboxFailure) as raised:
             evaluator._admin(["inspect", "fixture"])
         self.assertIn("missing tmpfs source:", str(raised.exception))
         self.assertIn("[truncated]", str(raised.exception))
@@ -586,7 +586,7 @@ class SandboxUnitTests(unittest.TestCase):
             self.assertEqual(removed, ["fixture"])
 
     def test_windows_has_no_host_execution_fallback(self):
-        with patch("alf.e3a_sandbox.os.name", "nt"), self.assertRaises(SandboxFailure):
+        with patch("ise.e3a_sandbox.os.name", "nt"), self.assertRaises(SandboxFailure):
             DockerEvaluator(ROOT, MANIFEST, SPEC, "csharp")
 
     def test_complete_workspace_is_not_limited_to_one_response_envelope(self):

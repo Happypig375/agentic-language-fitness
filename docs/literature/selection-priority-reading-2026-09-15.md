@@ -54,13 +54,13 @@ The alternative-edition DOIs for S01/S05 are `10.48550/arXiv.1506.02465` and `10
 
 These identities and discovery-level topics come from the committed [selection audit](../selection-evidence-closure-sources-2026-09-15.md), [three-criteria audit](../three-criteria-iteration-sources-2026-09-15.md), [design-discrimination audit](../pro-review-design-discrimination-sources-2026-09-14.md) and [Nu discovery ledger](../nu-form-factors-discovery-ledger-2026-09-14.md). They are listed so a local reader is not confined to the first priorities. This edit does **not** upgrade their reading status or validate their findings. Check live identity/edition and existing local holdings before use.
 
-A candidate is promoted to a full read when its screening, citation context or existing evidence connects it materially to a live claim, proposed control, implication or credible rival. Record a claim-specific disposition if it is redundant, out of scope or already adequately reconstructed. Relevance does not require agreement with ALF. The agent may add further entries beyond S18.
+A candidate is promoted to a full read when its screening, citation context or existing evidence connects it materially to a live claim, proposed control, implication or credible rival. Record a claim-specific disposition if it is redundant, out of scope or already adequately reconstructed. Relevance does not require agreement with ISE. The agent may add further entries beyond S18.
 
 | Stable ID | DOI / discovery title | Why a full read may be necessary |
 | --- | --- | --- |
 | **S08** | `10.48550/arXiv.2603.17833` — **ArchBench: Benchmarking Generative-AI for Software Architecture Tasks** | Reconstruct architectural/code task targets, evaluation and actual implemented scope before claiming an absence of behavioral architecture evaluation. |
 | **S09** | `10.48550/arXiv.2603.09004` — **Can AI Agents Generate Microservices? How Far are We?** | Determine what architectural/dependency context changes, which runnable obligations are measured and how information interventions differ from package choice. |
-| **S10** | `10.48550/arXiv.2602.02660` — **MARS: Modular Agent with Reflective Search for Automated AI Research** | Check modular construction, debugging and downstream evaluation before contrasting ALF with architecture-aware coding systems. Identify bundled architecture/harness/model changes. |
+| **S10** | `10.48550/arXiv.2602.02660` — **MARS: Modular Agent with Reflective Search for Automated AI Research** | Check modular construction, debugging and downstream evaluation before contrasting ISE with architecture-aware coding systems. Identify bundled architecture/harness/model changes. |
 | **S11** | `10.48550/arXiv.2602.13723` — **Compiling Large Multi-Modal Requirement Documents into Runnable Software Systems: From an Agentic Test-Driven Perspective** | Reconstruct requirements-to-architecture/code, interface tests, traceability and any evolution evaluation. Distinguish building a package from predicting which existing package is suitable. |
 | **S12** | `10.48550/arXiv.2606.13298` — **Mining Architectural Quality Under Agentic AI Adoption: A Causal Study of Java Repositories** | Assess real-workload motivation, adoption measurement, structural outcomes and identification assumptions before using architectural erosion or claimed causal effects as value evidence. |
 | **S13** | `10.1145/2000259.2000263` — **Sustainability evaluation of software architectures** | Reconstruct scenario-selection bias, practical analysis effort and evaluation value. It may challenge the proposed benefit even without discussing LLMs. |
@@ -91,9 +91,9 @@ Record the lawful PDF/supplement reference, hash, edition/date/notices and actua
 
 Reconstruct **decision object and available information -> procedure/training -> comparators -> outcome generation -> scoring/uncertainty -> claim**, with source-page/section/table locators. Include actual independent units versus repeated runs, selection/exclusions, missingness, costs, valid alternatives, contrary observations and limits. Recalculate only published arithmetic when supported; do not invent missing data or call calculation a reproduction.
 
-For conceptual or qualitative work, reconstruct its concepts, cases, reasoning and validation scope rather than invent experimental quantities. Separate the authors' reported evidence, their interpretation and ALF's proposed adaptation.
+For conceptual or qualitative work, reconstruct its concepts, cases, reasoning and validation scope rather than invent experimental quantities. Separate the authors' reported evidence, their interpretation and ISE's proposed adaptation.
 
-For each consequential ALF statement give one disposition: **retain with source**, **narrow/correct**, **withdraw/replace**, or **unresolved**, explaining how the source changes uniqueness, value or scientific validity. Amend the active proposal and PLAN when required; do not append summaries while leaving contradicted claims live. Preserve historical evidence and earlier versions.
+For each consequential ISE statement give one disposition: **retain with source**, **narrow/correct**, **withdraw/replace**, or **unresolved**, explaining how the source changes uniqueness, value or scientific validity. Amend the active proposal and PLAN when required; do not append summaries while leaving contradicted claims live. Preserve historical evidence and earlier versions.
 
 ## 5. Progress, access blocks and evidence-based handoff
 

@@ -6,7 +6,7 @@ import unittest
 import tempfile
 from pathlib import Path
 
-from alf.protocol import canonical_json_hash
+from ise.protocol import canonical_json_hash
 
 
 PATH = Path(__file__).parents[1] / "reports/workstream-e3a-oauth-renewal-2026-09-09/analyze-pilot.py"

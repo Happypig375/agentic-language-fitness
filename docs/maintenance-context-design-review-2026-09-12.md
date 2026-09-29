@@ -295,18 +295,18 @@ the summary task and lack of a longitudinal architectural workload, not an
 undiscovered diagnostic feedback loop. See the [source-bound finding](research-direction-2026-09-12.md#read-only-h-finding).
 
 Read-only inspection at the source above found that the general
-[runner](../src/alf/runner.py) preserves a workspace and snapshots across tasks,
+[runner](../src/ise/runner.py) preserves a workspace and snapshots across tasks,
 then stops at the first failed task. Its
-[scripted agent](../src/alf/agents/scripted.py) copies cumulative gold for harness
+[scripted agent](../src/ise/agents/scripted.py) copies cumulative gold for harness
 checks; those copies are not inherited-candidate evidence. Crucially,
-[evaluate_project](../src/alf/evaluator.py) calls
-[run_process](../src/alf/process.py), which runs host subprocesses. Timeouts and
+[evaluate_project](../src/ise/evaluator.py) calls
+[run_process](../src/ise/process.py), which runs host subprocesses. Timeouts and
 captured output are **not a sandbox**. Docker used for a command-agent transport
 does not automatically protect that evaluator.
 
 Reuse persistence ideas only, not that path for untrusted candidate execution.
 Any later implementation must compose with the existing isolated
-[H sandbox](../src/alf/h_sandbox.py)/[E3a sandbox](../src/alf/e3a_sandbox.py) boundary
+[H sandbox](../src/ise/h_sandbox.py)/[E3a sandbox](../src/ise/e3a_sandbox.py) boundary
 after specific review; their mere existence proves no new runner is protected.
 Do not add a second remote orchestration system, proxy or generic agent framework.
 Runner corrections use ordinary Git revisions, not a new scientific version for

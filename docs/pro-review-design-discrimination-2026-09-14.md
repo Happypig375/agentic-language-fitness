@@ -24,7 +24,7 @@ A trivial source-size preference or one package's missing API may explain a resu
 
 ### R2 — Recover ChainSWE as a close control/interface predecessor
 
-Primary ChainSWE v1 methods already include oracle prior fixes, fresh sequential state, persistent history and subagent interfaces. Earlier ALF discussions knew the chain benchmark, but the current proposal's central comparison did not make that full overlap clear.
+Primary ChainSWE v1 methods already include oracle prior fixes, fresh sequential state, persistent history and subagent interfaces. Earlier ISE discussions knew the chain benchmark, but the current proposal's central comparison did not make that full overlap clear.
 
 Those modes are methodological resources. They do not automatically establish a perfectly isolated memory effect, and neither copying their name nor adding a subagent is a new contribution. The updated synthesis restores them and makes prospective architectural predictions, not chaining/control novelty, the center of the proposed value.
 

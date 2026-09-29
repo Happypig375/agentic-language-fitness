@@ -10,11 +10,11 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.config import load_manifest
-from alf.protocol import canonical_json_hash
-import alf.workstream_e2 as e2
-import alf.workstream_e2_report as e2_report
-import alf.workstream_e2_runner as e2_runner
+from ise.config import load_manifest
+from ise.protocol import canonical_json_hash
+import ise.workstream_e2 as e2
+import ise.workstream_e2_report as e2_report
+import ise.workstream_e2_runner as e2_runner
 
 
 class _CharacterEncoding:
@@ -126,11 +126,11 @@ class WorkstreamE2DefinitionTests(unittest.TestCase):
             self.assertEqual(e2._snapshot(left_path, _CharacterEncoding())[0], e2._snapshot(right_path, _CharacterEncoding())[0])
 
     def test_exact_tokenizer_version_is_required(self) -> None:
-        with patch("alf.workstream_e2.importlib.metadata.version", return_value="0.13.0"):
+        with patch("ise.workstream_e2.importlib.metadata.version", return_value="0.13.0"):
             with self.assertRaisesRegex(ValueError, "exactly 0.14.0"):
                 e2._get_encoding()
         with patch(
-            "alf.workstream_e2.importlib.metadata.version",
+            "ise.workstream_e2.importlib.metadata.version",
             side_effect=importlib.metadata.PackageNotFoundError("tiktoken"),
         ):
             with self.assertRaisesRegex(ValueError, "tiktoken==0.14.0"):
@@ -141,7 +141,7 @@ class WorkstreamE2DefinitionTests(unittest.TestCase):
             path = Path(directory) / "definition.json"
             frozen = e2.freeze_definition(self.root, "benchmarks/successor/manifest.json", path)
             self.assertEqual(frozen, self.definition)
-            with patch("alf.workstream_e2_runner._invoke", side_effect=AssertionError("subprocess forbidden")):
+            with patch("ise.workstream_e2_runner._invoke", side_effect=AssertionError("subprocess forbidden")):
                 self.assertTrue(e2.check_definition(self.root, path, "benchmarks/successor/manifest.json")["ok"])
             mutations = {
                 "schema": lambda value: value.__setitem__("schema_version", "changed"),
@@ -150,7 +150,7 @@ class WorkstreamE2DefinitionTests(unittest.TestCase):
                 "contract": lambda value: value["execution_contract"].__setitem__("rounds", 6),
                 "state": lambda value: value["states"][0].__setitem__("case_count", 999),
             }
-            with patch("alf.workstream_e2._build_definition", return_value=frozen):
+            with patch("ise.workstream_e2._build_definition", return_value=frozen):
                 for name, mutate in mutations.items():
                     with self.subTest(name=name):
                         changed = copy.deepcopy(frozen)
@@ -210,8 +210,8 @@ class WorkstreamE2RunnerPrimitiveTests(unittest.TestCase):
             stdout = b'{"ok":true}\n' if operation == "run" else b""
             return {"operation": operation}, stdout, b""
 
-        with tempfile.TemporaryDirectory() as directory, patch("alf.workstream_e2_runner._execute_command", side_effect=execute), patch(
-            "alf.workstream_e2_runner._host_load", return_value={"load": 0}
+        with tempfile.TemporaryDirectory() as directory, patch("ise.workstream_e2_runner._execute_command", side_effect=execute), patch(
+            "ise.workstream_e2_runner._host_load", return_value={"load": 0}
         ):
             workspace = Path(directory)
             fresh = e2_runner._run_regime(
@@ -249,7 +249,7 @@ class WorkstreamE2RunnerPrimitiveTests(unittest.TestCase):
             calls.append(operation)
             raise e2.E2RunError("restore_failed")
 
-        with tempfile.TemporaryDirectory() as directory, patch("alf.workstream_e2_runner._execute_command", side_effect=fail):
+        with tempfile.TemporaryDirectory() as directory, patch("ise.workstream_e2_runner._execute_command", side_effect=fail):
             with self.assertRaisesRegex(e2.E2RunError, "restore_failed"):
                 e2_runner._run_regime(
                     workspace=Path(directory),
@@ -271,7 +271,7 @@ class WorkstreamE2RunnerPrimitiveTests(unittest.TestCase):
             stdout=b"warning CS1234: synthetic\n",
             stderr=b"detail\n",
         )
-        with tempfile.TemporaryDirectory() as directory, patch("alf.workstream_e2_runner._invoke", return_value=success):
+        with tempfile.TemporaryDirectory() as directory, patch("ise.workstream_e2_runner._invoke", return_value=success):
             raw = Path(directory)
             record, stdout, stderr = e2_runner._execute_command(
                 "build",
@@ -290,7 +290,7 @@ class WorkstreamE2RunnerPrimitiveTests(unittest.TestCase):
             self.assertTrue((raw / record["metadata_path"]).is_file())
 
         timeout = subprocess.TimeoutExpired(["dotnet", "build"], 1, output=b"partial", stderr=b"late")
-        with tempfile.TemporaryDirectory() as directory, patch("alf.workstream_e2_runner._invoke", side_effect=timeout):
+        with tempfile.TemporaryDirectory() as directory, patch("ise.workstream_e2_runner._invoke", side_effect=timeout):
             raw = Path(directory)
             with self.assertRaisesRegex(e2.E2RunError, "build_timeout"):
                 e2_runner._execute_command(
@@ -328,8 +328,8 @@ class WorkstreamE2RunnerPrimitiveTests(unittest.TestCase):
             json_path = Path(directory) / "report.json"
             markdown_path = Path(directory) / "report.md"
             report = {"synthetic": True}
-            with patch("alf.workstream_e2_report.markdown_report", return_value="# synthetic\n"), patch(
-                "alf.workstream_e2_report._atomic_json", side_effect=OSError("synthetic")
+            with patch("ise.workstream_e2_report.markdown_report", return_value="# synthetic\n"), patch(
+                "ise.workstream_e2_report._atomic_json", side_effect=OSError("synthetic")
             ):
                 with self.assertRaises(OSError):
                     e2_report.publish_report(report, json_path, markdown_path)
@@ -409,13 +409,13 @@ class WorkstreamE2RunTests(unittest.TestCase):
             raw = base / "raw"
             report_json = base / "report.json"
             report_md = base / "report.md"
-            with patch("alf.workstream_e2_runner._network_snapshot", return_value=network), patch(
-                "alf.workstream_e2_runner._host_load", return_value=load
-            ), patch("alf.workstream_e2_runner.shutil.which", return_value="dotnet"), patch(
-                "alf.workstream_e2_runner._invoke", side_effect=self._fake_invoke(calls)
-            ), patch("alf.workstream_e2_runner._atomic_bytes", side_effect=self._fast_atomic), patch(
-                "alf.workstream_e2_report._atomic_bytes", side_effect=self._fast_atomic
-            ), patch("alf.workstream_e2._atomic_bytes", side_effect=self._fast_atomic):
+            with patch("ise.workstream_e2_runner._network_snapshot", return_value=network), patch(
+                "ise.workstream_e2_runner._host_load", return_value=load
+            ), patch("ise.workstream_e2_runner.shutil.which", return_value="dotnet"), patch(
+                "ise.workstream_e2_runner._invoke", side_effect=self._fake_invoke(calls)
+            ), patch("ise.workstream_e2_runner._atomic_bytes", side_effect=self._fast_atomic), patch(
+                "ise.workstream_e2_report._atomic_bytes", side_effect=self._fast_atomic
+            ), patch("ise.workstream_e2._atomic_bytes", side_effect=self._fast_atomic):
                 report = e2_runner.run_baseline(
                     root=self.root,
                     definition=definition_path,
@@ -507,9 +507,9 @@ class WorkstreamE2RunTests(unittest.TestCase):
             report_json = base / "report.json"
             report_md = base / "report.md"
             with patch(
-                "alf.workstream_e2_runner._network_snapshot",
+                "ise.workstream_e2_runner._network_snapshot",
                 return_value={"ok": False, "interfaces": ["lo", "eth0"], "reason": "synthetic"},
-            ), patch("alf.workstream_e2_runner._invoke", side_effect=AssertionError("must not run")):
+            ), patch("ise.workstream_e2_runner._invoke", side_effect=AssertionError("must not run")):
                 with self.assertRaisesRegex(e2.E2RunError, "network_isolation_proof_failed"):
                     e2_runner.run_baseline(
                         root=self.root,
@@ -550,9 +550,9 @@ class WorkstreamE2RunTests(unittest.TestCase):
             cache = base / "cache"
             cache.mkdir()
             raw = base / "raw"
-            with patch("alf.workstream_e2_runner._network_snapshot", return_value=network), patch(
-                "alf.workstream_e2_runner.shutil.which", return_value="dotnet"
-            ), patch("alf.workstream_e2_runner._invoke", side_effect=mutate):
+            with patch("ise.workstream_e2_runner._network_snapshot", return_value=network), patch(
+                "ise.workstream_e2_runner.shutil.which", return_value="dotnet"
+            ), patch("ise.workstream_e2_runner._invoke", side_effect=mutate):
                 with self.assertRaisesRegex(e2.E2RunError, "package_cache_changed"):
                     e2_runner.run_baseline(
                         root=self.root,
@@ -576,9 +576,9 @@ class WorkstreamE2RunTests(unittest.TestCase):
             cache = base / "cache"
             cache.mkdir()
             with patch(
-                "alf.workstream_e2_runner._network_snapshot",
+                "ise.workstream_e2_runner._network_snapshot",
                 return_value={"ok": False, "interfaces": ["eth0"], "reason": "synthetic"},
-            ), patch("alf.workstream_e2_runner.write_raw_inventory", side_effect=OSError("disk full")):
+            ), patch("ise.workstream_e2_runner.write_raw_inventory", side_effect=OSError("disk full")):
                 with self.assertRaisesRegex(
                     e2.E2RunError,
                     "network_isolation_proof_failed_and_terminal_attempt_persistence_failed",

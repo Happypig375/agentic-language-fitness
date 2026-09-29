@@ -65,7 +65,7 @@ function Join-NativeArguments([string[]] $Values) {
 }
 
 $proxy = $null; $ssh = $null
-$readyPath = Join-Path ([System.IO.Path]::GetTempPath()) ("alf-connect-proxy-{0}.ready" -f [Guid]::NewGuid().ToString('N'))
+$readyPath = Join-Path ([System.IO.Path]::GetTempPath()) ("ise-connect-proxy-{0}.ready" -f [Guid]::NewGuid().ToString('N'))
 $readyTempPath = $null
 try {
     # A venv's `python` command may be a redirector whose PID differs from the

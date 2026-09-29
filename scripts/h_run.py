@@ -6,13 +6,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from alf.environment_profile import environment_profile_sha256, load_environment_profile
-from alf.h import HBoundaryError
-from alf.h_run import (policy_sha, require_live_authority, run_integration, run_pilot,
+from ise.environment_profile import environment_profile_sha256, load_environment_profile
+from ise.h import HBoundaryError
+from ise.h_run import (policy_sha, require_live_authority, run_integration, run_pilot,
                        verified_construction, verify_pilot_freeze)
-from alf.protocol import canonical_json_hash
-from alf.workstream_e2 import _atomic_json
-from alf.h_sandbox import HSandboxEvaluator
+from ise.protocol import canonical_json_hash
+from ise.workstream_e2 import _atomic_json
+from ise.h_sandbox import HSandboxEvaluator
 
 
 def _read(path: Path): return json.loads(path.read_text(encoding="utf-8"))
@@ -21,7 +21,7 @@ def _sha(path: Path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def _transport_module():
     location = ROOT / "scripts/e3a_run.py"
-    module_spec = importlib.util.spec_from_file_location("alf_existing_e3a_run", location)
+    module_spec = importlib.util.spec_from_file_location("ise_existing_e3a_run", location)
     if not module_spec or not module_spec.loader:
         raise RuntimeError("existing E3a transport module is unavailable")
     module = importlib.util.module_from_spec(module_spec)
@@ -55,11 +55,11 @@ def main(argv=None):
     head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True,
                           text=True, check=True).stdout.strip()
     identity_paths = ("scripts/h_run.py", "scripts/e3a_run.py", "scripts/codex-docker.py",
-        "src/alf/h.py", "src/alf/h_run.py", "src/alf/h_check.py",
-        "src/alf/h_sandbox.py", "src/alf/h_workload.py", "src/alf/e3a_codex.py",
-        "src/alf/e3a_runner.py", "src/alf/e3a_sandbox.py", "src/alf/workstream_e3a.py")
-    identity_paths += ("src/alf/config.py", "src/alf/process.py", "src/alf/environment_profile.py",
-                       "src/alf/protocol.py", "src/alf/workstream_e2.py")
+        "src/ise/h.py", "src/ise/h_run.py", "src/ise/h_check.py",
+        "src/ise/h_sandbox.py", "src/ise/h_workload.py", "src/ise/e3a_codex.py",
+        "src/ise/e3a_runner.py", "src/ise/e3a_sandbox.py", "src/ise/workstream_e3a.py")
+    identity_paths += ("src/ise/config.py", "src/ise/process.py", "src/ise/environment_profile.py",
+                       "src/ise/protocol.py", "src/ise/workstream_e2.py")
     runtime = {"runner_git_commit": head,
         "source_sha256": {path: _sha(ROOT / path) for path in identity_paths},
         "native_sha256": _sha(args.native_binary), "catalog_sha256": _sha(args.model_catalog),

@@ -6,14 +6,14 @@ RUN apt-get update \
 
 WORKDIR /workspace
 COPY . .
-RUN python3 -m venv /opt/alf-venv \
-    && /opt/alf-venv/bin/pip install --no-cache-dir . \
+RUN python3 -m venv /opt/ise-venv \
+    && /opt/ise-venv/bin/pip install --no-cache-dir . \
     && mkdir -p /opt/tiktoken-cache \
-    && TIKTOKEN_CACHE_DIR=/opt/tiktoken-cache /opt/alf-venv/bin/python -c "import tiktoken; tiktoken.get_encoding('o200k_base')"
+    && TIKTOKEN_CACHE_DIR=/opt/tiktoken-cache /opt/ise-venv/bin/python -c "import tiktoken; tiktoken.get_encoding('o200k_base')"
 
-ENV PATH=/opt/alf-venv/bin:$PATH \
+ENV PATH=/opt/ise-venv/bin:$PATH \
     PYTHONPATH=/workspace/src \
     PYTHONDONTWRITEBYTECODE=1 \
     TIKTOKEN_CACHE_DIR=/opt/tiktoken-cache
-ENTRYPOINT ["/opt/alf-venv/bin/python", "scripts/alf.py"]
+ENTRYPOINT ["/opt/ise-venv/bin/python", "scripts/ise.py"]
 CMD ["doctor", "--strict"]

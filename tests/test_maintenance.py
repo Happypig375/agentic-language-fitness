@@ -6,7 +6,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
 
-from alf import maintenance
+from ise import maintenance
 from scripts import maintenance_check
 
 
@@ -180,7 +180,7 @@ class MaintenanceTests(unittest.TestCase):
             ref = root / "benchmarks/maintenance-sim/reference/csharp"; ref.mkdir(parents=True)
             (ref / "01.patch").write_bytes(b"patch\n")
             completed = SimpleNamespace(returncode=0, stdout="", stderr="")
-            with mock.patch("alf.maintenance.subprocess.run", return_value=completed) as run:
+            with mock.patch("ise.maintenance.subprocess.run", return_value=completed) as run:
                 maintenance.reconstruct(root, "csharp", 1)
             self.assertEqual(run.call_count, 2)
             for call in run.call_args_list:
@@ -206,7 +206,7 @@ class MaintenanceTests(unittest.TestCase):
 
     def test_cli_provenance_contains_execution_and_fault_sources(self):
         root = Path(maintenance_check.__file__).resolve().parents[1]
-        expected_paths = ["src/alf/maintenance.py", "scripts/maintenance_check.py",
+        expected_paths = ["src/ise/maintenance.py", "scripts/maintenance_check.py",
                           "tests/test_maintenance.py", "benchmarks/maintenance-sim/fixtures/faults.json"]
         with tempfile.TemporaryDirectory() as td, \
              mock.patch.object(maintenance, "validate_layout", return_value={}), \
@@ -224,7 +224,7 @@ class MaintenanceTests(unittest.TestCase):
     def test_reference_submission_metric_includes_required_empty_notes(self):
         def reconstructed(root, language, checkpoint):
             return {"Program.cs": "before\n" if checkpoint == 0 else "after\n"}
-        with mock.patch("alf.maintenance.reconstruct", side_effect=reconstructed):
+        with mock.patch("ise.maintenance.reconstruct", side_effect=reconstructed):
             rows = maintenance.reference_submission_metrics(Path("unused"))
         expected = b'{"architecture_notes":"","files":{"Program.cs":"after\\n"}}'
         self.assertEqual(rows[0]["bytes"], len(expected))

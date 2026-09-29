@@ -85,7 +85,7 @@ The agent may write `.alf/usage.json`:
 }
 ```
 
-Use `alf run --agent command --require-usage --agent-command ...` when the command
+Use `ise run --agent command --require-usage --agent-command ...` when the command
 wrapper must produce usage. The adapter clears stale sidecars before each task;
 missing or malformed fresh artifacts make the task unsuccessful while preserving
 result artifacts. Without the flag, generic usage is optional and unavailable is

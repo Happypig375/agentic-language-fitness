@@ -1,5 +1,7 @@
 # Nu literature assessment before proposal formalization
 
+**Later instruction, 2026-09-30:** the user has reopened a wider [background survey](nu-background-survey-2026-09-30.md). This document preserves the preceding decision-specific assessment; its completion language does not describe the expanded survey's current status.
+
 **2026-09-30 HKT. Literature preparation complete at the scope below; experimental start remains deferred.** The original Nu assignment has a reconciled claim map, challenged primary evidence, an organized Zotero library and explicit reading/access limits. This is a decision-specific assessment, not a systematic review of the whole field, confirmation of firstness or a demonstration of Nu's superiority. The existing D1 recommendation remains separate from the broader Nu motivation.
 
 The practical conclusion is to study **which state, identity, ordering and effect obligations a particular organization helps a maintainer preserve**, under declared tool and resource access. Do not formalize a universal functional-versus-object-oriented advantage, a generic replay invention, or a causal MMCC-versus-ImSim architecture effect from the currently inspected sample pair. The literature supports concrete mechanisms and adverse cases; their net Nu maintenance benefit remains an empirical question.

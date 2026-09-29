@@ -14,21 +14,21 @@ that publishing this boundary does not launch a third sandbox attempt.
 
 ## Delivered boundary
 
-- `src/alf/workstream_e3a.py`: safe submission application, development-only
+- `src/ise/workstream_e3a.py`: safe submission application, development-only
   repair control, source-bound post-trajectory completion scoring. R1–R3 are
   applied without changing the selected tasks, sample, engine-file obligation,
   feedback allowance or repair count.
-- `src/alf/e3a_api.py`: one injected Responses path, exact-context count request,
+- `src/ise/e3a_api.py`: one injected Responses path, exact-context count request,
   repeated instructions, explicit all-turns reasoning context, Decimal
   pre-dispatch reservations, usage/lineage/model/tier checks and no retries.
   The optional HTTPS helper is killable at its deadline; credentials are supplied
   explicitly over its private stdin, never request evidence or candidate mounts.
   It does not read a key automatically. Default/live-authorization gates remain closed.
-- `src/alf/e3a_runner.py`: finite 24-slot controller, append-only/fsynced attempt
+- `src/ise/e3a_runner.py`: finite 24-slot controller, append-only/fsynced attempt
   journal, first/terminal scores, usage coverage, all assigned/unstarted slots,
   paired differences and complete-data descriptive means. Ambiguous dispatches
   keep their reservation. Reports do not equate reservations to observed billing.
-- `src/alf/e3a_sandbox.py`: Linux Docker evaluation only. Fresh tmpfs work and
+- `src/ise/e3a_sandbox.py`: Linux Docker evaluation only. Fresh tmpfs work and
   `/tmp`, read-only root/source/restore-seed/cache mounts, no network, UID 1000,
   dropped capabilities, no-new-privileges, 6 GiB memory/no swap, 2 CPUs, 512 PIDs.
   Trusted offline preparation uses the pinned SDK's library pack outside the
@@ -63,7 +63,7 @@ The regenerated [packet](../protocols/workstream-e3a-v1/review-packet.json) reco
 LF-normalized implementation/test hashes separately from that specification.
 Implementation identity: `9168153f0cc788fe03ddd6596f4c32eaa8b0af93` (the later
 stop-checkpoint commit changes documentation only). Its
-[exact-code CI run](https://github.com/Happypig375/agentic-language-fitness/actions/runs/33992404283)
+[exact-code CI run](https://github.com/Happypig375/interactive-software-evolution/actions/runs/33992404283)
 is **not green**. Uploaded artifacts, not a generated identity, establish scope.
 The Windows job completed successfully; the Linux sandbox-preparation step failed.
 
@@ -102,7 +102,7 @@ Reproduction and CI scopes:
 
 ```text
 python -m unittest discover -s tests -v
-python scripts/alf.py doctor --strict
+python scripts/ise.py doctor --strict
 python scripts/e3a_check.py
 python scripts/e3a_check.py --build-fixtures --output results/e3a-review-fixtures.json
 python scripts/e3a_sandbox_check.py --output results/e3a-sandbox.json

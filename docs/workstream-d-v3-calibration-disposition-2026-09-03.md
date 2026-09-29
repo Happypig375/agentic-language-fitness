@@ -3,7 +3,7 @@
 The ten preregistered, non-counting calibration runs are complete. H (Terra
 medium) is a saturated reference. M (Luna high) and L (Luna medium) were too
 easy in primary order and remained too easy in their preregistered reverse
-orders. Every retained run passed `alf audit`, was protocol-valid and
+orders. Every retained run passed `ise audit`, was protocol-valid and
 accounting-valid, completed 8/8 tasks, and had zero agent/evaluator failures.
 
 Selection and order were used only for difficulty and apparatus calibration.

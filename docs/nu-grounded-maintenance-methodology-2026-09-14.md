@@ -1,6 +1,6 @@
 # A feasible Nu-grounded maintenance study
 
-**Date:** 2026-09-14 HKT. **Inspected ALF source:**
+**Date:** 2026-09-14 HKT. **Inspected ISE source:**
 `7800549dd3ed598a4a7cfda235406ed2114f9537`.
 **Status:** methodological clarification and unadopted recommendation. No new
 engine, workload, comparator, adapter, participant recruitment or live execution
@@ -213,7 +213,7 @@ Two different questions must not be accidentally merged:
 
 Studying existing engine code does not require asking fresh architects to build
 two engines. Conversely, writing a tiny simulation inspired by Nu does not test
-maintenance of Nu itself. The present ALF construction remains the latter kind
+maintenance of Nu itself. The present ISE construction remains the latter kind
 of feasibility material; it is not retrospectively renamed a Nu experiment.
 
 ### A potentially simpler contrast already exists inside Nu

@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf import h_check
+from ise import h_check
 
 
 class HCheckTests(unittest.TestCase):
@@ -167,7 +167,7 @@ class HCheckTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary, \
              patch.object(h_check, "audit", return_value={"status": "failed"}), \
              patch.object(h_check, "write_artifacts") as write, \
-             patch("alf.h_fixtures.build_fixtures") as fixtures:
+             patch("ise.h_fixtures.build_fixtures") as fixtures:
             result = h_check.main(["--output-dir", str(Path(temporary) / "out"), "--build-fixtures"])
         self.assertEqual(result, 1)
         fixtures.assert_not_called()

@@ -41,9 +41,9 @@ Stopped local runtime file SHA-256 values (actual checkout bytes):
 | File | SHA-256 |
 |---|---|
 | `scripts/codex-docker.py` | `cd77b6badd66396d133ae90e799df0f9dbfb739495b7059821652499465e4fab` |
-| `src/alf/e3a_codex.py` | `8eef76c6cd0d6400e262a3bf333a5c7826786bb41380efcb5085fbe4cc8a7906` |
-| `src/alf/e3a_runner.py` | `8a224b30ae87f59e568c8db9652328eb2cfe5618c6b0bb151410a7214d58254a` |
-| `src/alf/workstream_e3a.py` | `80603be31f27b68bba372e119d6656785722f3c7dea89ad3b09bdda734bc1499` |
+| `src/ise/e3a_codex.py` | `8eef76c6cd0d6400e262a3bf333a5c7826786bb41380efcb5085fbe4cc8a7906` |
+| `src/ise/e3a_runner.py` | `8a224b30ae87f59e568c8db9652328eb2cfe5618c6b0bb151410a7214d58254a` |
+| `src/ise/workstream_e3a.py` | `80603be31f27b68bba372e119d6656785722f3c7dea89ad3b09bdda734bc1499` |
 
 ## Native preparation attempts: five failures, no sixth attempt
 

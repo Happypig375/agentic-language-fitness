@@ -302,7 +302,7 @@ but does not yet answer it.
 
 ## Sources
 
-[^1]: *agentic-language-fitness*, [standalone maintenance review packet](../docs/maintenance-sim-human-review-2026-09-12.md), [construction configuration](../benchmarks/maintenance-sim/construction.json), [measurement implementation](../src/alf/maintenance.py), and [retained evidence index](../reports/maintenance-sim-construction-2026-09-12/evidence/index.json), inspected at `cea02738a4c40a1a903d1f7293964c9627569c31`. Exact source locations and historical identities are recorded in the [companion evidence ledger](maintenance-research-verifiability-sources-2026-09-13.md).
+[^1]: *interactive-software-evolution*, [standalone maintenance review packet](../docs/maintenance-sim-human-review-2026-09-12.md), [construction configuration](../benchmarks/maintenance-sim/construction.json), [measurement implementation](../src/ise/maintenance.py), and [retained evidence index](../reports/maintenance-sim-construction-2026-09-12/evidence/index.json), inspected at `cea02738a4c40a1a903d1f7293964c9627569c31`. Exact source locations and historical identities are recorded in the [companion evidence ledger](maintenance-research-verifiability-sources-2026-09-13.md).
 
 [^2]: Duc Minh Le, Suhrid Karthik, Marcelo Schmitt Laser, and Nenad Medvidovic. “Architectural Decay as Predictor of Issue- and Change-Proneness.” *ICSA*, 92–103, 2021. DOI [10.1109/ICSA51549.2021.00017](https://doi.org/10.1109/ICSA51549.2021.00017). [Author preprint, v1](https://arxiv.org/pdf/2102.09835v1), §§III–V.
 

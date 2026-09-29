@@ -24,8 +24,8 @@ next decision gate are in `docs/difficulty-v1-results-2026-08-30.md`.
 The freeze commands used were:
 
 ```text
-python scripts/alf.py protocol validate --definition protocols/difficulty-v1/definition.json
-python scripts/alf.py protocol freeze --definition protocols/difficulty-v1/definition.json --output results/difficulty-v1/resolved-manifest.json
+python scripts/ise.py protocol validate --definition protocols/difficulty-v1/definition.json
+python scripts/ise.py protocol freeze --definition protocols/difficulty-v1/definition.json --output results/difficulty-v1/resolved-manifest.json
 ```
 
 The four ordered pilot runs use `--order williams-01`, positions 1 through 4,
@@ -42,8 +42,8 @@ pilot is non-counting and cannot authorize a formal run without a later freeze.
 The exact frozen run commands are:
 
 ```text
-python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json run --language fsharp --agent command --model gpt-5.4 --timeout 600 --require-usage --protocol-manifest results/difficulty-v1/resolved-manifest.json --block-id pilot-01 --order williams-01 --attempt-id pilot-01-fsharp-descriptive-01 --position 1 --output results/difficulty-v1
-python scripts/alf.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json run --language csharp --agent command --model gpt-5.4 --timeout 600 --require-usage --protocol-manifest results/difficulty-v1/resolved-manifest.json --block-id pilot-01 --order williams-01 --attempt-id pilot-01-csharp-descriptive-01 --position 2 --output results/difficulty-v1
-python scripts/alf.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json run --language csharp --agent command --model gpt-5.4 --timeout 600 --require-usage --protocol-manifest results/difficulty-v1/resolved-manifest.json --block-id pilot-01 --order williams-01 --attempt-id pilot-01-csharp-deterministic-01 --position 3 --output results/difficulty-v1
-python scripts/alf.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json run --language fsharp --agent command --model gpt-5.4 --timeout 600 --require-usage --protocol-manifest results/difficulty-v1/resolved-manifest.json --block-id pilot-01 --order williams-01 --attempt-id pilot-01-fsharp-deterministic-01 --position 4 --output results/difficulty-v1
+python scripts/ise.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json run --language fsharp --agent command --model gpt-5.4 --timeout 600 --require-usage --protocol-manifest results/difficulty-v1/resolved-manifest.json --block-id pilot-01 --order williams-01 --attempt-id pilot-01-fsharp-descriptive-01 --position 1 --output results/difficulty-v1
+python scripts/ise.py --manifest benchmarks/successor/representation-v1/descriptive.manifest.json run --language csharp --agent command --model gpt-5.4 --timeout 600 --require-usage --protocol-manifest results/difficulty-v1/resolved-manifest.json --block-id pilot-01 --order williams-01 --attempt-id pilot-01-csharp-descriptive-01 --position 2 --output results/difficulty-v1
+python scripts/ise.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json run --language csharp --agent command --model gpt-5.4 --timeout 600 --require-usage --protocol-manifest results/difficulty-v1/resolved-manifest.json --block-id pilot-01 --order williams-01 --attempt-id pilot-01-csharp-deterministic-01 --position 3 --output results/difficulty-v1
+python scripts/ise.py --manifest benchmarks/successor/representation-v1/deterministic.manifest.json run --language fsharp --agent command --model gpt-5.4 --timeout 600 --require-usage --protocol-manifest results/difficulty-v1/resolved-manifest.json --block-id pilot-01 --order williams-01 --attempt-id pilot-01-fsharp-deterministic-01 --position 4 --output results/difficulty-v1
 ```

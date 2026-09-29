@@ -81,7 +81,7 @@ The extraction was bound to `cea02738a4c40a1a903d1f7293964c9627569c31`:
 | Area | Exact inspected locations | Extracted result |
 |---|---|---|
 | Current authority | [construction.json](../benchmarks/maintenance-sim/construction.json), lines 2–16 and 37–39 | Construction-only; candidate/live false, allocation unset/zero, caps inactive. |
-| Measurement implementation | [maintenance.py](../src/alf/maintenance.py), lines 268–320 | Canonical envelope/component bytes and offline token proxy; reference changed-file output uses empty architecture notes and excludes real notes/framing. |
+| Measurement implementation | [maintenance.py](../src/ise/maintenance.py), lines 268–320 | Canonical envelope/component bytes and offline token proxy; reference changed-file output uses empty architecture notes and excludes real notes/framing. |
 | Faults/applicability | Same source, lines 403–583; [tests](../tests/test_maintenance.py), lines 283–349 | Four semantic fault families in two languages; inherited failure and recovery distinctions tested. |
 | Pair/checkpoint structure | Same tests, lines 189–205; [index](../reports/maintenance-sim-construction-2026-09-12/evidence/index.json), lines 7–18 and 47 | Sixteen predecessor/task pairs, 18 trusted targets, 27 focused tests; no independent workload replication. |
 | Retained behavior evidence | [report.json](../reports/maintenance-sim-construction-2026-09-12/evidence/report.json), lines 2–12 and 5067–5069 | Trusted-only execution evidence; no candidate/live runs. |
@@ -93,7 +93,7 @@ line numbers. The retained index's base `abdc68c...` and earlier source inspecti
 `663d4ac...` remain historical identities. The packet's old pending-publication-CI
 wording is not evidence that the currently inspected commit is failing:
 `cea02738...` passed exact Linux/Windows CI
-[34758415546](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34758415546)
+[34758415546](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34758415546)
 in the preceding publication. That check is not the new research publication's
 CI and is not human approval.
 

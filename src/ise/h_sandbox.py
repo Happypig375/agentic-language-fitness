@@ -18,7 +18,7 @@ class HSandboxEvaluator:
             raise ValueError("unsupported H language")
         if fixture_image_id is not None and spec.get("execution_authorized") is True:
             raise ValueError("fixture image cannot be used by an activated H specification")
-        self._temporary = tempfile.TemporaryDirectory(prefix="alf-h-baseline-")
+        self._temporary = tempfile.TemporaryDirectory(prefix="ise-h-baseline-")
         root = Path(self._temporary.name).resolve()
         base = root / "baseline"
         base.mkdir()

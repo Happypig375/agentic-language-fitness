@@ -8,9 +8,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.models import ProcessResult, Usage
-from alf.agents.command import CommandAgent
-from alf.protocol import (
+from ise.models import ProcessResult, Usage
+from ise.agents.command import CommandAgent
+from ise.protocol import (
     EXPECTED_IMAGE_ID,
     WORKSTREAM_D_V3_IMAGE_ID,
     canonical_json_hash,
@@ -19,8 +19,8 @@ from alf.protocol import (
     tracked_text_sha256,
     validate_cell,
 )
-from alf.runner import _prepare_protocol_run, run_chain
-from alf.workstream_d import (
+from ise.runner import _prepare_protocol_run, run_chain
+from ise.workstream_d import (
     ASSIGNMENT_SHA256,
     CONFIGURATIONS,
     ROWS,
@@ -464,7 +464,7 @@ class WorkstreamDFreezeTests(unittest.TestCase):
 
     def _freeze(self) -> dict:
         definition = self.repo.read(CHILD_PATHS["H"])
-        with patch("alf.protocol._git", side_effect=["", "a" * 40]):
+        with patch("ise.protocol._git", side_effect=["", "a" * 40]):
             return freeze_cell(
                 self.repo.root,
                 CHILD_PATHS["H"],
@@ -502,8 +502,8 @@ class WorkstreamDFreezeTests(unittest.TestCase):
 
         path = self._write_manifest(manifest)
         with (
-            patch("alf.protocol._require_ignored"),
-            patch("alf.protocol._git", side_effect=["", "a" * 40]),
+            patch("ise.protocol._require_ignored"),
+            patch("ise.protocol._git", side_effect=["", "a" * 40]),
         ):
             loaded = load_frozen_manifest(self.repo.root, path)
         self.assertEqual(loaded, manifest)
@@ -512,7 +512,7 @@ class WorkstreamDFreezeTests(unittest.TestCase):
         for configuration, relative in CHILD_PATHS.items():
             with self.subTest(configuration=configuration):
                 definition = self.repo.read(relative)
-                with patch("alf.protocol._git", side_effect=["", "a" * 40]):
+                with patch("ise.protocol._git", side_effect=["", "a" * 40]):
                     manifest = freeze_cell(
                         self.repo.root,
                         relative,
@@ -531,7 +531,7 @@ class WorkstreamDFreezeTests(unittest.TestCase):
         previous = Path.cwd()
         try:
             os.chdir(outside.name)
-            with patch("alf.protocol._git", side_effect=["", "a" * 40]):
+            with patch("ise.protocol._git", side_effect=["", "a" * 40]):
                 freeze_cell(
                     self.repo.root,
                     CHILD_PATHS["H"],
@@ -577,8 +577,8 @@ class WorkstreamDFreezeTests(unittest.TestCase):
                 manifest["manifest_sha256"] = canonical_json_hash(manifest)
                 path = self._write_manifest(manifest)
                 with (
-                    patch("alf.protocol._require_ignored"),
-                    patch("alf.protocol._git", side_effect=["", "a" * 40]),
+                    patch("ise.protocol._require_ignored"),
+                    patch("ise.protocol._git", side_effect=["", "a" * 40]),
                     self.assertRaisesRegex(ValueError, "Workstream D"),
                 ):
                     load_frozen_manifest(self.repo.root, path)
@@ -645,8 +645,8 @@ class WorkstreamDRunnerTests(unittest.TestCase):
         }
         arguments.update(overrides)
         with (
-            patch("alf.runner.load_frozen_manifest", return_value=self.protocol),
-            patch("alf.runner.run_process", return_value=self._image_result()),
+            patch("ise.runner.load_frozen_manifest", return_value=self.protocol),
+            patch("ise.runner.run_process", return_value=self._image_result()),
         ):
             return _prepare_protocol_run(**arguments)
 
@@ -830,13 +830,13 @@ class WorkstreamDRunnerTests(unittest.TestCase):
 
         with (
             patch(
-                "alf.runner._prepare_protocol_run",
+                "ise.runner._prepare_protocol_run",
                 return_value=(protocol, "agent", 1),
             ),
-            patch("alf.runner.init_workspace", side_effect=initialize),
-            patch("alf.runner.make_agent", return_value=object()),
+            patch("ise.runner.init_workspace", side_effect=initialize),
+            patch("ise.runner.make_agent", return_value=object()),
             patch(
-                "alf.runner.evaluate_project",
+                "ise.runner.evaluate_project",
                 return_value={
                     "ok": False,
                     "build": {
@@ -846,7 +846,7 @@ class WorkstreamDRunnerTests(unittest.TestCase):
                     },
                 },
             ),
-            patch("alf.runner.environment_snapshot", return_value={}),
+            patch("ise.runner.environment_snapshot", return_value={}),
         ):
             run_dir = run_chain(
                 root=self.repo.root,
@@ -918,26 +918,26 @@ class WorkstreamDRunnerTests(unittest.TestCase):
             (workspace / ".alf" / "usage.json").write_text(json.dumps(sidecar), encoding="utf-8")
             return ProcessResult(["command"], 124, "", "", 0.01)
         with (
-            patch("alf.runner._prepare_protocol_run", return_value=(protocol, "command", 1)),
-            patch("alf.runner.init_workspace", side_effect=initialize),
-            patch("alf.runner.artifact_plan", return_value={}),
-            patch("alf.runner.merge_workspace_checks", return_value={"file_exists": [], "text_contains": [], "text_not_contains": []}),
+            patch("ise.runner._prepare_protocol_run", return_value=(protocol, "command", 1)),
+            patch("ise.runner.init_workspace", side_effect=initialize),
+            patch("ise.runner.artifact_plan", return_value={}),
+            patch("ise.runner.merge_workspace_checks", return_value={"file_exists": [], "text_contains": [], "text_not_contains": []}),
             patch(
-                "alf.runner.make_agent",
+                "ise.runner.make_agent",
                 side_effect=lambda *_args, **kwargs: CommandAgent(
                     "command",
                     require_usage=True,
                     expected_protocol=kwargs.get("expected_protocol"),
                 ),
             ),
-            patch("alf.runner.evaluate_project", side_effect=[
+            patch("ise.runner.evaluate_project", side_effect=[
                 {"ok": True}, {"ok": False, "build": {"returncode": 124, "timed_out": True, "missing_executable": False}},
             ]),
-            patch("alf.runner.environment_snapshot", return_value={}),
-            patch("alf.runner.snapshot_repository", return_value={}),
-            patch("alf.runner.git_head", return_value="a" * 40),
-            patch("alf.runner.git_diff_metrics", return_value={}),
-            patch("alf.agents.command.run_process", side_effect=command_process),
+            patch("ise.runner.environment_snapshot", return_value={}),
+            patch("ise.runner.snapshot_repository", return_value={}),
+            patch("ise.runner.git_head", return_value="a" * 40),
+            patch("ise.runner.git_diff_metrics", return_value={}),
+            patch("ise.agents.command.run_process", side_effect=command_process),
         ):
             run_dir = run_chain(
                 root=self.repo.root, manifest=benchmark, language="fsharp",

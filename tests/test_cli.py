@@ -5,7 +5,7 @@ from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.cli import (
+from ise.cli import (
     build_parser,
     cmd_e2_audit,
     cmd_e2_check,
@@ -42,8 +42,8 @@ class CliWorkstreamETests(unittest.TestCase):
         report = {"report_sha256": "f" * 64, "totals": {"run_count": 10, "task_count": 80}}
         args = self.arguments()
         stream = io.StringIO()
-        with patch("alf.cli.analyze_archive", return_value=report) as analyze, \
-             patch("alf.cli.write_report") as writer, redirect_stdout(stream):
+        with patch("ise.cli.analyze_archive", return_value=report) as analyze, \
+             patch("ise.cli.write_report") as writer, redirect_stdout(stream):
             self.assertEqual(cmd_workstream_e(args), 0)
         summary = json.loads(stream.getvalue())
         self.assertEqual(summary["runs"], 10)
@@ -55,8 +55,8 @@ class CliWorkstreamETests(unittest.TestCase):
 
     def test_integrity_failure_does_not_call_writer(self):
         args = self.arguments()
-        with patch("alf.cli.analyze_archive", side_effect=ValueError("integrity")), \
-             patch("alf.cli.write_report") as writer:
+        with patch("ise.cli.analyze_archive", side_effect=ValueError("integrity")), \
+             patch("ise.cli.write_report") as writer:
             with self.assertRaisesRegex(ValueError, "integrity"):
                 cmd_workstream_e(args)
         writer.assert_not_called()
@@ -123,13 +123,13 @@ class CliWorkstreamE2Tests(unittest.TestCase):
             "schedule": [{}] * 90,
         }
         stream = io.StringIO()
-        with patch("alf.cli.freeze_definition", return_value=frozen) as freeze, redirect_stdout(stream):
+        with patch("ise.cli.freeze_definition", return_value=frozen) as freeze, redirect_stdout(stream):
             self.assertEqual(cmd_e2_freeze(self.arguments("freeze")), 0)
         self.assertEqual(json.loads(stream.getvalue())["states"], 18)
         freeze.assert_called_once()
 
         with patch(
-            "alf.cli.check_definition",
+            "ise.cli.check_definition",
             return_value={"ok": False, "errors": ["synthetic"], "definition_sha256": "a" * 64},
         ), redirect_stdout(io.StringIO()):
             self.assertEqual(cmd_e2_check(self.arguments("check")), 1)
@@ -139,7 +139,7 @@ class CliWorkstreamE2Tests(unittest.TestCase):
         stream = io.StringIO()
         synthetic = '{"definition_sha256":"' + "a" * 64 + '"}'
         with patch("pathlib.Path.read_text", return_value=synthetic), patch(
-            "alf.cli.audit_report",
+            "ise.cli.audit_report",
             return_value={"ok": True, "errors": [], "report_sha256": "b" * 64},
         ) as audit, redirect_stdout(stream):
             self.assertEqual(cmd_e2_audit(args), 0)
@@ -150,7 +150,7 @@ class CliWorkstreamE2Tests(unittest.TestCase):
         report = {"report_sha256": "c" * 64, "samples": [{}] * 90}
         stream = io.StringIO()
         args = self.arguments("run")
-        with patch("alf.cli.run_baseline", return_value=report) as run, redirect_stdout(stream):
+        with patch("ise.cli.run_baseline", return_value=report) as run, redirect_stdout(stream):
             self.assertEqual(cmd_e2_run(args), 0)
         kwargs = run.call_args.kwargs
         self.assertEqual(kwargs["runner_git_sha"], "a" * 40)

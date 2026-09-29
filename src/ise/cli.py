@@ -89,7 +89,7 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 def cmd_matrix(args: argparse.Namespace) -> int:
     if args.protocol_manifest or args.block_id or args.attempt_id or args.order or args.position:
-        raise ValueError("protocol runs must be invoked with `alf run`; matrix does not accept protocol position arguments")
+        raise ValueError("protocol runs must be invoked with `ise run`; matrix does not accept protocol position arguments")
     if args.require_usage and args.agent != "command":
         raise ValueError("--require-usage is valid only with --agent command")
     root, manifest = _root_and_manifest(args)
@@ -421,7 +421,7 @@ def _sha40(value: str) -> str:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="alf", description="Agentic Language Fitness benchmark harness")
+    parser = argparse.ArgumentParser(prog="ise", description="Interactive Software Evolution benchmark harness")
     parser.add_argument("--root", help="Repository root; auto-detected by default")
     parser.add_argument("--manifest", default=str(DEFAULT_MANIFEST), help="Manifest path relative to root")
     sub = parser.add_subparsers(dest="command", required=True)

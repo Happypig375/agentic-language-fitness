@@ -128,7 +128,7 @@ class CodexAgent(Agent):
         prompt_file = alf_dir / "TASK.md"
         prompt_file.write_text(prompt, encoding="utf-8")
         instructions = (
-            "You are operating inside an Agentic Language Fitness benchmark workspace. "
+            "You are operating inside an Interactive Software Evolution benchmark workspace. "
             "Implement the task in .alf/TASK.md. Work only inside this workspace. "
             "Do not search parent directories for tests, manifests, or gold answers. "
             "Preserve the line-delimited JSON protocol and existing behavior. "

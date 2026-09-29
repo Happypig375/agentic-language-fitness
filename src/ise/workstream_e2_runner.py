@@ -354,7 +354,7 @@ def _static_preflight(
         language = state["language"]
         stage = state["stage"]
         attempt["current_position"] = state["state_id"]
-        with tempfile.TemporaryDirectory(prefix="alf-e2-preflight-") as temporary:
+        with tempfile.TemporaryDirectory(prefix="ise-e2-preflight-") as temporary:
             workspace = Path(temporary)
             _materialize(root, manifest, language, stage, workspace)
             observed, _ = _snapshot(workspace, encoding)
@@ -451,7 +451,7 @@ def run_baseline(
         states = {(state["language"], state["stage"]): state for state in definition_data["states"]}
         encoding = _get_encoding()
 
-        with tempfile.TemporaryDirectory(prefix="alf-e2-runtime-") as runtime_temporary:
+        with tempfile.TemporaryDirectory(prefix="ise-e2-runtime-") as runtime_temporary:
             runtime_home = Path(runtime_temporary)
             for directory in (runtime_home / "tmp", runtime_home / "dotnet-home", runtime_home / "nuget-http-cache"):
                 directory.mkdir(parents=True, exist_ok=True)
@@ -489,7 +489,7 @@ def run_baseline(
                 stage = row["stage"]
                 state = states[(language, stage)]
                 attempt["current_position"] = position
-                with tempfile.TemporaryDirectory(prefix="alf-e2-sample-") as temporary:
+                with tempfile.TemporaryDirectory(prefix="ise-e2-sample-") as temporary:
                     workspace = Path(temporary)
                     _materialize(root, manifest_data, language, stage, workspace)
                     observed, _ = _snapshot(workspace, encoding)

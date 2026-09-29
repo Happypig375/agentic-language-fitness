@@ -2,8 +2,8 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from alf import h0
-from alf.h_workload import cases_for, oracle_additions, ordered_filenames, public_payload, source_for
+from ise import h0
+from ise.h_workload import cases_for, oracle_additions, ordered_filenames, public_payload, source_for
 
 ROOT = Path(__file__).resolve().parents[1]
 

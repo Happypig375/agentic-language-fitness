@@ -2,8 +2,8 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from alf.audit import audit_run, audit_representation_checkpoint
-from alf.runner import _derive_protocol_disposition
+from ise.audit import audit_run, audit_representation_checkpoint
+from ise.runner import _derive_protocol_disposition
 
 class AuditTests(unittest.TestCase):
     def test_c3_checkpoint_four_baselines_are_interpretable(self):

@@ -33,11 +33,11 @@ The paper combines ranked recommendations, several evaluated candidates and outc
 
 Figure 9's Python dictionary repeats the same `SVR` key for linear and RBF grids. If executed literally, the latter replaces the former; a full evaluator is needed to reconcile intended and executed comparisons. The PDF supplies parameter grids and printed scores, but no linked complete evaluator or run archive. Targeted title/author/artifact searches did not identify a verified companion repository in this pass. This is an acquisition/reconstruction limit, not evidence that no artifact exists.
 
-Costs, human use and broader deployment remain unmeasured; the paper explicitly proposes real-world integration and wider evaluation as future work. Its future idea of simulating human subjects with LLMs is neither performed evidence nor authorization for ALF workers. No clinical or deployment conclusion is adopted from these illustrative datasets.
+Costs, human use and broader deployment remain unmeasured; the paper explicitly proposes real-world integration and wider evaluation as future work. Its future idea of simulating human subjects with LLMs is neither performed evidence nor authorization for ISE workers. No clinical or deployment conclusion is adopted from these illustrative datasets.
 
-## Consequence for ALF
+## Consequence for ISE
 
-**Narrow the uniqueness claim further:** executable evaluation of LLM recommendations against conventional selection rules already exists. ALF cannot claim that transition as new. Its candidate contribution remains whether **decision-time architectural responsibility information** improves prospective coding-agent maintenance choices beyond a credible default/ordinary review.
+**Narrow the uniqueness claim further:** executable evaluation of LLM recommendations against conventional selection rules already exists. ISE cannot claim that transition as new. Its candidate contribution remains whether **decision-time architectural responsibility information** improves prospective coding-agent maintenance choices beyond a credible default/ordinary review.
 
 **Retain with source:** compare declared actions on common outcomes, record ties/adverse cases, and distinguish verbal rationale from mechanism. **Strengthen:** freeze the first choice, fallback or any adaptive search policy, its primary utility and full cost before outcomes; do not compare a selected portfolio winner with a single baseline choice or switch metrics afterward. Preserve independent decision profiles separately from executor repetitions.
 

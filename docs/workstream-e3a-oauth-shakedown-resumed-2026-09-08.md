@@ -10,7 +10,7 @@ attempt-02 identities and earlier freeze discussion below remain history.
 ## Explicit allowance
 
 Following parser repair `16737af3f67ccaa0f47671c85f07bdbab7062b7a` and its
-successful [Linux/Windows CI](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34239221036),
+successful [Linux/Windows CI](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34239221036),
 the user answered `continue` to the request for a fresh bounded shakedown, then
 said: “increase dispatch count to 5 in the agentic instructions”.
 
@@ -108,7 +108,7 @@ bytes. No API key, relay or native-client replacement is introduced.
 ## Attempt 02: successful live execution
 
 Commit `5e9eac2ea59188be63191d81240b51f714325180` passed exact
-[Linux/Windows CI 34242289358](https://github.com/Happypig375/agentic-language-fitness/actions/runs/34242289358),
+[Linux/Windows CI 34242289358](https://github.com/Happypig375/interactive-software-evolution/actions/runs/34242289358),
 then the new remote checkout was verified clean at that SHA. The existing
 PowerShell invocation ran once against `/tmp/alf-e3a-shakedown-xLRAgY` using
 only a temporary copy of the complete local `C:\Users\hadri\.codex\auth.json`.

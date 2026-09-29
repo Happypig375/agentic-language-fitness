@@ -4,7 +4,7 @@ import argparse, hashlib, json, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from alf import maintenance  # noqa: E402
+from ise import maintenance  # noqa: E402
 
 
 def main(argv=None) -> int:
@@ -23,7 +23,7 @@ def main(argv=None) -> int:
         tracked += [base / "guidance" / f"{x}.md" for x in maintenance.LANGUAGES]
         tracked += [base / "episodes" / f"{i:02d}.md" for i in range(1, 9)]
         tracked += [base / "fixtures" / "cases.json"]
-        tracked += [args.root / "src" / "alf" / "maintenance.py",
+        tracked += [args.root / "src" / "ise" / "maintenance.py",
                     args.root / "scripts" / "maintenance_check.py",
                     args.root / "tests" / "test_maintenance.py",
                     base / "fixtures" / "faults.json"]

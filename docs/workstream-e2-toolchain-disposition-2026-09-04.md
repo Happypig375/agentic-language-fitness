@@ -6,7 +6,7 @@ Date: 2026-09-04
 
 Workstream E2 completed its frozen, model-free measurement and independent
 report review. The successful attempt was GitHub Actions run
-[`33799957422`](https://github.com/Happypig375/agentic-language-fitness/actions/runs/33799957422)
+[`33799957422`](https://github.com/Happypig375/interactive-software-evolution/actions/runs/33799957422)
 at runner commit `b953dac54c03087ae46689bc62a3221c3c9d3f97`.
 
 The accepted identities are:

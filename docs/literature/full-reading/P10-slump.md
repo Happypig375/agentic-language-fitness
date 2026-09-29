@@ -34,6 +34,6 @@ DIR classifies an integration file as importing at least three distinct local ba
 
 The current scorer names `claude-sonnet-4-6`, asks for eight calls but launches a twenty-turn CLI allowance, retries unparseable verdicts up to three times, and can skip components after errors. Its summary averages the successfully scored subset and separately counts ERR. An exact reproduction must pin actual judge identity, enforce the intended search budget, report missing verdicts and freeze the denominator. The release's model alias is evidence about this commit, not proof of the publication run's dated judge. The CLI helper permits unrestricted tools; none were launched in this inspection. No solver/helper implementation or raw-run reproduction was established by this bounded source inspection.
 
-## ALF implication
+## ISE implication
 
 Retain an explicit ledger of accepted requirements, file state and unresolved obligations. Treat end-state specification recovery, source inheritance and conversation policy as separate variables. Do not claim novelty for persistent decision memory or attribute the upfront/emergent gap solely to context loss. A future same-predecessor comparison would need equal commitments, independently checked behavior, a pinned memory policy and full auxiliary/retry accounting before it could test a causal context hypothesis.

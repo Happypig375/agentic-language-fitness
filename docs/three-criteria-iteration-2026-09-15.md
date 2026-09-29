@@ -26,7 +26,7 @@ The focused discovery also recovered direct **architecture-pattern recommendatio
 
 The previous proposal explicitly compared the recommendation with size/API rules. It could therefore appear successful even when the analysis always recommends the same generally stronger package.
 
-**Synthetic example, not ALF data:** suppose A has success probability 0.8 and B 0.5 for each of two profiles. A detailed rule always choosing A beats a size rule choosing B by 0.3. It improves on always-A by exactly zero. The result establishes a package difference, not a need for profile analysis.
+**Synthetic example, not ISE data:** suppose A has success probability 0.8 and B 0.5 for each of two profiles. A detailed rule always choosing A beats a size rule choosing B by 0.3. It improves on always-A by exactly zero. The result establishes a package difference, not a need for profile analysis.
 
 A different synthetic panel makes A better on profile 1 and B better on profile 2, with probabilities (0.9,0.4) and (0.4,0.9). Correct profile-sensitive choices have value 0.9 while either constant has value 0.65. That is the kind of incremental choice result the stronger study is trying to detect, without assuming it exists in Nu.
 
@@ -105,6 +105,6 @@ for shared_outcome in [F(0), F(1,3), F(1)]:
     assert shared_outcome - shared_outcome == 0
 ```
 
-No ALF runtime suite, Nu game, candidate model or paper replication was executed. New source readings were selected primary HTML/metadata and existing committed reconstruction notes, not new full-PDF completion. The requested Deep Research app did not resolve in available connector discovery; Scite and direct primary-source browsing performed the bounded research. No substitute service was installed or autonomous research job claimed.
+No ISE runtime suite, Nu game, candidate model or paper replication was executed. New source readings were selected primary HTML/metadata and existing committed reconstruction notes, not new full-PDF completion. The requested Deep Research app did not resolve in available connector discovery; Scite and direct primary-source browsing performed the bounded research. No substitute service was installed or autonomous research job claimed.
 
 Changes are documentation-only: PLAN, AGENTS, the active proposal and this review/source record. Validate the exact commit's changed-file set and change-scoped CI, stating skips. Human review, model allocation and all previous frozen results remain unchanged.

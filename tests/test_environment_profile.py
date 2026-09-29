@@ -4,13 +4,13 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from alf.environment_profile import (
+from ise.environment_profile import (
     EnvironmentProfileError,
     environment_profile_sha256,
     load_environment_profile,
     validate_container_route,
 )
-from alf.runner import route_profile_identity
+from ise.runner import route_profile_identity
 
 
 ROOT = Path(__file__).parents[1]

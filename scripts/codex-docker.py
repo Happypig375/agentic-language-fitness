@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one ALF command-adapter task in an isolated Codex Docker container."""
+"""Run one ISE command-adapter task in an isolated Codex Docker container."""
 from __future__ import annotations
 
 import argparse
@@ -21,14 +21,14 @@ from typing import Sequence
 
 # The command adapter launches this script with cwd set to the task workspace.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from alf.agents.codex import parse_codex_jsonl
-from alf.environment_profile import (
+from ise.agents.codex import parse_codex_jsonl
+from ise.environment_profile import (
     environment_profile_sha256,
     load_environment_profile,
     validate_container_route,
 )
-from alf.host_memory import evaluate_host_memory, parse_requirement
-from alf.e3a_sandbox import bounded_process
+from ise.host_memory import evaluate_host_memory, parse_requirement
+from ise.e3a_sandbox import bounded_process
 
 IMAGE_DEFAULT = "alf-codex:0.149.1"
 E3A_MODEL_CATALOG_SHA256 = "c18214b1ba88ab9bd164753115324a7a29c0582e8d071f7b3babf749d892f549"
@@ -36,7 +36,7 @@ E3A_NATIVE_SHA256 = "72cf14453c1879996b970accc7de9aa114bf570e586230799a429d0741b
 CONTAINER_CODEX_HOME = "/tmp/alf-codex-home"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SAFETY_PROMPT = (
-    "You are operating inside an Agentic Language Fitness benchmark workspace. "
+    "You are operating inside an Interactive Software Evolution benchmark workspace. "
     "Implement the task provided below. Work only inside /workspace; do not search "
     "parent directories or for gold answers/evaluator files. Preserve existing behavior "
     "and finish with the repository edited in place.\n\n"
@@ -121,7 +121,7 @@ def build_docker_argv(
     for path in (workspace, auth_home):
         if path is not None and "," in str(path):
             raise ValueError("Docker mount paths containing commas are unsupported")
-    name = f"alf-codex-{uuid.uuid4().hex[:16]}"
+    name = f"ise-codex-{uuid.uuid4().hex[:16]}"
     resolved_memory = memory or os.environ.get("ALF_DOCKER_MEMORY", "2g")
     resolved_cpus = cpus if cpus is not None else int(os.environ.get("ALF_DOCKER_CPUS", "2"))
     resolved_pids = pids_limit if pids_limit is not None else int(os.environ.get("ALF_DOCKER_PIDS", "256"))
@@ -269,7 +269,7 @@ def temporary_auth_copy(source: Path | None) -> Path | None:
     """
     if source is None:
         return None
-    home = Path(tempfile.mkdtemp(prefix="alf-auth-home-"))
+    home = Path(tempfile.mkdtemp(prefix="ise-auth-home-"))
     target = home / "auth.json"
     try:
         with source.open("rb") as source_handle:

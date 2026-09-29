@@ -1,6 +1,6 @@
 # Historical exploratory paired result (2026-08-26)
 
-> **Provenance status as of 2026-08-29:** the exact raw run directory was recovered and hash-preserved; see `docs/historical-run-recovery-2026-08-29.md`. The legacy artifacts fail the hardened `alf audit` schema checks, so the figures below remain a historical smoke-test summary. Exclude this pair from formal aggregates, variance estimation, power calculations, and language-effect claims. Do not reconstruct or repair raw records from these totals.
+> **Provenance status as of 2026-08-29:** the exact raw run directory was recovered and hash-preserved; see `docs/historical-run-recovery-2026-08-29.md`. The legacy artifacts fail the hardened `ise audit` schema checks, so the figures below remain a historical smoke-test summary. Exclude this pair from formal aggregates, variance estimation, power calculations, and language-effect claims. Do not reconstruct or repair raw records from these totals.
 
 The container-isolated rerun reportedly completed both inherited tasks for both languages: F# 2/2 and C# 2/2, with all cumulative behavioral cases passing. This was one stochastic run per language over two small tasks; it does not estimate a language effect, uncertainty interval, significance, or causal conclusion.
 

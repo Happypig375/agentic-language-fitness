@@ -41,7 +41,7 @@ The four newly supplied S19/S21/S24/S25 papers are fully read, and S01/ExTrA are
 
 ## Existing Zotero collection and new acquisitions
 
-Destination: **ALF - Core Paper Reading Queue (2026-09-15)**, `PKLXQNEE`, user library 1. Current verified total: **53 parent works and 54 PDFs**. All stored PDF hashes match their acquisition checkpoints. The supplied S02/S04/S07 PDFs are preserved and their reading notes/tags updated.
+Destination: **ISE - Core Paper Reading Queue (2026-09-15)**, `PKLXQNEE`, user library 1. Current verified total: **53 parent works and 54 PDFs**. All stored PDF hashes match their acquisition checkpoints. The supplied S02/S04/S07 PDFs are preserved and their reading notes/tags updated.
 
 | ID / work | DOI or primary identity | Zotero parent | Attachment / access status |
 | --- | --- | --- | --- |
