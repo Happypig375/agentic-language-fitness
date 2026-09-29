@@ -1,0 +1,63 @@
+# S84 — Inheritance, change locality and task-dependent maintenance
+
+**Complete publication reading, 2026-09-30.** Gordon L. Freeman Jr. and Stephen R. Schach, *The task-dependent nature of the maintenance of object-oriented programs*, Journal of Systems and Software 76(2), 195–206 (2005; online 20 June 2004), [DOI 10.1016/j.jss.2004.05.010](https://doi.org/10.1016/j.jss.2004.05.010). Zotero parent `DW9PV4L4`, user-library publisher PDF `K89WTP5N`, note `EX63WPSR`.
+
+All twelve pages, two figures, five tables, scoring rules and eleven references were read. Five new page renders cover every figure/table; the first page was checked at acquisition. The PDF has 388,906 bytes and SHA-256 `3b346c39af9e6c155e116d1a7b1f48d6c2de10b005e32c93f6567769ca4d77a0`. Printed participant-level times and rounded scores were transcribed and used to reconstruct summaries and reported tests. This is a bounded analysis of published numbers, not acquisition of original edits, unrounded grading or experimental reproduction. Freeman's 2003 dissertation, source variants, complete rubrics and questionnaires remain unavailable in this segment.
+
+## Live claims and the actual intervention
+
+B01/B02/B10/B11/B12 concern whether a source organization is universally easier to maintain, how anticipated changes interact with shared behavior, and what counts as successful maintenance. The three experiments intentionally select tasks expected to favor inheritance, favor a flat version, or leave them similar. They are relevant examples of opposing maintenance consequences, not an estimate of the prevalence or average benefit of either design in real work.
+
+One teaching loan-report application, originally structured COBOL, was redesigned in C++. The authors ran the COBOL and C++ programs in parallel to check functionality. The inheritance version has 2,347 lines; the flat version has 3,018 after inherited methods and fields are explicitly duplicated. Source/behavior equivalence is an author claim not independently verified here. The flat comparator is this duplicated implementation, not every design without inheritance: shared helper functions, composition, table-driven templates or a different decomposition are not tested. Code volume and duplication are part of the assigned change, not controlled away by using the same language.
+
+The experiments use essentially the same program pair, different subjects and one different task each. The journal does not establish the complete hierarchy depth, compiler/editor/test availability, intervention delivery format, time limit or inter-rater/blinded grading procedure. Its scoring of compilation errors does not, by itself, establish that participants worked only on paper or lacked compiler access. Do not silently import those details from other inheritance experiments.
+
+## Participants, assignment and tasks
+
+Participants were students near the end of an advanced data-structures class, ordinarily their third C++ course. Experiment 1 recruited 26 and retained 25: one participant continued after declaring completion, making the recorded time unusable. The paper removes that participant from the reported results, not just timing; their group and correctness are unreported. Experiments 2 and 3 retain all 18 and 10. Thus 54 initially participated and 53 appear in the published data, across three distinct cohorts but one application family.
+
+Assignment uses course-performance ranks and a **deterministic balancing rule**, not described random allocation. For odd numbers, ranks alternate between groups; for even numbers, assignment alternates in pairs to make rank sums nearly equal. Matching a rank sum to its expectation does not demonstrate equal group medians or balance all relevant abilities. The omitted participant also leaves uncertainty about the final allocation balance. No professional C++ experience is reported for cohorts 2/3; two experiment-2 flat subjects and one experiment-3 inheritance subject had skipped the first introductory course. The latter scored zero and remains in the analysis.
+
+Everyone received demographic and post-task questionnaires, a one-page system description, example input/output, the task, an alphabetical class/member outline and source. The administrator explained the system and task and answered questions. Times run from the common start to each participant's declaration of completion, recorded to the nearest minute. No common deadline or all-behavior test stopping rule is specified.
+
+| Experiment | Assigned change and intended relation to the design | Retained inheritance / flat |
+| --- | --- | --- |
+| 1 | Change shared headings of five reports: company name, line order and four heading words. Seven logical changes in the shared inherited function versus 35 across five duplicated copies. | 12 / 13 |
+| 2 | Double-space only the loan-balance report's detail lines and compensate for page length, preserving the other four reports. A change to one leaf's inherited behavior. | 9 / 9 |
+| 3 | Reverse detail-line printing order for the last-date and loan-balance reports, preserving the other three. Changes to non-inherited behavior. | 5 / 5 |
+
+The third hypothesis and conclusion describe a change in **one** leaf class; the actual task and its scoring explicitly name **two** reports. Preserve that scope difference. Across experiments, task and cohort change together. The comparisons within a cohort are informative for their task, but there is no randomized task-by-design factorial interaction establishing a general task moderator independently of cohort differences.
+
+## Correctness and productivity are particular constructs
+
+The score is an equal-weight average over logical areas, with recursively divided substeps chosen according to the participant's strategy. A correct implementation receives 100; partial logic receives 50; wrong logic receives zero. Correct logic with compilation errors receives 90/80/70/60 for one/two/three/four-or-more errors; partial logic receives 40/30/20/10. The text also allows full credit for unspecified trivial mistakes. Experiment 1 divides scores by 700 for inheritance and 3,500 for flat. This reflects repeated edit sites, rather than a common executed behavioral test suite with independent retained obligations.
+
+Allowing different correct strategies is useful, but strategy-dependent recursion, compilation-error discounts and judgment about partial logic require an explicit rubric and reliability checks. The dissertation reportedly examines binary scoring and compiler-penalty sensitivity; the journal does not supply that analysis. The paper's preference for graded correctness does not make binary complete success an inferior estimand when the decision requires all obligations to hold. A rounded printed score of 100 is not independently verified executable correctness.
+
+Productivity is each participant's correctness percentage divided by minutes, then averaged. It gives credit to partial solutions and rewards earlier stopping; it is not complete-success probability at a common budget, net resource benefit, or the ratio of group median correctness to mean time. A favorable composite does not erase either constituent outcome.
+
+## Published results and reconstruction
+
+Alpha is .05. Experiments 1/2 use directional alternatives; experiment 3 uses two-sided differences. Normality and variance tests choose the subsequent t-test, while correctness uses tie-adjusted rank tests. Failure to reject normality/equal variances is not confirmation of those assumptions. The several endpoint tests have no stated multiplicity adjustment, equivalence margin or prospective power justification.
+
+| Experiment | Mean minutes, inheritance / flat | Median correctness, inheritance / flat | Mean score/minute, inheritance / flat | Reported comparisons |
+| --- | --- | --- | --- | --- |
+| 1 | 21.83 / 29.15 | 99 / 80 | 5.32 / 2.59 | Time one-sided pooled p = .037, Welch .041; correctness p = .0491; productivity Welch p = .019 |
+| 2 | 30.56 / 24.78 | 38 / 100 | 1.47 / 3.86 | Time p = .085, not significant; correctness p = .004; productivity p = .004 |
+| 3 | 18.4 / 18.2 | 75 / 100 | 4.14 / 6.04 | Two-sided time p = .961; correctness p = .230; productivity p = .340 |
+
+The transcribed Table 2/3 rows reproduce the time means, score medians, mean individual productivities and principal time/rank-test p-values to their printed precision. Experiment-2 productivity gives approximately .00339 using the rounded scores and standard Welch degrees of freedom, versus printed .004; unrounded grades or software degree-of-freedom conventions may explain this small difference, but were not verified. The qualitative comparison is unchanged. This bounded arithmetic check does not validate the scoring judgments, participant assignment or generalization.
+
+Printed score-100 counts are **5/12 versus 2/13**, **0/9 versus 6/9**, and **1/5 versus 3/5**, respectively. These retain every analyzed participant, including wrong answers; they do not recover the excluded experiment-1 participant or prove that a score of 100 passed a complete behavioral oracle. Figure 1 agrees that seven of nine experiment-2 flat scores exceed the best inheritance score. Figure 2 retains the experiment-3 zero, rather than excluding it as an outlier.
+
+The third experiment's nonsignificance is **not evidence of equivalence**, despite the conclusion's equal-ease wording. A reconstruction using the paper's pooled-time model gives an unadjusted 95% interval for inheritance minus flat mean time of approximately **−9.05 to +9.45 minutes** around +0.2. This conditional calculation illustrates the uncertainty in five participants per group; it is not a valid equivalence test or a repair for nonrandom allocation. Likewise, the rank test does not isolate a median difference without additional distributional assumptions.
+
+## Consequences and follow-up
+
+**Unique:** task-conditioned source-organization comparisons, shared-code versus duplicated-code tradeoffs and outcome disagreements are established empirical precedents. **Valuable:** the study gives concrete positive and adverse cases; it does not estimate their frequency, Nu maintenance benefit or a coding-agent effect. **Scientifically valid:** preserve design/task dependence, all attempts, executable old/new obligations and realistic alternative reorganizations. Do not identify future edit locality after seeing outcomes and then call it prospective selection evidence. This reading neither validates D1's source equivalence/oracle nor authorizes D2 or experimental construction.
+
+SC20 requested five exact inheritance-study/report titles with `limit:20`, offset 0, and returned five identities: Daly et al. `10.1109/ICSM.1995.526524`; Cartwright `10.1016/S0950-5849(98)00105-0`; Harrison/Counsell/Nithi `10.1016/S0164-1212(99)00144-2`; Prechelt et al. `10.1016/S0164-1212(02)00053-5`; and the related detailed report `10.5445/IR/57698`. All supplied metadata and short/missing abstracts were examined. S84's own footnote is uncertain whether Cartwright replicates the 1995 or 1996 Daly edition; their source/task/sample lineage needs primary verification rather than an assumed replication count.
+
+W13–W15 searched the Freeman thesis and Prechelt primary copies, including an exact thesis-title query and a Vanderbilt-domain query. No verified Freeman dissertation file was acquired; incidental cognitive-science/name matches supply no evidence. The [Prechelt author PDF](https://page.mi.fu-berlin.de/prechelt/Biblio/inherit_jss2003.pdf), [KIT copy](https://ps.ipd.kit.edu/downloads/za_2003_controlled_experiment_inheritance_depth.pdf), [FAU record](https://cris.fau.de/publications/120448504/?lang=de_DE) and detailed report are potential complementary editions, not independent new experiments. Automatically returned excerpts are partial coverage only. The matched design/task explanation and relevant-method cost model warrant full primary follow-up.
+
+The S84 publisher page also surfaces Lim/Jeong/Schach's professional credit-approval comparison, verified by SC21 as `10.1016/j.jss.2004.11.004`; the thesis title was not matched. Its abstract reports lower OO maintenance time alongside unequal design-document support and slower runtime. This opposing industrial evidence must be examined for team/task/document/tool and system-equivalence differences before treating it as a paradigm effect. S95/S96 are promoted for these two consequential continuations. The source audit and actual acquisition/reading states are recorded in the [background ledger](../nu-background-searches-2026-09-30.md).
