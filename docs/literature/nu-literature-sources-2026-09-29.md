@@ -8,6 +8,15 @@ Scite `report_citations` accepted **117 identifier decisions: six cited and 111 
 
 The subsequent `citation_report` for answer ID `alf-nu-literature-2026-09-29` was inspected: 117 screened, 6 included, 111 excluded; `retrieved=null` for this answer-scoped report; no missing reasons, no retrieval-linkage warning and `truncated=false`. Its accepted identifier set exactly matches this ledger. Recorded provenance is 85 Scite, 28 Consensus-only, two public web and two user-supplied records. It reports 111 title/abstract-stage and six full-text-stage decisions; reasons explicitly distinguish graph/title-only discovery and selected/reused technical material from full paper reading. Report calls returned different session identifiers but the requested answer ID resolved the same complete decision set. Tool acceptance is not independent review, PRISMA certification or evidence of field completeness.
 
+## Subsequent S41 and artifact segment
+
+The earlier 117 decisions below retain their original state. A later completed segment changes S41 from deferred to credited after its [full reading](full-reading/S41-reactive-readability-metrics.md); it does not resubmit the unchanged decisions. Scite `report_citations` for `alf-nu-literature-2026-09-29-metrics` accepted two cited entries, no exclusions and no skipped items. The inspected `citation_report` returned two screened/included, zero excluded, `retrieved=null`, no missing reasons, no retrieval-linkage warning and `truncated=false`. Both were full-text-stage decisions, one Scite and one other source. The artifact is not a second study or a full audit of all source files.
+
+| Source | Actual new evidence and limit |
+| --- | --- |
+| [S41, arXiv v1](https://doi.org/10.48550/arXiv.2110.15246) | All 11 pages and displayed figures/tables/equation. A selected 42-method refactor compares static metrics; it supplies no human or agent criterion for the snippets. Earlier Scite identity and fetched Consensus record reused. |
+| [Author-linked Zenodo 4277872](https://zenodo.org/records/4277872) | Public API, two checksum-verified archives, paired 42-row score CSVs and two `Server.sendToTCP` bodies inspected. Table IV aggregates recalculated; metric tools, tests and remaining source were not fully evaluated. Exact Scite DOI lookup requested 20 at offset 0 and returned zero; provenance is the author's link and Zenodo, not indexed Scite evidence. |
+
 ## Retrieval coverage
 
 Scite route names below refer to exact DOI groups (`scite_known`, `scite_more`, `scite_temporal`, `scite_s46_lineage`, `scite_followup`), exact title/edition resolution (`scite_time_travel`), the two offsets of the reactive-comprehension query (`scite_rp_q1` offset 0 and `scite_rp_q2` offset 20), and the noisier title/term reformulation (`scite_refined` offset 0). Every search requested 20 records per page. The [coverage ledger](nu-literature-coverage-2026-09-29.md#search-and-citation-frontier) records exact terms, returns, reported totals, graph parameters and unexamined frontiers; these prefixes do not imply exhaustive screening.
