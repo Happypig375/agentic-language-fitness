@@ -1,0 +1,60 @@
+# S144 — concurrent collection trades major pauses against other costs
+
+**Complete paper reading, 2026-10-01 HKT.** Ben Gamari and Laura Dietz, *Alligator collector: a latency-optimized garbage collector for functional programming languages*, ISMM 2020, printed pp.87–99, [DOI10.1145/3381898.3397214](https://doi.org/10.1145/3381898.3397214). This B05/B06/B12 reading tests whether runtime policy supplies a concrete alternative explanation for the costs attributed to functional state. It does not compare Nu with another engine or immutability with mutation.
+
+## Identity, coverage and artifact limits
+
+Zotero parent `KTSUUDH9`, paper PDF `JA2HIJDF`, canonical note `2AEVVKXW`. The [institutional author PDF](https://www.cs.unh.edu/~dietz/papers/gamari2020alligator.pdf) has thirteen pages, 527,541bytes, SHA-256 `effb875367bc8b565af3b0c721fd1aaf3292285cad75d38fc98cc3d345bd9ecd`. All pages, nine figures, two tables, pseudocode and 28 references were read. Rendered PDF pages3–8 and10–12 were inspected, covering the diagrams, table and result plots. Figures report observations, not worst-case pause guarantees.
+
+The [author artifact](https://github.com/well-typed/ismm-2020-nonmoving-gc/tree/048f000e1261e86701e9a010bb48cbc1ed51f17b) is pinned to `048f000e1261e86701e9a010bb48cbc1ed51f17b`, dated2020-11-27. Its untruncated tree has41 entries. Twelve files were acquired: three root/benchmark documentation or submodule files, `design.pdf`, `benchmarks/Analysis.ipynb`, the Nix configuration, four LRU source/driver files, the map benchmark and the timing helper. The ten non-PDF/non-notebook files were read completely. No dependency, submodule, compiler, benchmark or notebook was executed.
+
+The 31-page design supplement is attached as `TEQG3DG7`, 576,273bytes, SHA-256 `5a943ea0c9e5718c5ca43d801bf19fbdd44e681b1ef56643650ea9bdcf6daf46`. Only pages1–3 and21–28 were read: contents/background, barriers, scheduling, remembered sets, finalization and behavioral differences. Its proposal wording and source references are not a verification of the final implementation. It adds no full-paper count.
+
+The notebook is1,325,878bytes, SHA-256 `1e1798238c8c1cc2efbc55f437314dec58d57594bdd1a1aa07efa50e37b90923`. Complete source and available text outputs were inspected for33 of83 cells, indexed from zero:1,9–12,15–16,18–19,21–22,24–25,27–32,34,37–38,48,51–52,54,63,65,68,70,72–74. Embedded notebook graphics were not separately exhaustively inspected; the published graphics were. Ellipsized saved tables are not complete raw data. The artifact README's additional-results link is empty; its instructed `benchmarks/run.sh`, `results/rep-*` inputs and `cabal-census.tsv` are absent from this pinned tree. The release therefore does not permit an independent reconstruction of every published estimate.
+
+## Mechanism and integration obligations
+
+The method retains a moving, generational nursery and adds a concurrent nonmoving mark/sweep collector for the oldest generation. In GHC8.10.1 it is selected by `-xn`; runtime selection avoids requiring a separate compilation of every library. A major collection still pauses mutators for preparation/root work and for final synchronization. Marking and sweeping run concurrently; nursery collections remain stop-the-world. The illustrative phase durations in Figure2 are not proved bounds.
+
+Size-segregated32KB segments provide fixed-size allocation slots. Separate per-block bytes record empty or alternating mark epochs, avoiding repeated heap-wide clearing and contention over neighboring bits. Size-class rounding, partially occupied segments and mark metadata remain costs. Lazy evaluation entails heap mutation even in code expressed with pure values: thunk updates, stack changes, mutable references, arrays and transactional/concurrent primitives all need appropriate treatment.
+
+The snapshot-at-the-beginning barrier retains overwritten old references during marking, separately from the ordinary old-to-young remembered set. Per-capability buffering amortizes synchronization, while flushes during nursery collection reduce the final backlog. Small mutable cells use dirty/clean information to avoid logging every overwrite. Stack chunks are marked before mutation resumes and use a locking handshake; bounded chunk size does not bound every global pause or wait.
+
+Aging prevents selected short-lived mutable structures from prematurely promoting their reachable graphs. It also complicates reachability and GHC's blocked-thread/deadlock detection; the paper describes disabling aging when no runnable thread remains. These are runtime integration obligations, not consequences of collection API purity alone. The selected design pages add two useful boundaries: a fixed nursery does not alone bound remembered-set work, and concurrent marking can delay reclamation/finalization. The design proposes pausing an allocating mutator that outruns collection. These proposal-level details are not a measured final-runtime scheduling guarantee.
+
+## Positive results and adverse costs
+
+Most experiments use a32-core AMD Ryzen2990WX,64GB RAM and Debian10. The comparison changes the collector within GHC; it is neither an F#/Haskell comparison nor a treatment that changes source-level state conventions.
+
+The HTTP LRU workload retains up to640,000 cached entries over a Wikipedia-derived graph. Requests come from a modified one-hour2016 page-count distribution: popular counts are capped at1,000 to induce misses. The artifact further filters counts above five, samples one million weighted targets without an explicit NumPy seed in the inspected generator, then uses a per-thread-seeded Lua requester. ConfigurationA uses one runtime thread and2,000 requests/second; B uses eight and8,000. Both are deliberately below saturation. Thus the A/B difference bundles load and thread count. The paper uses constant-rate `wrk2` to address coordinated omission and reports99.9th-percentile response time falling from roughly1.3s to20ms. Response time, server service time and GC pause are different observables; this is not a maximum20ms bound.
+
+The following are **published Table2 values**, not recomputed raw observations. Each cell is copying→Alligator.
+
+| Workload | Elapsed / CPU seconds | Average minor pause | Maximum minor pause | Average major pause | Maximum major pause |
+| --- | --- | --- | --- | --- | --- |
+| Text search | 193.2→229.8 /193.1→374.5 | 235→390µs | 4.3→10ms | 680.6→3.5ms | 4.1s→31.4ms |
+| Key/value map | 65.9→72.8 /65.8→103.3 | 284→466µs | 3.2→3.3ms | 102.8ms→557µs | 457.4ms→725µs |
+| LRU service | 313.5→311.7 /1493.7→1481.8 | 785µs→1.0ms | 14.1→74.4ms | 363.3→8.1ms | 1.3s→32.2ms |
+| Memoized edit distance | 86.9→69.6 /86.8→112 | 342→824µs | 3.2→6.6ms | 2.8s→1.5ms | 20.1s→5.7ms |
+
+Major-pause improvements are substantial and consistent across these selected rows. Elapsed time improves for edit distance, while CPU rises; search/map run slower, and every listed average minor pause increases. A rounded −100% change is not a zero pause. The74.4ms LRU minor maximum prevents turning favorable major-GC results into a universal total-pause bound.
+
+The `nofib` results report a median slowdown of about21%, with some unchanged/improved tests and an approximately450% slowdown for `spectral/ansi`. Increased copying and aging are proposed explanations, not isolated causes. The saved notebook's median ratio1.20694 agrees approximately; its displayed summary contains108 benchmark rows, with missing-ratio filtering for elapsed-time analysis. The histogram further filters baseline runs above0.05s, while its printed summary statistics use all retained ratios. These denominators are not interchangeable, nor are they repeated independent applications.
+
+Compiling Cabal takes176→187s in the paper; those rounded values imply about6.25%, although the prose says5%. Mutator time143→156s rises about9%. An isolated550ms moving-generation pause remains under Alligator; a thunk-space-leak explanation is tentative. A linked-list allocation workload spends over10% of CPU on the allocator and triples minor-pause duration. A single Cabal heap census supports reasonably high segment occupancy, not a universal bound on fragmentation or retained-history memory. The saved notebook calculates overall occupied slot bytes divided by allocated segment bytes; this is not application payload utilization or process peak RSS.
+
+Two application accounts add useful positive evidence with narrower verification. A proprietary Haskell/C++ financial quotation service reportedly reduces major pauses about50-fold. Source/raw traces were not recovered. A15-second session of the Haskell3D game Frag, on a separate2.66GHz dual-core/32GB machine, reports maximum pauses42→8ms and averages21→1ms, with improved author-observed playability. No long-run frame-time distribution, independent user study or net maintenance measure is supplied. This direct game demonstration should be retained without converting it into a broad engine comparison.
+
+## What the released analysis resolves
+
+Notebook cells63/65 bind the published response/pause plots to `rep-1`, configurations `n1-r2000` and `n8-r8000`; response plots use segment2. Pause percentiles use lower interpolation over observed events. The inspected Lua driver provides target selection, but the missing launcher prevents verifying all historical command-line/rate settings from this release alone.
+
+Saved Table2-related outputs do not reproduce the paper's values. For example, search elapsed time is195.13→231.95s, map68.16→77.88s, and the selected edit-distance row89.54→86.37s; the paper reports different figures above. The LRU source cell points to `rep-test/no-n1-r2000` and its paired Alligator path, unlike the Figure5/6 paths. The notebook's final table-formatting cell renames columns to `before`/`after` but reindexes with `copying`/`ours`, retaining only percent-change columns and applying misplaced time formatters. This explains malformed **saved release output**, not how the published table was generated. Exact data/version correspondence remains unresolved; it neither warrants overwriting published values nor proves the reported direction false.
+
+The map source generates20million seeded integer operations with insertion/deletion/lookup choices and times100,000-operation chunks. Its very wide key distribution need not model a production map's hit/update mix. LRU code constructs64 stripes of10,000 entries, confirming nominal capacity. The timing helper forces only the returned value to weak head normal form; the service, serialization and deep evaluation boundaries still matter. These observations characterize workload and instrumentation; none is a reproduced runtime defect.
+
+## Claim disposition and next consequences
+
+**Unique:** the paper supplies an established collector alternative and explicitly builds on Ueno/Ohori's earlier nonmoving/concurrent methods. It offers no basis for assigning firstness to Nu's functional-state or latency claims. **Valuable:** large major-pause reductions and a small direct game demonstration are real reported benefits under their conditions; minor pauses, CPU, throughput and fragmentation qualify the choice. **Scientifically valid:** the mechanism and reported workloads are reconstructed, but source/data correspondence, repetitions, uncertainty, production trace access and cross-runtime transfer remain limited.
+
+For the survey, collector choice and state representation must remain separate dimensions. Record retained roots, operation/load distribution, runtime configuration, response/frame horizon, CPU and total pauses before transporting these results to Nu/.NET. S145's reference-counted reuse method is the next acquired comparator. Incoming graph G19 retains OCaml parallelism and hardware collection as conditional alternatives; the Haskell persistent-STM citer concerns nonvolatile storage, not retained functional versions. Neither a sparse graph nor unexplained Nu benefit closes or perpetually reopens this theme. No experimental hold is lifted.
