@@ -415,3 +415,25 @@ G08 has one incoming edge and flags low coverage. SC51 requests20 and returns it
 | `10.1155/2019/4108652`; `10.1109/tse.2015.2490067`; `10.1007/11678779_9` | Analyzer testing, feasible branches and compiler-supported testing; conditional B07 methods |
 
 S136 reappears as an already acquired pending method, and S119 as an already completed one. Twenty-four other prefix results concern unrelated psychology, security-configuration, accelerator/VLSI or sound/pattern discovery topics in this specific recovery question; they receive no effect credit. Three duplicate routes remain separate from fourteen conditional decisions in audit `nu_background_s135_20261001`. S136 and S115/S118/S116 remain the next concrete semantic/extension/practice dependencies, alongside the acquired Join Token and other open B01–B12 routes.
+
+## S136 complete: coverage, reachable-input safety and intended behavior
+
+[S136](full-reading/S136-intensional-datatype-refinement.md) now has full 29-page publisher coverage plus all 21 v3 appendix pages. Its constructor-erasure types, guarded constraints, saturation and restriction theorem explain how partial matches can be safe under inferred calling conditions. The linear-in-functions bound fixes type size, constructor/dependency-slice size, nesting and function size. This is a different mechanism from local coverage. Refinement typability does not decide all semantic safety properties or termination, and a safe fallback may still violate a new behavioral obligation.
+
+All 334 module rows preserve the authors' positive structural and reported timing findings. Their omitted Data.Sequence workload and zero true positives among 127 warnings remain part of the result. Six inspected public source files establish a dated implementation/measurement boundary; the later exact VM is available but unacquired. The public formatter's CPU-time unit label prevents certifying timing correspondence, not an automatic rescaling of the published results.
+
+G09 requests incoming depth 1/max 200 and returns four edges/six nodes, untruncated but explicitly low coverage for both publisher/preprint seeds. SC55 requests 20 at offset 0 and returns all four incoming DOI records. SC56 requests 20 at offset 0 and returns four exact backward DOI records. SC57 requests 20 at offset 0 for `"intensional datatype refinement"`, returning publisher/preprint2/2; that phrase is exhausted, not the broader citation/search frontier. Supplied abstract fragments are metadata screening only.
+
+| Source or route | Current disposition and consequential question |
+| --- | --- |
+| `10.1145/3546196.3550163`, Structural refinement types | Conditional expressiveness/inference-cost alternative; metadata only |
+| `10.4204/eptcs.396.2`, Contextual Refinement Types | Conditional datasort/context alternative; its snippet's termination characterization is not adopted as S136's guarantee |
+| `10.1145/3632909`, Ill-Typed Programs Don't Evaluate | Conditional two-sided typing and evaluation/reachability distinction |
+| `10.70675/728ce5bcz7dbdz4030z8e25ze63f629dd417`, pattern-elimination thesis | Conditional transformation-preservation method; year/body not established |
+| `10.1145/1411286.1411293` | Already fully read S114, reused rather than added to the pending list; alternate ACM notice `10.1145/1543134.1411293` supplies no independent evidence |
+| `10.1145/1926385.1926453` | Conditional PMRS/higher-order model-checking comparator; alternate notice `10.1145/1925844.1926453` remains an edition locator |
+| `10.1007/978-3-030-47147-7_6` | Springer 2020 edition of previously conditional2019 Eremondi preprint`10.48550/arxiv.1905.09423`; same research lineage, full method pending |
+| `10.1007/978-3-662-54434-1_18` | Conditional extensible-datasort method for programmer-declared refinements |
+| `10.1016/s0167-6423(99)00007-6`; `10.1016/s0167-6423(99)00011-8` | Conditional set-analysis/finite-semilattice foundations; whole-program solvability and compact compositional summaries differ |
+
+The new audit has 19 decisions: five credited sources, nine conditional methods, four duplicate/edition routes and one incidental nonprimary search hit. Credited sources include bounded appendices/code/API metadata, not five new full papers. Continue S115/S118/S116 and the remaining C02 abstract/page frontier. A new citation neighborhood is not an instruction to read every adjacent theorem before returning to other background themes.
