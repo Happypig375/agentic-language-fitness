@@ -1,0 +1,66 @@
+# S104 — Oracle information, changing requirements and judgment costs
+
+**Complete publisher-paper reading, 2026-09-30.** Earl T. Barr, Mark Harman, Phil McMinn, Muzammil Shahbaz and Shin Yoo, *The Oracle Problem in Software Testing: A Survey*, IEEE Transactions on Software Engineering 41(5), 507–525 (2015), online 19 November 2014, [DOI 10.1109/TSE.2014.2372785](https://doi.org/10.1109/TSE.2014.2372785). Zotero parent `DHWE7SQE`, publisher attachment `T5VP9QQU`, note `XH84D5JV`.
+
+All nineteen pages, three figures, nine numbered definitions, displayed equations, 211 numbered bibliography entries, footnotes and author biographies were read. Eight rendered pages (PDF pp. 2–5 and 8–11) cover all figures and the formal displays. A truncated tool response omitted part of the bibliography; pp. 17–18 were read again to close that gap. The publisher PDF has 1,077,201 bytes, SHA-256 `8128cbc2dd7c38323100871bb1a88131f71d1c10f85f86541ce2fdfe2991c9c8`. The separately retained 31-page author manuscript `G6JZFNDA` remains at first-page coverage; differing reference numbers prevent assuming edition equivalence. The survey's external paper repository and its primary experiments are separate from this complete publication reading.
+
+## Why this matters to the active background
+
+B07 asks how an evolution study establishes correct behavior independently of its chosen representation, compiler and implementation agent. This survey makes the foundational distinction explicit: generating inputs that exercise code does not supply correct judgments about the resulting behavior. It organizes oracle information into specified, derived, implicit and human sources, including partial and uncertain judgments. These mechanisms predate Nu and coding-agent workflows. A typed program, a model-checker pass or a generated test suite needs a stated behavioral interpretation; none automatically constitutes the complete oracle.
+
+The survey provides a conceptual taxonomy and a historical research map. It does not evaluate Nu, F#, coding agents or one new comprehensive oracle. Empirical percentages attributed to other papers are secondary reports until those primary methods are examined. The current broad assignment needs the foundations, while later LLM-based oracle developments and system-specific controls remain open.
+
+## Observation and oracle scope
+
+The formalism treats a test as a sequence of stimuli and observations. Stimuli include explicit calls, resets, environmental inputs, platform configuration and resource constraints. Observations include returned values and externally visible state as well as timing and other nonfunctional measurements. An ordinary function call is shorthand for a reliable reset followed by an invocation. Reusing that shorthand for a retained-state interactive system therefore requires an explicit reset/state assumption.
+
+An oracle is a partial predicate over these activity sequences. Undefined cases are distinct from acceptance or rejection. In the paper's convention, `true` means acceptable behavior. Its soundness condition says that acceptance implies ground-truth acceptance; completeness says that acceptable behavior is accepted. The conceptual ground-truth oracle is not supplied by defining it. In particular, a weak detector can find selected failures without justifying that every unflagged execution is correct.
+
+**Review inference:** the observation boundary matters as much as input coverage. After-tick state, final output and a complete event trace may expose different failures. State abstraction, nondeterministic allowed alternatives and timing tolerances must be specified independently of the treatment. Earlier S46/S47/S50/S53 provide concrete temporal/finite-trace methods; S100/S101 add current-checkpoint, dependency and migration boundaries. This survey supplies a vocabulary for these distinctions without validating an ISE oracle.
+
+## Four sources of judgment
+
+| Source | Construction described in the survey | Control needed for this background |
+| --- | --- | --- |
+| Specified | State/model specifications, transition systems, assertions/contracts and algebraic laws. | Validate the specification and its abstraction-to-concrete observation mapping. Partial invariants are not all obligations; assertions only check their executed conditions. |
+| Derived | Alternative implementations, metamorphic relations, previous versions, inferred invariants/models and documentation. | Establish the relation's intended validity and provenance. Agreement or observed regularity can reproduce common errors. Documentation may be ambiguous or stale. |
+| Implicit | General failure signals such as crashes, invalid memory access, deadlock or abnormal resource behavior. | Define the applicable context. The survey itself notes that even a crash can be intended in some systems. Absence of these failures does not establish domain correctness. |
+| Human | People create or apply the oracle, sometimes assisted by generated data, models or crowdsourcing. | Count construction and judgment costs separately, and assess label correctness. Human presence is not automatic independent validation. |
+
+Specified oracles face three separate obstacles: absent specifications, abstraction that admits infeasible behavior or omits relevant behavior, and difficulty comparing abstract results with concrete execution. A formal specification may still lack an executable, adequate test driver. For state-transition models, observational and nondeterministic conformance determine which mismatches count as faults. Model steering is offered as one way to tolerate benign timing divergence; whether it also hides real faults needs its primary evaluation, now S110.
+
+Pseudo-oracles compare separately implemented computations. N-version voting and program transformations are related possibilities, not proofs that a majority is correct. Metamorphic testing checks relations across executions of one implementation; the relations can concern sets or other nonnumeric outcomes. Nondeterministic programs may need distributional or set-based relations rather than exact output equality. Neither finding a relation in observed runs nor satisfying several such relations establishes the complete intended function.
+
+Dynamic invariant inference captures regularities from a finite execution sample. The survey explicitly warns that candidate invariants can be incorrect or irrelevant and that human filtering is fallible. It also distinguishes matching an implemented program from matching its intended specification. This is relevant to tests generated from an existing implementation or by the same agent that changes it: derived behavior cannot silently become independent ground truth.
+
+## Evolution requires an oracle-change policy
+
+Section 5.3 separates three situations that are easily conflated in a maintenance study:
+
+1. A corrective implementation change leaves intended behavior unchanged. The existing specification/oracle may remain valid; the old buggy implementation is not thereby correct everywhere.
+2. New functionality extends the covered behavior. Additional oracle information may augment the previous oracle where the old obligations still apply.
+3. Changed requirements alter the verdict on previously covered behavior. The new oracle must replace the superseded judgment on that domain, while retaining applicable obligations elsewhere. Simply unioning old and new tests can enforce a contradiction.
+
+This is directly useful to D1 and the broader Nu background. Retained obligations, superseded obligations, new obligations, unobserved behavior and undefined oracle cases need separate states. A newly passing compiler diagnostic or a smaller edit footprint does not settle those categories. The survey also points toward oracle reuse across variants and generalized reliable reset, but presents these as future directions, not completed mechanisms for arbitrary running states.
+
+## Cost and fault sensitivity
+
+Human oracle cost has at least two components: writing judgments and evaluating outcomes. The survey discusses smaller suites, shorter traces, familiar usage patterns and readable inputs. These may reduce effort, but preserving a chosen coverage score is not proof of preserved defect detection. Minimization can change the information available to a judge; a shorter trace is useful only if the relevant triggering and observation context survives.
+
+The survey reports studies of readable strings, inferred invariants, GUI-oracle design, contracts and crowdsourced judgments. Their different populations, fault sets and tasks are not a common effect estimate. S109 is promoted to check the primary invariant-classification evidence rather than inherit the survey's compressed “half” characterization. The retrieved opening of that paper already reports a range across two studies and three Java programs, with a discrepancy between abstract and introduction; full methods are required before choosing a denominator or quoting a pooled rate. GUI observation scope and concurrent-contract effectiveness remain further primary leads.
+
+**Review inference:** selecting a behavioral oracle is part of the scientific intervention's measurement design. Fault seeding, mutation scores, checked coverage, author-written expected outputs and expert agreement each require a validity argument. Tests shared with the implementation agent can also become feedback; held-out scoring and the source of expected behavior must stay explicit. None of the techniques surveyed authorizes new apparatus or workers in this literature assignment.
+
+## Historical method and formalization limits
+
+The authors report a repository of **694 publications for 1978–2012**, classified as 317 specified, 245 derived, 76 implicit and 56 addressing absence of an automated oracle. Their searches used Google Scholar and Microsoft Academic Search, yearly oracle queries and category-specific terms. The 211 bibliography entries and the 694-record repository are different denominators; the body also cites later work through 2014/2015. This is not 694 independently read or replicated studies in the present review.
+
+The timeline records the earliest publication the authors located under stated document/explicit-oracle criteria, excluding reports and manuals from that particular timeline. It is not a universal first-invention chronology. Figure 2 fits power curves to cumulative publication counts, with R² values about .87–.94. A good fit to accumulated historical counts does not validate future growth, method quality, adoption or effectiveness. The article does not provide the full search-result/selection log or an independently reproduced corpus here. Bibliography entries 125 and 130 repeat the same human-oracle-cost paper; this alone does not prove the external repository's count is duplicated.
+
+Two printed formalizations also need care before reuse. Equation (2) compares an `arg max` output value to a multiplicity threshold, although the accompanying prose intends the maximum count. Its `ceil(k/2)` “majority” threshold also permits a tie for even `k`; a strict majority requires more than half. These are observed notation/boundary problems, not tests of an implementation.
+
+Definition 2.9 and its following confidence-amplification statement need stronger sampling conditions. **Review inference:** the printed implications do not require a negative example's acceptance probability to be below one half. With epsilon .1, a negative example accepted with probability .55 does not violate their .6 threshold implication, yet repeated majority voting favors the wrong verdict. Independence and an appropriate correctness margin must be established before invoking repeated-sampling confidence. This does not invalidate the survey's taxonomy; it prevents importing its shorthand as a validated statistical protocol.
+
+The published [repository URL](http://crestweb.cs.ucl.ac.uk/resources/oracle_repository) was inaccessible through the web reader and a direct HTTP request timed out. No repository contents, record-level deduplication, regression fit or primary experiment was reproduced. The author manuscript remains a separate unread edition. Exact further access attempts and promoted-source identifiers are in the background ledger.
+
+**Unique:** oracle construction, partial judgments and oracle revision during evolution have extensive prior work; no Nu-specific novelty follows from combining them. **Valuable:** the distinctions expose concrete decisions about observations, retained/superseded requirements and judgment cost, but do not measure a Nu or coding-agent advantage. **Scientifically valid:** independent expected behavior, observation mapping, state/reset semantics, label reliability, fault sensitivity and total oracle cost remain necessary. The foundations are clearer; the proposed experiments and remaining primary comparisons are not validated. All experimental holds persist.
