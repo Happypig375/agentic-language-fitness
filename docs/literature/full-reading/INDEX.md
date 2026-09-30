@@ -32,6 +32,8 @@ The user supplied CodePlan's 2024 publication as attachment `LS9AUVZE`: 24 PDF p
 | P12 | arXiv v4 / `RXVC7BGE` | Complete, PDF 1-14 | Reconstructed; proxy, replay and paper/code differences retained | All appendices, figures/tables; prompts, scoring and passive controls inspected | [P12](P12-tocs.md) |
 | P13 | PACMSE 2024 / `LS9AUVZE` | Complete, PDF 1-24 | Reconstructed; implementation/private-data and oracle limits retained | Figures 1-6, tables 1-6 and algorithm 1 inspected | [P13](P13-codeplan.md) |
 
+The [C02 selective screen](../nu-background-types-search-2026-09-30.md) adds 83 supplied abstract/index passages across 199 existing occurrences and promotes S113–S120 without changing the full-reading count. Seven new PDFs and three user-library PDFs were verified; S105/S106/S110 access gaps are now closed, with first-page coverage only. S120 has a record but no acquired PDF. The new queue preserves coverage-checker, extensibility and positive/mixed maintenance evidence separately from experimental claims.
+
 ## Selection and discovery readings
 
 All rows are full publication readings with the stated edition and visual coverage; reconstruction gaps remain. Hashes, primary source links, actual comparisons and artifact limits are in each note. No author experiment was reproduced.
