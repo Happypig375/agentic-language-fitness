@@ -392,3 +392,26 @@ G07 returns eleven incoming edges (twelve nodes, untruncated); SC50 requests `li
 | S136 `MB7MAPR7` / `YYJNXUNY` / note `VZBSTGLH` | Thirty physical pages including Bristol cover; cover/article opening only; cover DOI3445980 differs from body3434336 | Does program-level compositional analysis change the sufficient-input/expressiveness tradeoff? Resolve the wrapper discrepancy without inventing an edition |
 
 The ledger preserves hashes, failed lawful routes and the 47-decision audit. S115/S118 extensibility, S116 practice and the broader B01–B12 frontiers remain active. The new implementation dependency does not turn the survey into compiler testing or authorize author-code execution.
+
+## S135 implementation validation complete; bounded follow-up screen
+
+[S135](full-reading/S135-pattern-analyzer-validation.md) now has full 27-page publisher coverage, all nine figures, three tables, Algorithm 1 and 38 references. Its generated positive/negative oracles uncover concrete analyzer failures; the released metadata corroborates twelve Scala and four Java reports, twelve fixed at publication. No GHC bug was found under its restricted generator and exposure. Eight Scala reports share one repair; one remaining report has a null-policy discussion. Sixteen report IDs are not sixteen independent causes. Separate saved streams corroborate 3,728 versus36 repeated triggers, without a unique-defect or repeat-run effect estimate.
+
+The acquired Zenodo ZIP is attached as `PQADFKSA`. All20,000 released Scala rows, all16 bug metadata records and three numeric trigger series were independently reconstructed. Fifteen full files and three bounded source ranges were inspected without execution. The archive preserves supported benefits and identifies summary/plot correspondence, missing timing data, batch-accounting and timeout-filter limits. These are implementation/oracle evidence, not an F# agent-maintenance effect.
+
+G08 has one incoming edge and flags low coverage. SC51 requests20 and returns its one DOI. SC52 requests20 at offset0 and returns20/19,430, mixing closest methods with unrelated coverage topics; SC53’s title=`pattern`, query=`exhaustiveness OR soundness` returns20/30,544 acoustic/linguistic/statistical collisions. Both noisy routes are **reformulated**, not exhausted: their offset20 continuations remain unexamined. SC54’s exact phrase `"pattern-match coverage analyzers"` requests20 and returns2/2, the publication and institutional S135 locators. Exhausting that phrase verifies a narrow retrieval set, not the field. All prefix titles/supplied abstract fragments were screened; snippets do not become full readings.
+
+| Conditional source | Claim or distinction it could change |
+| --- | --- |
+| `10.1145/3808320`, Enumerating Ill-Typed Programs for Testing Type Analyzers (2026) | Construction-based negative oracles; incoming S135 neighbor, abstract fragment only |
+| `10.1007/3-540-55984-1_24`, A term pattern-match compiler inspired by finite automata theory | Compilation sharing and evaluation-order restrictions, distinct from coverage diagnostics |
+| `10.4204/eptcs.241.2`, GADTs and Exhaustiveness: Looking for the Impossible | OCaml impossibility/precision counterpart; retain preprint/publication lineage |
+| `10.48550/arxiv.1905.09423`, Set Constraints, Pattern Match Analysis, and SMT | Program-level safety and cost comparator to acquired S136 |
+| `10.1007/10930755_8`, A Coverage Checking Algorithm for LF | Dependent/higher-order coverage under a different formal language |
+| `10.1016/j.entcs.2016.06.015`, Type Soundness for Path Polymorphism | Expressiveness and soundness assumptions |
+| `10.1007/11754008_2`; `10.1007/978-3-319-25945-1_5` | Grammar-test combinatorial/pattern coverage; first establish the coverage unit |
+| `10.1017/9781108770750.014`, Luck: A Probabilistic Language for Testing | Constrained generator correctness/distribution; edition/method unread |
+| `10.1007/978-3-540-78917-8_7`, Testing Data Types Implementations from Algebraic Specifications | Specification conformance/oracles, distinct from match exhaustiveness |
+| `10.1155/2019/4108652`; `10.1109/tse.2015.2490067`; `10.1007/11678779_9` | Analyzer testing, feasible branches and compiler-supported testing; conditional B07 methods |
+
+S136 reappears as an already acquired pending method, and S119 as an already completed one. Twenty-four other prefix results concern unrelated psychology, security-configuration, accelerator/VLSI or sound/pattern discovery topics in this specific recovery question; they receive no effect credit. Three duplicate routes remain separate from fourteen conditional decisions in audit `nu_background_s135_20261001`. S136 and S115/S118/S116 remain the next concrete semantic/extension/practice dependencies, alongside the acquired Join Token and other open B01–B12 routes.
