@@ -1,0 +1,63 @@
+# S77 — Game migration, subsystem speed and integration work
+
+**Complete thesis reading, 2026-09-30.** Juuso Ylikoski, *Transferring Game Mechanics to Unity DOTS and ECS After Release*, master's thesis, Lappeenranta–Lahti University of Technology LUT (2025), [institutional PDF](https://lutpub.lut.fi/bitstream/handle/10024/169074/diplomityo_ylikoski_juuso.pdf?sequence=1). Zotero parent `I4C4LWRA`, attachment `EX2K7XS9`, note `Y3IWKFXF`; these existed before continued reading and were reverified through the native API.
+
+All **46 PDF pages** were read: front matter, English/Finnish abstracts, AI-use declaration, main text, seven numbered figures (including two timing tables), three numbered images, code examples, 25 bibliography entries and the one-page profiler appendix. Twelve page images cover every display; the appendix was also rendered horizontally at higher resolution. Some profiler strings are clipped in the original screenshot; it is an illustrative trace, not a recoverable raw measurement series. Printed main pagination ends at 42 after four front-matter pages. The existing institutional PDF has **1,111,564 bytes**, SHA-256 `69d7676c5b43a9d4fe75084f3349d3a896e166f85b8b1c3fa57530c078bc4305`. No engine, benchmark or author code was executed.
+
+## Question and actual case
+
+The author develops *Ages of Conflict: World War Simulator*, an already released Early Access game with desktop and mobile versions. The practical question is whether to migrate performance-critical mechanics to Unity DOTS while continuing content updates as a solo developer. B05/B06/B10 need precisely this separation between a runtime opportunity and the effort of adopting it in existing software.
+
+The study **does not complete and benchmark a production migration**. It builds a simplified separate test project with two implementations of tile expansion and map rendering. The real game has nations, ownership changes, neighboring-tile interactions, event subscriptions and shared tile classes. The experiment removes nations and their event-driven attack logic, omits the UI, and excludes other game systems. The author's development account then informs a decision against migrating the full product.
+
+This is a preselected intrinsic case with developer-authored qualitative observations and repeated subsystem timings. It supplies concrete positive and adverse evidence under that scope. It is not a controlled comparison of multiple developers, an adoption survey, a maintenance-task experiment, or a universal test of object-oriented versus data-oriented design.
+
+## Mechanisms and integration obligations
+
+In the production design, a tile subscribes to its owning nation's attack event and changes that subscription when ownership changes. Figure 5 makes the flow explicit across an event handler, nation logic, nation object, owned tile and neighbor. This is useful evidence of lifecycle and dependency obligations that a representation change must preserve; removing the nation layer in a benchmark removes some of those obligations too.
+
+Both test variants operate on a **500 × 500 grid, 250,000 tiles**, initially occupied at the four corners. Active occupied tiles expand into adjacent unoccupied tiles and then become inactive. The author states that completion takes 500 frames in both variants. That is a reported equivalence condition, not an independently checked behavioral oracle; full update code and per-frame state comparisons are absent from the thesis.
+
+The conventional variant keeps each tile's coordinates and occupation/activity flags in a class and uses a grid helper. Its map renderer traverses tiles and keeps a list of changed pixels. The ECS variant uses separate position and occupation components plus an enableable `NeedsUpdating` marker. Both ultimately update a `Texture2D` through a singleton `MonoBehaviour` renderer. Thus this is a hybrid ECS/ordinary-Unity integration, not a renderer operating entirely within ECS.
+
+The ECS implementation separates occupation and map-update systems. It first works on the main thread, then uses parallel jobs and command buffers. The intended order is occupation iteration, application of tile changes, map iteration, then texture changes. Simulation/presentation system groups and a custom synchronization point enforce that pipeline; texture operations remain on the main thread. Parallelism changes alongside representation, query organization and buffering, so the timing comparison does not isolate cache layout or source organization alone.
+
+Both occupation variants still scan all 250,000 tiles each frame. Only the ECS rendering query filters by its enableable marker. The author proposes filtering occupation via additional enableable components as a future optimization, which was not measured. A faster alternative implementation is not a result of this study merely because it is described.
+
+## Reported measurements
+
+The author reports ten runs of the 500-frame simulation and averages the run results. The first frame, which marks every tile for update, is excluded from minimum, maximum and mean calculations. Consequently these are selected steady-simulation summaries, not startup-inclusive costs or 5,000 independent workloads.
+
+| Timed work | Conventional mean | ECS reported overall | ECS main thread / jobs | What follows from the printed values |
+| --- | --- | --- | --- | --- |
+| Tile occupation | 1.68 ms | 0.37 ms | 0.13 / 0.24 ms | Favorable ECS subsystem result: approximately 4.54× lower-duration ratio. Representation and parallel jobs are bundled. |
+| Map update/rendering | 1.06 ms | 1.71 ms | 1.68 / 0.033 ms | Adverse ECS subsystem result: about 1.61× the conventional duration, dominated by the integration/main-thread path. |
+| Sum reported for both | 2.74 ms | 2.08 ms | Not a complete frame/CPU budget | Approximately 24.1% less summed subsystem time, or a 1.32× ratio. This is not a measured production frame-rate speedup. |
+
+The first table also reports conventional minima/maxima of 1.49/2.74 ms for occupation and 1.00/1.52 ms for rendering. The ECS table instead breaks out main-thread/jobs time; it gives no matching extrema, spread or confidence intervals. The author says runs were averaged, so printed extrema should not be silently treated as global extrema across all observations. Parallel-job duration is also not summed CPU work across workers.
+
+Removing actual texture application reportedly reduces the ECS main-thread path by 1.30 ms. This is evidence that the Unity-object boundary is consequential, but it removes required work and is not an equivalent rendering optimization. Buffer allocation/copying, texture access and synchronization remain plausible contributors; the paper does not isolate their causal shares. Appendix 1 shows the expected main-thread/worker sequence for one frame, not a distribution or reproducible profiler capture.
+
+All tests ran **inside the Unity Editor on a Windows computer**. The thesis names neither the test computer's CPU/GPU/memory nor an exact test-project editor/package configuration. A cited documentation version is not an experiment manifest. It reports profiler plus stopwatch measurement, but no raw per-run series, randomized order, warm-up policy or project repository. Standalone builds, mobile performance, total frame latency, memory/GC costs and production workload behavior were not tested. The claim that common editor overhead “doesn't matter” needs an assumption about interactions; common presence alone does not establish cancellation.
+
+## Adoption outcome and its scope
+
+The developer decided **not to migrate the released product**. The stated reasons are existing data/logic connections, changes propagating into other systems, learning and documentation difficulties, and the opportunity cost of interrupting expected Early Access content updates. The production game also uses Unity 2021, whereas the intended newer DOTS route requires an editor upgrade. That compatibility work is distinct from rewriting tile logic.
+
+These are observed obstacles and a real author decision, not a measured negative return on investment. The thesis gives no development-hour log, priced cost/benefit calculation, measured update-delay/customer effect or completed migration/regression outcome. Its final advice to decide on DOTS early is plausible case-derived guidance; there is no paired new-project comparison establishing that early adoption would have succeeded or been cheaper.
+
+The author also reports that interconnected ordinary classes make some current iteration and access easy. That benefit should be retained alongside the difficulty of replacing them. The question is which work a representation makes local and which work it shifts into scheduling, lookups, ownership changes, adapters and rendering boundaries. A different workload or integration plan could change the decision.
+
+ChatGPT-4o assisted documentation interpretation, code generation, debugging and validation. The author reports useful assistance and occasional deprecated/context-insensitive suggestions. No transcript, standardized agent policy or unassisted comparison is supplied; this cannot estimate a coding-agent, language-exposure or AI productivity effect. It is relevant practice evidence about tooling during migration.
+
+## Two technical qualifications
+
+The thesis says Burst was not used because it requires `ISystem`. That general restriction is incorrect for the relevant documented API family: Unity's [Entities 1.0.16 `Entities.ForEach` reference](https://docs.unity3d.com/Packages/com.unity.entities@1.0/manual/iterating-data-entities-foreach.html), generated February 2024, describes generated jobs in `SystemBase` and distinguishes Burst-compatible operations from those requiring `WithoutBurst`. The current 1.3 documentation also separates managed callbacks from scheduled jobs. Thus `SystemBase` does not alone rule out compiling an eligible job with Burst. This does **not** establish that the author's particular jobs were eligible or actually compiled with it; source, settings and generated code were not obtained. Preserve “author reports no Burst” as an unverified configuration claim, not a platform impossibility or an automatically correct optimization plan.
+
+The background's heap/stack and value/reference explanations are also too categorical to serve as .NET facts. In particular, arbitrary heap allocation is not a universal noncontiguous/free-block search: Microsoft's [CLR allocation description](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals#memory-allocation) describes pointer-based contiguous allocation and compaction. That documents a counterexample to the universal explanation; it does not identify which allocator the thesis's unspecified Unity backend used. The observed timing contrast survives as a report even though the proposed general explanation needs qualification. No corrected Nu runtime benefit is inferred.
+
+## Consequential follow-up and synthesis
+
+S76's acquired entity-reference benchmark is the direct next game-cost reading: it can clarify cross-entity lookup and lifecycle costs omitted by isolated tile iteration. S68's longer game-language survey still needs its taxonomy/edition resolved. From this thesis's bibliography, Turpeinen's mobile crowd comparison is a useful positive/adverse workload lead, while Borufka's benchmark suite and Näykki's pathfinding/VR/AR case can clarify separation of Jobs, Burst, rendering and hardware. Their institutional abstracts/locators have been checked; their numeric headlines remain secondary or abstract-level until the primary methods are read. A targeted source search did not locate S77's test project; that limited search is not proof that no artifact exists.
+
+**Unique:** ECS/data-oriented organization, hybrid integration and adoption tradeoffs are established alternatives; no general Nu novelty follows. **Valuable:** this case gives a concrete favorable subsystem result, an adverse boundary result and a maintainer's migration decision. Total effort and transferable net benefit remain unmeasured. **Scientifically valid:** a useful exploratory case, with declared simplification, coupled runtime mechanisms, editor-only measurements and missing configuration/raw data. It motivates comparing semantically complete workload and integration costs; it does not validate an ISE experiment. All experimental holds persist.
