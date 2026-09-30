@@ -332,3 +332,17 @@ The next readings are S138/S139's methods and actual comparisons, with S118/S116
 ## Later reading-state update: S139
 
 The table above preserves the G12 screening checkpoint. [S139](full-reading/S139-composition-representation-cost.md) is now fully read: five pages, nine figures and six references. Its generated flat representation improves the reported synthetic evaluator scaling while retaining overhead over the plain datatype in much of the normalized graph. Exact source/data remain unlocated; printed-code discrepancies are not attributed to an unseen executed artifact. G13/SC66 reuse the previously screened random-generator source without a new screening claim. S138 remains acquired/unread and is the next practical/fusion comparison. The [search ledger](nu-background-searches-2026-09-30.md) records SC67–68's actual count discrepancy and the new source audit.
+
+## Later reading-state update: S138 and G14
+
+[S138](full-reading/S138-compositional-data-types.md) now has full article coverage, selected dated source inspection and reconstruction of the author’s corrected results. The earlier acquired/unread status is historical. A primary 2013 correction invalidates the original spectacular desugaring result; corrected costs and favorable fusion are separately retained. S140’s foundational distributivity report has a native record and author PostScript but no full-body credit.
+
+G14 follows S138 incoming citations at depth 1, maximum 200: 38 edges/39 nodes, untruncated, no low-coverage flag. All 38 titles and supplied snippets were inspected. Thirty-five exact DOI entries already occur above and retain their earlier dispositions; these are not 35 new screening decisions. The three new entries are:
+
+| DOI | Title | Current disposition |
+| --- | --- | --- |
+| `10.1007/978-3-662-45234-9_6` | Domain-Specific Languages for Enterprise Systems | Conditional practice/application context; title only |
+| `10.1145/2633628.2633634` | True sums of products | Conditional representation foundation; title only |
+| `10.48550/arxiv.1905.12594` | Fuzzi: A Three-Level Logic for Differential Privacy | Preprint route associated with already screened `10.1145/3341697`; body equivalence unverified |
+
+The supplied contexts retain the practical multi-language transformation, annotation/transducer, monadic semantics and richer decomposition leads already visible in G12. A snippet claiming support for five languages is a lead, not a reconstructed evaluation. SC69 supplies one exact S138 metadata record and no repository correction; SC70 supplies zero exact S140 title hits, both requesting 20. The [ledger](nu-background-searches-2026-09-30.md) preserves primary access, correction/data identities and the new audit. No graph count closes a theme.
