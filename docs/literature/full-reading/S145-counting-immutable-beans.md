@@ -1,5 +1,7 @@
 # S145 — reuse, borrowing and the cost of retaining versions
 
+**Successor check, 2026-10-01:** [S148 Perceus](S148-perceus-precise-reclamation.md) is now fully reconstructed. It formalizes core reference-count insertion, while leaving later optimization proofs outside its scope. This advances the precise-reclamation dependency without supplying the missing whole-compiler/reuse proof for this S145 edition. Its runtime evidence also preserves a case where reuse retains extra memory; S149 is selected for the stronger space-bound follow-up.
+
 **Complete reading, 2026-10-01 HKT.** Sebastian Ullrich and Leonardo de Moura, *Counting Immutable Beans: Reference Counting Optimized for Purely Functional Programming*, IFL’19, [DOI10.1145/3412932.3412935](https://doi.org/10.1145/3412932.3412935). This B04/B06/B12 reading reconstructs a runtime alternative to tracing collection and directly examines retained functional versions. Conference year2019, the manuscript's2020 reference format and the preprint revision date are distinct.
 
 ## Source identity and actual coverage
