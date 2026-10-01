@@ -213,3 +213,7 @@ This roster accounts discovery decisions, not full reading of 181 works. The two
 ## Subsequent primary-reading update
 
 [S157’s selected v2 and bounded public package](full-reading/S157-sydra-game-engine-understanding.md) are now reconstructed. Its favorable descriptive understanding/precision results, greater impact time, manual recovery cost and unresolved statistical/scoring inconsistencies replace the earlier opening-only state above. The final journal has selected extraction only; S158 remains acquired/opening-only. G25/SC90–91 follow-up promotes S159’s industrial instrumentation paper, without turning this historical G24 roster into a full-method review of its other entries.
+
+### S158 completed and practice frontier extended
+
+[S158’s full online-first reconstruction](full-reading/S158-practitioner-design-quality.md) now replaces its earlier opening-only state. All 45 pages and 37 questions are read; 26 pages visually checked. Experience/review and guideline support are self-reported, with contextual objections retained; the public raw package is inaccessible. G26/SC92–93/W208–W212 select S160–S162 for belief/evidence, metric/judgment and extended hot-fixing methods. This is new bounded follow-up, not a claim that the remaining G24 titles received full-method readings.
