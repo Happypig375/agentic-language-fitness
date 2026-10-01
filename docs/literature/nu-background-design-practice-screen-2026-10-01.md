@@ -209,3 +209,7 @@ W192/W193/W196/W197 returned **18/16/3/20 records**: **57 occurrences / 55 disti
 | `10.7763/lnse.2016.v4.223` | Assessing Software Maintainability Based on Class Diagram Design: A Preliminary Case Study | Reused prior disposition; no new credit |
 
 This roster accounts discovery decisions, not full reading of 181 works. The two promoted PDFs and S155 report have separate native records/coverage. Continue those primary methods while preserving wider frontiers and all experimental holds.
+
+## Subsequent primary-reading update
+
+[S157’s selected v2 and bounded public package](full-reading/S157-sydra-game-engine-understanding.md) are now reconstructed. Its favorable descriptive understanding/precision results, greater impact time, manual recovery cost and unresolved statistical/scoring inconsistencies replace the earlier opening-only state above. The final journal has selected extraction only; S158 remains acquired/opening-only. G25/SC90–91 follow-up promotes S159’s industrial instrumentation paper, without turning this historical G24 roster into a full-method review of its other entries.
