@@ -681,3 +681,6 @@ The released factory task includes a valid Pig catch-all; its Giraffe extension 
 
 
 **2026-10-02 continuation:** S194’s original replication is now fully reconstructed in [its note](full-reading/S194-original-modularity-replication.md). Its completer-only, editing-excluded result and exploratory ability/strategy analysis do not test case enumeration or a pure language effect. Next read acquired S200’s positive concern/defect mapping method; later C02 discovery and the concrete type-method dependencies remain open.
+
+
+**2026-10-02 positive-method continuation:** [S200](full-reading/S200-concern-scattering-defects.md) is now fully reconstructed. Its positive requirement-scattering/bug associations and size analyses do not test types, case enumeration or a representation intervention. The specific type-method gaps and later discovery pages remain open; S203's feature-comprehension comparison is the next cross-theme method dependency.
