@@ -206,3 +206,33 @@ W171's unchanged [Scherer author list](https://gallium.inria.fr/~scherer/publica
 **Local audit prepared, not submitted:** `nu_background_s151_20261001`, 28 decisions = 16 credited / 12 excluded (three duplicate, nine scope); fifteen full-text-stage entries comprise one paper, eleven complete source files and three partial files, with thirteen metadata entries. Provenance: fourteen web and fourteen ordinary pinned sources. One author-list decision is reused. Scite reporting and report inspection await the stated UTC quota reset; no accepted-count or clean-report claim is made.
 
 The reconstruction retains the practical benefit of reusing custom structures while separating logical rollback, resource retention, callable API, testing and proof. The direct S150 dependency is resolved at this design scope. Return to S97/S98 and wider B01–B12 frontiers; no experiment is authorized.
+
+## Quota reset and S150 citation continuation, 2026-10-01 UTC
+
+The preceding pending audit states are historical. After the stated reset, the first submissions and inspected reports are:
+
+| Answer ID | Accepted cited / excluded | Stage and provenance | Report result |
+| --- | --- | --- | --- |
+| `nu_background_s150_20261001` | 17 / 15; eight duplicate, seven scope | 13 full-text-stage / 19 metadata; one Scite, twelve ordinary sources, nineteen web | Zero skips/missing reasons; no unlinked warning/truncation |
+| `nu_background_s151_20261001` | 16 / 12; three duplicate, nine scope | 15 full-text-stage / 13 metadata; fourteen web, fourteen ordinary sources | Zero skips/missing reasons; no unlinked warning/truncation |
+| `nu_background_s97_20261001` | 5 / 38; eight duplicate, thirty scope | One full-text paper / 42 metadata; one user, forty web, two ordinary sources | Zero skips/missing reasons; no unlinked warning/truncation |
+
+All three answer-scoped retrieval totals are null. Full-text-stage units include selected files and partial proof checks, not that many fully read works. No unchanged decision was resubmitted simply because access resumed.
+
+**G22 retry:** S150 `10.1145/3674637`, incoming, depth one, cap 150, intent/snippets requested: **seven edges/eight nodes**, untruncated, seven resolved seed edges and no low-coverage flags. One edge has a supplied snippet describing S150 as a backtracking background source, not a validation. Seven returned edges do not establish complete citation coverage. **SC86** requests `limit: 20`, offset zero for all seven citing DOIs and returns exactly seven, resolving this finite identity set; several abstracts are missing/truncated. **W181** uses three exact-title queries and examines fifteen returned titles and relevant primary contexts. Complete papers and artifacts were not read in this screen.
+
+| Citing DOI | Actual understanding / next consequence |
+| --- | --- |
+| [10.1145/3828706](https://doi.org/10.1145/3828706) | *A Catenable, Splittable, Transient Sequence Data Structure*: primary conference abstract describes a hybrid ephemeral/persistent representation, bounded operations and an evaluation. Consequential B04/B06 comparator; full method, measured results and snapshot/conversion costs remain unread |
+| [10.1145/3759164.3759351](https://doi.org/10.1145/3759164.3759351) | *Lightweight Testing of Persistent Amortized Time Complexity in the Credit Monad*: consequential B06/B12 testing method. Abstract and repository locator only; finite generated checks must remain distinct from proof |
+| [10.4230/LIPIcs.ICALP.2026.185](https://doi.org/10.4230/LIPIcs.ICALP.2026.185) | *Persistent Amortised Analysis, Operationally*: conditional formal dependency of the preceding method. Search supplied selected operational/counterexample passages; no complete proof reading credited |
+| [10.48550/arXiv.2605.09411](https://doi.org/10.48550/arXiv.2605.09411) | Same-title/author preprint lineage of the ICALP work; not independent evidence. Exact edition/text correspondence remains unread |
+| [10.1145/3776701](https://doi.org/10.1145/3776701) | Zoo framework journal account; W169’s conditional framework/proof disposition reused, with the later edition identified, not assumed identical to its JFLA precursor |
+| [10.1145/3779031.3779086](https://doi.org/10.1145/3779031.3779086) | Rust ghost-ownership verification; W169’s conditional proof/implementation-correspondence disposition reused |
+| [10.4230/LIPIcs.ITP.2026.28](https://doi.org/10.4230/LIPIcs.ITP.2026.28) | String-diagram verification remains outside this snapshot-cost segment; unchanged W169 disposition reused |
+
+The [transient-sequence conference abstract](https://icfp26.sigplan.org/details/icfp-2026-icfp-papers/34/A-Catenable-Splittable-Transient-Sequence-Data-Structure), [credit-monad conference abstract](https://conf.researchr.org/details/icfp-splash-2025/haskellsymp-2025-papers/9/Lightweight-Testing-of-Persistent-Amortized-Time-Complexity-in-the-Credit-Monad), [v4 author-report locator](https://antonlorenzen.de/papers/creditmonad.pdf), [primary repository](https://github.com/anfelor/creditmonad), and [operational-paper search passages](https://drops.dagstuhl.de/storage/00lipics/lipics-vol374-icalp2026/html/LIPIcs.ICALP.2026.185/LIPIcs.ICALP.2026.185.html) ground the next-reading distinctions. The repository links its 2025 testing and 2026 formal accounts. No listed build/test command was executed.
+
+Two Sek Racket documentation routes are a conditional port/transfer lead, not independent validation of the original performance claim. Two author-hosted *Specification and Verification of a Transient Stack* PDFs are predecessor routes, not two works; only their returned related-work passages were examined. DBLP, J-GLOBAL, DeepDyve, ResearchGate and the ICALP series page are duplicate metadata routes. The previously screened Lorenzen author page is reused unchanged. These remain explicit discovery frontiers before any B04/B06 coverage conclusion; they do not displace the currently weaker B01/B10 reading merely because they are recent.
+
+Audit `nu_background_g22_20261001` accepts **18 new decisions: eight cited / ten excluded** (six duplicate, four scope), all metadata/selected-search-passage stage; four Scite and fourteen web. Three unchanged DOI/edition dispositions and one author locator are reused. Inspection finds zero skips/missing reasons, no unlinked warning or truncation; retrieval total is null. G22’s initial quota failure remains recorded separately from this successful retry.
