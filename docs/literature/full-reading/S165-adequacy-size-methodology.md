@@ -1,0 +1,76 @@
+# S165 — adequacy comparisons, test size and causal assumptions
+
+**Reading completed 2026-10-01:** Yiqun T. Chen, Rahul Gopinath, Anita Tadakamalla, Michael D. Ernst, Reid Holmes, Gordon Fraser, Paul Ammann and René Just, *Revisiting the Relationship Between Fault Detection, Test Adequacy Criteria, and Test Set Size*, ASE 2020, pp. 237–249, [DOI 10.1145/3324884.3416667](https://doi.org/10.1145/3324884.3416667). Chosen [author PDF](https://rahul.gopinath.org/resources/ase2020/chen2020revisiting.pdf): thirteen internally numbered pages. Publisher-file binary correspondence is unchecked.
+
+Native Zotero parent `HER4GLEM`, note `XK3PNGEF`, PDF `PULPU9IV`; record before intended body reading. Parent, attachment relationship and stored bytes reverified: **13 pages, 2,849,148 bytes**, SHA-256 `586754989545e6085f3af6a2848d3610a5cafbd2c27aa8aa12b63f2675d2337c`.
+
+**Actual coverage:** all thirteen pages, eight figures, the numerical table in Figure 4b, the matrix in Figure 8a, three numbered equations, six footnotes and 57 references. Six pages visually checked: 2, 6–10, including every plot, table and equation. Figure 1 generated substantial extraction noise from plotted symbols; its image was checked. No appendices are present. The paper, author abstract page and bounded artifact searches did not identify a matching public analysis package. The authors acknowledge receiving Papadakis et al.'s data; this is not a new independently collected fault corpus. No test generator, mutation framework, author simulation or benchmark was executed.
+
+## Live question and the comparisons being distinguished
+
+B07/B12 require an adequacy proxy to be assessed against independent behavior, with costs and sampling made explicit. [S164](S164-google-coverage-practice.md) establishes operational integration and perceived usefulness, while leaving actual quality effects open. S165 addresses whether coverage and mutation goals help select effective tests, and why earlier studies report different correlations. It does not evaluate Nu, coding-agent maintenance or coverage use in a live game.
+
+Sections 2–3 reconstruct four prior designs. These are S165's accounts; original full methods remain separately scoped:
+
+| Prior account | Unit and selection process described by S165 | Consequence for comparison |
+| --- | --- | --- |
+| Gopinath et al. 2014, `10.1145/2568225.2568278` | Existing developer suites and fixed-time generated suites for 250 Java projects; regression across projects, using project size as a proxy amid collinearity | Its statement-coverage/mutant prediction result is not a correlation within fixed-size subsamples of a single project. |
+| Inozemtseva–Holmes 2014, `10.1145/2568225.2568271` | 31,000 uniformly sampled suites across five Java projects and feasible sizes among 3–3,000 methods | Conditioning on size changes the suite distribution and available variation; small conditional coefficients do not alone establish a causal size explanation. |
+| Just et al. 2014, **S166** | Five Java programs/357 real faults; developer pre/post-fix suites and fixed-budget generated suites | Neither is the same intervention as uniformly choosing a fixed number of existing tests. Its body still needs reading. |
+| Papadakis et al. 2018, **S170**, `10.1145/3180155.3180183` | Combined developer/generated pools for 231 Defects4J faults; 10,000 fixed-size or random-size samples, plus a separate C analysis | This is the direct sampling-method comparison. Its primary abstract also reports a favorable top-ranked-mutation comparison; weak correlations are not its only finding. |
+
+Test creation, selection from an existing pool and retrospective suite evaluation answer different questions. Developers and generators often add tests in response to behavior, coverage goals or previous generated tests. Uniform independent sampling from a fixed pool does not reproduce those processes. This is a transfer objection to that model, not a proof that every fixed-size comparison or random baseline is invalid. S165 itself retains equally sized random baselines for its proposed comparison.
+
+## Mathematical reconstruction and limits
+
+For uniform sampling without replacement from a pool of **N** tests, **K** of which detect a given known fault, selecting **n** tests yields a hypergeometric number of detecting tests. Equations 2–3 give the chance of at least one detection as
+
+`1 − choose(N−K, n) / choose(N, n)` when `n ≤ N−K`, and `1` otherwise.
+
+This probability is determined by the selected size **conditional on the fixed pool and its K/N composition**. It is not a general law that test count alone determines effectiveness across projects or test-generation procedures. Coverage-goal distributions additionally depend on which tests satisfy which goals and the dependencies between goals.
+
+For Closure-100 the pool contains 6,068 tests, with 23 detecting the fault. Figure 2 shows detection near 0.91 at a 10% sample size, and much greater saturation at larger sizes. Across the 231 faults, Figure 3 shows markedly different sampling-probability curves. Figure 4 preserves four contrasting cases: Chart-24 and Math-6 saturate quickly, while Lang-51 has a single detecting test and a very different curve. The reported correlations under fixed versus random sizes change in different directions. Pool composition and restricted outcome variation matter.
+
+**The normality condition must remain attached to Equation 1.** It bounds correlation between a normally distributed continuous variable and a binary variable with success probability *p*, yielding about 0.798 at *p* = 0.5 and smaller bounds toward the extremes. Footnote 5 explicitly assumes normally distributed mutant detection for the Figure 3 bound. The paper's earlier broad wording that point-biserial correlation is at most 0.8 must not become an unconditional statistical rule. Its cited Cheng–Liu source, `10.1111/bmsp.12075`, has a [primary publisher abstract](https://bpspsychub.onlinelibrary.wiley.com/doi/10.1111/bmsp.12075) explicitly warning that non-normal distributions need not obey those bounds or their dependence on *p*. Only that abstract and selected search passages, not the full eight-page mathematical paper, were read here. S165 does not establish normality of every empirical adequacy distribution in the body.
+
+Figures 2 and 4 **set the observed correlation to zero when every sampled suite detects the fault**. A constant outcome ordinarily makes Pearson correlation undefined; zero is the authors' plotting/reporting convention, not measured evidence of independence. Their saturation warning remains useful without converting those values into valid null effects. Similarly, conditional/unconditional correlation differences cannot identify confounding by themselves. General claims of inevitable attenuation or causal removal require assumptions beyond collinearity and a regression coefficient.
+
+The abstract/conclusion says size is not a confounder, but Section 7 gives several causal models compatible with the same reduced conditional correlation, **including size as a confounder**, and calls for explicit causal assumptions. The defensible synthesis is that the cited correlation comparison does not identify which causal model holds. It is not a universal prohibition on adjusting for size, nor proof that size adjustment is always necessary. The later contrary S168 method is consequential for this unresolved distinction.
+
+## Proposed selection method and observed directions
+
+Section 6 uses **231 Defects4J faults and their developer-written tests**, whereas Section 5's sampling demonstration uses the combined developer/generated pools from the earlier study. These populations must not be silently interchanged. Major supplies mutation and coverage information. The body does not fully specify the exact coverage-goal instrumentation, mutant eligibility/equivalence handling or all satisfiable-goal filtering needed to bind an independent implementation to the printed analysis.
+
+For each fault and criterion, the procedure starts from an empty set, randomly considers candidate tests, and accepts the first one that satisfies an additional goal. It records fault detection, adequacy and test count after each addition, stopping when the goals are satisfied. **100 repetitions per fault** produce average detection probabilities. At each resulting size, the formula above supplies a matched random baseline. Repeated sampled suites are nested/dependent observations from the same known faults and projects, not 23,100 independent software systems or real developer sessions.
+
+| Comparison | Reported result | Boundary |
+| --- | --- | --- |
+| Before coverage saturation, Figure 5 | Coverage-directed selection is on average as strong as or stronger than mutation-directed selection at equal numbers of methods; both exceed random selection | Local-regression curves across the 231 faults, normalized by each coverage-adequate endpoint; no universal per-fault dominance or equal runtime claim. |
+| Continuing after coverage saturation, Figure 6 | Switching from coverage to mutation gives the best reported overall curve; repeatedly stacking coverage-adequate sets and pure mutation provide comparators | Normalization now uses mutation-adequate endpoint sizes. This is a simulation from existing pools, not the cost of generating new tests or Google's production effect. |
+| Adequacy-preserving reduction, Figure 7 | Mutation-based reduction generally retains more fault detection; coverage-based reduction loses substantially more | Each criterion has a different-size random baseline. Neither reduction preserves all faults. |
+| Greedy minimization variants | `Coverage-Min`/`Mutation-Min` choose the globally greatest added goal coverage, unlike the first-improving selection procedure | These approximate small suites, not a proved globally minimum set; cost still counts methods. |
+
+The plots support positive and task-dependent directions. Smoothed aggregate curves, means/medians and trial averaging do not establish a precise population effect, a human-time saving or an industrial net-budget advantage. The paper reports small trial errors but does not supply raw release/version binding, project-cluster uncertainty or a prospective held-out comparison in this account.
+
+## Probabilistic coupling is a known-fault proxy
+
+Section 6.5 defines the conditional probability that a test detects a known real fault given that it satisfies a particular goal, then takes the **maximum across goals**. Figure 8a illustrates values 1, 0.5 and 0; an unsatisfiable goal is assigned zero in the example, rather than supplying an empirically defined conditional probability. The intended benefit of the maximum is to avoid diluting a known fault's sensitivity with many unrelated goals.
+
+The maximum is not the probability that an arbitrary generated or adequate suite will detect the fault. It depends on the tests/known faults represented and omits dependencies among goals. The paper acknowledges the approximation and proposes incorporating subsumption as future work. Figure 8 compares aggregate distributions with Figure 7; it does not supply prospective calibration on previously unknown faults. Perfect coupling is a relation within the represented test universe, not behavioral equivalence or proof that every real fault has a coupled mutant.
+
+## Cost and transfer
+
+Section 7 explicitly limits the paper's own size measure: a JUnit test method may contain one assertion, many assertions, a table of cases, or an integration/system test. Splitting/combining methods can change the count without changing behavior or cost. Actual automatic execution and generation time should therefore be measured when those are the quantities of interest. The equal-method-count analysis remains useful for its declared comparison, with this cost proxy limitation intact.
+
+For ISE, the consequences are to preserve independent behavioral obligations, distinguish information availability from its causal use, state the tested fault population, and treat post-treatment edit/test counts separately from assigned opportunity and total costs. A coverage criterion can be useful despite imperfect correlation; a favorable correlation cannot replace a complete oracle. Neither criticism of earlier analyses nor a better proxy validates D1 or Nu.
+
+## Follow-up and current disposition
+
+G29 returns **61 incoming edges/62 nodes**, untruncated, with all citer titles available and 29 snippets across nineteen edges. Their [bounded screen](../nu-background-adequacy-method-screen-2026-10-01.md) retains actual reuse, proxy use and conditional methods; citation labels are not validation. SC98 returns two records from three exact titles; SC99 returns eight exact DOI records. The missing Papadakis identity is resolved by primary institutional/author routes as S170. W222–W228 also distinguish statistical assumptions, a later size-adjustment claim, ASSENT's editions and code-change proxies.
+
+- **S168**, `10.1145/3748504`, is a direct later contrary method. Its primary deposited abstract claims that regression removes size confounding. Native record exists, but public publisher PDF/landing requests are blocked; body and claimed causal removal remain unverified.
+- **S169**, `10.1145/3635713`, has an acquired **eleven-page 2022 arXiv v1** under an earlier title, not the 32-page 2024 journal body. Its ground-truth/benchmark/agreement framework is an intended method dependency; body coverage remains opening-only.
+- **S170**, `10.1145/3180155.3180183`, has an acquired twelve-page institutional author paper. It must be read with S166 to preserve both the critical and favorable original evidence; opening-only so far.
+- Conditional routes include Defects4J 2.0 coupling (`10.1109/ICSTW55395.2022.00042`), the coverage-factor survey (`10.1109/ICSTW58534.2023.00071`), fault-versus-failure measures (`10.1016/j.jss.2025.112450`) and the code-metric maintenance paper (`10.1007/s10664-022-10193-8`). The latter's primary opening explicitly uses change proneness as its effort indicator; original methods and its later methodological follow-up remain pending.
+
+**Unique:** adequacy-guided selection, coupling and equal-opportunity comparisons have prior methods; ISE priority is unconfirmed. **Valuable:** the study supplies favorable selection/reduction directions and practical cost warnings, with net effort and transfer unmeasured. **Scientifically valid:** the selected method is reconstructed, while sampling, distributional assumptions, causal interpretation, known-fault dependence and missing analysis binding constrain inference. Continue the original and contrary methods, S167's instrumentation comparison, and the broader practice/theme frontier. No theme closes or experiment starts.
