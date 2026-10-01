@@ -461,3 +461,9 @@ Clients still need factory-based construction, independent extensions need deleg
 Researcher checking provided an actual correctness control, but the participant outputs were lost after analysis. The [artifact check](S199-live-pattern-artifact-check.md) preserves this distinction, reconstructs the source tasks and corrects the scope of several reported statistics. A role warning identifies a missing structural participant without implementing its behavior. A valid factory catch-all appears in the released source; no D1 source-convention comparison was performed.
 
 These favorable and null results add to the cost/alternative synthesis without proving professional, long-term or Nu-specific benefit. S202’s primary abstract supplies a maintainer-rating follow-up with unread sampling/fidelity/cost methods. Next reconstruct acquired S194’s original replication, keeping S200 and independent runtime/oracle/type frontiers open.
+
+## S194 — assignment, completion and phase timing are separate
+
+[S194](S194-original-modularity-replication.md) supplies the original eight-page method behind S193’s retrospective account: random allocation is reported,17 of23volunteers finish within the allowance, and the published48.0/59.1-minute comparison excludes editing. It retains a smaller modular-faster mean with an inconclusive test. Saved programs and debriefs expose phase overlap and differing maintenance strategies.
+
+Ability rankings and the hypothetical replacement of testing times are exploratory. They do not show that a preferred adjusted effect should replace the observed comparison. Safe local edits and proceduralization of monolithic source remain valid behavior. This closes the conference-paper reading gap, while preserving fuller report/thesis/source/test limits and the common S193/S194 case lineage. Read acquired S200 next to reconstruct the positive concern/defect method, then retain S202 and independent runtime/oracle/type work.
