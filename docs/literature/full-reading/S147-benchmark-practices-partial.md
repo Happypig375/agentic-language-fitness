@@ -1,5 +1,7 @@
 # S147 — What the CHAMP warning record actually contains
 
+**Historical scope, superseded for current reading status:** the [complete final-journal reconstruction](S147-benchmark-practices.md) now covers the acquired sixteen-page PDF and additional RQ2 material. Native parent `IZE2C6FX` replaces the deleted historical `GP4BQG7X`; canonical note `2H26NKVR` was preserved by that existing merge. The following dated access record and bounded CHAMP analysis are retained, not asserted as current access limitations.
+
 **Partial reading, 2026-10-01 HKT; no full-work credit.** Diego Costa, Cor-Paul Bezemer, Philipp Leitner and Artur Andrzejak, *What's Wrong with My Benchmark Results? Studying Bad Practices in JMH Benchmarks*, IEEE TSE 47(7), 1452–1467 (2021; online 2019), [DOI 10.1109/TSE.2019.2925345](https://doi.org/10.1109/TSE.2019.2925345). Native record `GP4BQG7X`, note `2H26NKVR` preceded intended reading. The live question is whether this later study establishes a failure in [S143's](S143-champ-immutable-collections.md) published measurements.
 
 ## Access and bounded paper evidence
