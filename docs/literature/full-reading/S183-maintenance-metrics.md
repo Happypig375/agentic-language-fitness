@@ -1,5 +1,7 @@
 # S183 — system metrics and observed professional maintenance
 
+**2026-10-02 continuation:** [S184’s full publisher method](S184-smells-maintenance-effort.md) is now reconstructed. Table 4 resolves eleven analyzed assignments from twelve planned, with developer 6’s second-round B assignment unfinished and excluded. Both papers use the same systems/tasks. S184 clarifies the logged-event/acceptance/revision procedure and conditional models; original data, exact round adjustment and cross-table inventory scopes remain unresolved. The access attempts below describe the earlier state.
+
 ## Identity and actual coverage
 
 Dag I. K. Sjøberg, Bente Anda and Audris Mockus, *Questioning Software Maintenance Metrics: A Comparative Case Study*, ESEM 2012, pp. 107–110, [DOI 10.1145/2372251.2372269](https://doi.org/10.1145/2372251.2372269). [Author university PDF](https://www.mn.uio.no/ifi/personer/vit/dagsj/sjoberg.anda.mockus.esem.2012.pdf): four pages, 441,702 bytes, SHA-256 `f6c90e96442d08842031d16da107ff5a0715b3656bb89fb7653839ba420b0776`. Native Zotero parent `GWEUAWS4`, PDF `PLKNQPYU`, note `L9TUFIIN`. Crossref/native title omits the subtitle printed on the PDF; it is the same DOI/work.
@@ -61,7 +63,7 @@ The author bibliography supplies a DOI link; its university counterpart resets. 
 
 The [search ledger](../nu-background-searches-2026-09-30.md) records SC116 and W254–W261 plus primary HTTP/API probes. A narrow correction/data search finds no resolved correction or original package; that is not proof of global absence. Recent metric-guided refactoring and smell-relation methods remain conditional leads, including favorable results, without completed-method credit.
 
-For Nu/ISE, this is scoped positive evidence that system size can matter for actual work even when class-level metrics suggest another ranking. It does not overcome the project's preserved adverse F# source-size observations, prove source count is an adequate maintenance oracle, or establish an agent/context-window benefit. S184 is an access-limited dependency; acquired S181's displayed-metric intervention and S162's industry workflow remain independent accessible work. Keep type/runtime/oracle gaps visible and all construction holds intact.
+For Nu/ISE, this is scoped positive evidence that system size can matter for actual work even when class-level metrics suggest another ranking. It does not overcome the project's preserved adverse F# source-size observations, prove source count is an adequate maintenance oracle, or establish an agent/context-window benefit. S184’s publication access and primary-model reading are now closed; its original data and associated qualitative methods remain distinct gaps. S181’s displayed-metric intervention and S162’s industry workflow are reconstructed independent evidence. Keep type/runtime/oracle gaps visible and all construction holds intact.
 
 | Criterion | Disposition |
 | --- | --- |
