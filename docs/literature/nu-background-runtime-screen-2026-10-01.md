@@ -59,10 +59,10 @@ The search queries return **139 search occurrences**. Including successful open/
 
 | Lead | Why it remains consequential / current disposition |
 | --- | --- |
-| RRB vectors, `10.1145/3110260`; Persistent Iterators, `10.1145/3808324` / arXiv `2604.14072` | Value semantics, transience, reference counts and retained sharing could change the update/history cost account. Metadata/selected citation contexts only; a CHAMP reference is not an independent HAMT measurement |
+| RRB vectors, `10.1145/3110260`; Persistent Iterators, `10.1145/3808324` / arXiv `2604.14072` | Now **[S211](full-reading/S211-rrb-systems-persistence.md)** and **[S212](full-reading/S212-persistent-iterators.md)**: selected editions fully read with bounded artifact correspondence. Preserve operation-specific advantages and penalties, output materialization and retention conditions; no Nu/.NET measurement |
 | Heterogeneous HAMTs, arXiv `1608.01036`; product-line tries, `10.1145/2993236.2993251` and alternate `10.1145/3093335.2993251` | Representation specialization and multimaps; overlapping author/benchmark lineage, no independent replication presumed |
 | Runtime/compiler HAMTs, `10.1145/3486602.3486931` | C11 disposition reused; compiler/runtime cost methods remain unread. State-based ADTs `10.1007/978-3-032-24494-9_4` is a separate metadata lead |
-| MapReplay, `10.1145/3777884.3797010` / arXiv `2603.14019` | Trace-driven operation mix is the closest newly identified method for the representativeness question left by S143/S146; body unread |
+| MapReplay, `10.1145/3777884.3797010` / arXiv `2603.14019` | Now **[S214 fully reconstructed](full-reading/S214-mapreplay.md)**: 14-page v1, all figures/tables and bounded source/release inspection. Retain 18/21 directional agreement for the capacity case; transformations and released-input lineage qualify fidelity. No runtime reproduction |
 | Non-steady performance: `10.1007/s10664-022-10247-x`; primary institution lists `10.1145/3798236` | Fixed warmup and variance do not establish a representative regime. Earlier method and newer paper/artifact relationship remain unread; no result imported from titles |
 | Automatic microbenchmark generation, `10.1145/2970276.2970346` | Conditional method for elimination/constant-folding concerns; not evidence that S143's blackhole-consumed operations were eliminated |
 | Aggregate updates, `10.1109/CGO53902.2022.9741275`; PIE, `10.22152/programming-journal.org/2018/2/9` | Distinct dataflow/update and interactive-pipeline workloads; conditional B03/B08 methods, not collection-cost replications |
@@ -223,7 +223,7 @@ All three answer-scoped retrieval totals are null. Full-text-stage units include
 
 | Citing DOI | Actual understanding / next consequence |
 | --- | --- |
-| [10.1145/3828706](https://doi.org/10.1145/3828706) | *A Catenable, Splittable, Transient Sequence Data Structure*: primary conference abstract describes a hybrid ephemeral/persistent representation, bounded operations and an evaluation. Consequential B04/B06 comparator; full method, measured results and snapshot/conversion costs remain unread |
+| [10.1145/3828706](https://doi.org/10.1145/3828706) | Now **[S213](full-reading/S213-transient-sequence.md)**: all 33 author-edition pages and bounded Sek release reconstruction. Preserving/clearing snapshots, potential credit and selected stack costs are resolved; exact final-edition/run identity and retained-history transfer remain qualified |
 | [10.1145/3759164.3759351](https://doi.org/10.1145/3759164.3759351) | *Lightweight Testing of Persistent Amortized Time Complexity in the Credit Monad*: consequential B06/B12 testing method. Abstract and repository locator only; finite generated checks must remain distinct from proof |
 | [10.4230/LIPIcs.ICALP.2026.185](https://doi.org/10.4230/LIPIcs.ICALP.2026.185) | *Persistent Amortised Analysis, Operationally*: conditional formal dependency of the preceding method. Search supplied selected operational/counterexample passages; no complete proof reading credited |
 | [10.48550/arXiv.2605.09411](https://doi.org/10.48550/arXiv.2605.09411) | Same-title/author preprint lineage of the ICALP work; not independent evidence. Exact edition/text correspondence remains unread |
