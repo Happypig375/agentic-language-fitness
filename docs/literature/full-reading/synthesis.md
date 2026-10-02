@@ -572,3 +572,6 @@ Ability rankings and the hypothetical replacement of testing times are explorato
 
 
 **GUI playtesting and memory, 2026-10-02:** [S227](S227-continual-gui-playtesting.md) completes the19-page selected preprint (190works). Reported rubric gains, human agreement and nested memory/GUI ablations supply positive evidence for rendered-interaction feedback. Different budgets/stopping, post-outcome complexity groups, contradictory human-plot direction and unresolved rubric versions constrain the interpretation. The matched public gallery is not the complete benchmark release. Preserve development feedback separately from final scoring and follow S228's industrial temporal route without running a game, agent or candidate.
+
+
+**Industrial temporal assertions, 2026-10-02:** [S228](S228-opengameeval.md) reconstructs the Roblox article and bounded article-date/current sources; full-paper count remains190. Native edit/play/client/server evaluation is established prior work. Exact health samples and traffic-change flags support narrower obligations than complete timing/replication/cycle guarantees. Preserve the original measured difficulty pattern while separating later roster/model changes, source-derived concerns and actual runtime validation. Return to C05's supplied abstracts; no experiment is authorized.
