@@ -548,3 +548,6 @@ Ability rankings and the hypothetical replacement of testing times are explorato
 
 
 **Cyclic-call update boundary, 2026-10-02:** [S218](S218-redac-cyclic-reconfiguration.md) adds a primary-text reconstruction, with the complete-publication count unchanged at183 because PDF/visual access remains unresolved. ReDAC’s selective draining, positive lock-comparison result and PaintDotNet experience are retained separately from state conversion, bounded response and total application cost. A reported lack of noticed slowdown is not a zero-cost measurement. Follow the direct graphical-state predecessor where accessible, with independent algebraic-testing and temporal work still open.
+
+
+**Finite-test assumptions, 2026-10-02:** [S220](S220-algebraic-specification-testing.md) brings full selected-publication coverage to 184 works. Its algebraic method separates conformance, implementation testability, representative selection, finite bounds and observable verdicts. The constructive methods and their scoped positive/missed/null case reports survive, with selected-edition printed issues and final-copy limits explicit. Follow the original formal/statistical comparison before interpreting its case summary as a general comparative effect. Whole-survey completion, temporal adequacy and measured Nu benefit remain open.
