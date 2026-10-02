@@ -4,6 +4,8 @@ This bounded screen follows [S165](full-reading/S165-adequacy-size-methodology.m
 
 S165 is fully read. S168 is a selected access-limited contrary method; S169 and S170 are acquired at opening-only coverage. S169's eleven-page 2022 preprint is not the 32-page 2024 journal. A graph label does not establish validity, and these entries do not constitute 61 complete methods or independent studies. Sources credited only as conditional leads remain incomplete; deferred means excluded from this segment's evidentiary claims, not rejected or permanently prohibited. Unchanged earlier decisions are reused in the audit.
 
+**2026-10-02 continuation:** S168, S169 and S170 now have complete chosen-edition reconstructions in the [reading index](full-reading/INDEX.md). S169's 32-page final journal closes the earlier body-access gap; its eleven-page preprint remains partial. The dated screen below preserves original discovery dispositions, not current reading status.
+
 | DOI | Returned title | Segment disposition | Actual scope / reason |
 | --- | --- | --- | --- |
 | `10.1002/stvr.1843` | On subsumption relationships in data flow testing | Credited | Title, available graph snippet and selected exact metadata/abstract only; conditional adequacy, sampling, proxy-validity or practice method. 3 supplied citation snippets inspected; labels are not validity judgments. |
