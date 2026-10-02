@@ -536,3 +536,6 @@ Ability rankings and the hypothetical replacement of testing times are explorato
 
 
 **Algebraic-model refinement, 2026-10-02:** [S215](S215-gatlab-model-migration.md) brings full coverage to180 works. GATlab implements domain theories, explicit computational models and theory-map pullback; a map A→B derives A-interface behavior from a B-model. The [source](S215-gatlab-artifact-check.md) confirms generated delegation while leaving axiom-proof checking unfinished at the dated pin. Formal preservation premises, partial syntactic checks, dynamic membership and live-state obligations are distinct. This adds a constructive alternative without a measured Nu benefit. Next reconstruct United Constructions’ typed default branches from C02 2-71; the survey remains active.
+
+
+**Typed-default refinement, 2026-10-02:** [S216](S216-united-constructions.md) brings full coverage to181 works. Its default branch retains residual type/equality information after a failed tag test, with formal no-op casts and a sketched relative-consistency account. These are useful language-design results; open-world extension, future behavioral obligations and measured maintenance benefit remain separate. D1 now includes this prior-art boundary without changing its fixed-language source treatment or holds. Next resolve/read dependent (co)pattern elaboration’s two recorded edition routes.
