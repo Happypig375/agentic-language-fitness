@@ -6,7 +6,7 @@ The18 retained records were fetched through the native Consensus record interfac
 
 ## Consequences and next action
 
-**Current continuation,2026-10-04:** the acquisition/next-action paragraphs below describe the initial2026-10-02 screen. [S229](full-reading/S229-picoscenes-expert-ai.md) and S230–S234 are now reconstructed at their recorded final/preprint/artifact scopes. The active next method is **position64, CatCoder**, for type-informed repository context. The remaining retained leads remain conditional; this update does not repeat or extend the100-record screen.
+**Current continuation,2026-10-04:** the acquisition/next-action paragraphs below describe the initial2026-10-02 screen. [S229](full-reading/S229-picoscenes-expert-ai.md), S230–S234 and **position64/[S241 CatCoder](full-reading/S241-catcoder-type-context.md)** are now reconstructed at their recorded publication/artifact scopes. CatCoder’s2025v2 has a changed title; the2026journal body remains inaccessible. A new exact-title metadata route selects DOI10.1145/3808138 for its context-comparison method, because S241’s information gain also adds input. The remaining retained leads stay conditional; this update does not repeat or extend the100-record C05 screen.
 
 The strongest immediate leads are **S229/PicoScenes** for professional architectural diagnosis, implementation effort and runtime outcomes, and **S230/ArkTS** for typed reactive/UI tasks and compiler feedback versus behavior. Both now have native Zotero parents/notes in collection `PKLXQNEE`: `WH2VLKDM`/`UKKWIQT9` and `APFWN9Q4`/`DDHVTB3H`. Records precede intentional full readings; an exact-title web search automatically exposed partial body passages beforehand. Those passages are explicitly not complete readings.
 
