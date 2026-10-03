@@ -1,10 +1,12 @@
-# S229 — Expert–AI development in PicoScenes: primary access gap
+# S229 — Expert–AI development in PicoScenes: acquired, reading pending
 
 ## Identity and actual coverage
 
 Yu Duan, Daiyang Zhang, Zhiping Jiang, Zhuoyu Xie, Yiming Liu, Yueshen Xu, Rui Li and Di Cui, *Less Effort, More Productivity: Lessons Learned from Developing Millions of Lines of Code with Large Language Model*, ICSE-SEIP2026, pp.280–291, DOI [10.1145/3786583.3786872](https://doi.org/10.1145/3786583.3786872). Crossref records print/conference12 April2026 and online11 July2026. The [conference record](https://conf.researchr.org/details/icse-2026/icse-2026-software-engineering-in-practice/20/Less-Effort-More-Productivity-Lessons-Learned-from-Developing-Millions-of-Lines-of-) agrees with first author **Yu**, correcting Consensus's **Yu-Peng**. Native parent/note `WH2VLKDM`/`UKKWIQT9`, collection `PKLXQNEE`, created before intentional complete primary-body reading.
 
-**Not fully read.** C05 position74's supplied abstract and native fetched record are screened. An exact-title web search automatically exposed discontinuous publisher body passages before record creation, including parts of the introduction, workflow, setup and discussion. The display truncated the results; no page, figure, table or complete-section coverage is credited. No PDF was acquired, so there is no PDF hash or attachment to report. This note adds no full-paper count.
+**PDF acquired, not fully read, 2026-10-03.** A new native user-library attachment **`QDPY9REW`** resolves the previous PDF-access gap: **12 pages, 4,206,391 bytes**, SHA-256 **`c7e055a8acdfa52a14ac975adb796817371a908c075c251b43b7c05499e2971e`**, MD5 **`e212e0a6165f3523a71b83a9cf1e2deb`**. Actual native storage and the local copy match. The existing parent/collection/note were checked before opening; physical page 1 has text and visual identity coverage, matching eight authors, DOI, printed page 280, conference 12–18 April 2026 and CC BY 4.0. Extraction of the remaining pages is acquisition, not completed reading.
+
+The earlier checkpoint covered C05 position 74's supplied abstract, a native fetched record and discontinuous publisher search passages, without a PDF or complete section/figure/table coverage. Those historical limits remain recorded below. W449 again returned partial publisher text and locators while an independent native check found the attachment; the native PDF, rather than a successful web download, closes access. No full-paper count is added at this acquisition checkpoint.
 
 ## Why it remains consequential
 
@@ -18,4 +20,4 @@ On2026-10-02, ordinary HTTPS to the official ACM PDF returned403. Web opens of t
 
 SC141 requested `limit:20` for the exact S229/S230 DOIs and returned2 metadata records, with no abstracts or citation contexts. Its access flag does not establish readable content: native `read_fulltext` for S229 returned **zero characters**, `contentDenied:true`, no further page. The provider's publisher redirect was supplied but not independently followed; it remains one lawful access route to try. These retrieval limits are not evidence that the study or its underlying data are absent.
 
-Next: recover the publisher or author PDF/full HTML with all figures and tables through a working lawful route, attach/verify it under the existing parent, then reconstruct feature allocation, denominators, effort boundaries and result linkage. Continue accessible S230/S231 and the retained C05 methods while this specific gap remains. All experimental holds persist.
+Next: read the acquired publisher PDF completely, including all figures/tables, then reconstruct feature allocation, denominators, effort boundaries and result linkage. S83's completed maintenance comparison now leads directly to this professional-workflow evidence. All experimental holds persist.
