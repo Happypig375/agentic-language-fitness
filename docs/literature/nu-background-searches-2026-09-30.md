@@ -3687,3 +3687,42 @@ Audit **`nu_background_s237_20261003`** credits **one complete primary paper**, 
 **Next primary route is accessible:** S239's versioned publisher PDF is readable through the web reader although its ordinary GET remains403. A constructed public publisher-resource URL is then verified against the returned title, authors and DOI: [MDPI file](https://mdpi-res.com/d_attachment/modelling/modelling-03-00014/article_deploy/modelling-03-00014.pdf), **6,468,760 bytes /23 pages**, SHA-256 **`f462e7dec21defedcbcecbdc8aa74ed8821b48ada1b7a591eb51c04adebf4f5a`**, MD5 **`75776a0bb21e8f65ae38b4642667779e`**. New native attachment **`S5MALVH6`5427** matches exactly under existing parent `3RGDXVXJ`. This resolves local PDF acquisition; its complete reading is still next. The ongoing S239 segment owns its new access/discovery audit. No claim of byte identity with the web reader's versioned copy is made.
 
 Prior S238 commit **`436a897fe954649062bb0c69f1a61501fd66f2ee`** is pushed. Exact-head [CI37133354193](https://github.com/Happypig375/interactive-software-evolution/actions/runs/37133354193) succeeds: scope **111232751357** passes; Linux **111232773605**, maintenance **111232773733**, Windows **111232773823** and E2 baseline **111232774146** skip by documentation routing. Seven Markdown paths passed UTF-8/local-link/whitespace checks and the full-hash classifier selected `docs`. Unrelated `uv.lock` remains untouched.
+
+## S239 — Unity optimization bundle and measurement boundaries, 2026-10-03
+
+[S239](full-reading/S239-unity-mobile-optimization.md) now has **all 23 publisher text/visual pages**, six sections, **20 figures, eight tables and 31 references** read. No appendix or code/data supplement appears in the read PDF. Selected complete-publication coverage becomes **209 = 13P + 3A + 193S**. Native registration preceded body reading; no runtime, author script, compiler, new worker or experiment is executed.
+
+The five-technique bundle reports a favorable **50–60 versus 20–30 phone FPS** during action in its authored shooter. Both versions reach roughly50–60 FPS under low load. The optimized version retains 100 enemies for reuse and more constituent objects, while some selected managed-heap values are higher. These costs coexist with the positive phone result. The large geometry reduction, material changes, culling and pooling are not isolated treatments; the authors explicitly leave individual technique effects and frame-rate consistency to future work.
+
+Computer profiling retains900 frames and selects each version’s lowest-FPS and near-60-FPS frames. Phone screenshots use interval-averaged FPS but do not report the interval or replicate schedule. Unity/backend versions and PC hardware are unspecified. Printed table/narrative units conflict; the note records the exact entries and does not guess corrected values or infer GC pauses from allocation spikes. Phone cumulative elimination scores are not active-enemy counts or matched scene traces. Actual FPS evidence remains credited rather than replaced with a catalogue of limitations.
+
+| Access/discovery route | Actual outcome |
+| --- | --- |
+| W474 | Open publisher `/pdf?version=1648454833`: web reader succeeds,23 pages/1,153 indexed lines, with the initial supplied range through partial page4 inspected. Ordinary local GET remains403. Institutional web opening fails. This is an access route for the same S239, not another edition fully read or a byte-equivalence check. |
+| W475 | Exact query `"modelling-03-00014.pdf" "mdpi-res"` returns **12 displayed irrelevant blocks**, listed below. Titles/snippets only are screened; no useful publisher-file route is found. No further noise page is treated as necessary acquisition work. |
+| W476 | A constructed conventional public MDPI resource URL returns the PDF; title, authors, DOI and pagination verify identity. Native attachment and all23 local text/rendered pages are checked. This local edition governs the reconstruction; the later updated HTML and cached versioned web copy are not silently substituted. |
+
+The W475 blocks, in retrieval order, are excluded for scope rather than scientific quality:
+
+| Position | Returned source and actual screening reason |
+| --- | --- |
+| 1 | [FLOW-3D porous media](https://flow3d.co.kr/tag/porous-media/): fluid/porous-media modeling; no selected Unity paper. |
+| 2 | [Yokohama researcher profile](https://researcher.yokohama-cu.ac.jp/html/100000832_ja.html): biochemistry and molecular/pharmacokinetic publications. |
+| 3 | [Intestinal immunity dissertation page](https://fr.scribd.com/document/891717422/These-Gabriel-Tristan-2023-1): immunity/behavior material, not the game study. |
+| 4 | [Technology/biology opinion page](https://mcmartinreports.com/2023/07/13/scattered-notes-dystopia-transhumanist-manifesto-from-hell-religion-of-scientism-what-they-dont-tell-you/): no pertinent primary Unity method or PDF route. |
+| 5 | [Climate-change category](https://chaturvedimayank.wordpress.com/category/climate-change/): climate/scenario planning. |
+| 6 | [FLOW-3D shallow water](https://flow3d.co.kr/tag/shallow-water/): fluid/wave-energy modeling. |
+| 7 | [DiVA latest page73](https://uu.diva-portal.org/smash/latest.jsf?fs=false&language=no&p=73): unrelated Energy metadata. |
+| 8 | [DiVA latest page69](https://uu.diva-portal.org/smash/latest.jsf?fs=false&language=no&p=69): unrelated Energies metadata. |
+| 9 | [DiVA latest page70](https://uu.diva-portal.org/smash/latest.jsf?fs=false&language=en&p=70): Energy editorial metadata. |
+| 10 | [IRIDIA bibliography](https://iridia-ulb.github.io/references/index_bib): general bibliography/operations-research snippets, no selected PDF route. |
+| 11 | [DiVA latest page72](https://uu.diva-portal.org/smash/latest.jsf?fs=false&language=sv%2F1000&p=72): unrelated Energies metadata. |
+| 12 | [FLOW-3D physical modeling](https://flow3d.co.kr/tag/physical-modeling/): physical/foundry fluid modeling. |
+
+The **6,468,760-byte** publication remains SHA-256 **`f462e7dec21defedcbcecbdc8aa74ed8821b48ada1b7a591eb51c04adebf4f5a`**, MD5 **`75776a0bb21e8f65ae38b4642667779e`**. Version-guarded completion-tag/note updates and exact readback preserve membership and unchanged attachment data/version; native stored bytes are reverified. Final observed objects: **`3RGDXVXJ`5430 / `IMKLJ36Q`5429 / `S5MALVH6`5427**.
+
+Audit **`nu_background_s239_20261003`** records **one complete-paper credit and12 off-topic exclusions**. Checking131 prior decision files suppresses no exact new web identity; the DOI entry is a material full-reading upgrade rather than repeated metadata screening. All13 decision/provenance/reason/stage records match inspected `citation_report` (**78 field comparisons**); zero skips/missing reasons, no linkage warning or truncation. Answer-scoped retrieved count is null. No new Scite search, Consensus page or citation-graph traversal occurs; the31-entry paper bibliography is not31 additional independent screens.
+
+The index, B04/B06/B12 and synthesis now separate the bundle-level outcome from pooled-object retention, selected profiler frames and unknown GC/frame-tail behavior. **Next:** retained SC155:1, now S240, DOI10.51903/pixel.v15i2.770, for the direct pooling contrast. Crossref identity and native duplicate checks over1,265 top-level/259 collection items precede registration as **`Y5VD4GHT`5431 / `MK5B4ELA`5432**. Its ordinary publisher download returns403, but the13-page publisher PDF is web-readable; local acquisition and complete method/figure reconstruction continue in the next segment, which owns that access audit. Contemporary runtime guidance, retained-history costs and actual game-change work remain distinct frontiers. No theme or construction hold closes.
+
+Prior S237 commit **`7bac62eda0efada168bdf6a84a55fa0e4a4b0192`** is pushed. Exact-head [CI37134019214](https://github.com/Happypig375/interactive-software-evolution/actions/runs/37134019214) succeeds: scope **111234725795** passes; maintenance **111234746171**, Linux **111234746204**, Windows **111234746368** and E2 baseline **111234746830** skip by documentation routing. Five Markdown paths passed UTF-8/local-link/whitespace checks and the classifier selected `docs`. Unrelated `uv.lock` remains untouched.
