@@ -1,23 +1,119 @@
-# S229 — Expert–AI development in PicoScenes: acquired, reading pending
+# S229 — Expert–AI development in PicoScenes: benefits and comparison boundaries
 
-## Identity and actual coverage
+## Identity, access and actual coverage
 
-Yu Duan, Daiyang Zhang, Zhiping Jiang, Zhuoyu Xie, Yiming Liu, Yueshen Xu, Rui Li and Di Cui, *Less Effort, More Productivity: Lessons Learned from Developing Millions of Lines of Code with Large Language Model*, ICSE-SEIP2026, pp.280–291, DOI [10.1145/3786583.3786872](https://doi.org/10.1145/3786583.3786872). Crossref records print/conference12 April2026 and online11 July2026. The [conference record](https://conf.researchr.org/details/icse-2026/icse-2026-software-engineering-in-practice/20/Less-Effort-More-Productivity-Lessons-Learned-from-Developing-Millions-of-Lines-of-) agrees with first author **Yu**, correcting Consensus's **Yu-Peng**. Native parent/note `WH2VLKDM`/`UKKWIQT9`, collection `PKLXQNEE`, created before intentional complete primary-body reading.
+Yu Duan, Daiyang Zhang, Zhiping Jiang, Zhuoyu Xie, Yiming Liu, Yueshen Xu, Rui Li and Di Cui, *Less Effort, More Productivity: Lessons Learned from Developing Millions of Lines of Code with Large Language Model*, **ICSE-SEIP 2026, pp. 280–291**, [DOI 10.1145/3786583.3786872](https://doi.org/10.1145/3786583.3786872). The publisher records online publication **11 July 2026**; the PDF conference is **12–18 April 2026**. First author **Yu**, not the earlier Consensus metadata's Yu-Peng, is confirmed. Native parent/note **`WH2VLKDM` / `UKKWIQT9`**, collection `PKLXQNEE`, existed before intentional body reading.
 
-**PDF acquired, not fully read, 2026-10-03.** A new native user-library attachment **`QDPY9REW`** resolves the previous PDF-access gap: **12 pages, 4,206,391 bytes**, SHA-256 **`c7e055a8acdfa52a14ac975adb796817371a908c075c251b43b7c05499e2971e`**, MD5 **`e212e0a6165f3523a71b83a9cf1e2deb`**. Actual native storage and the local copy match. The existing parent/collection/note were checked before opening; physical page 1 has text and visual identity coverage, matching eight authors, DOI, printed page 280, conference 12–18 April 2026 and CC BY 4.0. Extraction of the remaining pages is acquisition, not completed reading.
+**Complete publication reading, 2026-10-03:** all **12 text and visual pages**, eight sections, six figures, seven tables, six labeled code snippets and 50 numbered references; no appendices. Figure 6 also receives an enlarged visual reading because its code is embedded in an image. Repeated text layers in Figures 2/4/5/6 are extraction artifacts, not multiple trials. The user-library publisher PDF **`QDPY9REW`** has **4,206,391 bytes**, SHA-256 **`c7e055a8acdfa52a14ac975adb796817371a908c075c251b43b7c05499e2971e`**, MD5 **`e212e0a6165f3523a71b83a9cf1e2deb`**; actual native storage and local copy match. All seven printed tables are transcribed into local JSON and checked by own arithmetic. These are reconstructed summaries, not raw observations or a reproduction.
 
-The earlier checkpoint covered C05 position 74's supplied abstract, a native fetched record and discontinuous publisher search passages, without a PDF or complete section/figure/table coverage. Those historical limits remain recorded below. W449 again returned partial publisher text and locators while an independent native check found the attachment; the native PDF, rather than a successful web download, closes access. No full-paper count is added at this acquisition checkpoint.
+The earlier 2 October checkpoint had C05 position 74's abstract and discontinuous publisher fragments; ordinary ACM PDF access returned 403 and Scite's body was empty. SC141 supplied only metadata. Those limits are historical: the new native attachment closes primary access. W449's two locator queries return 16 displayed hits; W450's artifact/project queries return 15. A renewed ACM page open still fails. The native attachment, rather than a web PDF download, provides the complete paper. No new Scite/Consensus search or citation graph is credited in this segment; unchanged historical screens are not re-reported.
 
-## Why it remains consequential
+## The workflow and its contribution
 
-The abstract reports substantial effort, complexity, defect and CPU-load improvements from combining expert architectural diagnosis with LLM implementation/refactoring in a large C++ Wi-Fi system. The available body fragments mention four experienced developers, historical periods and rotated feature assignments, plus an AI-only control outside the commit history. These are leads for reconstructing what was compared, not a verified experimental design or effect estimate. In particular, determine how historical observations relate to controlled feature comparisons, how effort includes expert diagnosis and repair, and whether defect/runtime comparisons share the same task population and completion criteria. Do not turn the 1.52-million-line system size into an amount of code generated by a model.
+PicoScenes is presented as a **1.52-million-line C/C++ Wi-Fi sensing system** organized into drivers, a platform/baseband/API layer, and plugins. That is system size, not the amount generated by a model. The paper describes a useful division of work: experts specify functionality and diagnose architectural/hardware problems; an LLM generates a prototype and performs directed refactoring, with compilation and regression checks before integration.
 
-This could provide professional benefit evidence relevant to B01/B09/B10/B11. It is neither a Nu/F# comparison nor an isolated source-convention effect. Preserve the favorable claims for primary verification instead of dismissing them because access is incomplete.
+The main example has three stages: generate a MATLAB prototype; use expert diagnosis to improve it before code generation; then direct C++ optimization after translation. At repository scale, prompts include API signatures, naming rules, AST-derived dependencies and interface-changing commit context. Prompt–patch pairs are indexed by signature and defect category for reuse. Cross-branch checks, compilation against driver headers and a regression harness support integration. The authors report **23 interface mismatches** caught during this work; the two mentions in §4.3 concern the same observation, not 46 independent events. No complete denominator or comparative mismatch rate is supplied.
 
-## Access attempted and executable continuation
+This is substantive professional practice relevant to Nu's architecture/agent motivation. It is a **bundle of expert knowledge, model assistance, source context, automated checks, iteration and changing implementation**, not an isolated source-organization treatment. An expert's solution-aware instruction is part of the intervention, not evidence that the original source alone made the solution discoverable.
 
-On2026-10-02, ordinary HTTPS to the official ACM PDF returned403. Web opens of the PDF, full HTML and DOI route also failed; the search index alone exposed partial text. Two PDF/arXiv/GitHub queries returned17 mostly unrelated locators; a more specific PicoScenes/Duan query returned9 bibliographic/conference/ResearchGate locators. ResearchGate's visible record says no full text is available. No author message, purchase, account setup or access-control workaround was attempted.
+Figure 2 reports a favorable PhaseTracker example: approximately **1.02 KLoC** of integrated hybrid output versus **421** Cursor and **255** Copilot lines, with better compilation/integration for the hybrid. Tool versions, modes, model configuration, equal prompting/repair budgets and repeated trials are not specified for this comparison. It supports the reported example, not a general ranking of current tools or the claim that longer output is more productive. Claims about what all contemporary tools can do should not be inferred from it.
 
-SC141 requested `limit:20` for the exact S229/S230 DOIs and returned2 metadata records, with no abstracts or citation contexts. Its access flag does not establish readable content: native `read_fulltext` for S229 returned **zero characters**, `contentDenied:true`, no further page. The provider's publisher redirect was supplied but not independently followed; it remains one lawful access route to try. These retrieval limits are not evidence that the study or its underlying data are absent.
+## What was compared
 
-Next: read the acquired publisher PDF completely, including all figures/tables, then reconstruct feature allocation, denominators, effort boundaries and result linkage. S83's completed maintenance comparison now leads directly to this professional-workflow evidence. All experimental holds persist.
+Four PicoScenes team members have **6–12 years of programming experience and at least two years on the system**. The same developers work in both baseline and hybrid conditions; the paper says assignments rotate and are balanced across project stages. Shared study tools include MATLAB R2023b, VS Code 1.100.1 and clang/LLVM 18.1.3. Claude 3.7 Sonnet is the main model, with three additional model families in sensitivity analysis.
+
+The narrative also contrasts historical workflow periods over **6,414 commits on 97 branches**, split into **3,246 baseline and 3,168 hybrid commits**. These are provenance/context totals, not independent randomized observations. The paper does not give dates or a feature/developer/order allocation table showing how contemporaneous repeated feature work maps to historical commits, active-hour reconstruction, defect follow-up and model-sensitivity results. It therefore supports a reported within-team comparison, while leaving the exact crossover/longitudinal design and time/learning controls unrecoverable. A shared toolchain during evaluation does not mean every historical commit originally used it.
+
+Baseline is described as MATLAB prototyping/code generation plus manual production refinement, and in the code-quality subsection as senior engineers' handwritten code without LLMs. The per-feature relationship between these descriptions is not supplied. AI-only is a separate control in which the same LLM receives a high-level specification without iterative expert guidance; **it is not part of the historical commit series**. These distinctions matter when attributing a change to expert guidance or architecture.
+
+Table 1 reports baseline/hybrid **100% compilation and test pass**, versus **73% compilation and 62% tests for AI-only**. The former are mature manually reviewed code. Failed AI-only modules count as defects and are omitted from throughput averages. Initial attempt counts, the test-rate denominator and eligibility for every other metric are not supplied. Do not multiply the two rates, invent module counts, infer first-attempt perfection, or condition a causal productivity comparison on successful outputs. The common regression harness is useful validation; the paper itself acknowledges system-scale errors beyond its tests.
+
+## Effort and throughput
+
+Feature Implementation Time is reconstructed from Git/Jira as **developer-active engineer-hours from first commit to final merge**, removing organizational waits. Three named features provide the main comparison:
+
+| Feature | Baseline hours | Hybrid hours | Printed reduction |
+| --- | ---: | ---: | ---: |
+| Beamforming algorithm | 159 | 55 | 65.4% |
+| UDP forwarding | 120 | 36 | 70.0% |
+| Phased-array calibration | 120 | 35 | 70.8% |
+| Mean | 133 | 42 | 68.3% |
+
+These are substantial reported active-effort savings in real feature work. The rounded rows reproduce means of 133 and 42; their ratio implies **68.4%**, slightly different from the printed 68.3%. Raw/unrounded observations are unavailable; the small discrepancy does not remove the favorable result. No per-developer variation, confidence interval, number of independent feature repetitions, logging rule or paired analysis is supplied. Coverage of design work before the first commit, reusable prompt-store preparation, tool costs and all later maintenance is not established by this endpoint.
+
+Net functional lines per engineer-day rise **150→255 (+70%)**, excluding comments/boilerplate according to the described `cloc` procedure. Lines are throughput, not a quality-adjusted output or independent functionality unit. Effort shares also require compatible categories: baseline **35% prototyping / 65% refinement**, with validation included in refinement, versus hybrid **40% prototyping / 20% refinement / 40% integration**. Comparing 65% directly with 20% mixes definitions; combining the latter two produces 60%. Shares alone do not identify the source of the total hour saving or imply more absolute prototyping time.
+
+## Code quality and longer follow-up
+
+Table 3 supplies favorable metrics for both AI-only and the hybrid:
+
+| Metric | Baseline | AI-only | Hybrid |
+| --- | ---: | ---: | ---: |
+| Mean cyclomatic complexity | 14.2 | 12.5 | 10.2 |
+| Lines changed within 30 days, % | 8.0 | 6.5 | 3.0 |
+| Mean coupling | .65 | .58 | .40 |
+| Mean cohesion | .55 | .62 | .75 |
+| CWE-120 warnings/KLoC | 1.8 | 1.1 | .3 |
+| CWE-476 warnings/KLoC | 1.5 | .9 | .5 |
+| CWE-416 warnings/KLoC | .9 | .7 | .4 |
+| Total warnings/KLoC | 4.2 | 2.7 | 1.2 |
+
+The **28.2% complexity reduction**, **62.5% churn reduction** and **71.4% warning-density reduction** follow the printed hybrid/baseline values within rounding. Complexity, churn, custom clang-based coupling/cohesion and static warnings retain their own meanings. They are not interchangeable with semantic correctness, confirmed vulnerabilities or the effort needed for the next change. Function/module counts, metric formulas/settings and aggregate handling of unbuildable AI-only code are not recovered from the paper.
+
+Table 4 reports defect introduction **.52→.26 defects/KLoC/month**, and SonarQube-estimated new technical-debt repair effort **16→5 days** over six months. The latter is a tool estimate, not observed time spent repaying debt. Defect counts are linked to feature commits using Git/Jira and normalized by code/time, but exposure totals, period bounds, linking decisions and raw incidents are absent. Keep the **reported 50% normalized defect reduction**; do not infer it from raw totals of 187 versus 12 defects, which have different exposure and sampling roles.
+
+For root causes, the authors randomly select **30 of 187 baseline defects** with an unspecified fixed seed and inspect **all 12 hybrid defects**. Memory/logic/API/configuration shares are **33/40/20/7%** versus **0/17/58/25%**. These are compatible, after rounding, with counts **10/12/6/2** and **0/2/7/3**; those counts are our inference, not supplied records. The observed composition shift is useful qualitative evidence. Conditioning on already observed defects does not measure the risk of each kind per feature or establish which defects expert guidance prevented. No coder agreement or incident-level audit is supplied.
+
+## Hardware and model sensitivity
+
+Six peripherals are measured on an **i9-13900H, 64 GB RAM** testbed, ten repetitions per device. Table 6 gives mean ± SD; PCU denotes **peak CPU usage**, with its repeated-run summary, not whole-session average CPU load.
+
+| Peripheral | Execution time, baseline→hybrid ms | Peak CPU, baseline→hybrid % |
+| --- | --- | --- |
+| Intel BE200 | 45.8±1.2 → 35.5±.9 | 8.2±.3 → 6.7±.2 |
+| Intel AX210 | 48.5±1.3 → 38.3±1.0 | 5.3±.2 → 4.5±.2 |
+| Atheros 9300 | 72.1±1.8 → 60.2±1.5 | 12.4±.4 → 9.9±.3 |
+| Intel 5300 | 75.3±2.0 → 63.9±1.7 | 13.1±.5 → 10.5±.4 |
+| USRP X310 | 52.1±1.4 → 42.0±1.1 | 31.2±1.1 → 23.4±.9 |
+| USRP B210 | 85.2±2.2 → 72.8±1.9 | 10.6±.4 → 8.5±.3 |
+
+Own arithmetic gives **14.6–22.5% lower execution time** and **15.1–25% lower peak CPU** across these reported pairs. The headline 25% is the X310 endpoint, not every device or a grand average. These are favorable measured costs under the reported workload. Ten timing repetitions do not supply ten independent developer teams or architecture interventions; source/configuration correspondence and packet-performance instrumentation are not reconstructed from a released experiment packet.
+
+Table 7 reports all four hybrid models ahead of the same baseline:
+
+| Model/condition | Feature hours | Lines/day | Complexity | Warnings/KLoC | Defects/KLoC/month | X310 peak CPU % |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Baseline | 133 | 150 | 14.2 | 4.2 | .52 | 31.2 |
+| Claude 3.7 | 42 | 255 | 10.2 | 1.2 | .26 | 23.4 |
+| GPT-4o | 45 | 248 | 10.5 | 1.1 | .28 | 23.8 |
+| Gemini 2.0 Flash | 51 | 230 | 11.1 | 1.5 | .30 | 24.5 |
+| Llama 3.1 8B | 65 | 205 | 11.8 | 1.9 | .32 | 26.1 |
+
+This widens the reported model scope. Without model-specific task/incident allocation, dates, repeats and effort/feedback budgets, agreement across model columns does not isolate a workflow effect or guarantee transfer. Claude's column repeats the main results rather than providing independent replication. The paper does not establish the current ranking of these model families or their later versions.
+
+## Semantic preservation in the illustrative optimizations
+
+The six snippets make expert-directed optimization concrete, but do not establish general equivalence. The MATLAB B1/B2 forms rotate two index ranges. The printed C++ B3/B4 forms swap two equal half-ranges, with no odd-length branch. For a five-element symbolic input `[a,b,c,d,e]`, the shown forms respectively produce `[c,d,e,a,b]` and `[c,d,a,b,e]`. **This is static reasoning over the displayed listings, not executed author code.** An even-length domain restriction or fuller production routine could resolve it; neither should be silently supplied for the printed general signature. No independent per-stage `fftshift` timing or exact compiled-binary correspondence is given.
+
+The enlarged **Figure 6** is directly relevant to interactive software. Its original PlotService code computes an x-value cutoff from `maxX - cutThreshold` and erases the corresponding prefix. The replacement uses example-capacity **1,000-element circular buffers** and removes the cutoff logic. Retaining a fixed number of samples and retaining an x-axis interval are different policies when sample spacing varies. Constant-cost buffer insertion also does not make a batch insertion or the entire plotting operation constant-time. The reported restoration of smooth display is a useful demonstration, without frame-time distributions or proof that every prior display-history requirement is retained. This visible boundary qualifies the example; it is not evidence that the production system or every reported performance result is incorrect.
+
+## Bounded public-source and citation check
+
+The PDF has no experiment-artifact/data URL. W450 finds the official [public organization](https://github.com/wifisensing); a public API inventory returns **all ten repositories in one page**. Two selected repositories have untruncated recursive trees and these fully read documentation files:
+
+| Primary source | Exact identity and scope |
+| --- | --- |
+| [PDK README](https://github.com/wifisensing/PicoScenes-PDK/blob/6251867fc3323912914fccea96e114cb9c7cd57c/README.md) | Pin `6251867fc3323912914fccea96e114cb9c7cd57c`, 17 December 2025; 49 tree entries. Complete 7-line/369-byte README, SHA-256 `617e6d2672d69bada67502a994addb7ecb03ea1d9329ce109cd683f1d392f2c4`. It describes Demo, EchoProbe and Packet Forwarder plugins. |
+| [Manual resource page](https://github.com/wifisensing/PicoScenes-Manual/blob/22b6aa52db2e36f3d164ed67ab88eeef38303283/source/resources.rst) | Pin `22b6aa52db2e36f3d164ed67ab88eeef38303283`, 14 January 2025; 225 tree entries. Complete 39-line/2,833-byte page, SHA-256 `8a41ad4c3a35c57a0517f1ca7ba64298bcff15061da31a6ce6f53c1a2c1057c3`; internal revision label 16 November 2023. It identifies public parsing/plugin/manual subprojects and the earlier platform paper. |
+
+These routes establish public subproject availability, **not recovery of the study's 6,414-commit dataset, Jira logs, prompt archive, full baseband, PlotService implementation or benchmark results**. The two examined trees have no path matching the selected artifact/experiment/data/prompt/PlotService locators; implementations in the other repositories and every historical branch were not searched. This bounded failure to locate a study package is not proof that none exists. No software was installed, built, run or contacted over radio; no account, purchase or author message was used.
+
+Some citations have literal identity limits visible within the article: [25]/[26] duplicate one control-code paper; the citation numbered [44] beside GitHub Copilot resolves to a touchless-input cursor paper; [12], cited for `cloc` and custom metric tooling, is a paper about **Clog** static checkers. These do not invalidate the observations, but should not be treated as verified tool documentation or independent corroboration. Neighbor bibliography entries receive no full-reading credit here.
+
+## Disposition for the broader survey
+
+For B01/B06/B08/B09/B10/B11/B12, S229 contributes **positive professional feature-effort, defect and hardware measurements**, plus a reviewable account of how expert diagnosis, API context and feedback enter implementation. This is stronger than an isolated generated snippet or a structural-score forecast. Its primary access/method-reading gap is now resolved; the unprovided allocation, exposure and artifact details remain reconstruction limits. A general causal maintenance advantage for this bundle remains less certain than the reported within-system comparisons.
+
+Nu's claimed appropriate factoring and source-guided evolution remain separate from expert-supplied solutions, tool context and later optimization. The PlotService example makes preserved behavior during a performance change especially salient. This workflow supplies neither .NET/game transfer nor D1's fixed-language enumeration/catch-all effect, does not validate old pilots anew and does not establish a new experiment's expected benefit. Preserve existing E/H adverse evidence and all execution holds.
+
+Next, return to **S103's acquired BiDEL/InVerDa method** for the B02/B08 boundary between coexisting schema versions, bidirectional updates and state preservation. Completed debugger navigation and migration examples do not by themselves resolve that contract. S102 remains a conditional document-schema companion, with modern .NET/game coverage and other broad-survey frontiers separately open.
