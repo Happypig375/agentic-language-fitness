@@ -487,3 +487,7 @@ validation passed 11 CI-routing regressions and strict UTF-8/local-link checks;
 final whitespace validation and CI are tied to the exact publication. No engine
 build, fixture reconstruction, candidate execution, model/count call, OAuth
 staging or scientific treatment was run or changed.
+
+## Later coverage update — 2026-10-03
+
+The earlier Aardvark partial reading is now upgraded by [S238’s complete publisher reading and three historical source files](literature/full-reading/S238-attribute-grammar-rendering.md). The publisher canonical DOI, two synthetic cost comparisons and actual Assimp integration are reconstructed. The alternate DOI has matching title/authors/pages; the author-page journal draft is unavailable and its definitive-version link points to an unrelated chapter. The dated M1–M8 coverage and decisions above remain historical; this is not another independent study or a new controlled maintenance result.
